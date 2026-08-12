@@ -39,7 +39,8 @@ from mathutils import Vector
 ESCALA = 0.5611          # metros por ponto de PDF (derivada da serie C)
 ALTURA_ESTANDE = 3.2     # m -- tenda/estande padrao de feira
 ALTURA_PAVILHAO = 7.0    # m -- pavilhao de animais
-RAIO_PISTA = 32.0        # m -- pista da arena; a bacia plana ao redor e maior
+RAIO_PISTA = 26.0        # m -- pista da arena, medida na planta; a bacia plana
+                         #      ao redor dela e bem maior
 FPS = 30
 LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
@@ -82,8 +83,10 @@ ELEVACAO_SOL = 12.0
 #   nome       identificacao interna, vira nome do marcador na viewport
 #   rotulo     rotulo da planta a procurar em data/mapa_agroshow26.json
 #   ocorrencia qual ocorrencia do rotulo, ordenada por (y, x)
-#   polar      (raio_m, angulo_graus) a partir do centro da arena, para os
-#              pontos que a planta nao rotula -- aneis e patamares
+#   titulo     texto do titulo vermelho do roteiro, na prancha (busca por
+#              trecho); e a fonte certa para os blocos que nao tem rotulo CAD
+#   ponto_pt   coordenada crua da prancha, em pontos PDF, para o unico bloco
+#              que nao tem nem rotulo nem titulo
 #   altura     m acima do terreno naquele ponto
 #   recuo      m entre a camera parada e o assunto; negativo passa do assunto
 #   alvo       m acima do solo do assunto onde a camera mira (padrao ALTURA_ALVO)
@@ -121,16 +124,22 @@ PERCURSO = [
          altura=26.0, recuo=90.0, pausa=2.0),
     dict(bloco="11", nome="Pista de Julgamentos", rotulo="PISTA DE JULGAMENTOS",
          altura=22.0, recuo=80.0, pausa=1.5),
-    # Sem rotulo na planta: posicionados por geometria da bacia (ver PATAMARES).
-    dict(bloco="12", nome="Expositores Externos", polar=(200.0, 170.0),
+    # Estes blocos nao tem rotulo CAD, mas tem titulo vermelho na prancha --
+    # o desenhista do mapa marcou cada um deles. Uma primeira versao os
+    # posicionou por geometria da bacia e errou de 88 a 182 m; a conferencia
+    # contra a planta trocou a estimativa pela posicao real.
+    dict(bloco="12", nome="Expositores Externos", titulo="Expositores Externo",
          altura=30.0, recuo=80.0, pausa=1.5),
-    dict(bloco="13", nome="Fazendinha", polar=(175.0, 215.0), provisorio=True,
+    dict(bloco="13", nome="Fazendinha", titulo="Fazendinha",
          altura=15.0, recuo=45.0, pausa=3.5),
-    dict(bloco="14", nome="Maquinas e Implementos", polar=(110.0, 250.0),
-         altura=20.0, pausa=1.5),
-    dict(bloco="15", nome="Veiculos e Nauticas", polar=(110.0, 320.0),
-         altura=20.0, pausa=1.5),
-    dict(bloco="16", nome="Area de Shows", polar=(70.0, 20.0),
+    dict(bloco="14", nome="Maquinas e Implementos",
+         titulo="Exposição de Máquinas", altura=22.0, recuo=70.0, pausa=1.5),
+    # Unico bloco sem rotulo e sem titulo: a prancha marca os veiculos so pela
+    # cor da legenda. Posicao = centroide dos pixels azuis (VEICULOS E MOTOS
+    # NAUTICAS) do bitmap, fora da caixa de legenda.
+    dict(bloco="15", nome="Veiculos e Nauticas", ponto_pt=(647.5, 294.2),
+         altura=22.0, recuo=70.0, pausa=1.5),
+    dict(bloco="16", nome="Area de Shows", titulo="Área de Show",
          altura=16.0, pausa=1.5),
     dict(bloco="17", nome="Arena de Rodeio", rotulo="ARENA DE RODEIO",
          altura=13.0, recuo=70.0, pausa=3.5),
@@ -500,19 +509,19 @@ def construir_estandes(dados, col, centro_arena):
 # Alimentacao Coberta, Pavilhao 2, Mercado do Produtor, Agroindustrias e Cafe
 # Colonial. Sem eles a camera para de frente para grama vazia nos seis.
 #
-# ATENCAO -- DIMENSOES SUPOSTAS. A planta nao desenha o contorno dos galpoes,
-# so os rotulos e os estandes de dentro; e o agrupamento por estande nao serve
-# de envoltoria (o do Pavilhao 3 esparrama por 122 x 106 m, o do Pavilhao 1
-# junta quatro estandes). Os numeros abaixo sao leitura conservadora do que
-# cabe entre os rotulos: os pavilhoes 2 e 3 estao a 39 m um do outro, entao o
-# lado comprido corre norte-sul. Confirme com o cliente antes do render final.
+# As dimensoes vieram da CONFERENCIA CONTRA A PLANTA (scripts/overlay_check.py),
+# medidas no bitmap da prancha, e nao de suposicao. Duas descobertas la:
+#   - Pavilhao 1, Sagua o Aberto e Praca Coberta nao sao predios separados. Sao
+#     um unico bloco comprido de ~176 x 33 m, com o Pavilhao 2 na outra ponta.
+#   - "PAVILHAO 3" e o bloco laranja estreito do Galpao do Produtor, de ~20 x
+#     37 m, que abriga Mercado do Produtor, Cafe Colonial e Cozinha Didatica.
+# A leitura do bitmap tem uns 2 m de incerteza; confirme com o cliente se
+# alguma medida virar decisao de producao.
 #
-# (rotulo, largura leste-oeste, profundidade norte-sul)
+# (nome, x_pt, y_pt, largura leste-oeste, profundidade norte-sul)
 GALPOES = [
-    ("PAVILHÃO 1", 30.0, 70.0),
-    ("PAVILHÃO 2", 30.0, 70.0),
-    ("PAVILHÃO 3", 36.0, 90.0),   # abriga Mercado, Agroindustrias e Cafe
-    ("Coberta",    40.0, 45.0),   # praca de alimentacao coberta
+    ("GALPAO Faixa Norte", 626.5, 162.5, 176.0, 33.0),
+    ("GALPAO do Produtor",  437.5, 166.0,  20.0, 37.0),
 ]
 ALTURA_GALPAO = 8.0      # m -- pe direito, acima dos 3,2 m dos estandes
 
@@ -526,27 +535,24 @@ def construir_galpoes(dados, col, mats, centro_arena):
     """
     origem = dados["_origem"]
     feitos = 0
-    for rotulo, larg, prof in GALPOES:
-        z = achar_zona(dados, rotulo, 0)
-        if z is None:
-            continue
-        x, y = para_mundo(z["x"], z["y"], origem)
+    for nome, x_pt, y_pt, larg, prof in GALPOES:
+        x, y = para_mundo(x_pt, y_pt, origem)
         solo = elevacao(x, y, centro_arena)
 
         meia = larg / 2
-        cobertura = prisma(f"{rotulo} cobertura",
+        cobertura = prisma(f"{nome} cobertura",
                            [(-meia, 0.0), (meia, 0.0), (meia, 1.2),
                             (0.0, 3.4), (-meia, 1.2)], prof, col)
         cobertura.location = (x, y, solo + ALTURA_GALPAO)
         aplicar(cobertura, mats["MAT_PAVILHAO"])
-        cobertura["dimensao_suposta"] = True
+        cobertura["medido_no_bitmap"] = True
 
         # Pilares a cada ~12 m nas duas laterais compridas.
-        passos = max(2, int(prof // 12.0))
+        passos = max(2, int(larg // 12.0))
         for i in range(passos + 1):
-            py = y - prof / 2 + prof * i / passos
-            for px in (x - meia, x + meia):
-                pilar = caixa(f"{rotulo} pilar {i}", 0.7, 0.7,
+            px = x - meia + larg * i / passos
+            for py in (y - prof / 2, y + prof / 2):
+                pilar = caixa(f"{nome} pilar {i}", 0.7, 0.7,
                               ALTURA_GALPAO, col)
                 pilar.location = (px, py, solo)
                 aplicar(pilar, mats["MAT_FERRO"])
@@ -559,8 +565,9 @@ def construir_estacionamentos(dados, col, mats, centro_arena):
 
     O bloco 00 e o ponto de vista de quem chega, e sem elas o primeiro quadro
     do filme e grama vazia. Sao lajes finas: a leitura vem da cor, nao do
-    volume. Dimensao aproximada -- a planta rotula o estacionamento mas nao
-    delimita a area.
+    volume. Dimensao aproximada e deliberadamente modesta: a planta rotula o
+    estacionamento mas nao delimita a area, e laje grande demais invade o
+    galpao da faixa norte -- coisa que a conferencia em planta mostra na hora.
     """
     origem = dados["_origem"]
     feitos = 0
@@ -568,7 +575,7 @@ def construir_estacionamentos(dados, col, mats, centro_arena):
         if z["rotulo"] != "ESTACIONAMENTO":
             continue
         x, y = para_mundo(z["x"], z["y"], origem)
-        obj = caixa(f"Estacionamento {feitos}", 90.0, 60.0, 0.15, col)
+        obj = caixa(f"Estacionamento {feitos}", 70.0, 40.0, 0.15, col)
         obj.location = (x, y, elevacao(x, y, centro_arena))
         aplicar(obj, mats["MAT_ASFALTO"])
         feitos += 1
@@ -593,6 +600,7 @@ def construir_pavilhoes(dados, col, centro_arena):
         x, y = para_mundo(z["x"], z["y"], origem)
         obj = caixa(z["rotulo"], largura, profundidade, ALTURA_PAVILHAO, col)
         obj.location = (x, y, elevacao(x, y, centro_arena))
+        obj.rotation_euler = (0.0, 0.0, angulo_do_rotulo(z))
         obj["area_m2"] = area
         feitos += 1
     return feitos
@@ -766,23 +774,24 @@ def construir_camarotes(dados, col, mats, centro_arena):
         if z is None:
             continue
         x, y = para_mundo(z["x"], z["y"], origem)
-        angulo = math.atan2(y - centro_arena[1], x - centro_arena[0])
-        raio = math.hypot(x - centro_arena[0], y - centro_arena[1])
 
-        # Oito modulos no arco. O passo angular sai da largura do modulo e do
-        # raio -- passo fixo em graus faria os modulos se atravessarem num raio
-        # e se afastarem em outro.
+        # A faixa corre no eixo do proprio rotulo -- conferido contra a planta,
+        # onde os camarotes sao duas faixas retas ladeando a pista, e nao um
+        # arco. Lado A fica a -54 graus e lado B a -70.
+        eixo = angulo_do_rotulo(z)
         largura, profundidade = 8.0, 6.0
-        passo = (largura + 1.5) / max(raio, 1.0)
+        passo = largura + 1.5
         for i in range(8):
-            ang = angulo + (i - 3.5) * passo
-            cx = centro_arena[0] + raio * math.cos(ang)
-            cy = centro_arena[1] + raio * math.sin(ang)
+            cx = x + math.cos(eixo) * (i - 3.5) * passo
+            cy = y + math.sin(eixo) * (i - 3.5) * passo
             obj = caixa(f"{rotulo} {i}", largura, profundidade, 6.0, col)
             obj.location = (cx, cy, elevacao(cx, cy, centro_arena))
-            # A largura corre no arco e a frente olha para a pista: o eixo X do
-            # modulo e tangente, ou seja, o raio mais 90 graus.
-            obj.rotation_euler = (0.0, 0.0, ang + math.pi / 2)
+            # A largura corre na faixa; a frente (-Y local) tem de olhar para a
+            # pista, entao escolhe-se o sentido que aponta para o centro.
+            para_centro = math.atan2(centro_arena[1] - cy, centro_arena[0] - cx)
+            giro = eixo if math.cos(para_centro - (eixo - math.pi / 2)) > 0 \
+                else eixo + math.pi
+            obj.rotation_euler = (0.0, 0.0, giro)
             aplicar(obj, mats["MAT_PALCO"])
             feitos += 1
     return feitos
@@ -799,22 +808,55 @@ def achar_zona(dados, rotulo, ocorrencia=0):
     return achados[min(ocorrencia, len(achados) - 1)]
 
 
+def angulo_do_rotulo(z, padrao=0.0):
+    """Angulo do elemento, em radianos no mundo, tirado da direcao do rotulo.
+
+    O rotulo da prancha corre no eixo do que ele nomeia: "PAVILHAO - GADO
+    LEITE" corre no eixo do pavilhao, "CAMAROTES - LADO A" corre na faixa dos
+    camarotes. O y do PDF cresce para baixo e o do mundo para cima, dai o sinal
+    invertido em dy. Sem isto tudo nasce alinhado aos eixos e a planta acusa:
+    os seis pavilhoes de animais estao a 18 graus.
+    """
+    direcao = z.get("dir")
+    if not direcao:
+        return padrao
+    dx, dy = direcao
+    return math.atan2(-dy, dx)
+
+
+def achar_titulo(dados, trecho, ocorrencia=0):
+    """Titulo do roteiro na prancha, buscado por trecho do texto.
+
+    Busca por trecho e nao por igualdade porque o titulo da prancha traz mais
+    do que o titulo da tela: "Fazendinha Area Infantil", "Exposicao de
+    Maquinas,Equipamentos e Veiculos e Implementos".
+    """
+    achados = [t for t in dados.get("titulos", []) if trecho in t["texto"]]
+    if not achados:
+        return None
+    achados.sort(key=lambda t: (t["y"], t["x"]))
+    return achados[min(ocorrencia, len(achados) - 1)]
+
+
 def resolver_pontos(dados, centro_arena):
     """Converte cada entrada do PERCURSO em coordenada de mundo.
 
-    Ponto com rotulo sai da planta. Ponto com polar sai da geometria da bacia:
-    o roteiro cita aneis e patamares que a planta nao rotula, e eles tem
-    posicao definida pelo raio ate o centro da arena.
+    Tres fontes, nesta ordem de confianca: o rotulo CAD da zona, o titulo
+    vermelho do roteiro na prancha, e a coordenada crua em pontos PDF. Nenhuma
+    delas e estimativa -- todas saem do desenho.
     """
     origem = dados["_origem"]
     pontos, ausentes = [], []
 
     for spec in PERCURSO:
-        if "polar" in spec:
-            raio, angulo = spec["polar"]
-            ang = math.radians(angulo)
-            x = centro_arena[0] + raio * math.cos(ang)
-            y = centro_arena[1] + raio * math.sin(ang)
+        if "ponto_pt" in spec:
+            x, y = para_mundo(*spec["ponto_pt"], origem)
+        elif "titulo" in spec:
+            t = achar_titulo(dados, spec["titulo"], spec.get("ocorrencia", 0))
+            if t is None:
+                ausentes.append((spec["nome"], spec["titulo"]))
+                continue
+            x, y = para_mundo(t["x"], t["y"], origem)
         else:
             z = achar_zona(dados, spec["rotulo"], spec.get("ocorrencia", 0))
             if z is None:

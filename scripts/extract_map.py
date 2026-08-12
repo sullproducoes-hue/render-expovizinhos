@@ -59,6 +59,70 @@ LEGENDA = [
     "AGRICULTURA",
 ]
 
+# Os titulos do roteiro estao na prancha, em vermelho, e sao a fonte certa para
+# posicionar os blocos: "Fazendinha", "Expositores Externo", "Exposicao de
+# Maquinas", "Area de Show". Varios deles estao rotacionados e nenhum aparece
+# na lista de ZONAS_ANCORA -- por isso a primeira extracao os perdeu, e cinco
+# blocos do percurso acabaram posicionados por estimativa geometrica, com erro
+# de 88 a 182 m. Nao repita: rotulo vermelho e material de posicionamento.
+COR_TITULO = 0xFF3131
+RAIO_TITULO = 18.0   # pt -- spans mais proximos que isso sao o mesmo titulo
+
+
+def agrupar_titulos(page):
+    """Junta os spans vermelhos em titulos, respeitando a rotacao de cada um.
+
+    Um titulo de tres linhas ("Exposicao de / Maquinas, Equipamentos e /
+    Veiculos e Implementos") vem como tres spans soltos. Agrupa por
+    proximidade e ordena pela projecao na direcao de leitura do proprio
+    rotulo, que e o que faz o texto sair legivel mesmo girado.
+    """
+    spans = []
+    for b in page.get_text("dict")["blocks"]:
+        for linha in b.get("lines", []):
+            direcao = linha.get("dir", (1.0, 0.0))
+            for s in linha["spans"]:
+                texto = s["text"].strip()
+                if texto and s["color"] == COR_TITULO:
+                    x = (s["bbox"][0] + s["bbox"][2]) / 2
+                    y = (s["bbox"][1] + s["bbox"][3]) / 2
+                    spans.append({"texto": texto, "x": x, "y": y, "dir": direcao})
+
+    # Agrupamento por ligacao simples.
+    pai = list(range(len(spans)))
+
+    def raiz(i):
+        while pai[i] != i:
+            pai[i] = pai[pai[i]]
+            i = pai[i]
+        return i
+
+    for i, a in enumerate(spans):
+        for j in range(i + 1, len(spans)):
+            c = spans[j]
+            if (a["x"] - c["x"]) ** 2 + (a["y"] - c["y"]) ** 2 <= RAIO_TITULO ** 2:
+                pai[raiz(i)] = raiz(j)
+
+    grupos = {}
+    for i, s in enumerate(spans):
+        grupos.setdefault(raiz(i), []).append(s)
+
+    titulos = []
+    for membros in grupos.values():
+        dx, dy = membros[0]["dir"]
+        # Ordena na direcao perpendicular a leitura (de linha em linha) e,
+        # dentro da linha, na direcao da leitura.
+        membros.sort(key=lambda s: (round(-s["x"] * dy + s["y"] * dx, 1),
+                                    s["x"] * dx + s["y"] * dy))
+        titulos.append({
+            "texto": " ".join(s["texto"] for s in membros),
+            "x": round(sum(s["x"] for s in membros) / len(membros), 2),
+            "y": round(sum(s["y"] for s in membros) / len(membros), 2),
+            "spans": len(membros),
+        })
+    return sorted(titulos, key=lambda t: (t["y"], t["x"]))
+
+
 RE_CODIGO = re.compile(r"^[A-Z]{1,2}[-–]\d{1,3}$")
 RE_AREA = re.compile(r"^([\d.]+,\d{2})\s*m²$")
 RE_NUMERO = re.compile(r"^[\d.,\s]+$")
@@ -81,6 +145,39 @@ def classificar(texto):
     return None
 
 
+def direcoes_por_texto(page):
+    """Mapa texto -> lista de (x, y, direcao de leitura).
+
+    A direcao do rotulo e a direcao do proprio elemento desenhado: o rotulo
+    "PAVILHAO - GADO LEITE" corre no eixo do pavilhao, e "CAMAROTES - LADO A"
+    corre na faixa dos camarotes. Sem isso, tudo nasce alinhado aos eixos do
+    mundo e os predios ficam tortos em relacao a planta.
+    """
+    achados = {}
+    for b in page.get_text("dict")["blocks"]:
+        for linha in b.get("lines", []):
+            direcao = linha.get("dir", (1.0, 0.0))
+            texto = "".join(s["text"] for s in linha["spans"]).strip()
+            if not texto:
+                continue
+            x0, y0, x1, y1 = linha["bbox"]
+            achados.setdefault(texto, []).append(
+                ((x0 + x1) / 2, (y0 + y1) / 2, direcao))
+    return achados
+
+
+def anexar_direcoes(zonas, direcoes):
+    """Poe em cada zona a direcao do rotulo mais proximo com o mesmo texto."""
+    for z in zonas:
+        candidatos = direcoes.get(z["rotulo"])
+        if not candidatos:
+            continue
+        x, y, direcao = min(
+            candidatos,
+            key=lambda c: (c[0] - z["x"]) ** 2 + (c[1] - z["y"]) ** 2)
+        z["dir"] = [round(direcao[0], 4), round(direcao[1], 4)]
+
+
 def extrair(pdf_path):
     doc = pymupdf.open(pdf_path)
     page = doc[0]
@@ -97,6 +194,9 @@ def extrair(pdf_path):
                 "x": round((b[0] + b[2]) / 2, 2),
                 "y": round((b[1] + b[3]) / 2, 2),
             })
+
+    titulos = agrupar_titulos(page)
+    direcoes = direcoes_por_texto(page)
 
     codigos = []
     areas = []
@@ -122,6 +222,8 @@ def extrair(pdf_path):
             if categoria:
                 zonas.append({"rotulo": linha, "categoria": categoria,
                               "x": b["x"], "y": b["y"]})
+
+    anexar_direcoes(zonas, direcoes)
 
     # Emparelha cada codigo de estande com a area cotada mais proxima.
     # Distancia em pontos PDF; acima do limiar o codigo fica sem area.
@@ -159,10 +261,12 @@ def extrair(pdf_path):
             "area_total_m2": round(sum(a["area_m2"] for a in areas), 2),
             "area_total_ha": round(sum(a["area_m2"] for a in areas) / 10000, 3),
             "zonas_identificadas": len(zonas),
+            "titulos_do_roteiro": len(titulos),
         },
         "estandes": sorted(codigos, key=lambda c: (c["serie"], c["codigo"])),
         "areas": sorted(areas, key=lambda a: -a["area_m2"]),
         "zonas": sorted(zonas, key=lambda z: (z["categoria"], z["rotulo"])),
+        "titulos": titulos,
         "legenda_categorias": LEGENDA,
     }
 
@@ -189,6 +293,7 @@ def main():
     print(f"  area total .......... {r['area_total_m2']:.0f} m² "
           f"({r['area_total_ha']:.2f} ha)")
     print(f"  zonas ............... {r['zonas_identificadas']}")
+    print(f"  titulos do roteiro .. {r['titulos_do_roteiro']}")
 
 
 if __name__ == "__main__":

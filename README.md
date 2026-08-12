@@ -17,13 +17,21 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
 ## Gerar a cena 3D
 
 ```bash
-pip install bpy pymupdf ezdxf
+pip install bpy pymupdf ezdxf pillow
 python3 scripts/build_scene.py --out cena.blend
 python3 scripts/build_scene.py --conferencia docs/conferencia/   # 1 quadro por bloco
+python3 scripts/overlay_check.py                                 # cena sobre a planta
 ```
 
-134 estandes, 6 pavilhões, portal, palco e camarotes, bacia da arena em 3
-patamares, percurso de 21 pontos animado em 148 s, render em 2760×1380.
+**Conferir posição é obrigatório antes de render longo.** `overlay_check.py`
+desenha a cena em planta por cima do PDF oficial; foi ele que pegou cinco
+blocos do percurso errados de 88 a 182 m, quatro galpões supostos onde há dois
+prédios reais, e tudo alinhado aos eixos quando a planta tem pavilhões a 18° e
+camarotes a −54°.
+
+134 estandes, 6 pavilhões de animais, 2 galpões da faixa norte, portal, palco e
+camarotes, bacia da arena em 3 patamares, percurso de 22 pontos animado em
+148 s, render em 2760×1380.
 
 ```
 > use o agente render-agroshow para revisar os prompts do bloco B11

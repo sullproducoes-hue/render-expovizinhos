@@ -17,7 +17,8 @@
     "blocos_com_area": 181,
     "area_total_m2": 17949.36,
     "area_total_ha": 1.795,
-    "zonas_identificadas": 122
+    "zonas_identificadas": 122,
+    "titulos_do_roteiro": 18
   },
   "estandes": [
     {
@@ -2005,733 +2006,1331 @@
       "rotulo": "Aberta",
       "categoria": "alimentacao",
       "x": 359.42,
-      "y": 273.4
+      "y": 273.4,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 489.65,
-      "y": 335.81
+      "y": 335.81,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 520.05,
-      "y": 409.92
+      "y": 409.92,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 526.61,
-      "y": 363.01
+      "y": 363.01,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 527.14,
-      "y": 300.2
+      "y": 300.2,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 566.03,
-      "y": 455.4
+      "y": 455.4,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 580.02,
-      "y": 327.19
+      "y": 327.19,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 583.0,
-      "y": 286.37
+      "y": 286.37,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 630.46,
-      "y": 405.53
+      "y": 405.53,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 635.32,
-      "y": 353.18
+      "y": 353.18,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Bar",
       "categoria": "alimentacao",
       "x": 637.55,
-      "y": 307.46
+      "y": 307.46,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Café Colonial",
       "categoria": "alimentacao",
       "x": 438.49,
-      "y": 160.91
+      "y": 160.91,
+      "dir": [
+        0.0,
+        -1.0
+      ]
     },
     {
       "rotulo": "Coberta",
       "categoria": "alimentacao",
       "x": 628.45,
-      "y": 180.96
+      "y": 180.96,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Cozinha Didática",
       "categoria": "alimentacao",
       "x": 445.93,
-      "y": 164.11
+      "y": 164.11,
+      "dir": [
+        0.0,
+        -1.0
+      ]
     },
     {
       "rotulo": "ESPAÇO P/ MESAS",
       "categoria": "alimentacao",
       "x": 328.86,
-      "y": 280.23
+      "y": 280.23,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESPAÇO P/ MESAS",
       "categoria": "alimentacao",
       "x": 376.24,
-      "y": 238.85
+      "y": 238.85,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "Mercado do Produtor",
       "categoria": "alimentacao",
       "x": 425.55,
-      "y": 168.16
+      "y": 168.16,
+      "dir": [
+        0.0,
+        -1.0
+      ]
     },
     {
       "rotulo": "Praça de Alimentação",
       "categoria": "alimentacao",
       "x": 628.45,
-      "y": 169.64
+      "y": 169.64,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Praça de Alimentação",
       "categoria": "alimentacao",
       "x": 359.42,
-      "y": 262.08
+      "y": 262.08,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "É CHURRASCO!",
       "categoria": "alimentacao",
       "x": 222.89,
-      "y": 397.45
+      "y": 397.45,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "ARENA DE RODEIO",
       "categoria": "arena",
       "x": 586.83,
-      "y": 410.77
+      "y": 410.77,
+      "dir": [
+        0.8849,
+        -0.4657
+      ]
     },
     {
       "rotulo": "ARENA DO CONHECIMENTO - UTF-PR",
       "categoria": "arena",
       "x": 261.74,
-      "y": 670.89
+      "y": 670.89,
+      "dir": [
+        0.357,
+        0.9341
+      ]
     },
     {
       "rotulo": "CAMAROTES - LADO A",
       "categoria": "arena",
       "x": 665.64,
-      "y": 388.61
+      "y": 388.61,
+      "dir": [
+        0.5863,
+        0.8101
+      ]
     },
     {
       "rotulo": "CAMAROTES - LADO B",
       "categoria": "arena",
       "x": 528.12,
-      "y": 445.73
+      "y": 445.73,
+      "dir": [
+        0.3442,
+        0.9389
+      ]
     },
     {
       "rotulo": "PALCO",
       "categoria": "arena",
       "x": 610.72,
-      "y": 451.12
+      "y": 451.12,
+      "dir": [
+        0.8849,
+        -0.4657
+      ]
     },
     {
       "rotulo": "PALCO",
       "categoria": "arena",
       "x": 609.09,
-      "y": 442.19
+      "y": 442.19,
+      "dir": [
+        0.8975,
+        -0.441
+      ]
     },
     {
       "rotulo": "PALCO AFTER",
       "categoria": "arena",
       "x": 685.12,
-      "y": 369.23
+      "y": 369.23,
+      "dir": [
+        0.5192,
+        0.8547
+      ]
     },
     {
       "rotulo": "AUDITÓRIO",
       "categoria": "infra",
       "x": 802.16,
-      "y": 273.18
+      "y": 273.18,
+      "dir": [
+        0.9511,
+        -0.3088
+      ]
     },
     {
       "rotulo": "BANHEIROS FEM.",
       "categoria": "infra",
       "x": 415.4,
-      "y": 605.03
+      "y": 605.03,
+      "dir": [
+        0.9345,
+        -0.356
+      ]
     },
     {
       "rotulo": "BANHEIROS MASC.",
       "categoria": "infra",
       "x": 419.22,
-      "y": 617.71
+      "y": 617.71,
+      "dir": [
+        0.9345,
+        -0.356
+      ]
     },
     {
       "rotulo": "CCO",
       "categoria": "infra",
       "x": 774.46,
-      "y": 273.82
+      "y": 273.82,
+      "dir": [
+        0.9516,
+        -0.3075
+      ]
     },
     {
       "rotulo": "CHUVEIROS",
       "categoria": "infra",
       "x": 414.36,
-      "y": 628.54
+      "y": 628.54,
+      "dir": [
+        0.9345,
+        -0.356
+      ]
     },
     {
       "rotulo": "CONTROLE SANITÁRIO",
       "categoria": "infra",
       "x": 146.88,
-      "y": 183.4
+      "y": 183.4,
+      "dir": [
+        0.9848,
+        0.1735
+      ]
     },
     {
       "rotulo": "EQ. LIMPEZA",
       "categoria": "infra",
       "x": 108.07,
-      "y": 351.9
+      "y": 351.9,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "EQ. LIMPEZA",
       "categoria": "infra",
       "x": 122.51,
-      "y": 455.37
+      "y": 455.37,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 273.64,
-      "y": 140.86
+      "y": 140.86,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 449.84,
-      "y": 109.84
+      "y": 109.84,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 635.27,
-      "y": 90.9
+      "y": 90.9,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 791.05,
-      "y": 84.82
+      "y": 84.82,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 841.31,
-      "y": 159.84
+      "y": 159.84,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 923.72,
-      "y": 271.52
+      "y": 271.52,
+      "dir": [
+        1.0,
+        -0.0069
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 144.09,
-      "y": 793.38
+      "y": 793.38,
+      "dir": [
+        0.9786,
+        -0.2059
+      ]
     },
     {
       "rotulo": "ESTACIONAMENTO",
       "categoria": "infra",
       "x": 306.42,
-      "y": 789.87
+      "y": 789.87,
+      "dir": [
+        0.9786,
+        -0.2059
+      ]
     },
     {
       "rotulo": "PORTAL",
       "categoria": "infra",
       "x": 415.06,
-      "y": 209.89
+      "y": 209.89,
+      "dir": [
+        0.9925,
+        0.1226
+      ]
     },
     {
       "rotulo": "PORTAL",
       "categoria": "infra",
       "x": 332.99,
-      "y": 368.25
+      "y": 368.25,
+      "dir": [
+        0.9992,
+        -0.0409
+      ]
     },
     {
       "rotulo": "PORTAL",
       "categoria": "infra",
       "x": 308.81,
-      "y": 234.08
+      "y": 234.08,
+      "dir": [
+        0.858,
+        -0.5136
+      ]
     },
     {
       "rotulo": "PORTAL",
       "categoria": "infra",
       "x": 806.37,
-      "y": 247.54
+      "y": 247.54,
+      "dir": [
+        0.2986,
+        0.9544
+      ]
     },
     {
       "rotulo": "PORTARIA",
       "categoria": "infra",
       "x": 134.75,
-      "y": 204.38
+      "y": 204.38,
+      "dir": [
+        0.9845,
+        0.1751
+      ]
     },
     {
       "rotulo": "Portal de Entrada",
       "categoria": "infra",
       "x": 841.8,
-      "y": 245.96
+      "y": 245.96,
+      "dir": [
+        0.2898,
+        0.9571
+      ]
     },
     {
       "rotulo": "RESIDÊNCIA",
       "categoria": "infra",
       "x": 850.19,
-      "y": 345.95
+      "y": 345.95,
+      "dir": [
+        0.7987,
+        0.6018
+      ]
     },
     {
       "rotulo": "RESIDÊNCIA",
       "categoria": "infra",
       "x": 117.53,
-      "y": 392.75
+      "y": 392.75,
+      "dir": [
+        0.0,
+        -1.0
+      ]
     },
     {
       "rotulo": "RESIDÊNCIA",
       "categoria": "infra",
       "x": 92.6,
-      "y": 396.29
+      "y": 396.29,
+      "dir": [
+        0.0,
+        -1.0
+      ]
     },
     {
       "rotulo": "SANITÁRIOS QUIMICOS",
       "categoria": "infra",
       "x": 554.55,
-      "y": 500.37
+      "y": 500.37,
+      "dir": [
+        0.9434,
+        -0.3317
+      ]
     },
     {
       "rotulo": "SANITÁRIOS QUIMICOS",
       "categoria": "infra",
       "x": 734.12,
-      "y": 423.82
+      "y": 423.82,
+      "dir": [
+        0.9434,
+        -0.3317
+      ]
     },
     {
       "rotulo": "AGRICULTURA",
       "categoria": "legenda",
       "x": 941.35,
-      "y": 700.53
+      "y": 700.53,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "ALIMENTAÇÃO E BEBIDAS",
       "categoria": "legenda",
       "x": 955.2,
-      "y": 576.47
+      "y": 576.47,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "AVICULTURA",
       "categoria": "legenda",
       "x": 939.04,
-      "y": 679.84
+      "y": 679.84,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "CAFÉ COLONIAL E COZINHA",
       "categoria": "legenda",
       "x": 957.97,
-      "y": 597.01
+      "y": 597.01,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "COOPERATIVAS",
       "categoria": "legenda",
       "x": 943.35,
-      "y": 638.5
+      "y": 638.5,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "EDIFICAÇÕES",
       "categoria": "legenda",
       "x": 938.7,
-      "y": 555.78
+      "y": 555.78,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "GALPÃO DO PRODUTOR",
       "categoria": "legenda",
       "x": 957.97,
-      "y": 597.01
+      "y": 597.01,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "MAQUINAS E EQUIPAMENTOS AGRICULAS",
       "categoria": "legenda",
       "x": 978.81,
-      "y": 659.15
+      "y": 659.15,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "VEÍCULOS E MOTOS NAUTICAS",
       "categoria": "legenda",
       "x": 963.86,
-      "y": 617.81
+      "y": 617.81,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bosque",
       "categoria": "paisagem",
       "x": 253.04,
-      "y": 273.11
+      "y": 273.11,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bosque",
       "categoria": "paisagem",
       "x": 278.67,
-      "y": 219.83
+      "y": 219.83,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bosque",
       "categoria": "paisagem",
       "x": 322.15,
-      "y": 182.04
+      "y": 182.04,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bosque",
       "categoria": "paisagem",
       "x": 526.79,
-      "y": 527.22
+      "y": 527.22,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bosque",
       "categoria": "paisagem",
       "x": 692.27,
-      "y": 441.66
+      "y": 441.66,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Bosque",
       "categoria": "paisagem",
       "x": 785.14,
-      "y": 392.53
+      "y": 392.53,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Mata Nativa",
       "categoria": "paisagem",
       "x": 611.32,
-      "y": 542.1
+      "y": 542.1,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Mata Nativa",
       "categoria": "paisagem",
       "x": 809.05,
-      "y": 444.24
+      "y": 444.24,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 383.94,
-      "y": 471.19
+      "y": 471.19,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 430.62,
-      "y": 439.7
+      "y": 439.7,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 434.12,
-      "y": 601.51
+      "y": 601.51,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 462.73,
-      "y": 256.8
+      "y": 256.8,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 477.73,
-      "y": 424.73
+      "y": 424.73,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 500.48,
-      "y": 300.33
+      "y": 300.33,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 506.78,
-      "y": 397.53
+      "y": 397.53,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 540.55,
-      "y": 428.58
+      "y": 428.58,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 563.69,
-      "y": 317.6
+      "y": 317.6,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 607.96,
-      "y": 274.04
+      "y": 274.04,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 633.11,
-      "y": 379.33
+      "y": 379.33,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 633.51,
-      "y": 231.52
+      "y": 231.52,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 655.07,
-      "y": 355.57
+      "y": 355.57,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 696.04,
-      "y": 325.17
+      "y": 325.17,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Talude",
       "categoria": "paisagem",
       "x": 696.04,
-      "y": 325.17
+      "y": 325.17,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 364.93,
-      "y": 276.81
+      "y": 276.81,
+      "dir": [
+        0.6493,
+        -0.7605
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 329.37,
-      "y": 254.33
+      "y": 254.33,
+      "dir": [
+        0.8606,
+        0.5093
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 345.09,
-      "y": 223.2
+      "y": 223.2,
+      "dir": [
+        0.9248,
+        -0.3805
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 421.1,
-      "y": 249.87
+      "y": 249.87,
+      "dir": [
+        0.9248,
+        -0.3805
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 337.78,
-      "y": 326.54
+      "y": 326.54,
+      "dir": [
+        0.3921,
+        -0.9199
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 305.03,
-      "y": 262.33
+      "y": 262.33,
+      "dir": [
+        0.3925,
+        -0.9198
+      ]
     },
     {
       "rotulo": "Trilha",
       "categoria": "paisagem",
       "x": 305.07,
-      "y": 300.3
+      "y": 300.3,
+      "dir": [
+        0.3925,
+        -0.9198
+      ]
     },
     {
       "rotulo": "ÁREA RESTRITA",
       "categoria": "paisagem",
       "x": 489.55,
-      "y": 714.65
+      "y": 714.65,
+      "dir": [
+        0.98,
+        -0.1991
+      ]
     },
     {
       "rotulo": "ÁREA RESTRITA",
       "categoria": "paisagem",
       "x": 511.33,
-      "y": 805.55
+      "y": 805.55,
+      "dir": [
+        0.98,
+        -0.1991
+      ]
     },
     {
       "rotulo": "PAVILHÃO - EQUÍNOS",
       "categoria": "pavilhoes",
       "x": 195.37,
-      "y": 699.69
+      "y": 699.69,
+      "dir": [
+        0.951,
+        -0.3092
+      ]
     },
     {
       "rotulo": "PAVILHÃO - GADO CORTE",
       "categoria": "pavilhoes",
       "x": 149.8,
-      "y": 585.4
+      "y": 585.4,
+      "dir": [
+        0.951,
+        -0.3092
+      ]
     },
     {
       "rotulo": "PAVILHÃO - GADO LEITE",
       "categoria": "pavilhoes",
       "x": 124.04,
-      "y": 507.58
+      "y": 507.58,
+      "dir": [
+        0.951,
+        -0.3092
+      ]
     },
     {
       "rotulo": "PAVILHÃO - NÚCLEO CARRA BRANCA",
       "categoria": "pavilhoes",
       "x": 137.15,
-      "y": 546.45
+      "y": 546.45,
+      "dir": [
+        0.951,
+        -0.3092
+      ]
     },
     {
       "rotulo": "PAVILHÃO - OVINOS E CAPRINOS",
       "categoria": "pavilhoes",
       "x": 160.22,
-      "y": 624.94
+      "y": 624.94,
+      "dir": [
+        0.9511,
+        -0.3088
+      ]
     },
     {
       "rotulo": "PAVILHÃO - PEQUENOS ANIMAIS",
       "categoria": "pavilhoes",
       "x": 175.67,
-      "y": 663.22
+      "y": 663.22,
+      "dir": [
+        0.951,
+        -0.3092
+      ]
     },
     {
       "rotulo": "PAVILHÃO 1",
       "categoria": "pavilhoes",
       "x": 727.58,
-      "y": 166.34
+      "y": 166.34,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "PAVILHÃO 2",
       "categoria": "pavilhoes",
       "x": 507.28,
-      "y": 158.81
+      "y": 158.81,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "PAVILHÃO 3",
       "categoria": "pavilhoes",
       "x": 438.69,
-      "y": 168.92
+      "y": 168.92,
+      "dir": [
+        1.0,
+        0.0
+      ]
     },
     {
       "rotulo": "CASA DO",
       "categoria": "pecuaria",
       "x": 266.89,
-      "y": 339.75
+      "y": 339.75,
+      "dir": [
+        0.9308,
+        -0.3654
+      ]
     },
     {
       "rotulo": "JULGAMENTO RUSTICO",
       "categoria": "pecuaria",
       "x": 134.48,
-      "y": 390.85
+      "y": 390.85,
+      "dir": [
+        0.9931,
+        0.1172
+      ]
     },
     {
       "rotulo": "LAVAGEM ANIMAIS",
       "categoria": "pecuaria",
       "x": 84.73,
-      "y": 613.52
+      "y": 613.52,
+      "dir": [
+        -0.1366,
+        -0.9906
+      ]
     },
     {
       "rotulo": "MANGUEIRAS",
       "categoria": "pecuaria",
       "x": 175.53,
-      "y": 327.2
+      "y": 327.2,
+      "dir": [
+        0.9921,
+        0.1254
+      ]
     },
     {
       "rotulo": "MÉDICO",
       "categoria": "pecuaria",
       "x": 269.69,
-      "y": 346.04
+      "y": 346.04,
+      "dir": [
+        0.9308,
+        -0.3654
+      ]
     },
     {
       "rotulo": "ORDENHADEIRA",
       "categoria": "pecuaria",
       "x": 128.43,
-      "y": 480.07
+      "y": 480.07,
+      "dir": [
+        0.9516,
+        -0.3075
+      ]
     },
     {
       "rotulo": "PISTA DE JULGAMENTOS",
       "categoria": "pecuaria",
       "x": 226.02,
-      "y": 553.47
+      "y": 553.47,
+      "dir": [
+        0.9511,
+        -0.3088
+      ]
     },
     {
       "rotulo": "RECINTO DE LEILÕES",
       "categoria": "pecuaria",
       "x": 164.1,
-      "y": 417.95
+      "y": 417.95,
+      "dir": [
+        0.9926,
+        0.1215
+      ]
     },
     {
       "rotulo": "VETERINÁRIO",
       "categoria": "pecuaria",
       "x": 269.69,
-      "y": 346.04
+      "y": 346.04,
+      "dir": [
+        0.9308,
+        -0.3654
+      ]
     },
     {
       "rotulo": "AV. VER. DORVALINO TOSI",
       "categoria": "vias",
       "x": 963.13,
-      "y": 128.55
+      "y": 128.55,
+      "dir": [
+        0.8553,
+        0.5182
+      ]
     },
     {
       "rotulo": "AVENIDA JOSÉ MARCANTE",
       "categoria": "vias",
       "x": 1025.03,
-      "y": 287.41
+      "y": 287.41,
+      "dir": [
+        0.8648,
+        0.5021
+      ]
     },
     {
       "rotulo": "AVENIDA VINICIUS DE MORAIS",
       "categoria": "vias",
       "x": 980.24,
-      "y": 336.38
+      "y": 336.38,
+      "dir": [
+        0.4756,
+        -0.8796
+      ]
     },
     {
       "rotulo": "CARROS DE APLICATIVO",
       "categoria": "vias",
       "x": 970.08,
-      "y": 332.82
+      "y": 332.82,
+      "dir": [
+        0.4557,
+        -0.8901
+      ]
     },
     {
       "rotulo": "CRUZEIRO DO IGUAÇU",
       "categoria": "vias",
       "x": 91.42,
-      "y": 244.23
+      "y": 244.23,
+      "dir": [
+        0.2272,
+        -0.9738
+      ]
     },
     {
       "rotulo": "DOIS VIZINHOS",
       "categoria": "vias",
       "x": 46.93,
-      "y": 477.27
+      "y": 477.27,
+      "dir": [
+        0.0378,
+        -0.9993
+      ]
     },
     {
       "rotulo": "PR 473",
       "categoria": "vias",
       "x": 54.95,
-      "y": 386.88
+      "y": 386.88,
+      "dir": [
+        0.2272,
+        -0.9738
+      ]
     },
     {
       "rotulo": "PR 473",
       "categoria": "vias",
       "x": 91.42,
-      "y": 244.23
+      "y": 244.23,
+      "dir": [
+        0.2272,
+        -0.9738
+      ]
     },
     {
       "rotulo": "RUA JORGE AMADO",
       "categoria": "vias",
       "x": 886.93,
-      "y": 356.72
+      "y": 356.72,
+      "dir": [
+        0.7897,
+        0.6135
+      ]
+    }
+  ],
+  "titulos": [
+    {
+      "texto": "Expositores Industria/Comércio e Serviços 2",
+      "x": 534.63,
+      "y": 157.21,
+      "spans": 3
+    },
+    {
+      "texto": "Expositores Industria/Comércio e Serviços 1",
+      "x": 746.26,
+      "y": 164.04,
+      "spans": 3
+    },
+    {
+      "texto": "Mercado do Produtor Café Colonial Cozinha Didática",
+      "x": 436.66,
+      "y": 164.39,
+      "spans": 3
+    },
+    {
+      "texto": "Praça de Alimentação Coberta",
+      "x": 628.45,
+      "y": 175.3,
+      "spans": 2
+    },
+    {
+      "texto": "Estacionamento",
+      "x": 862.44,
+      "y": 179.72,
+      "spans": 1
+    },
+    {
+      "texto": "AGROSHOW - É DAQUI QUE SAI O ALIMENTO QUE SUSTENTA O MUNDO Portal de Entrada",
+      "x": 850.97,
+      "y": 243.31,
+      "spans": 4
+    },
+    {
+      "texto": "Praça de Alimentação Aberta",
+      "x": 359.42,
+      "y": 267.74,
+      "spans": 2
+    },
+    {
+      "texto": "Exposição de Máquinas,Equipamentos e Veículos e Implementos",
+      "x": 526.72,
+      "y": 270.47,
+      "spans": 3
+    },
+    {
+      "texto": "Estacionamento",
+      "x": 934.94,
+      "y": 286.15,
+      "spans": 1
+    },
+    {
+      "texto": "Área de Show",
+      "x": 552.4,
+      "y": 330.95,
+      "spans": 1
+    },
+    {
+      "texto": "Arena de Rodeio",
+      "x": 582.52,
+      "y": 397.15,
+      "spans": 1
+    },
+    {
+      "texto": "Espaço É CHURRASCO!",
+      "x": 222.89,
+      "y": 397.45,
+      "spans": 2
+    },
+    {
+      "texto": "Fazendinha Área Infantil",
+      "x": 426.92,
+      "y": 438.08,
+      "spans": 2
+    },
+    {
+      "texto": "PALCO",
+      "x": 609.09,
+      "y": 442.19,
+      "spans": 1
+    },
+    {
+      "texto": "Pavilhões de Animais",
+      "x": 136.16,
+      "y": 493.0,
+      "spans": 1
+    },
+    {
+      "texto": "Expositores Externo",
+      "x": 304.27,
+      "y": 499.6,
+      "spans": 2
+    },
+    {
+      "texto": "Expositores Externo",
+      "x": 327.58,
+      "y": 557.34,
+      "spans": 2
+    },
+    {
+      "texto": "Pista de Jugamentos",
+      "x": 234.24,
+      "y": 568.75,
+      "spans": 2
     }
   ],
   "legenda_categorias": [

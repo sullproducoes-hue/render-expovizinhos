@@ -40,9 +40,10 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1 |
 | Percurso dos 20 blocos | `PERCURSO` no gerador | 22 pontos, na ordem do roteiro |
 | Portal, palco, camarotes | `construir_portal/palco/camarotes` | Modelados, leitura econômica |
-| Galpões da faixa norte | `GALPOES` no gerador | **Dimensões supostas** — ver pendência 2 |
+| Galpões da faixa norte | `GALPOES` no gerador | Medidos no bitmap da prancha (±2 m) |
 | Estacionamentos | `construir_estacionamentos` | Lajes de asfalto, dimensão aproximada |
 | Quadros de conferência | `docs/conferencia/` | Um por bloco, 690×345 |
+| **Conferência contra a planta** | `scripts/overlay_check.py` → `docs/conferencia-planta.png` | Cena sobreposta ao desenho |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
@@ -113,6 +114,30 @@ travou o bloco alegando conflito entre áudio e planta. Ordenando os rótulos po
 coordenada Y real, a sequência bate exatamente com a ditada. O bloco está
 liberado.
 
+**A cena foi conferida contra a planta, e a conferência achou erro grosso.**
+Render de câmera mostra se o quadro ficou bonito; só a sobreposição em planta
+mostra se o galpão está 90 m ao lado. Rode `scripts/overlay_check.py` depois de
+mexer em qualquer posição. O que a primeira conferência pegou:
+
+- **Cinco blocos do percurso estavam errados de 88 a 182 m.** Eu os havia
+  posicionado por geometria da bacia. A planta traz os títulos do roteiro
+  escritos em vermelho, com posição — inclusive a Fazendinha. O extrator não os
+  pegava porque só reconhecia rótulos de uma lista fixa, e vários estão
+  rotacionados. Agora saem em `titulos` no JSON.
+- **Os Pavilhões 1, 2 e a Praça Coberta são um prédio só**, de ~176 × 33 m, e o
+  "Pavilhão 3" é o bloco laranja do Galpão do Produtor, ~20 × 37 m. Eu havia
+  suposto quatro galpões separados de 30 × 70 m.
+- **Nada estava rotacionado.** Os seis pavilhões de animais correm a 18°, os
+  camarotes são duas faixas retas a −54° e −70°, o palco a 28°. A direção sai
+  do próprio rótulo, que na prancha corre no eixo do que ele nomeia; agora vai
+  em `dir` em cada zona do JSON.
+- **A pista da arena tinha 45 m de raio**; medida no desenho, tem ~26.
+
+Desvios que sobraram, conhecidos: a caixa de cada pavilhão de animais fica
+centrada no rótulo e não no prédio, o que a desloca uns 10 m no eixo; as lajes
+de estacionamento são aproximadas; e os galpões têm a incerteza de leitura do
+bitmap.
+
 **A câmera errava por três motivos, não um.** Voava a 12 m com inclinação fixa
 e **parava em cima do assunto** — e de cima do assunto só se vê cobertura. As
 três correções, que valem para qualquer bloco novo: altura por trecho (aéreo a
@@ -132,10 +157,11 @@ O gerador avisa na saída quando isso ocorre; a correção é baixar o `recuo` d
 bloco. Mercado, Agroindústrias e Café Colonial dividem o Pavilhão 3 e por isso
 têm recuo decrescente: a câmera avança pelo galpão enquanto o título muda.
 
-**Cinco blocos do roteiro não têm rótulo na planta.** Expositores Externos,
-Fazendinha, Máquinas, Veículos e Área de Shows. Quatro deles saem da geometria
-da bacia — são anéis e patamares com raio conhecido. **A Fazendinha não sai:**
-está posicionada em caráter provisório e o gerador imprime isso a cada rodada.
+**Cinco blocos não têm rótulo CAD — mas quatro têm título vermelho.**
+Expositores Externo, Fazendinha, Exposição de Máquinas e Área de Show saem dos
+títulos da prancha. Só **Veículos e Motos Náuticas** não tem nem rótulo nem
+título: a prancha o marca apenas pela cor da legenda, e a posição usada é o
+centroide dos pixels azuis do bitmap, fora da caixa de legenda.
 
 **Local:** -25,73144 / -53,07627 — R. Jorge Amado, Jardim Marcante, Dois
 Vizinhos - PR, 85660-000.
@@ -183,7 +209,7 @@ Frases literais, não reescrever:
 ## Próximos passos, em ordem de valor
 
 1. **Ajustar recuo, altura e mira bloco a bloco** pelos quadros em
-   `docs/conferencia/`. Os parâmetros estão na lista `PERCURSO`, um dicionário
+   `docs/conferencia/`, conferindo posição em `docs/conferencia-planta.png`. Os parâmetros estão na lista `PERCURSO`, um dicionário
    por bloco — mexer é trocar um número, não remontar cena. Os blocos da faixa
    norte (02 a 07) são os que ainda leem como telhado branco sem assunto.
 2. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
@@ -204,11 +230,14 @@ Frases literais, não reescrever:
 | # | Pendência | Impacto |
 |---|---|---|
 | 1 | Footage de edições anteriores — prometido, não chegou | Alto — vira textura e referência |
-| 2 | **Dimensão dos Pavilhões 1, 2 e 3** — a planta não desenha o contorno | Alto — seis blocos do roteiro acontecem neles |
-| 3 | **Onde fica a Fazendinha** — "ao lado da pista de tiro de laço", sem rótulo na planta | Alto — é diferencial, e a posição atual é chute |
-| 4 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
-| 5 | Medida real de qualquer estrutura | Médio — confirma a escala |
-| 6 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 2 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
+| 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
+| 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+
+Duas pendências saíram da lista porque **a própria planta respondeu**: onde
+fica a Fazendinha (título vermelho, x=426,9 y=438,1 na prancha) e a dimensão
+dos galpões da faixa norte (medida no bitmap). Antes de perguntar ao cliente,
+procure no desenho.
 
 ---
 

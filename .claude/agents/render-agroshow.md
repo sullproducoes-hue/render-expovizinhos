@@ -48,10 +48,22 @@ camada do evento no ano que vem.
 Antes de render longo, rode `--conferencia` e olhe os quadros. Erro de
 enquadramento descoberto depois de horas de render é o desperdício clássico.
 
+E antes de confiar em qualquer posição, rode **`scripts/overlay_check.py`**:
+ele desenha a cena em planta por cima do PDF oficial. Quadro de câmera mostra
+se ficou bonito; só a sobreposição mostra se o galpão está 90 m ao lado de onde
+deveria. Foi assim que apareceram cinco blocos do percurso errados de 88 a
+182 m, quatro galpões supostos no lugar de dois prédios reais e a cena inteira
+alinhada aos eixos, quando a planta tem pavilhões a 18° e camarotes a −54°.
+
 ## Números que não se re-descobrem
 
 - **Escala: 0,5611 m/pt**, derivada dos 39 estandes de 100 m² da série C. Dá
   terreno de 808 × 454 m. Ainda não conferida em campo.
+- **A planta responde mais do que parece.** Os títulos do roteiro estão nela em
+  vermelho, com posição — foi assim que a Fazendinha deixou de ser chute. E a
+  direção de cada rótulo é a direção do elemento que ele nomeia, o que dá a
+  rotação dos prédios. Os dois saem no JSON (`titulos`, e `dir` em cada zona).
+  **Antes de abrir pendência com o cliente, procure no desenho.**
 - **Nem o PDF nem o DWG têm vetor.** Os dois carregam o mesmo bitmap de
   1806 × 1383 px; o DWG tem zero polilinha e 4483 caracteres soltos, glifo a
   glifo. Não insista em extrair contorno deles.
