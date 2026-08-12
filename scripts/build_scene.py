@@ -3,17 +3,18 @@
 Gera a cena 3D do Parque de Exposicoes de Dois Vizinhos para a AGROSHOW 2026,
 a partir da planta extraida em data/mapa_agroshow26.json.
 
-Constroi terreno, os 134 estandes instanciados, os pavilhoes, a arena e o
-caminho de camera seguindo o percurso ditado pelo cliente. Deixa tudo em
-colecoes separadas para que a camada permanente (terreno, pavilhoes) sobreviva
-a troca da camada do evento (estandes, palco, sinalizacao) no ano seguinte.
+Constroi terreno, os 134 estandes instanciados, os pavilhoes, a arena, o portal,
+o palco, os camarotes e o caminho de camera seguindo o percurso ditado pelo
+cliente. Deixa tudo em colecoes separadas para que a camada permanente
+(terreno, pavilhoes) sobreviva a troca da camada do evento (estandes, palco,
+sinalizacao) no ano seguinte.
 
 Uso:
     blender --background --python scripts/build_scene.py -- --out cena.blend
-    blender --background --python scripts/build_scene.py -- --relevo dem.png
 
 Ou com o modulo bpy instalado (pip install bpy):
     python3 scripts/build_scene.py --out cena.blend
+    python3 scripts/build_scene.py --conferencia docs/   # quadros de checagem
 
 Escala: derivada da propria planta. Os 39 estandes da serie C tem 100 m² (lado
 de 10 m) e ficam encostados em fileira; a mediana da distancia entre rotulos
@@ -38,32 +39,111 @@ from mathutils import Vector
 ESCALA = 0.5611          # metros por ponto de PDF (derivada da serie C)
 ALTURA_ESTANDE = 3.2     # m -- tenda/estande padrao de feira
 ALTURA_PAVILHAO = 7.0    # m -- pavilhao de animais
-ALTURA_CAMERA = 12.0     # m -- altura de voo do percurso
-INCLINACAO_CAM = 18.0    # graus abaixo da horizontal
-SEGUNDOS_POR_PONTO = 8.0 # ritmo do percurso -- 16 pontos = ~2min08, como a referencia
+RAIO_PISTA = 32.0        # m -- pista da arena; a bacia plana ao redor e maior
 FPS = 30
 LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
 
-# Percurso ditado pelo cliente, em rotulos da planta. A ordem e a do audio.
-# Cada entrada: (nome do ponto, rotulo procurado, ocorrencia desejada)
+# Duracao alvo do percurso. A referencia do cliente tem ~2 min; sobra margem de
+# lapidacao cortando trecho, nunca esticando -- esticar mata o ritmo.
+DURACAO_ALVO = 148.0     # s
+
+# Camera. O quadro de conferencia anterior mostrava telhado de estande porque a
+# camera voava a 12 m com 18 graus de inclinacao fixos, parando em cima do
+# proprio assunto -- de cima do assunto so se ve cobertura. Agora sao tres
+# mudancas: a altura varia por trecho (aereo nas transicoes, baixa nos pontos),
+# a camera para a uma distancia de recuo ANTES do assunto, e a mira e um alvo
+# animado, nao um angulo fixo. Assim cada bloco do roteiro entra em quadro pela
+# frente, que e como o cliente descreve o percurso no audio.
+ALTURA_TRANSICAO = 52.0   # m acima do terreno, no meio dos trechos longos
+TRECHO_MINIMO_AEREO = 5.0 # s -- trecho mais curto que isso nao sobe
+RECUO_PADRAO = 55.0       # m entre a camera parada e o assunto
+ALTURA_ALVO = 4.0         # m acima do solo do assunto -- mira na massa, nao no chao
+# Mira do ultimo quadro, la fora do portal. Um pouco acima do horizonte: ao
+# atravessar o vao a camera levanta para o ceu de fim de tarde. Mirando no
+# horizonte o filme terminaria em campo vazio (nada foi modelado do lado de
+# fora); mirando muito alto termina em ceu puro. Com 30 mm o meio angulo
+# vertical e de 17 graus, entao 22 m a 130 m de distancia deixam a linha do
+# horizonte no terco inferior do quadro.
+ALTURA_ALVO_SAIDA = 22.0
+LENTE_MM = 30.0
+MOTOR_PADRAO = "CYCLES"
+
+# Sol de fim de tarde, coerente com o LOOK LOCK das imagens de apoio.
+# Azimute medido a partir do norte, no sentido horario (295 = oeste-noroeste).
+# Um unico par de angulos alimenta o sol e o ceu -- se divergirem, a sombra vai
+# para um lado e o disco solar para o outro, e o render inteiro denuncia.
+AZIMUTE_SOL = 295.0
+ELEVACAO_SOL = 12.0
+
+# Percurso: a ordem e a do roteiro em docs/BRIEFING.md, que veio do audio.
+# Cada ponto e um dicionario:
+#   bloco      numero do bloco no roteiro ("--" para no de passagem sem titulo)
+#   nome       identificacao interna, vira nome do marcador na viewport
+#   rotulo     rotulo da planta a procurar em data/mapa_agroshow26.json
+#   ocorrencia qual ocorrencia do rotulo, ordenada por (y, x)
+#   polar      (raio_m, angulo_graus) a partir do centro da arena, para os
+#              pontos que a planta nao rotula -- aneis e patamares
+#   altura     m acima do terreno naquele ponto
+#   recuo      m entre a camera parada e o assunto; negativo passa do assunto
+#   alvo       m acima do solo do assunto onde a camera mira (padrao ALTURA_ALVO)
+#   pausa      s parado no ponto, para o titulo respirar
+#   provisorio posicao ainda nao confirmada pelo cliente
+#
+# Os quatro diferenciais -- Fazendinha, Rodeio, Cafe Colonial e Mercado do
+# Produtor -- sao os unicos com pausa longa. Tela e tempo sao a mesma moeda.
 PERCURSO = [
-    ("00 Estacionamento",      "ESTACIONAMENTO",        5),
-    ("01 Portal de Entrada",   "Portal de Entrada",     0),
-    ("02 Pavilhao 1",          "PAVILHÃO 1",            0),
-    ("03 Alimentacao Coberta", "Coberta",               0),
-    ("04 Pavilhao 2",          "PAVILHÃO 2",            0),
-    ("05 Pavilhao 3",          "PAVILHÃO 3",            0),
-    ("06 Mercado do Produtor", "Mercado do Produtor",   0),
-    ("07 Cafe Colonial",       "Café Colonial",         0),
-    ("08 Bosque",              "Bosque",                2),
-    ("09 Alimentacao Aberta",  "Aberta",                0),
-    ("10 Recinto de Leiloes",  "RECINTO DE LEILÕES",    0),
-    ("11 Pavilhoes de Animais", "PAVILHÃO - GADO LEITE", 0),
-    ("12 Pista de Julgamentos", "PISTA DE JULGAMENTOS",  0),
-    ("13 Arena de Rodeio",     "ARENA DE RODEIO",       0),
-    ("14 Palco",               "PALCO",                 0),
-    ("15 Saida pelo Portal",   "Portal de Entrada",     0),
+    dict(bloco="00", nome="Estacionamento", rotulo="ESTACIONAMENTO",
+         ocorrencia=5, altura=46.0, recuo=120.0, pausa=1.5),
+    dict(bloco="01", nome="Portal de Entrada", rotulo="Portal de Entrada",
+         altura=9.0, recuo=45.0, pausa=3.0),
+    # Faixa norte: os galpoes tem 8 m de pe direito e ate 90 m de comprido.
+    # Recuo curto aqui poe a cobertura na cara da lente e o bloco some.
+    dict(bloco="02", nome="Pavilhao 1", rotulo="PAVILHÃO 1",
+         altura=32.0, recuo=110.0, alvo=9.0, pausa=1.5),
+    dict(bloco="03", nome="Alimentacao Coberta", rotulo="Coberta",
+         altura=28.0, recuo=95.0, alvo=9.0, pausa=1.5),
+    dict(bloco="04", nome="Pavilhao 2", rotulo="PAVILHÃO 2",
+         altura=32.0, recuo=110.0, alvo=9.0, pausa=1.5),
+    dict(bloco="05", nome="Mercado do Produtor", rotulo="Mercado do Produtor",
+         altura=26.0, recuo=90.0, alvo=8.0, pausa=3.0),
+    dict(bloco="06", nome="Agroindustrias", rotulo="PAVILHÃO 3",
+         altura=32.0, recuo=110.0, alvo=9.0, pausa=1.5),
+    dict(bloco="07", nome="Cafe Colonial", rotulo="Café Colonial",
+         altura=26.0, recuo=90.0, alvo=8.0, pausa=3.0),
+    dict(bloco="--", nome="Bosque", rotulo="Bosque", ocorrencia=0,
+         altura=24.0, pausa=0.0),
+    dict(bloco="08", nome="Alimentacao Aberta", rotulo="Aberta",
+         altura=18.0, pausa=1.5),
+    dict(bloco="09", nome="Recinto de Leiloes", rotulo="RECINTO DE LEILÕES",
+         altura=18.0, pausa=1.5),
+    dict(bloco="10", nome="Pavilhoes de Animais", rotulo="PAVILHÃO - GADO LEITE",
+         altura=26.0, recuo=90.0, pausa=2.0),
+    dict(bloco="11", nome="Pista de Julgamentos", rotulo="PISTA DE JULGAMENTOS",
+         altura=22.0, recuo=80.0, pausa=1.5),
+    # Sem rotulo na planta: posicionados por geometria da bacia (ver PATAMARES).
+    dict(bloco="12", nome="Expositores Externos", polar=(200.0, 170.0),
+         altura=30.0, recuo=80.0, pausa=1.5),
+    dict(bloco="13", nome="Fazendinha", polar=(175.0, 215.0), provisorio=True,
+         altura=15.0, recuo=45.0, pausa=3.5),
+    dict(bloco="14", nome="Maquinas e Implementos", polar=(110.0, 250.0),
+         altura=20.0, pausa=1.5),
+    dict(bloco="15", nome="Veiculos e Nauticas", polar=(110.0, 320.0),
+         altura=20.0, pausa=1.5),
+    dict(bloco="16", nome="Area de Shows", polar=(70.0, 20.0),
+         altura=16.0, pausa=1.5),
+    dict(bloco="17", nome="Arena de Rodeio", rotulo="ARENA DE RODEIO",
+         altura=13.0, recuo=70.0, pausa=3.5),
+    dict(bloco="18", nome="Palco Principal", rotulo="PALCO", ocorrencia=0,
+         altura=12.0, recuo=60.0, pausa=3.0),
+    # Plano final em dois tempos. Primeiro a camera para de frente para o
+    # portal, com ele preenchendo o quadro e a assinatura entrando; depois
+    # atravessa o vao central. Terminar 80 m depois do portao daria dois
+    # segundos de campo vazio -- o que fecha o filme e a passagem, nao o campo.
+    dict(bloco="19", nome="Saida pelo Portal", rotulo="Portal de Entrada",
+         altura=3.5, recuo=40.0, pausa=2.5),
+    dict(bloco="--", nome="Atravessa o Portal", rotulo="Portal de Entrada",
+         altura=3.5, recuo=-8.0, pausa=0.0),
 ]
 
 COLECOES = ["BASE", "EVENTO", "CAMERA", "LUZ"]
@@ -124,24 +204,90 @@ def caixa(nome, largura, profundidade, altura, colecao):
     return obj
 
 
+def prisma(nome, vertices, altura, colecao):
+    """Extruda um poligono do plano XY em um solido de altura dada.
+
+    Serve para as pecas que nao sao caixa -- frontao do portal, cobertura do
+    palco. Os vertices vem em coordenadas locais, no sentido anti-horario.
+    """
+    malha = bpy.data.meshes.new(nome)
+    obj = bpy.data.objects.new(nome, malha)
+    colecao.objects.link(obj)
+
+    bm = bmesh.new()
+    verts = [bm.verts.new((x, 0.0, z)) for x, z in vertices]
+    face = bm.faces.new(verts)
+    bmesh.ops.translate(
+        bm,
+        vec=Vector((0, -altura / 2, 0)),
+        verts=bm.verts,
+    )
+    ret = bmesh.ops.extrude_face_region(bm, geom=[face])
+    movidos = [e for e in ret["geom"] if isinstance(e, bmesh.types.BMVert)]
+    bmesh.ops.translate(bm, vec=Vector((0, altura, 0)), verts=movidos)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(malha)
+    bm.free()
+    return obj
+
+
 # --------------------------------------------------------------------------
 # Materiais
 
-# (nome, cor base RGB, rugosidade, metalico)
+# (nome, cor base RGB, rugosidade, metalico, tamanho da mancha em metros)
+# A mancha e um ruido que quebra a cor chapada. Vale pouco de perto e muito de
+# longe, que e onde este video vive: sem ela, grama e lona leem como plastico.
+# O tamanho e em METROS -- mancha de grama tem 12 m, veio de madeira tem 40 cm.
+# Mancha menor que um pixel na tela vira moire, que e pior que a cor chapada.
+# Troque por PBR com textura (Poly Haven, ambientCG, ambos CC0) na lapidacao;
+# no ambiente remoto os dois dominios estao bloqueados pelo proxy.
 MATERIAIS = {
-    "MAT_TERRENO":  ((0.13, 0.22, 0.07), 0.95, 0.0),
-    "MAT_LONA":     ((0.82, 0.81, 0.78), 0.55, 0.0),
-    "MAT_PAVILHAO": ((0.55, 0.56, 0.58), 0.45, 0.3),
-    "MAT_ARENA":    ((0.38, 0.28, 0.18), 0.90, 0.0),
-    "MAT_ASFALTO":  ((0.09, 0.09, 0.10), 0.80, 0.0),
+    "MAT_TERRENO":  ((0.13, 0.22, 0.07), 0.95, 0.0, 14.0),
+    "MAT_LONA":     ((0.82, 0.81, 0.78), 0.55, 0.0, 2.0),
+    "MAT_PAVILHAO": ((0.55, 0.56, 0.58), 0.45, 0.3, 4.0),
+    "MAT_ARENA":    ((0.38, 0.28, 0.18), 0.90, 0.0, 8.0),
+    "MAT_ASFALTO":  ((0.17, 0.17, 0.18), 0.80, 0.0, 10.0),
+    "MAT_MADEIRA":  ((0.16, 0.09, 0.05), 0.65, 0.0, 0.4),
+    "MAT_TELHA":    ((0.07, 0.07, 0.08), 0.40, 0.6, 1.2),
+    "MAT_LETREIRO": ((0.92, 0.91, 0.88), 0.35, 0.0, 0.0),
+    "MAT_FERRO":    ((0.03, 0.03, 0.03), 0.30, 0.9, 0.0),
+    "MAT_PALCO":    ((0.05, 0.05, 0.06), 0.55, 0.1, 1.5),
 }
 
 
+def variar_cor(mat, cor, tamanho):
+    """Mistura um ruido na cor base, para tirar o aspecto de plastico chapado.
+
+    O tamanho e a mancha em metros. O segundo tom sai da propria cor,
+    escurecido -- assim a variacao nunca briga com a paleta.
+    """
+    nos = mat.node_tree.nodes
+    ligacoes = mat.node_tree.links
+    bsdf = nos.get("Principled BSDF")
+    if not bsdf:
+        return
+
+    ruido = nos.new("ShaderNodeTexNoise")
+    ruido.inputs["Scale"].default_value = 1.0 / max(tamanho, 1e-3)
+    ruido.inputs["Detail"].default_value = 6.0
+    ruido.location = (-700, 0)
+
+    mistura = nos.new("ShaderNodeMixRGB")
+    mistura.blend_type = "MIX"
+    mistura.inputs["Fac"].default_value = 0.35
+    mistura.inputs["Color1"].default_value = (*cor, 1.0)
+    mistura.inputs["Color2"].default_value = (
+        cor[0] * 0.55, cor[1] * 0.55, cor[2] * 0.55, 1.0)
+    mistura.location = (-400, 0)
+
+    ligacoes.new(ruido.outputs["Fac"], mistura.inputs["Fac"])
+    ligacoes.new(mistura.outputs["Color"], bsdf.inputs["Base Color"])
+
+
 def criar_materiais():
-    """Materiais base. Sao ponto de partida para o acabamento -- troque por
-    PBR com textura (Poly Haven, ambientCG: ambos CC0) na etapa de lapidacao."""
+    """Materiais base, com variacao procedural. Ponto de partida do acabamento."""
     feitos = {}
-    for nome, (cor, rug, met) in MATERIAIS.items():
+    for nome, (cor, rug, met, mancha) in MATERIAIS.items():
         mat = bpy.data.materials.new(nome)
         mat.use_nodes = True
         bsdf = mat.node_tree.nodes.get("Principled BSDF")
@@ -150,6 +296,8 @@ def criar_materiais():
             bsdf.inputs["Roughness"].default_value = rug
             if "Metallic" in bsdf.inputs:
                 bsdf.inputs["Metallic"].default_value = met
+        if mancha:
+            variar_cor(mat, cor, mancha)
         feitos[nome] = mat
     return feitos
 
@@ -196,7 +344,7 @@ def elevacao(x, y, centro_arena):
 
 def construir_arena(centro_arena, col, mats):
     """Piso de terra da pista, no fundo da bacia."""
-    bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=45.0, depth=0.4,
+    bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=RAIO_PISTA, depth=0.4,
                                         location=(centro_arena[0],
                                                   centro_arena[1], 0.1))
     obj = bpy.context.active_object
@@ -273,6 +421,19 @@ def fcurves_da_acao(obj):
     return curvas
 
 
+def suavizar_curvas(obj):
+    """Poe as chaves em bezier auto-clamped.
+
+    Auto-clamped acelera e freia sozinho nas paradas e nao inventa overshoot
+    nos trechos de velocidade constante -- que e exatamente o comportamento
+    desejado num percurso com pausas nos diferenciais.
+    """
+    for fc in fcurves_da_acao(obj):
+        for kp in fc.keyframe_points:
+            kp.interpolation = "BEZIER"
+            kp.handle_left_type = kp.handle_right_type = "AUTO_CLAMPED"
+
+
 def orientar_estandes(postos):
     """Alinha cada estande ao eixo da sua fileira.
 
@@ -335,6 +496,85 @@ def construir_estandes(dados, col, centro_arena):
     return contagem
 
 
+# Galpoes da faixa norte, onde acontecem seis blocos do roteiro: Pavilhao 1,
+# Alimentacao Coberta, Pavilhao 2, Mercado do Produtor, Agroindustrias e Cafe
+# Colonial. Sem eles a camera para de frente para grama vazia nos seis.
+#
+# ATENCAO -- DIMENSOES SUPOSTAS. A planta nao desenha o contorno dos galpoes,
+# so os rotulos e os estandes de dentro; e o agrupamento por estande nao serve
+# de envoltoria (o do Pavilhao 3 esparrama por 122 x 106 m, o do Pavilhao 1
+# junta quatro estandes). Os numeros abaixo sao leitura conservadora do que
+# cabe entre os rotulos: os pavilhoes 2 e 3 estao a 39 m um do outro, entao o
+# lado comprido corre norte-sul. Confirme com o cliente antes do render final.
+#
+# (rotulo, largura leste-oeste, profundidade norte-sul)
+GALPOES = [
+    ("PAVILHÃO 1", 30.0, 70.0),
+    ("PAVILHÃO 2", 30.0, 70.0),
+    ("PAVILHÃO 3", 36.0, 90.0),   # abriga Mercado, Agroindustrias e Cafe
+    ("Coberta",    40.0, 45.0),   # praca de alimentacao coberta
+]
+ALTURA_GALPAO = 8.0      # m -- pe direito, acima dos 3,2 m dos estandes
+
+
+def construir_galpoes(dados, col, mats, centro_arena):
+    """Galpoes da faixa norte: cobertura em duas aguas sobre pilares.
+
+    Sem parede: os estandes de dentro continuam visiveis, que e o que o roteiro
+    pede em cada um dos seis blocos. Duas aguas em vez de laje plana porque a
+    laje, vista da altura da camera, vira um retangulo cinza sem leitura.
+    """
+    origem = dados["_origem"]
+    feitos = 0
+    for rotulo, larg, prof in GALPOES:
+        z = achar_zona(dados, rotulo, 0)
+        if z is None:
+            continue
+        x, y = para_mundo(z["x"], z["y"], origem)
+        solo = elevacao(x, y, centro_arena)
+
+        meia = larg / 2
+        cobertura = prisma(f"{rotulo} cobertura",
+                           [(-meia, 0.0), (meia, 0.0), (meia, 1.2),
+                            (0.0, 3.4), (-meia, 1.2)], prof, col)
+        cobertura.location = (x, y, solo + ALTURA_GALPAO)
+        aplicar(cobertura, mats["MAT_PAVILHAO"])
+        cobertura["dimensao_suposta"] = True
+
+        # Pilares a cada ~12 m nas duas laterais compridas.
+        passos = max(2, int(prof // 12.0))
+        for i in range(passos + 1):
+            py = y - prof / 2 + prof * i / passos
+            for px in (x - meia, x + meia):
+                pilar = caixa(f"{rotulo} pilar {i}", 0.7, 0.7,
+                              ALTURA_GALPAO, col)
+                pilar.location = (px, py, solo)
+                aplicar(pilar, mats["MAT_FERRO"])
+        feitos += 1
+    return feitos
+
+
+def construir_estacionamentos(dados, col, mats, centro_arena):
+    """Manchas de asfalto nos estacionamentos.
+
+    O bloco 00 e o ponto de vista de quem chega, e sem elas o primeiro quadro
+    do filme e grama vazia. Sao lajes finas: a leitura vem da cor, nao do
+    volume. Dimensao aproximada -- a planta rotula o estacionamento mas nao
+    delimita a area.
+    """
+    origem = dados["_origem"]
+    feitos = 0
+    for z in dados["zonas"]:
+        if z["rotulo"] != "ESTACIONAMENTO":
+            continue
+        x, y = para_mundo(z["x"], z["y"], origem)
+        obj = caixa(f"Estacionamento {feitos}", 90.0, 60.0, 0.15, col)
+        obj.location = (x, y, elevacao(x, y, centro_arena))
+        aplicar(obj, mats["MAT_ASFALTO"])
+        feitos += 1
+    return feitos
+
+
 def construir_pavilhoes(dados, col, centro_arena):
     """Pavilhoes de animais: 5 de 720 m² e 1 de 560 m².
 
@@ -358,6 +598,199 @@ def construir_pavilhoes(dados, col, centro_arena):
     return feitos
 
 
+# --------------------------------------------------------------------------
+# Portal, palco e camarotes -- as tres pecas que a camera encosta
+
+def construir_portal(dados, col, mats, centro_arena, mira):
+    """Portal de entrada, conceito celeiro, na leitura economica.
+
+    Segue reference/PORTAL-referencia.md: frontao em duas aguas com trelica em
+    V invertido, tabuas verticais, letreiro em relevo, alas laterais mais
+    baixas com beiral curto, tres vaos de passagem, barris ladeando. O cliente
+    disse que a versao construida sera mais barata que a foto -- na duvida
+    entre duas leituras de um detalhe, esta aqui a mais economica.
+
+    E o primeiro e o ultimo plano do video, entao vale a geometria de verdade:
+    o plano final atravessa o vao central.
+    """
+    origem = dados["_origem"]
+    z = achar_zona(dados, "Portal de Entrada", 0)
+    x, y = para_mundo(z["x"], z["y"], origem)
+    solo = elevacao(x, y, centro_arena)
+
+    grupo = bpy.data.objects.new("PORTAL", None)
+    grupo.empty_display_type = "PLAIN_AXES"
+    grupo.empty_display_size = 6.0
+    grupo.location = (x, y, solo)
+    # Os pilares correm no X local e a passagem acontece no Y local, entao o
+    # Y local e que tem de apontar para fora -- dai o quarto de volta somado ao
+    # rumo da mira. Sem ele o portao vira corredor paralelo ao caminho, e a
+    # camera passa por fora em vez de atravessar o vao.
+    grupo.rotation_euler = (0.0, 0.0,
+                            math.atan2(y - mira[1], x - mira[0]) + math.pi / 2)
+    col.objects.link(grupo)
+
+    def peca(nome, larg, prof, alt, pos, mat):
+        obj = caixa(nome, larg, prof, alt, col)
+        obj.parent = grupo
+        obj.location = pos
+        aplicar(obj, mat)
+        return obj
+
+    largura_vao = 4.0
+    largura_pilar = 1.6
+    altura_pilar = 5.0
+    # Quatro pilares definem os tres vaos de passagem.
+    for i in range(4):
+        deslocamento = (i - 1.5) * (largura_vao + largura_pilar)
+        peca(f"PORTAL_Pilar{i}", largura_pilar, 3.0, altura_pilar,
+             (deslocamento, 0.0, 0.0), mats["MAT_MADEIRA"])
+
+    largura_corpo = 4 * largura_pilar + 3 * largura_vao
+    peca("PORTAL_Verga", largura_corpo, 3.0, 1.6,
+         (0.0, 0.0, altura_pilar), mats["MAT_MADEIRA"])
+
+    # Frontao em duas aguas por cima da verga, com a trelica aparente.
+    meia = largura_corpo / 2
+    frontao = prisma("PORTAL_Frontao",
+                     [(-meia, 0.0), (meia, 0.0), (0.0, 3.6)], 2.6, col)
+    frontao.parent = grupo
+    frontao.location = (0.0, 0.0, altura_pilar + 1.6)
+    aplicar(frontao, mats["MAT_MADEIRA"])
+
+    # Trelica aparente em V invertido, encaixada no frontao: cada barra sai do
+    # beiral e sobe ate a cumeeira. Angulo e comprimento derivados da propria
+    # agua do telhado -- barra fora do triangulo fura o frontao, e o quadro de
+    # conferencia denuncia na hora.
+    altura_frontao = 3.6
+    comprimento = math.hypot(meia, altura_frontao)
+    inclinacao_agua = math.atan2(altura_frontao, meia)
+    for lado in (-1, 1):
+        trelica = caixa("PORTAL_Trelica", 0.3, 0.3, comprimento, col)
+        trelica.parent = grupo
+        trelica.location = (lado * meia, -1.35, altura_pilar + 1.6)
+        trelica.rotation_euler = (0.0,
+                                  -lado * (math.pi / 2 - inclinacao_agua),
+                                  0.0)
+        aplicar(trelica, mats["MAT_MADEIRA"])
+
+    # Letreiro em relevo: PARQUE DE EXPOSICOES / DE DOIS VIZINHOS - PR.
+    # Entra como placa; o texto e composto na pos com mascara, nunca gerado.
+    letreiro = peca("PORTAL_Letreiro", largura_corpo * 0.62, 0.25, 1.1,
+                    (0.0, -1.6, altura_pilar + 0.25), mats["MAT_LETREIRO"])
+    letreiro["texto"] = "PARQUE DE EXPOSIÇÕES · DE DOIS VIZINHOS - PR"
+
+    # Alas laterais, mais baixas, com beiral curto.
+    for lado in (-1, 1):
+        peca(f"PORTAL_Ala{lado}", 8.0, 4.0, 3.6,
+             (lado * (largura_corpo / 2 + 4.0), 0.0, 0.0),
+             mats["MAT_MADEIRA"])
+        peca(f"PORTAL_Beiral{lado}", 8.8, 4.8, 0.4,
+             (lado * (largura_corpo / 2 + 4.0), 0.0, 3.6),
+             mats["MAT_TELHA"])
+
+    # Luminarias de parede em ferro preto -- seis na fachada, como na foto.
+    for i in range(6):
+        peca(f"PORTAL_Luminaria{i}", 0.35, 0.35, 0.5,
+             ((i - 2.5) * (largura_corpo / 6), -1.6, 3.9), mats["MAT_FERRO"])
+
+    # Barris ladeando a passagem central.
+    for i, lado in enumerate((-1, 1)):
+        for j in range(3):
+            barril = peca(f"PORTAL_Barril{i}{j}", 0.9, 0.9, 1.0,
+                          (lado * (largura_vao * 0.75 + j * 1.2), -2.6, 0.0),
+                          mats["MAT_MADEIRA"])
+            barril.rotation_euler = (0.0, 0.0, math.radians(20.0 * j))
+
+    return grupo, (x, y)
+
+
+def construir_palco(dados, col, mats, centro_arena):
+    """Palco principal, de frente para a pista, no fundo da bacia.
+
+    Deck elevado, duas torres de PA e cobertura em duas aguas. Sem trelica
+    detalhada: a camera passa a 12 m e o que le e a silhueta.
+    """
+    origem = dados["_origem"]
+    z = achar_zona(dados, "PALCO", 0)
+    x, y = para_mundo(z["x"], z["y"], origem)
+    solo = elevacao(x, y, centro_arena)
+
+    grupo = bpy.data.objects.new("PALCO", None)
+    grupo.empty_display_type = "PLAIN_AXES"
+    grupo.empty_display_size = 6.0
+    grupo.location = (x, y, solo)
+    # De frente para o centro da pista -- o cliente foi explicito no audio. O
+    # deck e largo no X local e a boca de cena e o -Y local, dai o quarto de
+    # volta: sem ele o palco aponta a lateral para o publico.
+    grupo.rotation_euler = (0.0, 0.0,
+                            math.atan2(centro_arena[1] - y,
+                                       centro_arena[0] - x) + math.pi / 2)
+    col.objects.link(grupo)
+
+    def peca(nome, larg, prof, alt, pos, mat):
+        obj = caixa(nome, larg, prof, alt, col)
+        obj.parent = grupo
+        obj.location = pos
+        aplicar(obj, mat)
+        return obj
+
+    peca("PALCO_Deck", 26.0, 14.0, 2.0, (0.0, 0.0, 0.0), mats["MAT_PALCO"])
+    for lado in (-1, 1):
+        peca(f"PALCO_Torre{lado}", 3.0, 3.0, 11.0,
+             (lado * 14.5, 0.0, 0.0), mats["MAT_FERRO"])
+        peca(f"PALCO_PA{lado}", 2.2, 2.2, 4.0,
+             (lado * 14.5, -1.5, 6.5), mats["MAT_FERRO"])
+
+    cobertura = prisma("PALCO_Cobertura",
+                       [(-14.0, 0.0), (14.0, 0.0), (14.0, 1.0),
+                        (0.0, 3.2), (-14.0, 1.0)], 15.0, col)
+    cobertura.parent = grupo
+    cobertura.location = (0.0, 0.0, 11.0)
+    aplicar(cobertura, mats["MAT_TELHA"])
+    return grupo
+
+
+def construir_camarotes(dados, col, mats, centro_arena):
+    """Camarotes nos dois lados da pista. SEM ARQUIBANCADA.
+
+    Restricao dura do cliente: a arena tem so pista, camarotes nos dois lados e
+    palco de frente. Arquibancada e rejeicao -- nao acrescente por conta de
+    "ficar mais cheio". Cada lado vira uma fileira de modulos de dois andares
+    seguindo o arco da pista, apoiada no patamar dos shows.
+    """
+    origem = dados["_origem"]
+    feitos = 0
+    for rotulo in ("CAMAROTES - LADO A", "CAMAROTES - LADO B"):
+        z = achar_zona(dados, rotulo, 0)
+        if z is None:
+            continue
+        x, y = para_mundo(z["x"], z["y"], origem)
+        angulo = math.atan2(y - centro_arena[1], x - centro_arena[0])
+        raio = math.hypot(x - centro_arena[0], y - centro_arena[1])
+
+        # Oito modulos no arco. O passo angular sai da largura do modulo e do
+        # raio -- passo fixo em graus faria os modulos se atravessarem num raio
+        # e se afastarem em outro.
+        largura, profundidade = 8.0, 6.0
+        passo = (largura + 1.5) / max(raio, 1.0)
+        for i in range(8):
+            ang = angulo + (i - 3.5) * passo
+            cx = centro_arena[0] + raio * math.cos(ang)
+            cy = centro_arena[1] + raio * math.sin(ang)
+            obj = caixa(f"{rotulo} {i}", largura, profundidade, 6.0, col)
+            obj.location = (cx, cy, elevacao(cx, cy, centro_arena))
+            # A largura corre no arco e a frente olha para a pista: o eixo X do
+            # modulo e tangente, ou seja, o raio mais 90 graus.
+            obj.rotation_euler = (0.0, 0.0, ang + math.pi / 2)
+            aplicar(obj, mats["MAT_PALCO"])
+            feitos += 1
+    return feitos
+
+
+# --------------------------------------------------------------------------
+# Percurso e camera
+
 def achar_zona(dados, rotulo, ocorrencia=0):
     achados = [z for z in dados["zonas"] if z["rotulo"] == rotulo]
     if not achados:
@@ -366,40 +799,150 @@ def achar_zona(dados, rotulo, ocorrencia=0):
     return achados[min(ocorrencia, len(achados) - 1)]
 
 
-def construir_percurso(dados, col, centro_arena):
-    """Curva bezier passando pelos pontos do roteiro, com camera acoplada."""
+def resolver_pontos(dados, centro_arena):
+    """Converte cada entrada do PERCURSO em coordenada de mundo.
+
+    Ponto com rotulo sai da planta. Ponto com polar sai da geometria da bacia:
+    o roteiro cita aneis e patamares que a planta nao rotula, e eles tem
+    posicao definida pelo raio ate o centro da arena.
+    """
     origem = dados["_origem"]
     pontos, ausentes = [], []
 
-    for nome, rotulo, ocorrencia in PERCURSO:
-        z = achar_zona(dados, rotulo, ocorrencia)
-        if z is None:
-            ausentes.append((nome, rotulo))
-            continue
-        x, y = para_mundo(z["x"], z["y"], origem)
-        pontos.append((nome, x, y))
+    for spec in PERCURSO:
+        if "polar" in spec:
+            raio, angulo = spec["polar"]
+            ang = math.radians(angulo)
+            x = centro_arena[0] + raio * math.cos(ang)
+            y = centro_arena[1] + raio * math.sin(ang)
+        else:
+            z = achar_zona(dados, spec["rotulo"], spec.get("ocorrencia", 0))
+            if z is None:
+                ausentes.append((spec["nome"], spec["rotulo"]))
+                continue
+            x, y = para_mundo(z["x"], z["y"], origem)
+        ponto = dict(spec)
+        ponto["x"], ponto["y"] = x, y
+        pontos.append(ponto)
+
+    return pontos, ausentes
+
+
+def no_de_saida(pontos, mira):
+    """Ponto extra do caminho, do lado de fora do portal.
+
+    O plano final atravessa o portao -- entao o caminho precisa continuar para
+    fora dele, senao a camera para debaixo da verga.
+    """
+    fim = pontos[-1]
+    dx, dy = fim["x"] - mira[0], fim["y"] - mira[1]
+    norma = math.hypot(dx, dy) or 1.0
+    return (fim["x"] + dx / norma * 140.0, fim["y"] + dy / norma * 140.0)
+
+
+def no_de_entrada(pontos):
+    """Ponto extra do caminho, antes do primeiro bloco.
+
+    O recuo so existe se houver caminho atras do assunto. Sem este no, a camera
+    comeca em cima do estacionamento olhando para os proprios pes -- o primeiro
+    quadro do filme, justamente.
+    """
+    inicio, seguinte = pontos[0], pontos[1]
+    dx = inicio["x"] - seguinte["x"]
+    dy = inicio["y"] - seguinte["y"]
+    norma = math.hypot(dx, dy) or 1.0
+    return (inicio["x"] + dx / norma * 260.0, inicio["y"] + dy / norma * 260.0)
+
+
+def ritmar(pontos, entrada, saida):
+    """Distribui a duracao alvo entre os trechos e devolve os quadros-chave.
+
+    Tempo de marcha proporcional ao comprimento do trecho -- velocidade
+    constante, sem o solavanco de dar o mesmo tempo a um pulo de 400 m e a um
+    de 40 m. As pausas saem do bolo antes do rateio, entao acrescentar pausa
+    encurta a marcha em vez de esticar o filme.
+
+    O recuo de cada ponto vira deslocamento no parametro do caminho: a camera
+    para antes do assunto (ou depois dele, com recuo negativo) enquanto o alvo
+    continua no assunto. E o que faz o bloco entrar em quadro pela frente.
+    """
+    nos = [entrada] + [(p["x"], p["y"]) for p in pontos] + [saida]
+    comprimentos = [math.dist(a, b) for a, b in zip(nos, nos[1:])]
+    total = sum(comprimentos) or 1.0
+
+    # 1) Onde a camera para para cada bloco: a distancia do assunto ao longo do
+    #    caminho, menos o recuo. Sempre adiante da parada anterior -- o caminho
+    #    nunca anda para tras.
+    percorrido = comprimentos[0]
+    anterior = 0.0
+    for i, p in enumerate(pontos):
+        if i:
+            # comprimentos[i] e o trecho entre o assunto anterior e este --
+            # o indice ja conta com o no de entrada na frente da lista.
+            percorrido += comprimentos[i]
+        recuo = p.get("recuo", RECUO_PADRAO)
+        u = max(anterior + 1e-4, min(1.0, (percorrido - recuo) / total))
+        anterior = u
+        p["u"] = u
+
+    # 2) Tempo: proporcional ao caminho REALMENTE percorrido entre paradas, nao
+    #    ao caminho inteiro. Os nos de entrada e saida existem para dar sobra de
+    #    curva nas pontas; ratear tempo por eles encolheria o filme.
+    andados = [(b["u"] - a["u"]) * total for a, b in zip(pontos, pontos[1:])]
+    andado_total = sum(andados) or 1.0
+    pausa_total = sum(p.get("pausa", 0.0) for p in pontos)
+    marcha = max(DURACAO_ALVO - pausa_total, len(andados) * 1.0)
+
+    t = 0.0
+    for i, p in enumerate(pontos):
+        if i:
+            t += andados[i - 1] / andado_total * marcha
+        p["t_chegada"] = t
+        t += p.get("pausa", 0.0)
+        p["t_saida"] = t
+
+    duracao = t
+    for p in pontos:
+        p["quadro_chegada"] = max(1, round(p["t_chegada"] * FPS) + 1)
+        p["quadro_saida"] = max(1, round(p["t_saida"] * FPS) + 1)
+    return pontos, duracao, comprimentos, nos
+
+
+def construir_percurso(dados, col, centro_arena, mira):
+    """Curva bezier pelos pontos do roteiro, com camera animada por cima.
+
+    A camera nao anda colada na curva: a curva e a linha de solo do percurso, a
+    camera e filha do rig com altura propria por ponto, e a mira e um alvo
+    animado que caminha de assunto em assunto. Separar as tres coisas e o que
+    permite descer nos pontos de interesse, subir nas transicoes e ainda
+    manter o assunto enquadrado -- sem tocar na geometria do caminho.
+    """
+    pontos, ausentes = resolver_pontos(dados, centro_arena)
+    entrada = no_de_entrada(pontos)
+    saida = no_de_saida(pontos, mira)
+    pontos, duracao, comprimentos, nos = ritmar(pontos, entrada, saida)
 
     curva = bpy.data.curves.new("PercursoCamera", type="CURVE")
     curva.dimensions = "3D"
     spline = curva.splines.new("BEZIER")
-    spline.bezier_points.add(len(pontos) - 1)
+    spline.bezier_points.add(len(nos) - 1)
 
-    for i, (nome, x, y) in enumerate(pontos):
+    for i, (x, y) in enumerate(nos):
         bp = spline.bezier_points[i]
-        bp.co = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
+        bp.co = (x, y, elevacao(x, y, centro_arena))
         bp.handle_left_type = bp.handle_right_type = "AUTO"
 
     obj_curva = bpy.data.objects.new("PercursoCamera", curva)
     col.objects.link(obj_curva)
 
     cam_data = bpy.data.cameras.new("Camera")
-    cam_data.lens = 28.0
+    cam_data.lens = LENTE_MM
     cam = bpy.data.objects.new("Camera", cam_data)
     col.objects.link(cam)
-    cam.rotation_euler = (math.radians(75), 0, 0)
 
-    # Rig segue o caminho; a camera e filha e recebe a inclinacao.
-    # Separar os dois evita brigar com a orientacao que a constraint impoe.
+    # Rig anda no caminho; a camera e filha e so cuida da altura. Sem
+    # use_curve_follow: quem orienta a camera agora e o alvo, e deixar a
+    # constraint girar o rig junto so faria a altura pender nos taludes.
     rig = bpy.data.objects.new("RigCamera", None)
     rig.empty_display_type = "ARROWS"
     rig.empty_display_size = 12.0
@@ -407,83 +950,207 @@ def construir_percurso(dados, col, centro_arena):
 
     seguir = rig.constraints.new("FOLLOW_PATH")
     seguir.target = obj_curva
-    seguir.use_curve_follow = True
-    seguir.forward_axis = "FORWARD_Y"
-    seguir.up_axis = "UP_Z"
+    seguir.use_curve_follow = False
     seguir.use_fixed_location = True
 
     cam.parent = rig
-    cam.location = (0.0, 0.0, 0.0)
-    # A camera olha por -Z local; +90 graus em X faz olhar para +Y, que e a
-    # direcao de marcha. Subtrair a inclinacao aponta o nariz para baixo.
-    cam.rotation_euler = (math.radians(90.0 - INCLINACAO_CAM), 0.0, 0.0)
 
-    # Percorre o caminho do inicio ao fim ao longo da timeline.
+    # Alvo: caminha de assunto em assunto e leva a mira junto. E o que faz o
+    # bloco entrar em quadro pela frente em vez de passar por baixo da camera.
+    alvo = bpy.data.objects.new("AlvoCamera", None)
+    alvo.empty_display_type = "SPHERE"
+    alvo.empty_display_size = 6.0
+    col.objects.link(alvo)
+
+    mirar = cam.constraints.new("TRACK_TO")
+    mirar.target = alvo
+    mirar.track_axis = "TRACK_NEGATIVE_Z"
+    mirar.up_axis = "UP_Y"
+
     cena = bpy.context.scene
-    total = int(len(pontos) * SEGUNDOS_POR_PONTO * FPS)
     cena.frame_start = 1
-    cena.frame_end = total
-    seguir.offset_factor = 0.0
-    seguir.keyframe_insert("offset_factor", frame=1)
-    seguir.offset_factor = 1.0
-    seguir.keyframe_insert("offset_factor", frame=total)
-    for fc in fcurves_da_acao(rig):
-        for kp in fc.keyframe_points:
-            kp.interpolation = "LINEAR"
+    cena.frame_end = max(2, round(duracao * FPS))
+
+    # 1) Avanco no caminho: chega e para, chega e para.
+    for p in pontos:
+        seguir.offset_factor = p["u"]
+        seguir.keyframe_insert("offset_factor", frame=p["quadro_chegada"])
+        if p["quadro_saida"] != p["quadro_chegada"]:
+            seguir.keyframe_insert("offset_factor", frame=p["quadro_saida"])
+    suavizar_curvas(rig)
+
+    # 2) Mira. No ultimo bloco o alvo vai para fora do portal: o plano final
+    #    olha para fora enquanto atravessa o vao, como o cliente pediu.
+    for i, p in enumerate(pontos):
+        if i == len(pontos) - 1:
+            destino = (saida[0], saida[1],
+                       elevacao(saida[0], saida[1], centro_arena)
+                       + ALTURA_ALVO_SAIDA)
+        else:
+            destino = (p["x"], p["y"],
+                       elevacao(p["x"], p["y"], centro_arena)
+                       + p.get("alvo", ALTURA_ALVO))
+        alvo.location = destino
+        alvo.keyframe_insert("location", frame=p["quadro_chegada"])
+        if p["quadro_saida"] != p["quadro_chegada"]:
+            alvo.keyframe_insert("location", frame=p["quadro_saida"])
+    suavizar_curvas(alvo)
+
+    # 3) Altura: valor do ponto na parada, valor aereo no meio do trecho.
+    #    Trecho curto nao sobe -- subir e descer em dois segundos vira solucao,
+    #    e o cliente nota.
+    def chavear(quadro, altura):
+        cam.location = (0.0, 0.0, altura)
+        cam.keyframe_insert("location", frame=quadro)
+
+    aereos = 0
+    for i, p in enumerate(pontos):
+        chavear(p["quadro_chegada"], p["altura"])
+        if p["quadro_saida"] != p["quadro_chegada"]:
+            chavear(p["quadro_saida"], p["altura"])
+        if i + 1 < len(pontos):
+            prox = pontos[i + 1]
+            duracao_trecho = prox["t_chegada"] - p["t_saida"]
+            if duracao_trecho >= TRECHO_MINIMO_AEREO:
+                meio = round((p["quadro_saida"] + prox["quadro_chegada"]) / 2)
+                chavear(meio, ALTURA_TRANSICAO)
+                aereos += 1
+    suavizar_curvas(cam)
 
     bpy.context.scene.camera = cam
 
-    # Marcadores nomeados, para localizar cada ponto do roteiro na viewport.
-    for nome, x, y in pontos:
-        m = bpy.data.objects.new(f"PT_{nome}", None)
+    # Marcadores nomeados, para localizar cada bloco do roteiro na viewport.
+    for p in pontos:
+        m = bpy.data.objects.new(f"PT_{p['bloco']}_{p['nome']}", None)
         m.empty_display_type = "PLAIN_AXES"
         m.empty_display_size = 8.0
-        m.location = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
+        m.location = (p["x"], p["y"],
+                      elevacao(p["x"], p["y"], centro_arena) + p["altura"])
         col.objects.link(m)
 
-    return pontos, ausentes
+    return pontos, ausentes, duracao, aereos, sum(comprimentos)
 
 
-def configurar_render(cena):
+def configurar_render(cena, motor=None):
+    # AgX puro deixa o verde do recinto lavado, e quadro lavado num painel de
+    # 951.510 pixels significa titulo brigando com fundo. Punchy devolve o
+    # contraste sem estourar o ceu de fim de tarde.
+    ajustes = cena.view_settings
+    try:
+        ajustes.look = "AgX - Punchy"
+    except TypeError:
+        pass
+    ajustes.exposure = -0.6
+
     cena.render.resolution_x = LARGURA_RENDER
     cena.render.resolution_y = ALTURA_RENDER
     cena.render.resolution_percentage = 100
-    cena.render.fps = 30
+    cena.render.fps = FPS
     cena.render.image_settings.file_format = "PNG"
     cena.render.film_transparent = False
-    try:
-        cena.render.engine = "BLENDER_EEVEE_NEXT"
-    except TypeError:
-        cena.render.engine = "CYCLES"
+
+    # Cycles por padrao. EEVEE e mais rapido, mas exige contexto grafico
+    # (libEGL) e no ambiente remoto nao existe: a chamada nao falha na
+    # atribuicao do motor, falha no meio do render. Em maquina com GPU passe
+    # --motor BLENDER_EEVEE. Cycles em CPU custa ~90 s por quadro a 25% da
+    # resolucao aqui; render final e trabalho de maquina local.
+    cena.render.engine = motor or MOTOR_PADRAO
 
 
 def construir_ceu(cena):
-    """Ceu procedural de fim de tarde.
+    """Ceu fisico de fim de tarde, com o disco solar no mesmo lugar do sol.
 
-    Substitua por um HDRI real na lapidacao -- e o que mais aproxima do
-    golden hour combinado com o material de drone. Poly Haven tem HDRIs CC0.
+    Substitui a cor chapada anterior. O ideal continua sendo um HDRI real de
+    golden hour (Poly Haven, CC0), mas no ambiente remoto o proxy bloqueia o
+    dominio -- e um ceu Nishita com azimute e elevacao corretos entrega a maior
+    parte do salto: gradiente do horizonte, ceu quente perto do sol e luz de
+    preenchimento azul do lado oposto, que a cor chapada nunca deu.
     """
     mundo = bpy.data.worlds.new("Mundo")
     cena.world = mundo
     mundo.use_nodes = True
     nos = mundo.node_tree.nodes
     fundo = nos.get("Background")
-    if fundo:
-        fundo.inputs["Color"].default_value = (0.35, 0.48, 0.72, 1.0)
-        fundo.inputs["Strength"].default_value = 1.2
+    if not fundo:
+        return mundo
+
+    ceu = nos.new("ShaderNodeTexSky")
+    ceu.location = (-300, 0)
+    for tipo in ("NISHITA", "MULTIPLE_SCATTERING", "HOSEK_WILKIE"):
+        try:
+            ceu.sky_type = tipo
+            break
+        except TypeError:
+            continue
+
+    if hasattr(ceu, "sun_elevation"):
+        ceu.sun_elevation = math.radians(ELEVACAO_SOL)
+        # O azimute do projeto e medido do norte no sentido horario; o no do
+        # ceu mede a partir de +X no sentido anti-horario. Dai a conversao.
+        ceu.sun_rotation = math.radians(90.0 - AZIMUTE_SOL)
+    if hasattr(ceu, "sun_disc"):
+        ceu.sun_disc = True
+    # Aerossol: pouca poeira. Muito aerossol lava o quadro inteiro de branco,
+    # e num painel de 951.510 pixels quadro lavado significa titulo ilegivel.
+    # Na 5.0 a propriedade se chama aerosol_density; ate a 4.x era dust_density.
+    for atributo in ("aerosol_density", "dust_density"):
+        if hasattr(ceu, atributo):
+            setattr(ceu, atributo, 0.6)
+
+    mundo.node_tree.links.new(ceu.outputs["Color"], fundo.inputs["Color"])
+    fundo.inputs["Strength"].default_value = 1.0
     return mundo
 
 
 def construir_luz(col):
-    """Sol em golden hour, coerente com o LOOK LOCK das imagens de apoio."""
+    """Sol em golden hour, no mesmo azimute e elevacao do ceu."""
     dados_sol = bpy.data.lights.new("Sol", type="SUN")
-    dados_sol.energy = 3.0
+    dados_sol.energy = 2.5
     dados_sol.angle = math.radians(0.526)
     sol = bpy.data.objects.new("Sol", dados_sol)
-    # Elevacao baixa: sol de fim de tarde, sombras longas.
-    sol.rotation_euler = (math.radians(65), 0, math.radians(-135))
+    # A lampada emite pelo -Z local. Inclinar X de (90 - elevacao) poe o raio
+    # na altura certa; girar Z de (180 - azimute) o poe no rumo certo.
+    sol.rotation_euler = (math.radians(90.0 - ELEVACAO_SOL), 0.0,
+                          math.radians(180.0 - AZIMUTE_SOL))
     col.objects.link(sol)
     return sol
+
+
+# --------------------------------------------------------------------------
+# Conferencia
+
+def render_conferencia(cena, destino, pontos, blocos=None):
+    """Renderiza um quadro por bloco do roteiro, em baixa resolucao.
+
+    Serve para checar enquadramento antes de gastar render longo: se a camera
+    ve telhado de estande ou perde o assunto, aparece aqui em minutos.
+    """
+    destino = Path(destino)
+    destino.mkdir(parents=True, exist_ok=True)
+    largura, altura = cena.render.resolution_x, cena.render.resolution_y
+    porcento = cena.render.resolution_percentage
+    cena.render.resolution_percentage = 25
+    # Amostragem baixa: conferencia e sobre enquadramento, nao sobre ruido.
+    if hasattr(cena, "eevee"):
+        cena.eevee.taa_render_samples = 16
+    if hasattr(cena, "cycles"):
+        cena.cycles.samples = 32
+        cena.cycles.use_denoising = True
+
+    feitos = []
+    for p in pontos:
+        if blocos and p["bloco"] not in blocos:
+            continue
+        quadro = round((p["quadro_chegada"] + p["quadro_saida"]) / 2)
+        cena.frame_set(quadro)
+        caminho = destino / f"quadro-{p['bloco']}-{p['nome'].lower().replace(' ', '-')}.png"
+        cena.render.filepath = str(caminho)
+        bpy.ops.render.render(write_still=True)
+        feitos.append(caminho)
+
+    cena.render.resolution_percentage = porcento
+    cena.render.resolution_x, cena.render.resolution_y = largura, altura
+    return feitos
 
 
 # --------------------------------------------------------------------------
@@ -495,6 +1162,12 @@ def main():
     ap.add_argument("--relevo", default=None,
                     help="heightmap em escala de cinza para deslocar o terreno")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
+    ap.add_argument("--conferencia", default=None,
+                    help="renderiza um quadro por bloco do roteiro no diretorio")
+    ap.add_argument("--motor", default=None,
+                    help=f"motor de render; padrao {MOTOR_PADRAO}")
+    ap.add_argument("--blocos", default=None,
+                    help="restringe a conferencia a alguns blocos: --blocos 01,17,19")
     args = ap.parse_args(argv)
 
     dados = json.loads(Path(args.dados).read_text(encoding="utf-8"))
@@ -523,15 +1196,27 @@ def main():
     for o in cols["EVENTO"].objects:
         aplicar(o, mats["MAT_LONA"])
 
+    n_est = construir_estacionamentos(dados, cols["BASE"], mats, centro)
+    n_galp = construir_galpoes(dados, cols["EVENTO"], mats, centro)
+
+    print("construindo portal, palco e camarotes...")
+    pav1 = achar_zona(dados, "PAVILHÃO 1", 0)
+    mira = para_mundo(pav1["x"], pav1["y"], dados["_origem"])
+    construir_portal(dados, cols["EVENTO"], mats, centro, mira)
+    construir_palco(dados, cols["EVENTO"], mats, centro)
+    n_cam = construir_camarotes(dados, cols["EVENTO"], mats, centro)
+
     print("construindo percurso...")
-    pontos, ausentes = construir_percurso(dados, cols["CAMERA"], centro)
+    pontos, ausentes, duracao, aereos, extensao = construir_percurso(
+        dados, cols["CAMERA"], centro, mira)
 
     construir_luz(cols["LUZ"])
     construir_ceu(bpy.context.scene)
-    configurar_render(bpy.context.scene)
+    configurar_render(bpy.context.scene, args.motor)
 
     larg_m = dados["prancha"]["largura_pt"] * ESCALA
     prof_m = dados["prancha"]["altura_pt"] * ESCALA
+    provisorios = [p["nome"] for p in pontos if p.get("provisorio")]
 
     print("\n" + "=" * 58)
     print(f"  escala .............. {ESCALA} m/pt")
@@ -539,13 +1224,26 @@ def main():
     print(f"  pavilhoes ........... {n_pav}")
     print(f"  estandes ............ {cont['instanciado']} instanciados "
           f"+ {cont['proprio']} proprios")
+    print(f"  estacionamentos ..... {n_est}")
+    print(f"  galpoes da faixa norte {n_galp}")
+    print(f"  camarotes ........... {n_cam} modulos, sem arquibancada")
     print(f"  pontos do percurso .. {len(pontos)} de {len(PERCURSO)}")
+    print(f"  extensao do percurso  {extensao:.0f} m")
+    print(f"  trechos aereos ...... {aereos}")
+    print(f"  camera .............. {LENTE_MM:.0f} mm, "
+          f"{min(p['altura'] for p in pontos):.0f}-{ALTURA_TRANSICAO:.0f} m")
     print(f"  render .............. {LARGURA_RENDER}x{ALTURA_RENDER} "
           f"({LARGURA_RENDER/ALTURA_RENDER:.0f}:1)")
     print(f"  animacao ............ {bpy.context.scene.frame_end} quadros "
-          f"({bpy.context.scene.frame_end/FPS:.0f} s a {FPS} fps)")
+          f"({duracao:.0f} s a {FPS} fps)")
+    print(f"  sol ................. azimute {AZIMUTE_SOL:.0f}°, "
+          f"elevacao {ELEVACAO_SOL:.0f}°")
     print(f"  patamares ........... arena 0 m -> shows {PATAMARES[2][2]} m "
           f"-> anel {PATAMARES[4][2]} m -> plato {PATAMARES[6][2]} m")
+    if provisorios:
+        print("  POSICAO PROVISORIA (confirmar com o cliente):")
+        for nome in provisorios:
+            print(f"     {nome}")
     if ausentes:
         print("  AUSENTES no percurso:")
         for nome, rotulo in ausentes:
@@ -555,6 +1253,13 @@ def main():
     if args.out:
         bpy.ops.wm.save_as_mainfile(filepath=str(Path(args.out).resolve()))
         print(f"\nsalvo: {args.out}")
+
+    if args.conferencia:
+        print("\nrenderizando quadros de conferencia...")
+        blocos = {b.strip() for b in args.blocos.split(",")} if args.blocos else None
+        feitos = render_conferencia(bpy.context.scene, args.conferencia, pontos,
+                                    blocos)
+        print(f"  {len(feitos)} quadros em {args.conferencia}")
 
 
 if __name__ == "__main__":

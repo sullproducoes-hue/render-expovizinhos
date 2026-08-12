@@ -12,17 +12,18 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
 1. **`ESTADO.md`** — onde o projeto parou, o que foi descoberto, o que vem a seguir
 2. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
 3. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
-4. `.claude/agents/render-agroshow.md` — agente (redigido para o caminho 2.5D)
+4. `.claude/agents/render-agroshow.md` — agente do projeto
 
 ## Gerar a cena 3D
 
 ```bash
 pip install bpy pymupdf ezdxf
 python3 scripts/build_scene.py --out cena.blend
+python3 scripts/build_scene.py --conferencia docs/conferencia/   # 1 quadro por bloco
 ```
 
-134 estandes, 6 pavilhões, bacia da arena em 3 patamares, percurso de 16 pontos
-animado em 128 s, render em 2760×1380.
+134 estandes, 6 pavilhões, portal, palco e camarotes, bacia da arena em 3
+patamares, percurso de 21 pontos animado em 148 s, render em 2760×1380.
 
 ```
 > use o agente render-agroshow para revisar os prompts do bloco B11
