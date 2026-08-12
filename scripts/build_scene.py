@@ -65,6 +65,19 @@ PERCURSO = [
 
 COLECOES = ["BASE", "EVENTO", "CAMERA", "LUZ"]
 
+# Bacia da arena, em bandas radiais a partir do centro da pista.
+# (raio_interno_m, raio_externo_m, z_interno_m, z_externo_m)
+# Alturas ESTIMADAS -- confirme com um quadro de drone antes do render final.
+PATAMARES = [
+    (0.0,    45.0,  0.0,  0.0),   # pista da arena
+    (45.0,   62.0,  0.0,  3.5),   # talude para o patamar dos shows
+    (62.0,   78.0,  3.5,  3.5),   # area de shows / camarotes
+    (78.0,   95.0,  3.5,  7.0),   # talude para o primeiro anel
+    (95.0,  125.0,  7.0,  7.0),   # anel de maquinas e veiculos
+    (125.0, 150.0,  7.0, 10.0),   # talude para o plato geral
+    (150.0, 9999.0, 10.0, 10.0),  # plato do restante do recinto
+]
+
 
 # --------------------------------------------------------------------------
 # Utilitarios de cena
@@ -111,41 +124,83 @@ def caixa(nome, largura, profundidade, altura, colecao):
 # --------------------------------------------------------------------------
 # Construcao
 
-def construir_terreno(dados, col, relevo=None):
-    """Plano do terreno cobrindo a prancha inteira, com folga de 20%.
+def elevacao(x, y, centro_arena):
+    """Altura do terreno em metros, para um ponto do mundo.
 
-    Com --relevo aponta para um heightmap em escala de cinza, aplicado por
-    deslocamento. Sem ele, o terreno sai plano e o relevo entra depois.
+    A bacia da arena e modelada por bandas radiais, nao por DEM. Motivo: os
+    DEMs globais disponiveis (SRTM, Copernicus, NASADEM, AW3D30) sao todos de
+    ~30 m de resolucao. Num recinto de 800 m isso da cerca de 27 amostras de
+    ponta a ponta -- descreve o vale, mas nao enxerga patamares de poucos
+    metros. E os patamares sao justamente o que o cliente descreve no audio.
+
+    As bandas saem dos proprios dados da planta: agrupando os 93 estandes da
+    serie C pela distancia ao centro da arena, aparecem aneis claros em 72-90 m
+    e 108-113 m. Cruzando com o audio -- "primeiro anel de cima" (maquinas),
+    "segundo patamar descendo" (shows), "embaixo, em frente ao palco" (arena)
+    -- sao tres niveis. As 15 anotacoes de "Talude" na planta caem nas faixas
+    de transicao, o que confirma o desenho.
+
+    ALTURAS SAO ESTIMADAS. Um quadro de drone ou uma foto lateral da arena
+    confirma em minutos. Ajuste PATAMARES antes do render final.
+    """
+    r = math.hypot(x - centro_arena[0], y - centro_arena[1])
+    for r_int, r_ext, z_int, z_ext in PATAMARES:
+        if r < r_ext:
+            if r <= r_int:
+                return z_int
+            # Talude: transicao suave entre um patamar e o seguinte.
+            t = (r - r_int) / (r_ext - r_int)
+            t = t * t * (3.0 - 2.0 * t)   # smoothstep
+            return z_int + (z_ext - z_int) * t
+    return PATAMARES[-1][3]
+
+
+def construir_terreno(dados, col, centro_arena, relevo=None):
+    """Terreno da prancha inteira, esculpido na bacia da arena.
+
+    Com --relevo, um heightmap em escala de cinza entra por deslocamento por
+    cima da bacia -- util para o entorno (vale, encostas distantes), onde os
+    30 m de resolucao bastam. Para o recinto, quem manda e a bacia.
     """
     larg = dados["prancha"]["largura_pt"] * ESCALA * 1.2
     prof = dados["prancha"]["altura_pt"] * ESCALA * 1.2
+    div = 400
 
-    bpy.ops.mesh.primitive_grid_add(x_subdivisions=256, y_subdivisions=256,
+    bpy.ops.mesh.primitive_grid_add(x_subdivisions=div, y_subdivisions=div,
                                     size=1.0, location=(0, 0, 0))
     obj = bpy.context.active_object
     obj.name = "Terreno"
-    obj.scale = (larg, prof, 1.0)
     for c in list(obj.users_collection):
         c.objects.unlink(obj)
     col.objects.link(obj)
+
+    # Aplica escala na malha e esculpe a bacia vertice a vertice.
+    for v in obj.data.vertices:
+        v.co.x *= larg
+        v.co.y *= prof
+        v.co.z = elevacao(v.co.x, v.co.y, centro_arena)
 
     if relevo and Path(relevo).exists():
         img = bpy.data.images.load(str(relevo))
         tex = bpy.data.textures.new("RelevoTex", type="IMAGE")
         tex.image = img
-        mod = obj.modifiers.new("Relevo", type="DISPLACE")
+        mod = obj.modifiers.new("RelevoEntorno", type="DISPLACE")
         mod.texture = tex
         mod.texture_coords = "UV"
-        # Amplitude conservadora: o DEM de 30 m so descreve a forma macro.
         mod.strength = 20.0
         mod.mid_level = 0.5
-        print(f"  relevo aplicado: {relevo}")
+        print(f"  relevo do entorno: {relevo}")
     else:
-        print("  terreno plano (sem heightmap)")
+        print("  sem heightmap -- so a bacia derivada da planta")
     return obj
 
 
-def construir_estandes(dados, col):
+def centro_da_arena(dados):
+    z = [x for x in dados["zonas"] if x["rotulo"] == "ARENA DE RODEIO"][0]
+    return para_mundo(z["x"], z["y"], dados["_origem"])
+
+
+def construir_estandes(dados, col, centro_arena):
     """Instancia os estandes a partir de dois modulos base.
 
     39 estandes de 100 m² e 35 de 25 m² sao instancias, nao modelagens
@@ -175,14 +230,14 @@ def construir_estandes(dados, col):
             obj = caixa(st["codigo"], lado, lado, ALTURA_ESTANDE, col)
             contagem["proprio"] += 1
 
-        obj.location = (x, y, 0.0)
+        obj.location = (x, y, elevacao(x, y, centro_arena))
         obj["area_m2"] = area
         obj["serie"] = st["serie"]
 
     return contagem
 
 
-def construir_pavilhoes(dados, col):
+def construir_pavilhoes(dados, col, centro_arena):
     """Pavilhoes de animais: 5 de 720 m² e 1 de 560 m².
 
     Proporcao 60 x 12 m assumida para os de 720 -- confira em campo. A ordem
@@ -199,7 +254,7 @@ def construir_pavilhoes(dados, col):
         largura = area / profundidade
         x, y = para_mundo(z["x"], z["y"], origem)
         obj = caixa(z["rotulo"], largura, profundidade, ALTURA_PAVILHAO, col)
-        obj.location = (x, y, 0.0)
+        obj.location = (x, y, elevacao(x, y, centro_arena))
         obj["area_m2"] = area
         feitos += 1
     return feitos
@@ -213,7 +268,7 @@ def achar_zona(dados, rotulo, ocorrencia=0):
     return achados[min(ocorrencia, len(achados) - 1)]
 
 
-def construir_percurso(dados, col):
+def construir_percurso(dados, col, centro_arena):
     """Curva bezier passando pelos pontos do roteiro, com camera acoplada."""
     origem = dados["_origem"]
     pontos, ausentes = [], []
@@ -233,7 +288,7 @@ def construir_percurso(dados, col):
 
     for i, (nome, x, y) in enumerate(pontos):
         bp = spline.bezier_points[i]
-        bp.co = (x, y, ALTURA_CAMERA)
+        bp.co = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
         bp.handle_left_type = bp.handle_right_type = "AUTO"
 
     obj_curva = bpy.data.objects.new("PercursoCamera", curva)
@@ -256,7 +311,7 @@ def construir_percurso(dados, col):
         m = bpy.data.objects.new(f"PT_{nome}", None)
         m.empty_display_type = "PLAIN_AXES"
         m.empty_display_size = 8.0
-        m.location = (x, y, ALTURA_CAMERA)
+        m.location = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
         col.objects.link(m)
 
     return pontos, ausentes
@@ -305,18 +360,19 @@ def main():
 
     limpar_cena()
     cols = criar_colecoes()
+    centro = centro_da_arena(dados)
 
     print("construindo terreno...")
-    construir_terreno(dados, cols["BASE"], args.relevo)
+    construir_terreno(dados, cols["BASE"], centro, args.relevo)
 
     print("construindo pavilhoes...")
-    n_pav = construir_pavilhoes(dados, cols["BASE"])
+    n_pav = construir_pavilhoes(dados, cols["BASE"], centro)
 
     print("construindo estandes...")
-    cont = construir_estandes(dados, cols["EVENTO"])
+    cont = construir_estandes(dados, cols["EVENTO"], centro)
 
     print("construindo percurso...")
-    pontos, ausentes = construir_percurso(dados, cols["CAMERA"])
+    pontos, ausentes = construir_percurso(dados, cols["CAMERA"], centro)
 
     construir_luz(cols["LUZ"])
     configurar_render(bpy.context.scene)
@@ -333,6 +389,8 @@ def main():
     print(f"  pontos do percurso .. {len(pontos)} de {len(PERCURSO)}")
     print(f"  render .............. {LARGURA_RENDER}x{ALTURA_RENDER} "
           f"({LARGURA_RENDER/ALTURA_RENDER:.0f}:1)")
+    print(f"  patamares ........... arena 0 m -> shows {PATAMARES[2][2]} m "
+          f"-> anel {PATAMARES[4][2]} m -> plato {PATAMARES[6][2]} m")
     if ausentes:
         print("  AUSENTES no percurso:")
         for nome, rotulo in ausentes:

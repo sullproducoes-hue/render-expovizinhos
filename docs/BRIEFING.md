@@ -295,3 +295,44 @@ scripts/extract_map.py              Extração do PDF
 scripts/extract_dwg.py              Auditoria do DWG
 reference/                          Originais do cliente e briefings anteriores
 ```
+
+---
+
+## Terreno — por que não usamos DEM
+
+Local confirmado: **-25,73144, -53,07627** — R. Jorge Amado, Jardim Marcante,
+Dois Vizinhos - PR, 85660-000. Os logradouros do Google Maps batem com os da
+planta (Jorge Amado, Ver. Dorvalino Tosi, José Marcante, Vinicius de Morais,
+PR-473).
+
+**Os DEMs globais não servem para o recinto.** SRTM, Copernicus GLO-30, NASADEM
+e AW3D30 são todos de ~30 m. Num recorte de 2 × 2 km em volta do parque isso dá
+**67 × 67 pixels** — e o recinto em si ocuparia cerca de 27 pixels. Os patamares
+que o cliente descreve têm poucos metros de altura: no dado de 30 m eles
+simplesmente não existem.
+
+A bacia foi derivada da própria planta, o que é mais preciso e não custa
+download:
+
+- Agrupando os 93 estandes da série C pela distância ao centro da arena,
+  aparecem anéis claros em 72–90 m e 108–113 m.
+- As 15 anotações de **Talude** da planta caem nas faixas de transição.
+- O áudio confirma três níveis: "primeiro anel de cima" (máquinas), "segundo
+  patamar descendo" (shows), "embaixo, em frente ao palco" (arena).
+
+Resultado, em `PATAMARES` no gerador: arena 0 m → shows 3,5 m → anel 7 m →
+platô 10 m, com taludes suavizados entre as faixas.
+
+**As alturas são estimadas.** Um quadro de drone lateral da arena confirma em
+minutos — ajuste `PATAMARES` antes do render final.
+
+Se quiser o entorno (vale, encostas distantes), onde 30 m basta, o OpenTopography
+resolve com chave gratuita:
+
+```
+https://portal.opentopography.org/API/globaldem?demtype=COP30
+  &south=-25.740488&north=-25.722400&west=-53.086239&east=-53.066295
+  &outputFormat=GTiff&API_Key=SUA_CHAVE
+```
+
+Entra no gerador por `--relevo`, aplicado por cima da bacia.
