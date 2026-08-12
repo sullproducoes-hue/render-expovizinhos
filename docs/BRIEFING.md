@@ -19,10 +19,16 @@ cliente. Em qualquer divergência, a transcrição vence este documento.
 
 ## Especificações travadas
 
+O telão é um painel de LED **P2,9 com 1379 × 690 px nativos**. Conferindo:
+1379 × 2,9 mm = 3,999 m e 690 × 2,9 mm = 2,001 m — confirma o "4×2 m" que
+tinha sido informado antes, agora com a resolução real.
+
 | Item | Especificação |
 |---|---|
-| Proporção | **2:1** (telão 4×2 m) — **não é 16:9** |
-| Resolução | 3840×1920 |
+| Painel | LED P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m |
+| Aspecto | 1,99855 — trate como **2:1**. Não é 16:9 |
+| Master | **2760 × 1380** (2× o nativo, 2:1 exato, dimensões pares) |
+| Reserva | 1920 × 960 (2:1, pares) |
 | Orientação | Tudo horizontal |
 | Entrega | `.mov` (ProRes 422 HQ) **e** `.mp4` (H.264) — os dois |
 | Mote de abertura | *É daqui que sai o alimento que sustenta o mundo* |
@@ -31,8 +37,31 @@ cliente. Em qualquer divergência, a transcrição vence este documento.
 O formato duplo é requisito de segurança: o cliente registrou que "pode dar erro
 na hora de passar" e já teve falha de reprodução ao vivo.
 
-**Pendência de exibição:** confirmar se "telão 4×2" é metros ou contagem de
-painéis, e a resolução nativa do painel. Resolver antes do master.
+### Armadilha: 1379 é ímpar
+
+**Não masterize em 1379 × 690.** H.264 com subamostragem 4:2:0 exige largura e
+altura pares — largura ímpar não codifica. Se alguém tentar exportar no nativo
+exato, o encode falha ou o player corrige sozinho e desalinha o mapeamento de
+pixel.
+
+Masterize em **2760 × 1380** e deixe o processador de LED fazer o downscale
+para o painel. Se o processador só aceitar 1080p, o 2:1 entra letterboxed em
+1920 × 1080, com conteúdo de 1920 × 960 e tarja de 60 px em cima e embaixo.
+
+**Confirme com o operador do telão qual resolução o processador aceita na
+entrada.** O alvo real da entrega é o processador, não o painel.
+
+### Consequência para tipografia — a mais importante
+
+O painel tem **951.510 pixels**. Menos da metade de um 1080p, espalhados por
+quatro metros de largura.
+
+Isso é um canvas pequeno para uma tela grande, e este vídeo é feito de títulos.
+Tipografia fina, caixa alta apertada ou texto secundário pequeno **somem** no
+P2,9 visto a distância. Regra prática: título principal ocupando pelo menos 8%
+da altura do quadro, peso bold ou heavier, e nada de texto de apoio abaixo de
+4% da altura. Teste cada letreiro reduzindo o quadro a 1379 px de largura e
+olhando de longe antes de aprovar.
 
 ---
 
@@ -108,8 +137,11 @@ branco.
 2. **A palavra "Kids" é proibida.** Use *Fazendinha*; "Área Infantil" só em
    descrição secundária.
 3. **Fazendinha:** nome grande, descrição pequena embaixo.
-4. **Portal em conceito celeiro, econômico.** A foto em `reference/` é o portal
-   que existe hoje, não o que será construído.
+4. **Portal em conceito celeiro, econômico.** A foto enviada pelo cliente é a
+   referência de forma, material e identidade — descrita em
+   `reference/PORTAL-referencia.md`. A versão construída será **mais simples**
+   que a referência, nunca mais ornamentada: *"vamos dar um jeito dele, fazer
+   mais barato."*
 5. **Quatro diferenciais** com mais tela e peso: Fazendinha, Rodeio, Café
    Colonial, Mercado do Produtor.
 
@@ -155,7 +187,12 @@ glifo — assinatura de PDF importado para CAD. Só 40 são rótulos legíveis.
 
 1. Qualquer plano de abrir no Illustrator e separar camadas por cor da legenda
    (`Select > Same > Fill Color`) **falha** — não há preenchimento vetorial.
-2. 1806 px de largura não preenchem um quadro de 3840 px.
+   Este é o motivo real do redesenho: sem camadas separadas não há animação de
+   mapa, e sem vetor não há camadas.
+2. Resolução deixou de ser o problema. Com o painel real em 1379 px de largura
+   e master em 2760, o bitmap de 1806 px cobre o nativo e chega perto do master.
+   Aguenta como base de traçado e até como fundo estático — o que ele não faz é
+   separar em camadas nem escalar em push-in.
 3. O DWG não desbloqueou nada. A extração do PDF continua sendo a melhor fonte,
    porque o PDF preserva as palavras montadas.
 
@@ -192,16 +229,21 @@ Emparelhamento código→área com distância média de 3,2 pt. Confiável.
 
 | # | Pendência | Impacto |
 |---|---|---|
-| 1 | Existe footage de edições anteriores? (rodeio, show, público, leilão) | Alto — define se apoio é real ou gerado |
-| 2 | O portal-celeiro já tem projeto da arquiteta? | Alto — evita desenhar o que não será construído |
-| 3 | "Telão 4×2": metros ou painéis? Resolução nativa? | Alto — risco de master inutilizável |
-| 4 | Drone é do parque vazio, fora de evento? | Médio — limita o que vai na abertura |
-| 5 | Arquivo nativo do mapa | Médio — pode poupar o redesenho |
-| 6 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 1 | Resolução que o **processador** do telão aceita na entrada | Alto — alvo real da entrega |
+| 2 | No portal, reproduzir a estrutura da foto ou acrescentar elemento à frente? | Médio — fecha o bloco B01 |
+| 3 | Drone é do parque vazio, fora de evento? | Médio — limita o que vai na abertura |
+| 4 | Arquivo nativo do mapa | Médio — pode poupar o redesenho |
+| 5 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
 
-**Resolvidas:** transcrição dos áudios (feita, em `docs/brief-audios.md`); ordem
-dos pavilhões de animais (não havia divergência); DWG da planta (recebido e
-auditado — não contém vetor).
+**Resolvidas:**
+
+- Transcrição dos áudios — em `docs/brief-audios.md`
+- Ordem dos pavilhões de animais — não havia divergência, B07 liberado
+- DWG da planta — recebido e auditado, não contém vetor
+- Especificação do telão — LED P2,9, 1379 × 690 px, 4,00 × 2,00 m
+- Referência do portal-celeiro — foto recebida, descrita em
+  `reference/PORTAL-referencia.md`
+- Footage de edições anteriores — existe, o cliente vai enviar
 
 ---
 

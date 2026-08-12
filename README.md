@@ -27,14 +27,25 @@ apoio geradas por IA entrando como janelas sobre o mapa.
 
 ## Entrega
 
-Proporção **2:1** (telão 4×2 m), render 3840×1920, em `.mov` (ProRes 422 HQ)
-**e** `.mp4` (H.264). Os dois formatos, sempre.
+Telão LED **P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m**. Proporção **2:1**.
+
+Master em **2760 × 1380** (2× o nativo, dimensões pares), em `.mov` (ProRes
+422 HQ) **e** `.mp4` (H.264). Os dois formatos, sempre.
+
+**Nunca masterize em 1379 × 690** — largura ímpar não codifica em H.264 4:2:0.
+
+O painel tem 951.510 pixels para quatro metros de tela: tipografia fina some.
+Título com no mínimo 8% da altura do quadro.
 
 ## O mapa não é vetor
 
 PDF e DWG carregam o mesmo bitmap de 1806×1383 px. Zero geometria vetorial da
-planta. Plano de "separar camadas por cor no Illustrator" não funciona — ver
-`docs/BRIEFING.md`. O caminho é redesenhar como vetor por cima do raster.
+planta, e 4483 dos 4523 textos do DWG são caracteres soltos. Plano de "separar
+camadas por cor no Illustrator" não funciona — ver `docs/BRIEFING.md`.
+
+O caminho é redesenhar como vetor por cima do raster. O motivo não é resolução
+(1806 px cobre o painel de 1379): é que sem vetor não há camadas separadas, e
+sem camadas não há animação de mapa.
 
 ## Reproduzir as extrações
 

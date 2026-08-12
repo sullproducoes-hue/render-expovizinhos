@@ -115,13 +115,31 @@ todas obrigatórias:
 
 ## Especificações de entrega
 
-- **Proporção 2:1** — telão de 4×2 m. **Não é 16:9.** Render em 3840×1920.
+O telão é LED **P2,9 com 1379 × 690 px nativos** — 4,00 × 2,00 m.
+
+- **Proporção 2:1.** Não é 16:9.
+- **Master em 2760 × 1380** (2× o nativo, 2:1 exato, dimensões pares).
+- **Nunca masterize em 1379 × 690.** Largura ímpar não codifica em H.264 4:2:0.
+- Reserva em 1920 × 960. Se o processador só aceitar 1080p, o 2:1 entra
+  letterboxed em 1920 × 1080, com tarja de 60 px em cima e embaixo.
 - Tudo horizontal.
 - **`.mov` (ProRes 422 HQ) e `.mp4` (H.264 alto bitrate)** — os dois, sempre. O
   cliente já teve falha de reprodução ao vivo e pediu redundância. É requisito
   de segurança.
-- Confirme se "telão 4×2" é metros ou contagem de painéis, e a resolução nativa
-  do painel, antes de fechar o master.
+- Confirme com o operador do telão qual resolução o **processador** aceita na
+  entrada. O alvo da entrega é o processador, não o painel.
+
+### Tipografia — restrição dura
+
+O painel tem **951.510 pixels**, menos da metade de um 1080p, espalhados por
+quatro metros. E este vídeo é feito de títulos.
+
+Tipografia fina ou pequena some no P2,9 visto a distância. Título principal com
+no mínimo 8% da altura do quadro, peso bold ou mais pesado; nada de texto de
+apoio abaixo de 4% da altura. Antes de aprovar qualquer letreiro, reduza o
+quadro a 1379 px de largura e olhe de longe. Isso vale inclusive para a
+descrição menor da Fazendinha — pequena em relação ao nome, não pequena em
+valor absoluto.
 
 ## O problema do mapa — leia antes do Dia 1
 
