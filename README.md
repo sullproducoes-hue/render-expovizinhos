@@ -1,17 +1,28 @@
 # AGROSHOW 2026 — vídeo de apresentação do parque
 
-Mapa navegável animado em 2.5D do Parque de Exposições de Dois Vizinhos (PR),
-percorrendo o recinto na ordem real de circulação do visitante, com imagens de
-apoio geradas por IA entrando como janelas sobre o mapa.
+Vídeo de percurso pelo Parque de Exposições de Dois Vizinhos (PR), na ordem
+real de circulação do visitante, para exibição em telão.
 
-**Prazo: domingo.** Não é render 3D fotorrealista — esse caminho está em
-`docs/CAMINHO-3D.md`, como projeto futuro.
+**Caminho ativo: cena 3D em Blender**, gerada a partir da planta oficial, com
+qualidade de jogo moderno. O material do caminho 2.5D anterior segue válido
+para títulos, restrições e o LOOK LOCK das imagens de apoio.
 
 ## Comece por aqui
 
-1. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
-2. `docs/BRIEFING.md` — roteiro, restrições, blocos de execução e pendências
-3. `.claude/agents/render-agroshow.md` — o agente diretor técnico
+1. **`ESTADO.md`** — onde o projeto parou, o que foi descoberto, o que vem a seguir
+2. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
+3. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
+4. `.claude/agents/render-agroshow.md` — agente (redigido para o caminho 2.5D)
+
+## Gerar a cena 3D
+
+```bash
+pip install bpy pymupdf ezdxf
+python3 scripts/build_scene.py --out cena.blend
+```
+
+134 estandes, 6 pavilhões, bacia da arena em 3 patamares, percurso de 16 pontos
+animado em 128 s, render em 2760×1380.
 
 ```
 > use o agente render-agroshow para revisar os prompts do bloco B11

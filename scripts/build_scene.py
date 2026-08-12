@@ -39,6 +39,9 @@ ESCALA = 0.5611          # metros por ponto de PDF (derivada da serie C)
 ALTURA_ESTANDE = 3.2     # m -- tenda/estande padrao de feira
 ALTURA_PAVILHAO = 7.0    # m -- pavilhao de animais
 ALTURA_CAMERA = 12.0     # m -- altura de voo do percurso
+INCLINACAO_CAM = 18.0    # graus abaixo da horizontal
+SEGUNDOS_POR_PONTO = 8.0 # ritmo do percurso -- 16 pontos = ~2min08, como a referencia
+FPS = 30
 LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
 
@@ -122,6 +125,42 @@ def caixa(nome, largura, profundidade, altura, colecao):
 
 
 # --------------------------------------------------------------------------
+# Materiais
+
+# (nome, cor base RGB, rugosidade, metalico)
+MATERIAIS = {
+    "MAT_TERRENO":  ((0.13, 0.22, 0.07), 0.95, 0.0),
+    "MAT_LONA":     ((0.82, 0.81, 0.78), 0.55, 0.0),
+    "MAT_PAVILHAO": ((0.55, 0.56, 0.58), 0.45, 0.3),
+    "MAT_ARENA":    ((0.38, 0.28, 0.18), 0.90, 0.0),
+    "MAT_ASFALTO":  ((0.09, 0.09, 0.10), 0.80, 0.0),
+}
+
+
+def criar_materiais():
+    """Materiais base. Sao ponto de partida para o acabamento -- troque por
+    PBR com textura (Poly Haven, ambientCG: ambos CC0) na etapa de lapidacao."""
+    feitos = {}
+    for nome, (cor, rug, met) in MATERIAIS.items():
+        mat = bpy.data.materials.new(nome)
+        mat.use_nodes = True
+        bsdf = mat.node_tree.nodes.get("Principled BSDF")
+        if bsdf:
+            bsdf.inputs["Base Color"].default_value = (*cor, 1.0)
+            bsdf.inputs["Roughness"].default_value = rug
+            if "Metallic" in bsdf.inputs:
+                bsdf.inputs["Metallic"].default_value = met
+        feitos[nome] = mat
+    return feitos
+
+
+def aplicar(obj, mat):
+    if obj.data and hasattr(obj.data, "materials"):
+        obj.data.materials.clear()
+        obj.data.materials.append(mat)
+
+
+# --------------------------------------------------------------------------
 # Construcao
 
 def elevacao(x, y, centro_arena):
@@ -153,6 +192,20 @@ def elevacao(x, y, centro_arena):
             t = t * t * (3.0 - 2.0 * t)   # smoothstep
             return z_int + (z_ext - z_int) * t
     return PATAMARES[-1][3]
+
+
+def construir_arena(centro_arena, col, mats):
+    """Piso de terra da pista, no fundo da bacia."""
+    bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=45.0, depth=0.4,
+                                        location=(centro_arena[0],
+                                                  centro_arena[1], 0.1))
+    obj = bpy.context.active_object
+    obj.name = "PistaArena"
+    for c in list(obj.users_collection):
+        c.objects.unlink(obj)
+    col.objects.link(obj)
+    aplicar(obj, mats["MAT_ARENA"])
+    return obj
 
 
 def construir_terreno(dados, col, centro_arena, relevo=None):
@@ -200,6 +253,48 @@ def centro_da_arena(dados):
     return para_mundo(z["x"], z["y"], dados["_origem"])
 
 
+def fcurves_da_acao(obj):
+    """Devolve as fcurves da acao do objeto, em qualquer versao do Blender.
+
+    Ate a 4.3 a acao expunha .fcurves direto. Da 4.4 em diante elas vivem em
+    layers > strips > channelbags, e o atributo antigo sumiu na 5.0.
+    """
+    ad = obj.animation_data
+    if not ad or not ad.action:
+        return []
+    acao = ad.action
+    if hasattr(acao, "fcurves"):
+        return list(acao.fcurves)
+    curvas = []
+    for camada in getattr(acao, "layers", []):
+        for faixa in getattr(camada, "strips", []):
+            for saco in getattr(faixa, "channelbags", []):
+                curvas.extend(saco.fcurves)
+    return curvas
+
+
+def orientar_estandes(postos):
+    """Alinha cada estande ao eixo da sua fileira.
+
+    Estandes vizinhos numa fileira compartilham o eixo da fileira, entao a
+    direcao ate o vizinho mais proximo serve de referencia. Isso resolve tanto
+    as grades ortogonais quanto os arcos concentricos da arena, sem precisar
+    tratar os dois casos separadamente.
+    """
+    for i, (obj, x, y) in enumerate(postos):
+        melhor, dist_melhor = None, float("inf")
+        for j, (_, x2, y2) in enumerate(postos):
+            if i == j:
+                continue
+            d = (x - x2) ** 2 + (y - y2) ** 2
+            if d < dist_melhor:
+                dist_melhor, melhor = d, (x2, y2)
+        if melhor is None or dist_melhor > 40.0 ** 2:
+            continue
+        obj.rotation_euler = (0.0, 0.0,
+                              math.atan2(melhor[1] - y, melhor[0] - x))
+
+
 def construir_estandes(dados, col, centro_arena):
     """Instancia os estandes a partir de dois modulos base.
 
@@ -214,6 +309,7 @@ def construir_estandes(dados, col, centro_arena):
 
     origem = dados["_origem"]
     contagem = {"instanciado": 0, "proprio": 0}
+    postos = []
 
     for st in dados["estandes"]:
         area = st.get("area_m2")
@@ -233,7 +329,9 @@ def construir_estandes(dados, col, centro_arena):
         obj.location = (x, y, elevacao(x, y, centro_arena))
         obj["area_m2"] = area
         obj["serie"] = st["serie"]
+        postos.append((obj, x, y))
 
+    orientar_estandes(postos)
     return contagem
 
 
@@ -300,9 +398,38 @@ def construir_percurso(dados, col, centro_arena):
     col.objects.link(cam)
     cam.rotation_euler = (math.radians(75), 0, 0)
 
-    seguir = cam.constraints.new("FOLLOW_PATH")
+    # Rig segue o caminho; a camera e filha e recebe a inclinacao.
+    # Separar os dois evita brigar com a orientacao que a constraint impoe.
+    rig = bpy.data.objects.new("RigCamera", None)
+    rig.empty_display_type = "ARROWS"
+    rig.empty_display_size = 12.0
+    col.objects.link(rig)
+
+    seguir = rig.constraints.new("FOLLOW_PATH")
     seguir.target = obj_curva
     seguir.use_curve_follow = True
+    seguir.forward_axis = "FORWARD_Y"
+    seguir.up_axis = "UP_Z"
+    seguir.use_fixed_location = True
+
+    cam.parent = rig
+    cam.location = (0.0, 0.0, 0.0)
+    # A camera olha por -Z local; +90 graus em X faz olhar para +Y, que e a
+    # direcao de marcha. Subtrair a inclinacao aponta o nariz para baixo.
+    cam.rotation_euler = (math.radians(90.0 - INCLINACAO_CAM), 0.0, 0.0)
+
+    # Percorre o caminho do inicio ao fim ao longo da timeline.
+    cena = bpy.context.scene
+    total = int(len(pontos) * SEGUNDOS_POR_PONTO * FPS)
+    cena.frame_start = 1
+    cena.frame_end = total
+    seguir.offset_factor = 0.0
+    seguir.keyframe_insert("offset_factor", frame=1)
+    seguir.offset_factor = 1.0
+    seguir.keyframe_insert("offset_factor", frame=total)
+    for fc in fcurves_da_acao(rig):
+        for kp in fc.keyframe_points:
+            kp.interpolation = "LINEAR"
 
     bpy.context.scene.camera = cam
 
@@ -328,6 +455,23 @@ def configurar_render(cena):
         cena.render.engine = "BLENDER_EEVEE_NEXT"
     except TypeError:
         cena.render.engine = "CYCLES"
+
+
+def construir_ceu(cena):
+    """Ceu procedural de fim de tarde.
+
+    Substitua por um HDRI real na lapidacao -- e o que mais aproxima do
+    golden hour combinado com o material de drone. Poly Haven tem HDRIs CC0.
+    """
+    mundo = bpy.data.worlds.new("Mundo")
+    cena.world = mundo
+    mundo.use_nodes = True
+    nos = mundo.node_tree.nodes
+    fundo = nos.get("Background")
+    if fundo:
+        fundo.inputs["Color"].default_value = (0.35, 0.48, 0.72, 1.0)
+        fundo.inputs["Strength"].default_value = 1.2
+    return mundo
 
 
 def construir_luz(col):
@@ -361,20 +505,29 @@ def main():
     limpar_cena()
     cols = criar_colecoes()
     centro = centro_da_arena(dados)
+    mats = criar_materiais()
 
     print("construindo terreno...")
-    construir_terreno(dados, cols["BASE"], centro, args.relevo)
+    terreno = construir_terreno(dados, cols["BASE"], centro, args.relevo)
+    aplicar(terreno, mats["MAT_TERRENO"])
+    construir_arena(centro, cols["BASE"], mats)
 
     print("construindo pavilhoes...")
     n_pav = construir_pavilhoes(dados, cols["BASE"], centro)
+    for o in cols["BASE"].objects:
+        if "PAVILHÃO" in o.name:
+            aplicar(o, mats["MAT_PAVILHAO"])
 
     print("construindo estandes...")
     cont = construir_estandes(dados, cols["EVENTO"], centro)
+    for o in cols["EVENTO"].objects:
+        aplicar(o, mats["MAT_LONA"])
 
     print("construindo percurso...")
     pontos, ausentes = construir_percurso(dados, cols["CAMERA"], centro)
 
     construir_luz(cols["LUZ"])
+    construir_ceu(bpy.context.scene)
     configurar_render(bpy.context.scene)
 
     larg_m = dados["prancha"]["largura_pt"] * ESCALA
@@ -389,6 +542,8 @@ def main():
     print(f"  pontos do percurso .. {len(pontos)} de {len(PERCURSO)}")
     print(f"  render .............. {LARGURA_RENDER}x{ALTURA_RENDER} "
           f"({LARGURA_RENDER/ALTURA_RENDER:.0f}:1)")
+    print(f"  animacao ............ {bpy.context.scene.frame_end} quadros "
+          f"({bpy.context.scene.frame_end/FPS:.0f} s a {FPS} fps)")
     print(f"  patamares ........... arena 0 m -> shows {PATAMARES[2][2]} m "
           f"-> anel {PATAMARES[4][2]} m -> plato {PATAMARES[6][2]} m")
     if ausentes:
