@@ -44,12 +44,48 @@ altura pares — largura ímpar não codifica. Se alguém tentar exportar no nat
 exato, o encode falha ou o player corrige sozinho e desalinha o mapeamento de
 pixel.
 
-Masterize em **2760 × 1380** e deixe o processador de LED fazer o downscale
-para o painel. Se o processador só aceitar 1080p, o 2:1 entra letterboxed em
-1920 × 1080, com conteúdo de 1920 × 960 e tarja de 60 px em cima e embaixo.
+Masterize em **2760 × 1380** e deixe o processador de LED fazer o downscale.
 
-**Confirme com o operador do telão qual resolução o processador aceita na
-entrada.** O alvo real da entrega é o processador, não o painel.
+### Entrega às cegas — nunca embuta tarja
+
+A resolução de entrada do processador **não será confirmada**. O vídeo é
+entregue pronto e o operador se vira. Isso define a estratégia:
+
+**Entregue 2:1 limpo. Jamais embuta letterbox no arquivo.**
+
+O raciocínio é assimétrico. Um arquivo 2:1 limpo pode ser encaixotado por
+qualquer player ou processador na hora, sem perda. Um arquivo com tarja preta
+embutida **nunca** pode ser desencaixotado — e se o processador estiver
+configurado para preencher o painel, ele estica a tarja junto: as barras
+aparecem na tela E a imagem achata. É o pior resultado possível, e é
+irreversível.
+
+Conjunto de entrega:
+
+| Arquivo | Uso |
+|---|---|
+| `2760x1380` ProRes 422 HQ `.mov` | Master, qualidade máxima |
+| `2760x1380` H.264 `.mp4` | Principal para o operador |
+| `1380x690` H.264 `.mp4` | Reserva leve — quase 1:1 com o painel, roda em hardware fraco |
+
+Os três em 2:1 limpo, sem tarja.
+
+### Área de segurança — obrigatória, porque não dá para verificar
+
+Sem saber o processador, não há como garantir que o quadro inteiro chega ao
+painel. Overscan e recorte de borda são comuns em LED.
+
+**Mantenha todo texto e todo elemento crítico dentro de 90% do quadro** — 5% de
+margem em cada lado. Em 2760 × 1380, isso é uma caixa de 2484 × 1242
+centralizada. Nada de título encostando na borda.
+
+### Cartela de teste — mande junto
+
+Produza um arquivo extra de 10 segundos, mesma resolução, com moldura de borda,
+marcas de canto, a caixa de 90% desenhada e a legenda "AGROSHOW 2026 · 2:1 ·
+2760×1380". Custa quinze minutos e permite ao operador conferir enquadramento e
+recorte antes de rodar o filme. É a única defesa possível contra um processador
+que ninguém checou.
 
 ### Consequência para tipografia — a mais importante
 
@@ -137,11 +173,11 @@ branco.
 2. **A palavra "Kids" é proibida.** Use *Fazendinha*; "Área Infantil" só em
    descrição secundária.
 3. **Fazendinha:** nome grande, descrição pequena embaixo.
-4. **Portal em conceito celeiro, econômico.** A foto enviada pelo cliente é a
-   referência de forma, material e identidade — descrita em
-   `reference/PORTAL-referencia.md`. A versão construída será **mais simples**
-   que a referência, nunca mais ornamentada: *"vamos dar um jeito dele, fazer
-   mais barato."*
+4. **O portal é o da foto.** Confirmado pelo cliente: quando ele fala em "fazer
+   um portal", é aquele. Reproduza a fachada — descrita em
+   `reference/PORTAL-referencia.md`. Na dúvida sobre um detalhe, escolha a
+   leitura mais econômica: *"vamos dar um jeito dele, fazer mais barato."*
+   Nunca mais ornamentado que a foto.
 5. **Quatro diferenciais** com mais tela e peso: Fazendinha, Rodeio, Café
    Colonial, Mercado do Produtor.
 
@@ -229,11 +265,10 @@ Emparelhamento código→área com distância média de 3,2 pt. Confiável.
 
 | # | Pendência | Impacto |
 |---|---|---|
-| 1 | Resolução que o **processador** do telão aceita na entrada | Alto — alvo real da entrega |
-| 2 | No portal, reproduzir a estrutura da foto ou acrescentar elemento à frente? | Médio — fecha o bloco B01 |
-| 3 | Drone é do parque vazio, fora de evento? | Médio — limita o que vai na abertura |
-| 4 | Arquivo nativo do mapa | Médio — pode poupar o redesenho |
-| 5 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 1 | Footage de edições anteriores — cliente vai enviar | Alto — cada plano real tira uma geração de risco |
+| 2 | Drone é do parque vazio, fora de evento? | Médio — limita o que vai na abertura |
+| 3 | Arquivo nativo do mapa | Médio — pode poupar o redesenho |
+| 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
 
 **Resolvidas:**
 
@@ -241,9 +276,9 @@ Emparelhamento código→área com distância média de 3,2 pt. Confiável.
 - Ordem dos pavilhões de animais — não havia divergência, B07 liberado
 - DWG da planta — recebido e auditado, não contém vetor
 - Especificação do telão — LED P2,9, 1379 × 690 px, 4,00 × 2,00 m
-- Referência do portal-celeiro — foto recebida, descrita em
-  `reference/PORTAL-referencia.md`
-- Footage de edições anteriores — existe, o cliente vai enviar
+- Referência do portal — é a fachada da foto, sem elemento novo a inventar
+- Resolução do processador — não será obtida. Estratégia definida: 2:1 limpo,
+  sem tarja embutida, com área de segurança de 90% e cartela de teste
 
 ---
 

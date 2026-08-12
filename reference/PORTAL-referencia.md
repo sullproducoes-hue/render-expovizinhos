@@ -28,18 +28,15 @@ não para iluminação.
 
 ## Como usar
 
-Esta é a referência de **forma, material e identidade**. Duas ressalvas vindas
-do áudio do cliente:
+**O portal do vídeo é este.** Confirmado pelo cliente em 12/08/2026: quando ele
+fala em "fazer um portal" no áudio, o portal a que se refere é o da foto. Não há
+estrutura nova a ser inventada nem elemento a acrescentar à frente. Reproduza
+esta fachada.
 
-1. **A versão construída será mais simples.** Ele disse: *"nós vamos dar um
-   jeito dele, fazer mais barato, mas vamos fazer essa entrada diferente aí."*
-   Não gere portal monumental nem mais ornamentado que a foto — o real vai ser
-   mais econômico, não mais rico.
-
-2. **Confirmar o que exatamente entra no quadro.** No áudio ele fala em fazer
-   algo *"na frente do portal"*, o que pode significar reproduzir esta
-   estrutura ou acrescentar um elemento novo à frente dela. Perguntar antes de
-   fechar o bloco B01.
+Uma ressalva do áudio: **a versão construída será mais simples.** Ele disse:
+*"nós vamos dar um jeito dele, fazer mais barato."* Se houver dúvida entre duas
+leituras de um detalhe, escolha sempre a mais econômica. Nunca gere portal
+monumental nem mais ornamentado que a foto.
 
 O plano final do vídeo é a câmera **saindo pelo portão** — mesmo fechamento do
 último vídeo aprovado pelo cliente. É o último quadro que fica na retina, então

@@ -120,14 +120,26 @@ O telão é LED **P2,9 com 1379 × 690 px nativos** — 4,00 × 2,00 m.
 - **Proporção 2:1.** Não é 16:9.
 - **Master em 2760 × 1380** (2× o nativo, 2:1 exato, dimensões pares).
 - **Nunca masterize em 1379 × 690.** Largura ímpar não codifica em H.264 4:2:0.
-- Reserva em 1920 × 960. Se o processador só aceitar 1080p, o 2:1 entra
-  letterboxed em 1920 × 1080, com tarja de 60 px em cima e embaixo.
 - Tudo horizontal.
 - **`.mov` (ProRes 422 HQ) e `.mp4` (H.264 alto bitrate)** — os dois, sempre. O
   cliente já teve falha de reprodução ao vivo e pediu redundância. É requisito
   de segurança.
-- Confirme com o operador do telão qual resolução o **processador** aceita na
-  entrada. O alvo da entrega é o processador, não o painel.
+
+**A resolução de entrada do processador não será confirmada.** O vídeo é
+entregue pronto. Portanto:
+
+- **Entregue 2:1 limpo. Jamais embuta tarja preta no arquivo.** Um 2:1 limpo
+  qualquer player encaixota na hora; um arquivo com tarja embutida não se
+  desfaz, e se o processador estiver em modo preencher, ele estica a tarja
+  junto — barras na tela e imagem achatada, irreversível.
+- Entregue três arquivos: `2760x1380` ProRes `.mov`, `2760x1380` H.264 `.mp4`
+  e `1380x690` H.264 `.mp4` como reserva leve.
+- **Área de segurança de 90%.** Todo texto e elemento crítico dentro de
+  2484 × 1242 centralizados. Overscan em LED é comum e aqui não há como
+  verificar antes.
+- Produza uma **cartela de teste** de 10 s, mesma resolução, com marcas de
+  canto e a caixa de 90% desenhada, para o operador conferir recorte antes de
+  rodar o filme.
 
 ### Tipografia — restrição dura
 
