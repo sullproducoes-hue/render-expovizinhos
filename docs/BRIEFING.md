@@ -28,7 +28,7 @@ tinha sido informado antes, agora com a resolução real.
 | Painel | LED P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m |
 | Aspecto | 1,99855 — trate como **2:1**. Não é 16:9 |
 | Master | **2760 × 1380** (2× o nativo, 2:1 exato, dimensões pares) |
-| Reserva | 1920 × 960 (2:1, pares) |
+| Reserva | 1380 × 690 (2:1, pares, quase 1:1 com o painel) |
 | Orientação | Tudo horizontal |
 | Entrega | `.mov` (ProRes 422 HQ) **e** `.mp4` (H.264) — os dois |
 | Mote de abertura | *É daqui que sai o alimento que sustenta o mundo* |
