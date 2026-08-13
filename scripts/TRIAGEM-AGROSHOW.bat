@@ -10,7 +10,7 @@ title Triagem do footage - AGROSHOW 2026
 
 set "SCRIPT=%~dp0extrair_quadros.py"
 set "PASTA=%~1"
-if "%PASTA%"=="" set "PASTA=E:\Projetos todos\Mapa - agroshow"
+if "%PASTA%"=="" set "PASTA=E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 
 echo ==============================================================
 echo   TRIAGEM DO FOOTAGE DE DRONE -- AGROSHOW 2026

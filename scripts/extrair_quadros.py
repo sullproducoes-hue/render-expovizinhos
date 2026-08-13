@@ -17,15 +17,15 @@ Ordem recomendada de uso:
 
     # 1. o mais barato e o de maior retorno: existe telemetria embutida?
     python3 scripts/extrair_quadros.py --metadados ^
-        --pasta "E:\Projetos todos\Mapa - agroshow"
+        --pasta "E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 
     # 2. triagem: um contact sheet por video, 10 quadros com timecode
     python3 scripts/extrair_quadros.py --triagem ^
-        --pasta "E:\Projetos todos\Mapa - agroshow"
+        --pasta "E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 
     # 3. so nos videos aprovados, quadros densos em resolucao cheia
     python3 scripts/extrair_quadros.py --densa DJI_0960-015.MP4 --intervalo 2 ^
-        --pasta "E:\Projetos todos\Mapa - agroshow"
+        --pasta "E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 
 Anexe no chat: os .json e .srt do passo 1 (sao KB), os contact sheets do passo
 2, e depois as folhas do passo 3 em lotes.
@@ -369,7 +369,7 @@ def passada_densa(video, destino, intervalo, largura, seco=False):
 
 # --------------------------------------------------------------------------
 
-PASTA_PADRAO = r"E:\Projetos todos\Mapa - agroshow"
+PASTA_PADRAO = r"E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 
 
 def perguntar(args):

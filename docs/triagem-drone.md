@@ -9,7 +9,7 @@ o que não estiver aqui se perde quando a conversa for compactada.
 ## O que estamos triando
 
 **Os arquivos estão na máquina do cliente, em `E:\Projetos todos\Mapa -
-agroshow`** — não é preciso esperar o envio para o Drive terminar. O Drive é
+agroshow\Brutos Expo`** — não é preciso esperar o envio para o Drive terminar. O Drive é
 cópia: envio por rclone de **186 arquivos, ~168 GiB**, começado às 11h52 de
 13/08, com fim previsto por volta das 16h. Os arquivos são DJI (alguns com
 sufixo `_stabilized`), mais pelo menos um `.MOV` de celular e um `FPV.mp4`.
@@ -17,10 +17,10 @@ sufixo `_stabilized`), mais pelo menos um `.MOV` de celular e um `FPV.mp4`.
 Comandos, no Windows, a partir da pasta do projeto:
 
 ```bat
-python scripts\extrair_quadros.py --metadados --pasta "E:\Projetos todos\Mapa - agroshow"
-python scripts\extrair_quadros.py --triagem   --pasta "E:\Projetos todos\Mapa - agroshow"
+python scripts\extrair_quadros.py --metadados --pasta "E:\Projetos todos\Mapa - agroshow\Brutos Expo"
+python scripts\extrair_quadros.py --triagem   --pasta "E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 python scripts\extrair_quadros.py --densa DJI_0960-015.MP4 --intervalo 2 ^
-    --pasta "E:\Projetos todos\Mapa - agroshow"
+    --pasta "E:\Projetos todos\Mapa - agroshow\Brutos Expo"
 ```
 
 Precisa da build completa do ffmpeg (`winget install Gyan.FFmpeg`). A enxuta
