@@ -157,6 +157,19 @@ PERCURSO = [
 
 COLECOES = ["BASE", "EVENTO", "CAMERA", "LUZ"]
 
+# Relevo real do entorno, baixado por scripts/fetch_dem.py. Fica em modulo
+# porque elevacao() e chamada centenas de milhares de vezes e passar o dado por
+# parametro so encheria as assinaturas.
+RELEVO = None
+
+# Faixa de mistura entre a planta e o relevo medido, em metros de raio a partir
+# do centro da arena. Dentro do limite de dentro manda a planta -- ela enxerga
+# taludes de 3,5 m que um dado de 30 m nao ve. Fora do limite de fora manda o
+# relevo medido, que sabe que o terreno cai 1,4 m a cada 100 m, coisa que a
+# planta nao diz. No meio, mistura suave.
+MISTURA_RELEVO = (150.0, 320.0)
+EXTENSAO_ENTORNO = 500.0   # m de terreno alem da prancha, para os planos altos
+
 # Bacia da arena, em bandas radiais a partir do centro da pista.
 # (raio_interno_m, raio_externo_m, z_interno_m, z_externo_m)
 # Alturas ESTIMADAS -- confirme com um quadro de drone antes do render final.
@@ -261,6 +274,7 @@ MATERIAIS = {
     "MAT_LETREIRO": ((0.92, 0.91, 0.88), 0.35, 0.0, 0.0),
     "MAT_FERRO":    ((0.03, 0.03, 0.03), 0.30, 0.9, 0.0),
     "MAT_PALCO":    ((0.05, 0.05, 0.06), 0.55, 0.1, 1.5),
+    "MAT_PASTO":    ((0.16, 0.28, 0.09), 0.95, 0.0, 6.0),
 }
 
 
@@ -320,6 +334,63 @@ def aplicar(obj, mat):
 # --------------------------------------------------------------------------
 # Construcao
 
+def carregar_relevo(caminho):
+    """Le o recorte de elevacao e prepara a amostragem em coordenadas do mundo.
+
+    O recorte e quadrado e centrado na coordenada do recinto; assume-se que ela
+    cai no centro da prancha e que o desenho esta com o norte para cima -- e o
+    que a rosa dos ventos da planta mostra. Um erro de registro desloca o
+    relevo em relacao aos predios, por isso a planta e quem manda perto da
+    arena, onde a posicao importa.
+    """
+    global RELEVO
+    caminho = Path(caminho)
+    if not caminho.exists():
+        return None
+
+    import numpy as np
+    dados = np.load(caminho, allow_pickle=False)
+    altura = dados["altura"].astype(float)
+    meta = json.loads(str(dados["meta"]))
+    mpp = meta["metros_por_pixel"]
+    linhas, colunas = altura.shape
+
+    def amostrar(x, y):
+        """Altitude bruta, em metros, para um ponto do mundo."""
+        col = colunas / 2 + x / mpp
+        lin = linhas / 2 - y / mpp
+        c0 = min(max(int(col), 0), colunas - 2)
+        l0 = min(max(int(lin), 0), linhas - 2)
+        fc, fl = col - c0, lin - l0
+        fc = min(max(fc, 0.0), 1.0)
+        fl = min(max(fl, 0.0), 1.0)
+        a = altura[l0, c0] * (1 - fc) + altura[l0, c0 + 1] * fc
+        b = altura[l0 + 1, c0] * (1 - fc) + altura[l0 + 1, c0 + 1] * fc
+        return a * (1 - fl) + b * fl
+
+    RELEVO = {"amostrar": amostrar, "meta": meta, "referencia": 0.0,
+              "altura": altura, "mpp": mpp}
+    return RELEVO
+
+
+def referenciar_relevo(centro_arena):
+    """Zera o relevo medido na faixa onde ele encosta na planta.
+
+    Sem isso a cena inteira sobe uns 600 m (altitude absoluta) e, pior, apareceria
+    um degrau no raio de mistura. A referencia e a media do anel de transicao.
+    """
+    if not RELEVO:
+        return
+    r_int, r_ext = MISTURA_RELEVO
+    raio = (r_int + r_ext) / 2
+    amostras = []
+    for i in range(72):
+        a = math.radians(i * 5)
+        amostras.append(RELEVO["amostrar"](centro_arena[0] + raio * math.cos(a),
+                                           centro_arena[1] + raio * math.sin(a)))
+    RELEVO["referencia"] = sum(amostras) / len(amostras)
+
+
 def elevacao(x, y, centro_arena):
     """Altura do terreno em metros, para um ponto do mundo.
 
@@ -340,15 +411,34 @@ def elevacao(x, y, centro_arena):
     confirma em minutos. Ajuste PATAMARES antes do render final.
     """
     r = math.hypot(x - centro_arena[0], y - centro_arena[1])
+
+    z_planta = PATAMARES[-1][3]
     for r_int, r_ext, z_int, z_ext in PATAMARES:
         if r < r_ext:
             if r <= r_int:
-                return z_int
-            # Talude: transicao suave entre um patamar e o seguinte.
-            t = (r - r_int) / (r_ext - r_int)
-            t = t * t * (3.0 - 2.0 * t)   # smoothstep
-            return z_int + (z_ext - z_int) * t
-    return PATAMARES[-1][3]
+                z_planta = z_int
+            else:
+                # Talude: transicao suave entre um patamar e o seguinte.
+                t = (r - r_int) / (r_ext - r_int)
+                t = t * t * (3.0 - 2.0 * t)   # smoothstep
+                z_planta = z_int + (z_ext - z_int) * t
+            break
+
+    if not RELEVO:
+        return z_planta
+
+    # Relevo medido, trazido para o mesmo zero do plato da planta.
+    z_medido = (PATAMARES[-1][3]
+                + RELEVO["amostrar"](x, y) - RELEVO["referencia"])
+
+    r_int, r_ext = MISTURA_RELEVO
+    if r <= r_int:
+        return z_planta
+    if r >= r_ext:
+        return z_medido
+    t = (r - r_int) / (r_ext - r_int)
+    t = t * t * (3.0 - 2.0 * t)
+    return z_planta * (1 - t) + z_medido * t
 
 
 def construir_arena(centro_arena, col, mats):
@@ -365,16 +455,17 @@ def construir_arena(centro_arena, col, mats):
     return obj
 
 
-def construir_terreno(dados, col, centro_arena, relevo=None):
+def construir_terreno(dados, col, centro_arena):
     """Terreno da prancha inteira, esculpido na bacia da arena.
 
-    Com --relevo, um heightmap em escala de cinza entra por deslocamento por
-    cima da bacia -- util para o entorno (vale, encostas distantes), onde os
-    30 m de resolucao bastam. Para o recinto, quem manda e a bacia.
+    A altura de cada vertice sai de elevacao(), que mistura a bacia da planta
+    (perto da arena) com o relevo medido (no entorno). O terreno passa da
+    prancha em EXTENSAO_ENTORNO metros para os planos altos terem horizonte.
     """
-    larg = dados["prancha"]["largura_pt"] * ESCALA * 1.2
-    prof = dados["prancha"]["altura_pt"] * ESCALA * 1.2
-    div = 400
+    larg = dados["prancha"]["largura_pt"] * ESCALA + 2 * EXTENSAO_ENTORNO
+    prof = dados["prancha"]["altura_pt"] * ESCALA + 2 * EXTENSAO_ENTORNO
+    # Uma divisao a cada ~4 m, que e a amostragem do recorte de elevacao.
+    div = int(max(larg, prof) / 4.3)
 
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=div, y_subdivisions=div,
                                     size=1.0, location=(0, 0, 0))
@@ -390,18 +481,6 @@ def construir_terreno(dados, col, centro_arena, relevo=None):
         v.co.y *= prof
         v.co.z = elevacao(v.co.x, v.co.y, centro_arena)
 
-    if relevo and Path(relevo).exists():
-        img = bpy.data.images.load(str(relevo))
-        tex = bpy.data.textures.new("RelevoTex", type="IMAGE")
-        tex.image = img
-        mod = obj.modifiers.new("RelevoEntorno", type="DISPLACE")
-        mod.texture = tex
-        mod.texture_coords = "UV"
-        mod.strength = 20.0
-        mod.mid_level = 0.5
-        print(f"  relevo do entorno: {relevo}")
-    else:
-        print("  sem heightmap -- so a bacia derivada da planta")
     return obj
 
 
@@ -558,6 +637,146 @@ def construir_galpoes(dados, col, mats, centro_arena):
                 aplicar(pilar, mats["MAT_FERRO"])
         feitos += 1
     return feitos
+
+
+# Tres lugares que o roteiro visita e que a planta desenha, mas que a cena nao
+# tinha. As dimensoes foram medidas no bitmap da prancha (ver ESTADO.md); a
+# rotacao sai da direcao do rotulo.
+
+RAIO_LEILOES = 19.0      # m -- a estrela do recinto tem ~38 m de ponta a ponta
+ALTURA_LEILOES = 7.0
+PISTA_JULGAMENTO = (42.0, 59.0)   # m -- retangulo de pasto com pontas redondas
+FAZENDINHA = (28.0, 90.0)         # m -- faixa de grama entre duas fileiras
+
+
+def construir_leiloes(dados, col, mats, centro_arena):
+    """Recinto de Leiloes: pavilhao em estrela de oito pontas, ~38 m.
+
+    E o bloco 09 do roteiro e, ate agora, a camera parava de frente para o
+    nada. Na prancha e uma estrela regular hachurada; dezesseis lados com raio
+    alternado dao a mesma silhueta com custo de um cilindro.
+    """
+    z = achar_zona(dados, "RECINTO DE LEILÕES", 0)
+    if z is None:
+        return None
+    x, y = para_mundo(z["x"], z["y"], dados["_origem"])
+    solo = elevacao(x, y, centro_arena)
+
+    malha = bpy.data.meshes.new("RecintoDeLeiloes")
+    obj = bpy.data.objects.new("RecintoDeLeiloes", malha)
+    col.objects.link(obj)
+
+    bm = bmesh.new()
+    base = []
+    for i in range(16):
+        ang = math.pi * 2 * i / 16
+        raio = RAIO_LEILOES if i % 2 == 0 else RAIO_LEILOES * 0.72
+        base.append(bm.verts.new((raio * math.cos(ang), raio * math.sin(ang), 0.0)))
+    face = bm.faces.new(base)
+    ret = bmesh.ops.extrude_face_region(bm, geom=[face])
+    topo = [e for e in ret["geom"] if isinstance(e, bmesh.types.BMVert)]
+    bmesh.ops.translate(bm, vec=Vector((0, 0, ALTURA_LEILOES)), verts=topo)
+    # Cume: junta o topo num ponto so, virando telhado conico.
+    bmesh.ops.pointmerge(bm, verts=topo,
+                         merge_co=Vector((0, 0, ALTURA_LEILOES + 6.0)))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(malha)
+    bm.free()
+
+    obj.location = (x, y, solo)
+    obj.rotation_euler = (0.0, 0.0, angulo_do_rotulo(z))
+    aplicar(obj, mats["MAT_PAVILHAO"])
+    return obj
+
+
+def cercar(nome, x, y, larg, prof, angulo, altura, col, mats, centro_arena,
+           passo=6.0):
+    """Mouroes a cada passo metros, no contorno de um retangulo girado."""
+    feitos = 0
+    for lado, comprimento in ((0, larg), (1, prof)):
+        n = max(2, int(comprimento / passo))
+        for i in range(n + 1):
+            t = -comprimento / 2 + comprimento * i / n
+            for sinal in (-1, 1):
+                if lado == 0:
+                    lx, ly = t, sinal * prof / 2
+                else:
+                    lx, ly = sinal * larg / 2, t
+                px = x + lx * math.cos(angulo) - ly * math.sin(angulo)
+                py = y + lx * math.sin(angulo) + ly * math.cos(angulo)
+                mourao = caixa(f"{nome} mourao {feitos}", 0.22, 0.22, altura, col)
+                mourao.location = (px, py, elevacao(px, py, centro_arena))
+                aplicar(mourao, mats["MAT_MADEIRA"])
+                feitos += 1
+    return feitos
+
+
+def construir_pista_julgamento(dados, col, mats, centro_arena):
+    """Pista de Julgamentos: pasto cercado, ~42 x 59 m.
+
+    Bloco 11 do roteiro. Na prancha e um retangulo de pontas arredondadas com
+    hachura de grama; aqui vira um tapete rente ao chao mais a cerca, que e o
+    que da a leitura de area de pasto vista de cima.
+    """
+    z = achar_zona(dados, "PISTA DE JULGAMENTOS", 0)
+    if z is None:
+        return 0
+    x, y = para_mundo(z["x"], z["y"], dados["_origem"])
+    larg, prof = PISTA_JULGAMENTO
+    ang = angulo_do_rotulo(z)
+
+    tapete = caixa("PistaJulgamento", larg, prof, 0.12, col)
+    tapete.location = (x, y, elevacao(x, y, centro_arena))
+    tapete.rotation_euler = (0.0, 0.0, ang)
+    aplicar(tapete, mats["MAT_PASTO"])
+    return 1 + cercar("PistaJulgamento", x, y, larg, prof, ang, 1.3,
+                      col, mats, centro_arena)
+
+
+def construir_fazendinha(dados, col, mats, centro_arena):
+    """Fazendinha: faixa cercada com porteira de destaque na entrada.
+
+    Diferencial do cliente, e no audio ele pede nominalmente uma porteira
+    bacana. Na planta o rotulo cai numa faixa de grama entre duas fileiras de
+    estandes, descendo o talude -- nao e predio, e area aberta. A porteira fica
+    na ponta que olha para o percurso.
+    """
+    t = achar_titulo(dados, "Fazendinha")
+    if t is None:
+        return 0
+    x, y = para_mundo(t["x"], t["y"], dados["_origem"])
+    larg, prof = FAZENDINHA
+    # A faixa desce o talude, ou seja, corre no rumo do centro da arena.
+    ang = math.atan2(y - centro_arena[1], x - centro_arena[0]) + math.pi / 2
+
+    feitos = cercar("Fazendinha", x, y, larg, prof, ang, 1.3,
+                    col, mats, centro_arena, passo=8.0)
+
+    # Porteira: dois esteios, travessa e placa. O nome vai grande na placa e a
+    # descricao pequena embaixo -- hierarquia pedida nominalmente pelo cliente.
+    frente_x = x - math.sin(ang) * (prof / 2)
+    frente_y = y + math.cos(ang) * (prof / 2)
+    solo = elevacao(frente_x, frente_y, centro_arena)
+    for sinal in (-1, 1):
+        px = frente_x + math.cos(ang) * sinal * (larg / 2)
+        py = frente_y + math.sin(ang) * sinal * (larg / 2)
+        esteio = caixa(f"Fazendinha esteio {sinal}", 0.5, 0.5, 5.0, col)
+        esteio.location = (px, py, elevacao(px, py, centro_arena))
+        aplicar(esteio, mats["MAT_MADEIRA"])
+        feitos += 1
+
+    travessa = caixa("Fazendinha travessa", larg + 1.0, 0.4, 0.6, col)
+    travessa.location = (frente_x, frente_y, solo + 4.4)
+    travessa.rotation_euler = (0.0, 0.0, ang)
+    aplicar(travessa, mats["MAT_MADEIRA"])
+
+    placa = caixa("Fazendinha placa", larg * 0.55, 0.3, 1.6, col)
+    placa.location = (frente_x, frente_y, solo + 5.0)
+    placa.rotation_euler = (0.0, 0.0, ang)
+    aplicar(placa, mats["MAT_LETREIRO"])
+    placa["texto"] = "FAZENDINHA"
+    placa["descricao"] = "Area infantil"   # menor, embaixo do nome
+    return feitos + 2
 
 
 def construir_estacionamentos(dados, col, mats, centro_arena):
@@ -743,16 +962,19 @@ def construir_palco(dados, col, mats, centro_arena):
         aplicar(obj, mat)
         return obj
 
-    peca("PALCO_Deck", 26.0, 14.0, 2.0, (0.0, 0.0, 0.0), mats["MAT_PALCO"])
+    # 22 x 16 m: o poligono do palco na prancha mede uns 22 m de frente por 20
+    # de fundo, contando a area de servico atras. Medido no bitmap, com a
+    # incerteza de sempre.
+    peca("PALCO_Deck", 22.0, 16.0, 2.0, (0.0, 0.0, 0.0), mats["MAT_PALCO"])
     for lado in (-1, 1):
         peca(f"PALCO_Torre{lado}", 3.0, 3.0, 11.0,
-             (lado * 14.5, 0.0, 0.0), mats["MAT_FERRO"])
+             (lado * 12.5, 0.0, 0.0), mats["MAT_FERRO"])
         peca(f"PALCO_PA{lado}", 2.2, 2.2, 4.0,
-             (lado * 14.5, -1.5, 6.5), mats["MAT_FERRO"])
+             (lado * 12.5, -1.5, 6.5), mats["MAT_FERRO"])
 
     cobertura = prisma("PALCO_Cobertura",
-                       [(-14.0, 0.0), (14.0, 0.0), (14.0, 1.0),
-                        (0.0, 3.2), (-14.0, 1.0)], 15.0, col)
+                       [(-12.0, 0.0), (12.0, 0.0), (12.0, 1.0),
+                        (0.0, 3.2), (-12.0, 1.0)], 17.0, col)
     cobertura.parent = grupo
     cobertura.location = (0.0, 0.0, 11.0)
     aplicar(cobertura, mats["MAT_TELHA"])
@@ -1201,8 +1423,10 @@ def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:]
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dados", default="data/mapa_agroshow26.json")
-    ap.add_argument("--relevo", default=None,
-                    help="heightmap em escala de cinza para deslocar o terreno")
+    ap.add_argument("--relevo", default="data/dem_recinto.npz",
+                    help="recorte de elevacao medida (scripts/fetch_dem.py)")
+    ap.add_argument("--sem-relevo", action="store_true",
+                    help="ignora a elevacao medida e usa so a bacia da planta")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
     ap.add_argument("--conferencia", default=None,
                     help="renderiza um quadro por bloco do roteiro no diretorio")
@@ -1220,10 +1444,13 @@ def main():
     limpar_cena()
     cols = criar_colecoes()
     centro = centro_da_arena(dados)
+    if not args.sem_relevo:
+        carregar_relevo(args.relevo)
+        referenciar_relevo(centro)
     mats = criar_materiais()
 
     print("construindo terreno...")
-    terreno = construir_terreno(dados, cols["BASE"], centro, args.relevo)
+    terreno = construir_terreno(dados, cols["BASE"], centro)
     aplicar(terreno, mats["MAT_TERRENO"])
     construir_arena(centro, cols["BASE"], mats)
 
@@ -1240,6 +1467,9 @@ def main():
 
     n_est = construir_estacionamentos(dados, cols["BASE"], mats, centro)
     n_galp = construir_galpoes(dados, cols["EVENTO"], mats, centro)
+    construir_leiloes(dados, cols["BASE"], mats, centro)
+    n_pasto = construir_pista_julgamento(dados, cols["BASE"], mats, centro)
+    n_faz = construir_fazendinha(dados, cols["EVENTO"], mats, centro)
 
     print("construindo portal, palco e camarotes...")
     pav1 = achar_zona(dados, "PAVILHÃO 1", 0)
@@ -1256,19 +1486,25 @@ def main():
     construir_ceu(bpy.context.scene)
     configurar_render(bpy.context.scene, args.motor)
 
-    larg_m = dados["prancha"]["largura_pt"] * ESCALA
-    prof_m = dados["prancha"]["altura_pt"] * ESCALA
+    larg_m = dados["prancha"]["largura_pt"] * ESCALA + 2 * EXTENSAO_ENTORNO
+    prof_m = dados["prancha"]["altura_pt"] * ESCALA + 2 * EXTENSAO_ENTORNO
     provisorios = [p["nome"] for p in pontos if p.get("provisorio")]
 
     print("\n" + "=" * 58)
     print(f"  escala .............. {ESCALA} m/pt")
-    print(f"  extensao do terreno . {larg_m:.0f} x {prof_m:.0f} m")
+    print(f"  extensao do terreno . {larg_m:.0f} x {prof_m:.0f} m "
+          f"(prancha + {EXTENSAO_ENTORNO:.0f} m de entorno)")
     print(f"  pavilhoes ........... {n_pav}")
     print(f"  estandes ............ {cont['instanciado']} instanciados "
           f"+ {cont['proprio']} proprios")
     print(f"  estacionamentos ..... {n_est}")
     print(f"  galpoes da faixa norte {n_galp}")
     print(f"  camarotes ........... {n_cam} modulos, sem arquibancada")
+    print(f"  recinto de leiloes .. estrela de 8 pontas, {2*RAIO_LEILOES:.0f} m")
+    print(f"  pista de julgamentos  {PISTA_JULGAMENTO[0]:.0f} x "
+          f"{PISTA_JULGAMENTO[1]:.0f} m, {n_pasto} pecas")
+    print(f"  fazendinha .......... {FAZENDINHA[0]:.0f} x {FAZENDINHA[1]:.0f} m "
+          f"com porteira, {n_faz} pecas")
     print(f"  pontos do percurso .. {len(pontos)} de {len(PERCURSO)}")
     print(f"  extensao do percurso  {extensao:.0f} m")
     print(f"  trechos aereos ...... {aereos}")
@@ -1280,6 +1516,14 @@ def main():
           f"({duracao:.0f} s a {FPS} fps)")
     print(f"  sol ................. azimute {AZIMUTE_SOL:.0f}°, "
           f"elevacao {ELEVACAO_SOL:.0f}°")
+    if RELEVO:
+        m = RELEVO["meta"]
+        print(f"  relevo medido ....... {m['metros_por_pixel']:.1f} m/px, "
+              f"origem {m['dado_de_origem'].split(',')[0]}")
+        print(f"  mistura planta/dem .. {MISTURA_RELEVO[0]:.0f} a "
+              f"{MISTURA_RELEVO[1]:.0f} m do centro da arena")
+    else:
+        print("  relevo medido ....... ausente, so a bacia da planta")
     print(f"  patamares ........... arena 0 m -> shows {PATAMARES[2][2]} m "
           f"-> anel {PATAMARES[4][2]} m -> plato {PATAMARES[6][2]} m")
     if provisorios:
