@@ -38,32 +38,55 @@ from mathutils import Vector
 ESCALA = 0.5611          # metros por ponto de PDF (derivada da serie C)
 ALTURA_ESTANDE = 3.2     # m -- tenda/estande padrao de feira
 ALTURA_PAVILHAO = 7.0    # m -- pavilhao de animais
-ALTURA_CAMERA = 12.0     # m -- altura de voo do percurso
-INCLINACAO_CAM = 18.0    # graus abaixo da horizontal
 SEGUNDOS_POR_PONTO = 8.0 # ritmo do percurso -- 16 pontos = ~2min08, como a referencia
+FRACAO_PANORAMICA = 0.35 # parte do trecho gasta virando do ponto anterior para o proximo
+ALTURA_ALVO = 4.0        # m -- altura do alvo sobre o terreno, na escala de quem anda
+SAIDA_ALEM_DO_PORTAL = 60.0   # m -- ponto de fuga do plano final, fora do recinto
+AVANCO_FINAL = -5.0      # m -- onde a camera para, medido do plano do portal.
+                         # Negativo: ela para logo antes de cruzar, ainda sob o
+                         # vao. Passar do plano joga o portal para tras da nuca
+                         # e o ultimo quadro vira campo vazio -- e o cliente
+                         # quer o portal como ultima imagem na retina
+ELEVACAO_SOL = 14.0      # graus acima do horizonte -- fim de tarde, sombra longa
+AZIMUTE_SOL = 295.0      # graus, noroeste: o sol se poe por tras do recinto
+FORCA_SOL = 2.5          # W/m2 -- sol direto
+FORCA_CEU = 0.35         # o ceu entra so como preenchimento; sol forte e ceu
+                         # fraco e o que da contraste. Ceu forte lava a cena
 FPS = 30
 LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
 
 # Percurso ditado pelo cliente, em rotulos da planta. A ordem e a do audio.
-# Cada entrada: (nome do ponto, rotulo procurado, ocorrencia desejada)
+#
+# altura: metros acima do terreno naquele ponto. Nao e constante de proposito.
+#   O quadro de conferencia anterior voava a 12 m fixos e via telhado de estande;
+#   agora o voo sobe nas transicoes (leitura de conjunto) e desce nos pontos de
+#   interesse (leitura de detalhe), que e a gramatica de drone da referencia.
+# parada: segundos de permanencia no ponto, alem do tempo de deslocamento. Os
+#   quatro diferenciais do cliente -- Fazendinha, Rodeio, Cafe Colonial e
+#   Mercado do Produtor -- sao os que ganham mais tela, conforme a restricao 5.
+# recuo: metros em que a camera para antes do assunto. Quanto maior o assunto,
+#   maior o recuo -- a bacia da arena tem 300 m de borda a borda e nao cabe no
+#   mesmo recuo de um estande.
 PERCURSO = [
-    ("00 Estacionamento",      "ESTACIONAMENTO",        5),
-    ("01 Portal de Entrada",   "Portal de Entrada",     0),
-    ("02 Pavilhao 1",          "PAVILHÃO 1",            0),
-    ("03 Alimentacao Coberta", "Coberta",               0),
-    ("04 Pavilhao 2",          "PAVILHÃO 2",            0),
-    ("05 Pavilhao 3",          "PAVILHÃO 3",            0),
-    ("06 Mercado do Produtor", "Mercado do Produtor",   0),
-    ("07 Cafe Colonial",       "Café Colonial",         0),
-    ("08 Bosque",              "Bosque",                2),
-    ("09 Alimentacao Aberta",  "Aberta",                0),
-    ("10 Recinto de Leiloes",  "RECINTO DE LEILÕES",    0),
-    ("11 Pavilhoes de Animais", "PAVILHÃO - GADO LEITE", 0),
-    ("12 Pista de Julgamentos", "PISTA DE JULGAMENTOS",  0),
-    ("13 Arena de Rodeio",     "ARENA DE RODEIO",       0),
-    ("14 Palco",               "PALCO",                 0),
-    ("15 Saida pelo Portal",   "Portal de Entrada",     0),
+    ("00 Estacionamento",       "ESTACIONAMENTO",        5, 70.0, 0.0, 120.0),
+    ("01 Portal de Entrada",    "Portal de Entrada",     0, 16.0, 2.5,  45.0),
+    ("02 Pavilhao 1",           "PAVILHÃO 1",            0, 26.0, 1.5,  60.0),
+    ("03 Alimentacao Coberta",  "Coberta",               0, 24.0, 1.5,  55.0),
+    ("04 Pavilhao 2",           "PAVILHÃO 2",            0, 26.0, 1.5,  60.0),
+    ("05 Pavilhao 3",           "PAVILHÃO 3",            0, 34.0, 0.0,  70.0),
+    ("06 Mercado do Produtor",  "Mercado do Produtor",   0, 20.0, 3.5,  50.0),
+    ("07 Cafe Colonial",        "Café Colonial",         0, 20.0, 3.5,  50.0),
+    ("08 Bosque",               "Bosque",                2, 22.0, 1.5,  55.0),
+    ("09 Alimentacao Aberta",   "Aberta",                0, 22.0, 1.5,  55.0),
+    ("10 Recinto de Leiloes",   "RECINTO DE LEILÕES",    0, 28.0, 2.0,  65.0),
+    ("11 Pavilhoes de Animais", "PAVILHÃO - GADO LEITE", 0, 45.0, 1.5, 110.0),
+    ("12 Pista de Julgamentos", "PISTA DE JULGAMENTOS",  0, 30.0, 1.5,  75.0),
+    ("13 Arena de Rodeio",      "ARENA DE RODEIO",       0, 55.0, 3.5, 190.0),
+    ("14 Palco",                "PALCO",                 0, 30.0, 3.5, 110.0),
+    # O ultimo ponto voa baixo de proposito: a saida e POR DENTRO do vao do
+    # portal, na altura de quem passa. A 14 m a camera atravessava o frontao.
+    ("15 Saida pelo Portal",    "Portal de Entrada",     0,  3.6, 0.0,  45.0),
 ]
 
 COLECOES = ["BASE", "EVENTO", "CAMERA", "LUZ"]
@@ -127,29 +150,74 @@ def caixa(nome, largura, profundidade, altura, colecao):
 # --------------------------------------------------------------------------
 # Materiais
 
-# (nome, cor base RGB, rugosidade, metalico)
+# (nome, cor base RGB, rugosidade, metalico, cor secundaria, escala do ruido em
+#  metros, forca do relevo). Cor secundaria None desliga a variacao.
 MATERIAIS = {
-    "MAT_TERRENO":  ((0.13, 0.22, 0.07), 0.95, 0.0),
-    "MAT_LONA":     ((0.82, 0.81, 0.78), 0.55, 0.0),
-    "MAT_PAVILHAO": ((0.55, 0.56, 0.58), 0.45, 0.3),
-    "MAT_ARENA":    ((0.38, 0.28, 0.18), 0.90, 0.0),
-    "MAT_ASFALTO":  ((0.09, 0.09, 0.10), 0.80, 0.0),
+    "MAT_TERRENO":  ((0.10, 0.19, 0.05), 0.95, 0.0, (0.22, 0.28, 0.09), 14.0, 0.30),
+    "MAT_LONA":     ((0.82, 0.81, 0.78), 0.55, 0.0, (0.68, 0.67, 0.63),  1.6, 0.06),
+    "MAT_PAVILHAO": ((0.55, 0.56, 0.58), 0.42, 0.6, (0.44, 0.45, 0.48),  0.9, 0.10),
+    "MAT_ARENA":    ((0.38, 0.28, 0.18), 0.90, 0.0, (0.28, 0.20, 0.13),  3.0, 0.25),
+    "MAT_ASFALTO":  ((0.09, 0.09, 0.10), 0.80, 0.0, (0.14, 0.14, 0.15),  2.2, 0.15),
+    "MAT_MADEIRA":  ((0.16, 0.09, 0.05), 0.65, 0.0, (0.24, 0.14, 0.07),  0.4, 0.12),
+    "MAT_TELHA":    ((0.14, 0.13, 0.12), 0.50, 0.4, (0.20, 0.19, 0.17),  0.7, 0.10),
+    "MAT_CLARO":    ((0.86, 0.85, 0.83), 0.40, 0.0, None,                1.0, 0.00),
+    "MAT_PALCO":    ((0.06, 0.06, 0.07), 0.55, 0.0, (0.11, 0.11, 0.12),  1.2, 0.08),
 }
 
 
 def criar_materiais():
-    """Materiais base. Sao ponto de partida para o acabamento -- troque por
-    PBR com textura (Poly Haven, ambientCG: ambos CC0) na etapa de lapidacao."""
+    """Materiais procedurais.
+
+    Sao PBR sem arquivo de textura: ruido em escala metrica quebrando cor e
+    relevo. Motivo de nao usar biblioteca aqui -- o proxy de egresso bloqueia
+    Poly Haven e ambientCG (ver ESTADO.md), e cor chapada le como maquete antes
+    de qualquer outra falha. Na lapidacao local, troque por PBR com textura CC0
+    ligando os mapas nos mesmos slots.
+    """
     feitos = {}
-    for nome, (cor, rug, met) in MATERIAIS.items():
+    for nome, (cor, rug, met, cor2, escala, relevo) in MATERIAIS.items():
         mat = bpy.data.materials.new(nome)
         mat.use_nodes = True
-        bsdf = mat.node_tree.nodes.get("Principled BSDF")
-        if bsdf:
-            bsdf.inputs["Base Color"].default_value = (*cor, 1.0)
-            bsdf.inputs["Roughness"].default_value = rug
-            if "Metallic" in bsdf.inputs:
-                bsdf.inputs["Metallic"].default_value = met
+        nos = mat.node_tree.nodes
+        elos = mat.node_tree.links
+        bsdf = nos.get("Principled BSDF")
+        if bsdf is None:
+            feitos[nome] = mat
+            continue
+        bsdf.inputs["Base Color"].default_value = (*cor, 1.0)
+        bsdf.inputs["Roughness"].default_value = rug
+        if "Metallic" in bsdf.inputs:
+            bsdf.inputs["Metallic"].default_value = met
+
+        if cor2 is None:
+            feitos[nome] = mat
+            continue
+
+        # Coordenada de objeto/gerada em escala de mundo: o ruido acompanha o
+        # tamanho real da peca, entao a grama de 800 m e a lona de 10 m tem
+        # granulacao coerente entre si.
+        coord = nos.new("ShaderNodeTexCoord")
+        mapa = nos.new("ShaderNodeMapping")
+        ruido = nos.new("ShaderNodeTexNoise")
+        rampa = nos.new("ShaderNodeValToRGB")
+        bump = nos.new("ShaderNodeBump")
+
+        mapa.inputs["Scale"].default_value = (1.0 / escala,) * 3
+        ruido.inputs["Scale"].default_value = 6.0
+        ruido.inputs["Detail"].default_value = 8.0
+        ruido.inputs["Roughness"].default_value = 0.6
+        rampa.color_ramp.elements[0].color = (*cor, 1.0)
+        rampa.color_ramp.elements[1].color = (*cor2, 1.0)
+        rampa.color_ramp.elements[0].position = 0.35
+        rampa.color_ramp.elements[1].position = 0.68
+        bump.inputs["Strength"].default_value = relevo
+
+        elos.new(coord.outputs["Object"], mapa.inputs["Vector"])
+        elos.new(mapa.outputs["Vector"], ruido.inputs["Vector"])
+        elos.new(ruido.outputs["Fac"], rampa.inputs["Fac"])
+        elos.new(rampa.outputs["Color"], bsdf.inputs["Base Color"])
+        elos.new(ruido.outputs["Fac"], bump.inputs["Height"])
+        elos.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
         feitos[nome] = mat
     return feitos
 
@@ -358,6 +426,208 @@ def construir_pavilhoes(dados, col, centro_arena):
     return feitos
 
 
+def bloco(nome, larg, prof, alt, col, mat, x, y, z, yaw=0.0):
+    """Caixa posicionada e girada no mundo, base em z."""
+    obj = caixa(nome, larg, prof, alt, col)
+    obj.location = (x, y, z)
+    obj.rotation_euler = (0.0, 0.0, yaw)
+    aplicar(obj, mat)
+    return obj
+
+
+def prisma_duas_aguas(nome, larg, prof, alt, col):
+    """Frontao em duas aguas, base em z=0. E a silhueta do celeiro."""
+    malha = bpy.data.meshes.new(nome)
+    obj = bpy.data.objects.new(nome, malha)
+    col.objects.link(obj)
+    hx, hy = larg / 2.0, prof / 2.0
+    verts = [(-hx, -hy, 0), (hx, -hy, 0), (hx, hy, 0), (-hx, hy, 0),
+             (0, -hy, alt), (0, hy, alt)]
+    faces = [(0, 1, 2, 3), (0, 4, 5, 3), (1, 2, 5, 4), (0, 1, 4), (3, 2, 5)]
+    malha.from_pydata(verts, [], faces)
+    malha.update()
+    return obj
+
+
+def letreiro(nome, texto, tamanho, col, mat, x, y, z, yaw):
+    """Texto em relevo, de pe no plano da fachada."""
+    curva = bpy.data.curves.new(nome, type="FONT")
+    curva.body = texto
+    curva.size = tamanho
+    curva.align_x = "CENTER"
+    curva.align_y = "CENTER"
+    curva.extrude = 0.06
+    obj = bpy.data.objects.new(nome, curva)
+    col.objects.link(obj)
+    obj.location = (x, y, z)
+    # O texto nasce olhando para -Y local; meia volta em Z poe a leitura na
+    # direcao de quem chega, senao a fachada mostra o letreiro espelhado.
+    obj.rotation_euler = (math.radians(90.0), 0.0, yaw + math.pi)
+    aplicar(obj, mat)
+    return obj
+
+
+def construir_portal(dados, col, centro_arena, mats):
+    """Portal de entrada, conceito celeiro, na leitura mais economica.
+
+    A fachada e a da foto em reference/PORTAL-referencia.md: frontao em duas
+    aguas com trelica em V invertido, tabuas verticais escuras, tres vaos de
+    passagem, letreiro em relevo e alas laterais mais baixas com telha escura.
+    O cliente disse que a versao construida sera mais barata -- entao aqui e
+    volume e proporcao, sem ornamento que a foto nao mostre.
+
+    E o primeiro e o ultimo plano do video, por isso ele existe como geometria
+    desde a base, e nao como caixa generica.
+    """
+    z = achar_zona(dados, "Portal de Entrada", 0)
+    if z is None:
+        return None
+    x, y = para_mundo(z["x"], z["y"], dados["_origem"])
+    solo = elevacao(x, y, centro_arena)
+
+    # A fachada olha para quem chega. O interior do recinto esta na direcao do
+    # centro da arena, entao a frente e o sentido oposto.
+    para_dentro = math.atan2(centro_arena[1] - y, centro_arena[0] - x)
+    yaw = para_dentro + math.pi / 2.0   # eixo longo transversal a passagem
+    ex, ey = math.cos(yaw), math.sin(yaw)          # ao longo da fachada
+    # Para fora do recinto: e para ca que olham letreiro, janelas e luminarias,
+    # porque quem chega vem do estacionamento, nao de dentro.
+    fx, fy = -math.cos(para_dentro), -math.sin(para_dentro)
+
+    def posto(desloc_lateral, desloc_frente=0.0):
+        return (x + ex * desloc_lateral + fx * desloc_frente,
+                y + ey * desloc_lateral + fy * desloc_frente)
+
+    madeira, telha, claro = (mats["MAT_MADEIRA"], mats["MAT_TELHA"],
+                             mats["MAT_CLARO"])
+
+    # Quatro pilares abrindo os tres vaos de passagem.
+    for d in (-9.0, -3.0, 3.0, 9.0):
+        px, py = posto(d)
+        bloco("PortalPilar", 1.2, 3.0, 5.0, col, madeira, px, py, solo, yaw)
+
+    # Corpo central: a viga sobre os vaos e a parede de tabuas com o letreiro.
+    bloco("PortalViga", 20.0, 3.4, 1.0, col, madeira, x, y, solo + 5.0, yaw)
+    bloco("PortalParede", 20.0, 3.0, 2.6, col, madeira, x, y, solo + 6.0, yaw)
+
+    frontao = prisma_duas_aguas("PortalFrontao", 20.0, 3.0, 3.2, col)
+    frontao.location = (x, y, solo + 8.6)
+    frontao.rotation_euler = (0.0, 0.0, yaw)
+    aplicar(frontao, madeira)
+
+    # Trelica em V invertido: as duas barras acompanham as aguas do frontao,
+    # entao angulo e comprimento saem da propria geometria dele.
+    meia_base, subida = 9.0, 2.9
+    inclinacao = math.atan2(subida, meia_base)
+    barra = math.hypot(meia_base, subida)
+    for lado in (-1.0, 1.0):
+        tx, ty = posto(lado * meia_base / 2.0, 0.1)
+        t = bloco("PortalTrelica", barra, 0.3, 0.3, col, claro,
+                  tx, ty, solo + 8.6 + subida / 2.0, yaw)
+        # Girar em torno de +Y leva o topo da barra para -Z, entao o sinal do
+        # angulo acompanha o lado: cada barra sobe na direcao do cume.
+        t.rotation_euler = (0.0, lado * inclinacao, yaw)
+
+    letreiro("PortalLetreiro1", "PARQUE DE EXPOSIÇÕES", 1.15, col, claro,
+             *posto(0.0, 1.6), solo + 7.5, yaw)
+    letreiro("PortalLetreiro2", "★★★ DE DOIS VIZINHOS - PR ★★★", 0.62, col,
+             claro, *posto(0.0, 1.6), solo + 6.4, yaw)
+
+    # Alas laterais, mais baixas, com beiral curto de telha ondulada escura.
+    for lado in (-1.0, 1.0):
+        ax, ay = posto(lado * 17.0)
+        bloco("PortalAla", 14.0, 6.0, 4.0, col, madeira, ax, ay, solo, yaw)
+        bloco("PortalBeiral", 15.0, 7.0, 0.35, col, telha,
+              ax, ay, solo + 4.0, yaw)
+        # Janelas de guilhotina brancas, duas por ala.
+        for d in (-3.5, 3.5):
+            jx, jy = posto(lado * 17.0 + d, 3.05)
+            bloco("PortalJanela", 1.4, 0.15, 1.8, col, claro,
+                  jx, jy, solo + 1.5, yaw)
+
+    # Luminarias de parede em ferro preto, seis na fachada.
+    for d in (-15.0, -7.0, -2.0, 2.0, 7.0, 15.0):
+        lx, ly = posto(d, 1.7)
+        bloco("PortalLuminaria", 0.4, 0.4, 0.5, col, mats["MAT_PALCO"],
+              lx, ly, solo + 4.2, yaw)
+
+    return (x, y, solo)
+
+
+def construir_palco_e_camarotes(dados, col, centro_arena, mats):
+    """Palco de frente e camarotes dos dois lados. SEM ARQUIBANCADA.
+
+    Restricao 1 do cliente, dita no audio 2 aos 01:16: "nao da pra colocar
+    arquibancada... e so a pista da arena e dos lados camarote. E de frente, o
+    palco de shows." Se aparecer degrau de arquibancada em volta da pista, a
+    entrega e rejeitada -- por isso a estrutura entra aqui, na geometria, e nao
+    fica a cargo de quem for lapidar depois.
+    """
+    origem = dados["_origem"]
+    feitos = {"palco": 0, "camarotes": 0}
+
+    def de_costas_para_a_arena(px, py):
+        """Yaw com o eixo longo tangente a pista, frente voltada ao centro."""
+        return math.atan2(centro_arena[1] - py, centro_arena[0] - px) + math.pi / 2.0
+
+    def na_borda(px, py, raio):
+        """Empurra o ponto para um raio fixo, mantendo o azimute.
+
+        O rotulo da planta e ancora de texto, nao implantacao: 'PALCO' cai a
+        16 m do centro, dentro da pista. Palco e camarotes ficam na borda --
+        a pista precisa estar livre para o rodeio. O azimute do rotulo continua
+        mandando de que lado cada um esta.
+        """
+        dx, dy = px - centro_arena[0], py - centro_arena[1]
+        d = math.hypot(dx, dy) or 1.0
+        return centro_arena[0] + dx / d * raio, centro_arena[1] + dy / d * raio
+
+    z = achar_zona(dados, "PALCO", 0)
+    if z is not None:
+        px, py = na_borda(*para_mundo(z["x"], z["y"], origem), 52.0)
+        solo = elevacao(px, py, centro_arena)
+        yaw = de_costas_para_a_arena(px, py)
+        fx = math.cos(yaw - math.pi / 2.0)
+        fy = math.sin(yaw - math.pi / 2.0)
+        bloco("PalcoPiso", 26.0, 14.0, 1.8, col, mats["MAT_PALCO"],
+              px, py, solo, yaw)
+        bloco("PalcoFundo", 26.0, 1.0, 11.0, col, mats["MAT_PALCO"],
+              px - fx * 6.5, py - fy * 6.5, solo, yaw)
+        bloco("PalcoCobertura", 28.0, 16.0, 0.8, col, mats["MAT_PALCO"],
+              px, py, solo + 12.0, yaw)
+        for lx in (-13.0, 13.0):
+            for ly in (-7.0, 7.0):
+                cx = px + math.cos(yaw) * lx + fx * ly
+                cy = py + math.sin(yaw) * lx + fy * ly
+                bloco("PalcoTorre", 0.9, 0.9, 12.0, col, mats["MAT_PALCO"],
+                      cx, cy, solo, yaw)
+        feitos["palco"] = 1
+
+    for rotulo in ("CAMAROTES - LADO A", "CAMAROTES - LADO B"):
+        z = achar_zona(dados, rotulo, 0)
+        if z is None:
+            continue
+        cx, cy = na_borda(*para_mundo(z["x"], z["y"], origem), 58.0)
+        solo = elevacao(cx, cy, centro_arena)
+        yaw = de_costas_para_a_arena(cx, cy)
+        ex, ey = math.cos(yaw), math.sin(yaw)
+        nome = rotulo.replace(" ", "_")
+        # Fileira de modulos fechados, dois pavimentos, varanda voltada a pista.
+        # Nao e degrau em arquibancada: cada modulo e um camarote.
+        for i in range(6):
+            d = (i - 2.5) * 9.0
+            mx, my = cx + ex * d, cy + ey * d
+            bloco(f"{nome}_modulo", 8.4, 7.0, 3.2, col, mats["MAT_CLARO"],
+                  mx, my, solo, yaw)
+            bloco(f"{nome}_superior", 8.4, 7.0, 3.0, col, mats["MAT_CLARO"],
+                  mx, my, solo + 3.4, yaw)
+            bloco(f"{nome}_cobertura", 9.2, 8.4, 0.4, col, mats["MAT_TELHA"],
+                  mx, my, solo + 6.4, yaw)
+        feitos["camarotes"] += 1
+
+    return feitos
+
+
 def achar_zona(dados, rotulo, ocorrencia=0):
     achados = [z for z in dados["zonas"] if z["rotulo"] == rotulo]
     if not achados:
@@ -366,82 +636,180 @@ def achar_zona(dados, rotulo, ocorrencia=0):
     return achados[min(ocorrencia, len(achados) - 1)]
 
 
+def curva_por_pontos(nome, coords, col):
+    """Bezier suave passando por uma lista de (x, y, z)."""
+    curva = bpy.data.curves.new(nome, type="CURVE")
+    curva.dimensions = "3D"
+    spline = curva.splines.new("BEZIER")
+    spline.bezier_points.add(len(coords) - 1)
+    for bp, co in zip(spline.bezier_points, coords):
+        bp.co = co
+        bp.handle_left_type = bp.handle_right_type = "AUTO"
+    obj = bpy.data.objects.new(nome, curva)
+    col.objects.link(obj)
+    return obj
+
+
+def fracoes_do_percurso(coords):
+    """Fracao do comprimento acumulado em cada ponto, medida em corda.
+
+    O offset_factor da constraint anda por comprimento de arco, e a corda entre
+    os pontos de controle e uma aproximacao boa o bastante dele: o que importa
+    aqui e nao acelerar num trecho longo e arrastar num curto.
+    """
+    dist = [0.0]
+    for a, b in zip(coords, coords[1:]):
+        dist.append(dist[-1] + math.dist(a, b))
+    total = dist[-1] or 1.0
+    return [d / total for d in dist]
+
+
 def construir_percurso(dados, col, centro_arena):
-    """Curva bezier passando pelos pontos do roteiro, com camera acoplada."""
+    """Curva do voo, curva do olhar e a camera entre as duas.
+
+    Duas curvas em vez de uma: a camera anda pela de cima, com altura propria em
+    cada ponto, e olha para um alvo que corre pela de baixo, na altura de quem
+    caminha. Assim a inclinacao deixa de ser um numero fixo -- ela cai sozinha
+    quando o voo sobe e levanta quando o voo desce, que era o defeito do quadro
+    de conferencia anterior (12 m fixos e 18 graus, enquadrando telhado de
+    estande).
+    """
     origem = dados["_origem"]
     pontos, ausentes = [], []
 
-    for nome, rotulo, ocorrencia in PERCURSO:
+    for nome, rotulo, ocorrencia, altura, parada, recuo in PERCURSO:
         z = achar_zona(dados, rotulo, ocorrencia)
         if z is None:
             ausentes.append((nome, rotulo))
             continue
         x, y = para_mundo(z["x"], z["y"], origem)
-        pontos.append((nome, x, y))
+        pontos.append((nome, x, y, altura, parada, recuo))
 
-    curva = bpy.data.curves.new("PercursoCamera", type="CURVE")
-    curva.dimensions = "3D"
-    spline = curva.splines.new("BEZIER")
-    spline.bezier_points.add(len(pontos) - 1)
+    # A curva do voo nao passa por cima dos assuntos: cada ponto de controle
+    # recua alguns metros no sentido de quem chega. Passar por cima entrega o
+    # assunto em nadir bem no quadro em que ele deveria estar mais legivel; com
+    # o recuo, a camera para curta e enquadra a fachada em tres quartos.
+    voo = []
+    for i, (_, x, y, h, _, recuo) in enumerate(pontos):
+        ax, ay = pontos[i - 1][1:3] if i else pontos[min(1, len(pontos) - 1)][1:3]
+        dx, dy = x - ax, y - ay
+        if i == 0:
+            dx, dy = -dx, -dy      # no primeiro ponto, recua para tras da chegada
+        d = math.hypot(dx, dy) or 1.0
+        rx, ry = x - dx / d * recuo, y - dy / d * recuo
+        voo.append((rx, ry, elevacao(rx, ry, centro_arena) + h))
 
-    for i, (nome, x, y) in enumerate(pontos):
-        bp = spline.bezier_points[i]
-        bp.co = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
-        bp.handle_left_type = bp.handle_right_type = "AUTO"
+    olhar = [(x, y, elevacao(x, y, centro_arena) + ALTURA_ALVO)
+             for _, x, y, _, _, _ in pontos]
 
-    obj_curva = bpy.data.objects.new("PercursoCamera", curva)
-    col.objects.link(obj_curva)
+    # Um ponto a mais nas duas curvas, alem do portal e para fora do recinto. E
+    # o que faz o video terminar saindo pelo portao -- restricao 6 do cliente --
+    # e evita que camera e alvo se encontrem no ultimo quadro, o que giraria o
+    # enquadramento sobre si mesmo.
+    if len(olhar) >= 2:
+        ax, ay, az = olhar[-1]
+        bx, by, _ = olhar[-2]
+        d = math.dist((ax, ay), (bx, by)) or 1.0
+        ux, uy = (ax - bx) / d, (ay - by) / d
+        fuga = (ax + ux * SAIDA_ALEM_DO_PORTAL,
+                ay + uy * SAIDA_ALEM_DO_PORTAL)
+        olhar.append((*fuga, az))
+        voo.append((ax + ux * AVANCO_FINAL, ay + uy * AVANCO_FINAL,
+                    voo[-1][2]))
+
+    curva_voo = curva_por_pontos("PercursoCamera", voo, col)
+    curva_olhar = curva_por_pontos("PercursoAlvo", olhar, col)
 
     cam_data = bpy.data.cameras.new("Camera")
-    cam_data.lens = 28.0
+    cam_data.lens = 35.0
     cam = bpy.data.objects.new("Camera", cam_data)
     col.objects.link(cam)
-    cam.rotation_euler = (math.radians(75), 0, 0)
 
-    # Rig segue o caminho; a camera e filha e recebe a inclinacao.
-    # Separar os dois evita brigar com a orientacao que a constraint impoe.
-    rig = bpy.data.objects.new("RigCamera", None)
-    rig.empty_display_type = "ARROWS"
-    rig.empty_display_size = 12.0
-    col.objects.link(rig)
+    alvo = bpy.data.objects.new("AlvoCamera", None)
+    alvo.empty_display_type = "SPHERE"
+    alvo.empty_display_size = 6.0
+    col.objects.link(alvo)
 
-    seguir = rig.constraints.new("FOLLOW_PATH")
-    seguir.target = obj_curva
-    seguir.use_curve_follow = True
-    seguir.forward_axis = "FORWARD_Y"
-    seguir.up_axis = "UP_Z"
-    seguir.use_fixed_location = True
+    seg_cam = cam.constraints.new("FOLLOW_PATH")
+    seg_cam.target = curva_voo
+    seg_cam.use_fixed_location = True
+    seg_alvo = alvo.constraints.new("FOLLOW_PATH")
+    seg_alvo.target = curva_olhar
+    seg_alvo.use_fixed_location = True
 
-    cam.parent = rig
-    cam.location = (0.0, 0.0, 0.0)
-    # A camera olha por -Z local; +90 graus em X faz olhar para +Y, que e a
-    # direcao de marcha. Subtrair a inclinacao aponta o nariz para baixo.
-    cam.rotation_euler = (math.radians(90.0 - INCLINACAO_CAM), 0.0, 0.0)
+    mirar = cam.constraints.new("TRACK_TO")
+    mirar.target = alvo
+    mirar.track_axis = "TRACK_NEGATIVE_Z"
+    mirar.up_axis = "UP_Y"
 
-    # Percorre o caminho do inicio ao fim ao longo da timeline.
+    # Tempo e olhar.
+    #
+    # A camera nao para em cima do ponto -- parar sobre o assunto so rende
+    # quadro em nadir. O que segura o assunto na tela e o alvo: ele fica travado
+    # no ponto que esta chegando durante toda a aproximacao, e so vira para o
+    # proximo depois que a camera passou. A permanencia de cada ponto alonga o
+    # trecho de aproximacao dele, entao os quatro diferenciais ganham tela sem
+    # que o voo trave (restricao 5 do cliente).
+    frac_voo = fracoes_do_percurso(voo)
+    frac_olhar = fracoes_do_percurso(olhar)
+
     cena = bpy.context.scene
-    total = int(len(pontos) * SEGUNDOS_POR_PONTO * FPS)
+    chaves_cam, chaves_alvo, chegada = [], [], []
+    t = 1.0
+    chaves_cam.append((1, frac_voo[0]))
+    chaves_alvo.append((1, frac_olhar[1]))
+    chegada.append(1)
+
+    for i in range(1, len(pontos)):
+        duracao = (SEGUNDOS_POR_PONTO + pontos[i][4]) * FPS
+        t += duracao
+        quadro = round(t)
+        chegada.append(quadro)
+        chaves_cam.append((quadro, frac_voo[i]))
+        # Segura o assunto ate a chegada...
+        chaves_alvo.append((quadro, frac_olhar[i]))
+        # ...e vira para o proximo no comeco do trecho seguinte.
+        if i + 1 < len(frac_olhar):
+            proxima = (SEGUNDOS_POR_PONTO + (pontos[i + 1][4]
+                                             if i + 1 < len(pontos) else 0.0)) * FPS
+            chaves_alvo.append((round(t + proxima * FRACAO_PANORAMICA),
+                                frac_olhar[i + 1]))
+
+    # Trecho final: a camera atravessa o portal enquanto o alvo ja esta fora.
+    # Meio trecho basta -- e uma passagem, nao mais um ponto do roteiro.
+    fim = round(t + SEGUNDOS_POR_PONTO * FPS * 0.5)
+    chaves_cam.append((fim, 1.0))
+    chaves_alvo.append((fim, 1.0))
+
     cena.frame_start = 1
-    cena.frame_end = total
-    seguir.offset_factor = 0.0
-    seguir.keyframe_insert("offset_factor", frame=1)
-    seguir.offset_factor = 1.0
-    seguir.keyframe_insert("offset_factor", frame=total)
-    for fc in fcurves_da_acao(rig):
-        for kp in fc.keyframe_points:
-            kp.interpolation = "LINEAR"
+    cena.frame_end = max(chaves_cam[-1][0], chaves_alvo[-1][0])
 
-    bpy.context.scene.camera = cam
+    for quadro, f in chaves_cam:
+        seg_cam.offset_factor = f
+        seg_cam.keyframe_insert("offset_factor", frame=quadro)
+    for quadro, f in chaves_alvo:
+        seg_alvo.offset_factor = f
+        seg_alvo.keyframe_insert("offset_factor", frame=quadro)
 
-    # Marcadores nomeados, para localizar cada ponto do roteiro na viewport.
-    for nome, x, y in pontos:
+    for obj in (cam, alvo):
+        for fc in fcurves_da_acao(obj):
+            for kp in fc.keyframe_points:
+                kp.interpolation = "BEZIER"
+                kp.handle_left_type = kp.handle_right_type = "AUTO_CLAMPED"
+
+    cena.camera = cam
+
+    # Marcadores nomeados, para localizar cada ponto do roteiro na viewport, e
+    # marcadores de timeline, para achar o quadro de cada ponto no render.
+    for (nome, x, y, altura, _, _), co, quadro in zip(pontos, voo, chegada):
         m = bpy.data.objects.new(f"PT_{nome}", None)
         m.empty_display_type = "PLAIN_AXES"
         m.empty_display_size = 8.0
-        m.location = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
+        m.location = co
         col.objects.link(m)
+        cena.timeline_markers.new(nome, frame=quadro)
 
-    return pontos, ausentes
+    return pontos, ausentes, chegada
 
 
 def configurar_render(cena):
@@ -457,31 +825,72 @@ def configurar_render(cena):
         cena.render.engine = "CYCLES"
 
 
-def construir_ceu(cena):
-    """Ceu procedural de fim de tarde.
+def construir_ceu(cena, hdri=None):
+    """Ceu de fim de tarde: Nishita quando nao ha HDRI, HDRI quando ha.
 
-    Substitua por um HDRI real na lapidacao -- e o que mais aproxima do
-    golden hour combinado com o material de drone. Poly Haven tem HDRIs CC0.
+    O ceu chapado anterior nao iluminava nada -- sem gradiente de horizonte, o
+    render inteiro dependia do sol e as sombras fechavam em preto. O Sky Texture
+    em modo Nishita e ceu fisico: da o espalhamento atmosferico e o horizonte
+    quente da hora dourada sem baixar arquivo, o que importa aqui porque o proxy
+    bloqueia Poly Haven (ver ESTADO.md).
+
+    A elevacao e o azimute do ceu sao os mesmos do sol em construir_luz -- ceu e
+    sombra em desacordo e o primeiro sinal de maquete.
     """
     mundo = bpy.data.worlds.new("Mundo")
     cena.world = mundo
     mundo.use_nodes = True
     nos = mundo.node_tree.nodes
+    elos = mundo.node_tree.links
     fundo = nos.get("Background")
-    if fundo:
-        fundo.inputs["Color"].default_value = (0.35, 0.48, 0.72, 1.0)
-        fundo.inputs["Strength"].default_value = 1.2
+    if fundo is None:
+        return mundo
+
+    if hdri and Path(hdri).exists():
+        ambiente = nos.new("ShaderNodeTexEnvironment")
+        ambiente.image = bpy.data.images.load(str(hdri))
+        elos.new(ambiente.outputs["Color"], fundo.inputs["Color"])
+        fundo.inputs["Strength"].default_value = 1.0
+        print(f"  ceu: HDRI {hdri}")
+        return mundo
+
+    ceu = nos.new("ShaderNodeTexSky")
+    # O ceu fisico do Nishita virou MULTIPLE_SCATTERING na 5.0; o nome antigo
+    # ainda responde nas versoes anteriores.
+    for tipo in ("MULTIPLE_SCATTERING", "NISHITA"):
+        try:
+            ceu.sky_type = tipo
+            break
+        except TypeError:
+            continue
+    ceu.sun_elevation = math.radians(ELEVACAO_SOL)
+    ceu.sun_rotation = math.radians(AZIMUTE_SOL)
+    ceu.sun_disc = False         # o sol direto quem faz e a luz SUN, nao o ceu
+    ceu.altitude = 500.0         # Dois Vizinhos esta a ~510 m
+    ceu.air_density = 1.1
+    # Aerossol: poeira de recinto no fim de tarde. A propriedade mudou de nome
+    # entre versoes (dust_density -> aerosol_density).
+    for atributo in ("aerosol_density", "dust_density"):
+        if hasattr(ceu, atributo):
+            setattr(ceu, atributo, 2.2)
+            break
+    elos.new(ceu.outputs["Color"], fundo.inputs["Color"])
+    fundo.inputs["Strength"].default_value = FORCA_CEU
+    print("  ceu: Nishita procedural (sem HDRI)")
     return mundo
 
 
 def construir_luz(col):
     """Sol em golden hour, coerente com o LOOK LOCK das imagens de apoio."""
     dados_sol = bpy.data.lights.new("Sol", type="SUN")
-    dados_sol.energy = 3.0
+    dados_sol.energy = FORCA_SOL
     dados_sol.angle = math.radians(0.526)
     sol = bpy.data.objects.new("Sol", dados_sol)
-    # Elevacao baixa: sol de fim de tarde, sombras longas.
-    sol.rotation_euler = (math.radians(65), 0, math.radians(-135))
+    # A rotacao sai da mesma elevacao e do mesmo azimute do ceu: o eixo -Z do
+    # SUN aponta para a cena, entao inclinar 90 - elevacao deixa o raio na
+    # altura certa, e girar em Z coloca no azimute.
+    sol.rotation_euler = (math.radians(90.0 - ELEVACAO_SOL), 0.0,
+                          math.radians(AZIMUTE_SOL + 90.0))
     col.objects.link(sol)
     return sol
 
@@ -494,6 +903,8 @@ def main():
     ap.add_argument("--dados", default="data/mapa_agroshow26.json")
     ap.add_argument("--relevo", default=None,
                     help="heightmap em escala de cinza para deslocar o terreno")
+    ap.add_argument("--hdri", default=None,
+                    help="HDRI de ceu; sem ele, ceu Nishita procedural")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
     args = ap.parse_args(argv)
 
@@ -523,11 +934,15 @@ def main():
     for o in cols["EVENTO"].objects:
         aplicar(o, mats["MAT_LONA"])
 
+    print("construindo portal, palco e camarotes...")
+    portal = construir_portal(dados, cols["EVENTO"], centro, mats)
+    arena = construir_palco_e_camarotes(dados, cols["EVENTO"], centro, mats)
+
     print("construindo percurso...")
-    pontos, ausentes = construir_percurso(dados, cols["CAMERA"], centro)
+    pontos, ausentes, chegada = construir_percurso(dados, cols["CAMERA"], centro)
 
     construir_luz(cols["LUZ"])
-    construir_ceu(bpy.context.scene)
+    construir_ceu(bpy.context.scene, args.hdri)
     configurar_render(bpy.context.scene)
 
     larg_m = dados["prancha"]["largura_pt"] * ESCALA
@@ -539,6 +954,9 @@ def main():
     print(f"  pavilhoes ........... {n_pav}")
     print(f"  estandes ............ {cont['instanciado']} instanciados "
           f"+ {cont['proprio']} proprios")
+    print(f"  portal .............. {'modelado' if portal else 'AUSENTE'}")
+    print(f"  palco / camarotes ... {arena['palco']} palco, "
+          f"{arena['camarotes']} lados de camarote (sem arquibancada)")
     print(f"  pontos do percurso .. {len(pontos)} de {len(PERCURSO)}")
     print(f"  render .............. {LARGURA_RENDER}x{ALTURA_RENDER} "
           f"({LARGURA_RENDER/ALTURA_RENDER:.0f}:1)")
@@ -546,6 +964,12 @@ def main():
           f"({bpy.context.scene.frame_end/FPS:.0f} s a {FPS} fps)")
     print(f"  patamares ........... arena 0 m -> shows {PATAMARES[2][2]} m "
           f"-> anel {PATAMARES[4][2]} m -> plato {PATAMARES[6][2]} m")
+    print("-" * 58)
+    print("  ponto                       quadro    tempo   altura")
+    for (nome, _, _, altura, parada, _), quadro in zip(pontos, chegada):
+        marca = f"{quadro/FPS:5.1f}s"
+        extra = f"  +{parada:.1f}s parado" if parada else ""
+        print(f"  {nome:<26} {quadro:>6}   {marca}   {altura:>4.0f} m{extra}")
     if ausentes:
         print("  AUSENTES no percurso:")
         for nome, rotulo in ausentes:

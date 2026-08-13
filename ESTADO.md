@@ -1,7 +1,7 @@
 # ESTADO DO PROJETO — leia isto primeiro
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Atualizado em 12/08/2026.
+Atualizado em 13/08/2026.
 
 Este arquivo existe para retomar o trabalho em outra sessão sem perder contexto.
 Leia daqui e siga para os documentos citados.
@@ -11,11 +11,11 @@ Leia daqui e siga para os documentos citados.
 ## Situação
 
 Vídeo de apresentação do parque, para telão, com percurso pelo recinto na ordem
-ditada pelo cliente. **Prazo original era domingo; o cliente antecipou para
-amanhã (13/08)**, para sobrar tempo de lapidação antes da entrega.
+ditada pelo cliente. O prazo foi antecipado para hoje (13/08), para sobrar tempo
+de lapidação antes da entrega.
 
-Com essa antecipação, a meta de amanhã **não é o filme acabado** — é a **base
-navegável e renderizando**, para lapidar por cima.
+Com essa antecipação, a meta de hoje **não é o filme acabado** — é a **base
+navegável e renderizando**, para lapidar por cima. **Essa base está fechada.**
 
 ### Duas abordagens conviveram nesta conversa
 
@@ -36,10 +36,11 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Planta extraída do PDF | `data/mapa_agroshow26.json` | 134 estandes com área, 181 blocos, 122 zonas |
 | Auditoria do DWG | `data/dwg_agroshow26.json` | Confirma: não há vetor |
 | Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1 |
+| Conferência de quadros | `scripts/render_conferencia.py` | Cycles CPU, quadro isolado, sem GPU |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
-| Agente | `.claude/agents/render-agroshow.md` | Escrito para o caminho 2.5D — **precisa ser reescrito para 3D** |
+| Agente | `.claude/agents/render-agroshow.md` | Reescrito para o caminho 3D |
 
 Saída atual do gerador:
 
@@ -48,20 +49,61 @@ escala .............. 0.5611 m/pt
 extensao do terreno . 808 x 454 m
 pavilhoes ........... 6
 estandes ............ 74 instanciados + 60 proprios
+portal .............. modelado
+palco / camarotes ... 1 palco, 2 lados de camarote (sem arquibancada)
 pontos do percurso .. 16 de 16
 render .............. 2760x1380 (2:1)
-animacao ............ 3840 quadros (128 s a 30 fps)
+animacao ............ 4591 quadros (153 s a 30 fps)
 patamares ........... arena 0 m -> shows 3.5 m -> anel 7.0 m -> plato 10.0 m
 ```
 
 ```bash
 pip install bpy pymupdf ezdxf
 python3 scripts/build_scene.py --out cena.blend
+python3 scripts/render_conferencia.py cena.blend --quadros 1,316,3886,4231,4591 \
+    --saida docs --escala 35 --amostras 64
 ```
 
+O gerador imprime a tabela de pontos com quadro, tempo e altura de cada um, e
+deixa um marcador de timeline por ponto do roteiro — é assim que se acha o
+quadro de cada área sem contar na mão.
+
 Renders de conferência: `docs/conferencia-layout.png` (topo),
-`docs/conferencia-bacia.png` (patamares), `docs/conferencia-quadro.png`
-(quadro da animação).
+`docs/conferencia-bacia.png` (patamares) e um por ponto do percurso
+(`docs/conferencia-01-portal-de-entrada.png` e seguintes).
+
+---
+
+## O que entrou nesta sessão
+
+**Câmera em duas curvas.** Uma curva para o voo, outra para o olhar. A câmera
+mira um alvo na altura de quem caminha, então a inclinação sai da geometria em
+vez de ser um ângulo fixo. Cada ponto tem altura, permanência e recuo próprios.
+Três defeitos que isso resolveu, todos vistos em quadro e não no código:
+
+- 12 m fixos com 18° enquadravam telhado de estande;
+- passar por cima do assunto entregava o ponto em nadir — daí o recuo, que é
+  190 m na arena e 45 m no portal;
+- a saída pelo portal atravessava o frontão a 14 m de altura. O último ponto
+  agora voa a 3,6 m e **para 5 m antes do plano do portal**, sob o vão. Passar
+  do plano joga o portal para trás da nuca e o último quadro vira campo vazio.
+
+**Céu Nishita** no lugar da cor chapada, com sol e céu no mesmo azimute. Na 5.0
+o tipo passou a se chamar `MULTIPLE_SCATTERING` e `dust_density` virou
+`aerosol_density`; o código aceita os dois nomes. `--hdri` continua disponível
+para quando a máquina tiver acesso ao Poly Haven.
+
+**Materiais procedurais** com ruído em escala métrica, cor e relevo — no lugar
+das cores chapadas. Sol forte com céu fraco (`FORCA_SOL` / `FORCA_CEU`): céu
+forte lava a cena inteira.
+
+**Portal, palco e camarotes como geometria.** O portal segue a foto: frontão em
+duas águas, treliça em V invertido, três vãos, letreiro em relevo, alas com
+beiral, janelas e luminárias. Palco e camarotes ficam na **borda** da pista, não
+onde caem os rótulos: rótulo de planta é âncora de texto, e o de `PALCO` cai a
+16 m do centro, dentro da pista. O azimute do rótulo é que manda de que lado
+cada um está. Camarotes são módulos fechados de dois pavimentos — **não é
+arquibancada**, e essa é a restrição mais fácil de violar sem perceber.
 
 ---
 
@@ -91,6 +133,12 @@ agrupam em anéis a 72–90 m e 108–113 m do centro da arena; as 15 anotaçõe
 travou o bloco alegando conflito entre áudio e planta. Ordenando os rótulos por
 coordenada Y real, a sequência bate exatamente com a ditada. O bloco está
 liberado.
+
+**A Fazendinha não existe na planta.** Não há rótulo de "Fazendinha" nem de
+"tiro de laço" em `data/mapa_agroshow26.json` — o áudio só diz "ao lado da pista
+de tiro de laço". Por isso ela **não está no percurso**, apesar de ser um dos
+quatro diferenciais. É pendência de cliente, não decisão de projeto: sem
+coordenada, arbitrar posição de área é inventar material de venda de espaço.
 
 **Local:** -25,73144 / -53,07627 — R. Jorge Amado, Jardim Marcante, Dois
 Vizinhos - PR, 85660-000.
@@ -136,19 +184,21 @@ Frases literais, não reescrever:
 
 ## Próximos passos, em ordem de valor
 
-1. **Câmera está baixa demais.** No quadro de conferência ela vê telhado de
-   estande. Suba `ALTURA_CAMERA` e aumente `INCLINACAO_CAM`, ou faça a altura
-   variar por trecho — aéreo nas transições, baixo nos pontos de interesse.
-2. **HDRI no lugar do céu procedural.** `construir_ceu()` hoje é uma cor chapada.
-   Um HDRI de fim de tarde do Poly Haven (CC0) muda o render inteiro.
-3. **Texturas PBR** em vez das cores base. Poly Haven e ambientCG, ambos CC0:
-   grama, lona, brita, telha metálica.
-4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
-5. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
-   isso. O portal é o primeiro e o último plano.
-6. **Reescrever o agente** `.claude/agents/render-agroshow.md`, que ainda está
-   redigido para o caminho 2.5D.
-7. Confirmar as alturas dos patamares com um quadro de drone.
+1. **Gente.** É o que tira a cara de maquete, antes de qualquer outra coisa —
+   e hoje não há uma única figura humana na cena. Humanos fotoscaneados, escala
+   conferida, nunca a mesma pose duas vezes no mesmo quadro.
+2. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven):
+   bosque, mata nativa, veículos no estacionamento, gado nos pavilhões.
+3. **Texturas PBR com arquivo**, ligadas nos mesmos slots dos materiais
+   procedurais. Precisa ser feito em máquina com acesso — o proxy bloqueia
+   Poly Haven e ambientCG.
+4. **HDRI real** no lugar do céu Nishita, pelo mesmo motivo (`--hdri` já existe).
+5. **Fazendinha no percurso**, assim que o cliente disser onde ela fica.
+6. **Estandes com cara de estande** — hoje são caixas de lona. Toldo, testeira e
+   frente aberta resolvem a leitura a 20 m de câmera.
+7. **Confirmar as alturas dos patamares** com um quadro de drone.
+8. **Entorno**: fora do recinto o terreno é campo vazio, e o plano final olha
+   justamente para lá. Estacionamento, via e cerca fecham o quadro.
 
 ---
 
@@ -157,9 +207,10 @@ Frases literais, não reescrever:
 | # | Pendência | Impacto |
 |---|---|---|
 | 1 | Footage de edições anteriores — prometido, não chegou | Alto — vira textura e referência |
-| 2 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
-| 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
-| 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 2 | **Onde fica a Fazendinha** — não há rótulo na planta | Alto — é um dos quatro diferenciais e está fora do percurso |
+| 3 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
+| 4 | Medida real de qualquer estrutura | Médio — confirma a escala |
+| 5 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
 
 ---
 
@@ -167,7 +218,11 @@ Frases literais, não reescrever:
 
 Registrado para não se repetir tentativa: o proxy de egresso bloqueia
 `drive.google.com`, `at.adobe.com`, `portal.opentopography.org`,
-`huggingface.co`, o CDN da OpenAI, `openstreetmap.org` e
-`doisvizinhos.pr.gov.br`. Vídeo do Drive e transcrição de áudio precisam ser
-feitos localmente e anexados no chat. GitHub, PyPI e o arquivo principal do
-Ubuntu funcionam.
+`huggingface.co`, o CDN da OpenAI, `openstreetmap.org`, `doisvizinhos.pr.gov.br`
+e **`dl.polyhaven.org`** (por tabela, ambientCG também deve cair). Vídeo do
+Drive e transcrição de áudio precisam ser feitos localmente e anexados no chat.
+GitHub, PyPI e o arquivo principal do Ubuntu funcionam.
+
+Não há GPU: render em Cycles CPU. Um quadro de conferência a 35% da resolução de
+entrega com 64 amostras leva cerca de 45 s em 4 núcleos — o suficiente para
+conferir enquadramento, longe do necessário para animação.
