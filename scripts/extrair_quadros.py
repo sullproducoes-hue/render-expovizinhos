@@ -7,20 +7,25 @@ Este script roda NA MAQUINA DE QUEM TEM OS VIDEOS, nao no ambiente remoto: os
 arquivos passam de 3 GB cada, o proxy do ambiente bloqueia o dominio do Drive e
 nao ha disco nem ffmpeg la. Aqui e onde o material vira algo que cabe no chat.
 
-Precisa de ffmpeg e ffprobe no PATH. exiftool e opcional, e so ajuda na leitura
-dos atomos proprietarios da DJI.
+Precisa de ffmpeg no PATH. ffprobe e exiftool sao opcionais: sem ffprobe a
+duracao sai da propria saida do ffmpeg, e o exiftool so ajuda na leitura dos
+atomos proprietarios da DJI. No Windows, use a build completa
+(winget install Gyan.FFmpeg) -- a enxuta nao tem drawtext e as folhas saem sem
+o timecode gravado no quadro.
 
 Ordem recomendada de uso:
 
     # 1. o mais barato e o de maior retorno: existe telemetria embutida?
-    python3 scripts/extrair_quadros.py --metadados --pasta "D:/AGROSHOW"
+    python3 scripts/extrair_quadros.py --metadados ^
+        --pasta "E:\Projetos todos\Mapa - agroshow"
 
     # 2. triagem: um contact sheet por video, 10 quadros com timecode
-    python3 scripts/extrair_quadros.py --triagem --pasta "D:/AGROSHOW"
+    python3 scripts/extrair_quadros.py --triagem ^
+        --pasta "E:\Projetos todos\Mapa - agroshow"
 
     # 3. so nos videos aprovados, quadros densos em resolucao cheia
-    python3 scripts/extrair_quadros.py --densa DJI_0960-015.MP4 --intervalo 2 \
-        --pasta "D:/AGROSHOW"
+    python3 scripts/extrair_quadros.py --densa DJI_0960-015.MP4 --intervalo 2 ^
+        --pasta "E:\Projetos todos\Mapa - agroshow"
 
 Anexe no chat: os .json e .srt do passo 1 (sao KB), os contact sheets do passo
 2, e depois as folhas do passo 3 em lotes.
@@ -43,15 +48,40 @@ MARGEM = 0.03
 CELULA = (960, 540)      # tamanho de cada quadro dentro do contact sheet
 COLUNAS_TRIAGEM = 5      # 5 x 2 = os 10 quadros pedidos, em uma folha so
 LOTE_DENSO = 12          # 4 x 3 por folha na passada densa
+LARGURA_FOLHA = 4200     # px -- teto de largura da folha montada
 
 
 def existe(programa):
     return shutil.which(programa) is not None
 
 
+class SemPrograma:
+    """Resultado falso para quando o programa nem existe no PATH."""
+    returncode = 127
+    stdout = ""
+    stderr = "programa ausente"
+
+
 def rodar(cmd, capturar=True):
-    return subprocess.run(cmd, capture_output=capturar, text=True,
-                          encoding="utf-8", errors="replace")
+    # Programa ausente nao pode derrubar a rodada: sao 186 arquivos, e parar
+    # tudo por causa de um ffprobe que nao veio no pacote e desperdicio.
+    try:
+        return subprocess.run(cmd, capture_output=capturar, text=True,
+                              encoding="utf-8", errors="replace")
+    except (FileNotFoundError, OSError):
+        return SemPrograma()
+
+
+def tem_drawtext():
+    """O ffmpeg desta maquina sabe gravar texto no quadro?
+
+    drawtext depende de libfreetype, que falta em build enxuta. Sem ele a
+    triagem ainda sai, mas sem timecode gravado no pixel -- e o timecode e o
+    que permite pedir 'o trecho de 01:23 do DJI_0960' depois. Melhor avisar no
+    arranque do que descobrir com 186 folhas prontas.
+    """
+    saida = rodar(["ffmpeg", "-hide_banner", "-filters"])
+    return " drawtext " in (saida.stdout or "")
 
 
 def videos_da_pasta(pasta):
@@ -59,14 +89,54 @@ def videos_da_pasta(pasta):
                   if p.suffix.lower() in EXTENSOES)
 
 
+def sondar_por_ffmpeg(video):
+    """Duracao e resolucao lidas da saida do proprio ffmpeg.
+
+    Rede de seguranca para instalacao sem ffprobe -- acontece em build enxuto e
+    em pacote de editor. Le a linha 'Duration:' e a linha do stream de video.
+    """
+    saida = rodar(["ffmpeg", "-hide_banner", "-i", str(video)])
+    texto = (saida.stderr or "") + (saida.stdout or "")
+    duracao, largura, altura, fps = 0.0, None, None, 0.0
+    for linha in texto.splitlines():
+        linha = linha.strip()
+        if linha.startswith("Duration:"):
+            relogio = linha.split("Duration:")[1].split(",")[0].strip()
+            try:
+                h, m, s = relogio.split(":")
+                duracao = int(h) * 3600 + int(m) * 60 + float(s)
+            except ValueError:
+                pass
+        if "Video:" in linha:
+            for pedaco in linha.split(","):
+                pedaco = pedaco.strip()
+                if "x" in pedaco and pedaco.split("x")[0].strip().isdigit():
+                    try:
+                        l, a = pedaco.split()[0].split("x")
+                        largura, altura = int(l), int(a)
+                    except ValueError:
+                        pass
+                if pedaco.endswith("fps"):
+                    try:
+                        fps = float(pedaco.split()[0])
+                    except ValueError:
+                        pass
+    if not duracao or largura is None:
+        return None
+    return {"duracao": duracao, "largura": largura, "altura": altura,
+            "fps": fps, "bruto": {}}
+
+
 def sondar(video):
-    """Duracao, resolucao e fps. Devolve None se o ffprobe nao ler o arquivo."""
+    """Duracao, resolucao e fps. Devolve None se nem ffmpeg leu o arquivo."""
+    if not existe("ffprobe"):
+        return sondar_por_ffmpeg(video)
     saida = rodar([
         "ffprobe", "-v", "error", "-print_format", "json",
         "-show_format", "-show_streams", str(video),
     ])
     if saida.returncode != 0:
-        return None
+        return sondar_por_ffmpeg(video)
     dados = json.loads(saida.stdout)
     video_stream = next((s for s in dados.get("streams", [])
                          if s.get("codec_type") == "video"), None)
@@ -101,16 +171,29 @@ def extrair_metadados(video, destino, seco=False):
     destino.mkdir(parents=True, exist_ok=True)
     achados = []
 
-    alvo_json = destino / f"{video.stem}.ffprobe.json"
-    cmd = ["ffprobe", "-v", "error", "-print_format", "json",
-           "-show_format", "-show_streams", "-show_chapters", str(video)]
-    if seco:
-        print("  " + " ".join(cmd))
+    if existe("ffprobe"):
+        alvo_json = destino / f"{video.stem}.ffprobe.json"
+        cmd = ["ffprobe", "-v", "error", "-print_format", "json",
+               "-show_format", "-show_streams", "-show_chapters", str(video)]
+        if seco:
+            print("  " + " ".join(cmd))
+        else:
+            saida = rodar(cmd)
+            if saida.returncode == 0:
+                alvo_json.write_text(saida.stdout, encoding="utf-8")
+                achados.append(alvo_json.name)
     else:
-        saida = rodar(cmd)
-        if saida.returncode == 0:
-            alvo_json.write_text(saida.stdout, encoding="utf-8")
-            achados.append(alvo_json.name)
+        # Sem ffprobe, o proprio ffmpeg descreve o arquivo na saida de erro.
+        alvo_txt = destino / f"{video.stem}.ffmpeg.txt"
+        cmd = ["ffmpeg", "-hide_banner", "-i", str(video)]
+        if seco:
+            print("  " + " ".join(cmd))
+        else:
+            saida = rodar(cmd)
+            texto = (saida.stderr or "") + (saida.stdout or "")
+            if texto.strip():
+                alvo_txt.write_text(texto, encoding="utf-8")
+                achados.append(alvo_txt.name)
 
     # Faixa de legenda embutida: e onde mora a telemetria nos DJI recentes.
     alvo_srt = destino / f"{video.stem}.telemetria.srt"
@@ -167,32 +250,45 @@ def extrair_quadro(video, instante, alvo, largura=None, rotulo=None,
             ":x=16:y=h-th-16:fontsize=28:fontcolor=white"
             ":box=1:boxcolor=black@0.55:boxborderw=8"
         )
-    cmd = ["ffmpeg", "-y", "-v", "error", "-ss", f"{instante:.3f}",
-           "-i", str(video), "-frames:v", "1"]
-    if filtros:
-        cmd += ["-vf", ",".join(filtros)]
-    cmd += ["-q:v", "2", str(alvo)]
+    def montar(lista):
+        cmd = ["ffmpeg", "-y", "-v", "error", "-ss", f"{instante:.3f}",
+               "-i", str(video), "-frames:v", "1"]
+        if lista:
+            cmd += ["-vf", ",".join(lista)]
+        return cmd + ["-q:v", "2", str(alvo)]
+
     if seco:
-        print("  " + " ".join(cmd))
+        print("  " + " ".join(montar(filtros)))
         return True
-    return rodar(cmd).returncode == 0
+    if rodar(montar(filtros)).returncode == 0:
+        return True
+    # Sem fonte instalada o drawtext falha -- acontece em ffmpeg de Windows.
+    # Melhor o quadro sair sem rotulo do que a triagem parar.
+    sem_rotulo = [f for f in filtros if not f.startswith("drawtext")]
+    return rodar(montar(sem_rotulo)).returncode == 0
 
 
-def montar_folha(quadros, alvo, colunas, seco=False):
+def montar_folha(padrao, inicio, quantidade, alvo, colunas, seco=False):
     """Junta os quadros numa folha unica.
 
     Uma folha por video em vez de dez arquivos soltos: e o que permite triar
-    quinze videos numa conversa so, sem estourar o contexto de quem revisa.
+    186 fitas numa conversa so, sem estourar o contexto de quem revisa.
+
+    O tile monta a grade a partir de UMA sequencia de imagens, nao de varias
+    entradas separadas -- por isso a entrada e o padrao numerado dos quadros.
+    Passar dez arquivos como dez '-i' devolve a primeira celula preenchida e o
+    resto preto.
     """
-    if not quadros:
+    if quantidade <= 0:
         return False
-    linhas = math.ceil(len(quadros) / colunas)
-    cmd = ["ffmpeg", "-y", "-v", "error"]
-    for q in quadros:
-        cmd += ["-i", str(q)]
-    cmd += ["-filter_complex",
-            f"tile={colunas}x{linhas}:margin=8:padding=8:color=black",
-            "-frames:v", "1", str(alvo)]
+    linhas = math.ceil(quantidade / colunas)
+    cmd = ["ffmpeg", "-y", "-v", "error",
+           "-start_number", str(inicio), "-i", str(padrao),
+           # Teto de largura: a folha densa com celulas de 1920 passaria de
+           # 7.000 px e viraria anexo pesado sem ganho de leitura.
+           "-vf", f"tile={colunas}x{linhas}:margin=8:padding=8:color=black,"
+                  f"scale='min({LARGURA_FOLHA},iw)':-2",
+           "-frames:v", "1", "-q:v", "3", str(alvo)]
     if seco:
         print("  " + " ".join(cmd))
         return True
@@ -232,7 +328,8 @@ def triagem(video, destino, quantidade, seco=False, pular_prontos=True):
             quadros.append(alvo)
 
     folha = destino / f"FOLHA_{video.stem}.jpg"
-    montar_folha(quadros, folha, COLUNAS_TRIAGEM, seco)
+    montar_folha(destino / f"{video.stem}_t%02d.jpg", 0, len(quadros) or
+                 quantidade, folha, COLUNAS_TRIAGEM, seco)
     return {
         "video": video.name,
         "duracao": info["duracao"],
@@ -260,10 +357,12 @@ def passada_densa(video, destino, intervalo, largura, seco=False):
 
     # Folhas em lote, para revisar muito quadro sem abrir um por um.
     folhas = []
-    for i in range(0, len(quadros), LOTE_DENSO):
-        lote = quadros[i:i + LOTE_DENSO]
+    padrao = destino / f"{video.stem}_d%04d.jpg"
+    total_quadros = len(quadros) or total
+    for i in range(0, total_quadros, LOTE_DENSO):
+        lote = min(LOTE_DENSO, total_quadros - i)
         folha = destino / f"FOLHA_{video.stem}_lote{i // LOTE_DENSO:02d}.jpg"
-        if montar_folha(lote, folha, 4, seco):
+        if montar_folha(padrao, i, lote, folha, 4, seco):
             folhas.append(folha.name)
     return {"video": video.name, "quadros": len(quadros), "folhas": folhas}
 
@@ -293,13 +392,19 @@ def main():
                     help="imprime os comandos sem executar")
     args = ap.parse_args()
 
-    for programa in ("ffmpeg", "ffprobe"):
-        if not existe(programa):
-            print(f"ERRO: {programa} nao esta no PATH.")
-            print("  Windows: winget install Gyan.FFmpeg")
-            print("  macOS:   brew install ffmpeg")
-            print("  Linux:   sudo apt install ffmpeg")
-            return 1
+    if not existe("ffmpeg"):
+        print("ERRO: ffmpeg nao esta no PATH.")
+        print("  Windows: winget install Gyan.FFmpeg")
+        print("  macOS:   brew install ffmpeg")
+        print("  Linux:   sudo apt install ffmpeg")
+        return 1
+    if not existe("ffprobe"):
+        print("aviso: ffprobe ausente -- duracao e resolucao saem do ffmpeg")
+    if (args.triagem or args.densa) and not tem_drawtext():
+        print("aviso: este ffmpeg nao tem drawtext (falta libfreetype).")
+        print("       As folhas saem sem timecode gravado no quadro.")
+        print("       Windows: winget install Gyan.FFmpeg (build completa)")
+    print()
 
     pasta = Path(args.pasta)
     if not pasta.is_dir():
