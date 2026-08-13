@@ -1,7 +1,7 @@
 # ESTADO DO PROJETO — leia isto primeiro
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Atualizado em 12/08/2026.
+Atualizado em 13/08/2026, manhã.
 
 Este arquivo existe para retomar o trabalho em outra sessão sem perder contexto.
 Leia daqui e siga para os documentos citados.
@@ -15,7 +15,42 @@ ditada pelo cliente. **Prazo original era domingo; o cliente antecipou para
 amanhã (13/08)**, para sobrar tempo de lapidação antes da entrega.
 
 Com essa antecipação, a meta de amanhã **não é o filme acabado** — é a **base
-navegável e renderizando**, para lapidar por cima.
+navegável e renderizando**, para lapidar por cima. Essa base existe: a cena
+monta em segundos, o percurso cobre os 20 blocos do roteiro e a câmera enquadra
+cada bloco pela frente.
+
+### Onde a conversa parou — 13/08/2026, manhã
+
+**A cena já monta na máquina do Natan.** Windows, Blender 5.2 LTS em
+`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`, repositório em
+`C:\Users\natan\render-expovizinhos`, branch
+`claude/video-mapa-3d-assembly-4hcbty`. O comando que funcionou:
+
+```
+cd C:\Users\natan\render-expovizinhos
+"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python scripts/build_scene.py -- --out cena.blend
+```
+
+A saída bateu com a deste repositório, linha por linha. Os dois
+`DeprecationWarning` de `use_nodes` são inofensivos.
+
+**Próximo passo, que estava em andamento:** cronometrar um quadro na máquina
+dele para decidir motor e qualidade. Abrir `cena.blend`, escolher o motor em
+*Render Properties* (**EEVEE** para velocidade; **Cycles com Device → GPU
+Compute** para luz melhor), apertar `0` no teclado numérico, ir a um quadro
+qualquer e apertar `F12`. O tempo de um quadro × 4440 dá o custo do filme:
+1 s por quadro ≈ 1h15; 3 s ≈ 3h45; 10 s ≈ 12h; 60 s ≈ 3 dias. Depois disso,
+renderizar 300 quadros (dez segundos) como teste antes do filme inteiro.
+
+**Ele ainda não mandou esse tempo.** Quando mandar, a decisão é: se couber na
+janela dele, render inteiro; se não couber, cortar amostragem e resolução de
+prévia, nunca tempo de revisão.
+
+**PR aberto:** #1, `claude/video-mapa-3d-assembly-4hcbty` →
+`claude/render-texturas-expovizinho-nicvzj`. Sem CI configurado no repositório,
+sem comentários de revisão. A descrição do PR tem uma seção "Second commit" que
+corrige o texto original gerado pela UI — onde as duas partes divergirem, vale a
+segunda.
 
 ### Duas abordagens conviveram nesta conversa
 
@@ -36,32 +71,67 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Planta extraída do PDF | `data/mapa_agroshow26.json` | 134 estandes com área, 181 blocos, 122 zonas |
 | Auditoria do DWG | `data/dwg_agroshow26.json` | Confirma: não há vetor |
 | Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1 |
+| Relevo medido do entorno | `scripts/fetch_dem.py` → `data/dem_recinto.npz` | 2,4 × 2,4 km, 4,3 m/px |
+| Percurso dos 20 blocos | `PERCURSO` no gerador | 22 pontos, na ordem do roteiro |
+| Portal, palco, camarotes | `construir_portal/palco/camarotes` | Modelados, leitura econômica |
+| Galpões da faixa norte | `GALPOES` no gerador | Medidos no bitmap da prancha (±2 m) |
+| Recinto de Leilões | `construir_leiloes` | Estrela de 8 pontas, 38 m, medida no bitmap |
+| Pista de Julgamentos | `construir_pista_julgamento` | Pasto cercado, 42 × 59 m |
+| Fazendinha | `construir_fazendinha` | Faixa cercada 14 × 90 m com porteira |
+| Estacionamentos | `construir_estacionamentos` | Lajes de asfalto, dimensão aproximada |
+| Caminho do render final | `scripts/render_final.sh` | Cena → quadros → `.mov` + 2 `.mp4` |
+| Quadros de conferência | `docs/conferencia/` | Um por bloco, 690×345 |
+| **Conferência contra a planta** | `scripts/overlay_check.py` → `docs/conferencia-planta.png` | Cena sobreposta ao desenho |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
-| Agente | `.claude/agents/render-agroshow.md` | Escrito para o caminho 2.5D — **precisa ser reescrito para 3D** |
+| Agente | `.claude/agents/render-agroshow.md` | Reescrito para o caminho 3D |
 
 Saída atual do gerador:
 
 ```
 escala .............. 0.5611 m/pt
-extensao do terreno . 808 x 454 m
+extensao do terreno . 1808 x 1454 m (prancha + 500 m de entorno)
 pavilhoes ........... 6
 estandes ............ 74 instanciados + 60 proprios
-pontos do percurso .. 16 de 16
+estacionamentos ..... 8
+galpoes da faixa norte 2
+camarotes ........... 16 modulos, sem arquibancada
+recinto de leiloes .. estrela de 8 pontas, 38 m
+pista de julgamentos  42 x 59 m, 37 pecas
+fazendinha .......... 14 x 90 m com porteira, 22 pecas
+pontos do percurso .. 22 de 22
+extensao do percurso  1693 m
+trechos aereos ...... 10
+camera .............. 30 mm, 4-52 m
 render .............. 2760x1380 (2:1)
-animacao ............ 3840 quadros (128 s a 30 fps)
+animacao ............ 4440 quadros (148 s a 30 fps)
+sol ................. azimute 295°, elevacao 12°
+relevo medido ....... 4.3 m/px, origem familia SRTM/NASADEM
+mistura planta/dem .. 150 a 320 m do centro da arena
 patamares ........... arena 0 m -> shows 3.5 m -> anel 7.0 m -> plato 10.0 m
 ```
 
+São 22 pontos para 20 blocos: o Bosque e a travessia do portal são nós de
+passagem, sem título na tela.
+
 ```bash
-pip install bpy pymupdf ezdxf
+pip install bpy pymupdf ezdxf pillow numpy
+python3 scripts/fetch_dem.py                       # so quando faltar o .npz
 python3 scripts/build_scene.py --out cena.blend
+python3 scripts/build_scene.py --conferencia docs/conferencia/
+python3 scripts/overlay_check.py                   # cena sobre a planta
 ```
 
-Renders de conferência: `docs/conferencia-layout.png` (topo),
-`docs/conferencia-bacia.png` (patamares), `docs/conferencia-quadro.png`
-(quadro da animação).
+Conferência custa 10–20 s por quadro: Cycles em CPU, 25% da resolução, 32
+amostras com denoise. **Não há GPU no ambiente remoto** — EEVEE precisa de
+libEGL e quebra no meio do render, por isso o padrão é Cycles. Em máquina com
+GPU, `--motor BLENDER_EEVEE`. No Windows, chame pelo Blender instalado:
+`"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background
+--python scripts/build_scene.py -- --out cena.blend` — o `pip install bpy` não
+serve lá, porque o módulo só existe para Python 3.11 e a máquina tem 3.10.
+Renders antigos do layout: `docs/conferencia-layout.png` (topo),
+`docs/conferencia-bacia.png` (patamares).
 
 ---
 
@@ -77,10 +147,26 @@ de 1806 × 1383 px. O DWG (AC1018) tem 4883 TEXT, 1 LINE, 1 SOLID, 2 HATCH e
 zero polilinha — e 4483 dos textos são caracteres soltos, glifo a glifo.
 Assinatura de PDF importado para CAD. Não insista em extrair contorno dele.
 
-**DEM global não serve para o recinto.** SRTM, Copernicus, NASADEM e AW3D30 são
-todos ~30 m. Um recorte de 2 × 2 km sai com **67 × 67 pixels** — o recinto
-ocuparia uns 27. Os patamares somem. A bacia foi derivada da planta, e é mais
-precisa. OpenTopography só vale para o entorno distante.
+**DEM global não resolve os patamares — mas resolve a profundidade geral, e
+isso agora está na cena.** A frase anterior aqui era "DEM não serve", e era
+curta demais. O que é verdade: com ~30 m de origem, um talude de 3,5 m em 15 m
+de extensão não existe no dado, então **os patamares continuam vindo da planta
+e as alturas continuam estimadas**. O que o dado entrega, e a planta não: o
+recinto **não é plano**. Ele cai cerca de 1,4 m a cada 100 m e tem 44 m entre o
+ponto mais alto e o mais baixo dentro dos 808 × 454 m. A cena tinha 10 m
+chapados.
+
+Fonte: **terrain tiles da AWS** (`s3.amazonaws.com/elevation-tiles-prod`,
+formato terrarium, domínio público) — é o único provedor de elevação que o
+proxy libera; OpenTopography, opentopodata e open-elevation estão bloqueados.
+`scripts/fetch_dem.py` baixa e grava `data/dem_recinto.npz` (2,4 × 2,4 km),
+para o gerador rodar depois sem rede.
+
+A mistura entre as duas fontes é por raio a partir do centro da arena:
+até 150 m manda a planta, além de 320 m manda o relevo medido, no meio é
+transição suave. O registro do recorte assume que a coordenada do recinto cai
+no centro da prancha e que o desenho tem o norte para cima — por isso a planta
+é quem manda justamente onde a posição importa.
 
 **A bacia veio de três fontes concordando:** os 93 estandes da série C se
 agrupam em anéis a 72–90 m e 108–113 m do centro da arena; as 15 anotações de
@@ -91,6 +177,70 @@ agrupam em anéis a 72–90 m e 108–113 m do centro da arena; as 15 anotaçõe
 travou o bloco alegando conflito entre áudio e planta. Ordenando os rótulos por
 coordenada Y real, a sequência bate exatamente com a ditada. O bloco está
 liberado.
+
+**A cena foi conferida contra a planta, e a conferência achou erro grosso.**
+Render de câmera mostra se o quadro ficou bonito; só a sobreposição em planta
+mostra se o galpão está 90 m ao lado. Rode `scripts/overlay_check.py` depois de
+mexer em qualquer posição. O que a primeira conferência pegou:
+
+- **Cinco blocos do percurso estavam errados de 88 a 182 m.** Eu os havia
+  posicionado por geometria da bacia. A planta traz os títulos do roteiro
+  escritos em vermelho, com posição — inclusive a Fazendinha. O extrator não os
+  pegava porque só reconhecia rótulos de uma lista fixa, e vários estão
+  rotacionados. Agora saem em `titulos` no JSON.
+- **Os Pavilhões 1, 2 e a Praça Coberta são um prédio só**, de ~176 × 33 m, e o
+  "Pavilhão 3" é o bloco laranja do Galpão do Produtor, ~20 × 37 m. Eu havia
+  suposto quatro galpões separados de 30 × 70 m.
+- **Nada estava rotacionado.** Os seis pavilhões de animais correm a 18°, os
+  camarotes são duas faixas retas a −54° e −70°, o palco a 28°. A direção sai
+  do próprio rótulo, que na prancha corre no eixo do que ele nomeia; agora vai
+  em `dir` em cada zona do JSON.
+- **A pista da arena tinha 45 m de raio**; medida no desenho, tem ~26.
+
+Desvios que sobraram, conhecidos: a caixa de cada pavilhão de animais fica
+centrada no rótulo e não no prédio, o que a desloca uns 10 m no eixo; as lajes
+de estacionamento são aproximadas; e os galpões têm a incerteza de leitura do
+bitmap.
+
+**A câmera errava por três motivos, não um.** Voava a 12 m com inclinação fixa
+e **parava em cima do assunto** — e de cima do assunto só se vê cobertura. As
+três correções, que valem para qualquer bloco novo: altura por trecho (aéreo a
+52 m nas transições, baixa nos pontos), **recuo** (a câmera para dezenas de
+metros antes do assunto) e **mira em alvo animado** em vez de ângulo fixo.
+
+**A planta não desenha os Pavilhões 1, 2 e 3.** Ela rotula e desenha os
+estandes de dentro, mas não o contorno do galpão — e agrupar estandes por
+proximidade não serve de envoltória (o grupo do Pavilhão 3 esparrama por
+122 × 106 m, o do Pavilhão 1 junta quatro estandes). Os volumes atuais são
+**supostos**, na leitura mais conservadora: como os pavilhões 2 e 3 distam
+39 m, o lado comprido corre norte-sul. Seis blocos do roteiro acontecem neles.
+
+**Recuo maior que o trecho gruda duas paradas no mesmo ponto** — e dois títulos
+sobre o mesmo quadro. Acontece na faixa norte, onde os rótulos distam 55–68 m.
+O gerador avisa na saída quando isso ocorre; a correção é baixar o `recuo` do
+bloco. Mercado, Agroindústrias e Café Colonial dividem o Pavilhão 3 e por isso
+têm recuo decrescente: a câmera avança pelo galpão enquanto o título muda.
+
+**Eixo de área aberta se lê no título, não se deduz.** Tentei deduzir o eixo da
+faixa da Fazendinha por geometria duas vezes — radial, depois tangente — e errei
+as duas; a cerca atravessava as fileiras de estandes. O título vermelho é escrito
+**ao longo** da faixa, e agora `titulos` carrega a direção de cada um. A largura e
+o comprimento também deixaram de ser escolhidos: saem do vão livre medido entre as
+fileiras, e se nada couber o gerador monta só a porteira. Cerca por cima de estande
+vendido é erro mais caro que cerca ausente.
+
+**A Fazendinha não é prédio, é área aberta.** O título dela na prancha cai
+numa faixa de grama entre duas fileiras de estandes, descendo o talude — bate
+com o áudio ("desce pro lado da pista de tiro de laço"). Por isso ela entrou
+como faixa cercada de 14 × 90 m — a largura do vão livre entre as
+fileiras — com **porteira de destaque** na ponta que olha
+para o percurso, e não como construção. A porteira o cliente pediu nominalmente.
+
+**Cinco blocos não têm rótulo CAD — mas quatro têm título vermelho.**
+Expositores Externo, Fazendinha, Exposição de Máquinas e Área de Show saem dos
+títulos da prancha. Só **Veículos e Motos Náuticas** não tem nem rótulo nem
+título: a prancha o marca apenas pela cor da legenda, e a posição usada é o
+centroide dos pixels azuis do bitmap, fora da caixa de legenda.
 
 **Local:** -25,73144 / -53,07627 — R. Jorge Amado, Jardim Marcante, Dois
 Vizinhos - PR, 85660-000.
@@ -126,7 +276,8 @@ A resolução de entrada do processador não será confirmada — decisão do cl
    um detalhe, escolha a leitura mais econômica.
 5. **Quatro diferenciais** com mais tela: Fazendinha, Rodeio, Café Colonial,
    Mercado do Produtor.
-6. **Plano final saindo pelo portal.**
+6. **Plano final saindo pelo portal.** Já está na cena: o caminho atravessa o
+   vão central a 3,5 m de altura, abaixo da verga.
 
 Frases literais, não reescrever:
 - Abertura: *É daqui que sai o alimento que sustenta o mundo*
@@ -136,21 +287,38 @@ Frases literais, não reescrever:
 
 ## Próximos passos, em ordem de valor
 
-1. **Câmera está baixa demais.** No quadro de conferência ela vê telhado de
-   estande. Suba `ALTURA_CAMERA` e aumente `INCLINACAO_CAM`, ou faça a altura
-   variar por trecho — aéreo nas transições, baixo nos pontos de interesse.
-2. **HDRI no lugar do céu procedural.** `construir_ceu()` hoje é uma cor chapada.
-   Um HDRI de fim de tarde do Poly Haven (CC0) muda o render inteiro.
-3. **Texturas PBR** em vez das cores base. Poly Haven e ambientCG, ambos CC0:
-   grama, lona, brita, telha metálica.
-4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
-5. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
-   isso. O portal é o primeiro e o último plano.
-6. **Reescrever o agente** `.claude/agents/render-agroshow.md`, que ainda está
-   redigido para o caminho 2.5D.
-7. Confirmar as alturas dos patamares com um quadro de drone.
+1. **Ajustar recuo, altura e mira bloco a bloco** pelos quadros em
+   `docs/conferencia/`, conferindo posição em `docs/conferencia-planta.png`. Os parâmetros estão na lista `PERCURSO`, um dicionário
+   por bloco — mexer é trocar um número, não remontar cena. Os blocos da faixa
+   norte (02 a 07) são os que ainda leem como telhado branco sem assunto.
+2. **Confirmar as três cotas dos patamares** (3,5 / 7 / 10 m). É a última
+   dimensão importante que ainda é estimativa, e o relevo medido não a resolve.
+   Uma foto lateral da arena com pessoa ou veículo no quadro basta.
+3. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
+   Gente é o que mais entrega maquete; ver `docs/CAMINHO-3D.md`.
+4. **Texturas PBR** em vez da variação procedural de cor. Poly Haven e
+   ambientCG, ambos CC0 — **os dois estão bloqueados pelo proxy do ambiente
+   remoto**, precisam ser baixados localmente e anexados.
+5. **HDRI real** no lugar do céu Nishita, pelo mesmo caminho.
+6. **Render em passes** (beauty, depth, cryptomatte, motion vectors) antes de
+   qualquer render longo. Sem os passes, refino vira re-render.
+7. **Títulos e letreiros** sobre os quadros, na tipografia do telão.
 
 ---
+
+## O que falta para o render final
+
+O render final **não roda neste ambiente**: sem GPU, Cycles leva de 2 a 4 min
+por quadro em 2760 × 1380, e são 4440 quadros — entre 6 e 12 dias. Numa máquina
+com placa, EEVEE fecha o mesmo filme em torno de uma hora.
+
+O passo a passo para quem vai rodar está em **`docs/RENDER-LOCAL.md`**:
+o que instalar, como montar a cena, como conferir a posição antes de gastar
+horas e como codificar os arquivos. `scripts/render_final.sh` tem o caminho
+inteiro: monta a cena, roda a
+conferência de posição, renderiza os quadros e codifica os três arquivos de
+entrega (ProRes `.mov`, H.264 `.mp4` e a reserva 1380 × 690). Falta a cartela
+de teste de 10 s.
 
 ## Pendências com o cliente
 
@@ -161,13 +329,23 @@ Frases literais, não reescrever:
 | 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
 | 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
 
+Duas pendências saíram da lista porque **a própria planta respondeu**: onde
+fica a Fazendinha (título vermelho, x=426,9 y=438,1 na prancha) e a dimensão
+dos galpões da faixa norte (medida no bitmap). Antes de perguntar ao cliente,
+procure no desenho.
+
 ---
 
 ## Limitações do ambiente remoto
 
 Registrado para não se repetir tentativa: o proxy de egresso bloqueia
 `drive.google.com`, `at.adobe.com`, `portal.opentopography.org`,
-`huggingface.co`, o CDN da OpenAI, `openstreetmap.org` e
-`doisvizinhos.pr.gov.br`. Vídeo do Drive e transcrição de áudio precisam ser
-feitos localmente e anexados no chat. GitHub, PyPI e o arquivo principal do
-Ubuntu funcionam.
+`huggingface.co`, o CDN da OpenAI, `openstreetmap.org`,
+`doisvizinhos.pr.gov.br` e — testado nesta sessão — `polyhaven.com`,
+`ambientcg.com`, `api.opentopodata.org` e `open-elevation.com`. **Passa:**
+`s3.amazonaws.com/elevation-tiles-prod`, que é de onde vem o relevo. Vídeo do Drive, transcrição de áudio, HDRI e textura PBR
+precisam ser obtidos localmente e anexados no chat. GitHub, PyPI e o arquivo
+principal do Ubuntu funcionam.
+
+Não há GPU: o render roda em CPU, ~80 s por quadro a 25% da resolução. Render
+final é trabalho de máquina local.
