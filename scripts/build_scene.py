@@ -131,7 +131,7 @@ PERCURSO = [
     dict(bloco="12", nome="Expositores Externos", titulo="Expositores Externo",
          altura=30.0, recuo=80.0, pausa=1.5),
     dict(bloco="13", nome="Fazendinha", titulo="Fazendinha",
-         altura=15.0, recuo=45.0, pausa=3.5),
+         altura=20.0, recuo=60.0, alvo=5.0, pausa=3.5),
     dict(bloco="14", nome="Maquinas e Implementos",
          titulo="Exposição de Máquinas", altura=22.0, recuo=70.0, pausa=1.5),
     # Unico bloco sem rotulo e sem titulo: a prancha marca os veiculos so pela
@@ -754,8 +754,12 @@ def construir_fazendinha(dados, col, mats, centro_arena):
 
     # Porteira: dois esteios, travessa e placa. O nome vai grande na placa e a
     # descricao pequena embaixo -- hierarquia pedida nominalmente pelo cliente.
-    frente_x = x - math.sin(ang) * (prof / 2)
-    frente_y = y + math.cos(ang) * (prof / 2)
+    #
+    # Fica na ponta de CIMA da faixa, a que olha para os expositores externos:
+    # e por ali que o percurso desce, e porteira de destaque so cumpre o papel
+    # se estiver na chegada. Na ponta de baixo ela ficaria de costas.
+    frente_x = x + math.sin(ang) * (prof / 2)
+    frente_y = y - math.cos(ang) * (prof / 2)
     solo = elevacao(frente_x, frente_y, centro_arena)
     for sinal in (-1, 1):
         px = frente_x + math.cos(ang) * sinal * (larg / 2)
