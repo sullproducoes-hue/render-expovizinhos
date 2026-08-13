@@ -369,6 +369,38 @@ def passada_densa(video, destino, intervalo, largura, seco=False):
 
 # --------------------------------------------------------------------------
 
+PASTA_PADRAO = r"E:\Projetos todos\Mapa - agroshow"
+
+
+def perguntar(args):
+    """Modo de duplo clique: pergunta o essencial e segue.
+
+    Quem tem os videos nao precisa decorar linha de comando para entregar os
+    quadros. As respostas caem nos mesmos campos que as opcoes de linha.
+    """
+    print("=" * 62)
+    print("  TRIAGEM DO FOOTAGE DE DRONE -- AGROSHOW 2026")
+    print("=" * 62)
+    print()
+    print(f"Pasta dos videos [{PASTA_PADRAO}]:")
+    resposta = input("> ").strip().strip('"')
+    args.pasta = resposta or PASTA_PADRAO
+
+    print()
+    print("O que fazer?")
+    print("  1) Metadados e telemetria  -- rapido, e o de maior retorno")
+    print("  2) Triagem, 10 quadros por video")
+    print("  3) Os dois  (recomendado)")
+    escolha = input("> [3] ").strip() or "3"
+    args.metadados = escolha in ("1", "3")
+    args.triagem = escolha in ("2", "3")
+
+    # A saida vai para junto dos videos, e nao para a pasta de onde o script
+    # foi aberto -- senao o resultado se perde na pasta de downloads.
+    args.saida = str(Path(args.pasta) / "_triagem")
+    print(f"\nSaida: {args.saida}\n")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -391,6 +423,12 @@ def main():
     ap.add_argument("--dry-run", action="store_true",
                     help="imprime os comandos sem executar")
     args = ap.parse_args()
+
+    # Duplo clique no Windows nao passa argumento nenhum: sem isto a janela
+    # abre, imprime uma linha de ajuda e fecha antes de alguem ler.
+    interativo = len(sys.argv) == 1
+    if interativo:
+        perguntar(args)
 
     if not existe("ffmpeg"):
         print("ERRO: ffmpeg nao esta no PATH.")
@@ -480,4 +518,12 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    codigo = main()
+    if len(sys.argv) == 1:
+        # Janela de duplo clique fecha sozinha; sem a pausa ninguem le o
+        # resultado nem o aviso de erro.
+        try:
+            input("\nPronto. Enter para fechar.")
+        except EOFError:
+            pass
+    sys.exit(codigo)
