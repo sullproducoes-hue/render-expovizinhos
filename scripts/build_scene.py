@@ -812,17 +812,129 @@ def construir_percurso(dados, col, centro_arena):
     return pontos, ausentes, chegada
 
 
-def configurar_render(cena):
+def configurar_render(cena, perfil="previa"):
     cena.render.resolution_x = LARGURA_RENDER
     cena.render.resolution_y = ALTURA_RENDER
     cena.render.resolution_percentage = 100
     cena.render.fps = 30
     cena.render.image_settings.file_format = "PNG"
     cena.render.film_transparent = False
+
+    if perfil == "final":
+        configurar_cycles_final(cena)
+        return
+
+    # Previa: motor rapido para navegar e conferir enquadramento.
     try:
         cena.render.engine = "BLENDER_EEVEE_NEXT"
     except TypeError:
         cena.render.engine = "CYCLES"
+
+
+def escolher_dispositivo():
+    """Liga a GPU quando houver, e diz em voz alta quando nao houver.
+
+    A entrega roda em maquina com NVIDIA, entao a ordem de preferencia e OptiX,
+    depois CUDA, depois CPU. Este ambiente remoto nao tem GPU nenhuma -- e
+    melhor a cena avisar isso na hora de gerar do que alguem descobrir depois
+    de mandar 4.591 quadros para uma fila que nunca fecha.
+    """
+    try:
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+    except KeyError:
+        return "CPU", "addon cycles indisponivel"
+
+    for tipo in ("OPTIX", "CUDA", "HIP", "METAL", "ONEAPI"):
+        try:
+            prefs.compute_device_type = tipo
+        except TypeError:
+            continue
+        try:
+            prefs.get_devices()
+        except Exception:
+            pass
+        dispositivos = [d for d in getattr(prefs, "devices", [])
+                        if d.type == tipo]
+        if dispositivos:
+            for d in dispositivos:
+                d.use = True
+            return "GPU", f"{tipo}: " + ", ".join(d.name for d in dispositivos)
+    return "CPU", "nenhuma GPU visivel neste ambiente"
+
+
+def configurar_cycles_final(cena):
+    """Cycles para a entrega, com o maximo de realismo que a cena comporta.
+
+    Decisao do cliente: o render final e em Cycles, na maquina dele, com GPU
+    NVIDIA. Aqui ficam os numeros; a fila roda la.
+
+    Os passes nao sao luxo. Sem cryptomatte nao ha mascara para compor placa,
+    totem e letreiro -- e o texto e o que vende o video, entao ele e composto,
+    nunca gerado. Sem vetor de movimento e profundidade, todo ajuste de motion
+    blur ou de atmosfera vira re-render em vez de composicao.
+    """
+    cena.render.engine = "CYCLES"
+    modo, detalhe = escolher_dispositivo()
+    cena.cycles.device = modo
+
+    # Amostragem adaptativa: gasta amostra onde o ruido esta, nao no ceu limpo.
+    cena.cycles.use_adaptive_sampling = True
+    cena.cycles.adaptive_threshold = 0.01
+    cena.cycles.samples = 512
+    cena.cycles.adaptive_min_samples = 64
+    cena.cycles.use_denoising = True
+    for denoiser in ("OPTIX", "OPENIMAGEDENOISE"):
+        try:
+            cena.cycles.denoiser = denoiser
+            break
+        except TypeError:
+            continue
+
+    cena.cycles.max_bounces = 12
+    cena.cycles.diffuse_bounces = 4
+    cena.cycles.glossy_bounces = 4
+    cena.cycles.transmission_bounces = 8
+    cena.cycles.transparent_max_bounces = 8
+    cena.cycles.caustics_reflective = False
+    cena.cycles.caustics_refractive = False
+    # Dados persistentes entre quadros: a cena e grande e o setup se repete.
+    # A propriedade mudou de lugar entre versoes.
+    for alvo in (cena.render, cena.cycles):
+        if hasattr(alvo, "use_persistent_data"):
+            alvo.use_persistent_data = True
+            break
+
+    # Movimento perfeito e falso: obturador de 180 graus e o padrao de cinema.
+    cena.render.use_motion_blur = True
+    cena.render.motion_blur_shutter = 0.5
+
+    # EXR com os passes. Ate a 4.x o formato multicamada era um item proprio do
+    # enum; na 5.0 ele sumiu da lista porque as camadas passaram a sair juntas
+    # no OPEN_EXR. Tentar os dois deixa o arquivo abrir nas duas versoes.
+    imagem = cena.render.image_settings
+    for formato in ("OPEN_EXR_MULTILAYER", "OPEN_EXR"):
+        try:
+            imagem.file_format = formato
+            break
+        except TypeError:
+            continue
+    imagem.color_depth = "16"
+    imagem.exr_codec = "DWAA"
+
+    camada = cena.view_layers[0]
+    camada.use_pass_combined = True
+    camada.use_pass_z = True
+    camada.use_pass_vector = True
+    camada.use_pass_normal = True
+    camada.use_pass_cryptomatte_object = True
+    camada.use_pass_cryptomatte_material = True
+
+    print(f"  render final: Cycles em {modo} ({detalhe})")
+    print("  512 amostras adaptativas, denoise, motion blur 180 graus")
+    print("  saida EXR multicamada com z, vetor, normal e cryptomatte")
+    if modo == "CPU":
+        print("  AVISO: sem GPU aqui. Gere a cena e renderize na maquina com "
+              "NVIDIA -- em CPU esta fila nao fecha.")
 
 
 def construir_ceu(cena, hdri=None):
@@ -903,6 +1015,9 @@ def main():
     ap.add_argument("--dados", default="data/mapa_agroshow26.json")
     ap.add_argument("--relevo", default=None,
                     help="heightmap em escala de cinza para deslocar o terreno")
+    ap.add_argument("--perfil", choices=("previa", "final"), default="previa",
+                    help="previa: motor rapido para navegar. "
+                         "final: Cycles com passes, para a entrega")
     ap.add_argument("--hdri", default=None,
                     help="HDRI de ceu; sem ele, ceu Nishita procedural")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
@@ -943,7 +1058,7 @@ def main():
 
     construir_luz(cols["LUZ"])
     construir_ceu(bpy.context.scene, args.hdri)
-    configurar_render(bpy.context.scene)
+    configurar_render(bpy.context.scene, args.perfil)
 
     larg_m = dados["prancha"]["largura_pt"] * ESCALA
     prof_m = dados["prancha"]["altura_pt"] * ESCALA

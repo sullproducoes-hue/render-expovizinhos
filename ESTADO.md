@@ -8,6 +8,33 @@ Leia daqui e siga para os documentos citados.
 
 ---
 
+## Resumo e objetivo final
+
+**O que estamos fazendo.** Reconstruindo o Parque de Exposições de Dois
+Vizinhos em 3D, por script, a partir da planta oficial — e passeando por ele com
+uma câmera na ordem que o cliente ditou no áudio, com título a cada área.
+
+**Para onde vai.** Um vídeo de percurso de ~2,5 min, 2:1, exibido no telão LED
+P2,9 de 4 × 2 m da feira. Quem assiste tem que reconhecer o parque, entender o
+caminho e ler os títulos de longe. Abre com *É daqui que sai o alimento que
+sustenta o mundo* e fecha saindo pelo portal, com *Aqui será um grande balcão
+de negócios*.
+
+**Por que 3D e não montagem de imagens.** Porque o parque recebe mais de um
+evento por ano. A camada permanente — terreno, taludes, pavilhões, arena — não
+muda; a camada do evento — estandes, palco, portal, sinalização — troca a cada
+edição. Construído assim, o modelo se paga na segunda temporada, e a AGROSHOW
+vira a primeira cliente de um ativo, não um vídeo descartável.
+
+**Como termina.** Render final em **Cycles**, com o máximo de realismo, na
+máquina do cliente (GPU NVIDIA, OptiX). Este ambiente remoto não tem GPU e
+serve só para gerar a cena e conferir enquadramento.
+
+**O que falta para o realismo, em ordem:** gente na cena, referência real do
+lugar (o footage de drone, em triagem), vegetação e texturas com arquivo.
+
+---
+
 ## Situação
 
 Vídeo de apresentação do parque, para telão, com percurso pelo recinto na ordem
@@ -35,8 +62,10 @@ das imagens de apoio, os títulos e as restrições do cliente.
 |---|---|---|
 | Planta extraída do PDF | `data/mapa_agroshow26.json` | 134 estandes com área, 181 blocos, 122 zonas |
 | Auditoria do DWG | `data/dwg_agroshow26.json` | Confirma: não há vetor |
-| Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1 |
+| Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1, com perfil de prévia e de entrega |
 | Conferência de quadros | `scripts/render_conferencia.py` | Cycles CPU, quadro isolado, sem GPU |
+| Extração do footage | `scripts/extrair_quadros.py` | Roda na máquina do cliente; metadados, triagem e passada densa |
+| Triagem do drone | `docs/triagem-drone.md` | Método fechado, aguardando as folhas de contato |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
@@ -59,10 +88,20 @@ patamares ........... arena 0 m -> shows 3.5 m -> anel 7.0 m -> plato 10.0 m
 
 ```bash
 pip install bpy pymupdf ezdxf
-python3 scripts/build_scene.py --out cena.blend
+python3 scripts/build_scene.py --out cena.blend                 # previa
+python3 scripts/build_scene.py --perfil final --out cena.blend  # entrega
 python3 scripts/render_conferencia.py cena.blend --quadros 1,316,3886,4231,4591 \
     --saida docs --escala 35 --amostras 64
 ```
+
+**Perfil de entrega (`--perfil final`).** Decisão do cliente: render final em
+Cycles, na máquina dele, com GPU NVIDIA. O perfil liga OptiX quando encontra a
+GPU (caindo para CUDA e depois CPU, com aviso explícito), 512 amostras
+adaptativas com denoise, 12 bounces, motion blur de obturador 180° e saída em
+**EXR multicamada com passes** — combined, z, vetor, normal e cryptomatte de
+objeto e material. Os passes não são luxo: sem cryptomatte não há máscara para
+compor placa, totem e letreiro, e o texto é o que vende o vídeo — ele é
+composto, nunca gerado.
 
 O gerador imprime a tabela de pontos com quadro, tempo e altura de cada um, e
 deixa um marcador de timeline por ponto do roteiro — é assim que se acha o
@@ -206,11 +245,18 @@ Frases literais, não reescrever:
 
 | # | Pendência | Impacto |
 |---|---|---|
-| 1 | Footage de edições anteriores — prometido, não chegou | Alto — vira textura e referência |
-| 2 | **Onde fica a Fazendinha** — não há rótulo na planta | Alto — é um dos quatro diferenciais e está fora do percurso |
-| 3 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
-| 4 | Medida real de qualquer estrutura | Médio — confirma a escala |
-| 5 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 1 | **Onde fica a Fazendinha** — não há rótulo na planta | Alto — é um dos quatro diferenciais e está fora do percurso |
+| 2 | Folhas de contato da triagem do drone | Alto — é o que destrava cotas, escala e materiais |
+| 3 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+
+O footage de drone **chegou** (13/08): envio por rclone de 186 arquivos,
+~168 GiB, para a pasta `MAPA AGROSHOW`. Era a pendência nº 1 e saiu da lista.
+O método de triagem está em `docs/triagem-drone.md`; o que falta é rodar
+`scripts/extrair_quadros.py` na máquina do cliente e anexar as folhas.
+
+As pendências de quadro lateral da arena e de medida real de estrutura também
+saíram da lista: o footage responde as duas, desde que a triagem ache os
+quadros certos.
 
 ---
 
@@ -219,9 +265,16 @@ Frases literais, não reescrever:
 Registrado para não se repetir tentativa: o proxy de egresso bloqueia
 `drive.google.com`, `at.adobe.com`, `portal.opentopography.org`,
 `huggingface.co`, o CDN da OpenAI, `openstreetmap.org`, `doisvizinhos.pr.gov.br`
-e **`dl.polyhaven.org`** (por tabela, ambientCG também deve cair). Vídeo do
-Drive e transcrição de áudio precisam ser feitos localmente e anexados no chat.
-GitHub, PyPI e o arquivo principal do Ubuntu funcionam.
+e **`dl.polyhaven.org`** (por tabela, ambientCG também deve cair). GitHub, PyPI
+e o arquivo principal do Ubuntu funcionam.
+
+**Correção sobre o Drive:** o conector do Drive *funciona* e lê metadados —
+nomes, tamanhos, datas, e arquivos de texto pequenos, como o log do rclone. É
+assim que dá para acompanhar o envio de longe. O que não passa é o **binário**:
+o domínio de download está bloqueado, e `download_file_content` devolveria
+base64 de 3 GB por vídeo, o que não cabe em contexto nenhum. Por isso a extração
+de quadros roda na máquina do cliente e volta anexada no chat. Transcrição de
+áudio segue na mesma regra.
 
 Não há GPU: render em Cycles CPU. Um quadro de conferência a 35% da resolução de
 entrega com 64 amostras leva cerca de 45 s em 4 núcleos — o suficiente para

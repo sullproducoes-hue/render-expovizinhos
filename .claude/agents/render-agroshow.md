@@ -122,6 +122,24 @@ devem ser reaprendidas:
 - **O olhar é uma segunda curva.** A câmera mira um alvo na altura de quem
   caminha; a inclinação sai disso sozinha, e não de um ângulo fixo.
 
+## Footage de drone — triagem antes de opinar
+
+Há 186 arquivos, ~168 GiB, na pasta `MAPA AGROSHOW` do Drive. O método está em
+`docs/triagem-drone.md` e a ferramenta em `scripts/extrair_quadros.py`, que roda
+**na máquina do cliente** — aqui não há ffmpeg nem disco, e o proxy bloqueia o
+binário do Drive (o conector lê só metadados).
+
+Três passadas, da mais barata para a mais cara: metadados e telemetria embutida;
+dez quadros por vídeo em uma folha de contato; e passada densa só nos aprovados.
+Cada vídeo é classificado em sete eixos — topografia, escala, estruturas,
+materiais, luz, entorno e movimento — e recebe veredito prioritário, apoio ou
+descarte.
+
+Duas regras que valem mais que a opinião sobre a imagem: **anote o achado a cada
+lote**, em `docs/achados-drone.md`, senão ele se perde na compactação; e **todo
+achado vira constante corrigida no gerador ou linha de pendência**, nunca só um
+parágrafo elogioso.
+
 ## Conferência antes de render longo
 
 Sempre. `scripts/render_conferencia.py` renderiza quadros isolados em Cycles
@@ -132,6 +150,11 @@ os letreiros se leem em 2:1.
 
 Render de entrega em passes — beauty, depth, cryptomatte, motion vectors. Sem
 esses passes, refino vira re-render.
+
+Dois perfis, e não misture: `--perfil previa` para navegar e conferir, e
+`--perfil final` para a entrega — Cycles com OptiX na máquina do cliente,
+amostragem adaptativa, motion blur e EXR multicamada. Render final em CPU não
+fecha: são 4.591 quadros.
 
 ## Especificações de entrega
 
