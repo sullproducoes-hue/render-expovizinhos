@@ -1,7 +1,7 @@
 # ESTADO DO PROJETO — leia isto primeiro
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Atualizado em 13/08/2026, madrugada.
+Atualizado em 13/08/2026, manhã.
 
 Este arquivo existe para retomar o trabalho em outra sessão sem perder contexto.
 Leia daqui e siga para os documentos citados.
@@ -18,6 +18,39 @@ Com essa antecipação, a meta de amanhã **não é o filme acabado** — é a *
 navegável e renderizando**, para lapidar por cima. Essa base existe: a cena
 monta em segundos, o percurso cobre os 20 blocos do roteiro e a câmera enquadra
 cada bloco pela frente.
+
+### Onde a conversa parou — 13/08/2026, manhã
+
+**A cena já monta na máquina do Natan.** Windows, Blender 5.2 LTS em
+`C:\Program Files\Blender Foundation\Blender 5.2\blender.exe`, repositório em
+`C:\Users\natan\render-expovizinhos`, branch
+`claude/video-mapa-3d-assembly-4hcbty`. O comando que funcionou:
+
+```
+cd C:\Users\natan\render-expovizinhos
+"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python scripts/build_scene.py -- --out cena.blend
+```
+
+A saída bateu com a deste repositório, linha por linha. Os dois
+`DeprecationWarning` de `use_nodes` são inofensivos.
+
+**Próximo passo, que estava em andamento:** cronometrar um quadro na máquina
+dele para decidir motor e qualidade. Abrir `cena.blend`, escolher o motor em
+*Render Properties* (**EEVEE** para velocidade; **Cycles com Device → GPU
+Compute** para luz melhor), apertar `0` no teclado numérico, ir a um quadro
+qualquer e apertar `F12`. O tempo de um quadro × 4440 dá o custo do filme:
+1 s por quadro ≈ 1h15; 3 s ≈ 3h45; 10 s ≈ 12h; 60 s ≈ 3 dias. Depois disso,
+renderizar 300 quadros (dez segundos) como teste antes do filme inteiro.
+
+**Ele ainda não mandou esse tempo.** Quando mandar, a decisão é: se couber na
+janela dele, render inteiro; se não couber, cortar amostragem e resolução de
+prévia, nunca tempo de revisão.
+
+**PR aberto:** #1, `claude/video-mapa-3d-assembly-4hcbty` →
+`claude/render-texturas-expovizinho-nicvzj`. Sem CI configurado no repositório,
+sem comentários de revisão. A descrição do PR tem uma seção "Second commit" que
+corrige o texto original gerado pela UI — onde as duas partes divergirem, vale a
+segunda.
 
 ### Duas abordagens conviveram nesta conversa
 
@@ -44,7 +77,7 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Galpões da faixa norte | `GALPOES` no gerador | Medidos no bitmap da prancha (±2 m) |
 | Recinto de Leilões | `construir_leiloes` | Estrela de 8 pontas, 38 m, medida no bitmap |
 | Pista de Julgamentos | `construir_pista_julgamento` | Pasto cercado, 42 × 59 m |
-| Fazendinha | `construir_fazendinha` | Faixa cercada 28 × 90 m com porteira |
+| Fazendinha | `construir_fazendinha` | Faixa cercada 14 × 90 m com porteira |
 | Estacionamentos | `construir_estacionamentos` | Lajes de asfalto, dimensão aproximada |
 | Caminho do render final | `scripts/render_final.sh` | Cena → quadros → `.mov` + 2 `.mp4` |
 | Quadros de conferência | `docs/conferencia/` | Um por bloco, 690×345 |
@@ -64,6 +97,9 @@ estandes ............ 74 instanciados + 60 proprios
 estacionamentos ..... 8
 galpoes da faixa norte 2
 camarotes ........... 16 modulos, sem arquibancada
+recinto de leiloes .. estrela de 8 pontas, 38 m
+pista de julgamentos  42 x 59 m, 37 pecas
+fazendinha .......... 14 x 90 m com porteira, 22 pecas
 pontos do percurso .. 22 de 22
 extensao do percurso  1693 m
 trechos aereos ...... 10
@@ -88,9 +124,12 @@ python3 scripts/overlay_check.py                   # cena sobre a planta
 ```
 
 Conferência custa 10–20 s por quadro: Cycles em CPU, 25% da resolução, 32
-amostras com denoise. **Não há GPU aqui** — EEVEE precisa de libEGL e quebra no
-meio do render, por isso o padrão é Cycles. Em máquina com GPU, `--motor
-BLENDER_EEVEE`.
+amostras com denoise. **Não há GPU no ambiente remoto** — EEVEE precisa de
+libEGL e quebra no meio do render, por isso o padrão é Cycles. Em máquina com
+GPU, `--motor BLENDER_EEVEE`. No Windows, chame pelo Blender instalado:
+`"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background
+--python scripts/build_scene.py -- --out cena.blend` — o `pip install bpy` não
+serve lá, porque o módulo só existe para Python 3.11 e a máquina tem 3.10.
 Renders antigos do layout: `docs/conferencia-layout.png` (topo),
 `docs/conferencia-bacia.png` (patamares).
 
@@ -193,7 +232,8 @@ vendido é erro mais caro que cerca ausente.
 **A Fazendinha não é prédio, é área aberta.** O título dela na prancha cai
 numa faixa de grama entre duas fileiras de estandes, descendo o talude — bate
 com o áudio ("desce pro lado da pista de tiro de laço"). Por isso ela entrou
-como faixa cercada de 28 × 90 m com **porteira de destaque** na ponta que olha
+como faixa cercada de 14 × 90 m — a largura do vão livre entre as
+fileiras — com **porteira de destaque** na ponta que olha
 para o percurso, e não como construção. A porteira o cliente pediu nominalmente.
 
 **Cinco blocos não têm rótulo CAD — mas quatro têm título vermelho.**
