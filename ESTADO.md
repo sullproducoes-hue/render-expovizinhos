@@ -272,7 +272,10 @@ O render final **não roda neste ambiente**: sem GPU, Cycles leva de 2 a 4 min
 por quadro em 2760 × 1380, e são 4440 quadros — entre 6 e 12 dias. Numa máquina
 com placa, EEVEE fecha o mesmo filme em torno de uma hora.
 
-`scripts/render_final.sh` tem o caminho inteiro: monta a cena, roda a
+O passo a passo para quem vai rodar está em **`docs/RENDER-LOCAL.md`**:
+o que instalar, como montar a cena, como conferir a posição antes de gastar
+horas e como codificar os arquivos. `scripts/render_final.sh` tem o caminho
+inteiro: monta a cena, roda a
 conferência de posição, renderiza os quadros e codifica os três arquivos de
 entrega (ProRes `.mov`, H.264 `.mp4` e a reserva 1380 × 690). Falta a cartela
 de teste de 10 s.

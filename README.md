@@ -10,6 +10,7 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
 ## Comece por aqui
 
 1. **`ESTADO.md`** — onde o projeto parou, o que foi descoberto, o que vem a seguir
+1. **`docs/RENDER-LOCAL.md`** — como rodar o render na sua máquina, passo a passo
 2. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
 3. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
 4. `.claude/agents/render-agroshow.md` — agente do projeto
