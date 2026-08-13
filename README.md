@@ -12,7 +12,8 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
 1. **`ESTADO.md`** — onde o projeto parou, o que foi descoberto, o que vem a seguir
 2. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
 3. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
-4. `.claude/agents/render-agroshow.md` — agente (redigido para o caminho 2.5D)
+4. `.claude/agents/render-agroshow.md` — agente diretor técnico da cena 3D
+   (`docs/AGENTE-2.5D-suspenso.md` guarda o texto antigo, do caminho 2.5D)
 
 ## Gerar a cena 3D
 

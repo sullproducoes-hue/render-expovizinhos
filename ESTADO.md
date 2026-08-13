@@ -39,7 +39,7 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
-| Agente | `.claude/agents/render-agroshow.md` | Escrito para o caminho 2.5D — **precisa ser reescrito para 3D** |
+| Agente | `.claude/agents/render-agroshow.md` | Reescrito para 3D em 13/08/2026. Sistema próprio, fora do Cláudio. Texto 2.5D arquivado em `docs/AGENTE-2.5D-suspenso.md` |
 
 Saída atual do gerador:
 
@@ -146,9 +146,12 @@ Frases literais, não reescrever:
 4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
 5. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
    isso. O portal é o primeiro e o último plano.
-6. **Reescrever o agente** `.claude/agents/render-agroshow.md`, que ainda está
-   redigido para o caminho 2.5D.
-7. Confirmar as alturas dos patamares com um quadro de drone.
+6. Confirmar as alturas dos patamares com um quadro de drone.
+
+Feito em 13/08/2026: o agente `.claude/agents/render-agroshow.md` foi reescrito
+para o caminho 3D. Ele é **sistema próprio** — não responde ao Cláudio (o
+diretor de montagem em `E:\I.A Edit\claudio`) e não herda a doutrina 2.5D, por
+decisão do Natan.
 
 ---
 
