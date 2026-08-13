@@ -646,7 +646,7 @@ def construir_galpoes(dados, col, mats, centro_arena):
 RAIO_LEILOES = 19.0      # m -- a estrela do recinto tem ~38 m de ponta a ponta
 ALTURA_LEILOES = 7.0
 PISTA_JULGAMENTO = (42.0, 59.0)   # m -- retangulo de pasto com pontas redondas
-FAZENDINHA = (28.0, 90.0)         # m -- faixa de grama entre duas fileiras
+FAZENDINHA = (14.0, 90.0)         # m -- largura maxima e comprimento da faixa
 
 
 def construir_leiloes(dados, col, mats, centro_arena):
@@ -733,6 +733,67 @@ def construir_pista_julgamento(dados, col, mats, centro_arena):
                       col, mats, centro_arena)
 
 
+def ajustar_faixa(dados, x, y, angulo, larg_max, prof_max, folga=1.5):
+    """Maior retangulo livre de estandes, no eixo dado, centrado no ponto.
+
+    Encurta o comprimento em passos e, para cada um, mede o vao entre as
+    fileiras. Devolve o primeiro par que cabe com folga -- estande e material
+    de venda de espaco fisico, cerca por cima dele e erro caro.
+    """
+    for prof in [prof_max * f for f in (1.0, 0.8, 0.65, 0.5, 0.4, 0.3, 0.2)]:
+        larg = min(larg_max, vao_livre(dados, x, y, angulo, prof, folga))
+        if larg >= 6.0 and not invade_estande(dados, x, y, angulo, larg, prof, folga):
+            return larg, prof
+    # Nada coube: as fileiras sao arcos e a faixa e reta. Devolve zero, e quem
+    # chamou monta so a porteira -- que e o que o cliente pediu nominalmente.
+    # Cerca por cima de estande vendido e erro mais caro que cerca ausente.
+    return 0.0, 0.0
+
+
+def invade_estande(dados, x, y, angulo, larg, prof, folga=1.5):
+    """Diz se o retangulo dado encosta em algum estande cotado."""
+    origem = dados["_origem"]
+    cos, sen = math.cos(-angulo), math.sin(-angulo)
+    for st in dados["estandes"]:
+        if st.get("area_m2") is None:
+            continue
+        ex, ey = para_mundo(st["x"], st["y"], origem)
+        dx, dy = ex - x, ey - y
+        u = dx * cos - dy * sen
+        v = dx * sen + dy * cos
+        meio = math.sqrt(st["area_m2"]) / 2 + folga
+        if abs(u) < prof / 2 + meio and abs(v) < larg / 2 + meio:
+            return True
+    return False
+
+
+def vao_livre(dados, x, y, angulo, comprimento, folga=1.5):
+    """Largura livre entre os estandes, no eixo dado, ao redor de um ponto.
+
+    Projeta cada estande no referencial da faixa e devolve o dobro da menor
+    distancia livre ate um deles, de cada lado. E o que impede a cerca de
+    atravessar estande vendido.
+    """
+    origem = dados["_origem"]
+    cos, sen = math.cos(-angulo), math.sin(-angulo)
+    esquerda = direita = 40.0
+    for st in dados["estandes"]:
+        if st.get("area_m2") is None:
+            continue
+        ex, ey = para_mundo(st["x"], st["y"], origem)
+        dx, dy = ex - x, ey - y
+        u = dx * cos - dy * sen        # ao longo da faixa
+        v = dx * sen + dy * cos        # atravessado
+        if abs(u) > comprimento / 2:
+            continue
+        meio_lado = math.sqrt(st["area_m2"]) / 2 + folga
+        if v >= 0:
+            direita = min(direita, max(v - meio_lado, 0.0))
+        else:
+            esquerda = min(esquerda, max(-v - meio_lado, 0.0))
+    return max(6.0, 2 * min(esquerda, direita))
+
+
 def construir_fazendinha(dados, col, mats, centro_arena):
     """Fazendinha: faixa cercada com porteira de destaque na entrada.
 
@@ -746,20 +807,35 @@ def construir_fazendinha(dados, col, mats, centro_arena):
         return 0
     x, y = para_mundo(t["x"], t["y"], dados["_origem"])
     larg, prof = FAZENDINHA
-    # A faixa desce o talude, ou seja, corre no rumo do centro da arena.
-    ang = math.atan2(y - centro_arena[1], x - centro_arena[0]) + math.pi / 2
+    # Eixo da faixa: o do proprio titulo na prancha. Tentei duas vezes deduzir
+    # por geometria (radial, depois tangente) e errei as duas; a sobreposicao
+    # em planta mostrou a cerca atravessando as fileiras de estandes. O titulo
+    # vermelho e escrito ao longo da faixa, entre as duas fileiras -- e o dado,
+    # nao a deducao.
+    ang = angulo_do_rotulo(t)
 
-    feitos = cercar("Fazendinha", x, y, larg, prof, ang, 1.3,
-                    col, mats, centro_arena, passo=8.0)
+    # Largura e comprimento saem do vao livre entre as duas fileiras, medidos,
+    # e nao escolhidos. As fileiras sao arcos e a faixa e reta, entao esticar o
+    # comprimento acaba esbarrando nas pontas: o ajuste encurta ate caber. A
+    # primeira versao usava 28 x 90 m fixos e invadia cinco estandes vendidos.
+    larg_livre, prof_livre = ajustar_faixa(dados, x, y, ang, larg, prof)
+    feitos = 0
+    if larg_livre:
+        larg, prof = larg_livre, prof_livre
+        feitos = cercar("Fazendinha", x, y, larg, prof, ang, 1.3,
+                        col, mats, centro_arena, passo=8.0)
 
     # Porteira: dois esteios, travessa e placa. O nome vai grande na placa e a
     # descricao pequena embaixo -- hierarquia pedida nominalmente pelo cliente.
     #
-    # Fica na ponta de CIMA da faixa, a que olha para os expositores externos:
-    # e por ali que o percurso desce, e porteira de destaque so cumpre o papel
-    # se estiver na chegada. Na ponta de baixo ela ficaria de costas.
-    frente_x = x + math.sin(ang) * (prof / 2)
-    frente_y = y - math.cos(ang) * (prof / 2)
+    # Porteira na ponta mais distante do centro da arena: e por ali que o
+    # percurso desce, vindo dos expositores externos. Porteira de destaque na
+    # saida nao cumpre papel nenhum.
+    dx, dy = -math.sin(ang) * (prof / 2), math.cos(ang) * (prof / 2)
+    if (math.hypot(x + dx - centro_arena[0], y + dy - centro_arena[1]) <
+            math.hypot(x - dx - centro_arena[0], y - dy - centro_arena[1])):
+        dx, dy = -dx, -dy
+    frente_x, frente_y = x + dx, y + dy
     solo = elevacao(frente_x, frente_y, centro_arena)
     for sinal in (-1, 1):
         px = frente_x + math.cos(ang) * sinal * (larg / 2)

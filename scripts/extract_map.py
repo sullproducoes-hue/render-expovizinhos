@@ -118,6 +118,11 @@ def agrupar_titulos(page):
             "texto": " ".join(s["texto"] for s in membros),
             "x": round(sum(s["x"] for s in membros) / len(membros), 2),
             "y": round(sum(s["y"] for s in membros) / len(membros), 2),
+            # A direcao vale tanto quanto a posicao: o titulo e escrito no eixo
+            # da area que ele nomeia. E assim que se descobre que a faixa da
+            # Fazendinha corre entre as duas fileiras de estandes, e nao
+            # atravessada nelas.
+            "dir": [round(dx, 4), round(dy, 4)],
             "spans": len(membros),
         })
     return sorted(titulos, key=lambda t: (t["y"], t["x"]))

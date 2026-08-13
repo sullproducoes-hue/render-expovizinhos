@@ -3228,108 +3228,180 @@
       "texto": "Expositores Industria/Comércio e Serviços 2",
       "x": 534.63,
       "y": 157.21,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 3
     },
     {
       "texto": "Expositores Industria/Comércio e Serviços 1",
       "x": 746.26,
       "y": 164.04,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 3
     },
     {
       "texto": "Mercado do Produtor Café Colonial Cozinha Didática",
       "x": 436.66,
       "y": 164.39,
+      "dir": [
+        0.0,
+        -1.0
+      ],
       "spans": 3
     },
     {
       "texto": "Praça de Alimentação Coberta",
       "x": 628.45,
       "y": 175.3,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 2
     },
     {
       "texto": "Estacionamento",
       "x": 862.44,
       "y": 179.72,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 1
     },
     {
       "texto": "AGROSHOW - É DAQUI QUE SAI O ALIMENTO QUE SUSTENTA O MUNDO Portal de Entrada",
       "x": 850.97,
       "y": 243.31,
+      "dir": [
+        0.2898,
+        0.9571
+      ],
       "spans": 4
     },
     {
       "texto": "Praça de Alimentação Aberta",
       "x": 359.42,
       "y": 267.74,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 2
     },
     {
       "texto": "Exposição de Máquinas,Equipamentos e Veículos e Implementos",
       "x": 526.72,
       "y": 270.47,
+      "dir": [
+        0.9603,
+        -0.279
+      ],
       "spans": 3
     },
     {
       "texto": "Estacionamento",
       "x": 934.94,
       "y": 286.15,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 1
     },
     {
       "texto": "Área de Show",
       "x": 552.4,
       "y": 330.95,
+      "dir": [
+        0.9038,
+        -0.428
+      ],
       "spans": 1
     },
     {
       "texto": "Arena de Rodeio",
       "x": 582.52,
       "y": 397.15,
+      "dir": [
+        0.8975,
+        -0.441
+      ],
       "spans": 1
     },
     {
       "texto": "Espaço É CHURRASCO!",
       "x": 222.89,
       "y": 397.45,
+      "dir": [
+        1.0,
+        0.0
+      ],
       "spans": 2
     },
     {
       "texto": "Fazendinha Área Infantil",
       "x": 426.92,
       "y": 438.08,
+      "dir": [
+        -0.3653,
+        -0.9309
+      ],
       "spans": 2
     },
     {
       "texto": "PALCO",
       "x": 609.09,
       "y": 442.19,
+      "dir": [
+        0.8975,
+        -0.441
+      ],
       "spans": 1
     },
     {
       "texto": "Pavilhões de Animais",
       "x": 136.16,
       "y": 493.0,
+      "dir": [
+        0.9461,
+        -0.3239
+      ],
       "spans": 1
     },
     {
       "texto": "Expositores Externo",
       "x": 304.27,
       "y": 499.6,
+      "dir": [
+        0.9461,
+        -0.3239
+      ],
       "spans": 2
     },
     {
       "texto": "Expositores Externo",
       "x": 327.58,
       "y": 557.34,
+      "dir": [
+        0.9461,
+        -0.3239
+      ],
       "spans": 2
     },
     {
       "texto": "Pista de Jugamentos",
       "x": 234.24,
       "y": 568.75,
+      "dir": [
+        0.9461,
+        -0.3239
+      ],
       "spans": 2
     }
   ],

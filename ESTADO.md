@@ -182,6 +182,14 @@ O gerador avisa na saída quando isso ocorre; a correção é baixar o `recuo` d
 bloco. Mercado, Agroindústrias e Café Colonial dividem o Pavilhão 3 e por isso
 têm recuo decrescente: a câmera avança pelo galpão enquanto o título muda.
 
+**Eixo de área aberta se lê no título, não se deduz.** Tentei deduzir o eixo da
+faixa da Fazendinha por geometria duas vezes — radial, depois tangente — e errei
+as duas; a cerca atravessava as fileiras de estandes. O título vermelho é escrito
+**ao longo** da faixa, e agora `titulos` carrega a direção de cada um. A largura e
+o comprimento também deixaram de ser escolhidos: saem do vão livre medido entre as
+fileiras, e se nada couber o gerador monta só a porteira. Cerca por cima de estande
+vendido é erro mais caro que cerca ausente.
+
 **A Fazendinha não é prédio, é área aberta.** O título dela na prancha cai
 numa faixa de grama entre duas fileiras de estandes, descendo o talude — bate
 com o áudio ("desce pro lado da pista de tiro de laço"). Por isso ela entrou
