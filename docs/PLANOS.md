@@ -34,28 +34,28 @@ Isso roda em qualquer Python — não precisa de `bpy` nem de GPU.
 
 | # | Título na tela | Movimento | Lente | Dur. | m/s | Âncora |
 |---|---|---|---|---|---|---|
-| P01 | Estacionamento | subida | 24 mm | 7.0 s | 3.6 | planta |
+| P01 | Estacionamento | subida | 24 mm | 7.0 s | 2.8 | planta |
 | P02 | É daqui que sai o alimento que sustenta o mundo | push-in | 35 mm | 9.0 s | 2.1 | planta |
-| P03 | Pavilhão 1 — Indústria, Comércio e Prestação de Serviços | orbita | 35 mm | 6.0 s | 1.9 | planta |
-| P04 | Praça de Alimentação Coberta | push-in | 35 mm | 5.5 s | 2.1 | planta |
-| P05 | Pavilhão 2 — Indústria, Comércio e Prestação de Serviços | orbita | 35 mm | 5.0 s | 1.8 | planta |
+| P03 | Pavilhão 1 — Indústria, Comércio e Prestação de Serviços | orbita | 35 mm | 6.0 s | 1.7 | planta |
+| P04 | Praça de Alimentação Coberta | push-in | 35 mm | 5.5 s | 2.0 | planta |
+| P05 | Pavilhão 2 — Indústria, Comércio e Prestação de Serviços | orbita | 35 mm | 5.0 s | 1.7 | planta |
 | P06 **·** | Mercado do Produtor | push-in | 50 mm | 9.0 s | 2.1 | planta |
 | P07 | Agroindústrias | travelling | 35 mm | 5.0 s | 1.6 | planta |
 | P08 **·** | Café Colonial | push-in | 50 mm | 9.0 s | 2.0 | planta |
-| P09 | Praça de Alimentação Aberta | sobrevoo | 35 mm | 9.0 s | 6.1 | planta |
-| P10 | Recinto de Leilões | push-in | 35 mm | 6.0 s | 2.0 | planta |
+| P09 | Praça de Alimentação Aberta | sobrevoo | 35 mm | 9.0 s | 6.0 | planta |
+| P10 | Recinto de Leilões | push-in | 35 mm | 6.0 s | 1.9 | planta |
 | P11 | Exposição de Animais | sobrevoo | 35 mm | 11.0 s | 6.3 | planta |
 | P12 | Pista de Julgamentos | orbita | 50 mm | 5.0 s | 1.5 | planta |
-| P13 | Expositores Externos | sobrevoo | 35 mm | 5.5 s | 6.0 | derivada |
-| P14 **·** | Fazendinha | push-in | 35 mm | 10.0 s | 2.2 | estimada |
-| P15 | — (continua P14) | orbita | 50 mm | 6.0 s | 1.6 | estimada |
-| P16 | Máquinas, Equipamentos e Implementos Agrícolas | sobrevoo | 35 mm | 6.0 s | 5.8 | derivada |
-| P17 | Veículos e Motos Náuticas | travelling | 50 mm | 5.0 s | 1.3 | derivada |
-| P18 | Área de Shows | sobrevoo | 35 mm | 5.5 s | 5.9 | derivada |
-| P19 **·** | Arena de Rodeio | orbita | 35 mm | 10.0 s | 2.1 | planta |
-| P20 | Palco Principal | push-in | 50 mm | 7.0 s | 1.9 | planta |
-| P21 | Aqui será um grande balcão de negócios | subida | 24 mm | 7.0 s | 4.3 | planta |
-| P22 | — (saída pelo portal) | push-in | 35 mm | 6.0 s | 2.1 | planta |
+| P13 | Expositores Externos | sobrevoo | 35 mm | 5.5 s | 6.4 | planta |
+| P14 **·** | Fazendinha | push-in | 35 mm | 10.0 s | 2.0 | planta |
+| P15 | — | orbita | 50 mm | 6.0 s | 1.7 | planta |
+| P16 | Máquinas, Equipamentos e Implementos Agrícolas | sobrevoo | 35 mm | 6.0 s | 5.9 | planta |
+| P17 | Veículos e Motos Náuticas | travelling | 50 mm | 5.0 s | 1.3 | planta |
+| P18 | Área de Shows | sobrevoo | 35 mm | 5.5 s | 5.4 | planta |
+| P19 **·** | Arena de Rodeio | orbita | 35 mm | 10.0 s | 1.8 | planta |
+| P20 | Palco Principal | push-in | 50 mm | 7.0 s | 1.8 | planta |
+| P21 | Aqui será um grande balcão de negócios | subida | 24 mm | 7.0 s | 5.1 | planta |
+| P22 | — | push-in | 35 mm | 6.0 s | 2.1 | planta |
 
 **·** marca os quatro diferenciais (P06 Mercado do Produtor, P08 Café
 Colonial, P14/P15 Fazendinha, P19 Arena de Rodeio) — todos com 9–16 s de tela
@@ -69,22 +69,61 @@ python3 scripts/planos.py --tabela
 
 ---
 
-## As três âncoras
+## Altura de câmera: quem manda é o ambiente
+
+Ordem do Natan, **14/08/2026**, e ela não se negocia com estatística:
+
+| onde a câmera está | altura |
+|---|---|
+| por dentro de pavilhão | **~2 m** |
+| lugar aberto | **4–15 m** |
+| plano de conjunto do rodeio | **40–50 m**, e só um |
+
+**A telemetria dos 62 voos serve para aperfeiçoar o mapa, não para definir
+altura de câmera.** Ela mede o que ele fez filmando o recinto real, com drone;
+aqui a câmera é virtual e o enquadramento se decide pelo que precisa caber no
+quadro. Foi por isso que 13 planos desceram em 14/08 — o mais alto ia a 72 m.
+
+O plano de conjunto é o **P21**, a subida final sobre a arena (15 → 48 m), que
+é também a assinatura do filme. Nenhum plano entra em pavilhão hoje, porque os
+pavilhões ainda são caixa sem interior; quando tiverem, a faixa de dentro é a
+de ~2 m.
+
+---
+
+## As âncoras — todas viraram `planta` em 14/08
 
 Cada plano declara `ancora`, e isso não é decoração — é o nível de confiança
-da posição:
+da posição. Até 14/08 havia três níveis; hoje há um só:
 
-- **`planta`** — o alvo é um rótulo real de `data/mapa_agroshow26.json`.
-  16 dos 22 planos. Confiável.
-- **`derivada`** — não existe rótulo, mas existe dado: raio e azimute vêm da
-  bacia (aglomerados reais de estandes da série C, mesma fonte de
-  `PATAMARES`). P13, P16, P17, P18 — o anel de máquinas/veículos e a área de
-  expositores externos, que o áudio descreve mas a planta não rotula.
-- **`estimada`** — **não existe na planta.** P14 e P15, a Fazendinha, foram
-  posicionados só pelo áudio do cliente (*"desce pro lado da pista de tiro de
-  laço"*), entre a pista de julgamentos e o anel. **Confirmar com o cliente
-  antes do render final** — é a única posição do filme que não tem apoio em
-  dado nenhum, e a Fazendinha é um dos quatro diferenciais.
+- **`planta`** — o alvo é um rótulo real do mapa. **Os 22 planos.**
+
+O que mudou: o extrator antigo só aceitava rótulo que estivesse numa lista
+branca escrita à mão, e descartava o resto em silêncio — 50 dos 118 nomes do
+mapa. Entre os descartados estavam justamente os lugares que não tinham
+âncora: **Fazendinha**, **Área de Show**, **Expositores Externo** (dois deles)
+e a **Exposição de Máquinas, Equipamentos e Veículos e Implementos**.
+
+O mapa tem uma **camada vermelha** (`#ff3131`, 36 spans) que é o roteiro do
+cliente desenhado por cima da planta técnica — a mesma ordem que ele ditou no
+áudio, já posicionada. `scripts/auditar_mapa.py` lê essa camada e
+`scripts/terreno.py` a injeta nas zonas, então `alvo: {tipo: rotulo}` passou a
+encontrar todos eles.
+
+A **Fazendinha**, que era a única posição do filme sem apoio em dado nenhum,
+está no mapa em **(-164,4 · -18,6) m**. Decisão do Natan em 14/08: *vale o
+mapa*, e não a descrição do áudio (*"desce pro lado da pista de tiro de laço"*),
+que aponta para outro lugar.
+
+**P17 (Veículos e Motos Náuticas)** é o único alvo em `xy`: o rótulo vermelho
+junta máquinas e veículos num nome só, e quem separa os dois é a cor com que a
+planta pinta cada estande. Os 12 estandes azuis dão o centroide (-34,2 · 58,4) m
+— ver `scripts/classificar_estandes.py`.
+
+**Cuidado ao mexer no `alvo` de um plano:** o `alvo_fim` não acompanha sozinho.
+Quando as seis âncoras subiram para `planta`, três sobrevoos passaram a varrer
+da posição real até a posição chutada antiga e estouraram a faixa de velocidade
+— P16 chegou a 21,2 m/s. O conferidor pegou; sem ele, teria ido para o render.
 
 ---
 

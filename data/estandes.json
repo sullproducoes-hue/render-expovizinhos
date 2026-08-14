@@ -1,0 +1,1903 @@
+{
+  "fonte": "Mapa_AGROSHOW26.pdf",
+  "como_ler": "categoria vem da cor com que a planta pintou o estande, comparada com o quadradinho da legenda. centroides da a posicao media de cada categoria -- e o que localiza 'Maquinas e Equipamentos' e 'Veiculos e Motos Nauticas', que dividem um rotulo vermelho so.",
+  "resumo": {
+    "sem preenchimento": 41,
+    "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS": 37,
+    "AGRICULTURA": 43,
+    "sem correspondência na legenda (tom magenta)": 1,
+    "VEÍCULOS E MOTOS NAUTICAS": 12
+  },
+  "centroides": {
+    "VEÍCULOS E MOTOS NAUTICAS": {
+      "estandes": 12,
+      "x_m": -34.2,
+      "y_m": 58.4,
+      "area_total_m2": 1125.9
+    },
+    "AGRICULTURA": {
+      "estandes": 43,
+      "x_m": -215.6,
+      "y_m": -130.27,
+      "area_total_m2": 4353.0
+    }
+  },
+  "estandes": [
+    {
+      "codigo": "A-01",
+      "serie": "A",
+      "area_m2": 15.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        241,
+        241,
+        241
+      ],
+      "x_m": -13.1,
+      "y_m": 110.91
+    },
+    {
+      "codigo": "A-02",
+      "serie": "A",
+      "area_m2": 15.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        238,
+        238,
+        238
+      ],
+      "x_m": -18.5,
+      "y_m": 114.54
+    },
+    {
+      "codigo": "A-03",
+      "serie": "A",
+      "area_m2": 15.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        239,
+        239,
+        239
+      ],
+      "x_m": -23.9,
+      "y_m": 118.15
+    },
+    {
+      "codigo": "A-04",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        238,
+        237,
+        237
+      ],
+      "x_m": -30.09,
+      "y_m": 125.2
+    },
+    {
+      "codigo": "A-05",
+      "serie": "A",
+      "area_m2": 9.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        237,
+        237,
+        237
+      ],
+      "x_m": -106.77,
+      "y_m": 129.2
+    },
+    {
+      "codigo": "A-06",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        240,
+        239,
+        239
+      ],
+      "x_m": -116.78,
+      "y_m": 125.2
+    },
+    {
+      "codigo": "A-07",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        244,
+        244
+      ],
+      "x_m": -126.77,
+      "y_m": 121.2
+    },
+    {
+      "codigo": "A-08",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        240,
+        240,
+        240
+      ],
+      "x_m": -143.56,
+      "y_m": 116.68
+    },
+    {
+      "codigo": "A-09",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        243,
+        241,
+        241
+      ],
+      "x_m": -180.18,
+      "y_m": 114.17
+    },
+    {
+      "codigo": "A-10",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        245,
+        245
+      ],
+      "x_m": -193.43,
+      "y_m": 111.35
+    },
+    {
+      "codigo": "A-11",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        244,
+        243,
+        243
+      ],
+      "x_m": -206.42,
+      "y_m": 108.72
+    },
+    {
+      "codigo": "A-12",
+      "serie": "A",
+      "area_m2": 18.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        244,
+        244,
+        244
+      ],
+      "x_m": -222.91,
+      "y_m": 101.56
+    },
+    {
+      "codigo": "A-13",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        242,
+        241,
+        241
+      ],
+      "x_m": -237.47,
+      "y_m": 88.58
+    },
+    {
+      "codigo": "A-14",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        244,
+        244,
+        244
+      ],
+      "x_m": -241.59,
+      "y_m": 81.53
+    },
+    {
+      "codigo": "A-15",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        244,
+        243,
+        243
+      ],
+      "x_m": -243.43,
+      "y_m": 73.23
+    },
+    {
+      "codigo": "A-16",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        245,
+        245
+      ],
+      "x_m": -241.99,
+      "y_m": 64.62
+    },
+    {
+      "codigo": "A-17",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        244,
+        244
+      ],
+      "x_m": -240.12,
+      "y_m": 56.15
+    },
+    {
+      "codigo": "A-18",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        243,
+        241,
+        241
+      ],
+      "x_m": -232.08,
+      "y_m": 52.09
+    },
+    {
+      "codigo": "A-19",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        244,
+        244
+      ],
+      "x_m": -229.33,
+      "y_m": 47.28
+    },
+    {
+      "codigo": "A-20",
+      "serie": "A",
+      "area_m2": 50.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        243,
+        231,
+        231
+      ],
+      "x_m": -222.3,
+      "y_m": 28.78
+    },
+    {
+      "codigo": "A-21",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        245,
+        245
+      ],
+      "x_m": -220.53,
+      "y_m": 5.25
+    },
+    {
+      "codigo": "A-22",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        241,
+        240,
+        240
+      ],
+      "x_m": -209.18,
+      "y_m": 18.66
+    },
+    {
+      "codigo": "A-23",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        242,
+        242,
+        242
+      ],
+      "x_m": -206.18,
+      "y_m": 23.55
+    },
+    {
+      "codigo": "A-24",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        240,
+        240,
+        240
+      ],
+      "x_m": -202.06,
+      "y_m": 27.28
+    },
+    {
+      "codigo": "A-25",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        239,
+        239,
+        239
+      ],
+      "x_m": -198.49,
+      "y_m": 31.44
+    },
+    {
+      "codigo": "A-26",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        242,
+        242,
+        242
+      ],
+      "x_m": -215.5,
+      "y_m": 55.24
+    },
+    {
+      "codigo": "A-27",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        243,
+        242,
+        242
+      ],
+      "x_m": -204.5,
+      "y_m": 48.91
+    },
+    {
+      "codigo": "A-28",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        239,
+        238,
+        238
+      ],
+      "x_m": -197.68,
+      "y_m": 63.1
+    },
+    {
+      "codigo": "A-29",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        241,
+        241,
+        241
+      ],
+      "x_m": -181.82,
+      "y_m": 64.4
+    },
+    {
+      "codigo": "A-30",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        242,
+        241,
+        241
+      ],
+      "x_m": -173.77,
+      "y_m": 78.39
+    },
+    {
+      "codigo": "A-31",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        241,
+        241,
+        241
+      ],
+      "x_m": -161.45,
+      "y_m": 87.3
+    },
+    {
+      "codigo": "A-32",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        240,
+        240,
+        240
+      ],
+      "x_m": -181.33,
+      "y_m": 22.03
+    },
+    {
+      "codigo": "A-33",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        242,
+        242,
+        242
+      ],
+      "x_m": -180.42,
+      "y_m": 16.04
+    },
+    {
+      "codigo": "A-34",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        243,
+        243,
+        243
+      ],
+      "x_m": -179.13,
+      "y_m": 10.03
+    },
+    {
+      "codigo": "A-35",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        241,
+        241,
+        241
+      ],
+      "x_m": -180.15,
+      "y_m": -98.65
+    },
+    {
+      "codigo": "A-36",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        244,
+        243,
+        243
+      ],
+      "x_m": -156.72,
+      "y_m": -88.05
+    },
+    {
+      "codigo": "A-37",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        245,
+        245
+      ],
+      "x_m": -154.29,
+      "y_m": -94.92
+    },
+    {
+      "codigo": "A-38",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        243,
+        243,
+        243
+      ],
+      "x_m": -151.88,
+      "y_m": -101.77
+    },
+    {
+      "codigo": "A-39",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        241,
+        241,
+        241
+      ],
+      "x_m": -149.45,
+      "y_m": -108.65
+    },
+    {
+      "codigo": "A-40",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        242,
+        241,
+        241
+      ],
+      "x_m": -147.02,
+      "y_m": -115.51
+    },
+    {
+      "codigo": "A-41",
+      "serie": "A",
+      "area_m2": 25.0,
+      "categoria": null,
+      "categoria_ambigua": false,
+      "cor_lida": [
+        245,
+        244,
+        244
+      ],
+      "x_m": -144.61,
+      "y_m": -122.39
+    },
+    {
+      "codigo": "C-01",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        249,
+        229,
+        210
+      ],
+      "x_m": -267.64,
+      "y_m": -36.07
+    },
+    {
+      "codigo": "C-02",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        249,
+        230,
+        211
+      ],
+      "x_m": -263.73,
+      "y_m": -46.9
+    },
+    {
+      "codigo": "C-03",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        249,
+        229,
+        210
+      ],
+      "x_m": -259.81,
+      "y_m": -57.7
+    },
+    {
+      "codigo": "C-04",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        249,
+        229,
+        210
+      ],
+      "x_m": -255.9,
+      "y_m": -68.52
+    },
+    {
+      "codigo": "C-05",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -252.0,
+      "y_m": -79.32
+    },
+    {
+      "codigo": "C-06",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -248.1,
+      "y_m": -90.15
+    },
+    {
+      "codigo": "C-07",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -244.44,
+      "y_m": -100.11
+    },
+    {
+      "codigo": "C-08",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -269.34,
+      "y_m": -119.53
+    },
+    {
+      "codigo": "C-09",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        174,
+        249
+      ],
+      "x_m": -259.91,
+      "y_m": -116.19
+    },
+    {
+      "codigo": "C-10",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -250.49,
+      "y_m": -112.85
+    },
+    {
+      "codigo": "C-11",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        174,
+        249
+      ],
+      "x_m": -241.06,
+      "y_m": -109.51
+    },
+    {
+      "codigo": "C-12",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -234.41,
+      "y_m": -128.31
+    },
+    {
+      "codigo": "C-13",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -231.07,
+      "y_m": -137.74
+    },
+    {
+      "codigo": "C-14",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -227.73,
+      "y_m": -147.17
+    },
+    {
+      "codigo": "C-15",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -224.4,
+      "y_m": -156.59
+    },
+    {
+      "codigo": "C-16",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -221.06,
+      "y_m": -166.01
+    },
+    {
+      "codigo": "C-17",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -217.72,
+      "y_m": -175.42
+    },
+    {
+      "codigo": "C-18",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -214.38,
+      "y_m": -184.84
+    },
+    {
+      "codigo": "C-19",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -200.25,
+      "y_m": -179.86
+    },
+    {
+      "codigo": "C-20",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        174,
+        249
+      ],
+      "x_m": -203.58,
+      "y_m": -170.43
+    },
+    {
+      "codigo": "C-21",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -206.92,
+      "y_m": -161.01
+    },
+    {
+      "codigo": "C-22",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -210.26,
+      "y_m": -151.58
+    },
+    {
+      "codigo": "C-23",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -213.59,
+      "y_m": -142.15
+    },
+    {
+      "codigo": "C-24",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        172,
+        249
+      ],
+      "x_m": -216.93,
+      "y_m": -132.73
+    },
+    {
+      "codigo": "C-25",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -220.3,
+      "y_m": -123.28
+    },
+    {
+      "codigo": "C-26",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -210.87,
+      "y_m": -119.95
+    },
+    {
+      "codigo": "C-27",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -207.53,
+      "y_m": -129.37
+    },
+    {
+      "codigo": "C-28",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        172,
+        249
+      ],
+      "x_m": -204.17,
+      "y_m": -138.82
+    },
+    {
+      "codigo": "C-29",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -200.83,
+      "y_m": -148.24
+    },
+    {
+      "codigo": "C-30",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -197.5,
+      "y_m": -157.67
+    },
+    {
+      "codigo": "C-31",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -194.16,
+      "y_m": -167.1
+    },
+    {
+      "codigo": "C-32",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -190.82,
+      "y_m": -176.52
+    },
+    {
+      "codigo": "C-33",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        174,
+        249
+      ],
+      "x_m": -176.71,
+      "y_m": -171.51
+    },
+    {
+      "codigo": "C-34",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -180.02,
+      "y_m": -162.08
+    },
+    {
+      "codigo": "C-35",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -183.36,
+      "y_m": -152.66
+    },
+    {
+      "codigo": "C-36",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -186.72,
+      "y_m": -143.22
+    },
+    {
+      "codigo": "C-37",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        249
+      ],
+      "x_m": -190.06,
+      "y_m": -133.79
+    },
+    {
+      "codigo": "C-38",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -193.39,
+      "y_m": -124.36
+    },
+    {
+      "codigo": "C-39",
+      "serie": "C",
+      "area_m2": 100.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        210,
+        173,
+        250
+      ],
+      "x_m": -196.73,
+      "y_m": -114.94
+    },
+    {
+      "codigo": "C-40",
+      "serie": "C",
+      "area_m2": 105.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -228.14,
+      "y_m": -100.48
+    },
+    {
+      "codigo": "C-41",
+      "serie": "C",
+      "area_m2": 95.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -218.74,
+      "y_m": -97.06
+    },
+    {
+      "codigo": "C-42",
+      "serie": "C",
+      "area_m2": 105.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        170,
+        245
+      ],
+      "x_m": -231.55,
+      "y_m": -91.08
+    },
+    {
+      "codigo": "C-43",
+      "serie": "C",
+      "area_m2": 95.0,
+      "categoria": "sem correspondência na legenda (tom magenta)",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        220,
+        146,
+        206
+      ],
+      "x_m": -222.15,
+      "y_m": -87.67
+    },
+    {
+      "codigo": "C-44",
+      "serie": "C",
+      "area_m2": 105.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -235.45,
+      "y_m": -80.25
+    },
+    {
+      "codigo": "C-45",
+      "serie": "C",
+      "area_m2": 95.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        249
+      ],
+      "x_m": -226.06,
+      "y_m": -76.87
+    },
+    {
+      "codigo": "C-46",
+      "serie": "C",
+      "area_m2": 105.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        250,
+        226,
+        208
+      ],
+      "x_m": -241.56,
+      "y_m": -63.32
+    },
+    {
+      "codigo": "C-47",
+      "serie": "C",
+      "area_m2": 95.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        250,
+        210,
+        193
+      ],
+      "x_m": -232.17,
+      "y_m": -59.93
+    },
+    {
+      "codigo": "C-48",
+      "serie": "C",
+      "area_m2": 105.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        188,
+        173
+      ],
+      "x_m": -245.47,
+      "y_m": -52.52
+    },
+    {
+      "codigo": "C-49",
+      "serie": "C",
+      "area_m2": 95.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        251,
+        187,
+        173
+      ],
+      "x_m": -236.07,
+      "y_m": -49.13
+    },
+    {
+      "codigo": "C-50",
+      "serie": "C",
+      "area_m2": 105.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        250,
+        230,
+        211
+      ],
+      "x_m": -249.37,
+      "y_m": -41.72
+    },
+    {
+      "codigo": "C-51",
+      "serie": "C",
+      "area_m2": 95.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        249,
+        229,
+        211
+      ],
+      "x_m": -239.97,
+      "y_m": -38.31
+    },
+    {
+      "codigo": "C-52",
+      "serie": "C",
+      "area_m2": 124.95,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        231,
+        213
+      ],
+      "x_m": -253.62,
+      "y_m": -30.0
+    },
+    {
+      "codigo": "C-53",
+      "serie": "C",
+      "area_m2": 113.05,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        250,
+        230,
+        212
+      ],
+      "x_m": -244.22,
+      "y_m": -26.59
+    },
+    {
+      "codigo": "C-54",
+      "serie": "C",
+      "area_m2": 82.5,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        230,
+        211
+      ],
+      "x_m": -228.36,
+      "y_m": -26.06
+    },
+    {
+      "codigo": "C-55",
+      "serie": "C",
+      "area_m2": 82.5,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        231,
+        211
+      ],
+      "x_m": -228.22,
+      "y_m": -20.55
+    },
+    {
+      "codigo": "C-56",
+      "serie": "C",
+      "area_m2": 55.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        241,
+        222,
+        203
+      ],
+      "x_m": -224.54,
+      "y_m": -33.55
+    },
+    {
+      "codigo": "C-57",
+      "serie": "C",
+      "area_m2": 55.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        246,
+        224,
+        204
+      ],
+      "x_m": -224.65,
+      "y_m": -38.55
+    },
+    {
+      "codigo": "C-58",
+      "serie": "C",
+      "area_m2": 110.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        250,
+        211,
+        194
+      ],
+      "x_m": -220.68,
+      "y_m": -46.87
+    },
+    {
+      "codigo": "C-59",
+      "serie": "C",
+      "area_m2": 110.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        250,
+        230,
+        211
+      ],
+      "x_m": -216.78,
+      "y_m": -57.67
+    },
+    {
+      "codigo": "C-60",
+      "serie": "C",
+      "area_m2": 110.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        211,
+        174,
+        250
+      ],
+      "x_m": -211.72,
+      "y_m": -71.69
+    },
+    {
+      "codigo": "C-61",
+      "serie": "C",
+      "area_m2": 110.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        212,
+        167,
+        242
+      ],
+      "x_m": -207.83,
+      "y_m": -82.48
+    },
+    {
+      "codigo": "C-62",
+      "serie": "C",
+      "area_m2": 128.0,
+      "categoria": "AGRICULTURA",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        212,
+        175,
+        251
+      ],
+      "x_m": -190.32,
+      "y_m": -76.77
+    },
+    {
+      "codigo": "C-63",
+      "serie": "C",
+      "area_m2": 108.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        239,
+        214,
+        205
+      ],
+      "x_m": -168.4,
+      "y_m": -64.57
+    },
+    {
+      "codigo": "C-64",
+      "serie": "C",
+      "area_m2": 144.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        242,
+        216,
+        208
+      ],
+      "x_m": -171.2,
+      "y_m": -52.81
+    },
+    {
+      "codigo": "C-65",
+      "serie": "C",
+      "area_m2": 144.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        241,
+        216,
+        208
+      ],
+      "x_m": -175.39,
+      "y_m": -41.57
+    },
+    {
+      "codigo": "C-66",
+      "serie": "C",
+      "area_m2": 156.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        242,
+        217,
+        208
+      ],
+      "x_m": -179.13,
+      "y_m": -30.18
+    },
+    {
+      "codigo": "C-67",
+      "serie": "C",
+      "area_m2": 156.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        242,
+        216,
+        208
+      ],
+      "x_m": -183.32,
+      "y_m": -18.94
+    },
+    {
+      "codigo": "C-68",
+      "serie": "C",
+      "area_m2": 156.0,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        241,
+        216,
+        208
+      ],
+      "x_m": -187.5,
+      "y_m": -7.72
+    },
+    {
+      "codigo": "C-69",
+      "serie": "C",
+      "area_m2": 94.09,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        239,
+        214,
+        205
+      ],
+      "x_m": -140.74,
+      "y_m": -35.99
+    },
+    {
+      "codigo": "C-70",
+      "serie": "C",
+      "area_m2": 101.31,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        239,
+        214,
+        205
+      ],
+      "x_m": -143.05,
+      "y_m": -26.98
+    },
+    {
+      "codigo": "C-71",
+      "serie": "C",
+      "area_m2": 106.45,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        240,
+        214,
+        206
+      ],
+      "x_m": -145.21,
+      "y_m": -17.93
+    },
+    {
+      "codigo": "C-72",
+      "serie": "C",
+      "area_m2": 107.84,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        239,
+        214,
+        205
+      ],
+      "x_m": -146.78,
+      "y_m": -8.99
+    },
+    {
+      "codigo": "C-73",
+      "serie": "C",
+      "area_m2": 108.56,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        240,
+        215,
+        206
+      ],
+      "x_m": -148.23,
+      "y_m": -0.13
+    },
+    {
+      "codigo": "C-74",
+      "serie": "C",
+      "area_m2": 108.8,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        239,
+        214,
+        205
+      ],
+      "x_m": -149.23,
+      "y_m": 7.45
+    },
+    {
+      "codigo": "C-75",
+      "serie": "C",
+      "area_m2": 128.83,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        240,
+        214,
+        205
+      ],
+      "x_m": -149.89,
+      "y_m": 31.7
+    },
+    {
+      "codigo": "C-76",
+      "serie": "C",
+      "area_m2": 152.33,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        241,
+        216,
+        208
+      ],
+      "x_m": -148.15,
+      "y_m": 41.2
+    },
+    {
+      "codigo": "C-77",
+      "serie": "C",
+      "area_m2": 151.92,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        241,
+        216,
+        207
+      ],
+      "x_m": -145.23,
+      "y_m": 50.85
+    },
+    {
+      "codigo": "C-78",
+      "serie": "C",
+      "area_m2": 152.91,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        253,
+        253,
+        214
+      ],
+      "x_m": -139.56,
+      "y_m": 59.25
+    },
+    {
+      "codigo": "C-79",
+      "serie": "C",
+      "area_m2": 159.17,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        206,
+        175
+      ],
+      "x_m": -130.23,
+      "y_m": 67.52
+    },
+    {
+      "codigo": "C-80",
+      "serie": "C",
+      "area_m2": 134.53,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        201,
+        172
+      ],
+      "x_m": -121.96,
+      "y_m": 73.16
+    },
+    {
+      "codigo": "C-81",
+      "serie": "C",
+      "area_m2": 139.47,
+      "categoria": "AVICULTURA ou GALPÃO DO PRODUTOR / CAFÉ COLONIAL E COZINHA ou MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "categoria_ambigua": true,
+      "cor_lida": [
+        252,
+        191,
+        164
+      ],
+      "x_m": -111.87,
+      "y_m": 77.29
+    },
+    {
+      "codigo": "C-82",
+      "serie": "C",
+      "area_m2": 165.78,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        184,
+        197,
+        232
+      ],
+      "x_m": -85.19,
+      "y_m": 85.41
+    },
+    {
+      "codigo": "C-84",
+      "serie": "C",
+      "area_m2": 83.23,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        174,
+        210,
+        248
+      ],
+      "x_m": -66.74,
+      "y_m": 86.22
+    },
+    {
+      "codigo": "C-85",
+      "serie": "C",
+      "area_m2": 83.23,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        172,
+        209,
+        248
+      ],
+      "x_m": -57.97,
+      "y_m": 83.88
+    },
+    {
+      "codigo": "C-86",
+      "serie": "C",
+      "area_m2": 78.12,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        174,
+        210,
+        249
+      ],
+      "x_m": -51.05,
+      "y_m": 81.45
+    },
+    {
+      "codigo": "C-87",
+      "serie": "C",
+      "area_m2": 86.14,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        173,
+        211,
+        250
+      ],
+      "x_m": -44.06,
+      "y_m": 77.7
+    },
+    {
+      "codigo": "C-88",
+      "serie": "C",
+      "area_m2": 132.84,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        175,
+        212,
+        251
+      ],
+      "x_m": -27.68,
+      "y_m": 62.73
+    },
+    {
+      "codigo": "C-89",
+      "serie": "C",
+      "area_m2": 95.42,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        174,
+        210,
+        248
+      ],
+      "x_m": -21.73,
+      "y_m": 54.07
+    },
+    {
+      "codigo": "C-90",
+      "serie": "C",
+      "area_m2": 89.72,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        173,
+        210,
+        248
+      ],
+      "x_m": -17.6,
+      "y_m": 47.46
+    },
+    {
+      "codigo": "C-91",
+      "serie": "C",
+      "area_m2": 79.08,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        169,
+        208,
+        248
+      ],
+      "x_m": -14.08,
+      "y_m": 41.82
+    },
+    {
+      "codigo": "C-92",
+      "serie": "C",
+      "area_m2": 87.95,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        172,
+        209,
+        249
+      ],
+      "x_m": -11.31,
+      "y_m": 34.45
+    },
+    {
+      "codigo": "C-93",
+      "serie": "C",
+      "area_m2": 77.66,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        171,
+        208,
+        246
+      ],
+      "x_m": -7.65,
+      "y_m": 26.89
+    },
+    {
+      "codigo": "C-94",
+      "serie": "C",
+      "area_m2": 66.72,
+      "categoria": "VEÍCULOS E MOTOS NAUTICAS",
+      "categoria_ambigua": false,
+      "cor_lida": [
+        171,
+        207,
+        245
+      ],
+      "x_m": -5.3,
+      "y_m": 18.72
+    }
+  ]
+}

@@ -52,11 +52,46 @@ MAPA_PADRAO = "data/mapa_agroshow26.json"
 # --------------------------------------------------------------------------
 # Planta
 
-def carregar_mapa(caminho=MAPA_PADRAO):
+LOCAIS_PADRAO = Path(__file__).resolve().parent.parent / "data" / "locais.json"
+
+
+def completar_com_locais(dados, caminho=LOCAIS_PADRAO):
+    """Acrescenta as zonas que o extrator antigo deixava cair.
+
+    O `extract_map.py` so aceitava rotulo que estivesse numa lista branca
+    escrita a mao, e 50 dos 118 nomes do mapa nao estavam nela -- entre eles a
+    Fazendinha, a Area de Show e os Expositores Externos, que sao pedidos do
+    roteiro. O `auditar_mapa.py` le todos, e aqui eles entram como zona para que
+    `data/planos.json` possa mirar neles pelo nome.
+
+    So entra nome que ainda nao existe: quem ja estava fica como estava, para
+    nao mexer na ordem que `achar_zona` enxerga.
+    """
+    caminho = Path(caminho)
+    if not caminho.exists():
+        return dados
+
+    ja_tem = {z["rotulo"] for z in dados["zonas"]}
+    for lo in json.loads(caminho.read_text(encoding="utf-8"))["locais"]:
+        if lo["nome"] in ja_tem or lo.get("e_frase"):
+            continue
+        dados["zonas"].append({
+            "rotulo": lo["nome"],
+            "categoria": "roteiro" if lo["camada"] == "roteiro" else "planta",
+            "x": lo["x_pt"],
+            "y": lo["y_pt"],
+            "_do_auditor": True,
+        })
+    return dados
+
+
+def carregar_mapa(caminho=MAPA_PADRAO, completar=True):
     """Le a planta extraida e crava a origem no centro da prancha."""
     dados = json.loads(Path(caminho).read_text(encoding="utf-8"))
     dados["_origem"] = (dados["prancha"]["largura_pt"] / 2,
                         dados["prancha"]["altura_pt"] / 2)
+    if completar:
+        completar_com_locais(dados)
     return dados
 
 
