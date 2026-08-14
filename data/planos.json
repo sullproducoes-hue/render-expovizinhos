@@ -1,0 +1,560 @@
+{
+  "_leia": "Decupagem do filme. Cada plano e um dado, nao uma improvisacao. Confira com: python3 scripts/planos.py --conferir",
+  "_faixas_de_velocidade_m_s": {
+    "orbita_push_in": [
+      1.3,
+      2.2
+    ],
+    "sobrevoo": [
+      3.6,
+      6.7
+    ],
+    "_fonte": "faixa cinematografica de drone; acima disso nao se le placa nem se reconhece area"
+  },
+  "_ancoras": {
+    "planta": "posicao vem de um rotulo real de data/mapa_agroshow26.json",
+    "derivada": "posicao calculada a partir da bacia (raios medidos) ou de aglomerado real de estandes",
+    "estimada": "NAO EXISTE na planta. Ditada so no audio. Confirmar com o cliente antes do render final"
+  },
+  "fps": 30,
+  "planos": [
+    {
+      "id": "P01",
+      "titulo": "Estacionamento",
+      "peso": "abertura",
+      "duracao_s": 7.0,
+      "lente_mm": 24,
+      "movimento": "subida",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Portal de Entrada"
+      },
+      "camera": {
+        "azimute_deg": 100,
+        "dist_ini_m": 140,
+        "dist_fim_m": 122,
+        "alt_ini_m": 26,
+        "alt_fim_m": 44,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 8,
+      "ancora": "planta",
+      "nota": "ponto de vista de quem chega. Termina apontado para o portal, que e o proximo plano"
+    },
+    {
+      "id": "P02",
+      "titulo": "É daqui que sai o alimento que sustenta o mundo",
+      "peso": "abertura",
+      "duracao_s": 9.0,
+      "lente_mm": 35,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Portal de Entrada"
+      },
+      "camera": {
+        "azimute_deg": 60,
+        "dist_ini_m": 42,
+        "dist_fim_m": 24,
+        "alt_ini_m": 12,
+        "alt_fim_m": 6.5,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 6,
+      "ancora": "planta",
+      "nota": "PORTAL DA FOTO, conceito celeiro, versao economica. Frase literal, nao reescrever"
+    },
+    {
+      "id": "P03",
+      "titulo": "Pavilhão 1 — Indústria, Comércio e Prestação de Serviços",
+      "peso": "normal",
+      "duracao_s": 6.0,
+      "lente_mm": 35,
+      "movimento": "orbita",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "PAVILHÃO 1"
+      },
+      "camera": {
+        "azimute_deg": 55,
+        "dist_ini_m": 46,
+        "dist_fim_m": 42,
+        "alt_ini_m": 22,
+        "alt_fim_m": 17,
+        "giro_deg": 12
+      },
+      "mira_alt_m": 5,
+      "ancora": "planta",
+      "nota": "logo a direita de quem entra"
+    },
+    {
+      "id": "P04",
+      "titulo": "Praça de Alimentação Coberta",
+      "peso": "normal",
+      "duracao_s": 5.5,
+      "lente_mm": 35,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Coberta"
+      },
+      "camera": {
+        "azimute_deg": 20,
+        "dist_ini_m": 38,
+        "dist_fim_m": 28,
+        "alt_ini_m": 16,
+        "alt_fim_m": 10,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 4,
+      "ancora": "planta",
+      "nota": "mesas, cadeiras, guiches, lado da churrasqueira"
+    },
+    {
+      "id": "P05",
+      "titulo": "Pavilhão 2 — Indústria, Comércio e Prestação de Serviços",
+      "peso": "normal",
+      "duracao_s": 5.0,
+      "lente_mm": 35,
+      "movimento": "orbita",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "PAVILHÃO 2"
+      },
+      "camera": {
+        "azimute_deg": 40,
+        "dist_ini_m": 44,
+        "dist_fim_m": 41,
+        "alt_ini_m": 20,
+        "alt_fim_m": 16,
+        "giro_deg": 10
+      },
+      "mira_alt_m": 5,
+      "ancora": "planta"
+    },
+    {
+      "id": "P06",
+      "titulo": "Mercado do Produtor",
+      "peso": "diferencial",
+      "duracao_s": 9.0,
+      "lente_mm": 50,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Mercado do Produtor"
+      },
+      "camera": {
+        "azimute_deg": 30,
+        "dist_ini_m": 40,
+        "dist_fim_m": 23,
+        "alt_ini_m": 14,
+        "alt_fim_m": 5,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 3.5,
+      "ancora": "planta",
+      "nota": "DIFERENCIAL. Entrada do pavilhao 3"
+    },
+    {
+      "id": "P07",
+      "titulo": "Agroindústrias",
+      "peso": "normal",
+      "duracao_s": 5.0,
+      "lente_mm": 35,
+      "movimento": "travelling",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "PAVILHÃO 3"
+      },
+      "camera": {
+        "azimute_deg": 25,
+        "dist_ini_m": 34,
+        "dist_fim_m": 31,
+        "alt_ini_m": 12,
+        "alt_fim_m": 9,
+        "giro_deg": 12
+      },
+      "mira_alt_m": 3.5,
+      "ancora": "planta",
+      "nota": "guiches dos expositores, primeira metade do pavilhao"
+    },
+    {
+      "id": "P08",
+      "titulo": "Café Colonial",
+      "peso": "diferencial",
+      "duracao_s": 9.0,
+      "lente_mm": 50,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Café Colonial"
+      },
+      "camera": {
+        "azimute_deg": 340,
+        "dist_ini_m": 36,
+        "dist_fim_m": 19,
+        "alt_ini_m": 13,
+        "alt_fim_m": 4.5,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 3.0,
+      "ancora": "planta",
+      "nota": "DIFERENCIAL. Fundos do pavilhao 3. Cozinha de um lado, Cozinha Didatica do outro, divisao de meia parede"
+    },
+    {
+      "id": "P09",
+      "titulo": "Praça de Alimentação Aberta",
+      "peso": "normal",
+      "duracao_s": 9.0,
+      "lente_mm": 35,
+      "movimento": "sobrevoo",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Bosque",
+        "ocorrencia": 1
+      },
+      "alvo_fim": {
+        "tipo": "rotulo",
+        "rotulo": "Aberta"
+      },
+      "camera": {
+        "azimute_deg": 60,
+        "dist_ini_m": 34,
+        "dist_fim_m": 34,
+        "alt_ini_m": 16,
+        "alt_fim_m": 13,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 4,
+      "ancora": "planta",
+      "nota": "percurso passa por dentro do bosque e sai na praca aberta"
+    },
+    {
+      "id": "P10",
+      "titulo": "Recinto de Leilões",
+      "peso": "normal",
+      "duracao_s": 6.0,
+      "lente_mm": 35,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "RECINTO DE LEILÕES"
+      },
+      "camera": {
+        "azimute_deg": 80,
+        "dist_ini_m": 40,
+        "dist_fim_m": 30,
+        "alt_ini_m": 18,
+        "alt_fim_m": 11,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 4,
+      "ancora": "planta",
+      "nota": "leilao acontecendo"
+    },
+    {
+      "id": "P11",
+      "titulo": "Exposição de Animais",
+      "peso": "normal",
+      "duracao_s": 11.0,
+      "lente_mm": 35,
+      "movimento": "sobrevoo",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "PAVILHÃO - GADO LEITE"
+      },
+      "alvo_fim": {
+        "tipo": "rotulo",
+        "rotulo": "PAVILHÃO - OVINOS E CAPRINOS"
+      },
+      "camera": {
+        "azimute_deg": 90,
+        "dist_ini_m": 46,
+        "dist_fim_m": 46,
+        "alt_ini_m": 24,
+        "alt_fim_m": 24,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 4,
+      "ancora": "planta",
+      "nota": "ordem fisica norte-sul: leite, cara branca, corte, ovinos e caprinos, pequenos animais, equinos. NAO ha divergencia com o audio. O sobrevoo cobre 4 dos 6 pavilhoes -- cobrir os 6 a 6 m/s custaria 19 s"
+    },
+    {
+      "id": "P12",
+      "titulo": "Pista de Julgamentos",
+      "peso": "normal",
+      "duracao_s": 5.0,
+      "lente_mm": 50,
+      "movimento": "orbita",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "PISTA DE JULGAMENTOS"
+      },
+      "camera": {
+        "azimute_deg": 120,
+        "dist_ini_m": 40,
+        "dist_fim_m": 38,
+        "alt_ini_m": 15,
+        "alt_fim_m": 12,
+        "giro_deg": 10
+      },
+      "mira_alt_m": 2.5,
+      "ancora": "planta",
+      "nota": "area de pasto verde"
+    },
+    {
+      "id": "P13",
+      "titulo": "Expositores Externos",
+      "peso": "normal",
+      "duracao_s": 5.5,
+      "lente_mm": 35,
+      "movimento": "sobrevoo",
+      "alvo": {
+        "tipo": "polar",
+        "raio_m": 187,
+        "azimute_deg": 225
+      },
+      "alvo_fim": {
+        "tipo": "polar",
+        "raio_m": 187,
+        "azimute_deg": 215
+      },
+      "camera": {
+        "azimute_deg": 250,
+        "dist_ini_m": 48,
+        "dist_fim_m": 48,
+        "alt_ini_m": 26,
+        "alt_fim_m": 22,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 3,
+      "ancora": "derivada",
+      "nota": "ancorado no aglomerado real: 61 estandes da serie C em r~187 m, azimute 186-239 graus"
+    },
+    {
+      "id": "P14",
+      "titulo": "Fazendinha",
+      "peso": "diferencial",
+      "duracao_s": 10.0,
+      "lente_mm": 35,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "relativo",
+        "rotulo": "ARENA DO CONHECIMENTO - UTF-PR",
+        "dx_m": 25.0,
+        "dy_m": 30.0
+      },
+      "camera": {
+        "azimute_deg": 70,
+        "dist_ini_m": 44,
+        "dist_fim_m": 25,
+        "alt_ini_m": 16,
+        "alt_fim_m": 5.5,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 3.5,
+      "ancora": "estimada",
+      "nota": "DIFERENCIAL. NAO EXISTE NA PLANTA -- posicao inferida do audio ('desce pro lado da pista de tiro de laco'), entre a pista de julgamentos e o anel. PORTEIRA de destaque. Nome grande, descricao pequena embaixo. A palavra Kids e proibida. CONFIRMAR COM O CLIENTE"
+    },
+    {
+      "id": "P15",
+      "titulo": "",
+      "peso": "normal",
+      "duracao_s": 6.0,
+      "lente_mm": 50,
+      "movimento": "orbita",
+      "alvo": {
+        "tipo": "relativo",
+        "rotulo": "ARENA DO CONHECIMENTO - UTF-PR",
+        "dx_m": 25.0,
+        "dy_m": 30.0
+      },
+      "camera": {
+        "azimute_deg": 70,
+        "dist_ini_m": 26,
+        "dist_fim_m": 24,
+        "alt_ini_m": 6,
+        "alt_fim_m": 5,
+        "giro_deg": 22
+      },
+      "mira_alt_m": 1.7,
+      "ancora": "estimada",
+      "nota": "continuacao do P14, sem letreiro novo -- os dois somam 16 s de Fazendinha. Inflaveis, cavalo, ponei, Border Collie com ovelhas",
+      "continua": "P14"
+    },
+    {
+      "id": "P16",
+      "titulo": "Máquinas, Equipamentos e Implementos Agrícolas",
+      "peso": "normal",
+      "duracao_s": 6.0,
+      "lente_mm": 35,
+      "movimento": "sobrevoo",
+      "alvo": {
+        "tipo": "polar",
+        "raio_m": 110,
+        "azimute_deg": 210
+      },
+      "alvo_fim": {
+        "tipo": "polar",
+        "raio_m": 110,
+        "azimute_deg": 192
+      },
+      "camera": {
+        "azimute_deg": 240,
+        "dist_ini_m": 40,
+        "dist_fim_m": 40,
+        "alt_ini_m": 22,
+        "alt_fim_m": 19,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 3,
+      "ancora": "derivada",
+      "nota": "primeiro anel de cima, banda 95-125 m da bacia. Estandes reais nesse anel em azimute 167-229"
+    },
+    {
+      "id": "P17",
+      "titulo": "Veículos e Motos Náuticas",
+      "peso": "normal",
+      "duracao_s": 5.0,
+      "lente_mm": 50,
+      "movimento": "travelling",
+      "alvo": {
+        "tipo": "polar",
+        "raio_m": 110,
+        "azimute_deg": 172
+      },
+      "camera": {
+        "azimute_deg": 205,
+        "dist_ini_m": 34,
+        "dist_fim_m": 32,
+        "alt_ini_m": 15,
+        "alt_fim_m": 12,
+        "giro_deg": 9
+      },
+      "mira_alt_m": 2.5,
+      "ancora": "derivada",
+      "nota": "no decorrer da volta do anel, depois das maquinas"
+    },
+    {
+      "id": "P18",
+      "titulo": "Área de Shows",
+      "peso": "normal",
+      "duracao_s": 5.5,
+      "lente_mm": 35,
+      "movimento": "sobrevoo",
+      "alvo": {
+        "tipo": "polar",
+        "raio_m": 72,
+        "azimute_deg": 60
+      },
+      "alvo_fim": {
+        "tipo": "polar",
+        "raio_m": 72,
+        "azimute_deg": 35
+      },
+      "camera": {
+        "azimute_deg": 70,
+        "dist_ini_m": 40,
+        "dist_fim_m": 38,
+        "alt_ini_m": 22,
+        "alt_fim_m": 17,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 3,
+      "ancora": "derivada",
+      "nota": "segundo patamar descendo, banda 62-78 m da bacia, cota 3,5 m"
+    },
+    {
+      "id": "P19",
+      "titulo": "Arena de Rodeio",
+      "peso": "diferencial",
+      "duracao_s": 10.0,
+      "lente_mm": 35,
+      "movimento": "orbita",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "ARENA DE RODEIO"
+      },
+      "camera": {
+        "azimute_deg": 120,
+        "dist_ini_m": 62,
+        "dist_fim_m": 54,
+        "alt_ini_m": 20,
+        "alt_fim_m": 9,
+        "giro_deg": 14
+      },
+      "mira_alt_m": 2.0,
+      "ancora": "planta",
+      "nota": "DIFERENCIAL. SEM ARQUIBANCADA -- so a pista, camarotes nos dois lados (Lado A e Lado B) e o palco de frente. Touro pulando. Violar isso e rejeicao"
+    },
+    {
+      "id": "P20",
+      "titulo": "Palco Principal",
+      "peso": "normal",
+      "duracao_s": 7.0,
+      "lente_mm": 50,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "PALCO"
+      },
+      "camera": {
+        "azimute_deg": 20,
+        "dist_ini_m": 58,
+        "dist_fim_m": 46,
+        "alt_ini_m": 16,
+        "alt_fim_m": 12,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 6,
+      "ancora": "planta",
+      "nota": "artista cantando, publico lotado, toda a area embaixo cheia"
+    },
+    {
+      "id": "P21",
+      "titulo": "Aqui será um grande balcão de negócios",
+      "peso": "assinatura",
+      "duracao_s": 7.0,
+      "lente_mm": 24,
+      "movimento": "subida",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "ARENA DE RODEIO"
+      },
+      "camera": {
+        "azimute_deg": 45,
+        "dist_ini_m": 120,
+        "dist_fim_m": 132,
+        "alt_ini_m": 45,
+        "alt_fim_m": 72,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 4,
+      "ancora": "planta",
+      "nota": "abre o recinto inteiro. Frase literal, nao reescrever"
+    },
+    {
+      "id": "P22",
+      "titulo": "",
+      "peso": "fechamento",
+      "duracao_s": 6.0,
+      "lente_mm": 35,
+      "movimento": "push-in",
+      "alvo": {
+        "tipo": "rotulo",
+        "rotulo": "Portal de Entrada"
+      },
+      "camera": {
+        "azimute_deg": 240,
+        "dist_ini_m": 30,
+        "dist_fim_m": 18,
+        "alt_ini_m": 10,
+        "alt_fim_m": 6,
+        "giro_deg": 0
+      },
+      "mira_alt_m": 6,
+      "ancora": "planta",
+      "nota": "PLANO FINAL SAINDO PELO PORTAL, por dentro para fora. Exigencia do cliente"
+    }
+  ]
+}

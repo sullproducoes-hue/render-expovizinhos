@@ -1,21 +1,54 @@
 # ESTADO DO PROJETO — leia isto primeiro
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Atualizado em 12/08/2026.
+Atualizado em 14/08/2026.
 
 Este arquivo existe para retomar o trabalho em outra sessão sem perder contexto.
 Leia daqui e siga para os documentos citados.
 
 ---
 
-## Situação
+## Prazo e situação, hoje 14/08
 
-Vídeo de apresentação do parque, para telão, com percurso pelo recinto na ordem
-ditada pelo cliente. **Prazo original era domingo; o cliente antecipou para
-amanhã (13/08)**, para sobrar tempo de lapidação antes da entrega.
+**Domingo 16/08: tudo ajustado. Segunda 17/08 à tarde: renderizado e
+exportado o `.mp4` para o cliente.** Três dias a contar de hoje para o que se
+orça em 4 a 8 semanas de estúdio de archviz — ver `docs/PROPOSTA-3-DIAS.md`
+para o cronograma completo, o portão de decisão e os riscos com saída.
 
-Com essa antecipação, a meta de amanhã **não é o filme acabado** — é a **base
-navegável e renderizando**, para lapidar por cima.
+Máquina de render: GPU de 8–12 GB de VRAM. Verba de asset: **zero** — só CC0 e
+gratuito. Essas duas restrições decidiram o motor (ver abaixo).
+
+### O achado que mudou o filme
+
+O percurso antigo (16 pontos, uma curva bezier única, 128 s) foi medido contra
+a planta: **1.152 m em 128 s dão 9,0 m/s — 32 km/h**, de 1,3 a 7× acima da
+faixa cinematográfica de drone (1,3–2,2 m/s em órbita/push-in, 3,6–6,7 m/s em
+sobrevoo). Nessa velocidade não se lê placa nem se reconhece área.
+
+**A câmera virou dado.** `data/planos.json` declara 22 planos — alvo, lente,
+altura, movimento, duração — cada um dentro da faixa cinematográfica, conferido
+por `python3 scripts/planos.py --conferir`. Ver `docs/PLANOS.md`.
+
+### Motor: dois planos, com portão de decisão
+
+- **Plano A (ativo):** Blender gera a geometria e exporta FBX
+  (`build_scene.py --export-fbx`); o **Twinmotion 2026** (gratuito, direito
+  comercial abaixo de US$ 1 M de faturamento) veste — gente animada,
+  vegetação, materiais, tudo que a verba zero não compra — e renderiza em
+  tempo real.
+- **Plano B (rede de segurança):** EEVEE Next no próprio Blender, mesma
+  geometria, mesma decupagem, sem sair do repositório.
+- **Portão: sábado 15/08, 12h.** Se o Twinmotion não segurar a cena inteira
+  com fluidez (risco real: recomenda-se 12 GB+ de VRAM para site grande, a
+  máquina tem 8–12), cai para o Plano B sem olhar para trás.
+- **Calibração antes de prometer o domingo:** `render_shots.py --plano <ID>
+  --quadros 24 --cronometrar` mede o tempo real por quadro do plano mais
+  pesado e projeta o filme inteiro. Acima de ~11 h não cabe na noite de
+  domingo.
+
+Situação anterior (prazo original domingo 13/08, antecipado e depois
+reaberto): a meta daquele momento era só a base navegável renderizando. Esse
+momento passou; o que vale agora é o cronograma de 3 dias acima.
 
 ### Duas abordagens conviveram nesta conversa
 
@@ -35,33 +68,42 @@ das imagens de apoio, os títulos e as restrições do cliente.
 |---|---|---|
 | Planta extraída do PDF | `data/mapa_agroshow26.json` | 134 estandes com área, 181 blocos, 122 zonas |
 | Auditoria do DWG | `data/dwg_agroshow26.json` | Confirma: não há vetor |
-| Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1 |
+| Núcleo de terreno/bacia | `scripts/terreno.py` | Sem `bpy` — escala, bacia, leitura da planta. Fonte única para o gerador e a decupagem |
+| Decupagem do filme | `data/planos.json` + `scripts/planos.py` | 22 planos, conferidos em velocidade — ver `docs/PLANOS.md` |
+| Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1. `--plano` corta por região, `--export-fbx` exporta para o Twinmotion |
+| Render retomável | `scripts/render_shots.py` | Plano a plano, animatic, calibração de tempo (`--cronometrar`) |
+| Entrega | `scripts/encode.sh` | Os 3 arquivos + cartela de teste, a partir da sequência de PNG |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
+| Proposta de 3 dias | `docs/PROPOSTA-3-DIAS.md` | Cronograma, motor, portão de sábado, riscos |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
 | Agente | `.claude/agents/render-agroshow.md` | Reescrito para 3D em 13/08/2026. Sistema próprio, fora do Cláudio. Texto 2.5D arquivado em `docs/AGENTE-2.5D-suspenso.md` |
 
-Saída atual do gerador:
+Saída atual do gerador (filme completo, sem `--plano`):
 
 ```
 escala .............. 0.5611 m/pt
 extensao do terreno . 808 x 454 m
 pavilhoes ........... 6
 estandes ............ 74 instanciados + 60 proprios
-pontos do percurso .. 16 de 16
+planos ............... 22 de 22 (filme completo)
 render .............. 2760x1380 (2:1)
-animacao ............ 3840 quadros (128 s a 30 fps)
+duracao do filme ..... 4635 quadros (154 s a 30 fps)
 patamares ........... arena 0 m -> shows 3.5 m -> anel 7.0 m -> plato 10.0 m
 ```
 
 ```bash
 pip install bpy pymupdf ezdxf
-python3 scripts/build_scene.py --out cena.blend
+python3 scripts/build_scene.py --out out/cena.blend                 # filme completo
+python3 scripts/build_scene.py --plano P19 --out out/P19.blend      # so um plano, cabe em 8-12 GB
+python3 scripts/build_scene.py --export-fbx out/cena.fbx            # para o Twinmotion (Plano A)
+python3 scripts/planos.py --conferir                                # confere velocidades sem bpy
 ```
 
 Renders de conferência: `docs/conferencia-layout.png` (topo),
 `docs/conferencia-bacia.png` (patamares), `docs/conferencia-quadro.png`
-(quadro da animação).
+(quadro da animação) — **desatualizado**, ainda mostra a câmera antiga de 16
+pontos. Regenerar com a decupagem nova antes da próxima conferência visual.
 
 ---
 
@@ -136,22 +178,36 @@ Frases literais, não reescrever:
 
 ## Próximos passos, em ordem de valor
 
-1. **Câmera está baixa demais.** No quadro de conferência ela vê telhado de
-   estande. Suba `ALTURA_CAMERA` e aumente `INCLINACAO_CAM`, ou faça a altura
-   variar por trecho — aéreo nas transições, baixo nos pontos de interesse.
-2. **HDRI no lugar do céu procedural.** `construir_ceu()` hoje é uma cor chapada.
-   Um HDRI de fim de tarde do Poly Haven (CC0) muda o render inteiro.
-3. **Texturas PBR** em vez das cores base. Poly Haven e ambientCG, ambos CC0:
-   grama, lona, brita, telha metálica.
-4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
-5. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
-   isso. O portal é o primeiro e o último plano.
-6. Confirmar as alturas dos patamares com um quadro de drone.
+1. **Regenerar `docs/conferencia-quadro.png` com a decupagem nova** — a
+   câmera antiga (16 pontos, 18° fixos) foi substituída por 22 planos com
+   mira por constraint. Conferir se algum ainda vê telhado de estande.
+2. **Exportar o FBX e testar no Twinmotion** (`--export-fbx`) — é o item que
+   decide o portão de sábado 12h. Confira VRAM com a cena inteira vestida.
+3. **HDRI no lugar do céu procedural.** `construir_ceu()` hoje é uma cor
+   chapada. Um HDRI de fim de tarde do Poly Haven (CC0) muda o render inteiro.
+4. **Sun Position** com −25,73144 / −53,07627 no lugar do sol fixo em
+   `construir_luz()`.
+5. **Materiais: variação macro primeiro** (ruído de baixa frequência sobre a
+   cor base), textura PBR CC0 só onde a câmera desce.
+6. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven)
+   no Plano B; *Populate* do Twinmotion no Plano A.
+7. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
+   isso. O portal é o primeiro e o último plano (P02 e P22).
+8. Confirmar as alturas dos patamares com um quadro de drone.
+9. **Confirmar a Fazendinha (P14/P15) com o cliente** — é a única posição do
+   filme sem apoio na planta, só no áudio. Ver `docs/PLANOS.md`, âncora
+   `estimada`.
 
 Feito em 13/08/2026: o agente `.claude/agents/render-agroshow.md` foi reescrito
 para o caminho 3D. Ele é **sistema próprio** — não responde ao Cláudio (o
 diretor de montagem em `E:\I.A Edit\claudio`) e não herda a doutrina 2.5D, por
 decisão do Natan.
+
+Feito em 14/08/2026: a câmera deixou de ser uma curva única e virou decupagem
+em `data/planos.json` (22 planos); o gerador ganhou corte por região
+(`--plano`) e exportação para o Twinmotion (`--export-fbx`); e entrou o par
+Plano A / Plano B com portão de decisão no sábado — ver
+`docs/PROPOSTA-3-DIAS.md`.
 
 ---
 
@@ -160,9 +216,10 @@ decisão do Natan.
 | # | Pendência | Impacto |
 |---|---|---|
 | 1 | Footage de edições anteriores — prometido, não chegou | Alto — vira textura e referência |
-| 2 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
-| 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
-| 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 2 | Posição real da Fazendinha (P14/P15) — não existe na planta, só no áudio | Alto — é diferencial, e a câmera já está montada em cima da estimativa |
+| 3 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
+| 4 | Medida real de qualquer estrutura | Médio — confirma a escala |
+| 5 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
 
 ---
 
