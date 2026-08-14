@@ -35,8 +35,16 @@ Ele lista os vídeos da pasta com a duração de cada um:
   [ 3]  00:06:55  drone parque.mp4
 ```
 
-Você escolhe por número — `1,3`, ou um intervalo `1-3`, ou `todos` — e ele
-pergunta a quantidade de quadros **de cada vídeo**, um por um. Enter aceita 30.
+Você escolhe por número — `1,3`, ou um intervalo `1-3`, ou `todos`. Aí ele
+pergunta a quantidade: digite um número para valer **para todos**, ou dê Enter
+para definir vídeo por vídeo (nesse caso Enter aceita 30 em cada).
+
+Depois ele pergunta **onde salvar os quadros** — o padrão é uma pasta `extracao`
+criada junto dos vídeos — e **onde salvar as folhas de contato**, que podem ir
+para outro HD. Enter na segunda pergunta deixa as folhas junto dos quadros.
+
+Se você apontar uma pasta onde não dá para gravar, ele avisa e pergunta de novo,
+em vez de morrer. Pode colar o caminho com aspas, do jeito que o Windows copia.
 
 Vídeo longo pede mais: para um percurso de 6 minutos, 30 quadros dá um a cada
 12 segundos, o que pula área inteira do parque. Regra prática: **um quadro a
@@ -54,7 +62,7 @@ Um número só vale para todos os vídeos; vários, um por vídeo, na mesma orde
 
 | Opção | Efeito |
 |---|---|
-| `--saida PASTA` | Onde gravar os quadros. Padrão: `extracao` |
+| `--saida PASTA` | Onde gravar os quadros. Padrão: `extracao`, junto dos vídeos |
 | `--folhas PASTA` | Folhas de contato em outro lugar — inclusive outro HD |
 | `--png` | PNG em vez de JPEG. Arquivo grande, sem perda |
 | `--qualidade N` | Qualidade JPEG, 2 = melhor (padrão), 31 = pior |
@@ -109,6 +117,18 @@ o nome te diz o minuto exato para voltar no vídeo e cortar o trecho na edição
 Os quadros são distribuídos por igual ao longo do vídeo, com uma folga de 2% nas
 pontas — fade de entrada e de saída costumam ser preto, e não vale gastar quadro
 com eles.
+
+## Acesso negado ao criar a pasta
+
+Se aparecer `[WinError 5] Acesso negado`, a pasta de destino é protegida do
+Windows. Isso acontecia com o padrão antigo quando você abria o script com dois
+cliques: o Python roda a partir de `C:\Program Files\WindowsApps\...`, e um
+caminho relativo caía lá dentro.
+
+Resolvido de duas formas: o padrão agora é uma pasta criada **junto dos vídeos**,
+e o script testa a escrita antes de extrair — se não der, ele pergunta outro
+caminho em vez de fechar. Nunca aponte a saída para dentro de `C:\Program Files`
+ou `C:\Windows`.
 
 ## Se a janela fechar sozinha
 

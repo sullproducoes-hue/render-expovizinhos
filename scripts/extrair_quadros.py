@@ -13,6 +13,10 @@ Uso direto, sem perguntas:
 
     python extrair_quadros.py --videos abertura.mp4 rodeio.mp4 --quadros 40 60
 
+Ele ainda pergunta onde salvar os quadros — o padrao e uma pasta 'extracao'
+criada junto dos videos — e onde salvar as folhas de contato, que podem ir
+para outro HD.
+
 Saida:
 
     extracao/
@@ -138,6 +142,51 @@ def escolher_videos(pasta: Path) -> list[Path]:
     if not selecao:
         sys.exit("Nenhum video selecionado.")
     return selecao
+
+
+def garantir_pasta(destino: Path):
+    """Cria a pasta e confirma que da para gravar nela.
+
+    Devolve None se estiver tudo certo, ou a mensagem de erro. Criar nao
+    basta: precisa escrever de verdade para pegar pasta protegida e HD
+    montado somente para leitura.
+    """
+    try:
+        destino.mkdir(parents=True, exist_ok=True)
+        teste = destino / ".escrita_ok"
+        teste.write_text("ok", encoding="utf-8")
+        teste.unlink()
+    except OSError as e:
+        return str(e)
+    return None
+
+
+def perguntar_pasta(rotulo: str, padrao, permitir_pular=False):
+    """Pergunta um caminho ate conseguir um em que da para gravar."""
+    while True:
+        if padrao:
+            sufixo = f" [{padrao}]"
+        elif permitir_pular:
+            sufixo = " (Enter para pular)"
+        else:
+            sufixo = ""
+        resposta = input(f"\n{rotulo}{sufixo}\n> ").strip().strip('"').strip("'")
+
+        if not resposta:
+            if padrao is None:
+                if permitir_pular:
+                    return None
+                print("  Preciso de um caminho.")
+                continue
+            escolha = padrao
+        else:
+            escolha = Path(resposta)
+
+        erro = garantir_pasta(escolha)
+        if erro is None:
+            return escolha
+        print(f"  Nao da para gravar em '{escolha}': {erro}")
+        print("  Escolha outro caminho — pasta protegida do Windows nao serve.")
 
 
 def perguntar_quantidade(video: Path, dur: float) -> int:
@@ -422,8 +471,9 @@ def main():
                    help="caminhos dos videos, sem perguntar nada")
     p.add_argument("--quadros", type=int, nargs="+",
                    help="quantidade por video. Um numero vale para todos")
-    p.add_argument("--saida", type=Path, default=Path("extracao"),
-                   help="pasta de saida (padrao: extracao)")
+    p.add_argument("--saida", type=Path,
+                   help="pasta dos quadros (padrao: pasta 'extracao' criada "
+                        "junto dos videos)")
     p.add_argument("--png", action="store_true",
                    help="salvar em PNG em vez de JPEG")
     p.add_argument("--qualidade", type=int, default=2,
@@ -451,11 +501,14 @@ def main():
             sys.exit("Nenhum video valido.")
     else:
         pasta = args.pasta
-        if pasta is None:
+        while pasta is None or not pasta.is_dir():
+            if pasta is not None:
+                print(f"  Pasta nao encontrada: {pasta}")
             entrada = input("Pasta com os videos: ").strip().strip('"').strip("'")
+            if not entrada:
+                sys.exit("Sem pasta, sem extracao.")
             pasta = Path(entrada)
-        if not pasta.is_dir():
-            sys.exit(f"Pasta nao encontrada: {pasta}")
+        args.pasta = pasta
         videos = escolher_videos(pasta)
 
     duracoes = {v: duracao(v) for v in videos}
@@ -471,22 +524,47 @@ def main():
                 f"{len(videos)} videos. Passe um valor so, ou um por video."
             )
     else:
-        print(f"\n{len(videos)} video(s) selecionado(s). "
-              f"Enter aceita {PADRAO_QUADROS}.\n")
-        quantidades = [perguntar_quantidade(v, duracoes[v]) for v in videos]
+        print(f"\n{len(videos)} video(s) selecionado(s).")
+        print("Mesma quantidade para todos? Digite o numero, ou Enter para "
+              "definir um a um.")
+        resposta = input("> ").strip()
+        if resposta.isdigit() and int(resposta) > 0:
+            quantidades = [int(resposta)] * len(videos)
+        else:
+            print(f"\nUm a um. Enter aceita {PADRAO_QUADROS}.\n")
+            quantidades = [perguntar_quantidade(v, duracoes[v]) for v in videos]
 
     extensao = ".png" if args.png else ".jpg"
 
-    # Cria as duas pastas ANTES de extrair. Descobrir que o HD das folhas nao
-    # esta montado depois de meia hora de extracao seria a pior hora possivel.
-    for rotulo, destino in (("--saida", args.saida), ("--folhas", args.folhas)):
+    # Onde gravar. O padrao fica JUNTO DOS VIDEOS: caminho relativo cai na
+    # pasta de trabalho do processo, que com dois cliques no Windows e a
+    # pasta protegida do proprio Python — e da acesso negado.
+    base = (args.pasta or videos[0].parent).resolve()
+    padrao_saida = base / "extracao"
+
+    interativo = sys.stdin and sys.stdin.isatty()
+
+    if args.saida is None and interativo:
+        args.saida = perguntar_pasta("Onde salvar os quadros?", padrao_saida)
+    elif args.saida is None:
+        args.saida = padrao_saida
+
+    if args.folhas is None and interativo and not args.sem_folhas:
+        args.folhas = perguntar_pasta(
+            "Onde salvar as folhas de contato? Pode ser outro HD.",
+            None, permitir_pular=True,
+        )
+
+    # Confere as duas ANTES de extrair. Descobrir que o HD das folhas nao esta
+    # montado depois de meia hora de extracao seria a pior hora possivel.
+    for rotulo, destino in (("dos quadros", args.saida), ("das folhas", args.folhas)):
         if destino is None:
             continue
-        try:
-            destino.mkdir(parents=True, exist_ok=True)
-        except OSError as e:
-            sys.exit(f"Nao consegui criar {rotulo} em '{destino}': {e}\n"
-                     "Confira se o HD esta conectado e se o caminho existe.")
+        erro = garantir_pasta(destino)
+        if erro:
+            sys.exit(f"Nao da para gravar na pasta {rotulo}, '{destino}': {erro}\n"
+                     "Confira se o HD esta conectado e escolha uma pasta sua — "
+                     "pasta protegida do Windows nao serve.")
 
     if args.nitidez:
         try:
