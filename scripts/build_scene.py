@@ -33,6 +33,7 @@ da propria planta. NAO CONFERIDA com medida real em campo.
 """
 
 import argparse
+import json
 import math
 import sys
 from pathlib import Path
@@ -43,6 +44,7 @@ import bpy
 import bmesh
 from mathutils import Vector
 
+import estruturas
 import planos as planos_mod
 import terreno
 
@@ -53,6 +55,15 @@ LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
 
 COLECOES = ["BASE", "EVENTO", "CAMERA", "MARCOS_CAMERA", "LUZ"]
+
+RAIZ = Path(__file__).resolve().parent.parent
+
+# Rumo das estruturas, em graus. Nao sao chute: saem do angulo com que a planta
+# escreve o rotulo de cada uma -- `angulo_graus` em data/locais.json. O rotulo
+# de um galpao e escrito no eixo dele.
+RUMO_PAVILHOES = 341.0   # a fileira corre norte-sul, levemente girada
+RUMO_PORTAL = 73.0       # de frente para quem chega pela Dorvalino Tosi
+RUMO_PALCO = 334.0       # de frente para a arena
 
 
 # --------------------------------------------------------------------------
@@ -299,46 +310,240 @@ def construir_pavilhoes(dados, col, centro_arena, bbox=None):
         area = 560.0 if "EQUÍNOS" in z["rotulo"] else 720.0
         profundidade = 12.0
         largura = area / profundidade
-        obj = caixa(z["rotulo"], largura, profundidade, terreno.ALTURA_PAVILHAO, col)
-        obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
+        # Galpao de duas aguas, nao caixa: o telhado e o que se ve do alto no
+        # sobrevoo do P11, e caixa chapada denuncia CG antes de qualquer
+        # textura. A orientacao segue a fileira, que corre norte-sul.
+        obj = estruturas.pavilhao(z["rotulo"], x, y,
+                                  terreno.elevacao(x, y, centro_arena),
+                                  largura, profundidade, col,
+                                  rumo_graus=RUMO_PAVILHOES)
         obj["area_m2"] = area
         feitos += 1
     return feitos
 
 
-def configurar_render(cena):
+def construir_estruturas(dados, col, centro_arena, bbox=None):
+    """Portal, palco e camarotes -- as tres que o filme mais mostra.
+
+    O portal abre e fecha o filme (P02 e P22), o palco e o P20, e os camarotes
+    aparecem em todo plano da arena. Ate 14/08 os tres eram caixa ou nem isso.
+    """
+    origem = dados["_origem"]
+    feitos = []
+
+    def posicao(rotulo, ocorrencia=0):
+        p = terreno.ponto_da_zona(dados, rotulo, ocorrencia)
+        if p is None or not dentro(bbox, p[0], p[1]):
+            return None
+        return p[0], p[1], terreno.elevacao(p[0], p[1], centro_arena)
+
+    p = posicao("Portal de Entrada")
+    if p:
+        feitos.append(estruturas.portal("PortalCeleiro", *p, col,
+                                        rumo_graus=RUMO_PORTAL))
+
+    p = posicao("PALCO")
+    if p:
+        feitos.append(estruturas.palco("Palco", *p, col,
+                                       rumo_graus=RUMO_PALCO))
+
+    # Os dois camarotes ladeiam a arena -- restricao 1 do cliente, e o mapa
+    # desenha os dois. Cada um aponta para o centro da pista.
+    for rotulo in ("CAMAROTES - LADO A", "CAMAROTES - LADO B"):
+        p = posicao(rotulo)
+        if not p:
+            continue
+        rumo = math.degrees(math.atan2(centro_arena[1] - p[1],
+                                       centro_arena[0] - p[0]))
+        feitos.append(estruturas.camarote(rotulo, *p, col, rumo_graus=rumo))
+
+    return feitos
+
+
+def construir_vias(col, centro_arena, bbox=None, caminho=None):
+    """As vias lidas do bitmap da planta, viradas em fita de pista.
+
+    So entra o que `scripts/extrair_vias.py` marcou como via de verdade -- o
+    resto do que a deteccao pega e moldura de prancha e caixa de carimbo.
+    """
+    caminho = Path(caminho or RAIZ / "data" / "vias.json")
+    if not caminho.exists():
+        print("  sem data/vias.json -- rode scripts/extrair_vias.py")
+        return 0
+
+    dados_vias = json.loads(caminho.read_text(encoding="utf-8"))
+    feitas = 0
+    for v in dados_vias["vias"]:
+        if not v.get("e_via"):
+            continue
+        pontos = [(x, y) for x, y in v["pontos_m"]
+                  if dentro(bbox, x, y)]
+        if len(pontos) < 2:
+            continue
+        obj = estruturas.via(f"Via_{v['id']}", pontos, col,
+                             lambda x, y: terreno.elevacao(x, y, centro_arena))
+        if obj:
+            obj["tipo"] = v.get("tipo")
+            obj["rotulo_mais_proximo"] = v.get("rotulo_mais_proximo")
+            feitas += 1
+    return feitas
+
+
+def configurar_render(cena, motor="cycles"):
     cena.render.resolution_x = LARGURA_RENDER
     cena.render.resolution_y = ALTURA_RENDER
     cena.render.resolution_percentage = 100
     cena.render.fps = 30
     cena.render.image_settings.file_format = "PNG"
     cena.render.film_transparent = False
-    try:
-        cena.render.engine = "BLENDER_EEVEE_NEXT"
-    except TypeError:
-        cena.render.engine = "CYCLES"
-    # Overscan: com camera em movimento, efeitos de tela do EEVEE (SSR, SSAO)
-    # somem perto da borda do quadro. 5-10% os traz de volta.
-    try:
-        cena.eevee.use_overscan = True
-        cena.eevee.overscan_size = 7.0
-    except AttributeError:
-        pass
-    # Motion blur: EEVEE Next nao tem passe Vector, entao o blur do beauty vem
-    # daqui, por acumulacao. 4-8 passos e o equilibrio entre gradiente limpo
-    # e tempo de render -- mais que isso reavalia a cena inteira por passo.
-    try:
-        cena.render.use_motion_blur = True
-        cena.eevee.motion_blur_steps = 6
-    except AttributeError:
-        pass
-    try:
-        cena.eevee.taa_render_samples = 64
-    except AttributeError:
-        pass
+    escolher_motor(cena, motor)
+
+    if cena.render.engine == "CYCLES":
+        configurar_cycles(cena)
+    else:
+        configurar_eevee(cena)
+
     # Ceu de fim de tarde em 2:1 e um degrade grande; painel LED costuma
     # trabalhar em 8 bits e bandeia. Dither e a primeira defesa, sem custo.
     cena.render.dither_intensity = 1.0
+    print(f"  motor de render ..... {cena.render.engine}")
+
+
+def escolher_motor(cena, pedido="cycles"):
+    """Crava o motor pedido, e ABORTA se ele nao existir.
+
+    O codigo antigo tentava 'BLENDER_EEVEE_NEXT' e, no except, caia em Cycles.
+    No Blender 5.2 o identificador voltou a ser 'BLENDER_EEVEE' -- entao o
+    except disparava sempre e a cena saia em **Cycles CPU, em silencio**, com
+    o resto do arquivo (overscan, motion blur por acumulacao) configurado para
+    EEVEE. Um render de 4.635 quadros comecaria e nao terminaria nunca, e
+    ninguem saberia por que.
+
+    Motor e declaracao, nao tentativa. Se o pedido nao existe nesta build, o
+    programa para e diz qual existe.
+    """
+    if pedido == "cycles":
+        garantir_addon_cycles()
+
+    candidatos = {
+        "cycles": ["CYCLES"],
+        # 'NEXT' e o nome da 4.2 a 4.5; a 5.x voltou ao nome curto.
+        "eevee": ["BLENDER_EEVEE", "BLENDER_EEVEE_NEXT"],
+    }[pedido]
+
+    # Atribui e CONFERE. Nao da para consultar a lista antes: o enum de
+    # `render.engine` so anuncia os motores embutidos, e o Cycles, que e addon,
+    # nao aparece nele nem quando esta ligado e funcionando. Consultando a
+    # lista, o gerador abortava dizendo que a build nao tem Cycles -- e tinha.
+    for nome in candidatos:
+        try:
+            cena.render.engine = nome
+        except TypeError:
+            continue
+        if cena.render.engine == nome:
+            return nome
+
+    raise SystemExit(
+        f"nao consegui cravar o motor {pedido!r} nesta build do Blender "
+        f"(tentei {candidatos}). O render NAO vai sair no motor pedido.")
+
+
+def garantir_addon_cycles():
+    """Religa o addon do Cycles, que `limpar_cena()` derruba.
+
+    `bpy.ops.wm.read_factory_settings()` -- usado para nascer com a cena vazia
+    -- volta as preferencias de fabrica e, com elas, desabilita os addons da
+    sessao. O Cycles some do enum de motores e o gerador aborta dizendo que a
+    build nao tem Cycles, o que e falso. Religar aqui custa nada e evita o
+    diagnostico errado.
+    """
+    import addon_utils
+    for nome in ("cycles", "bl_ext.blender_org.cycles"):
+        try:
+            addon_utils.enable(nome, default_set=False, persistent=True)
+        except Exception:
+            continue
+        if "cycles" in bpy.context.preferences.addons:
+            return True
+    return "cycles" in bpy.context.preferences.addons
+
+
+def configurar_cycles(cena):
+    """A configuracao que o Natan ditou em 14/08, gravada na cena.
+
+    Ele abre o .blend e renderiza: nada aqui e para ser remarcado a mao.
+    Max samples 128 com limiar de ruido 0,1 -- o limiar e quem manda, e os 128
+    sao o teto para o pixel que nao converge. Denoise ligado no fim, prefiltro
+    Fast, qualidade Balanced, na GPU.
+    """
+    c = cena.cycles
+    c.device = "GPU"
+    c.samples = 128
+    c.use_adaptive_sampling = True
+    c.adaptive_threshold = 0.1
+    c.use_denoising = True
+    for atributo, valor in (("denoising_use_gpu", True),
+                            ("denoising_prefilter", "FAST"),
+                            ("denoising_quality", "BALANCED"),
+                            ("use_fast_gi", True)):
+        if hasattr(c, atributo):
+            setattr(c, atributo, valor)
+
+    # Sem isto o Blender aceita device='GPU' e renderiza na CPU assim mesmo:
+    # o device so vale se houver placa habilitada nas preferencias.
+    habilitar_gpu()
+
+    cena.render.use_motion_blur = True
+    print(f"  cycles .............. {c.samples} samples, limiar "
+          f"{c.adaptive_threshold}, denoise "
+          f"{getattr(c, 'denoising_prefilter', '?')}/"
+          f"{getattr(c, 'denoising_quality', '?')}")
+
+
+def habilitar_gpu():
+    """Liga a placa nas preferencias do Cycles, tentando OptiX e depois CUDA.
+
+    `cycles.device = 'GPU'` sozinho nao basta: se nenhum dispositivo estiver
+    marcado nas preferencias, o Cycles cai para a CPU sem reclamar. Numa RTX
+    4060 isso e a diferenca entre minutos e uma noite.
+    """
+    try:
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+    except KeyError:
+        print("  AVISO: addon cycles indisponivel; render vai para a CPU")
+        return None
+
+    for tipo in ("OPTIX", "CUDA", "HIP", "ONEAPI", "METAL"):
+        try:
+            prefs.compute_device_type = tipo
+        except TypeError:
+            continue
+        prefs.get_devices()
+        placas = [d for d in prefs.devices if d.type == tipo]
+        if not placas:
+            continue
+        for d in prefs.devices:
+            d.use = (d.type == tipo)
+        print(f"  gpu ................. {tipo}: "
+              f"{', '.join(d.name for d in placas)}")
+        return tipo
+
+    print("  AVISO: nenhuma GPU encontrada; render vai para a CPU")
+    return None
+
+
+def configurar_eevee(cena):
+    """Alternativa rapida, para conferencia -- nao e o motor da entrega."""
+    # Overscan: com camera em movimento, efeitos de tela do EEVEE (SSR, SSAO)
+    # somem perto da borda do quadro. 5-10% os traz de volta.
+    for alvo, atributo, valor in (
+            (cena.eevee, "use_overscan", True),
+            (cena.eevee, "overscan_size", 7.0),
+            (cena.render, "use_motion_blur", True),
+            (cena.eevee, "motion_blur_steps", 6),
+            (cena.eevee, "taa_render_samples", 64)):
+        if hasattr(alvo, atributo):
+            setattr(alvo, atributo, valor)
 
 
 def construir_ceu(cena):
@@ -405,6 +610,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dados", default="data/mapa_agroshow26.json")
     ap.add_argument("--planos-json", dest="planos_json", default="data/planos.json")
+    ap.add_argument("--motor", choices=("cycles", "eevee"), default="cycles",
+                    help="motor gravado na cena. cycles e o da entrega, com a "
+                         "configuracao que o Natan ditou; eevee e so para "
+                         "conferencia rapida")
     ap.add_argument("--relevo", default=None,
                     help="heightmap em escala de cinza para deslocar o terreno")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
@@ -450,6 +659,18 @@ def main():
         if "PAVILHÃO" in o.name:
             aplicar(o, mats["MAT_PAVILHAO"])
 
+    print("construindo portal, palco e camarotes...")
+    feitas = construir_estruturas(dados, cols["BASE"], centro, bbox)
+    for o in feitas:
+        aplicar(o, mats["MAT_PAVILHAO"] if "Camarote" not in o.name
+                else mats["MAT_LONA"])
+
+    print("construindo vias...")
+    n_vias = construir_vias(cols["BASE"], centro, bbox)
+    for o in cols["BASE"].objects:
+        if o.name.startswith("Via_"):
+            aplicar(o, mats["MAT_ASFALTO"])
+
     print("construindo estandes...")
     cont = construir_estandes(dados, cols["EVENTO"], centro, bbox)
     for o in cols["EVENTO"].objects:
@@ -469,7 +690,7 @@ def main():
 
     construir_luz(cols["LUZ"])
     construir_ceu(bpy.context.scene)
-    configurar_render(bpy.context.scene)
+    configurar_render(bpy.context.scene, args.motor)
 
     larg_m = dados["prancha"]["largura_pt"] * terreno.ESCALA
     prof_m = dados["prancha"]["altura_pt"] * terreno.ESCALA
@@ -478,7 +699,10 @@ def main():
     print("\n" + "=" * 58)
     print(f"  escala .............. {terreno.ESCALA} m/pt")
     print(f"  extensao do terreno . {larg_m:.0f} x {prof_m:.0f} m")
-    print(f"  pavilhoes ........... {n_pav}")
+    print(f"  pavilhoes ........... {n_pav} (duas aguas, nao caixa)")
+    print(f"  estruturas .......... {len(feitas)}: "
+          f"{', '.join(o.name for o in feitas) or 'nenhuma'}")
+    print(f"  vias ................ {n_vias}")
     print(f"  estandes ............ {cont['instanciado']} instanciados "
           f"+ {cont['proprio']} proprios"
           + (f" (+{cont['fora_do_corte']} fora do corte)" if bbox else ""))
