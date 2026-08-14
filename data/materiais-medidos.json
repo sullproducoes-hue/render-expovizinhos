@@ -1,0 +1,186 @@
+{
+ "o_que_e": "Cor-base por classe, tirada do footage do proprio recinto e corrigida do iluminante. NAO e medida de laboratorio: e a melhor leitura possivel de um quadro de video sem carta de cor.",
+ "quadro": "telha-metalica__DJI_20251129182345_0168_D__00m52_000s.jpg",
+ "quadro_completo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\_triagem\\provas-materiais\\telha-metalica\\telha-metalica__DJI_20251129182345_0168_D__00m52_000s.jpg",
+ "por_que_este_quadro": "golden hour, a mesma luz do filme, e tem telha, lona, grama, terra e arvore no MESMO quadro -- entao as classes sao comparaveis entre si.",
+ "ancora": {
+  "classe": "lona",
+  "albedo_assumido": 0.75,
+  "por_que": "lona de PVC branco de tenda tem refletancia de mercado 0,70-0,80"
+ },
+ "iluminante_linear_rgb": [
+  0.4496,
+  0.5084,
+  0.601
+ ],
+ "itens": {
+  "lona": {
+   "material": "MAT_LONA",
+   "onde": "agua do telhado do pavilhao de tendas ao centro-alto, a que esta VIRADA PARA O SOL. A primeira tentativa amostrou a agua virada para o ceu e o iluminante saiu azul (R/B 0,63), o que deixou a grama marrom -- superficie de ancora tem que estar iluminada como as que se quer medir",
+   "caixa_px": [
+    1440,
+    770,
+    1960,
+    850
+   ],
+   "srgb_no_quadro": [
+    157,
+    166,
+    179
+   ],
+   "albedo_linear": [
+    0.75,
+    0.75,
+    0.75
+   ],
+   "hex_aproximado": "#e1e1e1"
+  },
+  "telha": {
+   "material": "MAT_TELHA",
+   "onde": "telhado metalico do galpao a esquerda, com o sol rasante nas ondas",
+   "caixa_px": [
+    120,
+    830,
+    500,
+    960
+   ],
+   "srgb_no_quadro": [
+    188,
+    192,
+    199
+   ],
+   "albedo_linear": [
+    1.0,
+    1.0,
+    0.9502
+   ],
+   "hex_aproximado": "#fffff9"
+  },
+  "grama_pisada": {
+   "material": null,
+   "onde": "gramado junto a alameda, ao sol -- e a grama PISADA de fim de evento. Nao serve de cor geral do recinto: usada em 170.000 m² chapados, ela deixou a cena com cara de deserto no render de prova. Fica como a cor do desgaste, para a textura da Rodada 2",
+   "caixa_px": [
+    1240,
+    1300,
+    1520,
+    1380
+   ],
+   "srgb_no_quadro": [
+    99,
+    97,
+    72
+   ],
+   "albedo_linear": [
+    0.2775,
+    0.2351,
+    0.1078
+   ],
+   "hex_aproximado": "#90855c"
+  },
+  "grama": {
+   "material": "MAT_TERRENO",
+   "onde": "faixa de gramado preservado entre a alameda e o bosque, ao sol -- e a grama SA, e e ela que cobre a maior parte do recinto",
+   "caixa_px": [
+    1660,
+    1380,
+    1960,
+    1480
+   ],
+   "srgb_no_quadro": [
+    68,
+    71,
+    41
+   ],
+   "albedo_linear": [
+    0.1286,
+    0.1239,
+    0.0369
+   ],
+   "hex_aproximado": "#646336"
+  },
+  "terra": {
+   "material": "MAT_ARENA",
+   "onde": "alameda de chao batido entre os pavilhoes de tenda",
+   "caixa_px": [
+    1520,
+    1120,
+    2000,
+    1170
+   ],
+   "srgb_no_quadro": [
+    97,
+    87,
+    86
+   ],
+   "albedo_linear": [
+    0.2659,
+    0.1875,
+    0.1548
+   ],
+   "hex_aproximado": "#8d786e"
+  },
+  "brita": {
+   "material": "MAT_SAIBRO",
+   "onde": "piso solto da area de maquinas, ao pe das tendas",
+   "caixa_px": [
+    200,
+    1800,
+    600,
+    1920
+   ],
+   "srgb_no_quadro": [
+    70,
+    63,
+    58
+   ],
+   "albedo_linear": [
+    0.1362,
+    0.0978,
+    0.0704
+   ],
+   "hex_aproximado": "#67584b"
+  },
+  "arvore": {
+   "material": "MAT_COPA",
+   "onde": "massa fechada de copa no LADO DIREITO do quadro, longe do sol. Duas tentativas antes falharam e as duas pelo mesmo motivo: recorte largo pegava vao de ceu entre as copas, e recorte perto do sol pegava o veu do flare -- os dois devolviam copa mais clara que o gramado, o que nao existe",
+   "caixa_px": [
+    3000,
+    1240,
+    3300,
+    1320
+   ],
+   "srgb_no_quadro": [
+    69,
+    79,
+    46
+   ],
+   "albedo_linear": [
+    0.1324,
+    0.1538,
+    0.0455
+   ],
+   "hex_aproximado": "#666d3c"
+  },
+  "campo": {
+   "material": null,
+   "onde": "lavoura verde ao fundo, no alto do quadro. NAO entra em material nenhum: e o CONTROLE do metodo. Qualquer um olha e diz que e verde; se a inversao devolver isto oliva, quem esta errado e a inversao, nao a grama",
+   "caixa_px": [
+    2100,
+    500,
+    2500,
+    580
+   ],
+   "srgb_no_quadro": [
+    91,
+    104,
+    78
+   ],
+   "albedo_linear": [
+    0.2327,
+    0.2723,
+    0.1268
+   ],
+   "hex_aproximado": "#858e64"
+  }
+ }
+}

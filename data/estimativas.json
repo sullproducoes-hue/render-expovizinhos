@@ -1,0 +1,136 @@
+{
+ "o_que_e": "Tamanho ESTIMADO das zonas que a planta nomeia mas nao desenha. Nao e medida. Cada objeto gerado a partir daqui sai carimbado com estimado=true e com o fundamento colado nele, para ser trocado sem procurar.",
+ "autoridade": "O Natan autorizou em 14/08/2026, com estas palavras: 'pode fazer com uma estimativa aproximada'. Ate ali as 35 zonas sem footprint estavam paradas esperando decisao dele.",
+ "como_substituir": "Quando chegar print, medida de campo ou planta vetorial de uma zona, apague a entrada dela aqui: o gerador passa a usar o dado real e nada mais precisa mudar.",
+ "escrito_em": "2026-08-14",
+
+ "de_onde_vem_o_numero": [
+  "A planta tem vocabulario proprio de modulo: 5x5 (25 m2), 8x8 (64 m2) e 10x10 (100 m2) sao as cotas que se repetem nos estandes. Predio pequeno de infra usa esse modulo -- e emprestar a unidade do proprio desenho em vez de inventar uma.",
+  "Onde a planta COTA a area da zona, a cota manda e so a proporcao e assumida. Sao dois casos: ARENA DO CONHECIMENTO (200 m2, a 5 pt do rotulo) e EQ. LIMPEZA (100 m2, a 3 pt).",
+  "O rumo nao e estimado: vem de `angulo_graus` em data/locais.json, o angulo com que a planta escreve o rotulo. O rotulo de um galpao e escrito no eixo dele. O sinal inverte da pagina para o mundo (a pagina tem y para baixo) -- e a mesma relacao que ja liga RUMO_PORTAL=73 ao angulo -73,2 do rotulo do portal.",
+  "Altura segue as constantes ja usadas na cena: estande 3,2 m, pavilhao 7,0 m."
+ ],
+
+ "nao_estimar": {
+  "Portal de Entrada": "ja construido: estruturas.portal -> PortalCeleiro",
+  "PALCO": "ja construido: estruturas.palco",
+  "CAMAROTES - LADO A": "ja construido: estruturas.camarote",
+  "CAMAROTES - LADO B": "ja construido: estruturas.camarote",
+  "ARENA DE RODEIO": "e a bacia do terreno, feita em terreno.PATAMARES -- nao e edificacao"
+ },
+
+ "tipos": {
+  "quiosque": {
+   "largura_m": 5.0, "profundidade_m": 5.0, "altura_m": 3.2, "forma": "caixa",
+   "fundamento": "modulo de 25 m2, o menor cotado na planta. Bar de feira e um quiosque desse tamanho"
+  },
+  "cobertura_de_mesas": {
+   "largura_m": 12.0, "profundidade_m": 8.0, "altura_m": 3.2, "forma": "cobertura",
+   "fundamento": "area coberta com mesas e cadeiras, sem parede. O audio pede 'mesas, cadeiras, os guiches'"
+  },
+  "praca_coberta_menor": {
+   "largura_m": 25.0, "profundidade_m": 15.0, "altura_m": 3.5, "forma": "cobertura",
+   "fundamento": "o audio: 'a area do bosque segue e tem uma praca de alimentacao embaixo do bosque'. Menor que a Coberta, que foi medida em 145 x 34 m"
+  },
+  "galpao_cotado": {
+   "proporcao": 2.0, "altura_m": 4.0, "forma": "caixa",
+   "fundamento": "AREA COTADA NA PLANTA -- so a proporcao 2:1 e assumida"
+  },
+  "galpao_pequeno": {
+   "largura_m": 10.0, "profundidade_m": 6.0, "altura_m": 3.5, "forma": "caixa",
+   "fundamento": "galpao de servico de uma agua"
+  },
+  "bloco_sanitario": {
+   "largura_m": 12.0, "profundidade_m": 5.0, "altura_m": 3.0, "forma": "caixa",
+   "fundamento": "bloco de sanitarios de evento: fileira de cabines com circulacao na frente"
+  },
+  "bloco_sanitario_duplo": {
+   "largura_m": 16.0, "profundidade_m": 5.0, "altura_m": 3.0, "forma": "caixa",
+   "fundamento": "dois usos no mesmo bloco (masculino e chuveiros), por isso mais comprido"
+  },
+  "fileira_de_cabines": {
+   "largura_m": 6.0, "profundidade_m": 1.2, "altura_m": 2.3, "forma": "caixa",
+   "fundamento": "cabine quimica tem ~1,2 m de lado e vem em fileira de cinco"
+  },
+  "guarita": {
+   "largura_m": 5.0, "profundidade_m": 5.0, "altura_m": 3.0, "forma": "caixa",
+   "fundamento": "modulo de 25 m2 da propria planta"
+  },
+  "sala_tecnica": {
+   "largura_m": 6.0, "profundidade_m": 2.5, "altura_m": 2.6, "forma": "caixa",
+   "fundamento": "conteiner de obra, medida de mercado"
+  },
+  "portao_secundario": {
+   "largura_m": 8.0, "profundidade_m": 1.5, "altura_m": 5.0, "forma": "caixa",
+   "fundamento": "portao de passagem, nao o portal celeiro. O celeiro e so o Portal de Entrada"
+  },
+  "estacionamento": {
+   "largura_m": 60.0, "profundidade_m": 40.0, "altura_m": 0.0, "forma": "chao",
+   "fundamento": "NAO e predio: e superficie. Sai como chapa no chao com material proprio, nunca como caixa. O tamanho e o mais fraco desta tabela"
+  },
+  "currais": {
+   "largura_m": 60.0, "profundidade_m": 35.0, "altura_m": 2.5, "forma": "cercado",
+   "fundamento": "A MAIS FRACA DE TODAS. As mangueiras sao desenhadas como grade de dezenas de currais e tres metodos falharam em medir (ver docs/FOOTPRINTS.md). O numero vem da mancha que a grade ocupa no desenho, a olho. Trocar assim que houver print"
+  }
+ },
+
+ "altura_das_zonas_medidas": {
+  "o_que_e": "Estas zonas TEM footprint medido em data/footprints.json -- largura, profundidade e rumo saem do desenho. O que a planta nao diz de nenhuma delas e a ALTURA, e altura nao se mede em planta baixa. Entao aqui so a altura e a forma sao estimadas, e o objeto sai com altura_estimada=true e footprint_medido=true, para nao confundir as duas coisas.",
+  "regua": "A unica referencia de altura do projeto e a pessoa em pe de ~1,70 m no quadro `1 (4)` 00:00:02 do footage, ao lado do palco fixo (ver ESTADO.md). Confirmar com um quadro de drone lateral.",
+  "zonas": {
+   "Praça de Alimentação Coberta": {
+    "altura_m": 5.0, "forma": "cobertura", "material": "MAT_LONA",
+    "fundamento": "o audio: 'sai do pavilhao 1 e ja la no fundo tem a area coberta... nessa area coberta vai ser uma praca de alimentacao coberta'. Cobertura sem parede, pe-direito alto para ventilar 145 x 34 m"
+   },
+   "Café Colonial Cozinha Didática": {
+    "altura_m": 5.0, "forma": "caixa", "material": "MAT_PAVILHAO",
+    "fundamento": "o audio poe cozinha de um lado e cozinha didatica do outro -- e predio fechado, nao cobertura. E um dos quatro diferenciais do cliente"
+   },
+   "RECINTO DE LEILÕES": {
+    "altura_m": 7.0, "forma": "caixa", "material": "MAT_PAVILHAO",
+    "fundamento": "o audio: 'entra no recinto, tem leiloes, os leiloes acontecendo'. Salao com arquibancada interna e pista central pede pe-direito de pavilhao"
+   },
+   "AUDITÓRIO": {
+    "altura_m": 6.0, "forma": "caixa", "material": "MAT_PAVILHAO",
+    "fundamento": "auditorio com plateia em piso inclinado"
+   },
+   "PALCO AFTER": {
+    "altura_m": 8.0, "forma": "cobertura", "material": "MAT_LONA",
+    "fundamento": "palco coberto: a medida de 60 x 14,5 m e a area do palco com as alas, nao a caixa cenica. Nao usa estruturas.palco porque aquele e o palco fixo da arena, de outro tamanho"
+   },
+   "RESIDÊNCIA": {
+    "altura_m": 3.5, "forma": "caixa", "material": "MAT_LONA",
+    "fundamento": "casa terrea. Sao tres no recinto e nenhuma aparece na decupagem -- entram para o fundo nao ficar vazio"
+   },
+   "LAVAGEM ANIMAIS": {
+    "altura_m": 3.5, "forma": "cobertura", "material": "MAT_TELHA",
+    "fundamento": "baia de lavagem e cobertura sobre piso lavavel, aberta dos lados"
+   }
+  },
+  "ja_tem_construcao_propria": {
+   "PALCO PALCO": "estruturas.palco",
+   "CAMAROTES - LADO A": "estruturas.camarote",
+   "CAMAROTES - LADO B": "estruturas.camarote",
+   "Portal de Entrada": "estruturas.portal",
+   "ARENA DE RODEIO": "terreno.PATAMARES"
+  }
+ },
+
+ "por_rotulo": {
+  "Bar": "quiosque",
+  "ESPAÇO P/ MESAS": "cobertura_de_mesas",
+  "Praça de Alimentação Aberta": "praca_coberta_menor",
+  "ARENA DO CONHECIMENTO - UTF-PR": "galpao_cotado",
+  "EQ. LIMPEZA": "galpao_cotado",
+  "BANHEIROS FEM.": "bloco_sanitario",
+  "BANHEIROS MASC. CHUVEIROS": "bloco_sanitario_duplo",
+  "SANITÁRIOS QUIMICOS": "fileira_de_cabines",
+  "CCO": "sala_tecnica",
+  "CONTROLE SANITÁRIO": "guarita",
+  "PORTARIA": "guarita",
+  "PORTAL": "portao_secundario",
+  "ESTACIONAMENTO": "estacionamento",
+  "MANGUEIRAS": "currais",
+  "ORDENHADEIRA": "galpao_pequeno"
+ }
+}

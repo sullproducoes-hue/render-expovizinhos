@@ -94,6 +94,9 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Render retomável | `scripts/render_shots.py` | Plano a plano, animatic, calibração de tempo (`--cronometrar`) |
 | Entrega | `scripts/encode.sh` | Os 3 arquivos + cartela de teste, a partir da sequência de PNG |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro **e do conteúdo de cada ambiente** |
+| Footprint das zonas | `scripts/extrair_footprints.py` + `data/footprints.json` | Mede o desenho. **18 zonas com footprint que serve; 35 só têm rótulo** — ver `docs/FOOTPRINTS.md` |
+| Estimativa das demais | `data/estimativas.json` + `scripts/estimativas.py` | 33 zonas na coleção **ESTIMADO**, carimbadas. Autorizado por ele em 14/08. Medida e estimativa não se misturam |
+| Cor-base dos materiais | `scripts/medir_materiais.py` + `data/materiais-medidos.json` | Medida do footage, com âncora na lona branca e **teste de controle** na lavoura. Falta a textura |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
 | Dossiê de materiais | `docs/MATERIAIS-referencia.md` | Triagem dos 137 GB: escolha por classe, com vídeo, timecode e prova |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
@@ -104,7 +107,9 @@ Saída atual do gerador (filme completo, sem `--plano`):
 ```
 escala .............. 0.5611 m/pt
 extensao do terreno . 808 x 454 m
-pavilhoes ........... 6
+pavilhoes ........... 8
+zonas medidas ....... 9 (footprint do desenho, altura declarada)
+zonas estimadas ..... 33 na colecao ESTIMADO (4 recusadas) -- NAO SAO MEDIDA
 estandes ............ 74 instanciados + 60 proprios
 planos .............. 22 de 22 (filme completo)
 render .............. 2760x1380 (2:1)
@@ -140,10 +145,21 @@ que ficam encostados em fileira — a mediana entre rótulos consecutivos é
 17,82 pt. A série A não serve para o mesmo cálculo, há corredor entre módulos.
 Resulta em terreno de 808 × 454 m. **Ainda não conferida com medida em campo.**
 
+**A planta descreve 113 zonas e desenha footprint para 18.** O resto é rótulo
+sobre chão aberto, e o extrator antigo media a tinta da própria palavra — três
+métodos foram testados para recuperar o que falta e os três foram recusados pelo
+número. Consequência direta para o passo 1 do fluxo dele: as 35 zonas sem
+desenho precisam de **print com posição e tamanho**, de **caixa padrão
+declarada**, ou de ficar fora desta versão. Detalhe em `docs/FOOTPRINTS.md`.
+
 **Nem o PDF nem o DWG têm geometria vetorial.** Os dois carregam o mesmo bitmap
 de 1806 × 1383 px. O DWG (AC1018) tem 4883 TEXT, 1 LINE, 1 SOLID, 2 HATCH e
 zero polilinha — e 4483 dos textos são caracteres soltos, glifo a glifo.
 Assinatura de PDF importado para CAD. Não insista em extrair contorno dele.
+**Reconferido em 14/08**, por varredura crua do DXF que conta entidade dentro
+dos BLOCKS: 4 entidades de desenho no arquivo inteiro. O DWG da pasta
+`E:\Projetos todos\Mapa - agroshow\` é este mesmo, byte a byte. E o PDF também
+não tem vetor — `get_drawings()` devolve só o retângulo branco da página.
 **Consequência para as estradas:** o traçado é lido do bitmap e conferido por
 print com o Natan antes de virar geometria.
 
@@ -260,13 +276,22 @@ Frases literais, não reescrever:
 *"não corrija pois esta longe de um render de qualidade"* — dito quando eu
 consertava um detalhe da geometria do portal. O que falta não é polígono:
 
-1. **HDRI de golden hour** no lugar do céu chapado, e o sol alinhado a ele.
-   `construir_ceu()` ainda é uma cor lisa. É o maior salto por menos trabalho.
-2. **Materiais PBR** calibrados pelas provas do footage — brita, telha, lona e
-   terra vêm de `docs/MATERIAIS-referencia.md`; grama vem de biblioteca CC0
-   calibrada pela cor medida, porque não existe close de grama no acervo.
-3. **Vegetação e povoamento.** O mapa tem 6 Bosques, 2 Matas Nativas e 15
-   Taludes, e hoje tudo isso é grama chapada.
+1. ~~**HDRI de golden hour** no lugar do céu chapado~~ — **fechado em 14/08.**
+   `construir_ceu()` carrega o HDRI, a SUN é calculada pelo NOAA e colorida pelo
+   disco medido do céu. O escolhido é o `kloppenheim_06`, por erro de elevação
+   de 2,1° contra 8,0° do belfast. Provas em `out/luz/`.
+2. **Materiais** — a **cor-base já foi medida** em 14/08 por
+   `scripts/medir_materiais.py`, do footage do próprio recinto: grama, terra,
+   brita e lona saem de `data/materiais-medidos.json`. O que **falta** é a
+   textura (mapas PBR de biblioteca CC0, normal e variação de mancha) — hoje
+   cada material ainda é uma cor chapada, e é isso que faz o gramado ler como
+   feltro num plano aberto.
+3. **Vegetação** — feita em 14/08: os 6 Bosques, as 2 Matas Nativas e a
+   **alameda arborizada**, num total de **418 árvores, todas instâncias de UMA
+   malha**. Contrato em `data/vegetacao.json`; o terreno deixou de ser cor
+   chapada e mistura as **duas gramas medidas** — a sã e a pisada — por ruído de
+   duas frequências. Falta o **povoamento** (gente, gado, montaria) e o arbusto
+   dos 15 taludes.
 4. **Títulos, letreiros e logos** — passo 3 do fluxo dele. Logo se resolve com
    o JPEG achado ou o nome simples; não esperar vetor.
 5. Confirmar as alturas dos patamares com um quadro de drone lateral.
@@ -281,6 +306,20 @@ Medido nesta máquina, com a cena ainda crua: **31 s por quadro** em 2760×1380,
 Cycles 128 samples, OptiX na RTX 4060 — o filme inteiro, 4.635 quadros, dá
 **cerca de 39 h**. Com textura, vegetação e gente, sobe. Recronometrar depois
 do passo 2 antes de prometer prazo.
+
+**Recronometrado em 14/08, já com as 42 zonas e as 232 árvores** (por ordem
+dele: *"medir o custo da vegetação antes de escolher o teto de horas"*),
+com `scripts/cronometrar_vegetacao.py` — o mesmo quadro, duas vezes:
+
+| | s/quadro | filme inteiro |
+|---|---|---|
+| sem vegetação | 30,0 s | 38,7 h |
+| **com vegetação (418 árvores)** | **33,1 s** | **42,6 h** |
+| custo das árvores | +3,0 s (+10%) | +3,9 h |
+
+**A vegetação é barata, e é a instanciação que faz isso** — 308 vértices reais
+em memória contra 128.744 se cada árvore tivesse a sua malha. Ainda é cena sem
+textura e sem gente — recronometrar depois da textura.
 
 Feito em 13/08/2026: o agente `.claude/agents/render-agroshow.md` foi reescrito
 para o caminho 3D. Ele é **sistema próprio** — não responde ao Cláudio (o

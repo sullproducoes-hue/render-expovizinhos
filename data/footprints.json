@@ -1,0 +1,1808 @@
+{
+ "aviso": "MEDIDO DO DESENHO, nao de cota. A planta so cota area dos pavilhoes de animais e dos estandes. Confira antes de tratar como dado. Item com confianca 'baixa' nao vai para geometria sem olhar o desenho.",
+ "metodo": "v2",
+ "escala_m_por_pt": 0.5611,
+ "px_por_pt": 2.5,
+ "itens": [
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 489.65,
+   "y_pt": 335.81,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 5.3,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 520.05,
+   "y_pt": 409.92,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 3.2,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 526.61,
+   "y_pt": 363.01,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 10.1,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 527.14,
+   "y_pt": 300.2,
+   "largura_m": 105.28,
+   "profundidade_m": 27.13,
+   "area_m2": 893.9,
+   "rumo_graus": 99.3,
+   "preenchimento": 0.313,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 96,
+   "busca_px": 35,
+   "area_fora_do_rotulo_m2": 893.9,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "o rotulo nao encosta na mancha"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 566.03,
+   "y_pt": 455.4,
+   "metodo": "sem mancha",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "nenhuma mancha encontrada"
+   ]
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 580.02,
+   "y_pt": 327.19,
+   "largura_m": 12.29,
+   "profundidade_m": 3.43,
+   "area_m2": 30.1,
+   "rumo_graus": 113.6,
+   "preenchimento": 0.714,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 163,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 30.1,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "quase toda a mancha e a palavra",
+    "encosto minimo entre rotulo e mancha"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 583.0,
+   "y_pt": 286.37,
+   "largura_m": 31.17,
+   "profundidade_m": 3.51,
+   "area_m2": 78.6,
+   "rumo_graus": 105.9,
+   "preenchimento": 0.719,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 128,
+   "busca_px": 35,
+   "area_fora_do_rotulo_m2": 78.6,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "filete",
+    "o rotulo nao encosta na mancha"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 630.46,
+   "y_pt": 405.53,
+   "largura_m": 13.67,
+   "profundidade_m": 2.87,
+   "area_m2": 31.4,
+   "rumo_graus": 115.6,
+   "preenchimento": 0.8,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 96,
+   "busca_px": 55,
+   "area_fora_do_rotulo_m2": 31.4,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "quase toda a mancha e a palavra",
+    "o rotulo nao encosta na mancha"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 635.32,
+   "y_pt": 353.18,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 17.1,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Bar",
+   "rotulos": [
+    "Bar"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 637.55,
+   "y_pt": 307.46,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Café Colonial Cozinha Didática",
+   "rotulos": [
+    "Café Colonial",
+    "Cozinha Didática"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 442.21,
+   "y_pt": 162.51,
+   "largura_m": 34.34,
+   "profundidade_m": 14.14,
+   "area_m2": 438.1,
+   "rumo_graus": 0.0,
+   "preenchimento": 0.902,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 10720,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 153.3,
+   "rumo_do_bloco": 0.0,
+   "rumo_confiavel": false,
+   "suspeitas": [],
+   "confianca": "media",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "ESPAÇO P/ MESAS",
+   "rotulos": [
+    "ESPAÇO P/ MESAS"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 328.86,
+   "y_pt": 280.23,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESPAÇO P/ MESAS",
+   "rotulos": [
+    "ESPAÇO P/ MESAS"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 376.24,
+   "y_pt": 238.85,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Mercado do Produtor",
+   "rotulos": [
+    "Mercado do Produtor"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 425.55,
+   "y_pt": 168.16,
+   "largura_m": 36.36,
+   "profundidade_m": 6.28,
+   "area_m2": 194.5,
+   "rumo_graus": 0.0,
+   "preenchimento": 0.851,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 5825,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 17.2,
+   "rumo_do_bloco": 0.0,
+   "rumo_confiavel": false,
+   "suspeitas": [
+    "a mancha e a propria palavra"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "Praça de Alimentação Aberta",
+   "rotulos": [
+    "Praça de Alimentação",
+    "Aberta"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 359.42,
+   "y_pt": 267.74,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Praça de Alimentação Coberta",
+   "rotulos": [
+    "Praça de Alimentação",
+    "Coberta"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 628.45,
+   "y_pt": 175.3,
+   "largura_m": 145.53,
+   "profundidade_m": 33.64,
+   "area_m2": 2990.5,
+   "rumo_graus": 91.8,
+   "preenchimento": 0.611,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 19390,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 2276.3,
+   "rumo_do_bloco": 91.3,
+   "rumo_confiavel": false,
+   "suspeitas": [],
+   "confianca": "media",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "É CHURRASCO!",
+   "rotulos": [
+    "É CHURRASCO!"
+   ],
+   "categoria": "alimentacao",
+   "x_pt": 222.89,
+   "y_pt": 397.45,
+   "largura_m": 12.79,
+   "profundidade_m": 2.02,
+   "area_m2": 25.6,
+   "rumo_graus": 90.0,
+   "preenchimento": 0.992,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 417,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 20.2,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "quase toda a mancha e a palavra"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "ARENA DE RODEIO",
+   "rotulos": [
+    "ARENA DE RODEIO"
+   ],
+   "categoria": "arena",
+   "x_pt": 586.83,
+   "y_pt": 410.77,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ARENA DO CONHECIMENTO - UTF-PR",
+   "rotulos": [
+    "ARENA DO CONHECIMENTO - UTF-PR"
+   ],
+   "categoria": "arena",
+   "x_pt": 261.74,
+   "y_pt": 670.89,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ],
+   "area_cotada_m2": 200.0
+  },
+  {
+   "rotulo": "CAMAROTES - LADO A",
+   "rotulos": [
+    "CAMAROTES - LADO A"
+   ],
+   "categoria": "arena",
+   "x_pt": 665.64,
+   "y_pt": 388.61,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "CAMAROTES - LADO B",
+   "rotulos": [
+    "CAMAROTES - LADO B"
+   ],
+   "categoria": "arena",
+   "x_pt": 528.12,
+   "y_pt": 445.73,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "PALCO AFTER",
+   "rotulos": [
+    "PALCO AFTER"
+   ],
+   "categoria": "arena",
+   "x_pt": 685.12,
+   "y_pt": 369.23,
+   "largura_m": 60.02,
+   "profundidade_m": 14.5,
+   "area_m2": 658.1,
+   "rumo_graus": 29.1,
+   "preenchimento": 0.756,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 343,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 658.1,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "PALCO PALCO",
+   "rotulos": [
+    "PALCO",
+    "PALCO"
+   ],
+   "categoria": "arena",
+   "x_pt": 609.9,
+   "y_pt": 446.65,
+   "largura_m": 20.28,
+   "profundidade_m": 17.67,
+   "area_m2": 292.1,
+   "rumo_graus": 116.6,
+   "preenchimento": 0.816,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 5766,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 95.2,
+   "rumo_do_bloco": 117.5,
+   "rumo_confiavel": false,
+   "suspeitas": [],
+   "confianca": "media",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "AUDITÓRIO",
+   "rotulos": [
+    "AUDITÓRIO"
+   ],
+   "categoria": "infra",
+   "x_pt": 802.16,
+   "y_pt": 273.18,
+   "largura_m": 23.61,
+   "profundidade_m": 12.05,
+   "area_m2": 244.9,
+   "rumo_graus": 107.7,
+   "preenchimento": 0.861,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 3843,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 156.0,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "BANHEIROS FEM.",
+   "rotulos": [
+    "BANHEIROS FEM."
+   ],
+   "categoria": "infra",
+   "x_pt": 415.4,
+   "y_pt": 605.03,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 15.1,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "BANHEIROS MASC. CHUVEIROS",
+   "rotulos": [
+    "BANHEIROS MASC.",
+    "CHUVEIROS"
+   ],
+   "categoria": "infra",
+   "x_pt": 416.79,
+   "y_pt": 623.12,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "CCO",
+   "rotulos": [
+    "CCO"
+   ],
+   "categoria": "infra",
+   "x_pt": 774.46,
+   "y_pt": 273.82,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "CONTROLE SANITÁRIO",
+   "rotulos": [
+    "CONTROLE SANITÁRIO"
+   ],
+   "categoria": "infra",
+   "x_pt": 146.88,
+   "y_pt": 183.4,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 2.2,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "EQ. LIMPEZA",
+   "rotulos": [
+    "EQ. LIMPEZA"
+   ],
+   "categoria": "infra",
+   "x_pt": 108.07,
+   "y_pt": 351.9,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 1.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ],
+   "area_cotada_m2": 100.0
+  },
+  {
+   "rotulo": "EQ. LIMPEZA",
+   "rotulos": [
+    "EQ. LIMPEZA"
+   ],
+   "categoria": "infra",
+   "x_pt": 122.51,
+   "y_pt": 455.37,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 1.5,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ],
+   "area_cotada_m2": 100.0
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 273.64,
+   "y_pt": 140.86,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 449.84,
+   "y_pt": 109.84,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 635.27,
+   "y_pt": 90.9,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 791.05,
+   "y_pt": 84.82,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 841.31,
+   "y_pt": 159.84,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 923.72,
+   "y_pt": 271.52,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 144.09,
+   "y_pt": 793.38,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ESTACIONAMENTO",
+   "rotulos": [
+    "ESTACIONAMENTO"
+   ],
+   "categoria": "infra",
+   "x_pt": 306.42,
+   "y_pt": 789.87,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "PORTAL",
+   "rotulos": [
+    "PORTAL"
+   ],
+   "categoria": "infra",
+   "x_pt": 415.06,
+   "y_pt": 209.89,
+   "metodo": "sem mancha",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "nenhuma mancha encontrada"
+   ]
+  },
+  {
+   "rotulo": "PORTAL",
+   "rotulos": [
+    "PORTAL"
+   ],
+   "categoria": "infra",
+   "x_pt": 332.99,
+   "y_pt": 368.25,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 9.2,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "PORTAL",
+   "rotulos": [
+    "PORTAL"
+   ],
+   "categoria": "infra",
+   "x_pt": 308.81,
+   "y_pt": 234.08,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 8.3,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "PORTAL",
+   "rotulos": [
+    "PORTAL"
+   ],
+   "categoria": "infra",
+   "x_pt": 806.37,
+   "y_pt": 247.54,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "PORTARIA",
+   "rotulos": [
+    "PORTARIA"
+   ],
+   "categoria": "infra",
+   "x_pt": 134.75,
+   "y_pt": 204.38,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 8.8,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Portal de Entrada",
+   "rotulos": [
+    "Portal de Entrada"
+   ],
+   "categoria": "infra",
+   "x_pt": 841.8,
+   "y_pt": 245.96,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "RESIDÊNCIA",
+   "rotulos": [
+    "RESIDÊNCIA"
+   ],
+   "categoria": "infra",
+   "x_pt": 850.19,
+   "y_pt": 345.95,
+   "largura_m": 39.1,
+   "profundidade_m": 36.09,
+   "area_m2": 970.1,
+   "rumo_graus": 35.7,
+   "preenchimento": 0.687,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 3011,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 877.0,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "RESIDÊNCIA",
+   "rotulos": [
+    "RESIDÊNCIA"
+   ],
+   "categoria": "infra",
+   "x_pt": 117.53,
+   "y_pt": 392.75,
+   "largura_m": 13.02,
+   "profundidade_m": 12.34,
+   "area_m2": 143.8,
+   "rumo_graus": 0.0,
+   "preenchimento": 0.895,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 651,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 135.3,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "RESIDÊNCIA",
+   "rotulos": [
+    "RESIDÊNCIA"
+   ],
+   "categoria": "infra",
+   "x_pt": 92.6,
+   "y_pt": 396.29,
+   "largura_m": 13.47,
+   "profundidade_m": 11.45,
+   "area_m2": 138.4,
+   "rumo_graus": 0.0,
+   "preenchimento": 0.898,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 682,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 128.9,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "SANITÁRIOS QUIMICOS",
+   "rotulos": [
+    "SANITÁRIOS QUIMICOS"
+   ],
+   "categoria": "infra",
+   "x_pt": 554.55,
+   "y_pt": 500.37,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 13.9,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "SANITÁRIOS QUIMICOS",
+   "rotulos": [
+    "SANITÁRIOS QUIMICOS"
+   ],
+   "categoria": "infra",
+   "x_pt": 734.12,
+   "y_pt": 423.82,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 11.9,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "Bosque",
+   "rotulos": [
+    "Bosque"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 253.04,
+   "y_pt": 273.11,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Bosque",
+   "rotulos": [
+    "Bosque"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 278.67,
+   "y_pt": 219.83,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Bosque",
+   "rotulos": [
+    "Bosque"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 322.15,
+   "y_pt": 182.04,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Bosque",
+   "rotulos": [
+    "Bosque"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 526.79,
+   "y_pt": 527.22,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Bosque",
+   "rotulos": [
+    "Bosque"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 692.27,
+   "y_pt": 441.66,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Bosque",
+   "rotulos": [
+    "Bosque"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 785.14,
+   "y_pt": 392.53,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Mata Nativa",
+   "rotulos": [
+    "Mata Nativa"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 611.32,
+   "y_pt": 542.1,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Mata Nativa",
+   "rotulos": [
+    "Mata Nativa"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 809.05,
+   "y_pt": 444.24,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 383.94,
+   "y_pt": 471.19,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 430.62,
+   "y_pt": 439.7,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 434.12,
+   "y_pt": 601.51,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 462.73,
+   "y_pt": 256.8,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 477.73,
+   "y_pt": 424.73,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 500.48,
+   "y_pt": 300.33,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 506.78,
+   "y_pt": 397.53,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 540.55,
+   "y_pt": 428.58,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 563.69,
+   "y_pt": 317.6,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 607.96,
+   "y_pt": 274.04,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 633.11,
+   "y_pt": 379.33,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 633.51,
+   "y_pt": 231.52,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude",
+   "rotulos": [
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 655.07,
+   "y_pt": 355.57,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Talude Talude",
+   "rotulos": [
+    "Talude",
+    "Talude"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 696.04,
+   "y_pt": 325.17,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 364.93,
+   "y_pt": 276.81,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 329.37,
+   "y_pt": 254.33,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 345.09,
+   "y_pt": 223.2,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 421.1,
+   "y_pt": 249.87,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 337.78,
+   "y_pt": 326.54,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 305.03,
+   "y_pt": 262.33,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "Trilha",
+   "rotulos": [
+    "Trilha"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 305.07,
+   "y_pt": 300.3,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "ÁREA RESTRITA",
+   "rotulos": [
+    "ÁREA RESTRITA"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 489.55,
+   "y_pt": 714.65,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "ÁREA RESTRITA",
+   "rotulos": [
+    "ÁREA RESTRITA"
+   ],
+   "categoria": "paisagem",
+   "x_pt": 511.33,
+   "y_pt": 805.55,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "PAVILHÃO - EQUÍNOS",
+   "rotulos": [
+    "PAVILHÃO - EQUÍNOS"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 195.37,
+   "y_pt": 699.69,
+   "largura_m": 49.55,
+   "profundidade_m": 20.24,
+   "area_m2": 717.3,
+   "rumo_graus": 107.9,
+   "preenchimento": 0.715,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 8067,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 489.7,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 560.0
+  },
+  {
+   "rotulo": "PAVILHÃO - GADO CORTE",
+   "rotulos": [
+    "PAVILHÃO - GADO CORTE"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 149.8,
+   "y_pt": 585.4,
+   "largura_m": 45.85,
+   "profundidade_m": 16.82,
+   "area_m2": 765.1,
+   "rumo_graus": 108.4,
+   "preenchimento": 0.992,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 9581,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 463.2,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 720.0
+  },
+  {
+   "rotulo": "PAVILHÃO - GADO LEITE",
+   "rotulos": [
+    "PAVILHÃO - GADO LEITE"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 124.04,
+   "y_pt": 507.58,
+   "largura_m": 55.72,
+   "profundidade_m": 16.97,
+   "area_m2": 782.9,
+   "rumo_graus": 108.3,
+   "preenchimento": 0.828,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 9063,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 502.5,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 720.0
+  },
+  {
+   "rotulo": "PAVILHÃO - NÚCLEO CARRA BRANCA",
+   "rotulos": [
+    "PAVILHÃO - NÚCLEO CARRA BRANCA"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 137.15,
+   "y_pt": 546.45,
+   "largura_m": 45.88,
+   "profundidade_m": 16.84,
+   "area_m2": 766.8,
+   "rumo_graus": 108.3,
+   "preenchimento": 0.993,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 13379,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 266.5,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 720.0
+  },
+  {
+   "rotulo": "PAVILHÃO - OVINOS E CAPRINOS",
+   "rotulos": [
+    "PAVILHÃO - OVINOS E CAPRINOS"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 160.22,
+   "y_pt": 624.94,
+   "largura_m": 45.85,
+   "profundidade_m": 16.82,
+   "area_m2": 764.2,
+   "rumo_graus": 108.4,
+   "preenchimento": 0.991,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 11977,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 341.9,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 720.0
+  },
+  {
+   "rotulo": "PAVILHÃO - PEQUENOS ANIMAIS",
+   "rotulos": [
+    "PAVILHÃO - PEQUENOS ANIMAIS"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 175.67,
+   "y_pt": 663.22,
+   "largura_m": 45.85,
+   "profundidade_m": 16.96,
+   "area_m2": 772.4,
+   "rumo_graus": 108.4,
+   "preenchimento": 0.993,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 11890,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 357.1,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 720.0
+  },
+  {
+   "rotulo": "PAVILHÃO 1",
+   "rotulos": [
+    "PAVILHÃO 1"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 727.58,
+   "y_pt": 166.34,
+   "largura_m": 51.85,
+   "profundidade_m": 25.59,
+   "area_m2": 936.2,
+   "rumo_graus": 90.0,
+   "preenchimento": 0.706,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 3612,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 888.4,
+   "rumo_do_bloco": 91.3,
+   "rumo_confiavel": false,
+   "suspeitas": [],
+   "confianca": "media",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "PAVILHÃO 2",
+   "rotulos": [
+    "PAVILHÃO 2"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 507.28,
+   "y_pt": 158.81,
+   "largura_m": 46.05,
+   "profundidade_m": 30.8,
+   "area_m2": 1067.8,
+   "rumo_graus": 90.3,
+   "preenchimento": 0.753,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 3612,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 1019.4,
+   "rumo_do_bloco": 91.3,
+   "rumo_confiavel": false,
+   "suspeitas": [],
+   "confianca": "media",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "PAVILHÃO 3",
+   "rotulos": [
+    "PAVILHÃO 3"
+   ],
+   "categoria": "pavilhoes",
+   "x_pt": 438.69,
+   "y_pt": 168.92,
+   "largura_m": 12.57,
+   "profundidade_m": 3.59,
+   "area_m2": 38.1,
+   "rumo_graus": 90.0,
+   "preenchimento": 0.844,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 3485,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 0.3,
+   "rumo_do_bloco": 0.0,
+   "rumo_confiavel": false,
+   "suspeitas": [
+    "a mancha e a propria palavra"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "CASA DO MÉDICO VETERINÁRIO",
+   "rotulos": [
+    "CASA DO",
+    "MÉDICO",
+    "VETERINÁRIO"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 268.76,
+   "y_pt": 343.94,
+   "largura_m": 20.27,
+   "profundidade_m": 11.33,
+   "area_m2": 205.4,
+   "rumo_graus": 114.7,
+   "preenchimento": 0.895,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 3983,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 56.1,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "quase toda a mancha e a palavra"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "JULGAMENTO RUSTICO",
+   "rotulos": [
+    "JULGAMENTO RUSTICO"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 134.48,
+   "y_pt": 390.85,
+   "largura_m": 16.04,
+   "profundidade_m": 6.28,
+   "area_m2": 37.9,
+   "rumo_graus": 74.7,
+   "preenchimento": 0.377,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 922,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 17.6,
+   "rumo_do_bloco": 14.3,
+   "rumo_confiavel": false,
+   "suspeitas": [
+    "a mancha e a propria palavra"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto",
+   "area_cotada_m2": 25.0
+  },
+  {
+   "rotulo": "LAVAGEM ANIMAIS",
+   "rotulos": [
+    "LAVAGEM ANIMAIS"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 84.73,
+   "y_pt": 613.52,
+   "largura_m": 18.67,
+   "profundidade_m": 7.99,
+   "area_m2": 144.7,
+   "rumo_graus": 6.6,
+   "preenchimento": 0.97,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 2873,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 62.7,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [],
+   "confianca": "alta",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "MANGUEIRAS",
+   "rotulos": [
+    "MANGUEIRAS"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 175.53,
+   "y_pt": 327.2,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 0.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "ORDENHADEIRA",
+   "rotulos": [
+    "ORDENHADEIRA"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 128.43,
+   "y_pt": 480.07,
+   "metodo": "so o rotulo",
+   "confianca": "nenhuma",
+   "area_fora_do_rotulo_m2": 5.0,
+   "suspeitas": [
+    "a unica mancha sob o rotulo e a tinta da propria palavra: esta zona nao tem footprint desenhado"
+   ]
+  },
+  {
+   "rotulo": "PISTA DE JULGAMENTOS",
+   "rotulos": [
+    "PISTA DE JULGAMENTOS"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 226.02,
+   "y_pt": 553.47,
+   "largura_m": 11.16,
+   "profundidade_m": 3.48,
+   "area_m2": 28.0,
+   "rumo_graus": 105.9,
+   "preenchimento": 0.72,
+   "metodo": "fill",
+   "particao": "inteira",
+   "sobreposicao_px": 530,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 23.6,
+   "rumo_do_bloco": null,
+   "rumo_confiavel": true,
+   "suspeitas": [
+    "quase toda a mancha e a palavra"
+   ],
+   "confianca": "baixa",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "RECINTO DE LEILÕES",
+   "rotulos": [
+    "RECINTO DE LEILÕES"
+   ],
+   "categoria": "pecuaria",
+   "x_pt": 164.1,
+   "y_pt": 417.95,
+   "largura_m": 38.23,
+   "profundidade_m": 35.07,
+   "area_m2": 878.3,
+   "rumo_graus": 61.8,
+   "preenchimento": 0.655,
+   "metodo": "fill",
+   "particao": "watershed",
+   "sobreposicao_px": 6983,
+   "busca_px": 15,
+   "area_fora_do_rotulo_m2": 731.6,
+   "rumo_do_bloco": 14.3,
+   "rumo_confiavel": false,
+   "suspeitas": [],
+   "confianca": "media",
+   "fonte": "medido do desenho da prancha, nao cotado em texto"
+  },
+  {
+   "rotulo": "AV. VER. DORVALINO TOSI",
+   "rotulos": [
+    "AV. VER. DORVALINO TOSI"
+   ],
+   "categoria": "vias",
+   "x_pt": 963.13,
+   "y_pt": 128.55,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "AVENIDA JOSÉ MARCANTE",
+   "rotulos": [
+    "AVENIDA JOSÉ MARCANTE"
+   ],
+   "categoria": "vias",
+   "x_pt": 1025.03,
+   "y_pt": 287.41,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "CARROS DE APLICATIVO AVENIDA VINICIUS DE MORAIS",
+   "rotulos": [
+    "CARROS DE APLICATIVO",
+    "AVENIDA VINICIUS DE MORAIS"
+   ],
+   "categoria": "vias",
+   "x_pt": 975.16,
+   "y_pt": 334.6,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "CRUZEIRO DO IGUAÇU PR 473",
+   "rotulos": [
+    "CRUZEIRO DO IGUAÇU",
+    "PR 473"
+   ],
+   "categoria": "vias",
+   "x_pt": 91.42,
+   "y_pt": 244.23,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "DOIS VIZINHOS",
+   "rotulos": [
+    "DOIS VIZINHOS"
+   ],
+   "categoria": "vias",
+   "x_pt": 46.93,
+   "y_pt": 477.27,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "PR 473",
+   "rotulos": [
+    "PR 473"
+   ],
+   "categoria": "vias",
+   "x_pt": 54.95,
+   "y_pt": 386.88,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  },
+  {
+   "rotulo": "RUA JORGE AMADO",
+   "rotulos": [
+    "RUA JORGE AMADO"
+   ],
+   "categoria": "vias",
+   "x_pt": 886.93,
+   "y_pt": 356.72,
+   "metodo": "fora do alcance",
+   "confianca": "nenhuma",
+   "suspeitas": [
+    "categoria sem edificacao: nao se mede footprint de talude, bosque, trilha ou rua neste desenho"
+   ]
+  }
+ ]
+}

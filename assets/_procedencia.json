@@ -1,0 +1,237 @@
+{
+ "itens": [
+  {
+   "arquivo": "assets/hdri/belfast_sunset_puresky_4k.hdr",
+   "tipo": "hdri",
+   "nome": "Belfast Sunset (Pure Sky)",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Dimitrios Savva",
+    "Greg Zaal",
+    "Jarod Guest"
+   ],
+   "url": "https://polyhaven.com/a/belfast_sunset_puresky",
+   "md5": "52d2339c16069a2aaa7fd37a320d8495",
+   "bytes": 17420114,
+   "resolucao": "4k",
+   "coords": [
+    -25.687944,
+    30.113194
+   ],
+   "evs_cap": 12
+  },
+  {
+   "arquivo": "assets/hdri/kloppenheim_06_puresky_4k.hdr",
+   "tipo": "hdri",
+   "nome": "Kloppenheim 06 (Pure Sky)",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Greg Zaal",
+    "Jarod Guest"
+   ],
+   "url": "https://polyhaven.com/a/kloppenheim_06_puresky",
+   "md5": "63e9826c43b973f8b6ecb07cb6a89227",
+   "bytes": 17385661,
+   "resolucao": "4k",
+   "coords": [
+    -25.648383,
+    30.151945
+   ],
+   "evs_cap": 12
+  },
+  {
+   "arquivo": "assets/textura/aerial_grass_rock_Rough_2k.jpg",
+   "tipo": "textura",
+   "nome": "Aerial Grass Rock — Rough",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/aerial_grass_rock",
+   "md5": "8d181000237d420a73f99dfc260dab17",
+   "bytes": 1495844,
+   "resolucao": "2k",
+   "mapa": "Rough",
+   "lado_mm": [
+    15000,
+    15000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/aerial_grass_rock_nor_gl_2k.jpg",
+   "tipo": "textura",
+   "nome": "Aerial Grass Rock — nor_gl",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/aerial_grass_rock",
+   "md5": "0c5423ce365169df7c242933b5137696",
+   "bytes": 3799025,
+   "resolucao": "2k",
+   "mapa": "nor_gl",
+   "lado_mm": [
+    15000,
+    15000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/corrugated_iron_02_Rough_2k.jpg",
+   "tipo": "textura",
+   "nome": "Corrugated Iron 02 — Rough",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Jenelle van Heerden",
+    "Sergej Majboroda"
+   ],
+   "url": "https://polyhaven.com/a/corrugated_iron_02",
+   "md5": "cd1a30895816c7a72e1baf780fcbc2e8",
+   "bytes": 3492646,
+   "resolucao": "2k",
+   "mapa": "Rough",
+   "lado_mm": [
+    2700.000047683716,
+    2700.000047683716
+   ]
+  },
+  {
+   "arquivo": "assets/textura/corrugated_iron_02_nor_gl_2k.jpg",
+   "tipo": "textura",
+   "nome": "Corrugated Iron 02 — nor_gl",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Jenelle van Heerden",
+    "Sergej Majboroda"
+   ],
+   "url": "https://polyhaven.com/a/corrugated_iron_02",
+   "md5": "7ce1e415161ddffdf06fb1f9a80bae5c",
+   "bytes": 2178443,
+   "resolucao": "2k",
+   "mapa": "nor_gl",
+   "lado_mm": [
+    2700.000047683716,
+    2700.000047683716
+   ]
+  },
+  {
+   "arquivo": "assets/textura/dirt_aerial_03_Diffuse_2k.jpg",
+   "tipo": "textura",
+   "nome": "Dirt Aerial 03 — Diffuse",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/dirt_aerial_03",
+   "md5": "d67e26f08c08aa095235d49015e48baf",
+   "bytes": 1115831,
+   "resolucao": "2k",
+   "mapa": "Diffuse",
+   "lado_mm": [
+    25000,
+    25000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/dirt_aerial_03_Rough_2k.jpg",
+   "tipo": "textura",
+   "nome": "Dirt Aerial 03 — Rough",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/dirt_aerial_03",
+   "md5": "1afbf952422c8023bcfc47c4a48c24c5",
+   "bytes": 802443,
+   "resolucao": "2k",
+   "mapa": "Rough",
+   "lado_mm": [
+    25000,
+    25000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/dirt_aerial_03_nor_gl_2k.jpg",
+   "tipo": "textura",
+   "nome": "Dirt Aerial 03 — nor_gl",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/dirt_aerial_03",
+   "md5": "cd63c161d01134e90cedda32367a675e",
+   "bytes": 1325847,
+   "resolucao": "2k",
+   "mapa": "nor_gl",
+   "lado_mm": [
+    25000,
+    25000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/gravel_road_Diffuse_2k.jpg",
+   "tipo": "textura",
+   "nome": "Gravel Road — Diffuse",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Amal Kumar"
+   ],
+   "url": "https://polyhaven.com/a/gravel_road",
+   "md5": "5d024d27bc8ffa9decad93e4743de749",
+   "bytes": 2871851,
+   "resolucao": "2k",
+   "mapa": "Diffuse",
+   "lado_mm": [
+    2000,
+    2000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/gravel_road_Rough_2k.jpg",
+   "tipo": "textura",
+   "nome": "Gravel Road — Rough",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Amal Kumar"
+   ],
+   "url": "https://polyhaven.com/a/gravel_road",
+   "md5": "bbd4f6c7c1b8ceb4c88a41d03e4ba158",
+   "bytes": 1203380,
+   "resolucao": "2k",
+   "mapa": "Rough",
+   "lado_mm": [
+    2000,
+    2000
+   ]
+  },
+  {
+   "arquivo": "assets/textura/gravel_road_nor_gl_2k.jpg",
+   "tipo": "textura",
+   "nome": "Gravel Road — nor_gl",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Amal Kumar"
+   ],
+   "url": "https://polyhaven.com/a/gravel_road",
+   "md5": "7c25211b3cf395df072ffad97c6c2550",
+   "bytes": 3613956,
+   "resolucao": "2k",
+   "mapa": "nor_gl",
+   "lado_mm": [
+    2000,
+    2000
+   ]
+  }
+ ]
+}

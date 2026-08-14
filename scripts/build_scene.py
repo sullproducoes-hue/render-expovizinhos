@@ -35,6 +35,7 @@ da propria planta. NAO CONFERIDA com medida real em campo.
 import argparse
 import json
 import math
+import random
 import sys
 from pathlib import Path
 
@@ -42,10 +43,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import bpy
 import bmesh
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
+import estimativas
 import estruturas
 import planos as planos_mod
+import sol
 import terreno
 
 # --------------------------------------------------------------------------
@@ -54,14 +57,20 @@ import terreno
 LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
 
-COLECOES = ["BASE", "EVENTO", "CAMERA", "MARCOS_CAMERA", "LUZ"]
+# ESTIMADO fica separada de proposito: e a colecao do que NAO foi medido, e
+# poder esconder ela inteira no .blend e o que deixa ver, num clique, quanto da
+# cena ainda e palpite. Ver data/estimativas.json e docs/FOOTPRINTS.md.
+COLECOES = ["BASE", "EVENTO", "ESTIMADO", "CAMERA", "MARCOS_CAMERA", "LUZ"]
 
 RAIZ = Path(__file__).resolve().parent.parent
 
 # Rumo das estruturas, em graus. Nao sao chute: saem do angulo com que a planta
 # escreve o rotulo de cada uma -- `angulo_graus` em data/locais.json. O rotulo
 # de um galpao e escrito no eixo dele.
-RUMO_PAVILHOES = 341.0   # a fileira corre norte-sul, levemente girada
+# RUMO_PAVILHOES nao e mais usado para construir: desde 14/08 o rumo de cada
+# pavilhao vem medido em data/footprints.json e passa por `azimute_para_giro`.
+# Fica aqui porque `conferir_norte.py` imprime este valor como referencia.
+RUMO_PAVILHOES = 341.0   # = azimute 108,4 depois da conversao. Ver azimute_para_giro
 RUMO_PORTAL = 73.0       # de frente para quem chega pela Dorvalino Tosi
 RUMO_PALCO = 334.0       # de frente para a arena
 
@@ -100,12 +109,63 @@ def caixa(nome, largura, profundidade, altura, colecao):
 # Materiais
 
 # (nome, cor base RGB, rugosidade, metalico)
+#
+# Ainda sao cores chapadas -- o PBR calibrado pelas provas do footage e a
+# Rodada 2. O que mudou aqui e que as superficies deixaram de ser cinco: o
+# portal era fachada de tabua saindo como metal escovado, porque `MAT_MADEIRA`
+# simplesmente nao existia e o dispatch mandava tudo para MAT_PAVILHAO.
 MATERIAIS = {
-    "MAT_TERRENO":  ((0.13, 0.22, 0.07), 0.95, 0.0),
-    "MAT_LONA":     ((0.82, 0.81, 0.78), 0.55, 0.0),
+    # MEDIDOS no footage do proprio recinto em 14/08, por scripts/medir_materiais.py
+    # -- quadro de golden hour com todas as classes juntas, cor-base tirada
+    # dividindo pelo iluminante que a lona branca entrega. Ver
+    # data/materiais-medidos.json e docs/MATERIAIS-referencia.md.
+    #
+    # O achado que muda o quadro: **a grama do recinto nao e verde de lavoura.**
+    # O controle do metodo foi amostrar a lavoura ao fundo, que qualquer um olha
+    # e diz que e verde -- ela sai com G > R (0.233 / 0.272 / 0.127). A grama do
+    # recinto, no mesmo quadro e na mesma luz, e verde-oliva escura e bem menos
+    # clara: 0.129 de albedo, dentro da faixa fisica da grama (0,10-0,25).
+    #
+    # Cuidado que custou um render: a primeira amostra caiu na grama PISADA da
+    # beira da alameda (0.278 / 0.235 / 0.108) e, chapada sobre 170.000 m², ela
+    # deixou o recinto inteiro com cara de deserto. Trecho gasto e desgaste, nao
+    # e a cor do campo -- ele volta como variacao de textura, nao como cor base.
+    "MAT_TERRENO":  ((0.129, 0.124, 0.037), 0.95, 0.0),   # medido: grama sa
+    "MAT_LONA":     ((0.750, 0.750, 0.750), 0.55, 0.0),   # ancora: PVC branco 0,75
     "MAT_PAVILHAO": ((0.55, 0.56, 0.58), 0.45, 0.3),
-    "MAT_ARENA":    ((0.38, 0.28, 0.18), 0.90, 0.0),
+    "MAT_ARENA":    ((0.266, 0.187, 0.155), 0.90, 0.0),   # medido: chao batido
     "MAT_ASFALTO":  ((0.09, 0.09, 0.10), 0.80, 0.0),
+
+    # tabua de celeiro: marrom-tabaco, fosca, NADA de metalico
+    "MAT_MADEIRA":  ((0.21, 0.11, 0.055), 0.85, 0.0),
+    # telha trapezoidal branca/galvanizada nova -- e o que o footage mostra em
+    # todo o recinto; telha oxidada seria proposta, nao dado (MATERIAIS-referencia.md)
+    #
+    # ESTA NAO SE MEDE pelo metodo dos outros, e o proprio numero avisou: a
+    # medicao ESTOUROU (albedo 1,00 / 1,00 / 0,95, no teto da escala). Telha
+    # metalica reflete o CEU de forma especular, entao o que a camera ve nao e
+    # a cor dela -- e o ceu. Fica o cinza galvanizado com metallic 0,55, que e
+    # o que faz o reflexo aparecer no render em vez de vir pintado.
+    "MAT_TELHA":    ((0.62, 0.63, 0.64), 0.40, 0.55),
+    "MAT_DECK":     ((0.30, 0.22, 0.15), 0.75, 0.0),
+    "MAT_GRADIL":   ((0.86, 0.87, 0.88), 0.35, 0.20),
+    "MAT_TRELICA":  ((0.72, 0.73, 0.75), 0.32, 0.85),
+    "MAT_PRETO":    ((0.03, 0.03, 0.035), 0.60, 0.0),
+    # saibro das vias internas: o footage diz "asfalto -> saibro -> cascalho".
+    # 36 vias internas pretas num campo verde denunciam sozinhas.
+    # Medido em 14/08 e bem mais escuro do que eu tinha posto (0,34 -> 0,14):
+    # piso solto de area de maquina, com oleo e terra pisada.
+    "MAT_SAIBRO":   ((0.136, 0.098, 0.070), 0.92, 0.0),
+
+    # copa: MEDIDA, e custou tres recortes. Os dois primeiros devolveram copa
+    # MAIS CLARA que o gramado (0,35 e 0,43), o que nao existe -- um pegava vao
+    # de ceu entre as copas, o outro pegava o veu do flare perto do sol. Longe
+    # do sol e em massa fechada ela da 0,132 / 0,154 / 0,045: verde de verdade
+    # (G > R), no mesmo patamar da grama e um pouco mais verde.
+    "MAT_COPA":     ((0.132, 0.154, 0.045), 0.88, 0.0),
+    # tronco NAO e medido: no quadro aereo ele tem poucos pixels e esta sob a
+    # copa. Casca de arvore de parque, faixa fisica 0,08-0,12.
+    "MAT_TRONCO":   ((0.095, 0.078, 0.062), 0.90, 0.0),
 }
 
 
@@ -125,8 +185,124 @@ def criar_materiais():
             bsdf.inputs["Roughness"].default_value = rug
             if "Metallic" in bsdf.inputs:
                 bsdf.inputs["Metallic"].default_value = met
+        # cor de viewport: o Principled so vale no render. Sem isto a cena
+        # abre TODA CINZA no modo solido -- que e como o Natan vai olhar o
+        # .blend -- e o Workbench (usado na conferencia de posicao) tambem.
+        mat.diffuse_color = (*cor, 1.0)
+        mat.roughness = rug
+        mat.metallic = met
+        if nome == "MAT_COPA":
+            _variar_por_instancia(mat, bsdf, cor)
+        if nome == "MAT_TERRENO":
+            _manchar_terreno(mat, bsdf)
         feitos[nome] = mat
     return feitos
+
+
+# As duas gramas MEDIDAS no footage (scripts/medir_materiais.py). Nao sao duas
+# invencoes: sao dois trechos reais do mesmo quadro, na mesma luz.
+GRAMA_SA = (0.129, 0.124, 0.037)
+GRAMA_PISADA = (0.278, 0.235, 0.108)
+
+
+def _manchar_terreno(mat, bsdf):
+    """Quebra a cor chapada do terreno com as DUAS gramas medidas.
+
+    O comentario de `criar_materiais` ja dizia isto desde o inicio e ninguem
+    tinha feito: o que mais entrega CG num terreno de 800 m nao e falta de
+    textura fina, e cor uniforme -- de cima, 170.000 m² de um verde so leem como
+    feltro. A vista de topo de 14/08 mostra isso de olho fechado.
+
+    O que entra na mistura nao e invencao: sao as DUAS amostras de grama do
+    mesmo quadro do footage. A sa (albedo 0,129) e a pisada da beira da alameda
+    (0,278), aquela que sozinha tinha deixado o recinto com cara de deserto.
+    Como mancha, ela e exatamente o que faltava -- capim gasto onde passa gente.
+
+    Duas frequencias, porque uma so volta a ser padrao: manchas largas de ~60 m
+    (onde o gado e o publico circulam) e quebra de ~8 m por cima.
+    """
+    nt = mat.node_tree
+
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    coord.location = (-1100, -200)
+
+    largo = nt.nodes.new("ShaderNodeTexNoise")
+    largo.location = (-900, -80)
+    largo.inputs["Scale"].default_value = 0.017      # ~60 m de periodo
+    largo.inputs["Detail"].default_value = 3.0
+    largo.inputs["Roughness"].default_value = 0.55
+
+    fino = nt.nodes.new("ShaderNodeTexNoise")
+    fino.location = (-900, -320)
+    fino.inputs["Scale"].default_value = 0.13        # ~8 m
+    fino.inputs["Detail"].default_value = 2.0
+
+    soma = nt.nodes.new("ShaderNodeMix")
+    soma.data_type = "FLOAT"
+    soma.location = (-700, -200)
+    soma.inputs["Factor"].default_value = 0.35       # o fino so tempera o largo
+
+    rampa = nt.nodes.new("ShaderNodeValToRGB")
+    rampa.location = (-520, -200)
+    rampa.color_ramp.elements[0].position = 0.38     # mais campo que desgaste
+    rampa.color_ramp.elements[1].position = 0.72
+
+    sa = nt.nodes.new("ShaderNodeRGB")
+    sa.location = (-520, 80)
+    sa.outputs[0].default_value = (*GRAMA_SA, 1.0)
+
+    pisada = nt.nodes.new("ShaderNodeRGB")
+    pisada.location = (-520, -60)
+    pisada.outputs[0].default_value = (*GRAMA_PISADA, 1.0)
+
+    mistura = nt.nodes.new("ShaderNodeMix")
+    mistura.data_type = "RGBA"
+    mistura.location = (-300, -60)
+
+    nt.links.new(coord.outputs["Object"], largo.inputs["Vector"])
+    nt.links.new(coord.outputs["Object"], fino.inputs["Vector"])
+    nt.links.new(largo.outputs["Fac"], soma.inputs[2])   # A (float)
+    nt.links.new(fino.outputs["Fac"], soma.inputs[3])    # B (float)
+    nt.links.new(soma.outputs[0], rampa.inputs["Fac"])
+    nt.links.new(rampa.outputs["Color"], mistura.inputs["Factor"])
+    nt.links.new(sa.outputs[0], mistura.inputs[6])       # A (RGBA)
+    nt.links.new(pisada.outputs[0], mistura.inputs[7])   # B (RGBA)
+    nt.links.new(mistura.outputs[2], bsdf.inputs["Base Color"])
+
+
+def _variar_por_instancia(mat, bsdf, cor):
+    """Faz cada arvore ter a sua cor, sem criar um material por arvore.
+
+    As 232 arvores compartilham UMA malha e UM material -- e por isso a mata
+    saiu como uma massa unica, do mesmo verde do primeiro ao ultimo tufo. Mata
+    de verdade nao e monocromatica.
+
+    `Object Info > Random` da um numero fixo por instancia; ele entra num Mix
+    que clareia ou escurece a cor base em ate 30%. Custo de render: nenhum
+    mensuravel -- e um no, nao geometria -- e a malha continua uma so.
+    """
+    nt = mat.node_tree
+    info = nt.nodes.new("ShaderNodeObjectInfo")
+    info.location = (-620, -120)
+
+    escuro = nt.nodes.new("ShaderNodeRGB")
+    escuro.outputs[0].default_value = (cor[0] * 0.70, cor[1] * 0.70,
+                                       cor[2] * 0.78, 1.0)
+    escuro.location = (-420, -40)
+
+    claro = nt.nodes.new("ShaderNodeRGB")
+    claro.outputs[0].default_value = (min(cor[0] * 1.30, 1.0),
+                                      min(cor[1] * 1.28, 1.0),
+                                      min(cor[2] * 1.15, 1.0), 1.0)
+    claro.location = (-420, -220)
+
+    mix = nt.nodes.new("ShaderNodeMix")
+    mix.data_type = "RGBA"
+    mix.location = (-220, -120)
+    nt.links.new(info.outputs["Random"], mix.inputs["Factor"])
+    nt.links.new(escuro.outputs[0], mix.inputs[6])   # A (RGBA)
+    nt.links.new(claro.outputs[0], mix.inputs[7])    # B (RGBA)
+    nt.links.new(mix.outputs[2], bsdf.inputs["Base Color"])
 
 
 def aplicar(obj, mat):
@@ -222,6 +398,52 @@ def construir_terreno(dados, col, centro_arena, relevo=None):
     return obj
 
 
+def construir_entorno(col, centro, mats, raio=3000.0):
+    """Disco de terreno ate 3 km, so para fechar o horizonte.
+
+    Sem isto o terreno acaba em 969 x 545 m e, com o sol a 10 graus e a camera
+    baixa, aparece CEU ABAIXO DA LINHA DO HORIZONTE -- o tell classico de CG,
+    que mata o quadro por melhor que esteja a luz.
+
+    Fora de r=150 m do centro da arena, `terreno.elevacao` e constante em 10 m
+    (ver PATAMARES), entao o disco casa com a borda sem costura. Fica 2 cm
+    abaixo para nao brigar em z com o terreno detalhado.
+
+    E liso, e isso e uma limitacao declarada: a regiao de Dois Vizinhos e
+    ondulada. Relevo real de entorno sai de TOPODATA/INPE (SRTM refinado, 30 m,
+    uso livre) com imagem Sentinel-2 -- cabe na verba zero, mas e outra rodada.
+    """
+    # Grid grosso que usa a MESMA funcao de elevacao do terreno detalhado, e
+    # fica 5 cm abaixo dele. Assim os dois casam sem costura e sem z-fighting:
+    # onde o detalhado existe ele cobre, e fora dele o entorno aparece.
+    #
+    # A primeira versao disto era um disco chapado em z=10 (o nivel do plato).
+    # Estava errado e escondia a cena: a bacia da arena e ESCAVADA ate z=0,
+    # entao o disco passava por cima dela e da metade do terreno. So apareceu
+    # na conferencia de topo -- de frente, com a camera baixa, nao dava para ver.
+    div = 120
+    bpy.ops.mesh.primitive_grid_add(x_subdivisions=div, y_subdivisions=div,
+                                    size=1.0, location=(0, 0, 0))
+    obj = bpy.context.active_object
+    obj.name = "Entorno"
+    for c in list(obj.users_collection):
+        c.objects.unlink(obj)
+    col.objects.link(obj)
+
+    for v in obj.data.vertices:
+        v.co.x *= raio * 2.0
+        v.co.y *= raio * 2.0
+        v.co.z = terreno.elevacao(v.co.x, v.co.y, centro) - 0.05
+
+    aplicar(obj, mats["MAT_TERRENO"])
+    # declara tambem na propriedade, senao o dispatch do main o acusa de "sem
+    # material declarado" a cada build -- aviso falso que ja despistou uma vez
+    obj["material"] = "MAT_TERRENO"
+    obj["nota"] = ("horizonte ate 3 km; segue a mesma elevacao do terreno, mas "
+                   "grosso e sem relevo regional -- TOPODATA/Sentinel-2 e outra rodada")
+    return obj
+
+
 def orientar_estandes(postos):
     """Alinha cada estande ao eixo da sua fileira.
 
@@ -292,34 +514,625 @@ def construir_estandes(dados, col, centro_arena, bbox=None):
     return contagem
 
 
-def construir_pavilhoes(dados, col, centro_arena, bbox=None):
-    """Pavilhoes de animais: 5 de 720 m² e 1 de 560 m².
+def carregar_footprints(caminho=None):
+    """Footprints medidos do desenho, em LISTA. Ver docs/FOOTPRINTS.md.
 
-    Proporcao 60 x 12 m assumida para os de 720 -- confira em campo. A ordem
-    fisica norte->sul e gado leite, nucleo cara branca, gado corte, ovinos e
-    caprinos, pequenos animais, equinos.
+    Lista e nao dicionario por rotulo, e o motivo custou uma rodada: **ha nomes
+    repetidos no recinto**. Sao tres RESIDENCIA, oito ESTACIONAMENTO, seis Bar.
+    Indexar por rotulo colapsava as tres residencias em uma e o gerador
+    construia sete zonas onde deveria construir nove -- sem erro nenhum na tela.
+
+    Devolve [] se o arquivo nao existir: o gerador segue com a proporcao
+    assumida e avisa. Nunca falhar calado por falta de um json.
     """
+    p = Path(caminho) if caminho else RAIZ / "data" / "footprints.json"
+    if not p.exists():
+        return []
+    return json.loads(p.read_text(encoding="utf-8")).get("itens", [])
+
+
+def procurar_footprint(fp, rotulo, x_pt=None, y_pt=None):
+    """O item daquele rotulo -- e, havendo repetidos, o mais perto do ponto."""
+    iguais = [it for it in fp if it["rotulo"] == rotulo]
+    if not iguais:
+        return None
+    if x_pt is None or len(iguais) == 1:
+        return iguais[0]
+    return min(iguais, key=lambda it: (it["x_pt"] - x_pt) ** 2 + (it["y_pt"] - y_pt) ** 2)
+
+
+def azimute_para_giro(azimute):
+    """Azimute de compasso -> o angulo que `estruturas._girar` espera.
+
+    `_girar` poe o valor direto em `rotation_euler.z`, ou seja e angulo
+    matematico, anti-horario a partir do +X. A constante `RUMO_PAVILHOES = 341`
+    esta escrita como se fosse azimute e da azimute 109 quando aplicada -- o
+    RETOMAR marca isso como "certo por sorte" e manda nao mexer. Aqui a
+    conversao fica explicita para nao depender mais da sorte.
+    """
+    return (90.0 - azimute) % 360.0
+
+
+def forma_do_pavilhao(rotulo, fp, x_pt=None, y_pt=None):
+    """largura, profundidade, giro e a procedencia de cada um desses numeros.
+
+    A regra vem do que cada fonte sabe: **a planta cota AREA em texto** (`720,00
+    m²` a 5 pt do rotulo) e isso e medida declarada por quem desenhou; **o
+    desenho da a PROPORCAO e o RUMO**, que o texto nao diz. Entao usa-se a
+    proporcao medida, escalada para fechar a area cotada.
+
+    Isso tambem corrige o vies do extrator: a mascara e fechada por morfologia e
+    incha o contorno em ~1,5 px de cada lado, o que aparece como +6 a +9% de
+    area nos cinco pavilhoes que conferem. Escalando pela cota, o vies sai.
+    """
+    it = procurar_footprint(fp, rotulo, x_pt, y_pt)
+    if not it or it.get("confianca") not in ("alta", "media"):
+        return None
+
+    largura = it["largura_m"]
+    profundidade = it["profundidade_m"]
+    cota = it.get("area_cotada_m2")
+    proc = "proporcao e rumo medidos do desenho"
+
+    # Mancha contaminada: quando a componente encosta num vizinho, ela deixa de
+    # ser o predio e vira a uniao dos dois -- e isso se ve no PREENCHIMENTO.
+    # Os cinco pavilhoes limpos preenchem 0,99 do proprio retangulo; o
+    # PAVILHAO - EQUINOS preenche 0,71, porque a mancha dele engole um estande
+    # de 5x5 e um pedaco do bloco da lavagem (conferido no recorte do desenho).
+    # A saida nao e chutar: a familia toda tem a MESMA profundidade medida, de
+    # 16,8 m em cinco predios, e a area dele esta cotada em texto. Entao usa-se
+    # a profundidade da familia e tira-se a largura da cota.
+    familia = [o for o in fp
+               if o.get("categoria") == "pavilhoes" and " - " in o["rotulo"]
+               and o.get("preenchimento", 0) >= 0.95 and "profundidade_m" in o]
+    if familia and cota and it.get("preenchimento", 1.0) < 0.85:
+        fundos = sorted(o["profundidade_m"] for o in familia)
+        profundidade = fundos[len(fundos) // 2]
+        largura = cota / profundidade
+        proc = (f"mancha contaminada (preenche {it['preenchimento']:.2f} do proprio "
+                f"retangulo contra {len(familia)} irmaos em 0,99+): profundidade "
+                f"{profundidade:.1f} m e a mediana da familia medida, largura sai "
+                f"da cota de {cota:.0f} m²")
+        return largura, profundidade, azimute_para_giro(
+            it["rumo_graus"] if it.get("rumo_confiavel") else it.get("rumo_do_bloco", 108.4)
+        ), proc, it
+    if cota and largura * profundidade > 0:
+        k = math.sqrt(cota / (largura * profundidade))
+        largura, profundidade = largura * k, profundidade * k
+        proc += f"; area escalada para a cota de {cota:.0f} m²"
+
+    azimute = it["rumo_graus"] if it.get("rumo_confiavel") else it.get("rumo_do_bloco")
+    if azimute is None:
+        azimute = 108.4                      # o rumo medido da fileira
+        proc += "; rumo da fileira, o da fatia nao vale"
+    return largura, profundidade, azimute_para_giro(azimute), proc, it
+
+
+def construir_pavilhoes(dados, col, centro_arena, bbox=None, fp=None):
+    """Pavilhoes: os 6 de animais mais os de expositores que a planta numera.
+
+    Ate 14/08 isto fazia `profundidade = 12.0` com o comentario "proporcao
+    assumida", e o desenho diz **45,9 x 16,8 m**. E o filtro exigia hifen no
+    rotulo, entao `PAVILHAO 1`, `2` e `3` -- os de Expositores Industria,
+    Comercio e Servicos, que o Natan apontou mandando o PDF -- eram descartados
+    **sem aviso nenhum**. Agora a forma vem de `data/footprints.json` e o que
+    nao tem footprint confiavel e nomeado na saida, nao sumido.
+
+    A ordem fisica norte->sul dos de animais e gado leite, nucleo cara branca,
+    gado corte, ovinos e caprinos, pequenos animais, equinos.
+    """
+    fp = fp if fp is not None else carregar_footprints()
     origem = dados["_origem"]
-    feitos = 0
+    feitos, pulados, assumidos = 0, [], []
     for z in dados["zonas"]:
-        if z["categoria"] != "pavilhoes" or "PAVILHÃO -" not in z["rotulo"]:
+        if z["categoria"] != "pavilhoes":
             continue
         x, y = terreno.para_mundo(z["x"], z["y"], origem)
         if not dentro(bbox, x, y):
             continue
-        area = 560.0 if "EQUÍNOS" in z["rotulo"] else 720.0
-        profundidade = 12.0
-        largura = area / profundidade
+
+        forma = forma_do_pavilhao(z["rotulo"], fp, z["x"], z["y"])
+        if forma is None:
+            it = procurar_footprint(fp, z["rotulo"], z["x"], z["y"]) or {}
+            motivo = "; ".join(it.get("suspeitas", [])) or "sem footprint no desenho"
+            pulados.append((z["rotulo"], motivo))
+            continue
+        largura, profundidade, giro, proc, it = forma
+
         # Galpao de duas aguas, nao caixa: o telhado e o que se ve do alto no
         # sobrevoo do P11, e caixa chapada denuncia CG antes de qualquer
-        # textura. A orientacao segue a fileira, que corre norte-sul.
+        # textura.
         obj = estruturas.pavilhao(z["rotulo"], x, y,
                                   terreno.elevacao(x, y, centro_arena),
-                                  largura, profundidade, col,
-                                  rumo_graus=RUMO_PAVILHOES)
-        obj["area_m2"] = area
+                                  largura, profundidade, col, rumo_graus=giro)
+        obj["area_m2"] = round(largura * profundidade, 1)
+        obj["forma_procedencia"] = proc
+        obj["confianca_footprint"] = it["confianca"]
         feitos += 1
+        if not it.get("area_cotada_m2"):
+            assumidos.append(z["rotulo"])
+
+    for rotulo, motivo in pulados:
+        print(f"  pavilhao NAO construido: {rotulo} -- {motivo}")
+    if assumidos:
+        print(f"  sem cota em texto, so o desenho: {', '.join(assumidos)}")
     return feitos
+
+
+def construir_medidos(dados, col, centro_arena, bbox=None, fp=None):
+    """As zonas que TEM footprint medido e nao tinham construcao nenhuma.
+
+    Sao nove, e elas mudam o filme: a Praca de Alimentacao Coberta (145 x 34 m,
+    o P04), o Recinto de Leiloes (o audio: *"entra no recinto, tem leiloes, os
+    leiloes acontecendo"*), o Cafe Colonial -- um dos quatro diferenciais do
+    cliente --, o Auditorio, o Palco After, a Lavagem de Animais e as tres
+    residencias. Antes de 14/08 o extrator media todas elas e ninguem lia.
+
+    **Aqui a procedencia se parte em duas, e o objeto carrega as duas.** O
+    footprint (largura, profundidade, rumo) e MEDIDO do desenho; a ALTURA e
+    estimada, porque planta baixa nao tem altura. Sai `footprint_medido = True`
+    e `altura_estimada = True` em cada objeto, e a altura de cada uma esta
+    declarada em `data/estimativas.json`, secao `altura_das_zonas_medidas`.
+    """
+    fp = fp if fp is not None else carregar_footprints()
+    tabela = estimativas.carregar() or {}
+    secao = tabela.get("altura_das_zonas_medidas", {})
+    alturas = secao.get("zonas", {})
+    proprias = secao.get("ja_tem_construcao_propria", {})
+
+    origem = dados["_origem"]
+    feitos, sem_altura = 0, []
+    for it in fp:
+        rotulo = it["rotulo"]
+        if it.get("confianca") not in ("alta", "media"):
+            continue
+        if it["categoria"] == "pavilhoes" or rotulo in proprias:
+            continue                      # ja construidos, cada um no seu lugar
+        decl = alturas.get(rotulo)
+        if decl is None:
+            sem_altura.append(rotulo)
+            continue
+
+        x, y = terreno.para_mundo(it["x_pt"], it["y_pt"], origem)
+        if not dentro(bbox, x, y):
+            continue
+        z = terreno.elevacao(x, y, centro_arena)
+        largura, profundidade = it["largura_m"], it["profundidade_m"]
+        azimute = it["rumo_graus"] if it.get("rumo_confiavel") else it.get("rumo_do_bloco")
+        giro = azimute_para_giro(azimute if azimute is not None else 90.0)
+
+        if decl["forma"] == "cobertura":
+            obj = caixa(rotulo, largura, profundidade, 0.3, col)
+            obj.location = (x, y, z + decl["altura_m"])
+            pilares(rotulo, x, y, z, largura, profundidade, decl["altura_m"],
+                    giro, col, marca="footprint_medido")
+        else:
+            obj = caixa(rotulo, largura, profundidade, decl["altura_m"], col)
+            obj.location = (x, y, z)
+
+        obj.rotation_euler = (0.0, 0.0, math.radians(giro))
+        obj["material"] = decl["material"]
+        obj["area_m2"] = round(largura * profundidade, 1)
+        obj["footprint_medido"] = True
+        obj["altura_estimada"] = True
+        obj["confianca_footprint"] = it["confianca"]
+        obj["procedencia"] = (
+            f"footprint medido do desenho ({it['particao']}); "
+            f"altura estimada: {decl['fundamento']}")
+        feitos += 1
+
+    for rotulo in sem_altura:
+        print(f"  medido mas NAO construido: {rotulo} -- sem altura declarada em "
+              "estimativas.json")
+    return feitos
+
+
+def malha_de_arvore(porte):
+    """UMA malha de arvore, para todas as instancias compartilharem.
+
+    Nao ha verba de asset (so CC0) e o teto e uma RTX 4060 de 8 GB. Arvore de
+    biblioteca com folha por geometria multiplicada por 300 nao cabe; malha
+    compartilhada cabe com folga, porque o Blender guarda os vertices uma vez so
+    e cada instancia e uma matriz.
+
+    A forma e grosseira de proposito -- tronco mais tres copas deslocadas. A
+    distancia de sobrevoo isso le como arvore; o que denuncia CG num plano
+    aereo e copa ESFERICA E IGUAL, e e por isso que cada instancia sai com
+    escala, giro e proporcao proprios.
+    """
+    malha = bpy.data.meshes.new("ArvoreBase")
+    bm = bmesh.new()
+
+    # dois slots: 0 = tronco, 1 = copa. Sem isso a arvore inteira sai verde, e
+    # a 4 m de altura -- que e a regua de camera dele para lugar aberto -- o
+    # tronco aparece.
+    tronco = porte["altura_tronco_m"]
+    r_tronco = porte["raio_tronco_m"]
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=7,
+                          radius1=r_tronco * 1.35, radius2=r_tronco,
+                          depth=tronco,
+                          matrix=Matrix.Translation(Vector((0, 0, tronco / 2))))
+
+    bm.faces.ensure_lookup_table()
+    faces_do_tronco = len(bm.faces)
+
+    copa_r = porte["raio_copa_m"]
+    copa_z = porte["altura_m"]
+    # Sete tufos, nao tres. Com tres bolhas grandes a copa fecha num ovoide liso
+    # e a mata inteira le como brocolis -- foi o que apareceu no render de prova.
+    # Tufo menor e mais numeroso quebra a silhueta e, principalmente, cria
+    # SOMBRA DE UM NO OUTRO, que e o que da volume a uma massa de folha.
+    #
+    # E a copa e ACHATADA (0,55 em z, contra 0,72 antes): arvore adulta de parque
+    # abre para os lados, nao cresce em bola -- as do quadro de referencia tem
+    # copa mais larga que alta.
+    for dx, dy, dz, k in ((0.00, 0.00, 0.02, 0.82),
+                          (0.52, -0.34, -0.16, 0.62),
+                          (-0.46, 0.40, -0.10, 0.58),
+                          (0.30, 0.52, -0.20, 0.54),
+                          (-0.55, -0.30, -0.24, 0.50),
+                          (0.10, -0.60, 0.08, 0.46),
+                          (-0.18, 0.14, 0.26, 0.52)):
+        # subdivisions=2 (80 faces por bolha). Com 1 a copa e um icosaedro de 20
+        # faces e, alisada, ela vira um balao -- foi exatamente o que apareceu no
+        # render de prova. O custo e zero na pratica: a malha e UMA so, e as 232
+        # arvores sao instancias dela.
+        bmesh.ops.create_icosphere(
+            bm, subdivisions=2, radius=copa_r * k,
+            matrix=Matrix.Translation(Vector((dx * copa_r, dy * copa_r,
+                                              copa_z * 0.72 + dz * copa_r)))
+            @ Matrix.Diagonal(Vector((1.0, 1.0, 0.55, 1.0))))
+
+    bm.faces.ensure_lookup_table()
+    for i, f in enumerate(bm.faces):
+        copa = i >= faces_do_tronco
+        f.material_index = 1 if copa else 0
+        # copa lisa, tronco facetado. Icosfera com face chapada desenha cada
+        # triangulo com sombra propria, e no primeiro render a copa apareceu
+        # como um poliedro escuro em vez de massa de folha.
+        f.smooth = copa
+
+    bm.to_mesh(malha)
+    bm.free()
+    return malha
+
+
+def construir_vegetacao(dados, col, centro_arena, bbox=None, solidos=None):
+    """Os 6 Bosques e as 2 Matas Nativas que a planta nomeia e nao desenha.
+
+    Contrato em `data/vegetacao.json` -- porte, raio da mancha, densidade e o
+    fundamento de cada numero. Aqui so se obedece.
+
+    Tres travas, e as tres estao no contrato: nada dentro de predio, nada dentro
+    da bacia da arena (o cliente descreve pista, camarotes e palco -- arvore ali
+    contradiz o brief) e semente fixa, senao a cena muda a cada build e nenhuma
+    conferencia de quadro vale.
+    """
+    caminho = RAIZ / "data" / "vegetacao.json"
+    if not caminho.exists():
+        print("  sem data/vegetacao.json -- vegetacao nao construida")
+        return 0, 0
+    veg = json.loads(caminho.read_text(encoding="utf-8"))
+
+    malha = malha_de_arvore(veg["porte"])
+    mats = {m.name: m for m in bpy.data.materials}
+    for nome_mat in ("MAT_TRONCO", "MAT_COPA"):
+        if nome_mat in mats:
+            malha.materials.append(mats[nome_mat])
+    rnd = random.Random(veg["semente"])
+    origem = dados["_origem"]
+    porte = veg["porte"]
+    plantadas, recusadas = 0, 0
+
+    raio_livre = veg.get("raio_livre_da_arena_m", 49.0)
+
+    def livre(x, y):
+        if math.hypot(x - centro_arena[0], y - centro_arena[1]) < raio_livre:
+            return False                      # pista da arena
+        for _nome, q, _c in (solidos or []):
+            if q[0] - 3.0 <= x <= q[2] + 3.0 and q[1] - 3.0 <= y <= q[3] + 3.0:
+                return False                  # dentro (ou colado) de predio
+        return True
+
+    por_zona = []
+    for z in dados["zonas"]:
+        tipo_nome = veg["por_rotulo"].get(z["rotulo"])
+        if tipo_nome is None:
+            continue
+        tipo = veg["tipos"][tipo_nome]
+        cx, cy = terreno.para_mundo(z["x"], z["y"], origem)
+        raio = tipo["raio_m"]
+        quantas = max(1, int(math.pi * raio ** 2 / tipo["m2_por_arvore"]))
+        antes = plantadas
+
+        # Borda irregular: tres harmonicas com fase sorteada deformam o raio de
+        # -28% a +28% conforme a direcao. Mancha de arvore com borda de compasso
+        # e o segundo tell mais obvio de CG num plano aereo, depois de copa
+        # igual -- e a vista de topo de 14/08 mostrou os bosques como discos.
+        fases = [(rnd.uniform(0, 2 * math.pi), rnd.uniform(0.5, 1.0)) for _ in range(3)]
+
+        def raio_na_direcao(ang):
+            d = sum(peso * math.sin((k + 2) * ang + fase)
+                    for k, (fase, peso) in enumerate(fases))
+            return raio * (1.0 + 0.28 * d / 2.5)
+
+        for _ in range(quantas):
+            # ponto uniforme no disco -- sqrt, senao tudo se acumula no centro
+            a = rnd.uniform(0, 2 * math.pi)
+            u = rnd.random()
+            # e rala na borda: mata nao termina numa parede de arvore
+            if u > 0.80 and rnd.random() < 0.55:
+                recusadas += 1
+                continue
+            r = raio_na_direcao(a) * math.sqrt(u)
+            x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+            if not dentro(bbox, x, y) or not livre(x, y):
+                recusadas += 1
+                continue
+
+            obj = bpy.data.objects.new(f"Arvore_{z['rotulo'][:6]}", malha)
+            col.objects.link(obj)
+            obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
+            k_alt = 1.0 + rnd.uniform(-1, 1) * porte["altura_variacao"]
+            k_raio = 1.0 + rnd.uniform(-1, 1) * porte["raio_variacao"]
+            obj.scale = (k_raio, k_raio * rnd.uniform(0.88, 1.12), k_alt)
+            obj.rotation_euler = (0.0, 0.0, rnd.uniform(0, 2 * math.pi))
+            # material vem da MALHA (dois slots), nao da propriedade -- por isso
+            # nao se declara `material` aqui
+            obj["estimado"] = True
+            obj["procedencia"] = ("porte e densidade declarados em "
+                                  "data/vegetacao.json; a planta so escreve o nome")
+            plantadas += 1
+
+        # Zona por zona, e nao so o total: um bosque inteiro pode ser barrado
+        # pelas travas e o total geral esconde isso. Bosque com zero arvore e a
+        # planta dizendo uma coisa e a cena dizendo outra.
+        por_zona.append((z["rotulo"], round(cx, 1), round(cy, 1),
+                         plantadas - antes, quantas))
+
+    # --- alameda arborizada ---------------------------------------------
+    al = veg.get("alameda", {})
+    caminho_vias = RAIZ / "data" / "vias.json"
+    if al.get("planta") and caminho_vias.exists():
+        vias = json.loads(caminho_vias.read_text(encoding="utf-8"))["vias"]
+        passo = al["espacamento_m"]
+        recuo = al["recuo_do_eixo_m"]
+        antes = plantadas
+        for via in vias:
+            if not via.get("e_via") or via.get("tipo") != al.get("so_tipo"):
+                continue
+            if via.get("comprimento_m", 0) < al["comprimento_minimo_m"]:
+                continue
+            pts = via.get("pontos_m") or []
+            sobra = rnd.uniform(0, passo)       # nao comeca sempre no vertice
+            for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+                dx, dy = bx - ax, by - ay
+                comp = math.hypot(dx, dy)
+                if comp < 1e-6:
+                    continue
+                ux, uy = dx / comp, dy / comp
+                nx, ny = -uy, ux                # normal do trecho
+                s = sobra
+                while s < comp:
+                    for lado in ((-1, 1) if al.get("dos_dois_lados") else (1,)):
+                        jx = rnd.uniform(-1.5, 1.5)
+                        x = ax + ux * s + nx * lado * recuo + ux * jx
+                        y = ay + uy * s + ny * lado * recuo + uy * jx
+                        if not dentro(bbox, x, y) or not livre(x, y):
+                            recusadas += 1
+                            continue
+                        obj = bpy.data.objects.new("Arvore_alameda", malha)
+                        col.objects.link(obj)
+                        obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
+                        k_alt = 1.0 + rnd.uniform(-1, 1) * porte["altura_variacao"] * 0.6
+                        k_raio = 1.0 + rnd.uniform(-1, 1) * porte["raio_variacao"] * 0.6
+                        obj.scale = (k_raio, k_raio * rnd.uniform(0.9, 1.1), k_alt)
+                        obj.rotation_euler = (0.0, 0.0, rnd.uniform(0, 2 * math.pi))
+                        obj["estimado"] = True
+                        obj["procedencia"] = (
+                            "alinhamento de alameda: espacamento e recuo declarados "
+                            "em data/vegetacao.json; a alameda arborizada aparece no "
+                            "footage do recinto, o alinhamento exato nao")
+                        plantadas += 1
+                    s += passo
+        por_zona.append(("alameda", 0.0, 0.0, plantadas - antes, plantadas - antes))
+
+    for rotulo, cx, cy, feitas, pedidas in por_zona:
+        marca = "  <-- VAZIO" if feitas == 0 else ("  <-- quase vazio"
+                                                   if feitas < pedidas * 0.3 else "")
+        print(f"    {rotulo[:14]:16s} ({cx:7.1f},{cy:7.1f})  "
+              f"{feitas:3d} de {pedidas:3d}{marca}")
+
+    return plantadas, recusadas
+
+
+def pilares(nome, x, y, z, largura, profundidade, altura, giro, col,
+            passo=12.0, secao=0.4, marca=None):
+    """Pilares em malha sob uma cobertura, e nao so nos quatro cantos.
+
+    A primeira versao punha quatro pilares em qualquer cobertura, e nas provas
+    de luz a Praca de Alimentacao Coberta -- 145 x 34 m -- apareceu como uma
+    chapa branca flutuando. Vao de galpao nao passa de ~12 m sem apoio, e o
+    telhado e o que se ve do alto no sobrevoo.
+    """
+    nx = max(2, int(round(largura / passo)) + 1)
+    ny = max(2, int(round(profundidade / passo)) + 1)
+    c, s = math.cos(math.radians(giro)), math.sin(math.radians(giro))
+    postos = 0
+    for i in range(nx):
+        lx = -largura / 2 + 0.6 + (largura - 1.2) * i / (nx - 1)
+        for j in range(ny):
+            ly = -profundidade / 2 + 0.6 + (profundidade - 1.2) * j / (ny - 1)
+            if 0 < i < nx - 1 and 0 < j < ny - 1:
+                continue                 # so o perimetro: o miolo fica livre
+            pe = caixa(f"{nome} pilar", secao, secao, altura, col)
+            pe.location = (x + lx * c - ly * s, y + lx * s + ly * c, z)
+            pe.rotation_euler = (0.0, 0.0, math.radians(giro))
+            pe["material"] = "MAT_TRELICA"
+            if marca:
+                pe[marca] = True
+            postos += 1
+    return postos
+
+
+def _pegada_xy(obj):
+    xs = [(obj.matrix_world @ v.co).x for v in obj.data.vertices]
+    ys = [(obj.matrix_world @ v.co).y for v in obj.data.vertices]
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+def pegada_prevista(x, y, largura, profundidade, giro_graus):
+    """Caixa envolvente XY de um retangulo girado, sem depender do depsgraph.
+
+    `matrix_world` so vale depois que o Blender atualiza a cena, e dentro do
+    laco de construcao ele ainda nao atualizou -- a primeira versao disto leu
+    todas as pegadas na origem e concluiu que a cena inteira estava dentro do
+    PAVILHAO - EQUINOS, afastando 33 objetos em 20 m cada. Aqui a conta e
+    fechada e nao depende de estado nenhum.
+    """
+    c = abs(math.cos(math.radians(giro_graus)))
+    s = abs(math.sin(math.radians(giro_graus)))
+    hx = (c * largura + s * profundidade) / 2.0
+    hy = (s * largura + c * profundidade) / 2.0
+    return x - hx, y - hy, x + hx, y + hy
+
+
+def afastar_do_medido(obj, largura, profundidade, giro, medidos,
+                      limite=0.10, margem=1.0, passos=40):
+    # 0.10 e a MESMA regua de conferir_estimados.py, de proposito: construtor e
+    # conferidor com limite diferente e como ter dois juizes -- o CCO passava
+    # com 12% de si dentro do AUDITORIO e a conferencia depois acusava.
+    """Tira a caixa estimada de dentro de geometria MEDIDA, e conta que tirou.
+
+    A ancora de uma zona estimada e a posicao do ROTULO, nao do predio, e as
+    duas nem sempre coincidem: um `Bar` nascia 99% dentro do CAMAROTES - LADO B
+    e a ORDENHADEIRA nascia 51% dentro do PAVILHAO - GADO LEITE.
+
+    Afasta na direcao que sai do objeto medido, de meio metro por vez, ate
+    passar do limite de sobreposicao. **Nao inventa posicao nova**: so recusa a
+    posicao impossivel, e grava `deslocado_m` no objeto para aparecer na
+    conferencia.
+
+    Vias ficam de fora da conta de proposito: sao fitas diagonais lidas do
+    bitmap, e a caixa envolvente de uma diagonal cobre um retangulo enorme --
+    daria falso positivo em quase tudo. Alem disso portao e quiosque ficam
+    mesmo na beira da via.
+    """
+    def sobrepoe(p, q):
+        dx = min(p[2], q[2]) - max(p[0], q[0])
+        dy = min(p[3], q[3]) - max(p[1], q[1])
+        return dx * dy if dx > 0 and dy > 0 else 0.0
+
+    p = pegada_prevista(obj.location.x, obj.location.y, largura, profundidade, giro)
+    area = max((p[2] - p[0]) * (p[3] - p[1]), 1e-6)
+    culpado = None
+    for nome, q, centro in medidos:
+        if sobrepoe(p, q) / area > limite:
+            culpado = (q, centro, nome)
+            break
+    if culpado is None:
+        return 0.0, None
+
+    q, centro, nome = culpado
+    dx = obj.location.x - centro[0]
+    dy = obj.location.y - centro[1]
+    n = math.hypot(dx, dy)
+    if n < 1e-6:                      # concentricos: sai para o leste
+        dx, dy, n = 1.0, 0.0, 1.0
+    dx, dy = dx / n, dy / n
+
+    andado = 0.0
+    for _ in range(passos):
+        obj.location.x += dx * 0.5
+        obj.location.y += dy * 0.5
+        andado += 0.5
+        p = pegada_prevista(obj.location.x, obj.location.y,
+                            largura, profundidade, giro)
+        if sobrepoe(p, q) / area <= 0.01:
+            obj.location.x += dx * margem
+            obj.location.y += dy * margem
+            return andado + margem, nome
+    return andado, nome
+
+
+def construir_estimados(col, centro_arena, bbox=None, origem=None, medidos=None):
+    """As zonas que a planta nomeia e nao desenha, no tamanho ESTIMADO.
+
+    Autorizado pelo Natan em 14/08: *"pode fazer com uma estimativa
+    aproximada"*. Sem isto, metade do recinto -- praca de alimentacao aberta,
+    banheiros, portaria, estacionamentos, mangueiras -- ficava sem nada.
+
+    Elas vao para a colecao **ESTIMADO**, separada de proposito: no .blend da
+    para esconder tudo de uma vez e ver quanto da cena e palpite. Cada objeto
+    leva `estimado = True` e a procedencia do numero colada nele.
+
+    Tamanho, tipo e fundamento vivem em `data/estimativas.json`; quem resolve e
+    `scripts/estimativas.py`, que roda sem bpy.
+    """
+    est, recusados = estimativas.resolver()
+    feitos, deslocados = 0, []
+    for e in est:
+        x, y = terreno.para_mundo(e["x_pt"], e["y_pt"], origem)
+        if not dentro(bbox, x, y):
+            continue
+        z = terreno.elevacao(x, y, centro_arena)
+        largura, profundidade = e["largura_m"], e["profundidade_m"]
+        alto = 0.0                      # deslocamento vertical da peca principal
+
+        if e["forma"] == "chao":
+            # Estacionamento e SUPERFICIE. Sair como caixa seria transformar
+            # um patio num galpao de 3 m de altura no meio do sobrevoo.
+            obj = caixa(e["rotulo"], largura, profundidade, 0.06, col)
+            obj["material"] = "MAT_ASFALTO"
+        elif e["forma"] == "cobertura":
+            # Laje de cobertura sobre pilar: area coberta e sem parede, que e o
+            # que o audio descreve na praca de alimentacao.
+            obj = caixa(e["rotulo"], largura, profundidade, 0.25, col)
+            alto = e["altura_m"]
+            obj["material"] = "MAT_LONA"
+            pilares(e["rotulo"], x, y, z, largura, profundidade, e["altura_m"],
+                    e["giro_graus"], col, secao=0.3, marca="estimado")
+        elif e["forma"] == "cercado":
+            # Curral e cerca, nao caixa fechada: quatro panos baixos.
+            obj = caixa(e["rotulo"], largura, 0.2, e["altura_m"], col)
+            obj["material"] = "MAT_GRADIL"
+            for lado, (dx, dy, lx, ly) in enumerate((
+                    (0, profundidade / 2, largura, 0.2),
+                    (0, -profundidade / 2, largura, 0.2),
+                    (largura / 2, 0, 0.2, profundidade),
+                    (-largura / 2, 0, 0.2, profundidade))):
+                if lado == 0:
+                    continue
+                pano = caixa(f"{e['rotulo']} pano", lx, ly, e["altura_m"], col)
+                pano.location = (x + dx, y + dy, z)
+                pano["material"] = "MAT_GRADIL"
+                pano["estimado"] = True
+        else:
+            obj = caixa(e["rotulo"], largura, profundidade, e["altura_m"], col)
+            obj["material"] = "MAT_PAVILHAO"
+
+        obj.location = (x, y, z + alto)
+        obj.rotation_euler = (0.0, 0.0, math.radians(e["giro_graus"]))
+        obj["estimado"] = True
+        obj["tipo_estimado"] = e["tipo"]
+        obj["procedencia"] = e["procedencia"]
+        obj["area_m2"] = round(largura * profundidade, 1)
+
+        if medidos:
+            andado, quem = afastar_do_medido(obj, largura, profundidade,
+                                             e["giro_graus"], medidos)
+            if andado:
+                obj["deslocado_m"] = round(andado, 1)
+                obj["deslocado_de"] = quem
+                deslocados.append((e["rotulo"], andado, quem))
+        feitos += 1
+
+    for rotulo, motivo in recusados:
+        print(f"  estimativa recusada: {rotulo} -- {motivo}")
+    for rotulo, andado, quem in deslocados:
+        print(f"  estimativa afastada: {rotulo} andou {andado:.1f} m "
+              f"para sair de dentro de {quem}")
+    return feitos, len(recusados)
 
 
 def construir_estruturas(dados, col, centro_arena, bbox=None):
@@ -546,37 +1359,155 @@ def configurar_eevee(cena):
             setattr(alvo, atributo, valor)
 
 
-def construir_ceu(cena):
-    """Ceu procedural de fim de tarde.
+def alvo_do_sol(luz):
+    """(elevacao, azimute_na_cena) do sol, e a rotacao a aplicar no ceu.
 
-    Substitua por um HDRI real na lapidacao -- e o que mais aproxima do
-    golden hour combinado com o material de drone. Poly Haven tem HDRIs CC0.
+    Hierarquia, e ela e o contrato -- sem isso `sol.py` e o HDRI discordam e
+    quem ler o codigo daqui a duas rodadas reintroduz a ambiguidade:
+
+        1. sol.py (NOAA)   -> o azimute-alvo do sitio          <- O DONO
+        2. medir_hdri.py   -> onde o sol esta DENTRO do HDRI
+        3. rotacao do ceu  =  alvo - medido
+        4. a SUN           -> posicionada pelo ALVO
+
+    O azimute do HDRI e arbitrario: depende de como o fotografo apontou a
+    camera ao montar o panorama. Por isso ele nunca manda -- ele so informa
+    quanto girar para o sol cair onde o NOAA diz que ele estava.
     """
+    ano, mes, dia = (int(p) for p in luz["momento"]["data"].split("-"))
+    hh, mm = (int(p) for p in luz["momento"]["hora"].split(":"))
+    elev, azim_real = sol.posicao(ano, mes, dia, hh + mm / 60.0,
+                                  luz["local"]["lat"], luz["local"]["lon"],
+                                  luz["local"]["tz"])
+
+    # o mundo da cena esta girado em relacao ao norte verdadeiro
+    azim_cena = (azim_real - luz["norte_do_mapa_graus"]) % 360.0
+
+    medido = _hdri_medido(luz)
+    rot = (azim_cena - medido["azimute_deg"]) % 360.0 if medido else 0.0
+    return elev, azim_cena, rot, medido
+
+
+def _hdri_medido(luz):
+    """A medicao de scripts/medir_hdri.py para o HDRI escolhido."""
+    caminho = RAIZ / "data" / "hdri-medido.json"
+    if not caminho.exists():
+        return None
+    escolhido = luz["hdri"]["escolhido"]
+    for item in json.loads(caminho.read_text(encoding="utf-8"))["itens"]:
+        if Path(item["arquivo"]).stem == escolhido:
+            return item
+    return None
+
+
+def construir_ceu(cena, luz, rotacao_z):
+    """HDRI de golden hour, girado para o sol cair no azimute do sitio.
+
+    O ceu chapado que havia aqui era azul (0.35, 0.48, 0.72) -- azul de
+    meio-dia, o oposto do que a cena pede.
+    """
+    arquivo = RAIZ / f"assets/hdri/{luz['hdri']['escolhido']}.hdr"
     mundo = bpy.data.worlds.new("Mundo")
     cena.world = mundo
     mundo.use_nodes = True
-    nos = mundo.node_tree.nodes
-    fundo = nos.get("Background")
-    if fundo:
-        fundo.inputs["Color"].default_value = (0.35, 0.48, 0.72, 1.0)
-        fundo.inputs["Strength"].default_value = 1.2
+    nt = mundo.node_tree
+    nt.nodes.clear()
+
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    mapa = nt.nodes.new("ShaderNodeMapping")
+    mapa.inputs["Rotation"].default_value[2] = math.radians(rotacao_z)
+    fundo = nt.nodes.new("ShaderNodeBackground")
+    fundo.inputs["Strength"].default_value = luz["hdri"].get("forca", 1.0)
+    saida = nt.nodes.new("ShaderNodeOutputWorld")
+
+    if arquivo.exists():
+        env = nt.nodes.new("ShaderNodeTexEnvironment")
+        env.image = bpy.data.images.load(str(arquivo), check_existing=True)
+        # .hdr ja e linear: marcar como sRGB aqui escurece o ceu inteiro
+        env.image.colorspace_settings.name = "Linear Rec.709"
+        env.projection = "EQUIRECTANGULAR"
+        nt.links.new(coord.outputs["Generated"], mapa.inputs["Vector"])
+        nt.links.new(mapa.outputs["Vector"], env.inputs["Vector"])
+        nt.links.new(env.outputs["Color"], fundo.inputs["Color"])
+    else:
+        # Sem HDRI a cena ainda tem que montar, mas nao finge que esta certa.
+        print(f"  AVISO: {arquivo.name} nao existe -- ceu chapado de emergencia."
+              f" Rode: python scripts/assets.py --hdri <slug>")
+        fundo.inputs["Color"].default_value = (0.35, 0.28, 0.20, 1.0)
+
+    nt.links.new(fundo.outputs["Background"], saida.inputs["Surface"])
+
+    # Importance sampling do mundo. Sem isto um ceu de fim de tarde, que tem
+    # quase toda a energia num disco pequeno, vira granulado em 128 samples.
+    if hasattr(mundo, "cycles"):
+        mundo.cycles.sampling_method = "MANUAL"
+        mundo.cycles.sample_map_resolution = 2048
     return mundo
 
 
-def construir_luz(col):
-    """Sol em golden hour, coerente com o LOOK LOCK das imagens de apoio.
+def construir_luz(col, luz, elevacao, azimute_cena, medido):
+    """A SUN, posicionada pelo alvo do NOAA e colorida pelo disco do HDRI.
 
-    Substitua pelo addon Sun Position com -25,73144 / -53,07627 e o horario
-    do evento assim que a lapidacao comecar. Sol errado denuncia CG mais
-    rapido que qualquer polígono."""
-    import math
-    dados_sol = bpy.data.lights.new("Sol", type="SUN")
-    dados_sol.energy = 3.0
-    dados_sol.angle = math.radians(0.526)
-    sol = bpy.data.objects.new("Sol", dados_sol)
-    sol.rotation_euler = (math.radians(65), 0, math.radians(-135))
-    col.objects.link(sol)
-    return sol
+    O que havia aqui era um sol a 25 graus de elevacao, branco puro e com o
+    azimute apontando para o lado errado -- nem golden hour, nem coerente com
+    o ceu do fundo.
+
+    A cor sai medida do proprio disco solar do HDRI em vez de convertida de
+    Kelvin: casa exatamente com o ceu que esta atras, que e o ponto.
+    """
+    dados = bpy.data.lights.new("Sol", type="SUN")
+    dados.energy = luz["sol"]["energia"]
+    dados.angle = math.radians(luz["sol"]["angulo_deg"])
+
+    kelvin = luz["sol"].get("temperatura_k")
+    if kelvin:
+        dados.color = sol.cor_de_temperatura(kelvin)
+    elif medido:
+        dados.color = tuple(medido["cor_do_disco"])[:3]
+
+    obj = bpy.data.objects.new("Sol", dados)
+    d = Vector(sol.direcao(elevacao, azimute_cena))
+    # to_track_quat mapeia +Z local em d; a SUN emite ao longo do -Z local,
+    # entao a luz viaja em -d: do sol para o chao. Escrever isso com Euler a
+    # mao e onde se troca sinal sem perceber.
+    obj.rotation_euler = d.to_track_quat("Z", "Y").to_euler()
+    col.objects.link(obj)
+    obj["azimute_cena"] = azimute_cena
+    obj["elevacao"] = elevacao
+    return obj
+
+
+def configurar_cor(cena, luz):
+    """Regua de visualizacao. Atribuir e conferir, nunca perguntar ao enum.
+
+    Em background o RNA lista view_transform e look como vazios, mas aceita a
+    atribuicao -- e o MESMO defeito do render.engine com o Cycles, que ja custou
+    uma rodada a este projeto quando renderizou em CPU calado.
+    """
+    c = luz.get("cor", {})
+    for prop in ("view_transform", "look"):
+        valor = c.get(prop)
+        if not valor:
+            continue
+        try:
+            setattr(cena.view_settings, prop, valor)
+        except TypeError:
+            raise SystemExit(f"o OCIO desta build nao tem {prop}={valor!r}")
+        if getattr(cena.view_settings, prop) != valor:
+            raise SystemExit(f"{prop} nao pegou: pedi {valor!r}, ficou "
+                             f"{getattr(cena.view_settings, prop)!r}")
+
+    cena.view_settings.exposure = c.get("exposure", 0.0)
+    cena.view_settings.gamma = 1.0
+
+    # dither SO age na conversao para 8 bits. Sem cravar a profundidade ele
+    # vira decoracao e o telao bandeia no degrade do ceu.
+    profundidade = str(c.get("color_depth", "8"))
+    cena.render.image_settings.color_depth = profundidade
+
+    print(f"  cor: {cena.view_settings.view_transform} / "
+          f"{cena.view_settings.look} / exposure "
+          f"{cena.view_settings.exposure:+.2f} / {profundidade} bits")
 
 
 # --------------------------------------------------------------------------
@@ -651,30 +1582,73 @@ def main():
     print("construindo terreno...")
     terreno_obj = construir_terreno(dados, cols["BASE"], centro, args.relevo)
     aplicar(terreno_obj, mats["MAT_TERRENO"])
+    construir_entorno(cols["BASE"], centro, mats)
     construir_arena(centro, cols["BASE"], mats)
 
     print("construindo pavilhoes...")
     n_pav = construir_pavilhoes(dados, cols["BASE"], centro, bbox)
-    for o in cols["BASE"].objects:
-        if "PAVILHÃO" in o.name:
-            aplicar(o, mats["MAT_PAVILHAO"])
 
     print("construindo portal, palco e camarotes...")
     feitas = construir_estruturas(dados, cols["BASE"], centro, bbox)
-    for o in feitas:
-        aplicar(o, mats["MAT_PAVILHAO"] if "Camarote" not in o.name
-                else mats["MAT_LONA"])
+
+    print("construindo as zonas com footprint medido...")
+    n_med = construir_medidos(dados, cols["BASE"], centro, bbox)
 
     print("construindo vias...")
     n_vias = construir_vias(cols["BASE"], centro, bbox)
+
+    # Cada estrutura declara o material que a define, em estruturas.py, e aqui
+    # so se obedece. O que havia antes era `if "Camarote" not in o.name`, um
+    # teste sensivel a caixa contra nomes que estao em MAIUSCULAS: dava
+    # verdadeiro para os quatro objetos, e o portal -- fachada de tabua, o
+    # primeiro e o ultimo quadro do filme -- saia com metallic 0.3, cinza.
+    # Nome de objeto nao volta a decidir material neste arquivo.
+    sem_material = []
     for o in cols["BASE"].objects:
-        if o.name.startswith("Via_"):
-            aplicar(o, mats["MAT_ASFALTO"])
+        nome_mat = o.get("material")
+        if nome_mat:
+            aplicar(o, mats[nome_mat])
+        elif o.type == "MESH" and o.name not in ("Terreno", "PistaArena"):
+            sem_material.append(o.name)
+    if sem_material:
+        print(f"  AVISO: sem material declarado: {sem_material[:6]}")
+
+    print("construindo as zonas estimadas...")
+    # so os solidos entram na conta de colisao -- terreno, pista e as vias
+    # ficam de fora (ver afastar_do_medido). O update e obrigatorio: sem ele
+    # `matrix_world` ainda esta na origem e toda pegada sai errada.
+    bpy.context.view_layer.update()
+    solidos = [(o.name, _pegada_xy(o),
+                ((_pegada_xy(o)[0] + _pegada_xy(o)[2]) / 2,
+                 (_pegada_xy(o)[1] + _pegada_xy(o)[3]) / 2))
+               for o in cols["BASE"].objects
+               if o.type == "MESH" and not o.name.startswith("Via_")
+               and o.name not in ("Terreno", "PistaArena", "Entorno")]
+    n_est, n_rec = construir_estimados(cols["ESTIMADO"], centro, bbox,
+                                       origem=dados["_origem"], medidos=solidos)
+
+    for o in cols["ESTIMADO"].objects:
+        nome_mat = o.get("material")
+        if nome_mat:
+            aplicar(o, mats[nome_mat])
 
     print("construindo estandes...")
     cont = construir_estandes(dados, cols["EVENTO"], centro, bbox)
     for o in cols["EVENTO"].objects:
         aplicar(o, mats["MAT_LONA"])
+
+    # A vegetacao vem DEPOIS dos estandes de proposito: arvore nao pode nascer
+    # em cima de estande, e para conferir isso os estandes precisam existir.
+    # Na primeira versao ela vinha antes e a conferencia so via a colecao BASE.
+    print("plantando bosques e matas...")
+    bpy.context.view_layer.update()
+    ocupado = solidos + [
+        (o.name, _pegada_xy(o),
+         ((_pegada_xy(o)[0] + _pegada_xy(o)[2]) / 2,
+          (_pegada_xy(o)[1] + _pegada_xy(o)[3]) / 2))
+        for o in cols["EVENTO"].objects if o.type == "MESH"]
+    n_arv, n_arv_rec = construir_vegetacao(dados, cols["ESTIMADO"], centro, bbox,
+                                           solidos=ocupado)
 
     n_cam = 0
     if not args.sem_camera:
@@ -688,8 +1662,37 @@ def main():
     if args.export_fbx:
         n_marcos = planos_mod.montar_marcos(pacote, cols["MARCOS_CAMERA"])
 
-    construir_luz(cols["LUZ"])
-    construir_ceu(bpy.context.scene)
+    cena = bpy.context.scene
+    luz = json.loads((RAIZ / "data" / "luz.json").read_text(encoding="utf-8"))
+    elev, azim, rot, medido = alvo_do_sol(luz)
+
+    print(f"luz: {luz['momento']['data']} {luz['momento']['hora']}  "
+          f"elevacao {elev:.1f}  azimute real "
+          f"{(azim + luz['norte_do_mapa_graus']) % 360:.1f}")
+    print(f"  norte do mapa: {luz['norte_do_mapa_graus']:+.1f} -> "
+          f"azimute na cena {azim:.1f}")
+    if medido:
+        print(f"  HDRI: sol medido em {medido['azimute_deg']:.1f} / "
+              f"{medido['elevacao_deg']:.1f}  -> girar ceu {rot:.1f}")
+    else:
+        print("  AVISO: sem data/hdri-medido.json -- ceu nao girado. Rode "
+              "blender --background --python scripts/medir_hdri.py")
+    print(f"  sombra: {sol.comprimento_da_sombra(elev):.1f}x a altura")
+
+    construir_luz(cols["LUZ"], luz, elev, azim, medido)
+    construir_ceu(cena, luz, rot)
+    configurar_cor(cena, luz)
+
+    # Mist como AOV: custa ~zero e e composto depois, sem re-renderizar. A 10
+    # graus de elevacao sobre 170.000 m2, a perspectiva aerea e o que impede o
+    # parque de ler como miniatura.
+    if luz.get("atmosfera", {}).get("mist"):
+        bpy.context.view_layer.use_pass_mist = True
+        mundo_mist = cena.world.mist_settings
+        mundo_mist.use_mist = True
+        mundo_mist.start = 80.0
+        mundo_mist.depth = 900.0
+        mundo_mist.falloff = "INVERSE_QUADRATIC"
     configurar_render(bpy.context.scene, args.motor)
 
     larg_m = dados["prancha"]["largura_pt"] * terreno.ESCALA
@@ -700,6 +1703,11 @@ def main():
     print(f"  escala .............. {terreno.ESCALA} m/pt")
     print(f"  extensao do terreno . {larg_m:.0f} x {prof_m:.0f} m")
     print(f"  pavilhoes ........... {n_pav} (duas aguas, nao caixa)")
+    print(f"  zonas medidas ....... {n_med} (footprint do desenho, altura declarada)")
+    print(f"  zonas estimadas ..... {n_est} na colecao ESTIMADO "
+          f"({n_rec} recusadas) -- NAO SAO MEDIDA")
+    print(f"  arvores ............. {n_arv} instancias de 1 malha "
+          f"({n_arv_rec} recusadas por predio ou pela bacia)")
     print(f"  estruturas .......... {len(feitas)}: "
           f"{', '.join(o.name for o in feitas) or 'nenhuma'}")
     print(f"  vias ................ {n_vias}")

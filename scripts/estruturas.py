@@ -169,6 +169,7 @@ def portal(nome, x, y, z, colecao, rumo_graus=0.0):
     obj = _fechar(obj, bm)
     obj.location = (x, y, z)
     _girar(obj, rumo_graus)
+    obj["material"] = "MAT_MADEIRA"   # fachada de tabua, NAO metal
     obj["referencia"] = "reference/PORTAL-referencia.md + foto do cliente 12/08"
     obj["medidas"] = "ESTIMADAS por proporcao -- ver pendencia 4"
     return obj
@@ -227,6 +228,7 @@ def palco(nome, x, y, z, colecao, rumo_graus=0.0):
     obj = _fechar(obj, bm)
     obj.location = (x, y, z)
     _girar(obj, rumo_graus)
+    obj["material"] = "MAT_PRETO"     # deck e treliça de palco
     obj["referencia"] = "DJI_20251127184447_0110_D 00:00:02"
     return obj
 
@@ -276,6 +278,7 @@ def camarote(nome, x, y, z, colecao, comprimento=48.0, faixas=2,
     obj = _fechar(obj, bm)
     obj.location = (x, y, z)
     _girar(obj, rumo_graus)
+    obj["material"] = "MAT_DECK"      # deck de madeira, gradil branco
     obj["referencia"] = "DJI_20251128224305_0163_D 00:00:09"
     obj["sem_arquibancada"] = True
     return obj
@@ -320,6 +323,7 @@ def pavilhao(nome, x, y, z, largura, profundidade, colecao, rumo_graus=0.0):
     obj = _fechar(obj, bm)
     obj.location = (x, y, z)
     _girar(obj, rumo_graus)
+    obj["material"] = "MAT_TELHA"     # telha trapezoidal branca/galvanizada
     return obj
 
 
@@ -360,5 +364,6 @@ def via(nome, pontos_m, colecao, elevacao, largura=VIA_LARGURA):
                       direita[i + 1], direita[i]))
 
     obj = _fechar(obj, bm)
+    obj["material"] = "MAT_ASFALTO"
     obj["fonte"] = "data/vias.json -- tracado lido do bitmap da planta"
     return obj

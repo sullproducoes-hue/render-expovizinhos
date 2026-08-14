@@ -1,0 +1,6 @@
+# Binario de asset CC0 nao versiona: o MANIFESTO.md e o
+# _procedencia.json bastam para rebaixar tudo com md5 conferido.
+*
+!.gitignore
+!MANIFESTO.md
+!_procedencia.json

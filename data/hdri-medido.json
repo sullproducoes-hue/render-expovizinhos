@@ -1,0 +1,50 @@
+{
+ "itens": [
+  {
+   "arquivo": "assets/hdri/belfast_sunset_puresky_4k.hdr",
+   "resolucao": [
+    4096,
+    2048
+   ],
+   "pixel_do_sol": [
+    2476,
+    1047
+   ],
+   "elevacao_deg": 2.07,
+   "azimute_deg": 127.66,
+   "cor_do_disco": [
+    1.0,
+    0.5516,
+    0.2092
+   ],
+   "luminancia_pico": 25.7,
+   "irradiancia_do_disco": 1.082,
+   "irradiancia_total": 13.512,
+   "fracao_do_disco": 0.0801,
+   "medido_por": "scripts/medir_hdri.py"
+  },
+  {
+   "arquivo": "assets/hdri/kloppenheim_06_puresky_4k.hdr",
+   "resolucao": [
+    4096,
+    2048
+   ],
+   "pixel_do_sol": [
+    2484,
+    1115
+   ],
+   "elevacao_deg": 8.04,
+   "azimute_deg": 128.36,
+   "cor_do_disco": [
+    1.0,
+    0.5587,
+    0.1964
+   ],
+   "luminancia_pico": 29.7,
+   "irradiancia_do_disco": 0.005,
+   "irradiancia_total": 9.01,
+   "fracao_do_disco": 0.0006,
+   "medido_por": "scripts/medir_hdri.py"
+  }
+ ]
+}

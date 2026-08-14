@@ -1,0 +1,69 @@
+{
+ "_leia": "Contrato declarado da luz, como planos.json e o da camera. Aqui so entra INTENCAO: data, hora, qual HDRI, e o norte. Os numeros derivados (elevacao, azimute, rotacao do ceu) sao calculados no build por scripts/sol.py e lidos de data/hdri-medido.json -- nao se copia numero a mao para ca, senao um dia eles divergem e ninguem percebe.",
+
+ "local": {
+  "nome": "Parque de Exposicoes de Dois Vizinhos/PR",
+  "lat": -25.73144,
+  "lon": -53.07627,
+  "tz": -3
+ },
+
+ "norte_do_mapa_graus": 11.5,
+ "_norte": {
+  "o_que_e": "Quanto o norte verdadeiro esta girado em relacao ao +Y do mundo da cena. Azimute da cena = azimute real - este valor.",
+  "medido_por": "A ROSA DOS VENTOS DA PRANCHA -- e declaracao do projetista, nao inferencia minha. N em (778.0,528.3) pt e S em (792.9,601.6) pt dao o norte a -11.5 graus do topo da prancha; E e as diagonais confirmam.",
+  "segunda_fonte": "scripts/conferir_norte.py mediu 8.6 graus por outro caminho: fileira dos 6 pavilhoes a 160.3 graus na planta contra 169.0 no satelite do Google. As duas concordam em direcao e ordem de grandeza; a diferenca de 2.9 graus e a incerteza real da medicao por imagem.",
+  "estabilidade": "tres recortes diferentes do satelite deram 168.9 / 169.0 / 169.0.",
+  "faixa_de_decisao": "ate 3 graus corrige calado; 3 a 10 corrige e mostra antes/depois; acima de 10 para e pergunta. Com a rosa dos ventos o valor deixou de ser estimativa e virou dado da prancha, entao a faixa nao se aplica: e leitura, nao inferencia.",
+  "conferido_pelo_natan": false
+ },
+
+ "momento": {
+  "data": "2026-11-27",
+  "hora": "18:15",
+  "fonte": "PROPOSTA. O Natan escolheu golden hour; a hora exata sai da tabela do sol.py e da faixa medida na telemetria dos 62 voos (18:23 as 19:00). 18:15 da sombra de 5.6x a altura, que e longa sem apagar metade do recinto.",
+  "_alternativas": "17:30 = 19.8 graus, sombra 2.8x, recinto todo legivel. 18:45 = 3.8 graus, sombra 15.1x, metade da arena na sombra."
+ },
+
+ "hdri": {
+  "escolhido": "kloppenheim_06_puresky_4k",
+  "_escolhido": "DECIDIDO em 14/08. Era proposta minha; o Natan delegou com estas palavras: 'isso tudo ja pode fazendo, se realmente precisa de mim me chama'. Reversivel num campo. As duas opcoes estao em assets/hdri/ e as duas sao CC0.",
+  "_por_que_kloppenheim": "Elevacao. O sitio pede o sol a 10,1 graus (27/11, 18:15); o sol DENTRO do kloppenheim esta a 8,0 (erro de 2,1 graus) e o do belfast a 2,1 (erro de 8,0). Num filme com contraluz e ceu no quadro, o sol que se ve tem que concordar com a sombra que cai -- e 8 graus de desencontro aparecem. O belfast tem disco melhor (8,0% da irradiancia contra 0,06%), mas disco forte na altura errada e pior que disco fraco na altura certa: quem da a direcao da sombra e a SUN, e ela e calculada.",
+  "candidatos": [
+   {
+    "arquivo": "assets/hdri/belfast_sunset_puresky_4k.hdr",
+    "lat_do_ceu": -25.688,
+    "nota": "disco solar carrega 8.0% da irradiancia: sol definido, sombra com direcao clara."
+   },
+   {
+    "arquivo": "assets/hdri/kloppenheim_06_puresky_4k.hdr",
+    "lat_do_ceu": -25.648,
+    "nota": "disco carrega 0.1%: ceu difuso, sombra macia. Fim de tarde mais nublado."
+   }
+  ],
+  "forca": 1.0
+ },
+
+ "sol": {
+  "temperatura_k": null,
+  "_temperatura": "null = usar a cor medida no proprio disco do HDRI (data/hdri-medido.json). E melhor que converter Kelvin: casa exatamente com o ceu que esta no fundo. Preencher com um numero so para forcar outra coisa.",
+  "energia": 5.0,
+  "_energia": "CALIBRADO na cena real em 14/08, nao no teste sintetico. Em 1.5 o HDRI afogava a SUN e as sombras de 5.6x sumiam; em 5.0 elas aparecem sem estourar a lona branca. Recalibrar de novo na Rodada 2: material real muda o quanto a cena devolve de luz.",
+  "angulo_deg": 1.5,
+  "_angulo": "O disco solar real tem 0.526 graus. 1.5 e PROPOSTA: com sombra de 5.6x a altura, a penumbra vira elemento grafico do quadro, e o haze de fim de tarde alarga a fonte de verdade. Testar os dois."
+ },
+
+ "cor": {
+  "view_transform": "AgX",
+  "look": "AgX - Punchy",
+  "exposure": 0.0,
+  "_nota": "Regua de visualizacao, nao decisao de cena: e reversivel e nao fica gravada em lugar nenhum. O AgX default desatura justamente os tons quentes, e em AgX default o Natan julgaria a LUZ por um defeito de VISUALIZACAO.",
+  "color_depth": "8",
+  "_color_depth": "DECIDIDO em 14/08, com ele delegando: fica 8. Tres razoes e nenhuma e gosto: o painel P2,9 e de 8 bits, a entrega e ProRes 422 HQ e H.264, e o dither_intensity=1.0 so age na conversao para 8 (a 16 ele fica inerte, e o dither e o que impede banding no ceu de fim de tarde). Custo: ~15 GB de sequencia contra ~30 GB. O encode.sh le os dois, entao voltar atras e so trocar aqui e re-renderizar."
+ },
+
+ "atmosfera": {
+  "mist": true,
+  "_mist": "Mist pass como AOV: custa ~zero e e composto depois, sem re-renderizar. A 10 graus de elevacao sobre 170.000 m2, a perspectiva aerea e o que impede o parque de ler como miniatura. Volume scatter global faria melhor mas pode dobrar o s/quadro e fica cozinhado no pixel -- fica para medicao."
+ }
+}

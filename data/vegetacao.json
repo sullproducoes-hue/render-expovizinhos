@@ -1,0 +1,66 @@
+{
+ "o_que_e": "Contrato declarado da vegetacao. A planta NOMEIA 6 Bosques e 2 Matas Nativas e nao desenha copa nenhuma -- conferido no recorte do desenho, a camada de paisagem e so texto sobre branco. Entao posicao vem do rotulo e extensao/densidade vem daqui, declaradas.",
+ "autoridade": "Mesma delegacao de 14/08/2026: 'pode fazer com uma estimativa aproximada' e 'isso tudo ja pode fazendo'. Tudo aqui e trocavel por print ou medida de campo.",
+ "escrito_em": "2026-08-14",
+
+ "de_onde_vem_o_numero": [
+  "PORTE DA ARVORE: medido a olho no quadro DJI_20251129182345_0168_D 00:00:52, comparando a copa com a alameda que ela sombreia -- copa de 14 a 18 m de diametro, altura da ordem de 12 m. Sao arvores adultas de copa larga, do tipo que se planta em parque (sibipiruna, ipe, timbauva). NAO e medida de trena.",
+  "RAIO DA MANCHA: os dois Bosques do oeste estao a 31 m um do outro no mapa, entao cada mancha e da ordem de 30 m de raio -- maior que isso e eles se comem. Mata Nativa vem de fora do recinto e e maior.",
+  "DENSIDADE: 1 arvore a cada 90 m2 da ~110 por hectare, que e densidade de bosque de parque -- copas encostando sem fechar dossel. Mata nativa fecha mais: 1 a cada 55 m2.",
+  "GEOMETRIA: arvore procedural (tronco + tres copas irregulares), com MALHA COMPARTILHADA entre todas as instancias. Nao ha verba de asset e o teto e uma RTX 4060 de 8 GB; 330 arvores com malha propria estouram a VRAM, 330 instancias da mesma malha nao."
+ ],
+
+ "porte": {
+  "altura_m": 12.0,
+  "altura_variacao": 0.28,
+  "raio_copa_m": 8.0,
+  "raio_variacao": 0.25,
+  "altura_tronco_m": 3.6,
+  "raio_tronco_m": 0.32
+ },
+
+ "tipos": {
+  "bosque": {
+   "raio_m": 30.0,
+   "m2_por_arvore": 90.0,
+   "fundamento": "bosque de parque: copas encostando, luz passando entre elas"
+  },
+  "mata_nativa": {
+   "raio_m": 45.0,
+   "m2_por_arvore": 55.0,
+   "fundamento": "mata fecha mais que bosque plantado, e as duas ficam na borda do recinto"
+  }
+ },
+
+ "por_rotulo": {
+  "Bosque": "bosque",
+  "Mata Nativa": "mata_nativa"
+ },
+
+ "alameda": {
+  "planta": true,
+  "so_tipo": "interna",
+  "comprimento_minimo_m": 30.0,
+  "espacamento_m": 18.0,
+  "recuo_do_eixo_m": 6.5,
+  "dos_dois_lados": true,
+  "por_que": "NAO e invencao: o footage do proprio recinto mostra as alamedas arborizadas -- no quadro DJI_20251129182345_0168_D 00:00:52 as copas grandes acompanham o caminho entre os pavilhoes e sombreiam quem passa. E e o que mais aparece nos planos, porque a regua de altura de camera dele para lugar aberto e 4 a 15 m: nessa altura quem enquadra o parque e a arvore da beira, nao o bosque do fundo.",
+  "o_que_ainda_e_declarado": "espacamento de 18 m e recuo de 6,5 m do eixo. Alinhamento de arvore de rua fica entre 8 e 20 m conforme o porte; com copa de 16 m, 18 m e o que faz as copas quase se tocarem sem se cruzarem.",
+  "so_nas_internas": "as 6 vias de perimetro sao a borda do recinto e a divisa com a estrada -- arvore ali fecharia a vista de chegada, que e o P01"
+ },
+
+ "nao_planta": {
+  "Talude": "talude e terra em declive, ja e geometria em terreno.PATAMARES. Arbusto de talude entra na Rodada de textura, nao aqui",
+  "Trilha": "trilha e caminho, nao macico de arvore",
+  "ÁREA RESTRITA": "sem informacao do que ha dentro; plantar arvore ali seria inventar"
+ },
+
+ "regras": [
+  "Nenhuma arvore dentro de predio nem em cima de estande: a mesma conferencia de pegada que vale para as zonas estimadas vale aqui.",
+  "Nenhuma arvore na PISTA da arena. O raio vem de terreno.PATAMARES, a faixa 0-45 m, mais 4 m de folga -- nao e numero redondo escolhido por mim.",
+  "Semente fixa: a mesma cena tem que sair igual em toda build, senao conferencia de quadro nao vale nada."
+ ],
+ "raio_livre_da_arena_m": 49.0,
+ "_raio_livre": "PRIMEIRA VERSAO USAVA 95 m e estava errado, e o relatorio por zona foi o que mostrou: um Bosque ficou com ZERO arvores e outro com 4 de 31, porque a planta poe bosque a 62 m do centro da arena -- em cima do talude. Talude arborizado e o normal num parque, e o audio do cliente so descreve pista, camarotes e palco, nao proibe arvore na encosta. Quem impede arvore em cima de camarote e a conferencia de pegada, nao um raio.",
+ "semente": 20261127
+}
