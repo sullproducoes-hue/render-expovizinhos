@@ -57,11 +57,22 @@ CINZA_MAX = 252
 # de 2 px de espessura da razao perto de 1, hachura e texto dao muito mais.
 ESPESSURA_MAX = 3.0
 
+# Saturacao maxima para um pixel contar como traco tecnico. Os estandes sao
+# preenchidos com cor (laranja, roxo, azul, verde) e o roteiro e vermelho; o
+# arruamento e cinza puro. Sem este corte, a via interna encosta no estande
+# colorido, os dois viram um contorno so, e o filtro de espessura joga fora o
+# conjunto -- que foi exatamente o que escondeu a circulacao interna.
+SATURACAO_MAX = 10
+
 # A moldura da prancha e a caixa do carimbo tambem sao linhas longas e finas, e
 # entram na deteccao como se fossem rua. O que as denuncia e serem retas
 # perfeitamente alinhadas ao eixo: uma rua real, mesmo reta, tem alguns pontos
 # de largura na caixa delimitadora. Elas nao sao apagadas -- ficam marcadas.
 MOLDURA_ESPESSURA_PT = 2.5
+
+# Ate esta distancia de um nome de rua, o traco e a rua daquele nome. Acima,
+# esta dentro do recinto e nao tem nome na planta.
+DISTANCIA_NOME_PT = 60.0
 CAIXA_CARIMBO = (900.0, 770.0, 1440.0, 810.0)
 
 
@@ -76,9 +87,17 @@ def carregar_bitmap(pdf_path, dpi):
 
 
 def mascara_de_linha(img):
-    """Pixels que sao traco de desenho, incluindo o traco claro das ruas."""
-    cinza = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    return (cinza <= CINZA_MAX).astype(np.uint8) * 255
+    """Pixels de traco tecnico: escuros o bastante e sem cor.
+
+    Os dois cortes fazem trabalhos diferentes. O de tom pega a linha clara da
+    rua; o de saturacao tira o estande colorido de perto dela, para que os dois
+    nao virem um contorno so.
+    """
+    v = img.astype(np.int16)
+    cinza = v.mean(axis=2)
+    saturacao = v.max(axis=2) - v.min(axis=2)
+    return ((cinza <= CINZA_MAX) &
+            (saturacao <= SATURACAO_MAX)).astype(np.uint8) * 255
 
 
 def espinha(contorno):
@@ -190,9 +209,18 @@ def main():
               and CAIXA_CARIMBO[1] <= cy <= CAIXA_CARIMBO[3]):
             descarte = "caixa do carimbo"
 
+        # Perto de um nome de rua e via com nome; longe de todos e traco de
+        # dentro do recinto -- e ai o desenho nao distingue corredor de borda
+        # de talude, entao o tipo sai como 'interna' e quem separa e o Natan.
+        tipo = None
+        if descarte is None:
+            tipo = ("perimetro" if s["distancia_ao_rotulo_pt"] <= DISTANCIA_NOME_PT
+                    else "interna")
+
         saida.append({
             "id": f"V{i:02d}",
             "e_via": descarte is None,
+            "tipo": tipo,
             "descarte": descarte,
             "rotulo_mais_proximo": s["rotulo_mais_proximo"],
             "distancia_ao_rotulo_pt": s["distancia_ao_rotulo_pt"],
@@ -220,9 +248,11 @@ def main():
                               "utf-8")
 
     vias = [s for s in saida if s["e_via"]]
-    print(f"tracos detectados: {len(saida)}  |  vias: {len(vias)}  |  "
+    per = [s for s in vias if s["tipo"] == "perimetro"]
+    print(f"tracos: {len(saida)}  |  perimetro: {len(per)}  |  "
+          f"internos: {len(vias) - len(per)}  |  "
           f"moldura/carimbo: {len(saida) - len(vias)}")
-    for s in vias:
+    for s in per:
         print(f"  {s['id']}  {s['comprimento_m']:6.1f} m  "
               f"{s['vertices']:3d} pts  "
               f"perto de: {s['rotulo_mais_proximo']} "

@@ -140,12 +140,11 @@ def desenhar_tracado(dados, vias, pdf_path, dpi, destino):
 
     for v in reais:
         pts = [(x * escala_px, y * escala_px) for x, y in v["pontos_pt"]]
-        d.line(pts, fill=COR_VIA, width=max(4, int(pix.width / 700)),
-               joint="curve")
-        for p in pts:
-            r = max(4, int(pix.width / 900))
-            d.ellipse([p[0] - r, p[1] - r, p[0] + r, p[1] + r], fill=(200, 0, 0))
-        d.text(pts[0], v["id"], font=f_id, fill=(150, 60, 0),
+        # Laranja: via com nome na planta. Azul: traco de dentro do recinto,
+        # onde o desenho nao diz se e corredor ou borda de talude.
+        cor = COR_VIA if v.get("tipo") == "perimetro" else COR_PLANTA
+        d.line(pts, fill=cor, width=max(4, int(pix.width / 700)), joint="curve")
+        d.text(pts[0], v["id"], font=f_id, fill=cor,
                stroke_width=4, stroke_fill=BRANCO)
 
     mapa.save(destino, quality=94)
