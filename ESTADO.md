@@ -8,14 +8,63 @@ Leia daqui e siga para os documentos citados.
 
 ---
 
-## Situação
+## O caminho ativo: o fluxo de 5 passos do Natan
 
-Vídeo de apresentação do parque, para telão, com percurso pelo recinto na ordem
-ditada pelo cliente. **Prazo original era domingo; o cliente antecipou para
-amanhã (13/08)**, para sobrar tempo de lapidação antes da entrega.
+Decidido por ele em 14/08/2026, e é isto que manda:
 
-Com essa antecipação, a meta de amanhã **não é o filme acabado** — é a **base
-navegável e renderizando**, para lapidar por cima.
+1. **Posições de todos os locais** do mapa (`Mapa_AGROSHOW26`), sem faltar
+   nenhum, com todos os nomes — **incluindo as estradas**, que entram no
+   Blender. Dúvida de leitura ou posição vira **pergunta com print** do trecho
+   do mapa, respondida por ele.
+2. **Modelagem e texturas.**
+3. **Títulos e letreiros** do que o mapa descreve. Logo procurado na internet:
+   **usa o JPEG achado ou o nome simples** — não esperar vetor.
+4. **Projeto pronto para ele renderizar.** A cena sai salva com a configuração
+   dele já marcada; **quem exporta é ele, no Blender dele**.
+5. **Plano A** (o que ele acha mais viável): os quadros aprovados viram entrada
+   de **IA geradora de vídeo** com prompt ultra-realista por local.
+   **Plano B**: se o render local convencer, renderizar o trajeto completo aqui
+   com as animações — pessoas, gado, montaria, laçada, salão do leiloeiro.
+
+**Regra permanente:** a descrição dos áudios (`docs/brief-audios.md`) é a régua
+do que vai dentro de cada ambiente — conteúdo, posição e detalhe. Dúvida sobre
+o que ele quis dizer: **perguntar**, com print.
+
+### Configuração de render ditada por ele (Cycles)
+
+GPU habilitada nas preferências · max samples **128** · noise threshold **0,1**
+habilitado · denoise habilitado, prefilter **Fast**, quality **Balanced**,
+**Use GPU** · **Fast GI Approximation** habilitado.
+
+A cena já sai com tudo isso gravado. Máquina: **RTX 4060, 8 GB**.
+Verba de asset: **zero** — só CC0 e gratuito (Poly Haven, ambientCG e o
+material gratuito da **Blender Foundation / Blender Studio**).
+
+### O que ficou superado
+
+A `docs/PROPOSTA-3-DIAS.md` (cronograma de 3 dias, Twinmotion como Plano A,
+portão de sábado 12h) foi escrita antes deste fluxo e **está superada pelo
+Plano A/B acima**. Fica no repositório como registro do raciocínio de motor e
+dos números de render — não como plano de trabalho.
+
+---
+
+## O achado que mudou o filme
+
+O percurso antigo (16 pontos, uma curva bezier única, 128 s) foi medido contra
+a planta: **1.152 m em 128 s dão 9,0 m/s — 32 km/h**, de 1,3 a 7× acima da
+faixa cinematográfica de drone (1,3–2,2 m/s em órbita/push-in, 3,6–6,7 m/s em
+sobrevoo). Nessa velocidade não se lê placa nem se reconhece área.
+
+**A câmera virou dado.** `data/planos.json` declara 22 planos — alvo, lente,
+altura, movimento, duração — cada um dentro da faixa cinematográfica, conferido
+por `python scripts/planos.py --conferir`. Ver `docs/PLANOS.md`.
+
+### Altura de câmera: a régua é o ambiente, não a telemetria
+
+Ordem do Natan, 14/08: **pavilhão por dentro ~2 m · lugar aberto 4–15 m · e
+talvez um plano de 40–50 m mostrando o rodeio inteiro.** A telemetria dos 62
+voos serve para **aperfeiçoar o mapa**, não para definir altura de câmera.
 
 ### Duas abordagens conviveram nesta conversa
 
@@ -35,33 +84,48 @@ das imagens de apoio, os títulos e as restrições do cliente.
 |---|---|---|
 | Planta extraída do PDF | `data/mapa_agroshow26.json` | 134 estandes com área, 181 blocos, 122 zonas |
 | Auditoria do DWG | `data/dwg_agroshow26.json` | Confirma: não há vetor |
-| Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta em bpy 5.0.1 |
-| Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro |
+| Núcleo de terreno/bacia | `scripts/terreno.py` | Sem `bpy` — escala, bacia, leitura da planta. Fonte única para o gerador e a decupagem |
+| Decupagem do filme | `data/planos.json` + `scripts/planos.py` | 22 planos, conferidos em velocidade — ver `docs/PLANOS.md` |
+| Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta. `--plano` corta por região, `--export-fbx` exporta FBX |
+| Render retomável | `scripts/render_shots.py` | Plano a plano, animatic, calibração de tempo (`--cronometrar`) |
+| Entrega | `scripts/encode.sh` | Os 3 arquivos + cartela de teste, a partir da sequência de PNG |
+| Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro **e do conteúdo de cada ambiente** |
 | Briefing completo | `docs/BRIEFING.md` | Roteiro, restrições, entrega |
+| Dossiê de materiais | `docs/MATERIAIS-referencia.md` | Triagem dos 137 GB: escolha por classe, com vídeo, timecode e prova |
 | Referência do portal | `reference/PORTAL-referencia.md` | Descrição da fachada |
 | Agente | `.claude/agents/render-agroshow.md` | Reescrito para 3D em 13/08/2026. Sistema próprio, fora do Cláudio. Texto 2.5D arquivado em `docs/AGENTE-2.5D-suspenso.md` |
 
-Saída atual do gerador:
+Saída atual do gerador (filme completo, sem `--plano`):
 
 ```
 escala .............. 0.5611 m/pt
 extensao do terreno . 808 x 454 m
 pavilhoes ........... 6
 estandes ............ 74 instanciados + 60 proprios
-pontos do percurso .. 16 de 16
+planos .............. 22 de 22 (filme completo)
 render .............. 2760x1380 (2:1)
-animacao ............ 3840 quadros (128 s a 30 fps)
+duracao do filme .... 4635 quadros (154 s a 30 fps)
 patamares ........... arena 0 m -> shows 3.5 m -> anel 7.0 m -> plato 10.0 m
 ```
 
 ```bash
-pip install bpy pymupdf ezdxf
-python3 scripts/build_scene.py --out cena.blend
+python scripts/build_scene.py --out out/cena.blend                 # filme completo
+python scripts/build_scene.py --plano P19 --out out/P19.blend      # so um plano
+python scripts/build_scene.py --export-fbx out/cena.fbx            # FBX
+python scripts/planos.py --conferir                                # velocidades, sem bpy
+```
+
+Na máquina do Natan o gerador roda pelo Blender instalado, não pelo `bpy` do
+pip:
+
+```bash
+"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python scripts/build_scene.py -- --out out/cena.blend
 ```
 
 Renders de conferência: `docs/conferencia-layout.png` (topo),
 `docs/conferencia-bacia.png` (patamares), `docs/conferencia-quadro.png`
-(quadro da animação).
+(quadro da animação) — **desatualizado**, ainda mostra a câmera antiga de 16
+pontos. Regenerar com a decupagem nova.
 
 ---
 
@@ -76,6 +140,8 @@ Resulta em terreno de 808 × 454 m. **Ainda não conferida com medida em campo.*
 de 1806 × 1383 px. O DWG (AC1018) tem 4883 TEXT, 1 LINE, 1 SOLID, 2 HATCH e
 zero polilinha — e 4483 dos textos são caracteres soltos, glifo a glifo.
 Assinatura de PDF importado para CAD. Não insista em extrair contorno dele.
+**Consequência para as estradas:** o traçado é lido do bitmap e conferido por
+print com o Natan antes de virar geometria.
 
 **DEM global não serve para o recinto.** SRTM, Copernicus, NASADEM e AW3D30 são
 todos ~30 m. Um recorte de 2 × 2 km sai com **67 × 67 pixels** — o recinto
@@ -92,8 +158,58 @@ travou o bloco alegando conflito entre áudio e planta. Ordenando os rótulos po
 coordenada Y real, a sequência bate exatamente com a ditada. O bloco está
 liberado.
 
+**O motor de render não pode cair sozinho.** No Blender 5.2 o identificador é
+`BLENDER_EEVEE`; `BLENDER_EEVEE_NEXT` não existe mais. O `try/except` antigo
+engolia o `TypeError` e a cena saía em **Cycles CPU em silêncio**. Motor é
+declaração explícita, nunca fallback mudo.
+
 **Local:** -25,73144 / -53,07627 — R. Jorge Amado, Jardim Marcante, Dois
 Vizinhos - PR, 85660-000.
+
+---
+
+## O footage — 137 GB, 173 vídeos, triados em 14/08
+
+Em `E:\Projetos todos\Mapa - agroshow\Brutos Expo`. **Não está neste
+repositório e não deve entrar**: é material de cliente e o `origin` é público.
+O que sobe para cá é o dossiê e o caminho absoluto de cada prova.
+
+Triagem completa: 173 folhas de contato, 10 quadros por vídeo com timecode
+gravado no pixel, mais a análise de todas elas por classe de material. As
+escolhas estão em **`docs/MATERIAIS-referencia.md`** — leia antes de tocar em
+material, portal, palco ou camarotes.
+
+O que o dossiê entrega, em uma linha cada:
+
+- **Material por classe** com vídeo, timecode e rajada em resolução nativa em
+  `_triagem\provas-materiais\<classe>\`. Grama não tem close no acervo: vem de
+  biblioteca CC0 **calibrada** pela cor e mancha medidas.
+- **Luz:** o material se parte em sol a pino, golden hour e noturno. O melhor
+  material de textura está no golden hour; noturno é inútil para PBR.
+  Temperatura medida: mediana 5206 K, extremos 3318 K e 8061 K.
+- **Portal, palco e camarotes:** o portal celeiro **não aparece em nenhum dos
+  173 vídeos** — a referência é a foto do cliente em
+  `E:\Projetos todos\Mapa - agroshow\WhatsApp Image 2026-08-12 at 13.15.32.jpeg`.
+  Palco: `DJI_20251127184447_0110_D` 00:00:02. Camarotes:
+  `DJI_20251128224305_0163_D` 00:00:09 — e **não há arquibancada em nenhum
+  quadro do recinto inteiro**, o que confirma a restrição 1 por imagem.
+- **Escala vertical:** a pessoa em pé no quadro `1 (4)` 00:00:02 dá ~1,70 m no
+  mesmo quadro que o palco fixo. Não é trena, mas é melhor que proporção.
+- **As cotas dos patamares continuam estimadas.** A telemetria **não** resolve:
+  dentro de uma sessão a DJI mantém a referência barométrica do primeiro
+  takeoff, então `AbsoluteAltitude − RelativeAltitude` mede calibração, não
+  terreno — 9 das 10 sessões dão desnível 0,00 m.
+
+Telemetria dos 62 voos em `_triagem\telemetria\`, resumo em `camera-real.json`.
+Ferramentas para regerar tudo em `E:\Projetos todos\Mapa - agroshow\Comandos\`
+(`extrair_quadros.py`, `extrair_telemetria.py`, `camera_real.py`,
+`extrair_provas.py`, e `cotas_do_terreno.py`, que **não funciona** — ver acima).
+
+**Registro de material sondado que não está no disco:** há 17 `.ffprobe.json` em
+`_triagem\metadados\` de arquivos `dji_fly_20260813_*` que não existem mais na
+pasta. Vieram de um zip que falhou na descompactação de 13/08 e foi apagado
+depois de extraído. Não é perda conhecida — é uma ausência que ninguém decidiu.
+Decisão do Natan.
 
 ---
 
@@ -118,7 +234,7 @@ A resolução de entrada do processador não será confirmada — decisão do cl
 ## Restrições do cliente — violar é rejeição
 
 1. **Arena de rodeio SEM arquibancada.** Só pista, camarotes nos dois lados,
-   palco de frente.
+   palco de frente. **Confirmada por imagem** no footage do próprio recinto.
 2. **A palavra "Kids" é proibida.** Use *Fazendinha*; "Área Infantil" só em
    descrição secundária.
 3. **Fazendinha:** nome grande, descrição pequena embaixo.
@@ -134,46 +250,34 @@ Frases literais, não reescrever:
 
 ---
 
-## Próximos passos, em ordem de valor
+## Próximos passos — na ordem do fluxo de 5 passos
 
-1. **Câmera está baixa demais** — e agora existe o número certo, medido.
-   A telemetria dos 62 voos do próprio Natan neste recinto dá:
-   **altura mediana 24,0 m** (quartis 18,2 / 44,7; máxima 122,3) e
-   **gimbal pitch mediano −18,8°** (quartis −28,8 / −12,4).
-   Ele **quase não usa nadir**: 0,7% dos quadros abaixo de −80°, 51% acima de
-   −20°. A linguagem dele é percurso oblíquo baixo, não mapa visto de cima —
-   o que confirma a escolha do cliente pelo percurso 3D.
-   Ajuste `ALTURA_CAMERA` e `INCLINACAO_CAM` para esses valores medidos, e faça
-   variar por trecho. Dados em `_triagem\telemetria\camera-real.json`.
-2. **HDRI no lugar do céu procedural.** `construir_ceu()` hoje é uma cor chapada.
-   A **temperatura de cor medida** nos voos vai de 3318 K a 8061 K, mediana
-   5206 K. O footage sustenta bem dois momentos: sol duro de meio-dia com
-   cumulus, e golden hour de fim de tarde — e a maior parte do material bom de
-   material está no segundo. Ver a seção de luz no dossiê.
-3. **Texturas PBR** em vez das cores base — **as referências já estão
-   escolhidas**, com vídeo, timecode e quadro de prova em resolução nativa:
-   `docs/MATERIAIS-referencia.md`. Poly Haven e ambientCG, ambos CC0.
-4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
-5. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
-   isso. O portal é o primeiro e o último plano. **Os três têm referência
-   agora**, e vale saber de onde vem cada uma:
-   - **Portal:** não aparece em nenhuma das 173 folhas. A referência é a foto
-     que o cliente mandou, e ela estava solta fora do repositório —
-     `E:\Projetos todos\Mapa - agroshow\WhatsApp Image 2026-08-12 at 13.15.32.jpeg`.
-     É a foto que o `reference/PORTAL-referencia.md` descreve.
-   - **Palco:** vários, o melhor em `DJI_20251127184447_0110_D` 00:00:02 —
-     montado e vazio, com treliça, cobertura tensionada, telões e deck.
-   - **Camarotes:** `DJI_20251128224305_0163_D` 00:00:09 — deck elevado de
-     madeira, módulos separados por gradil branco de tubo, e **sem
-     arquibancada**, o que confirma a restrição 1 por imagem do próprio recinto.
-6. Confirmar as alturas dos patamares com um quadro de drone — **continua
-   aberto**, e a telemetria não resolve (ver o dossiê: o barômetro da DJI não
-   recalibra entre decolagens da mesma sessão).
+1. **Inventário completo dos locais** (`data/locais.json` + `docs/LOCAIS.md`):
+   todo rótulo do mapa, com coordenada, categoria, plano de câmera e a **ficha
+   de conteúdo tirada dos áudios**.
+2. **Estradas e vias** lidas do bitmap, conferidas com o Natan por print antes
+   de virar geometria.
+3. **Alturas de câmera** em `data/planos.json` ajustadas às bandas dele
+   (~2 m interior · 4–15 m aberto · 40–50 m só no conjunto do rodeio).
+4. **Portal, palco, camarotes e pavilhões modelados** — hoje são caixa ou nem
+   isso. O portal é o primeiro e o último plano (P02 e P22).
+5. **Texturas e luz:** PBR calibrado pelas provas + HDRI golden hour.
+6. **Títulos, letreiros e logos** (JPEG ou nome simples).
+7. **Cena salva com a configuração Cycles dele** e entregue como `.blend`.
+8. Confirmar as alturas dos patamares com um quadro de drone lateral.
 
 Feito em 13/08/2026: o agente `.claude/agents/render-agroshow.md` foi reescrito
 para o caminho 3D. Ele é **sistema próprio** — não responde ao Cláudio (o
 diretor de montagem em `E:\I.A Edit\claudio`) e não herda a doutrina 2.5D, por
 decisão do Natan.
+
+Feito em 14/08/2026, de manhã: triagem completa dos 137 GB e o dossiê
+`docs/MATERIAIS-referencia.md`.
+
+Feito em 14/08/2026, à tarde: a câmera deixou de ser uma curva única e virou
+decupagem em `data/planos.json` (22 planos); o gerador ganhou corte por região
+(`--plano`) e exportação FBX; e o Natan fixou o fluxo de 5 passos, a régua de
+altura por ambiente e a configuração de render.
 
 ---
 
@@ -181,54 +285,20 @@ decisão do Natan.
 
 | # | Pendência | Impacto |
 |---|---|---|
-| ~~1~~ | ~~Footage de edições anteriores~~ — **chegou em 13/08/2026** | Resolvida — ver abaixo |
-| 2 | Quadro de drone **lateral** da arena | Médio — trava as cotas dos patamares |
-| 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
-| 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
-
-A pendência 2 **continua aberta e ficou mais estreita**: das 173 folhas triadas,
-nenhuma traz perfil lateral da arena com elemento de cota conhecida. Os melhores
-candidatos (`DJI_20251126155259_0053_D` 00:02:11, `DJI_20251128150656_0136_D`
-00:00:15, `DJI_20251126120722_0045_D_stabilized` 00:00:00) provam que o degrau
-existe e que **não há arquibancada**, mas são oblíquos altos: dão a forma do
-talude, não a altura. O que falta é um voo lateral rasante, com o drone à altura
-do patamar intermediário.
-
----
-
-## O footage chegou — 137 GB, 173 vídeos
-
-Em `E:\Projetos todos\Mapa - agroshow\Brutos Expo`. **Não está neste repositório
-e não deve entrar**: é material de cliente e o `origin` é público. O que sobe
-para cá é o dossiê e o caminho absoluto de cada prova.
-
-Triagem completa em 14/08/2026 — 173 folhas de contato, 10 quadros por vídeo com
-timecode gravado no quadro, mais a análise de todas elas por classe de material.
-As escolhas estão em **`docs/MATERIAIS-referencia.md`**.
-
-Ferramentas, em `E:\Projetos todos\Mapa - agroshow\Comandos\`:
-
-| script | o que faz |
-|---|---|
-| `extrair_quadros.py` | folhas de contato e passada densa (decode em CUDA, tonemap de HLG) |
-| `extrair_telemetria.py` | telemetria de voo dos streams `djmd` via exiftool |
-| `cotas_do_terreno.py` | tentativa de cotar os patamares pelo barômetro — **não funciona**, ver dossiê |
-| `camera_real.py` | altura de voo, gimbal e luz medidos dos 62 voos |
-| `extrair_provas.py` | rajadas em resolução nativa dos materiais escolhidos |
-
-**Registro de material sondado que não está no disco:** há 17 `.ffprobe.json` em
-`_triagem\metadados\` de arquivos `dji_fly_20260813_*` que não existem mais na
-pasta. Vieram de um zip que falhou na descompactação de 13/08 e foi apagado
-depois de extraído. Não é perda conhecida — é uma ausência que ninguém decidiu.
-Decisão do Natan.
+| ~~1~~ | ~~Footage de edições anteriores~~ — **chegou em 13/08, triado em 14/08** | Resolvida — `docs/MATERIAIS-referencia.md` |
+| 2 | **Posição da Fazendinha e do portão** — não existe na planta, só no áudio | **O Natan vai mandar um print com a posição e instruções.** Enquanto não chega, P14/P15 seguem com âncora `estimada` |
+| 3 | Quadro de drone **lateral** da arena, rasante, com elemento de altura conhecida | Médio — trava as cotas dos patamares. Das 173 folhas, nenhuma serve: todas são oblíquas altas |
+| 4 | Medida real de qualquer estrutura | Médio — confirma a escala de 0,5611 m/pt |
+| 5 | Identidade visual AGROSHOW 2026 em vetor | Baixo agora — decisão do Natan: **usar o JPEG achado na internet ou o nome simples** |
 
 ---
 
 ## Limitações do ambiente remoto
 
-Registrado para não se repetir tentativa: o proxy de egresso bloqueia
-`drive.google.com`, `at.adobe.com`, `portal.opentopography.org`,
+Registrado para não se repetir tentativa: em sessão remota o proxy de egresso
+bloqueia `drive.google.com`, `at.adobe.com`, `portal.opentopography.org`,
 `huggingface.co`, o CDN da OpenAI, `openstreetmap.org` e
 `doisvizinhos.pr.gov.br`. Vídeo do Drive e transcrição de áudio precisam ser
 feitos localmente e anexados no chat. GitHub, PyPI e o arquivo principal do
-Ubuntu funcionam.
+Ubuntu funcionam. **Na máquina do Natan isso não vale** — lá o acesso é
+direto, e é onde o footage e o Blender moram.

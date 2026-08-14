@@ -3,10 +3,11 @@
 Gera a cena 3D do Parque de Exposicoes de Dois Vizinhos para a AGROSHOW 2026,
 a partir da planta extraida em data/mapa_agroshow26.json.
 
-Constroi terreno, os 134 estandes instanciados, os pavilhoes, a arena e o
-caminho de camera seguindo o percurso ditado pelo cliente. Deixa tudo em
-colecoes separadas para que a camada permanente (terreno, pavilhoes) sobreviva
-a troca da camada do evento (estandes, palco, sinalizacao) no ano seguinte.
+Constroi terreno, os 134 estandes instanciados, os pavilhoes, a arena e as
+cameras dos planos do filme (data/planos.json, resolvidas por scripts/planos.py).
+Deixa tudo em colecoes separadas para que a camada permanente (terreno,
+pavilhoes) sobreviva a troca da camada do evento (estandes, palco, sinalizacao)
+no ano seguinte.
 
 Uso:
     blender --background --python scripts/build_scene.py -- --out cena.blend
@@ -15,71 +16,43 @@ Uso:
 Ou com o modulo bpy instalado (pip install bpy):
     python3 scripts/build_scene.py --out cena.blend
 
-Escala: derivada da propria planta. Os 39 estandes da serie C tem 100 m² (lado
-de 10 m) e ficam encostados em fileira; a mediana da distancia entre rotulos
-consecutivos e 17,82 pt, o que da 0,5611 m/pt. A serie A nao serve para o mesmo
-calculo porque nao esta em fileira continua -- ha corredor entre os modulos.
-Confira com uma medida real em campo antes de render final.
+Constroi so a regiao de um plano (ou lista de planos), para caber em GPU de
+8-12 GB sem carregar o recinto inteiro:
+
+    python3 scripts/build_scene.py --plano P19 --out out/P19.blend
+
+Exporta para o Twinmotion (Plano A da proposta de render). O FBX carrega
+BASE + EVENTO + cones da coleção MARCOS_CAMERA -- um cone por ponta de plano,
+porque o Twinmotion importa geometria mas nao importa camera animada:
+
+    python3 scripts/build_scene.py --export-fbx out/cena.fbx
+
+Escala, bacia da arena e leitura da planta vivem em scripts/terreno.py -- e a
+fonte unica, compartilhada com scripts/planos.py. Escala 0,5611 m/pt, derivada
+da propria planta. NAO CONFERIDA com medida real em campo.
 """
 
 import argparse
-import json
 import math
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import bpy
 import bmesh
 from mathutils import Vector
 
-# --------------------------------------------------------------------------
-# Constantes do projeto
+import planos as planos_mod
+import terreno
 
-ESCALA = 0.5611          # metros por ponto de PDF (derivada da serie C)
-ALTURA_ESTANDE = 3.2     # m -- tenda/estande padrao de feira
-ALTURA_PAVILHAO = 7.0    # m -- pavilhao de animais
-ALTURA_CAMERA = 12.0     # m -- altura de voo do percurso
-INCLINACAO_CAM = 18.0    # graus abaixo da horizontal
-SEGUNDOS_POR_PONTO = 8.0 # ritmo do percurso -- 16 pontos = ~2min08, como a referencia
-FPS = 30
+# --------------------------------------------------------------------------
+# Constantes proprias do gerador (geometria e bacia vivem em terreno.py)
+
 LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
 ALTURA_RENDER = 1380
 
-# Percurso ditado pelo cliente, em rotulos da planta. A ordem e a do audio.
-# Cada entrada: (nome do ponto, rotulo procurado, ocorrencia desejada)
-PERCURSO = [
-    ("00 Estacionamento",      "ESTACIONAMENTO",        5),
-    ("01 Portal de Entrada",   "Portal de Entrada",     0),
-    ("02 Pavilhao 1",          "PAVILHÃO 1",            0),
-    ("03 Alimentacao Coberta", "Coberta",               0),
-    ("04 Pavilhao 2",          "PAVILHÃO 2",            0),
-    ("05 Pavilhao 3",          "PAVILHÃO 3",            0),
-    ("06 Mercado do Produtor", "Mercado do Produtor",   0),
-    ("07 Cafe Colonial",       "Café Colonial",         0),
-    ("08 Bosque",              "Bosque",                2),
-    ("09 Alimentacao Aberta",  "Aberta",                0),
-    ("10 Recinto de Leiloes",  "RECINTO DE LEILÕES",    0),
-    ("11 Pavilhoes de Animais", "PAVILHÃO - GADO LEITE", 0),
-    ("12 Pista de Julgamentos", "PISTA DE JULGAMENTOS",  0),
-    ("13 Arena de Rodeio",     "ARENA DE RODEIO",       0),
-    ("14 Palco",               "PALCO",                 0),
-    ("15 Saida pelo Portal",   "Portal de Entrada",     0),
-]
-
-COLECOES = ["BASE", "EVENTO", "CAMERA", "LUZ"]
-
-# Bacia da arena, em bandas radiais a partir do centro da pista.
-# (raio_interno_m, raio_externo_m, z_interno_m, z_externo_m)
-# Alturas ESTIMADAS -- confirme com um quadro de drone antes do render final.
-PATAMARES = [
-    (0.0,    45.0,  0.0,  0.0),   # pista da arena
-    (45.0,   62.0,  0.0,  3.5),   # talude para o patamar dos shows
-    (62.0,   78.0,  3.5,  3.5),   # area de shows / camarotes
-    (78.0,   95.0,  3.5,  7.0),   # talude para o primeiro anel
-    (95.0,  125.0,  7.0,  7.0),   # anel de maquinas e veiculos
-    (125.0, 150.0,  7.0, 10.0),   # talude para o plato geral
-    (150.0, 9999.0, 10.0, 10.0),  # plato do restante do recinto
-]
+COLECOES = ["BASE", "EVENTO", "CAMERA", "MARCOS_CAMERA", "LUZ"]
 
 
 # --------------------------------------------------------------------------
@@ -94,18 +67,6 @@ def criar_colecoes():
         col = bpy.data.collections.new(nome)
         bpy.context.scene.collection.children.link(col)
     return {c.name: c for c in bpy.data.collections}
-
-
-def para_mundo(x_pt, y_pt, origem):
-    """Converte ponto do PDF para metros no mundo.
-
-    O PDF tem origem no canto superior esquerdo com y crescendo para baixo;
-    o Blender tem y crescendo para o norte. Dai a inversao de sinal em y.
-    """
-    return (
-        (x_pt - origem[0]) * ESCALA,
-        -(y_pt - origem[1]) * ESCALA,
-    )
 
 
 def caixa(nome, largura, profundidade, altura, colecao):
@@ -139,7 +100,10 @@ MATERIAIS = {
 
 def criar_materiais():
     """Materiais base. Sao ponto de partida para o acabamento -- troque por
-    PBR com textura (Poly Haven, ambientCG: ambos CC0) na etapa de lapidacao."""
+    PBR com textura (Poly Haven, ambientCG: ambos CC0) na etapa de lapidacao.
+    No terreno, antes de textura nova: ruido de baixa frequencia (escala 1-3)
+    em Overlay a 0,2-0,35 sobre a cor base quebra o padrao repetido visto do
+    alto -- e o que mais entrega CG num terreno de 800 m, nao a textura."""
     feitos = {}
     for nome, (cor, rug, met) in MATERIAIS.items():
         mat = bpy.data.materials.new(nome)
@@ -161,38 +125,34 @@ def aplicar(obj, mat):
 
 
 # --------------------------------------------------------------------------
-# Construcao
+# Corte por regiao -- o que segura a cena em 8-12 GB de VRAM
 
-def elevacao(x, y, centro_arena):
-    """Altura do terreno em metros, para um ponto do mundo.
+def bbox_dos_planos(planos_sel, centro, margem=80.0):
+    """Caixa envolvente (x0, x1, y0, y1) das cameras e miras dos planos dados.
 
-    A bacia da arena e modelada por bandas radiais, nao por DEM. Motivo: os
-    DEMs globais disponiveis (SRTM, Copernicus, NASADEM, AW3D30) sao todos de
-    ~30 m de resolucao. Num recinto de 800 m isso da cerca de 27 amostras de
-    ponta a ponta -- descreve o vale, mas nao enxerga patamares de poucos
-    metros. E os patamares sao justamente o que o cliente descreve no audio.
-
-    As bandas saem dos proprios dados da planta: agrupando os 93 estandes da
-    serie C pela distancia ao centro da arena, aparecem aneis claros em 72-90 m
-    e 108-113 m. Cruzando com o audio -- "primeiro anel de cima" (maquinas),
-    "segundo patamar descendo" (shows), "embaixo, em frente ao palco" (arena)
-    -- sao tres niveis. As 15 anotacoes de "Talude" na planta caem nas faixas
-    de transicao, o que confirma o desenho.
-
-    ALTURAS SAO ESTIMADAS. Um quadro de drone ou uma foto lateral da arena
-    confirma em minutos. Ajuste PATAMARES antes do render final.
+    Margem de 80 m cobre o maior estande (100 m², lado 10 m) mais folga de
+    enquadramento. Usada para construir so o que aparece nos planos pedidos
+    -- decisivo numa GPU de 8-12 GB, que nao segura o recinto inteiro vestido.
     """
-    r = math.hypot(x - centro_arena[0], y - centro_arena[1])
-    for r_int, r_ext, z_int, z_ext in PATAMARES:
-        if r < r_ext:
-            if r <= r_int:
-                return z_int
-            # Talude: transicao suave entre um patamar e o seguinte.
-            t = (r - r_int) / (r_ext - r_int)
-            t = t * t * (3.0 - 2.0 * t)   # smoothstep
-            return z_int + (z_ext - z_int) * t
-    return PATAMARES[-1][3]
+    xs, ys = [], []
+    for p in planos_sel:
+        for t in (0.0, 1.0):
+            pos, mira = planos_mod.amostra(p, t, centro)
+            xs += [pos[0], mira[0]]
+            ys += [pos[1], mira[1]]
+    return (min(xs) - margem, max(xs) + margem,
+            min(ys) - margem, max(ys) + margem)
 
+
+def dentro(bbox, x, y):
+    if bbox is None:
+        return True
+    x0, x1, y0, y1 = bbox
+    return x0 <= x <= x1 and y0 <= y <= y1
+
+
+# --------------------------------------------------------------------------
+# Construcao
 
 def construir_arena(centro_arena, col, mats):
     """Piso de terra da pista, no fundo da bacia."""
@@ -211,12 +171,16 @@ def construir_arena(centro_arena, col, mats):
 def construir_terreno(dados, col, centro_arena, relevo=None):
     """Terreno da prancha inteira, esculpido na bacia da arena.
 
+    Constroi sempre a prancha inteira, mesmo com --plano ativo: e uma unica
+    malha, o custo de esculpir alguns vertices a mais e desprezivel perto do
+    que --plano economiza em estandes e pavilhoes instanciados.
+
     Com --relevo, um heightmap em escala de cinza entra por deslocamento por
     cima da bacia -- util para o entorno (vale, encostas distantes), onde os
     30 m de resolucao bastam. Para o recinto, quem manda e a bacia.
     """
-    larg = dados["prancha"]["largura_pt"] * ESCALA * 1.2
-    prof = dados["prancha"]["altura_pt"] * ESCALA * 1.2
+    larg = dados["prancha"]["largura_pt"] * terreno.ESCALA * 1.2
+    prof = dados["prancha"]["altura_pt"] * terreno.ESCALA * 1.2
     div = 400
 
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=div, y_subdivisions=div,
@@ -227,11 +191,10 @@ def construir_terreno(dados, col, centro_arena, relevo=None):
         c.objects.unlink(obj)
     col.objects.link(obj)
 
-    # Aplica escala na malha e esculpe a bacia vertice a vertice.
     for v in obj.data.vertices:
         v.co.x *= larg
         v.co.y *= prof
-        v.co.z = elevacao(v.co.x, v.co.y, centro_arena)
+        v.co.z = terreno.elevacao(v.co.x, v.co.y, centro_arena)
 
     if relevo and Path(relevo).exists():
         img = bpy.data.images.load(str(relevo))
@@ -248,31 +211,6 @@ def construir_terreno(dados, col, centro_arena, relevo=None):
     return obj
 
 
-def centro_da_arena(dados):
-    z = [x for x in dados["zonas"] if x["rotulo"] == "ARENA DE RODEIO"][0]
-    return para_mundo(z["x"], z["y"], dados["_origem"])
-
-
-def fcurves_da_acao(obj):
-    """Devolve as fcurves da acao do objeto, em qualquer versao do Blender.
-
-    Ate a 4.3 a acao expunha .fcurves direto. Da 4.4 em diante elas vivem em
-    layers > strips > channelbags, e o atributo antigo sumiu na 5.0.
-    """
-    ad = obj.animation_data
-    if not ad or not ad.action:
-        return []
-    acao = ad.action
-    if hasattr(acao, "fcurves"):
-        return list(acao.fcurves)
-    curvas = []
-    for camada in getattr(acao, "layers", []):
-        for faixa in getattr(camada, "strips", []):
-            for saco in getattr(faixa, "channelbags", []):
-                curvas.extend(saco.fcurves)
-    return curvas
-
-
 def orientar_estandes(postos):
     """Alinha cada estande ao eixo da sua fileira.
 
@@ -280,6 +218,11 @@ def orientar_estandes(postos):
     direcao ate o vizinho mais proximo serve de referencia. Isso resolve tanto
     as grades ortogonais quanto os arcos concentricos da arena, sem precisar
     tratar os dois casos separadamente.
+
+    Com --plano ativo, so os estandes dentro da bbox entram nesta lista -- a
+    orientacao de um estande na borda do corte pode ficar imprecisa se o
+    vizinho mais proximo dele ficou de fora. Aceitavel: e um corte de trabalho,
+    nao a build de entrega.
     """
     for i, (obj, x, y) in enumerate(postos):
         melhor, dist_melhor = None, float("inf")
@@ -295,7 +238,7 @@ def orientar_estandes(postos):
                               math.atan2(melhor[1] - y, melhor[0] - x))
 
 
-def construir_estandes(dados, col, centro_arena):
+def construir_estandes(dados, col, centro_arena, bbox=None):
     """Instancia os estandes a partir de dois modulos base.
 
     39 estandes de 100 m² e 35 de 25 m² sao instancias, nao modelagens
@@ -303,19 +246,22 @@ def construir_estandes(dados, col, centro_arena):
     """
     modulos = {}
     for area, lado in ((100.0, 10.0), (25.0, 5.0)):
-        base = caixa(f"MODULO_{int(area)}m2", lado, lado, ALTURA_ESTANDE, col)
+        base = caixa(f"MODULO_{int(area)}m2", lado, lado, terreno.ALTURA_ESTANDE, col)
         base.hide_render = base.hide_viewport = True
         modulos[area] = base
 
     origem = dados["_origem"]
-    contagem = {"instanciado": 0, "proprio": 0}
+    contagem = {"instanciado": 0, "proprio": 0, "fora_do_corte": 0}
     postos = []
 
     for st in dados["estandes"]:
         area = st.get("area_m2")
         if area is None:
             continue
-        x, y = para_mundo(st["x"], st["y"], origem)
+        x, y = terreno.para_mundo(st["x"], st["y"], origem)
+        if not dentro(bbox, x, y):
+            contagem["fora_do_corte"] += 1
+            continue
 
         if area in modulos:
             obj = bpy.data.objects.new(st["codigo"], modulos[area].data)
@@ -323,10 +269,10 @@ def construir_estandes(dados, col, centro_arena):
             contagem["instanciado"] += 1
         else:
             lado = math.sqrt(area)
-            obj = caixa(st["codigo"], lado, lado, ALTURA_ESTANDE, col)
+            obj = caixa(st["codigo"], lado, lado, terreno.ALTURA_ESTANDE, col)
             contagem["proprio"] += 1
 
-        obj.location = (x, y, elevacao(x, y, centro_arena))
+        obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
         obj["area_m2"] = area
         obj["serie"] = st["serie"]
         postos.append((obj, x, y))
@@ -335,7 +281,7 @@ def construir_estandes(dados, col, centro_arena):
     return contagem
 
 
-def construir_pavilhoes(dados, col, centro_arena):
+def construir_pavilhoes(dados, col, centro_arena, bbox=None):
     """Pavilhoes de animais: 5 de 720 m² e 1 de 560 m².
 
     Proporcao 60 x 12 m assumida para os de 720 -- confira em campo. A ordem
@@ -347,101 +293,17 @@ def construir_pavilhoes(dados, col, centro_arena):
     for z in dados["zonas"]:
         if z["categoria"] != "pavilhoes" or "PAVILHÃO -" not in z["rotulo"]:
             continue
+        x, y = terreno.para_mundo(z["x"], z["y"], origem)
+        if not dentro(bbox, x, y):
+            continue
         area = 560.0 if "EQUÍNOS" in z["rotulo"] else 720.0
         profundidade = 12.0
         largura = area / profundidade
-        x, y = para_mundo(z["x"], z["y"], origem)
-        obj = caixa(z["rotulo"], largura, profundidade, ALTURA_PAVILHAO, col)
-        obj.location = (x, y, elevacao(x, y, centro_arena))
+        obj = caixa(z["rotulo"], largura, profundidade, terreno.ALTURA_PAVILHAO, col)
+        obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
         obj["area_m2"] = area
         feitos += 1
     return feitos
-
-
-def achar_zona(dados, rotulo, ocorrencia=0):
-    achados = [z for z in dados["zonas"] if z["rotulo"] == rotulo]
-    if not achados:
-        return None
-    achados.sort(key=lambda z: (z["y"], z["x"]))
-    return achados[min(ocorrencia, len(achados) - 1)]
-
-
-def construir_percurso(dados, col, centro_arena):
-    """Curva bezier passando pelos pontos do roteiro, com camera acoplada."""
-    origem = dados["_origem"]
-    pontos, ausentes = [], []
-
-    for nome, rotulo, ocorrencia in PERCURSO:
-        z = achar_zona(dados, rotulo, ocorrencia)
-        if z is None:
-            ausentes.append((nome, rotulo))
-            continue
-        x, y = para_mundo(z["x"], z["y"], origem)
-        pontos.append((nome, x, y))
-
-    curva = bpy.data.curves.new("PercursoCamera", type="CURVE")
-    curva.dimensions = "3D"
-    spline = curva.splines.new("BEZIER")
-    spline.bezier_points.add(len(pontos) - 1)
-
-    for i, (nome, x, y) in enumerate(pontos):
-        bp = spline.bezier_points[i]
-        bp.co = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
-        bp.handle_left_type = bp.handle_right_type = "AUTO"
-
-    obj_curva = bpy.data.objects.new("PercursoCamera", curva)
-    col.objects.link(obj_curva)
-
-    cam_data = bpy.data.cameras.new("Camera")
-    cam_data.lens = 28.0
-    cam = bpy.data.objects.new("Camera", cam_data)
-    col.objects.link(cam)
-    cam.rotation_euler = (math.radians(75), 0, 0)
-
-    # Rig segue o caminho; a camera e filha e recebe a inclinacao.
-    # Separar os dois evita brigar com a orientacao que a constraint impoe.
-    rig = bpy.data.objects.new("RigCamera", None)
-    rig.empty_display_type = "ARROWS"
-    rig.empty_display_size = 12.0
-    col.objects.link(rig)
-
-    seguir = rig.constraints.new("FOLLOW_PATH")
-    seguir.target = obj_curva
-    seguir.use_curve_follow = True
-    seguir.forward_axis = "FORWARD_Y"
-    seguir.up_axis = "UP_Z"
-    seguir.use_fixed_location = True
-
-    cam.parent = rig
-    cam.location = (0.0, 0.0, 0.0)
-    # A camera olha por -Z local; +90 graus em X faz olhar para +Y, que e a
-    # direcao de marcha. Subtrair a inclinacao aponta o nariz para baixo.
-    cam.rotation_euler = (math.radians(90.0 - INCLINACAO_CAM), 0.0, 0.0)
-
-    # Percorre o caminho do inicio ao fim ao longo da timeline.
-    cena = bpy.context.scene
-    total = int(len(pontos) * SEGUNDOS_POR_PONTO * FPS)
-    cena.frame_start = 1
-    cena.frame_end = total
-    seguir.offset_factor = 0.0
-    seguir.keyframe_insert("offset_factor", frame=1)
-    seguir.offset_factor = 1.0
-    seguir.keyframe_insert("offset_factor", frame=total)
-    for fc in fcurves_da_acao(rig):
-        for kp in fc.keyframe_points:
-            kp.interpolation = "LINEAR"
-
-    bpy.context.scene.camera = cam
-
-    # Marcadores nomeados, para localizar cada ponto do roteiro na viewport.
-    for nome, x, y in pontos:
-        m = bpy.data.objects.new(f"PT_{nome}", None)
-        m.empty_display_type = "PLAIN_AXES"
-        m.empty_display_size = 8.0
-        m.location = (x, y, elevacao(x, y, centro_arena) + ALTURA_CAMERA)
-        col.objects.link(m)
-
-    return pontos, ausentes
 
 
 def configurar_render(cena):
@@ -455,6 +317,28 @@ def configurar_render(cena):
         cena.render.engine = "BLENDER_EEVEE_NEXT"
     except TypeError:
         cena.render.engine = "CYCLES"
+    # Overscan: com camera em movimento, efeitos de tela do EEVEE (SSR, SSAO)
+    # somem perto da borda do quadro. 5-10% os traz de volta.
+    try:
+        cena.eevee.use_overscan = True
+        cena.eevee.overscan_size = 7.0
+    except AttributeError:
+        pass
+    # Motion blur: EEVEE Next nao tem passe Vector, entao o blur do beauty vem
+    # daqui, por acumulacao. 4-8 passos e o equilibrio entre gradiente limpo
+    # e tempo de render -- mais que isso reavalia a cena inteira por passo.
+    try:
+        cena.render.use_motion_blur = True
+        cena.eevee.motion_blur_steps = 6
+    except AttributeError:
+        pass
+    try:
+        cena.eevee.taa_render_samples = 64
+    except AttributeError:
+        pass
+    # Ceu de fim de tarde em 2:1 e um degrade grande; painel LED costuma
+    # trabalhar em 8 bits e bandeia. Dither e a primeira defesa, sem custo.
+    cena.render.dither_intensity = 1.0
 
 
 def construir_ceu(cena):
@@ -475,15 +359,43 @@ def construir_ceu(cena):
 
 
 def construir_luz(col):
-    """Sol em golden hour, coerente com o LOOK LOCK das imagens de apoio."""
+    """Sol em golden hour, coerente com o LOOK LOCK das imagens de apoio.
+
+    Substitua pelo addon Sun Position com -25,73144 / -53,07627 e o horario
+    do evento assim que a lapidacao comecar. Sol errado denuncia CG mais
+    rapido que qualquer polígono."""
+    import math
     dados_sol = bpy.data.lights.new("Sol", type="SUN")
     dados_sol.energy = 3.0
     dados_sol.angle = math.radians(0.526)
     sol = bpy.data.objects.new("Sol", dados_sol)
-    # Elevacao baixa: sol de fim de tarde, sombras longas.
     sol.rotation_euler = (math.radians(65), 0, math.radians(-135))
     col.objects.link(sol)
     return sol
+
+
+# --------------------------------------------------------------------------
+# Exportacao para o Twinmotion (Plano A)
+
+def exportar_fbx(caminho):
+    """BASE + EVENTO + os cones de MARCOS_CAMERA, sem as cameras animadas.
+
+    O Twinmotion importa geometria mas nao importa camera animada -- os cones
+    dizem ao Natan onde cravar cada chave la dentro. object_types={'MESH'}
+    deixa de fora tanto as cameras reais quanto as miras (empties), que nao
+    tem uso no Twinmotion.
+    """
+    Path(caminho).parent.mkdir(parents=True, exist_ok=True)
+    bpy.ops.export_scene.fbx(
+        filepath=str(Path(caminho).resolve()),
+        use_selection=False,
+        object_types={"MESH"},
+        apply_unit_scale=True,
+        apply_scale_options="FBX_SCALE_ALL",
+        axis_forward="Y",
+        axis_up="Z",
+        global_scale=1.0,
+    )
 
 
 # --------------------------------------------------------------------------
@@ -492,69 +404,105 @@ def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:]
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dados", default="data/mapa_agroshow26.json")
+    ap.add_argument("--planos-json", dest="planos_json", default="data/planos.json")
     ap.add_argument("--relevo", default=None,
                     help="heightmap em escala de cinza para deslocar o terreno")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
+    ap.add_argument("--export-fbx", default=None,
+                    help="exporta BASE+EVENTO+MARCOS_CAMERA em FBX, para o Twinmotion")
+    ap.add_argument("--plano", default=None,
+                    help="constroi so a regiao dos planos com este id "
+                         "(ou lista separada por virgula, ex: P13,P14,P15). "
+                         "Sem isso, constroi o recinto inteiro")
+    ap.add_argument("--sem-camera", action="store_true",
+                    help="pula a montagem das cameras -- so para conferir geometria")
     args = ap.parse_args(argv)
 
-    dados = json.loads(Path(args.dados).read_text(encoding="utf-8"))
-    # Origem no centro da prancha, para a cena nascer centrada no mundo.
-    dados["_origem"] = (dados["prancha"]["largura_pt"] / 2,
-                        dados["prancha"]["altura_pt"] / 2)
+    dados = terreno.carregar_mapa(args.dados)
 
     limpar_cena()
     cols = criar_colecoes()
-    centro = centro_da_arena(dados)
+    centro = terreno.centro_da_arena(dados)
     mats = criar_materiais()
 
+    pacote = planos_mod.carregar(args.planos_json, dados=dados)
+    selecionados = pacote["planos"]
+    if args.plano:
+        ids_pedidos = set(args.plano.split(","))
+        selecionados = [p for p in pacote["planos"] if p["id"] in ids_pedidos]
+        faltando = ids_pedidos - {p["id"] for p in selecionados}
+        if faltando:
+            raise SystemExit(f"plano(s) inexistente(s) em {args.planos_json}: {sorted(faltando)}")
+
+    bbox = bbox_dos_planos(selecionados, centro) if args.plano else None
+    if bbox:
+        print(f"corte por --plano {args.plano}: "
+              f"x [{bbox[0]:.0f}, {bbox[1]:.0f}]  y [{bbox[2]:.0f}, {bbox[3]:.0f}]")
+
     print("construindo terreno...")
-    terreno = construir_terreno(dados, cols["BASE"], centro, args.relevo)
-    aplicar(terreno, mats["MAT_TERRENO"])
+    terreno_obj = construir_terreno(dados, cols["BASE"], centro, args.relevo)
+    aplicar(terreno_obj, mats["MAT_TERRENO"])
     construir_arena(centro, cols["BASE"], mats)
 
     print("construindo pavilhoes...")
-    n_pav = construir_pavilhoes(dados, cols["BASE"], centro)
+    n_pav = construir_pavilhoes(dados, cols["BASE"], centro, bbox)
     for o in cols["BASE"].objects:
         if "PAVILHÃO" in o.name:
             aplicar(o, mats["MAT_PAVILHAO"])
 
     print("construindo estandes...")
-    cont = construir_estandes(dados, cols["EVENTO"], centro)
+    cont = construir_estandes(dados, cols["EVENTO"], centro, bbox)
     for o in cols["EVENTO"].objects:
         aplicar(o, mats["MAT_LONA"])
 
-    print("construindo percurso...")
-    pontos, ausentes = construir_percurso(dados, cols["CAMERA"], centro)
+    n_cam = 0
+    if not args.sem_camera:
+        print("montando cameras dos planos...")
+        n_cam = planos_mod.montar_cameras(pacote if not args.plano
+                                          else {**pacote, "planos": selecionados,
+                                                "total_quadros": max(p["_quadro_fim"] for p in selecionados)},
+                                          cols["CAMERA"])
+
+    n_marcos = 0
+    if args.export_fbx:
+        n_marcos = planos_mod.montar_marcos(pacote, cols["MARCOS_CAMERA"])
 
     construir_luz(cols["LUZ"])
     construir_ceu(bpy.context.scene)
     configurar_render(bpy.context.scene)
 
-    larg_m = dados["prancha"]["largura_pt"] * ESCALA
-    prof_m = dados["prancha"]["altura_pt"] * ESCALA
+    larg_m = dados["prancha"]["largura_pt"] * terreno.ESCALA
+    prof_m = dados["prancha"]["altura_pt"] * terreno.ESCALA
+    dur_s = pacote["total_quadros"] / pacote["fps"]
 
     print("\n" + "=" * 58)
-    print(f"  escala .............. {ESCALA} m/pt")
+    print(f"  escala .............. {terreno.ESCALA} m/pt")
     print(f"  extensao do terreno . {larg_m:.0f} x {prof_m:.0f} m")
     print(f"  pavilhoes ........... {n_pav}")
     print(f"  estandes ............ {cont['instanciado']} instanciados "
-          f"+ {cont['proprio']} proprios")
-    print(f"  pontos do percurso .. {len(pontos)} de {len(PERCURSO)}")
+          f"+ {cont['proprio']} proprios"
+          + (f" (+{cont['fora_do_corte']} fora do corte)" if bbox else ""))
+    print(f"  planos ............... {len(selecionados)} de {len(pacote['planos'])}"
+          + (f" (corte --plano {args.plano})" if args.plano else " (filme completo)"))
+    print(f"  cameras montadas ..... {n_cam}")
+    if args.export_fbx:
+        print(f"  marcos de camera ..... {n_marcos} (2 por plano, ida e volta)")
     print(f"  render .............. {LARGURA_RENDER}x{ALTURA_RENDER} "
           f"({LARGURA_RENDER/ALTURA_RENDER:.0f}:1)")
-    print(f"  animacao ............ {bpy.context.scene.frame_end} quadros "
-          f"({bpy.context.scene.frame_end/FPS:.0f} s a {FPS} fps)")
-    print(f"  patamares ........... arena 0 m -> shows {PATAMARES[2][2]} m "
-          f"-> anel {PATAMARES[4][2]} m -> plato {PATAMARES[6][2]} m")
-    if ausentes:
-        print("  AUSENTES no percurso:")
-        for nome, rotulo in ausentes:
-            print(f"     {nome} -> rotulo {rotulo!r} nao encontrado")
+    print(f"  duracao do filme ..... {pacote['total_quadros']} quadros "
+          f"({dur_s:.0f} s a {pacote['fps']} fps)")
+    print(f"  patamares ........... arena 0 m -> shows {terreno.PATAMARES[2][2]} m "
+          f"-> anel {terreno.PATAMARES[4][2]} m -> plato {terreno.PATAMARES[6][2]} m")
     print("=" * 58)
 
     if args.out:
+        Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         bpy.ops.wm.save_as_mainfile(filepath=str(Path(args.out).resolve()))
         print(f"\nsalvo: {args.out}")
+
+    if args.export_fbx:
+        exportar_fbx(args.export_fbx)
+        print(f"exportado para o Twinmotion: {args.export_fbx}")
 
 
 if __name__ == "__main__":

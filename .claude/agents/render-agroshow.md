@@ -35,11 +35,17 @@ Ordem de leitura antes de agir:
 
 1. **`ESTADO.md`** — onde o trabalho parou e o que vem a seguir. Manda em tudo,
    inclusive neste documento.
-2. **`docs/brief-audios.md`** — transcrição literal dos áudios. É a palavra do
+2. **`docs/PROPOSTA-3-DIAS.md`** — o prazo é 3 dias a partir de 14/08/2026, não
+   o mês que um projeto assim levaria em estúdio. Cronograma, motor (Plano A
+   Twinmotion / Plano B EEVEE), portão de decisão de sábado 12h, riscos.
+3. **`docs/PLANOS.md`** — a câmera não é mais uma curva única. São 22 planos
+   declarados em `data/planos.json`, cada um com alvo, lente, altura,
+   movimento e duração, conferidos contra a faixa cinematográfica de drone.
+4. **`docs/brief-audios.md`** — transcrição literal dos áudios. É a palavra do
    cliente e vence qualquer resumo.
-3. **`docs/CAMINHO-3D.md`** — a doutrina do realismo. Foi escrito como "projeto
+5. **`docs/CAMINHO-3D.md`** — a doutrina do realismo. Foi escrito como "projeto
    futuro"; o futuro é hoje, e ele é a sua base técnica.
-4. **`docs/BRIEFING.md`** — use pelo **roteiro dos 19 pontos, as restrições e as
+6. **`docs/BRIEFING.md`** — use pelo **roteiro dos 19 pontos, as restrições e as
    specs de entrega**. Ignore o que ele diz sobre 2.5D, imagens de IA e redesenho
    vetorial: aquilo caducou.
 
@@ -49,16 +55,31 @@ Um **percurso em cena 3D real**, construído em Blender por script, na ordem de
 circulação ditada pelo cliente. Qualidade de jogo moderno é suficiente —
 fotorrealismo não foi pedido e não é a meta.
 
-A cena inteira sai de `scripts/build_scene.py`, dirigida por `bpy`:
+A cena inteira sai de `scripts/build_scene.py`, dirigida por `bpy`. Escala e
+bacia vivem em `scripts/terreno.py` (sem `bpy` — fonte única, compartilhada
+com a decupagem). A câmera vem de `data/planos.json`, resolvida por
+`scripts/planos.py`:
 
 ```bash
 pip install bpy pymupdf ezdxf
-python3 scripts/build_scene.py --out cena.blend
+python3 scripts/build_scene.py --out out/cena.blend                 # filme completo
+python3 scripts/build_scene.py --plano P19 --out out/P19.blend      # so a regiao de um plano
+python3 scripts/build_scene.py --export-fbx out/cena.fbx            # para o Twinmotion
+
+python3 scripts/planos.py --conferir     # confere velocidades, sem bpy nem GPU
 ```
 
 Saída atual: 808 × 454 m de terreno, 6 pavilhões, 74 estandes instanciados +
-60 próprios, 16 pontos de percurso, 3840 quadros (128 s a 30 fps), render em
-2760 × 1380.
+60 próprios, **22 planos** de câmera, 4.635 quadros (154 s a 30 fps), render
+em 2760 × 1380.
+
+**A câmera não é uma curva única.** Medida contra a planta, a curva de 16
+pontos original fazia 9,0 m/s (32 km/h) — de 1,3 a 7× acima da faixa
+cinematográfica de drone (1,3–2,2 m/s em órbita/push-in, 3,6–6,7 m/s em
+sobrevoo). Virou 22 planos declarados, cada um com alvo, lente, altura,
+movimento e duração próprios. `python3 scripts/planos.py --conferir` mede a
+velocidade real de cada plano e falha se algum sair da faixa. Ver
+`docs/PLANOS.md` antes de tocar em qualquer câmera.
 
 **Nada de modelagem manual não versionada.** O que existe só dentro de um
 `.blend` salvo à mão não sobrevive à segunda temporada, e o valor deste ativo
@@ -80,12 +101,17 @@ produto revendível em vez de peça descartável.
 Atacar fora de ordem é gastar caro no lugar errado. Vêm do `docs/CAMINHO-3D.md`,
 medidas contra o vídeo de referência do cliente (EXPOJARA, feito em Lumion).
 
-1. **Gente.** É o que entrega maquete antes de qualquer outra coisa. Nunca as
-   pessoas nativas do Lumion/Twinmotion — humanos fotoscaneados, escala conferida
-   contra elemento de altura conhecida, vestuário de feira agropecuária do
-   interior do PR, nunca a mesma pose duas vezes no mesmo quadro, pés com contato
-   e sombra de contato. Multidão como sistema com variação de rotação e escala,
-   jamais bloco clonado.
+1. **Gente.** É o que entrega maquete antes de qualquer outra coisa. Regra
+   original: nunca pessoas nativas de motor de tempo real — humanos
+   fotoscaneados, escala conferida contra elemento de altura conhecida,
+   vestuário de feira agropecuária do interior do PR, nunca a mesma pose duas
+   vezes no mesmo quadro, pés com contato e sombra de contato. Multidão como
+   sistema com variação de rotação e escala, jamais bloco clonado.
+   **Exceção decidida em 14/08/2026, por verba zero e prazo de 3 dias:** no
+   Plano A, a gente vem do *Populate* do próprio Twinmotion — é o que a verba
+   zero permite em 3 dias. No Plano B (EEVEE), a regra original volta a valer:
+   Mixamo (grátis, uso comercial liberado) + amostras gratuitas da
+   Renderpeople, nunca as figuras padrão de motor de jogo.
 2. **Luz.** GI de verdade. HDRI de céu real com orientação solar batendo com a
    latitude e o horário — hoje `construir_ceu()` é cor chapada, e trocar isso
    muda o render inteiro. Poly Haven é CC0. Superfície iluminada sem bounce no
@@ -101,10 +127,42 @@ medidas contra o vídeo de referência do cliente (EXPOJARA, feito em Lumion).
 Resolver 1 e 2 já entrega a maior parte do salto. Trocar de motor sem resolver as
 pessoas não muda nada.
 
-## Render em passes — nunca só beauty
+## Motor: Plano A (Twinmotion) e Plano B (EEVEE), com portão de sábado
 
-Beauty, depth, cryptomatte (objeto e material) e motion vectors. Sem esses passes,
-refino vira re-render.
+Cycles no filme inteiro não cabe — 4.635 quadros numa GPU de 8–12 GB é
+trabalho de dias, e a janela de render é uma noite. Fica no máximo para uma
+imagem-chave, nunca para o filme.
+
+- **Plano A, ativo:** `build_scene.py --export-fbx` gera BASE + EVENTO +
+  `MARCOS_CAMERA` (um cone por ponta de plano — o Twinmotion importa
+  geometria mas não importa câmera animada, os cones dizem onde cravar cada
+  chave). O Twinmotion veste — gente, vegetação, materiais, tudo que a verba
+  zero não compra — e renderiza em tempo real.
+- **Plano B, rede de segurança:** EEVEE Next no próprio Blender
+  (`build_scene.py --out`), mesma geometria, mesma decupagem.
+- **Portão: sábado 12h.** Twinmotion recomenda 12 GB+ de VRAM para site
+  grande; a máquina tem 8–12. Se não segurar a cena inteira com fluidez até
+  lá, cai para o Plano B sem olhar para trás.
+- **Calibre antes de prometer o domingo:** `render_shots.py --plano <ID>
+  --quadros 24 --cronometrar` mede o tempo real do plano mais pesado e
+  projeta o filme inteiro. Acima de ~11 h não cabe na noite de domingo.
+
+Ver `docs/PROPOSTA-3-DIAS.md` para o cronograma completo.
+
+## Render em passes — nunca só beauty (Plano B, EEVEE)
+
+Beauty com motion blur ligado (acumulação, 6 passos — mais que isso reavalia a
+cena inteira por passo). Nos planos que precisam de máscara para placa ou
+logo, um render utilitário separado, sem motion blur, com Z e cryptomatte.
+
+**Três fatos do EEVEE Next que mudam a receita, e não são opcionais:**
+
+- **Não existe passe Vector.** O motion blur do beauty vem só da acumulação
+  (`motion_blur_steps`), nunca de um passe isolado — diferente de Cycles.
+- **Cryptomatte não acompanha motion blur no EEVEE.** Por isso o passe
+  utilitário de máscara roda com motion blur desligado, em passada separada.
+- **Efeitos de tela (SSR, SSAO) somem perto da borda do quadro** com câmera em
+  movimento. `configurar_render()` já liga Overscan em 7% — não desligue.
 
 **IA entra por cima do render, nunca no lugar dele.** Ela não conhece a planta,
 não mantém continuidade entre planos e não escreve português confiável — e aqui
@@ -113,7 +171,9 @@ máscara de cryptomatte, jamais gerados.
 
 Antes de render longo, valide em baixa amostragem: escala humana, contato de
 sombra, orientação solar e legibilidade das placas em 2:1. Erro de escala
-descoberto depois de 40 horas de render é o desperdício clássico.
+descoberto depois de 40 horas de render é o desperdício clássico. Use o
+`--animatic` de `render_shots.py` para essa validação — resolução e amostras
+baixas, mesma decupagem.
 
 ## Restrições do cliente — violar é rejeição
 
@@ -165,6 +225,12 @@ teve falha de reprodução ao vivo.
 - **Cartela de teste de 10 s**, mesma resolução, com moldura, marcas de canto, a
   caixa de 90% desenhada e a legenda "AGROSHOW 2026 · 2:1 · 2760×1380". Custa
   quinze minutos e é a única defesa contra um processador que ninguém checou.
+- **Dither em 1,0 na saída** (já cravado em `configurar_render()`). Um céu de
+  fim de tarde em 2:1 é um degradê grande, e painel LED costuma trabalhar em
+  8 bits — sem isso, bandeia.
+
+`scripts/encode.sh out/final out/entrega` gera os quatro arquivos de uma vez,
+a partir da sequência de PNG renderizada por `render_shots.py`.
 
 ### Tipografia — restrição dura
 
@@ -201,6 +267,11 @@ auditoria do DWG, não use como fonte.
   de proporção, não de medida. Um quadro de drone lateral da arena resolve em
   minutos — ajuste `PATAMARES` antes do render final.
 - A escala em si nunca foi conferida contra medida real de estrutura.
+- **A posição da Fazendinha (planos P14/P15).** Não existe rótulo na planta —
+  foi inferida só do áudio (*"desce pro lado da pista de tiro de laço"*),
+  entre a pista de julgamentos e o anel. É a única âncora `estimada` do
+  filme, e a Fazendinha é diferencial. Confirmar com o cliente antes do
+  render final. Ver `docs/PLANOS.md`.
 
 **Não perca tempo com DEM global.** SRTM, Copernicus, NASADEM e AW3D30 são todos
 ~30 m: um recorte de 2 × 2 km sai com 67 × 67 px e o recinto ocupa uns 27 — os
@@ -217,24 +288,28 @@ nadir dedicado (70–80% de sobreposição, exposição travada) se ele aparecer
 
 Confira sempre contra o `ESTADO.md`, que é mais atual que esta lista:
 
-1. **Câmera baixa demais** — no quadro de conferência ela vê telhado de estande.
-   Suba `ALTURA_CAMERA`, aumente `INCLINACAO_CAM`, ou faça a altura variar por
-   trecho: aéreo nas transições, baixo nos pontos de interesse.
-2. **HDRI no lugar do céu procedural.**
-3. **Texturas PBR** no lugar das cores base.
-4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
-5. **Portal, palco e camarotes modelados** — hoje são caixa ou nem isso. O portal
-   é o primeiro e o último plano do filme.
-6. Confirmar as alturas dos patamares com quadro de drone.
+1. **Regenerar `docs/conferencia-quadro.png`** com a decupagem nova — a câmera
+   de 16 pontos e inclinação fixa foi substituída por 22 planos com mira por
+   constraint. Conferir se algum ainda vê telhado de estande.
+2. **Exportar o FBX e testar no Twinmotion** — decide o portão de sábado 12h.
+3. **HDRI no lugar do céu procedural**, e Sun Position no lugar do sol fixo.
+4. **Materiais: variação macro primeiro**, textura PBR CC0 só onde a câmera desce.
+5. **Vegetação e povoamento** — *Populate* do Twinmotion no Plano A, assets CC0
+   (Quaternius, Kenney, Poly Haven) no Plano B.
+6. **Portal, palco e camarotes modelados** — hoje são caixa ou nem isso. O portal
+   é o primeiro e o último plano do filme (P02 e P22).
+7. Confirmar as alturas dos patamares com quadro de drone.
+8. **Confirmar a Fazendinha (P14/P15) com o cliente** — única âncora `estimada`.
 
 ## Pendências com o cliente
 
 | # | Pendência | Impacto |
 |---|---|---|
 | 1 | Footage de edições anteriores — prometido, não chegou | Alto — vira textura e referência |
-| 2 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
-| 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
-| 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+| 2 | Posição real da Fazendinha (P14/P15) — só existe no áudio | Alto — é diferencial |
+| 3 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
+| 4 | Medida real de qualquer estrutura | Médio — confirma a escala |
+| 5 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
 
 ## Como você trabalha
 

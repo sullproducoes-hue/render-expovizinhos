@@ -10,20 +10,42 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
 ## Comece por aqui
 
 1. **`ESTADO.md`** — onde o projeto parou, o que foi descoberto, o que vem a seguir
-2. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
-3. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
-4. `.claude/agents/render-agroshow.md` — agente diretor técnico da cena 3D
+2. `docs/PROPOSTA-3-DIAS.md` — cronograma, motor (Blender+Twinmotion com rede
+   de segurança em EEVEE), portão de decisão, riscos
+3. `docs/PLANOS.md` — a decupagem: 22 planos, cada um com alvo, lente, altura,
+   movimento e duração, conferidos contra a faixa cinematográfica de drone
+4. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
+5. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
+6. `.claude/agents/render-agroshow.md` — agente diretor técnico da cena 3D
    (`docs/AGENTE-2.5D-suspenso.md` guarda o texto antigo, do caminho 2.5D)
 
 ## Gerar a cena 3D
 
 ```bash
 pip install bpy pymupdf ezdxf
-python3 scripts/build_scene.py --out cena.blend
+python3 scripts/build_scene.py --out out/cena.blend                 # filme completo
+python3 scripts/build_scene.py --plano P19 --out out/P19.blend      # so a regiao de um plano
+python3 scripts/build_scene.py --export-fbx out/cena.fbx            # para o Twinmotion
+
+python3 scripts/planos.py --conferir     # confere a decupagem, sem bpy
 ```
 
-134 estandes, 6 pavilhões, bacia da arena em 3 patamares, percurso de 16 pontos
-animado em 128 s, render em 2760×1380.
+134 estandes, 6 pavilhões, bacia da arena em 3 patamares, **22 planos** de
+câmera (não mais uma curva única — ver `docs/PLANOS.md`), 154 s a 30 fps,
+render em 2760×1380.
+
+## Renderizar e entregar
+
+```bash
+blender --background --python scripts/render_shots.py -- --blend out/cena.blend
+bash scripts/encode.sh out/final out/entrega
+```
+
+`render_shots.py` renderiza plano a plano e é retomável — pula quadro já
+existente em disco. `--animatic` gera rascunho rápido para aprovação;
+`--plano <ID> --quadros 24 --cronometrar` calibra o tempo antes de prometer o
+cronograma. `encode.sh` gera os três arquivos de entrega mais a cartela de
+teste de 10 s.
 
 ```
 > use o agente render-agroshow para revisar os prompts do bloco B11
@@ -42,7 +64,9 @@ animado em 128 s, render em 2760×1380.
 Telão LED **P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m**. Proporção **2:1**.
 
 Master em **2760 × 1380** (2× o nativo, dimensões pares), em `.mov` (ProRes
-422 HQ) **e** `.mp4` (H.264). Os dois formatos, sempre.
+422 HQ) **e** `.mp4` (H.264), mais uma reserva leve em **1380 × 690**. Os três
+arquivos, sempre — o cliente já teve falha de reprodução ao vivo. Gerados por
+`scripts/encode.sh` a partir da sequência renderizada.
 
 **Nunca masterize em 1379 × 690** — largura ímpar não codifica em H.264 4:2:0.
 
@@ -55,9 +79,13 @@ PDF e DWG carregam o mesmo bitmap de 1806×1383 px. Zero geometria vetorial da
 planta, e 4483 dos 4523 textos do DWG são caracteres soltos. Plano de "separar
 camadas por cor no Illustrator" não funciona — ver `docs/BRIEFING.md`.
 
-O caminho é redesenhar como vetor por cima do raster. O motivo não é resolução
-(1806 px cobre o painel de 1379): é que sem vetor não há camadas separadas, e
-sem camadas não há animação de mapa.
+No caminho 3D ativo isso não bloqueia nada: `scripts/terreno.py` lê as
+posições reais direto do JSON extraído (`data/mapa_agroshow26.json`), sem
+precisar de contorno vetorial. Onde a planta não rotula um ponto que o áudio
+descreve (o anel de máquinas, os expositores externos), a posição é derivada
+da bacia ou marcada como estimada — ver as âncoras em `docs/PLANOS.md`. O
+redesenho vetorial era necessário só para o mapa animado 2.5D, caminho
+suspenso (`docs/AGENTE-2.5D-suspenso.md`).
 
 ## Reproduzir as extrações
 
