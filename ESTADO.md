@@ -6,6 +6,10 @@ Atualizado em 14/08/2026.
 Este arquivo existe para retomar o trabalho em outra sessão sem perder contexto.
 Leia daqui e siga para os documentos citados.
 
+> **Retomando depois de uma pausa? Abra `RETOMAR.md` antes deste arquivo.**
+> Ele tem o veredito do Natan sobre o próximo passo, o tempo de render medido
+> na máquina, os comandos e as oito armadilhas que já custaram uma rodada cada.
+
 ---
 
 ## O caminho ativo: o fluxo de 5 passos do Natan
@@ -250,21 +254,33 @@ Frases literais, não reescrever:
 
 ---
 
-## Próximos passos — na ordem do fluxo de 5 passos
+## Próximos passos
 
-1. **Inventário completo dos locais** (`data/locais.json` + `docs/LOCAIS.md`):
-   todo rótulo do mapa, com coordenada, categoria, plano de câmera e a **ficha
-   de conteúdo tirada dos áudios**.
-2. **Estradas e vias** lidas do bitmap, conferidas com o Natan por print antes
-   de virar geometria.
-3. **Alturas de câmera** em `data/planos.json` ajustadas às bandas dele
-   (~2 m interior · 4–15 m aberto · 40–50 m só no conjunto do rodeio).
-4. **Portal, palco, camarotes e pavilhões modelados** — hoje são caixa ou nem
-   isso. O portal é o primeiro e o último plano (P02 e P22).
-5. **Texturas e luz:** PBR calibrado pelas provas + HDRI golden hour.
-6. **Títulos, letreiros e logos** (JPEG ou nome simples).
-7. **Cena salva com a configuração Cycles dele** e entregue como `.blend`.
-8. Confirmar as alturas dos patamares com um quadro de drone lateral.
+**O veredito do Natan em 14/08, olhando o primeiro quadro renderizado:**
+*"não corrija pois esta longe de um render de qualidade"* — dito quando eu
+consertava um detalhe da geometria do portal. O que falta não é polígono:
+
+1. **HDRI de golden hour** no lugar do céu chapado, e o sol alinhado a ele.
+   `construir_ceu()` ainda é uma cor lisa. É o maior salto por menos trabalho.
+2. **Materiais PBR** calibrados pelas provas do footage — brita, telha, lona e
+   terra vêm de `docs/MATERIAIS-referencia.md`; grama vem de biblioteca CC0
+   calibrada pela cor medida, porque não existe close de grama no acervo.
+3. **Vegetação e povoamento.** O mapa tem 6 Bosques, 2 Matas Nativas e 15
+   Taludes, e hoje tudo isso é grama chapada.
+4. **Títulos, letreiros e logos** — passo 3 do fluxo dele. Logo se resolve com
+   o JPEG achado ou o nome simples; não esperar vetor.
+5. Confirmar as alturas dos patamares com um quadro de drone lateral.
+
+Feito e fechado: inventário dos locais, vias lidas do bitmap, as 22 âncoras em
+`planta`, a régua de altura por ambiente, portal/palco/camarotes/pavilhões
+modelados e a configuração de Cycles gravada na cena.
+
+### O número que decide o Plano A vs o Plano B
+
+Medido nesta máquina, com a cena ainda crua: **31 s por quadro** em 2760×1380,
+Cycles 128 samples, OptiX na RTX 4060 — o filme inteiro, 4.635 quadros, dá
+**cerca de 39 h**. Com textura, vegetação e gente, sobe. Recronometrar depois
+do passo 2 antes de prometer prazo.
 
 Feito em 13/08/2026: o agente `.claude/agents/render-agroshow.md` foi reescrito
 para o caminho 3D. Ele é **sistema próprio** — não responde ao Cláudio (o
