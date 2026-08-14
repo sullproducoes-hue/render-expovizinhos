@@ -154,7 +154,10 @@ esses passes, refino vira re-render.
 Dois perfis, e não misture: `--perfil previa` para navegar e conferir, e
 `--perfil final` para a entrega — Cycles com OptiX na máquina do cliente,
 amostragem adaptativa, motion blur e EXR multicamada. Render final em CPU não
-fecha: são 4.591 quadros.
+fecha: são 4.591 quadros. Por isso `--perfil final` **exige GPU por padrão** e
+para com erro em vez de cair para CPU calado — só continua em CPU com
+`--permitir-cpu` explícito, e isso é para conferência num ambiente sem GPU,
+nunca para a entrega.
 
 ## Especificações de entrega
 

@@ -305,7 +305,61 @@ def instantes(duracao, quantidade):
     return [inicio + passo * i for i in range(quantidade)]
 
 
-def triagem(video, destino, quantidade, seco=False, pular_prontos=True):
+def segmentos(duracao, quantidade):
+    """Divide o trecho util do video em `quantidade` fatias iguais.
+
+    Cada fatia vira um candidato a um dos dez quadros da triagem -- a escolha
+    de qual instante dentro da fatia usar e o trabalho de instante_mediano.
+    """
+    inicio = duracao * MARGEM
+    fim = duracao * (1.0 - MARGEM)
+    passo = (fim - inicio) / quantidade
+    return [(inicio + passo * i, inicio + passo * (i + 1))
+            for i in range(quantidade)]
+
+
+def instante_mediano(video, seg_inicio, seg_fim, pasta_tmp, indice,
+                     candidatos=3, seco=False):
+    """Escolhe, dentro de uma fatia do video, o instante mediano por peso do
+    quadro -- nao o instante do meio do tempo.
+
+    Um corte de plano, um quadro preto de transicao ou um pan tao rapido que
+    borra tudo comprimem para um JPEG bem menor que um quadro nitido com
+    detalhe de verdade. Amostrando alguns pontos da fatia e ficando com o de
+    tamanho mediano (nem o maior, nem o menor), a triagem descarta esses
+    extremos sem decodificar o video inteiro nem analisar pixel a pixel.
+    """
+    if candidatos <= 1:
+        return (seg_inicio + seg_fim) / 2.0
+    passo = (seg_fim - seg_inicio) / (candidatos + 1)
+    pontos = [seg_inicio + passo * (i + 1) for i in range(candidatos)]
+    if seco:
+        return pontos[len(pontos) // 2]
+
+    medidas = []
+    for i, t in enumerate(pontos):
+        tmp = pasta_tmp / f"_cand_{indice:02d}_{i}.jpg"
+        if extrair_quadro(video, t, tmp, largura=480, seco=False):
+            try:
+                medidas.append((tmp.stat().st_size, t, tmp))
+            except OSError:
+                pass
+
+    if not medidas:
+        return pontos[len(pontos) // 2]
+
+    medidas.sort(key=lambda m: m[0])
+    tamanho_mediano, instante_escolhido, arquivo_escolhido = \
+        medidas[len(medidas) // 2]
+    for _, _, tmp in medidas:
+        if tmp != arquivo_escolhido:
+            tmp.unlink(missing_ok=True)
+    arquivo_escolhido.unlink(missing_ok=True)  # so a sonda; o quadro final
+    return instante_escolhido                  # e extraido de novo, com rotulo
+
+
+def triagem(video, destino, quantidade, seco=False, pular_prontos=True,
+           candidatos_mediana=3):
     folha_pronta = destino / f"FOLHA_{video.stem}.jpg"
     if pular_prontos and folha_pronta.exists():
         # O envio sao 186 arquivos e leva horas. Poder rodar o script varias
@@ -321,7 +375,9 @@ def triagem(video, destino, quantidade, seco=False, pular_prontos=True):
     destino.mkdir(parents=True, exist_ok=True)
 
     quadros = []
-    for i, t in enumerate(instantes(info["duracao"], quantidade)):
+    for i, (si, sf) in enumerate(segmentos(info["duracao"], quantidade)):
+        t = instante_mediano(video, si, sf, destino, i, candidatos_mediana,
+                             seco)
         alvo = destino / f"{video.stem}_t{i:02d}.jpg"
         rotulo = f"{video.name}  {timecode(t)}"
         if extrair_quadro(video, t, alvo, CELULA[0], rotulo, seco):
@@ -412,6 +468,11 @@ def main():
                     help="um contact sheet por video")
     ap.add_argument("--quadros", type=int, default=10,
                     help="quadros por video na triagem (padrao 10)")
+    ap.add_argument("--candidatos-mediana", type=int, default=3,
+                    help="candidatos por quadro da triagem, escolhe o "
+                         "mediano por peso do JPEG -- descarta cortes, "
+                         "quadros pretos e pans borrados. 1 desliga e usa o "
+                         "meio de cada fatia (padrao 3)")
     ap.add_argument("--densa", default=None,
                     help="nome do video aprovado para a passada densa")
     ap.add_argument("--intervalo", type=float, default=2.0,
@@ -495,11 +556,13 @@ def main():
                   "assim -- resolucao, fps e codec ja orientam a triagem.")
 
     if args.triagem:
-        print(f"\ntriagem, {args.quadros} quadros por video:")
+        print(f"\ntriagem, {args.quadros} quadros por video "
+              f"(mediana de {args.candidatos_mediana} candidatos por quadro):")
         fichas = []
         for v in videos:
             ficha = triagem(v, saida / v.stem, args.quadros, args.dry_run,
-                            pular_prontos=not args.refazer)
+                            pular_prontos=not args.refazer,
+                            candidatos_mediana=args.candidatos_mediana)
             if ficha:
                 fichas.append(ficha)
                 if ficha.get("pulado"):

@@ -95,11 +95,17 @@ python3 scripts/render_conferencia.py cena.blend --quadros 1,316,3886,4231,4591 
 ```
 
 **Perfil de entrega (`--perfil final`).** Decisão do cliente: render final em
-Cycles, na máquina dele, com GPU NVIDIA. O perfil liga OptiX quando encontra a
-GPU (caindo para CUDA e depois CPU, com aviso explícito), 512 amostras
-adaptativas com denoise, 12 bounces, motion blur de obturador 180° e saída em
-**EXR multicamada com passes** — combined, z, vetor, normal e cryptomatte de
-objeto e material. Os passes não são luxo: sem cryptomatte não há máscara para
+Cycles, na máquina dele, com GPU NVIDIA. **O perfil exige GPU por padrão — se
+não achar OptiX/CUDA, o script para com código de saída 1, imprime o que
+conferir (driver, Preferences > System > Cycles Render Devices) e não salva a
+cena.** Ele não cai para CPU em silêncio: são 4.591 quadros, e um render de
+dias rodando no lugar errado por engano é pior do que o script recusar a
+sair. Só continua em CPU se `--permitir-cpu` for passado explicitamente — use
+isso só para conferir a cena num ambiente sem GPU, nunca para a entrega. Uma
+vez com a GPU confirmada: 512 amostras adaptativas com denoise, 12 bounces,
+motion blur de obturador 180° e saída em **EXR multicamada com passes** —
+combined, z, vetor, normal e cryptomatte de objeto e material. Os passes não
+são luxo: sem cryptomatte não há máscara para
 compor placa, totem e letreiro, e o texto é o que vende o vídeo — ele é
 composto, nunca gerado.
 

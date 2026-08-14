@@ -47,11 +47,18 @@ arquivo. Se a telemetria aparecer, ela responde por medida o que os quadros
 responderiam por proporção: altitude relativa dá a cota dos patamares, e
 altitude com distância focal dá a escala do recinto.
 
-**2. Triagem — 10 quadros por vídeo.** `--triagem` monta **uma folha de
-contato por vídeo**, grade 5×2, com nome e timecode gravados em cada célula.
-Uma imagem por fita em vez de dez soltas: é o que permite passar por 186
-arquivos sem estourar o contexto. O timecode gravado é o que me deixa pedir
-depois "o trecho de 01:23 do DJI_0960" em vez de descrever o quadro.
+**2. Triagem — 10 quadros por vídeo, por mediana.** `--triagem` divide o
+trecho útil do vídeo em 10 fatias iguais e, dentro de cada fatia, amostra 3
+candidatos e fica com o **mediano por peso do JPEG** — nem o maior, nem o
+menor. Um corte de plano, um quadro preto de transição ou um pan borrado
+comprimem para um arquivo bem menor que um quadro nítido com detalhe de
+verdade; a mediana descarta esses extremos sem decodificar o vídeo inteiro.
+`--candidatos-mediana 1` desliga isso e volta a pegar o meio exato de cada
+fatia. O resultado é **uma folha de contato por vídeo**, grade 5×2, com nome e
+timecode gravados em cada célula. Uma imagem por fita em vez de dez soltas: é
+o que permite passar por 186 arquivos sem estourar o contexto. O timecode
+gravado é o que me deixa pedir depois "o trecho de 01:23 do DJI_0960" em vez
+de descrever o quadro.
 
 **3. Passada densa.** Só nos aprovados: `--densa <arquivo> --intervalo 2`,
 resolução cheia, folhas em lotes de 12. É o "máximo de quadros possível" na

@@ -812,7 +812,7 @@ def construir_percurso(dados, col, centro_arena):
     return pontos, ausentes, chegada
 
 
-def configurar_render(cena, perfil="previa"):
+def configurar_render(cena, perfil="previa", exigir_gpu=True):
     cena.render.resolution_x = LARGURA_RENDER
     cena.render.resolution_y = ALTURA_RENDER
     cena.render.resolution_percentage = 100
@@ -821,7 +821,7 @@ def configurar_render(cena, perfil="previa"):
     cena.render.film_transparent = False
 
     if perfil == "final":
-        configurar_cycles_final(cena)
+        configurar_cycles_final(cena, exigir_gpu)
         return
 
     # Previa: motor rapido para navegar e conferir enquadramento.
@@ -831,17 +831,41 @@ def configurar_render(cena, perfil="previa"):
         cena.render.engine = "CYCLES"
 
 
-def escolher_dispositivo():
-    """Liga a GPU quando houver, e diz em voz alta quando nao houver.
+MENSAGEM_SEM_GPU = """
+ERRO: nenhuma GPU encontrada para o render final.
 
-    A entrega roda em maquina com NVIDIA, entao a ordem de preferencia e OptiX,
-    depois CUDA, depois CPU. Este ambiente remoto nao tem GPU nenhuma -- e
-    melhor a cena avisar isso na hora de gerar do que alguem descobrir depois
-    de mandar 4.591 quadros para uma fila que nunca fecha.
+O cliente pediu Cycles com GPU NVIDIA -- render em CPU nao e uma alternativa
+silenciosa aceitavel aqui, sao 4.591 quadros e a fila nao fecha em CPU. Antes
+de tentar de novo:
+
+  1. Confira o driver NVIDIA (Painel da NVIDIA ou `nvidia-smi` no terminal).
+  2. No Blender: Edit > Preferences > System > Cycles Render Devices.
+     Escolha OptiX (ou CUDA) e marque a caixa da placa. Isso fica salvo nas
+     preferencias do Blender, nao no arquivo da cena -- confirme antes de
+     cada maquina nova.
+  3. Rode de novo.
+
+Se quiser mesmo assim renderizar em CPU (por exemplo, so para conferir a cena
+neste ambiente sem GPU), passe --permitir-cpu explicitamente.
+""".strip()
+
+
+def escolher_dispositivo(exigir_gpu=True):
+    """Liga a GPU quando houver. Quando exigir_gpu, PARA em vez de cair para
+    CPU -- decisao do cliente foi Cycles com GPU NVIDIA, e um render de dias
+    rodando na CPU por engano e pior do que o script recusar a sair.
+
+    A ordem de preferencia e OptiX, depois CUDA, depois os outros backends.
+    get_devices_for_type() e a API atual para listar os dispositivos de um
+    backend; cai para get_devices() + prefs.devices nas versoes que ainda
+    usam a API antiga.
     """
     try:
         prefs = bpy.context.preferences.addons["cycles"].preferences
     except KeyError:
+        if exigir_gpu:
+            raise RuntimeError("addon Cycles indisponivel neste Blender.\n" +
+                               MENSAGEM_SEM_GPU)
         return "CPU", "addon cycles indisponivel"
 
     for tipo in ("OPTIX", "CUDA", "HIP", "METAL", "ONEAPI"):
@@ -849,24 +873,42 @@ def escolher_dispositivo():
             prefs.compute_device_type = tipo
         except TypeError:
             continue
-        try:
-            prefs.get_devices()
-        except Exception:
-            pass
-        dispositivos = [d for d in getattr(prefs, "devices", [])
-                        if d.type == tipo]
-        if dispositivos:
+
+        obter_por_tipo = getattr(prefs, "get_devices_for_type", None)
+        if obter_por_tipo:
+            try:
+                dispositivos = list(obter_por_tipo(tipo))
+            except TypeError:
+                dispositivos = list(obter_por_tipo())
+        else:
+            try:
+                prefs.get_devices()
+            except Exception:
+                pass
+            dispositivos = list(getattr(prefs, "devices", []))
+
+        gpus = [d for d in dispositivos if d.type == tipo]
+        if gpus:
+            # So a GPU liga -- deixar a CPU tambem marcada nao acelera Cycles
+            # o bastante para compensar a confusao de saber o que rodou onde.
             for d in dispositivos:
-                d.use = True
-            return "GPU", f"{tipo}: " + ", ".join(d.name for d in dispositivos)
+                d.use = d in gpus
+            return "GPU", f"{tipo}: " + ", ".join(d.name for d in gpus)
+
+    if exigir_gpu:
+        raise RuntimeError(MENSAGEM_SEM_GPU)
     return "CPU", "nenhuma GPU visivel neste ambiente"
 
 
-def configurar_cycles_final(cena):
+def configurar_cycles_final(cena, exigir_gpu=True):
     """Cycles para a entrega, com o maximo de realismo que a cena comporta.
 
     Decisao do cliente: o render final e em Cycles, na maquina dele, com GPU
     NVIDIA. Aqui ficam os numeros; a fila roda la.
+
+    exigir_gpu=True (padrao) faz o script PARAR se nao achar GPU, em vez de
+    seguir em CPU calado -- e o comportamento pedido pelo cliente. Only passe
+    --permitir-cpu quando for so conferir a cena num ambiente sem GPU.
 
     Os passes nao sao luxo. Sem cryptomatte nao ha mascara para compor placa,
     totem e letreiro -- e o texto e o que vende o video, entao ele e composto,
@@ -874,7 +916,7 @@ def configurar_cycles_final(cena):
     blur ou de atmosfera vira re-render em vez de composicao.
     """
     cena.render.engine = "CYCLES"
-    modo, detalhe = escolher_dispositivo()
+    modo, detalhe = escolher_dispositivo(exigir_gpu)
     cena.cycles.device = modo
 
     # Amostragem adaptativa: gasta amostra onde o ruido esta, nao no ceu limpo.
@@ -933,8 +975,11 @@ def configurar_cycles_final(cena):
     print("  512 amostras adaptativas, denoise, motion blur 180 graus")
     print("  saida EXR multicamada com z, vetor, normal e cryptomatte")
     if modo == "CPU":
-        print("  AVISO: sem GPU aqui. Gere a cena e renderize na maquina com "
-              "NVIDIA -- em CPU esta fila nao fecha.")
+        # So chega aqui com --permitir-cpu -- sem essa flag, a falta de GPU
+        # ja teria parado o script antes deste ponto.
+        print("  AVISO: --permitir-cpu estava ligado, entao seguiu em CPU. "
+              "Em CPU esta fila nao fecha -- use isto so para conferir a "
+              "cena, nunca para o render final.")
 
 
 def construir_ceu(cena, hdri=None):
@@ -1018,6 +1063,10 @@ def main():
     ap.add_argument("--perfil", choices=("previa", "final"), default="previa",
                     help="previa: motor rapido para navegar. "
                          "final: Cycles com passes, para a entrega")
+    ap.add_argument("--permitir-cpu", action="store_true",
+                    help="no --perfil final, nao para se faltar GPU -- "
+                         "renderiza em CPU mesmo assim. Use so para conferir "
+                         "a cena num ambiente sem GPU, nunca para a entrega")
     ap.add_argument("--hdri", default=None,
                     help="HDRI de ceu; sem ele, ceu Nishita procedural")
     ap.add_argument("--out", default=None, help="salva um .blend no caminho")
@@ -1058,7 +1107,8 @@ def main():
 
     construir_luz(cols["LUZ"])
     construir_ceu(bpy.context.scene, args.hdri)
-    configurar_render(bpy.context.scene, args.perfil)
+    configurar_render(bpy.context.scene, args.perfil,
+                      exigir_gpu=not args.permitir_cpu)
 
     larg_m = dados["prancha"]["largura_pt"] * ESCALA
     prof_m = dados["prancha"]["altura_pt"] * ESCALA
@@ -1097,4 +1147,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except RuntimeError as erro:
+        # Falta de GPU no --perfil final chega aqui: mensagem limpa e sai,
+        # em vez de traceback gigante ou, pior, salvar a cena calado em CPU.
+        print(f"\n{erro}\n")
+        sys.exit(1)
