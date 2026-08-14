@@ -1,0 +1,6489 @@
+{
+  "fonte": "Mapa_AGROSHOW26.pdf",
+  "escala_m_por_pt": 0.5611,
+  "prancha": {
+    "largura_pt": 1440.0,
+    "altura_pt": 810.0
+  },
+  "como_ler": "camada 'roteiro' e o texto vermelho (#ff3131) que o cliente mandou desenhar por cima da planta -- e a ordem do video. camada 'planta' e o desenho tecnico. x_m/y_m sao metros no mundo do Blender, origem no centro da prancha. angulo_graus e a inclinacao do rotulo na prancha, util para orientar placa e letreiro.",
+  "aviso_legenda": "os itens em descartados com motivo 'legenda' tem rotulo igual ao de areas do recinto, mas a coordenada e a do quadradinho de cor no canto da prancha. NAO usar como posicao.",
+  "resumo": {
+    "linhas_de_texto": 752,
+    "locais": 142,
+    "locais_do_roteiro": 21,
+    "locais_da_planta": 121,
+    "descartados": 593,
+    "por_motivo": {
+      "cota_dimensao": 257,
+      "cota_area": 181,
+      "codigo_estande": 135,
+      "legenda": 9,
+      "carimbo": 1,
+      "bussola": 7,
+      "numero_solto": 3
+    },
+    "spans_por_cor": {
+      "#000000": 706,
+      "#ff3131": 36,
+      "#767676": 8,
+      "#dcdcdc": 1,
+      "#0000ff": 1
+    }
+  },
+  "locais": [
+    {
+      "texto_no_mapa": "AGROSHOW - É DAQUI QUE SAI O ALIMENTO QUE SUSTENTA O MUNDO",
+      "x_pt": 854.03,
+      "y_pt": 242.43,
+      "corpo_pt": 4.4,
+      "angulo_graus": -73.2,
+      "nome": "AGROSHOW - É DAQUI QUE SAI O ALIMENTO QUE SUSTENTA O MUNDO",
+      "camada": "roteiro",
+      "x_m": 75.2,
+      "y_m": 91.22,
+      "e_frase": true
+    },
+    {
+      "texto_no_mapa": "Arena de Rodeio",
+      "x_pt": 582.52,
+      "y_pt": 397.15,
+      "corpo_pt": 7.4,
+      "angulo_graus": 26.2,
+      "nome": "Arena de Rodeio",
+      "camada": "roteiro",
+      "x_m": -77.14,
+      "y_m": 4.4,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Café Colonial",
+      "x_pt": 438.49,
+      "y_pt": 160.91,
+      "corpo_pt": 6.3,
+      "angulo_graus": 90.0,
+      "nome": "Café Colonial",
+      "camada": "roteiro",
+      "x_m": -157.96,
+      "y_m": 136.96,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Cozinha Didática",
+      "x_pt": 445.93,
+      "y_pt": 164.11,
+      "corpo_pt": 6.3,
+      "angulo_graus": 90.0,
+      "nome": "Cozinha Didática",
+      "camada": "roteiro",
+      "x_m": -153.78,
+      "y_m": 135.16,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Espaço É CHURRASCO!",
+      "x_pt": 222.89,
+      "y_pt": 397.45,
+      "corpo_pt": 5.4,
+      "angulo_graus": -0.0,
+      "nome": "Espaço É CHURRASCO!",
+      "camada": "roteiro",
+      "x_m": -278.93,
+      "y_m": 4.24,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Estacionamento",
+      "x_pt": 862.44,
+      "y_pt": 179.72,
+      "corpo_pt": 8.2,
+      "angulo_graus": -0.0,
+      "nome": "Estacionamento",
+      "camada": "roteiro",
+      "x_m": 79.92,
+      "y_m": 126.4,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Estacionamento",
+      "x_pt": 934.94,
+      "y_pt": 286.15,
+      "corpo_pt": 8.2,
+      "angulo_graus": -0.0,
+      "nome": "Estacionamento",
+      "camada": "roteiro",
+      "x_m": 120.6,
+      "y_m": 66.69,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Expositores Externo",
+      "x_pt": 304.27,
+      "y_pt": 499.61,
+      "corpo_pt": 8.5,
+      "angulo_graus": 18.9,
+      "nome": "Expositores Externo",
+      "camada": "roteiro",
+      "x_m": -233.27,
+      "y_m": -53.09,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Expositores Externo",
+      "x_pt": 327.58,
+      "y_pt": 557.34,
+      "corpo_pt": 8.5,
+      "angulo_graus": 18.9,
+      "nome": "Expositores Externo",
+      "camada": "roteiro",
+      "x_m": -220.19,
+      "y_m": -85.48,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Expositores Industria/Comércio e Serviços",
+      "x_pt": 534.63,
+      "y_pt": 153.4,
+      "corpo_pt": 5.5,
+      "angulo_graus": -0.0,
+      "nome": "Expositores Industria/Comércio e Serviços",
+      "camada": "roteiro",
+      "x_m": -104.01,
+      "y_m": 141.17,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Expositores Industria/Comércio e Serviços",
+      "x_pt": 746.26,
+      "y_pt": 160.23,
+      "corpo_pt": 5.5,
+      "angulo_graus": -0.0,
+      "nome": "Expositores Industria/Comércio e Serviços",
+      "camada": "roteiro",
+      "x_m": 14.73,
+      "y_m": 137.34,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Exposição de Máquinas,Equipamentos e Veículos e Implementos",
+      "x_pt": 526.72,
+      "y_pt": 270.47,
+      "corpo_pt": 8.5,
+      "angulo_graus": 16.2,
+      "nome": "Exposição de Máquinas,Equipamentos e Veículos e Implementos",
+      "camada": "roteiro",
+      "x_m": -108.45,
+      "y_m": 75.48,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Fazendinha Área Infantil",
+      "x_pt": 426.92,
+      "y_pt": 438.08,
+      "corpo_pt": 8.5,
+      "angulo_graus": 111.4,
+      "nome": "Fazendinha",
+      "camada": "roteiro",
+      "x_m": -164.45,
+      "y_m": -18.56,
+      "e_frase": false,
+      "descricao": "Área Infantil",
+      "grafia_corrigida": true
+    },
+    {
+      "texto_no_mapa": "Mercado do Produtor",
+      "x_pt": 425.55,
+      "y_pt": 168.16,
+      "corpo_pt": 6.3,
+      "angulo_graus": 90.0,
+      "nome": "Mercado do Produtor",
+      "camada": "roteiro",
+      "x_m": -165.22,
+      "y_m": 132.89,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PALCO",
+      "x_pt": 609.09,
+      "y_pt": 442.19,
+      "corpo_pt": 7.4,
+      "angulo_graus": 26.2,
+      "nome": "PALCO",
+      "camada": "roteiro",
+      "x_m": -62.23,
+      "y_m": -20.87,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Pavilhões de Animais",
+      "x_pt": 136.16,
+      "y_pt": 493.0,
+      "corpo_pt": 8.2,
+      "angulo_graus": 18.9,
+      "nome": "Pavilhões de Animais",
+      "camada": "roteiro",
+      "x_m": -327.59,
+      "y_m": -49.38,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Pista de Jugamentos",
+      "x_pt": 234.24,
+      "y_pt": 568.75,
+      "corpo_pt": 8.5,
+      "angulo_graus": 18.9,
+      "nome": "Pista de Julgamentos",
+      "camada": "roteiro",
+      "x_m": -272.56,
+      "y_m": -91.88,
+      "e_frase": false,
+      "grafia_corrigida": true
+    },
+    {
+      "texto_no_mapa": "Portal de Entrada",
+      "x_pt": 841.8,
+      "y_pt": 245.96,
+      "corpo_pt": 4.9,
+      "angulo_graus": -73.2,
+      "nome": "Portal de Entrada",
+      "camada": "roteiro",
+      "x_m": 68.34,
+      "y_m": 89.24,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Praça de Alimentação Aberta",
+      "x_pt": 359.42,
+      "y_pt": 267.74,
+      "corpo_pt": 8.2,
+      "angulo_graus": -0.0,
+      "nome": "Praça de Alimentação Aberta",
+      "camada": "roteiro",
+      "x_m": -202.32,
+      "y_m": 77.02,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Praça de Alimentação Coberta",
+      "x_pt": 628.45,
+      "y_pt": 175.3,
+      "corpo_pt": 8.2,
+      "angulo_graus": -0.0,
+      "nome": "Praça de Alimentação Coberta",
+      "camada": "roteiro",
+      "x_m": -51.37,
+      "y_m": 128.88,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Área de Show",
+      "x_pt": 552.4,
+      "y_pt": 330.95,
+      "corpo_pt": 8.5,
+      "angulo_graus": 25.3,
+      "nome": "Área de Show",
+      "camada": "roteiro",
+      "x_m": -94.04,
+      "y_m": 41.55,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "AASPAR",
+      "x_pt": 356.62,
+      "y_pt": 465.99,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "nome": "AASPAR",
+      "camada": "planta",
+      "x_m": -203.89,
+      "y_m": -34.22,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ANTENA",
+      "x_pt": 252.93,
+      "y_pt": 197.54,
+      "corpo_pt": 0.5,
+      "angulo_graus": 40.7,
+      "nome": "ANTENA",
+      "camada": "planta",
+      "x_m": -262.07,
+      "y_m": 116.41,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "APICULTURA",
+      "x_pt": 362.83,
+      "y_pt": 483.3,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "nome": "APICULTURA",
+      "camada": "planta",
+      "x_m": -200.41,
+      "y_m": -43.93,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ARENA DE RODEIO",
+      "x_pt": 586.83,
+      "y_pt": 410.77,
+      "corpo_pt": 3.7,
+      "angulo_graus": 27.8,
+      "nome": "ARENA DE RODEIO",
+      "camada": "planta",
+      "x_m": -74.72,
+      "y_m": -3.24,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ARENA DO CONHECIMENTO - UTF-PR",
+      "x_pt": 261.2,
+      "y_pt": 670.89,
+      "corpo_pt": 2.0,
+      "angulo_graus": -69.1,
+      "nome": "ARENA DO CONHECIMENTO - UTF-PR",
+      "camada": "planta",
+      "x_m": -257.43,
+      "y_m": -149.19,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "AUDITÓRIO",
+      "x_pt": 802.16,
+      "y_pt": 273.18,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "AUDITÓRIO",
+      "camada": "planta",
+      "x_m": 46.1,
+      "y_m": 73.96,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "AV. VER. DORVALINO TOSI",
+      "x_pt": 963.13,
+      "y_pt": 128.55,
+      "corpo_pt": 3.7,
+      "angulo_graus": -31.2,
+      "nome": "AV. VER. DORVALINO TOSI",
+      "camada": "planta",
+      "x_m": 136.42,
+      "y_m": 155.12,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "AVENIDA JOSÉ MARCANTE",
+      "x_pt": 1025.03,
+      "y_pt": 287.41,
+      "corpo_pt": 3.7,
+      "angulo_graus": -30.1,
+      "nome": "AVENIDA JOSÉ MARCANTE",
+      "camada": "planta",
+      "x_m": 171.15,
+      "y_m": 65.98,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "AVENIDA VINICIUS DE MORAIS",
+      "x_pt": 980.24,
+      "y_pt": 336.38,
+      "corpo_pt": 3.7,
+      "angulo_graus": 61.6,
+      "nome": "AVENIDA VINICIUS DE MORAIS",
+      "camada": "planta",
+      "x_m": 146.02,
+      "y_m": 38.5,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "BANHEIROS FEM.",
+      "x_pt": 415.4,
+      "y_pt": 605.03,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "nome": "BANHEIROS FEM.",
+      "camada": "planta",
+      "x_m": -170.91,
+      "y_m": -112.24,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "BANHEIROS MASC.",
+      "x_pt": 419.22,
+      "y_pt": 617.71,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "nome": "BANHEIROS MASC.",
+      "camada": "planta",
+      "x_m": -168.77,
+      "y_m": -119.35,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "BRF",
+      "x_pt": 349.17,
+      "y_pt": 440.92,
+      "corpo_pt": 3.0,
+      "angulo_graus": -68.7,
+      "nome": "BRF",
+      "camada": "planta",
+      "x_m": -208.07,
+      "y_m": -20.15,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 583.0,
+      "y_pt": 286.37,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -76.87,
+      "y_m": 66.56,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 527.14,
+      "y_pt": 300.2,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -108.21,
+      "y_m": 58.8,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 637.55,
+      "y_pt": 307.46,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -46.26,
+      "y_m": 54.73,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 580.02,
+      "y_pt": 327.19,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -78.54,
+      "y_m": 43.66,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 489.65,
+      "y_pt": 335.81,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -129.25,
+      "y_m": 38.82,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 635.32,
+      "y_pt": 353.18,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -47.51,
+      "y_m": 29.08,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 526.61,
+      "y_pt": 363.01,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -108.51,
+      "y_m": 23.56,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 630.46,
+      "y_pt": 405.53,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -50.24,
+      "y_m": -0.3,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 520.05,
+      "y_pt": 409.92,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -112.19,
+      "y_m": -2.76,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bar",
+      "x_pt": 566.03,
+      "y_pt": 455.4,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "Bar",
+      "camada": "planta",
+      "x_m": -86.39,
+      "y_m": -28.28,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bosque",
+      "x_pt": 322.15,
+      "y_pt": 182.04,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Bosque",
+      "camada": "planta",
+      "x_m": -223.23,
+      "y_m": 125.1,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bosque",
+      "x_pt": 278.67,
+      "y_pt": 219.83,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Bosque",
+      "camada": "planta",
+      "x_m": -247.63,
+      "y_m": 103.9,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bosque",
+      "x_pt": 253.04,
+      "y_pt": 273.11,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Bosque",
+      "camada": "planta",
+      "x_m": -262.01,
+      "y_m": 74.0,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bosque",
+      "x_pt": 785.14,
+      "y_pt": 392.53,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Bosque",
+      "camada": "planta",
+      "x_m": 36.55,
+      "y_m": 7.0,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bosque",
+      "x_pt": 692.27,
+      "y_pt": 441.66,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Bosque",
+      "camada": "planta",
+      "x_m": -15.56,
+      "y_m": -20.57,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Bosque",
+      "x_pt": 526.79,
+      "y_pt": 527.22,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Bosque",
+      "camada": "planta",
+      "x_m": -108.41,
+      "y_m": -68.58,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CAMAROTES - LADO A",
+      "x_pt": 665.64,
+      "y_pt": 388.61,
+      "corpo_pt": 3.7,
+      "angulo_graus": -54.1,
+      "nome": "CAMAROTES - LADO A",
+      "camada": "planta",
+      "x_m": -30.5,
+      "y_m": 9.2,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CAMAROTES - LADO B",
+      "x_pt": 528.12,
+      "y_pt": 445.73,
+      "corpo_pt": 3.7,
+      "angulo_graus": -69.9,
+      "nome": "CAMAROTES - LADO B",
+      "camada": "planta",
+      "x_m": -107.66,
+      "y_m": -22.85,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CARROS DE APLICATIVO",
+      "x_pt": 970.08,
+      "y_pt": 332.82,
+      "corpo_pt": 3.7,
+      "angulo_graus": 62.9,
+      "nome": "CARROS DE APLICATIVO",
+      "camada": "planta",
+      "x_m": 140.32,
+      "y_m": 40.5,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CASA 1",
+      "x_pt": 735.85,
+      "y_pt": 245.18,
+      "corpo_pt": 2.5,
+      "angulo_graus": -14.6,
+      "nome": "CASA 1",
+      "camada": "planta",
+      "x_m": 8.89,
+      "y_m": 89.68,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CASA 2",
+      "x_pt": 745.6,
+      "y_pt": 261.06,
+      "corpo_pt": 2.5,
+      "angulo_graus": -14.6,
+      "nome": "CASA 2",
+      "camada": "planta",
+      "x_m": 14.36,
+      "y_m": 80.76,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CASA DO MÉDICO VETERINÁRIO",
+      "x_pt": 268.29,
+      "y_pt": 343.31,
+      "corpo_pt": 3.7,
+      "angulo_graus": 21.4,
+      "nome": "CASA DO MÉDICO VETERINÁRIO",
+      "camada": "planta",
+      "x_m": -253.45,
+      "y_m": 34.61,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CCO",
+      "x_pt": 774.46,
+      "y_pt": 273.82,
+      "corpo_pt": 3.0,
+      "angulo_graus": 17.9,
+      "nome": "CCO",
+      "camada": "planta",
+      "x_m": 30.56,
+      "y_m": 73.61,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CENTRO DE CONVIVÊNCIA DO IDOSO",
+      "x_pt": 818.98,
+      "y_pt": 353.91,
+      "corpo_pt": 3.7,
+      "angulo_graus": -55.5,
+      "nome": "CENTRO DE CONVIVÊNCIA DO IDOSO",
+      "camada": "planta",
+      "x_m": 55.54,
+      "y_m": 28.67,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CHUVEIROS",
+      "x_pt": 414.36,
+      "y_pt": 628.54,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "nome": "CHUVEIROS",
+      "camada": "planta",
+      "x_m": -171.49,
+      "y_m": -125.43,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "COBERTURA",
+      "x_pt": 190.59,
+      "y_pt": 260.21,
+      "corpo_pt": 3.7,
+      "angulo_graus": -7.2,
+      "nome": "COBERTURA",
+      "camada": "planta",
+      "x_m": -297.05,
+      "y_m": 81.24,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CONTROLE SANITÁRIO",
+      "x_pt": 146.88,
+      "y_pt": 183.4,
+      "corpo_pt": 3.0,
+      "angulo_graus": -10.0,
+      "nome": "CONTROLE SANITÁRIO",
+      "camada": "planta",
+      "x_m": -321.58,
+      "y_m": 124.34,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "CRUZEIRO DO IGUAÇU",
+      "x_pt": 96.28,
+      "y_pt": 217.55,
+      "corpo_pt": 3.7,
+      "angulo_graus": 76.9,
+      "nome": "CRUZEIRO DO IGUAÇU",
+      "camada": "planta",
+      "x_m": -349.97,
+      "y_m": 105.18,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "DOIS VIZINHOS",
+      "x_pt": 46.93,
+      "y_pt": 477.27,
+      "corpo_pt": 3.7,
+      "angulo_graus": 87.8,
+      "nome": "DOIS VIZINHOS",
+      "camada": "planta",
+      "x_m": -377.66,
+      "y_m": -40.55,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "EQ. LIMPEZA",
+      "x_pt": 108.07,
+      "y_pt": 351.9,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "EQ. LIMPEZA",
+      "camada": "planta",
+      "x_m": -343.35,
+      "y_m": 29.79,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "EQ. LIMPEZA",
+      "x_pt": 122.51,
+      "y_pt": 455.37,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "EQ. LIMPEZA",
+      "camada": "planta",
+      "x_m": -335.25,
+      "y_m": -28.26,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESPAÇO P/ MESAS",
+      "x_pt": 376.24,
+      "y_pt": 238.85,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESPAÇO P/ MESAS",
+      "camada": "planta",
+      "x_m": -192.88,
+      "y_m": 93.23,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESPAÇO P/ MESAS",
+      "x_pt": 328.86,
+      "y_pt": 280.23,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESPAÇO P/ MESAS",
+      "camada": "planta",
+      "x_m": -219.47,
+      "y_m": 70.01,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 791.05,
+      "y_pt": 84.82,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": 39.87,
+      "y_m": 179.65,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 635.27,
+      "y_pt": 90.9,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": -47.54,
+      "y_m": 176.24,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 449.84,
+      "y_pt": 109.84,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": -151.59,
+      "y_m": 165.61,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 273.64,
+      "y_pt": 140.86,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": -250.45,
+      "y_m": 148.21,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 841.31,
+      "y_pt": 159.84,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": 68.07,
+      "y_m": 137.56,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 923.72,
+      "y_pt": 271.52,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": 114.31,
+      "y_m": 74.9,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 306.42,
+      "y_pt": 789.87,
+      "corpo_pt": 3.7,
+      "angulo_graus": 11.9,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": -232.06,
+      "y_m": -215.95,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ESTACIONAMENTO",
+      "x_pt": 144.09,
+      "y_pt": 793.38,
+      "corpo_pt": 3.7,
+      "angulo_graus": 11.9,
+      "nome": "ESTACIONAMENTO",
+      "camada": "planta",
+      "x_m": -323.14,
+      "y_m": -217.92,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "JULGAMENTO RUSTICO",
+      "x_pt": 134.48,
+      "y_pt": 390.85,
+      "corpo_pt": 2.0,
+      "angulo_graus": -6.7,
+      "nome": "JULGAMENTO RUSTICO",
+      "camada": "planta",
+      "x_m": -328.54,
+      "y_m": 7.94,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "LAVAGEM",
+      "x_pt": 156.13,
+      "y_pt": 724.39,
+      "corpo_pt": 3.0,
+      "angulo_graus": 17.9,
+      "nome": "LAVAGEM",
+      "camada": "planta",
+      "x_m": -316.39,
+      "y_m": -179.21,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "LAVAGEM ANIMAIS",
+      "x_pt": 84.73,
+      "y_pt": 613.52,
+      "corpo_pt": 3.0,
+      "angulo_graus": 97.8,
+      "nome": "LAVAGEM ANIMAIS",
+      "camada": "planta",
+      "x_m": -356.45,
+      "y_m": -117.0,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "MANGUEIRAS",
+      "x_pt": 175.53,
+      "y_pt": 327.2,
+      "corpo_pt": 3.7,
+      "angulo_graus": -7.2,
+      "nome": "MANGUEIRAS",
+      "camada": "planta",
+      "x_m": -305.5,
+      "y_m": 43.65,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "MECÂNICOS",
+      "x_pt": 372.55,
+      "y_pt": 511.99,
+      "corpo_pt": 3.0,
+      "angulo_graus": -68.7,
+      "nome": "MECÂNICOS",
+      "camada": "planta",
+      "x_m": -194.95,
+      "y_m": -60.03,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Mata Nativa",
+      "x_pt": 809.05,
+      "y_pt": 444.24,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Mata Nativa",
+      "camada": "planta",
+      "x_m": 49.97,
+      "y_m": -22.02,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Mata Nativa",
+      "x_pt": 611.32,
+      "y_pt": 542.1,
+      "corpo_pt": 5.0,
+      "angulo_graus": -0.0,
+      "nome": "Mata Nativa",
+      "camada": "planta",
+      "x_m": -60.98,
+      "y_m": -76.93,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ORDENHADEIRA",
+      "x_pt": 128.43,
+      "y_pt": 480.07,
+      "corpo_pt": 3.0,
+      "angulo_graus": 17.9,
+      "nome": "ORDENHADEIRA",
+      "camada": "planta",
+      "x_m": -331.93,
+      "y_m": -42.12,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PALCO",
+      "x_pt": 610.72,
+      "y_pt": 451.12,
+      "corpo_pt": 3.7,
+      "angulo_graus": 27.8,
+      "nome": "PALCO",
+      "camada": "planta",
+      "x_m": -61.32,
+      "y_m": -25.88,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PALCO AFTER",
+      "x_pt": 685.12,
+      "y_pt": 369.23,
+      "corpo_pt": 3.7,
+      "angulo_graus": -58.7,
+      "nome": "PALCO AFTER",
+      "camada": "planta",
+      "x_m": -19.57,
+      "y_m": 20.07,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO - EQUÍNOS",
+      "x_pt": 195.37,
+      "y_pt": 699.69,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PAVILHÃO - EQUÍNOS",
+      "camada": "planta",
+      "x_m": -294.37,
+      "y_m": -165.35,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO - GADO CORTE",
+      "x_pt": 149.8,
+      "y_pt": 585.4,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PAVILHÃO - GADO CORTE",
+      "camada": "planta",
+      "x_m": -319.94,
+      "y_m": -101.22,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO - GADO LEITE",
+      "x_pt": 124.04,
+      "y_pt": 507.58,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PAVILHÃO - GADO LEITE",
+      "camada": "planta",
+      "x_m": -334.39,
+      "y_m": -57.56,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO - NÚCLEO CARRA BRANCA",
+      "x_pt": 137.15,
+      "y_pt": 546.45,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PAVILHÃO - NÚCLEO CARA BRANCA",
+      "camada": "planta",
+      "x_m": -327.04,
+      "y_m": -79.37,
+      "e_frase": false,
+      "grafia_corrigida": true
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO - OVINOS E CAPRINOS",
+      "x_pt": 160.22,
+      "y_pt": 624.94,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PAVILHÃO - OVINOS E CAPRINOS",
+      "camada": "planta",
+      "x_m": -314.09,
+      "y_m": -123.41,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO - PEQUENOS ANIMAIS",
+      "x_pt": 175.67,
+      "y_pt": 663.22,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PAVILHÃO - PEQUENOS ANIMAIS",
+      "camada": "planta",
+      "x_m": -305.42,
+      "y_m": -144.89,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO 1",
+      "x_pt": 727.58,
+      "y_pt": 166.34,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "PAVILHÃO 1",
+      "camada": "planta",
+      "x_m": 4.25,
+      "y_m": 133.91,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO 2",
+      "x_pt": 507.28,
+      "y_pt": 158.81,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "PAVILHÃO 2",
+      "camada": "planta",
+      "x_m": -119.36,
+      "y_m": 138.14,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PAVILHÃO 3",
+      "x_pt": 438.69,
+      "y_pt": 168.92,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "PAVILHÃO 3",
+      "camada": "planta",
+      "x_m": -157.84,
+      "y_m": 132.46,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PISTA DE JULGAMENTOS",
+      "x_pt": 226.02,
+      "y_pt": 553.47,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "nome": "PISTA DE JULGAMENTOS",
+      "camada": "planta",
+      "x_m": -277.17,
+      "y_m": -83.31,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PORTAL",
+      "x_pt": 415.06,
+      "y_pt": 209.89,
+      "corpo_pt": 1.9,
+      "angulo_graus": -7.0,
+      "nome": "PORTAL",
+      "camada": "planta",
+      "x_m": -171.1,
+      "y_m": 109.48,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PORTAL",
+      "x_pt": 308.81,
+      "y_pt": 234.08,
+      "corpo_pt": 1.9,
+      "angulo_graus": 30.9,
+      "nome": "PORTAL",
+      "camada": "planta",
+      "x_m": -230.72,
+      "y_m": 95.9,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PORTAL",
+      "x_pt": 806.37,
+      "y_pt": 247.54,
+      "corpo_pt": 3.7,
+      "angulo_graus": -72.6,
+      "nome": "PORTAL",
+      "camada": "planta",
+      "x_m": 48.46,
+      "y_m": 88.35,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PORTAL",
+      "x_pt": 332.99,
+      "y_pt": 368.25,
+      "corpo_pt": 1.9,
+      "angulo_graus": 2.3,
+      "nome": "PORTAL",
+      "camada": "planta",
+      "x_m": -217.15,
+      "y_m": 20.62,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PORTARIA",
+      "x_pt": 134.75,
+      "y_pt": 204.38,
+      "corpo_pt": 3.0,
+      "angulo_graus": -10.1,
+      "nome": "PORTARIA",
+      "camada": "planta",
+      "x_m": -328.38,
+      "y_m": 112.57,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "POSTE",
+      "x_pt": 845.88,
+      "y_pt": 224.42,
+      "corpo_pt": 1.2,
+      "angulo_graus": -0.0,
+      "nome": "POSTE",
+      "camada": "planta",
+      "x_m": 70.63,
+      "y_m": 101.32,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "POSTE",
+      "x_pt": 762.89,
+      "y_pt": 288.11,
+      "corpo_pt": 1.2,
+      "angulo_graus": -0.0,
+      "nome": "POSTE",
+      "camada": "planta",
+      "x_m": 24.07,
+      "y_m": 65.59,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "POSTE",
+      "x_pt": 341.99,
+      "y_pt": 382.2,
+      "corpo_pt": 1.2,
+      "angulo_graus": -0.0,
+      "nome": "POSTE",
+      "camada": "planta",
+      "x_m": -212.1,
+      "y_m": 12.79,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "POSTE",
+      "x_pt": 293.87,
+      "y_pt": 536.93,
+      "corpo_pt": 1.2,
+      "angulo_graus": -0.0,
+      "nome": "POSTE",
+      "camada": "planta",
+      "x_m": -239.1,
+      "y_m": -74.03,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PR 473",
+      "x_pt": 83.25,
+      "y_pt": 285.13,
+      "corpo_pt": 3.7,
+      "angulo_graus": 76.9,
+      "nome": "PR 473",
+      "camada": "planta",
+      "x_m": -357.28,
+      "y_m": 67.26,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "PR 473",
+      "x_pt": 54.95,
+      "y_pt": 386.88,
+      "corpo_pt": 3.7,
+      "angulo_graus": 76.9,
+      "nome": "PR 473",
+      "camada": "planta",
+      "x_m": -373.16,
+      "y_m": 10.17,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "RECINTO DE LEILÕES",
+      "x_pt": 164.1,
+      "y_pt": 417.95,
+      "corpo_pt": 3.7,
+      "angulo_graus": -7.0,
+      "nome": "RECINTO DE LEILÕES",
+      "camada": "planta",
+      "x_m": -311.92,
+      "y_m": -7.27,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "RESIDÊNCIA",
+      "x_pt": 850.19,
+      "y_pt": 345.95,
+      "corpo_pt": 3.2,
+      "angulo_graus": -37.0,
+      "nome": "RESIDÊNCIA",
+      "camada": "planta",
+      "x_m": 73.05,
+      "y_m": 33.13,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "RESIDÊNCIA",
+      "x_pt": 117.53,
+      "y_pt": 392.75,
+      "corpo_pt": 3.2,
+      "angulo_graus": 90.0,
+      "nome": "RESIDÊNCIA",
+      "camada": "planta",
+      "x_m": -338.05,
+      "y_m": 6.87,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "RESIDÊNCIA",
+      "x_pt": 92.6,
+      "y_pt": 396.29,
+      "corpo_pt": 3.2,
+      "angulo_graus": 90.0,
+      "nome": "RESIDÊNCIA",
+      "camada": "planta",
+      "x_m": -352.03,
+      "y_m": 4.89,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "RESTAURANTE SOCIEDADE RURAL",
+      "x_pt": 278.53,
+      "y_pt": 374.8,
+      "corpo_pt": 3.7,
+      "angulo_graus": 21.4,
+      "nome": "RESTAURANTE SOCIEDADE RURAL",
+      "camada": "planta",
+      "x_m": -247.71,
+      "y_m": 16.95,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "RUA JORGE AMADO",
+      "x_pt": 886.93,
+      "y_pt": 356.72,
+      "corpo_pt": 3.7,
+      "angulo_graus": -37.8,
+      "nome": "RUA JORGE AMADO",
+      "camada": "planta",
+      "x_m": 93.66,
+      "y_m": 27.09,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "S-A",
+      "x_pt": 149.1,
+      "y_pt": 471.65,
+      "corpo_pt": 3.0,
+      "angulo_graus": 18.6,
+      "nome": "S-A",
+      "camada": "planta",
+      "x_m": -320.33,
+      "y_m": -37.4,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "SACA ROLHA",
+      "x_pt": 250.93,
+      "y_pt": 180.58,
+      "corpo_pt": 3.7,
+      "angulo_graus": -49.6,
+      "nome": "SACA ROLHA",
+      "camada": "planta",
+      "x_m": -263.2,
+      "y_m": 125.92,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "SAGUÃO ABERTO",
+      "x_pt": 607.49,
+      "y_pt": 158.81,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "SAGUÃO ABERTO",
+      "camada": "planta",
+      "x_m": -63.13,
+      "y_m": 138.14,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "SANEPAR",
+      "x_pt": 648.21,
+      "y_pt": 474.95,
+      "corpo_pt": 3.5,
+      "angulo_graus": 19.1,
+      "nome": "SANEPAR",
+      "camada": "planta",
+      "x_m": -40.28,
+      "y_m": -39.25,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "SANITÁRIOS QUIMICOS",
+      "x_pt": 734.12,
+      "y_pt": 423.82,
+      "corpo_pt": 1.7,
+      "angulo_graus": 19.4,
+      "nome": "SANITÁRIOS QUIMICOS",
+      "camada": "planta",
+      "x_m": 7.92,
+      "y_m": -10.56,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "SANITÁRIOS QUIMICOS",
+      "x_pt": 554.55,
+      "y_pt": 500.37,
+      "corpo_pt": 1.7,
+      "angulo_graus": 19.4,
+      "nome": "SANITÁRIOS QUIMICOS",
+      "camada": "planta",
+      "x_m": -92.83,
+      "y_m": -53.51,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "SUPERPOSTE",
+      "x_pt": 828.51,
+      "y_pt": 232.42,
+      "corpo_pt": 1.2,
+      "angulo_graus": -0.0,
+      "nome": "SUPERPOSTE",
+      "camada": "planta",
+      "x_m": 60.88,
+      "y_m": 96.83,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 633.51,
+      "y_pt": 231.52,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -48.53,
+      "y_m": 97.34,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 462.73,
+      "y_pt": 256.8,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -144.35,
+      "y_m": 83.16,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 607.96,
+      "y_pt": 274.04,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -62.87,
+      "y_m": 73.48,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 500.48,
+      "y_pt": 300.33,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -123.17,
+      "y_m": 58.73,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 563.69,
+      "y_pt": 317.6,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -87.71,
+      "y_m": 49.04,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 669.86,
+      "y_pt": 324.52,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -28.13,
+      "y_m": 45.16,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 722.22,
+      "y_pt": 325.83,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": 1.25,
+      "y_m": 44.42,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 655.07,
+      "y_pt": 355.57,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -36.43,
+      "y_m": 27.74,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 633.11,
+      "y_pt": 379.33,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -48.75,
+      "y_m": 14.4,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 506.78,
+      "y_pt": 397.53,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -119.64,
+      "y_m": 4.19,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 477.73,
+      "y_pt": 424.73,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -135.94,
+      "y_m": -11.07,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 540.55,
+      "y_pt": 428.58,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -100.69,
+      "y_m": -13.23,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 430.62,
+      "y_pt": 439.7,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -162.37,
+      "y_m": -19.47,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 383.94,
+      "y_pt": 471.19,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -188.56,
+      "y_m": -37.14,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Talude",
+      "x_pt": 434.12,
+      "y_pt": 601.51,
+      "corpo_pt": 3.7,
+      "angulo_graus": -0.0,
+      "nome": "Talude",
+      "camada": "planta",
+      "x_m": -160.41,
+      "y_m": -110.26,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 345.09,
+      "y_pt": 223.2,
+      "corpo_pt": 3.0,
+      "angulo_graus": 22.4,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -210.36,
+      "y_m": 102.01,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 421.1,
+      "y_pt": 249.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": 22.4,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -167.71,
+      "y_m": 87.04,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 329.37,
+      "y_pt": 254.33,
+      "corpo_pt": 3.0,
+      "angulo_graus": -30.6,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -219.18,
+      "y_m": 84.54,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 305.03,
+      "y_pt": 262.33,
+      "corpo_pt": 3.0,
+      "angulo_graus": 66.9,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -232.84,
+      "y_m": 80.05,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 364.93,
+      "y_pt": 276.81,
+      "corpo_pt": 3.0,
+      "angulo_graus": 49.5,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -199.23,
+      "y_m": 71.93,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 305.07,
+      "y_pt": 300.3,
+      "corpo_pt": 3.0,
+      "angulo_graus": 66.9,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -232.82,
+      "y_m": 58.75,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "Trilha",
+      "x_pt": 337.78,
+      "y_pt": 326.54,
+      "corpo_pt": 3.5,
+      "angulo_graus": 66.9,
+      "nome": "Trilha",
+      "camada": "planta",
+      "x_m": -214.46,
+      "y_m": 44.02,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ÁREA RESTRITA",
+      "x_pt": 489.55,
+      "y_pt": 714.65,
+      "corpo_pt": 5.0,
+      "angulo_graus": 11.5,
+      "nome": "ÁREA RESTRITA",
+      "camada": "planta",
+      "x_m": -129.31,
+      "y_m": -173.74,
+      "e_frase": false
+    },
+    {
+      "texto_no_mapa": "ÁREA RESTRITA",
+      "x_pt": 511.33,
+      "y_pt": 805.55,
+      "corpo_pt": 5.0,
+      "angulo_graus": 11.5,
+      "nome": "ÁREA RESTRITA",
+      "camada": "planta",
+      "x_m": -117.08,
+      "y_m": -224.75,
+      "e_frase": false
+    }
+  ],
+  "descartados": [
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 871.45,
+      "y_pt": 91.49,
+      "corpo_pt": 3.0,
+      "angulo_graus": 49.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 873.47,
+      "y_pt": 93.18,
+      "corpo_pt": 2.0,
+      "angulo_graus": 49.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "3 x 3",
+      "x_pt": 167.08,
+      "y_pt": 161.47,
+      "corpo_pt": 3.0,
+      "angulo_graus": 8.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "3 x 3",
+      "x_pt": 982.91,
+      "y_pt": 162.8,
+      "corpo_pt": 3.0,
+      "angulo_graus": 49.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,00 m²",
+      "x_pt": 167.45,
+      "y_pt": 164.03,
+      "corpo_pt": 2.0,
+      "angulo_graus": 8.2,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,00 m²",
+      "x_pt": 984.9,
+      "y_pt": 164.45,
+      "corpo_pt": 2.0,
+      "angulo_graus": 50.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-05",
+      "x_pt": 529.72,
+      "y_pt": 174.74,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "9,00 m²",
+      "x_pt": 529.68,
+      "y_pt": 177.33,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 225.73,
+      "y_pt": 177.4,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 225.71,
+      "y_pt": 180.0,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-06",
+      "x_pt": 511.87,
+      "y_pt": 181.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-04",
+      "x_pt": 666.38,
+      "y_pt": 181.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 511.86,
+      "y_pt": 184.46,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 666.37,
+      "y_pt": 184.46,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-07",
+      "x_pt": 494.07,
+      "y_pt": 189.0,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 494.06,
+      "y_pt": 191.59,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 132.53,
+      "y_pt": 192.76,
+      "corpo_pt": 3.0,
+      "angulo_graus": -10.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 786.01,
+      "y_pt": 194.08,
+      "corpo_pt": 3.0,
+      "angulo_graus": 48.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-03",
+      "x_pt": 677.4,
+      "y_pt": 194.43,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 133.09,
+      "y_pt": 195.04,
+      "corpo_pt": 2.0,
+      "angulo_graus": -10.6,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 225.73,
+      "y_pt": 195.18,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 787.89,
+      "y_pt": 195.85,
+      "corpo_pt": 2.0,
+      "angulo_graus": 47.9,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "15,00 m²",
+      "x_pt": 677.39,
+      "y_pt": 197.02,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-08",
+      "x_pt": 464.15,
+      "y_pt": 197.05,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 225.71,
+      "y_pt": 197.76,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 464.14,
+      "y_pt": 199.6,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 715.19,
+      "y_pt": 200.59,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 732.99,
+      "y_pt": 200.59,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 750.84,
+      "y_pt": 200.59,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-02",
+      "x_pt": 687.03,
+      "y_pt": 200.86,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-09",
+      "x_pt": 398.88,
+      "y_pt": 201.52,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 785.95,
+      "y_pt": 202.97,
+      "corpo_pt": 3.0,
+      "angulo_graus": 48.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 715.21,
+      "y_pt": 203.18,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 733.02,
+      "y_pt": 203.18,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 750.82,
+      "y_pt": 203.18,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "15,00 m²",
+      "x_pt": 687.01,
+      "y_pt": 203.45,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 398.87,
+      "y_pt": 204.1,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 787.87,
+      "y_pt": 204.77,
+      "corpo_pt": 2.0,
+      "angulo_graus": 47.9,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-10",
+      "x_pt": 375.26,
+      "y_pt": 206.55,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-01",
+      "x_pt": 696.65,
+      "y_pt": 207.33,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 375.25,
+      "y_pt": 209.13,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "15,00 m²",
+      "x_pt": 696.64,
+      "y_pt": 209.92,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-11",
+      "x_pt": 352.12,
+      "y_pt": 211.23,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 785.91,
+      "y_pt": 211.89,
+      "corpo_pt": 3.0,
+      "angulo_graus": 48.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 787.82,
+      "y_pt": 213.66,
+      "corpo_pt": 2.0,
+      "angulo_graus": 47.9,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 352.11,
+      "y_pt": 213.81,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8 x 8",
+      "x_pt": 814.1,
+      "y_pt": 215.92,
+      "corpo_pt": 3.0,
+      "angulo_graus": 17.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "64,00 m²",
+      "x_pt": 814.84,
+      "y_pt": 218.37,
+      "corpo_pt": 2.0,
+      "angulo_graus": 17.1,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-12",
+      "x_pt": 322.72,
+      "y_pt": 224.0,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "18,00 m²",
+      "x_pt": 322.75,
+      "y_pt": 226.59,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,57",
+      "x_pt": 586.4,
+      "y_pt": 242.3,
+      "corpo_pt": 1.5,
+      "angulo_graus": -2.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,47",
+      "x_pt": 567.06,
+      "y_pt": 243.15,
+      "corpo_pt": 1.5,
+      "angulo_graus": 10.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,05",
+      "x_pt": 603.06,
+      "y_pt": 244.35,
+      "corpo_pt": 1.5,
+      "angulo_graus": -13.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-13",
+      "x_pt": 296.78,
+      "y_pt": 247.14,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "9,08",
+      "x_pt": 618.7,
+      "y_pt": 248.58,
+      "corpo_pt": 1.5,
+      "angulo_graus": -15.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-31",
+      "x_pt": 432.26,
+      "y_pt": 249.42,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 296.81,
+      "y_pt": 249.73,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-84",
+      "x_pt": 601.06,
+      "y_pt": 251.34,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-83,",
+      "x_pt": 586.78,
+      "y_pt": 251.77,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 432.28,
+      "y_pt": 251.96,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-82",
+      "x_pt": 568.17,
+      "y_pt": 252.78,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "11,90",
+      "x_pt": 593.6,
+      "y_pt": 252.94,
+      "corpo_pt": 1.5,
+      "angulo_graus": 89.3,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "13,19",
+      "x_pt": 576.19,
+      "y_pt": 253.07,
+      "corpo_pt": 1.5,
+      "angulo_graus": 94.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "90,05 m²",
+      "x_pt": 601.1,
+      "y_pt": 253.93,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "121,14 m²",
+      "x_pt": 586.77,
+      "y_pt": 254.32,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,49",
+      "x_pt": 633.18,
+      "y_pt": 254.35,
+      "corpo_pt": 1.5,
+      "angulo_graus": -28.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,39",
+      "x_pt": 607.85,
+      "y_pt": 254.48,
+      "corpo_pt": 1.5,
+      "angulo_graus": 76.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "15,44",
+      "x_pt": 556.57,
+      "y_pt": 255.32,
+      "corpo_pt": 1.5,
+      "angulo_graus": 77.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "165,78 m²",
+      "x_pt": 568.19,
+      "y_pt": 255.37,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-85",
+      "x_pt": 616.68,
+      "y_pt": 255.5,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "83,23 m²",
+      "x_pt": 616.67,
+      "y_pt": 258.08,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,97",
+      "x_pt": 621.97,
+      "y_pt": 258.31,
+      "corpo_pt": 1.5,
+      "angulo_graus": 63.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,08",
+      "x_pt": 517.37,
+      "y_pt": 258.83,
+      "corpo_pt": 1.5,
+      "angulo_graus": 14.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-14",
+      "x_pt": 289.43,
+      "y_pt": 259.7,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-86",
+      "x_pt": 629.02,
+      "y_pt": 259.83,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 981.01,
+      "y_pt": 261.14,
+      "corpo_pt": 3.0,
+      "angulo_graus": 63.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "7,25",
+      "x_pt": 600.4,
+      "y_pt": 262.18,
+      "corpo_pt": 1.5,
+      "angulo_graus": -0.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 289.42,
+      "y_pt": 262.28,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 983.33,
+      "y_pt": 262.3,
+      "corpo_pt": 2.0,
+      "angulo_graus": 63.6,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "78,12 m²",
+      "x_pt": 629.01,
+      "y_pt": 262.41,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,84",
+      "x_pt": 586.49,
+      "y_pt": 262.48,
+      "corpo_pt": 1.5,
+      "angulo_graus": 4.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,67",
+      "x_pt": 573.47,
+      "y_pt": 263.64,
+      "corpo_pt": 1.5,
+      "angulo_graus": 11.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "7,36",
+      "x_pt": 614.0,
+      "y_pt": 263.94,
+      "corpo_pt": 1.5,
+      "angulo_graus": -13.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,75",
+      "x_pt": 634.6,
+      "y_pt": 264.34,
+      "corpo_pt": 1.5,
+      "angulo_graus": 59.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,14",
+      "x_pt": 648.05,
+      "y_pt": 264.63,
+      "corpo_pt": 1.5,
+      "angulo_graus": -43.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "13,73",
+      "x_pt": 530.29,
+      "y_pt": 265.16,
+      "corpo_pt": 1.5,
+      "angulo_graus": -57.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-30",
+      "x_pt": 410.3,
+      "y_pt": 265.29,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-87",
+      "x_pt": 641.48,
+      "y_pt": 266.52,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "11,85",
+      "x_pt": 498.46,
+      "y_pt": 266.61,
+      "corpo_pt": 1.5,
+      "angulo_graus": 29.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,21",
+      "x_pt": 560.08,
+      "y_pt": 267.13,
+      "corpo_pt": 1.5,
+      "angulo_graus": 18.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-81",
+      "x_pt": 520.62,
+      "y_pt": 267.26,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 410.29,
+      "y_pt": 267.88,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "7,41",
+      "x_pt": 625.91,
+      "y_pt": 268.19,
+      "corpo_pt": 1.5,
+      "angulo_graus": -23.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "86,14 m²",
+      "x_pt": 641.48,
+      "y_pt": 269.11,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "139,47 m²",
+      "x_pt": 520.59,
+      "y_pt": 269.81,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "12,37",
+      "x_pt": 512.94,
+      "y_pt": 270.44,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "8,87",
+      "x_pt": 649.1,
+      "y_pt": 274.02,
+      "corpo_pt": 1.5,
+      "angulo_graus": 29.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "7,38",
+      "x_pt": 637.86,
+      "y_pt": 274.43,
+      "corpo_pt": 1.5,
+      "angulo_graus": -29.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-15",
+      "x_pt": 286.15,
+      "y_pt": 274.48,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-80",
+      "x_pt": 502.64,
+      "y_pt": 274.61,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "6,88",
+      "x_pt": 532.11,
+      "y_pt": 275.56,
+      "corpo_pt": 1.5,
+      "angulo_graus": 4.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 286.14,
+      "y_pt": 277.07,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "134,53 m²",
+      "x_pt": 502.61,
+      "y_pt": 277.16,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 403.46,
+      "y_pt": 277.6,
+      "corpo_pt": 3.0,
+      "angulo_graus": -29.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "6,28",
+      "x_pt": 521.37,
+      "y_pt": 278.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": 23.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "14,05",
+      "x_pt": 478.65,
+      "y_pt": 278.33,
+      "corpo_pt": 1.5,
+      "angulo_graus": 34.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,37",
+      "x_pt": 495.49,
+      "y_pt": 279.23,
+      "corpo_pt": 1.5,
+      "angulo_graus": -58.3,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 402.18,
+      "y_pt": 279.79,
+      "corpo_pt": 2.0,
+      "angulo_graus": -29.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,93",
+      "x_pt": 507.59,
+      "y_pt": 284.39,
+      "corpo_pt": 1.5,
+      "angulo_graus": 29.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-79",
+      "x_pt": 487.9,
+      "y_pt": 284.67,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "159,17 m²",
+      "x_pt": 487.91,
+      "y_pt": 287.22,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "11,18",
+      "x_pt": 664.93,
+      "y_pt": 287.72,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-16",
+      "x_pt": 288.73,
+      "y_pt": 289.84,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-29",
+      "x_pt": 395.95,
+      "y_pt": 290.23,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "11,01",
+      "x_pt": 679.22,
+      "y_pt": 290.96,
+      "corpo_pt": 1.5,
+      "angulo_graus": -48.3,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,23",
+      "x_pt": 460.92,
+      "y_pt": 291.75,
+      "corpo_pt": 1.5,
+      "angulo_graus": 55.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "14,20",
+      "x_pt": 478.03,
+      "y_pt": 291.9,
+      "corpo_pt": 1.5,
+      "angulo_graus": -42.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 288.72,
+      "y_pt": 292.42,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-28",
+      "x_pt": 367.69,
+      "y_pt": 292.55,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 395.98,
+      "y_pt": 292.82,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-88",
+      "x_pt": 670.66,
+      "y_pt": 293.2,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,24",
+      "x_pt": 492.78,
+      "y_pt": 294.57,
+      "corpo_pt": 1.5,
+      "angulo_graus": 40.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "7,93",
+      "x_pt": 659.84,
+      "y_pt": 294.87,
+      "corpo_pt": 1.5,
+      "angulo_graus": -50.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 367.68,
+      "y_pt": 295.13,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "132,84 m²",
+      "x_pt": 670.64,
+      "y_pt": 295.79,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-78",
+      "x_pt": 471.27,
+      "y_pt": 299.41,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 388.59,
+      "y_pt": 301.4,
+      "corpo_pt": 3.0,
+      "angulo_graus": -29.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "152,91 m²",
+      "x_pt": 471.25,
+      "y_pt": 302.0,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "11,96",
+      "x_pt": 676.31,
+      "y_pt": 303.27,
+      "corpo_pt": 1.5,
+      "angulo_graus": 31.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 390.5,
+      "y_pt": 303.98,
+      "corpo_pt": 2.0,
+      "angulo_graus": -29.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "7,76",
+      "x_pt": 689.75,
+      "y_pt": 304.1,
+      "corpo_pt": 1.5,
+      "angulo_graus": -55.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-17",
+      "x_pt": 292.06,
+      "y_pt": 304.93,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5,11",
+      "x_pt": 667.16,
+      "y_pt": 305.32,
+      "corpo_pt": 1.5,
+      "angulo_graus": -60.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-26",
+      "x_pt": 335.94,
+      "y_pt": 306.55,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "14,83",
+      "x_pt": 466.84,
+      "y_pt": 307.1,
+      "corpo_pt": 1.5,
+      "angulo_graus": -36.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 292.05,
+      "y_pt": 307.51,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,92",
+      "x_pt": 480.64,
+      "y_pt": 308.44,
+      "corpo_pt": 1.5,
+      "angulo_graus": 60.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-89",
+      "x_pt": 681.28,
+      "y_pt": 308.64,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 335.91,
+      "y_pt": 309.09,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "11,97",
+      "x_pt": 451.16,
+      "y_pt": 310.13,
+      "corpo_pt": 1.5,
+      "angulo_graus": 63.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "95,42 m²",
+      "x_pt": 681.27,
+      "y_pt": 311.19,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-18",
+      "x_pt": 306.39,
+      "y_pt": 312.17,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 390.27,
+      "y_pt": 313.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": -29.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-77",
+      "x_pt": 461.17,
+      "y_pt": 314.38,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 306.35,
+      "y_pt": 314.78,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "12,24",
+      "x_pt": 684.35,
+      "y_pt": 314.91,
+      "corpo_pt": 1.5,
+      "angulo_graus": 33.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "8,02",
+      "x_pt": 673.27,
+      "y_pt": 315.02,
+      "corpo_pt": 1.5,
+      "angulo_graus": -54.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 385.81,
+      "y_pt": 315.66,
+      "corpo_pt": 2.0,
+      "angulo_graus": -29.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "7,85",
+      "x_pt": 697.4,
+      "y_pt": 316.31,
+      "corpo_pt": 1.5,
+      "angulo_graus": -59.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "151,92 m²",
+      "x_pt": 461.19,
+      "y_pt": 316.96,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-27",
+      "x_pt": 355.53,
+      "y_pt": 317.83,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-90",
+      "x_pt": 688.63,
+      "y_pt": 320.41,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 355.52,
+      "y_pt": 320.42,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-19",
+      "x_pt": 311.28,
+      "y_pt": 320.74,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "8,48",
+      "x_pt": 472.36,
+      "y_pt": 322.66,
+      "corpo_pt": 1.5,
+      "angulo_graus": 66.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "89,72 m²",
+      "x_pt": 688.67,
+      "y_pt": 322.96,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "15,14",
+      "x_pt": 458.32,
+      "y_pt": 323.16,
+      "corpo_pt": 1.5,
+      "angulo_graus": -25.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 311.34,
+      "y_pt": 323.31,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "11,86",
+      "x_pt": 691.2,
+      "y_pt": 326.3,
+      "corpo_pt": 1.5,
+      "angulo_graus": 32.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "7,06",
+      "x_pt": 680.48,
+      "y_pt": 326.35,
+      "corpo_pt": 1.5,
+      "angulo_graus": -54.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "7,37",
+      "x_pt": 703.77,
+      "y_pt": 328.04,
+      "corpo_pt": 1.5,
+      "angulo_graus": -63.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 373.67,
+      "y_pt": 328.97,
+      "corpo_pt": 3.0,
+      "angulo_graus": -29.5,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-91",
+      "x_pt": 694.9,
+      "y_pt": 330.47,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 372.39,
+      "y_pt": 331.19,
+      "corpo_pt": 2.0,
+      "angulo_graus": -29.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-76",
+      "x_pt": 455.96,
+      "y_pt": 331.57,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "14,20",
+      "x_pt": 443.45,
+      "y_pt": 331.91,
+      "corpo_pt": 1.5,
+      "angulo_graus": 77.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "79,08 m²",
+      "x_pt": 694.93,
+      "y_pt": 333.06,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "152,33 m²",
+      "x_pt": 455.94,
+      "y_pt": 334.15,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "7,04",
+      "x_pt": 467.01,
+      "y_pt": 336.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": 68.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "6,26",
+      "x_pt": 686.77,
+      "y_pt": 336.52,
+      "corpo_pt": 1.5,
+      "angulo_graus": -59.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,40",
+      "x_pt": 697.42,
+      "y_pt": 336.63,
+      "corpo_pt": 1.5,
+      "angulo_graus": 24.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "8,42",
+      "x_pt": 708.6,
+      "y_pt": 340.71,
+      "corpo_pt": 1.5,
+      "angulo_graus": -76.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "14,54",
+      "x_pt": 453.35,
+      "y_pt": 341.54,
+      "corpo_pt": 1.5,
+      "angulo_graus": 4.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-92",
+      "x_pt": 699.84,
+      "y_pt": 343.6,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 231.09,
+      "y_pt": 345.22,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "87,95 m²",
+      "x_pt": 699.83,
+      "y_pt": 346.18,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "5,24",
+      "x_pt": 464.65,
+      "y_pt": 346.57,
+      "corpo_pt": 1.5,
+      "angulo_graus": 83.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "8,41",
+      "x_pt": 693.05,
+      "y_pt": 347.99,
+      "corpo_pt": 1.5,
+      "angulo_graus": -63.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 232.09,
+      "y_pt": 348.0,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-75",
+      "x_pt": 452.86,
+      "y_pt": 348.5,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-25",
+      "x_pt": 366.24,
+      "y_pt": 348.96,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "9,66",
+      "x_pt": 702.76,
+      "y_pt": 350.52,
+      "corpo_pt": 1.5,
+      "angulo_graus": 25.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "128,83 m²",
+      "x_pt": 452.87,
+      "y_pt": 351.04,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 366.15,
+      "y_pt": 351.48,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,99",
+      "x_pt": 442.23,
+      "y_pt": 353.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": 96.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-20",
+      "x_pt": 323.82,
+      "y_pt": 353.7,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 108.08,
+      "y_pt": 354.49,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,47",
+      "x_pt": 712.99,
+      "y_pt": 355.39,
+      "corpo_pt": 1.5,
+      "angulo_graus": -73.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "50,00 m²",
+      "x_pt": 323.8,
+      "y_pt": 356.29,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-24",
+      "x_pt": 359.89,
+      "y_pt": 356.39,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-93",
+      "x_pt": 706.36,
+      "y_pt": 357.07,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "12,62",
+      "x_pt": 455.84,
+      "y_pt": 357.14,
+      "corpo_pt": 1.5,
+      "angulo_graus": 40.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 359.85,
+      "y_pt": 358.96,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "77,66 m²",
+      "x_pt": 706.39,
+      "y_pt": 359.66,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,42",
+      "x_pt": 699.62,
+      "y_pt": 361.51,
+      "corpo_pt": 1.5,
+      "angulo_graus": -63.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "3,20",
+      "x_pt": 445.54,
+      "y_pt": 363.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": -20.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-23",
+      "x_pt": 352.54,
+      "y_pt": 363.03,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "8,79",
+      "x_pt": 708.31,
+      "y_pt": 364.47,
+      "corpo_pt": 1.5,
+      "angulo_graus": 25.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5 x 10",
+      "x_pt": 367.86,
+      "y_pt": 364.65,
+      "corpo_pt": 3.0,
+      "angulo_graus": 47.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 352.54,
+      "y_pt": 365.65,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-32",
+      "x_pt": 396.83,
+      "y_pt": 365.73,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "50,00 m²",
+      "x_pt": 369.72,
+      "y_pt": 366.39,
+      "corpo_pt": 2.0,
+      "angulo_graus": 47.9,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 214.49,
+      "y_pt": 367.99,
+      "corpo_pt": 3.0,
+      "angulo_graus": -6.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 396.81,
+      "y_pt": 368.32,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,59",
+      "x_pt": 717.05,
+      "y_pt": 369.67,
+      "corpo_pt": 1.5,
+      "angulo_graus": -76.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 214.2,
+      "y_pt": 370.56,
+      "corpo_pt": 2.0,
+      "angulo_graus": -6.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-94",
+      "x_pt": 710.56,
+      "y_pt": 371.64,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-22",
+      "x_pt": 347.19,
+      "y_pt": 371.75,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "66,72 m²",
+      "x_pt": 710.55,
+      "y_pt": 374.22,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 347.25,
+      "y_pt": 374.4,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,37",
+      "x_pt": 705.83,
+      "y_pt": 375.07,
+      "corpo_pt": 1.5,
+      "angulo_graus": -63.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-33",
+      "x_pt": 398.45,
+      "y_pt": 376.41,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "7,11",
+      "x_pt": 713.21,
+      "y_pt": 378.69,
+      "corpo_pt": 1.5,
+      "angulo_graus": 25.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 398.43,
+      "y_pt": 378.99,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "5 x 55 x 5",
+      "x_pt": 133.91,
+      "y_pt": 383.68,
+      "corpo_pt": 3.0,
+      "angulo_graus": -6.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "16,12",
+      "x_pt": 453.67,
+      "y_pt": 384.45,
+      "corpo_pt": 1.5,
+      "angulo_graus": 39.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,61",
+      "x_pt": 464.08,
+      "y_pt": 386.18,
+      "corpo_pt": 1.5,
+      "angulo_graus": 94.7,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 130.08,
+      "y_pt": 386.4,
+      "corpo_pt": 2.0,
+      "angulo_graus": -6.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 139.21,
+      "y_pt": 387.06,
+      "corpo_pt": 2.0,
+      "angulo_graus": -7.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-34",
+      "x_pt": 400.76,
+      "y_pt": 387.12,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 400.75,
+      "y_pt": 389.71,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-74",
+      "x_pt": 454.04,
+      "y_pt": 391.72,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "108,80 m²",
+      "x_pt": 454.06,
+      "y_pt": 394.3,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-21",
+      "x_pt": 326.97,
+      "y_pt": 395.65,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "4,36",
+      "x_pt": 443.77,
+      "y_pt": 397.07,
+      "corpo_pt": 1.5,
+      "angulo_graus": 99.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,54",
+      "x_pt": 454.48,
+      "y_pt": 397.75,
+      "corpo_pt": 1.5,
+      "angulo_graus": 12.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 326.95,
+      "y_pt": 398.2,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,70",
+      "x_pt": 465.43,
+      "y_pt": 405.13,
+      "corpo_pt": 1.5,
+      "angulo_graus": 97.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-73",
+      "x_pt": 455.83,
+      "y_pt": 405.23,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "108,56 m²",
+      "x_pt": 455.85,
+      "y_pt": 407.78,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8,87",
+      "x_pt": 445.35,
+      "y_pt": 408.23,
+      "corpo_pt": 1.5,
+      "angulo_graus": 99.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "13,00",
+      "x_pt": 382.82,
+      "y_pt": 410.61,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,19",
+      "x_pt": 456.55,
+      "y_pt": 413.26,
+      "corpo_pt": 1.5,
+      "angulo_graus": 11.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-68",
+      "x_pt": 385.83,
+      "y_pt": 418.75,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "4 x 4",
+      "x_pt": 271.84,
+      "y_pt": 419.57,
+      "corpo_pt": 3.0,
+      "angulo_graus": 24.3,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "8,86",
+      "x_pt": 467.4,
+      "y_pt": 420.65,
+      "corpo_pt": 1.5,
+      "angulo_graus": 99.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-72",
+      "x_pt": 458.41,
+      "y_pt": 421.02,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "156,00 m²",
+      "x_pt": 386.74,
+      "y_pt": 421.15,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "8 x 12",
+      "x_pt": 228.43,
+      "y_pt": 421.68,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "16,00 m²",
+      "x_pt": 272.91,
+      "y_pt": 421.92,
+      "corpo_pt": 2.0,
+      "angulo_graus": 24.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "107,84 m²",
+      "x_pt": 458.39,
+      "y_pt": 423.65,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 376.04,
+      "y_pt": 423.83,
+      "corpo_pt": 1.5,
+      "angulo_graus": 111.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "96,00 m²",
+      "x_pt": 229.27,
+      "y_pt": 424.1,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,30",
+      "x_pt": 448.45,
+      "y_pt": 424.63,
+      "corpo_pt": 1.5,
+      "angulo_graus": 104.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "8 x 12",
+      "x_pt": 215.4,
+      "y_pt": 427.46,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,59",
+      "x_pt": 459.35,
+      "y_pt": 429.18,
+      "corpo_pt": 1.5,
+      "angulo_graus": 11.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "96,00 m²",
+      "x_pt": 216.29,
+      "y_pt": 429.9,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "13,00",
+      "x_pt": 390.3,
+      "y_pt": 430.6,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,50",
+      "x_pt": 312.04,
+      "y_pt": 433.5,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,30",
+      "x_pt": 469.97,
+      "y_pt": 436.7,
+      "corpo_pt": 1.5,
+      "angulo_graus": 104.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,50",
+      "x_pt": 302.85,
+      "y_pt": 436.82,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-71",
+      "x_pt": 461.21,
+      "y_pt": 436.95,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-67",
+      "x_pt": 393.28,
+      "y_pt": 438.76,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "9,30",
+      "x_pt": 451.47,
+      "y_pt": 439.37,
+      "corpo_pt": 1.5,
+      "angulo_graus": 104.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "106,45 m²",
+      "x_pt": 461.19,
+      "y_pt": 439.53,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "156,00 m²",
+      "x_pt": 394.22,
+      "y_pt": 441.19,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-55",
+      "x_pt": 313.27,
+      "y_pt": 441.63,
+      "corpo_pt": 3.0,
+      "angulo_graus": -68.7,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "94,00 m²",
+      "x_pt": 346.78,
+      "y_pt": 441.82,
+      "corpo_pt": 2.0,
+      "angulo_graus": -68.8,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 383.54,
+      "y_pt": 443.85,
+      "corpo_pt": 1.5,
+      "angulo_graus": 110.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "15,00",
+      "x_pt": 320.47,
+      "y_pt": 443.92,
+      "corpo_pt": 1.5,
+      "angulo_graus": -71.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,30",
+      "x_pt": 462.5,
+      "y_pt": 445.45,
+      "corpo_pt": 1.5,
+      "angulo_graus": 11.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "82,50 m²",
+      "x_pt": 315.36,
+      "y_pt": 445.73,
+      "corpo_pt": 2.0,
+      "angulo_graus": -68.8,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "82,50 m²",
+      "x_pt": 306.14,
+      "y_pt": 449.08,
+      "corpo_pt": 2.0,
+      "angulo_graus": -68.8,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "15,00",
+      "x_pt": 303.69,
+      "y_pt": 449.99,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "13,00",
+      "x_pt": 397.78,
+      "y_pt": 450.63,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,90",
+      "x_pt": 292.73,
+      "y_pt": 451.02,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-54",
+      "x_pt": 313.02,
+      "y_pt": 451.44,
+      "corpo_pt": 3.0,
+      "angulo_graus": -68.7,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-53",
+      "x_pt": 284.74,
+      "y_pt": 452.39,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "9,30",
+      "x_pt": 473.12,
+      "y_pt": 452.97,
+      "corpo_pt": 1.5,
+      "angulo_graus": 104.0,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-70",
+      "x_pt": 465.06,
+      "y_pt": 453.09,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "113,05 m²",
+      "x_pt": 285.69,
+      "y_pt": 454.84,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "101,31 m²",
+      "x_pt": 465.08,
+      "y_pt": 455.64,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10 x 12",
+      "x_pt": 192.77,
+      "y_pt": 455.75,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,34",
+      "x_pt": 455.81,
+      "y_pt": 456.46,
+      "corpo_pt": 1.5,
+      "angulo_graus": 107.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 301.15,
+      "y_pt": 456.85,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 122.51,
+      "y_pt": 457.91,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "120,00 m²",
+      "x_pt": 193.67,
+      "y_pt": 458.19,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-52",
+      "x_pt": 267.99,
+      "y_pt": 458.47,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-66",
+      "x_pt": 400.76,
+      "y_pt": 458.79,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "124,95 m²",
+      "x_pt": 268.93,
+      "y_pt": 460.92,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "156,00 m²",
+      "x_pt": 401.7,
+      "y_pt": 461.22,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,48",
+      "x_pt": 466.61,
+      "y_pt": 461.51,
+      "corpo_pt": 1.5,
+      "angulo_graus": 11.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,90",
+      "x_pt": 260.86,
+      "y_pt": 462.5,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 288.64,
+      "y_pt": 462.67,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,00",
+      "x_pt": 317.45,
+      "y_pt": 462.73,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 391.02,
+      "y_pt": 463.89,
+      "corpo_pt": 1.5,
+      "angulo_graus": 110.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-56",
+      "x_pt": 319.82,
+      "y_pt": 464.79,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "55,00 m²",
+      "x_pt": 320.8,
+      "y_pt": 467.24,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "104,00 m²",
+      "x_pt": 357.56,
+      "y_pt": 468.44,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 271.88,
+      "y_pt": 468.74,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-69",
+      "x_pt": 469.17,
+      "y_pt": 469.14,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "9,30",
+      "x_pt": 476.58,
+      "y_pt": 469.16,
+      "corpo_pt": 1.5,
+      "angulo_graus": 103.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 310.64,
+      "y_pt": 469.24,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-01",
+      "x_pt": 243.01,
+      "y_pt": 469.28,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 243.95,
+      "y_pt": 471.72,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "94,09 m²",
+      "x_pt": 469.17,
+      "y_pt": 471.73,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 300.26,
+      "y_pt": 471.88,
+      "corpo_pt": 1.5,
+      "angulo_graus": -71.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,29",
+      "x_pt": 460.46,
+      "y_pt": 472.06,
+      "corpo_pt": 1.5,
+      "angulo_graus": 106.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 258.66,
+      "y_pt": 472.46,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 236.29,
+      "y_pt": 473.16,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-51",
+      "x_pt": 292.32,
+      "y_pt": 473.27,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-57",
+      "x_pt": 319.62,
+      "y_pt": 473.7,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 149.96,
+      "y_pt": 474.14,
+      "corpo_pt": 2.0,
+      "angulo_graus": 18.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "95,00 m²",
+      "x_pt": 293.21,
+      "y_pt": 475.71,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "55,00 m²",
+      "x_pt": 320.55,
+      "y_pt": 476.12,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,75",
+      "x_pt": 470.79,
+      "y_pt": 477.54,
+      "corpo_pt": 1.5,
+      "angulo_graus": 12.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 313.64,
+      "y_pt": 477.66,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,00",
+      "x_pt": 322.96,
+      "y_pt": 477.91,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 246.29,
+      "y_pt": 477.97,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-65",
+      "x_pt": 407.41,
+      "y_pt": 479.09,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-50",
+      "x_pt": 275.57,
+      "y_pt": 479.35,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "144,00 m²",
+      "x_pt": 408.34,
+      "y_pt": 481.52,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "105,00 m²",
+      "x_pt": 276.5,
+      "y_pt": 481.78,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 295.58,
+      "y_pt": 481.95,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 203.97,
+      "y_pt": 482.04,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 268.39,
+      "y_pt": 483.37,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 398.54,
+      "y_pt": 483.92,
+      "corpo_pt": 1.5,
+      "angulo_graus": 110.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 204.83,
+      "y_pt": 484.48,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "131,30 m²",
+      "x_pt": 363.82,
+      "y_pt": 485.72,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 278.82,
+      "y_pt": 488.02,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-58",
+      "x_pt": 326.7,
+      "y_pt": 488.54,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-02",
+      "x_pt": 249.98,
+      "y_pt": 488.58,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "110,00 m²",
+      "x_pt": 327.64,
+      "y_pt": 490.97,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 250.91,
+      "y_pt": 491.01,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 411.91,
+      "y_pt": 491.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 307.22,
+      "y_pt": 491.17,
+      "corpo_pt": 1.5,
+      "angulo_graus": -71.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 243.25,
+      "y_pt": 492.45,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-49",
+      "x_pt": 299.28,
+      "y_pt": 492.56,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 319.09,
+      "y_pt": 492.73,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "95,00 m²",
+      "x_pt": 300.22,
+      "y_pt": 494.97,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "11,00",
+      "x_pt": 329.96,
+      "y_pt": 497.21,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 253.27,
+      "y_pt": 497.25,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-48",
+      "x_pt": 282.52,
+      "y_pt": 498.6,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-64",
+      "x_pt": 414.89,
+      "y_pt": 499.12,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "105,00 m²",
+      "x_pt": 283.46,
+      "y_pt": 501.03,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 302.55,
+      "y_pt": 501.26,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "144,00 m²",
+      "x_pt": 415.83,
+      "y_pt": 501.55,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 275.36,
+      "y_pt": 502.65,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 406.01,
+      "y_pt": 503.97,
+      "corpo_pt": 1.5,
+      "angulo_graus": 111.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 285.79,
+      "y_pt": 507.28,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-59",
+      "x_pt": 333.66,
+      "y_pt": 507.78,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-03",
+      "x_pt": 256.97,
+      "y_pt": 507.83,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 211.37,
+      "y_pt": 508.85,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "110,00 m²",
+      "x_pt": 334.59,
+      "y_pt": 510.2,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 257.91,
+      "y_pt": 510.26,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 314.21,
+      "y_pt": 510.38,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 212.22,
+      "y_pt": 511.3,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 250.19,
+      "y_pt": 511.72,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-47",
+      "x_pt": 306.23,
+      "y_pt": 511.81,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 326.09,
+      "y_pt": 511.98,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "720,00 m²",
+      "x_pt": 125.65,
+      "y_pt": 512.52,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "224,00 m²",
+      "x_pt": 370.11,
+      "y_pt": 512.98,
+      "corpo_pt": 2.0,
+      "angulo_graus": -68.8,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "95,00 m²",
+      "x_pt": 307.18,
+      "y_pt": 514.26,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 321.27,
+      "y_pt": 515.08,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,00",
+      "x_pt": 336.91,
+      "y_pt": 516.45,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 260.25,
+      "y_pt": 516.51,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-46",
+      "x_pt": 289.48,
+      "y_pt": 517.85,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-63",
+      "x_pt": 419.88,
+      "y_pt": 520.08,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "105,00 m²",
+      "x_pt": 290.41,
+      "y_pt": 520.28,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 309.49,
+      "y_pt": 520.49,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 282.31,
+      "y_pt": 521.89,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "108,00 m²",
+      "x_pt": 420.81,
+      "y_pt": 522.51,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "12,00",
+      "x_pt": 413.49,
+      "y_pt": 523.97,
+      "corpo_pt": 1.5,
+      "angulo_graus": 111.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 292.72,
+      "y_pt": 526.54,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-04",
+      "x_pt": 263.93,
+      "y_pt": 527.12,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 264.87,
+      "y_pt": 529.55,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 278.84,
+      "y_pt": 529.65,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,00",
+      "x_pt": 423.84,
+      "y_pt": 530.38,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 257.19,
+      "y_pt": 531.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-60",
+      "x_pt": 342.67,
+      "y_pt": 532.76,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "110,00 m²",
+      "x_pt": 343.61,
+      "y_pt": 535.19,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 267.19,
+      "y_pt": 535.79,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 335.1,
+      "y_pt": 536.96,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 325.1,
+      "y_pt": 540.56,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,00",
+      "x_pt": 345.93,
+      "y_pt": 541.43,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-62",
+      "x_pt": 380.81,
+      "y_pt": 541.82,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-45",
+      "x_pt": 317.12,
+      "y_pt": 541.99,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "128,00 m²",
+      "x_pt": 381.75,
+      "y_pt": 544.25,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "95,00 m²",
+      "x_pt": 318.07,
+      "y_pt": 544.41,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-05",
+      "x_pt": 270.89,
+      "y_pt": 546.37,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 371.73,
+      "y_pt": 546.57,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-44",
+      "x_pt": 300.37,
+      "y_pt": 548.03,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 271.82,
+      "y_pt": 548.8,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 264.14,
+      "y_pt": 550.26,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "12,80",
+      "x_pt": 384.16,
+      "y_pt": 550.44,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "105,00 m²",
+      "x_pt": 301.3,
+      "y_pt": 550.46,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 320.4,
+      "y_pt": 550.69,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "720,00 m²",
+      "x_pt": 138.75,
+      "y_pt": 551.39,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-61",
+      "x_pt": 349.61,
+      "y_pt": 552.0,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 293.21,
+      "y_pt": 552.08,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "110,00 m²",
+      "x_pt": 350.56,
+      "y_pt": 554.44,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 274.15,
+      "y_pt": 555.04,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "EDIFICAÇÕES",
+      "x_pt": 938.7,
+      "y_pt": 555.78,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 342.07,
+      "y_pt": 556.19,
+      "corpo_pt": 1.5,
+      "angulo_graus": -68.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 303.64,
+      "y_pt": 556.71,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 332.05,
+      "y_pt": 559.81,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "11,00",
+      "x_pt": 352.9,
+      "y_pt": 560.69,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-43",
+      "x_pt": 324.08,
+      "y_pt": 561.24,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "A-36",
+      "x_pt": 440.7,
+      "y_pt": 561.93,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "95,00 m²",
+      "x_pt": 325.02,
+      "y_pt": 563.68,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 440.69,
+      "y_pt": 564.51,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-06",
+      "x_pt": 277.84,
+      "y_pt": 565.66,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-42",
+      "x_pt": 307.32,
+      "y_pt": 567.32,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 278.77,
+      "y_pt": 568.08,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 271.1,
+      "y_pt": 569.55,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "105,00 m²",
+      "x_pt": 308.26,
+      "y_pt": 569.75,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 327.34,
+      "y_pt": 569.92,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 300.15,
+      "y_pt": 571.34,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-37",
+      "x_pt": 445.03,
+      "y_pt": 574.17,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 281.1,
+      "y_pt": 574.32,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 310.58,
+      "y_pt": 575.99,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "ALIMENTAÇÃO E BEBIDAS",
+      "x_pt": 955.2,
+      "y_pt": 576.47,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 338.06,
+      "y_pt": 576.6,
+      "corpo_pt": 1.5,
+      "angulo_graus": -71.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 445.02,
+      "y_pt": 576.76,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-41",
+      "x_pt": 330.16,
+      "y_pt": 577.99,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "95,00 m²",
+      "x_pt": 331.05,
+      "y_pt": 580.43,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-35",
+      "x_pt": 398.93,
+      "y_pt": 580.82,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5,00",
+      "x_pt": 298.31,
+      "y_pt": 582.79,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 398.96,
+      "y_pt": 583.41,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-07",
+      "x_pt": 284.36,
+      "y_pt": 583.42,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-40",
+      "x_pt": 313.4,
+      "y_pt": 584.07,
+      "corpo_pt": 3.0,
+      "angulo_graus": 21.0,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 285.29,
+      "y_pt": 585.85,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "A-38",
+      "x_pt": 449.32,
+      "y_pt": 586.38,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "105,00 m²",
+      "x_pt": 314.34,
+      "y_pt": 586.51,
+      "corpo_pt": 2.0,
+      "angulo_graus": 21.4,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "9,50",
+      "x_pt": 333.42,
+      "y_pt": 586.67,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 277.62,
+      "y_pt": 587.35,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 306.23,
+      "y_pt": 588.09,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 449.35,
+      "y_pt": 588.97,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "720,00 m²",
+      "x_pt": 151.41,
+      "y_pt": 590.34,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 287.62,
+      "y_pt": 592.09,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,50",
+      "x_pt": 316.66,
+      "y_pt": 592.74,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "GALPÃO DO PRODUTOR",
+      "x_pt": 952.88,
+      "y_pt": 593.86,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "A-39",
+      "x_pt": 453.65,
+      "y_pt": 598.63,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "CAFÉ COLONIAL E COZINHA",
+      "x_pt": 957.97,
+      "y_pt": 600.15,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "C-11",
+      "x_pt": 290.38,
+      "y_pt": 600.17,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 453.64,
+      "y_pt": 601.21,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 291.24,
+      "y_pt": 602.6,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 283.53,
+      "y_pt": 604.02,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-10",
+      "x_pt": 273.58,
+      "y_pt": 606.12,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 274.45,
+      "y_pt": 608.51,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 293.58,
+      "y_pt": 608.9,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-39",
+      "x_pt": 369.38,
+      "y_pt": 609.84,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 266.73,
+      "y_pt": 609.97,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-40",
+      "x_pt": 457.98,
+      "y_pt": 610.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-09",
+      "x_pt": 256.78,
+      "y_pt": 612.07,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 370.29,
+      "y_pt": 612.31,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 457.96,
+      "y_pt": 613.42,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 362.48,
+      "y_pt": 613.85,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 257.67,
+      "y_pt": 614.49,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 276.77,
+      "y_pt": 614.83,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 249.93,
+      "y_pt": 615.92,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "VEÍCULOS E MOTOS NAUTICAS",
+      "x_pt": 963.86,
+      "y_pt": 617.81,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "C-08",
+      "x_pt": 239.98,
+      "y_pt": 618.02,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 372.55,
+      "y_pt": 618.76,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-26",
+      "x_pt": 344.18,
+      "y_pt": 618.77,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 240.87,
+      "y_pt": 620.44,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 259.97,
+      "y_pt": 620.78,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 345.09,
+      "y_pt": 621.24,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 337.26,
+      "y_pt": 622.8,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "A-41",
+      "x_pt": 462.27,
+      "y_pt": 623.12,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "C-25",
+      "x_pt": 327.38,
+      "y_pt": 624.72,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 462.26,
+      "y_pt": 625.71,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "C-38",
+      "x_pt": 375.33,
+      "y_pt": 626.64,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 243.16,
+      "y_pt": 626.72,
+      "corpo_pt": 1.5,
+      "angulo_graus": 21.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 328.3,
+      "y_pt": 627.19,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 347.4,
+      "y_pt": 627.68,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 320.47,
+      "y_pt": 628.75,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 376.2,
+      "y_pt": 629.12,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "720,00 m²",
+      "x_pt": 163.86,
+      "y_pt": 629.22,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 368.43,
+      "y_pt": 630.65,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 330.6,
+      "y_pt": 633.63,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-12",
+      "x_pt": 302.23,
+      "y_pt": 633.68,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 378.5,
+      "y_pt": 635.55,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-27",
+      "x_pt": 350.13,
+      "y_pt": 635.56,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 303.1,
+      "y_pt": 636.11,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 295.27,
+      "y_pt": 637.68,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 351.04,
+      "y_pt": 638.03,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "COOPERATIVAS",
+      "x_pt": 943.35,
+      "y_pt": 638.5,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 343.23,
+      "y_pt": 639.58,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-24",
+      "x_pt": 333.38,
+      "y_pt": 641.56,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 305.4,
+      "y_pt": 642.55,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-37",
+      "x_pt": 381.27,
+      "y_pt": 643.44,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 334.25,
+      "y_pt": 643.98,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 353.3,
+      "y_pt": 644.48,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 326.42,
+      "y_pt": 645.55,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 382.15,
+      "y_pt": 645.92,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 374.36,
+      "y_pt": 647.48,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 336.51,
+      "y_pt": 650.43,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-13",
+      "x_pt": 308.18,
+      "y_pt": 650.48,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 384.45,
+      "y_pt": 652.35,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-28",
+      "x_pt": 356.13,
+      "y_pt": 652.4,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 309.05,
+      "y_pt": 652.86,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 301.22,
+      "y_pt": 654.47,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 356.96,
+      "y_pt": 654.84,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 349.18,
+      "y_pt": 656.38,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-23",
+      "x_pt": 339.33,
+      "y_pt": 658.35,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "MAQUINAS E EQUIPAMENTOS AGRICULAS",
+      "x_pt": 978.81,
+      "y_pt": 659.15,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 311.34,
+      "y_pt": 659.34,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-36",
+      "x_pt": 387.22,
+      "y_pt": 660.24,
+      "corpo_pt": 3.0,
+      "angulo_graus": 20.9,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 340.19,
+      "y_pt": 660.78,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 359.25,
+      "y_pt": 661.28,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 332.38,
+      "y_pt": 662.33,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 388.1,
+      "y_pt": 662.72,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 380.31,
+      "y_pt": 664.27,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "200,00 m²",
+      "x_pt": 261.61,
+      "y_pt": 666.08,
+      "corpo_pt": 2.0,
+      "angulo_graus": -69.1,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 342.46,
+      "y_pt": 667.23,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-14",
+      "x_pt": 314.13,
+      "y_pt": 667.28,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "720,00 m²",
+      "x_pt": 177.27,
+      "y_pt": 668.16,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 390.4,
+      "y_pt": 669.15,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-29",
+      "x_pt": 362.07,
+      "y_pt": 669.2,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 315.02,
+      "y_pt": 669.7,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "20 x 10",
+      "x_pt": 266.51,
+      "y_pt": 670.78,
+      "corpo_pt": 3.0,
+      "angulo_graus": -69.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 307.17,
+      "y_pt": 671.27,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 362.91,
+      "y_pt": 671.64,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 355.11,
+      "y_pt": 673.2,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-22",
+      "x_pt": 345.28,
+      "y_pt": 675.15,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 317.29,
+      "y_pt": 676.13,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-35",
+      "x_pt": 393.22,
+      "y_pt": 677.08,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 346.11,
+      "y_pt": 677.55,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 365.2,
+      "y_pt": 678.07,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 338.33,
+      "y_pt": 679.13,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 394.04,
+      "y_pt": 679.5,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "AVICULTURA",
+      "x_pt": 939.04,
+      "y_pt": 679.84,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 386.26,
+      "y_pt": 681.07,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 348.39,
+      "y_pt": 684.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-15",
+      "x_pt": 320.08,
+      "y_pt": 684.08,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 396.35,
+      "y_pt": 685.95,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-30",
+      "x_pt": 368.02,
+      "y_pt": 686.0,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 320.97,
+      "y_pt": 686.49,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 313.14,
+      "y_pt": 688.01,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 368.85,
+      "y_pt": 688.39,
+      "corpo_pt": 2.0,
+      "angulo_graus": 20.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 361.06,
+      "y_pt": 690.0,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-21",
+      "x_pt": 351.23,
+      "y_pt": 691.95,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 323.19,
+      "y_pt": 692.93,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-34",
+      "x_pt": 399.17,
+      "y_pt": 693.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 352.06,
+      "y_pt": 694.36,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 371.14,
+      "y_pt": 694.86,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 344.27,
+      "y_pt": 695.94,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 399.99,
+      "y_pt": 696.3,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 392.21,
+      "y_pt": 697.87,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "AGRICULTURA",
+      "x_pt": 941.35,
+      "y_pt": 700.53,
+      "corpo_pt": 5.6,
+      "angulo_graus": -0.0,
+      "motivo": "legenda"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 354.34,
+      "y_pt": 700.81,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-16",
+      "x_pt": 326.03,
+      "y_pt": 700.87,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 402.3,
+      "y_pt": 702.75,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-31",
+      "x_pt": 373.97,
+      "y_pt": 702.8,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 326.87,
+      "y_pt": 703.28,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "560,00 m²",
+      "x_pt": 196.97,
+      "y_pt": 704.63,
+      "corpo_pt": 3.7,
+      "angulo_graus": 18.0,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 319.09,
+      "y_pt": 704.8,
+      "corpo_pt": 1.5,
+      "angulo_graus": -69.2,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 374.82,
+      "y_pt": 705.22,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 367.01,
+      "y_pt": 706.79,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-20",
+      "x_pt": 357.18,
+      "y_pt": 708.75,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "5 x 5",
+      "x_pt": 227.91,
+      "y_pt": 709.29,
+      "corpo_pt": 3.0,
+      "angulo_graus": 18.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 329.16,
+      "y_pt": 709.75,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-33",
+      "x_pt": 405.07,
+      "y_pt": 710.67,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 358.01,
+      "y_pt": 711.15,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 377.09,
+      "y_pt": 711.65,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "25,00 m²",
+      "x_pt": 228.7,
+      "y_pt": 711.75,
+      "corpo_pt": 2.0,
+      "angulo_graus": 18.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 350.21,
+      "y_pt": 712.7,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 405.94,
+      "y_pt": 713.06,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 398.16,
+      "y_pt": 714.67,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 360.29,
+      "y_pt": 717.6,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-17",
+      "x_pt": 331.98,
+      "y_pt": 717.63,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 408.23,
+      "y_pt": 719.53,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-32",
+      "x_pt": 379.92,
+      "y_pt": 719.6,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 332.82,
+      "y_pt": 720.08,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 325.02,
+      "y_pt": 721.62,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 380.77,
+      "y_pt": 722.02,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 372.96,
+      "y_pt": 723.55,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-19",
+      "x_pt": 363.12,
+      "y_pt": 725.55,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 335.11,
+      "y_pt": 726.54,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 363.97,
+      "y_pt": 727.96,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 383.03,
+      "y_pt": 728.45,
+      "corpo_pt": 1.5,
+      "angulo_graus": 20.6,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 356.16,
+      "y_pt": 729.5,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 366.25,
+      "y_pt": 734.42,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "C-18",
+      "x_pt": 337.93,
+      "y_pt": 734.43,
+      "corpo_pt": 3.0,
+      "angulo_graus": 19.8,
+      "motivo": "codigo_estande"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 338.76,
+      "y_pt": 736.88,
+      "corpo_pt": 2.0,
+      "angulo_graus": 19.7,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 330.97,
+      "y_pt": 738.42,
+      "corpo_pt": 1.5,
+      "angulo_graus": -70.1,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10,00",
+      "x_pt": 341.06,
+      "y_pt": 743.34,
+      "corpo_pt": 1.5,
+      "angulo_graus": 19.9,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "10 x 10",
+      "x_pt": 243.4,
+      "y_pt": 744.37,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "100,00 m²",
+      "x_pt": 243.43,
+      "y_pt": 746.97,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "3 x 3",
+      "x_pt": 312.27,
+      "y_pt": 750.64,
+      "corpo_pt": 3.0,
+      "angulo_graus": 0.4,
+      "motivo": "cota_dimensao"
+    },
+    {
+      "texto_no_mapa": "9,00 m²",
+      "x_pt": 312.27,
+      "y_pt": 753.22,
+      "corpo_pt": 2.0,
+      "angulo_graus": 0.3,
+      "motivo": "cota_area"
+    },
+    {
+      "texto_no_mapa": "FEIRA AGROSHOW 2026",
+      "x_pt": 964.57,
+      "y_pt": 801.17,
+      "corpo_pt": 14.4,
+      "angulo_graus": -0.0,
+      "motivo": "carimbo"
+    },
+    {
+      "texto_no_mapa": "N",
+      "x_pt": 778.04,
+      "y_pt": 528.33,
+      "corpo_pt": 10.0,
+      "angulo_graus": 11.9,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "NE",
+      "x_pt": 805.22,
+      "y_pt": 540.23,
+      "corpo_pt": 6.8,
+      "angulo_graus": 11.8,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "NO",
+      "x_pt": 763.82,
+      "y_pt": 547.92,
+      "corpo_pt": 6.8,
+      "angulo_graus": 11.8,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "E",
+      "x_pt": 821.3,
+      "y_pt": 557.39,
+      "corpo_pt": 10.0,
+      "angulo_graus": 11.9,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "0",
+      "x_pt": 749.66,
+      "y_pt": 572.36,
+      "corpo_pt": 10.0,
+      "angulo_graus": 11.9,
+      "motivo": "numero_solto"
+    },
+    {
+      "texto_no_mapa": "SE",
+      "x_pt": 811.34,
+      "y_pt": 578.29,
+      "corpo_pt": 6.8,
+      "angulo_graus": 11.8,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "SO",
+      "x_pt": 766.72,
+      "y_pt": 588.85,
+      "corpo_pt": 6.8,
+      "angulo_graus": 11.8,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "S",
+      "x_pt": 792.95,
+      "y_pt": 601.58,
+      "corpo_pt": 10.0,
+      "angulo_graus": 12.1,
+      "motivo": "bussola"
+    },
+    {
+      "texto_no_mapa": "2",
+      "x_pt": 534.63,
+      "y_pt": 164.83,
+      "corpo_pt": 5.5,
+      "angulo_graus": -0.0,
+      "motivo": "numero_solto"
+    },
+    {
+      "texto_no_mapa": "1",
+      "x_pt": 746.26,
+      "y_pt": 171.66,
+      "corpo_pt": 5.5,
+      "angulo_graus": -0.0,
+      "motivo": "numero_solto"
+    }
+  ]
+}
