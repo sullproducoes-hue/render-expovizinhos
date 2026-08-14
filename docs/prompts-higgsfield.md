@@ -11,18 +11,26 @@ Gere a imagem primeiro, aprove o quadro, só então anime.
 
 ## Regras de operação
 
-### Proporção — não gere em 16:9
+### Proporção — 16:9 gerado, 2:1 entregue
 
-A entrega é **2:1** (painel LED P2,9, 1379 × 690, master 2760 × 1380).
+A entrega é **2:1** (painel LED P2,9, 1379 × 690, master 2760 × 1380). O
+Higgsfield gera em **16:9**, tanto imagem quanto vídeo. Então o corte é
+inevitável: 16:9 é 1,78, 2:1 é 2,00.
 
-Gere em **21:9** e corte as laterais até 2:1. O 21:9 é 2,33 — cortando só as
-laterais você mantém a altura inteira. Se gerar em 16:9 (1,78) você é obrigado a
-cortar topo e base, e perde 11% da altura do quadro, que é justamente onde estão
-céu e horizonte nestes planos.
+**Gere em 16:9 e corte topo e base.** Você perde 11% da altura — 1080 vira 960.
+Isso muda como compor:
 
-Componha sempre o assunto no **centro**, com folga nas laterais. Nada importante
-a menos de 8% da borda — além do corte do 21:9 ainda existe a área de segurança
-de 90% do telão.
+- **Assunto no centro vertical.** Nada essencial no primeiro nem no último 12% da
+  altura. Céu alto e chão em primeiro plano são as duas primeiras coisas que o
+  corte come, e nesses planos é justamente onde ficam horizonte e piso.
+- **Linha do horizonte perto do meio.** Horizonte muito alto ou muito baixo
+  desmancha quando você fecha para 2:1.
+- **Folga lateral também**, por causa da área de segurança de 90% do telão. Nada
+  crítico a menos de 8% de qualquer borda.
+
+Resolução não é problema: 1080p em 16:9, cortado para 2:1, dá 1920 × 960 — e o
+painel tem 1379 de largura. Sobra pixel. Deixe a timeline em 2760 × 1380 e escale
+o material dentro dela; o processador de LED faz o downscale final.
 
 ### LOOK LOCK — cola em todo prompt
 
@@ -682,14 +690,16 @@ segura muito melhor que multidão gesticulando. É por isso que o bloco 17 é o
 clipe mais arriscado da pauta — o touro em movimento é justamente o que quebra.
 Se houver footage real de rodeio, use o real ali.
 
-## Proporção no vídeo — diferente da imagem
+## Proporção: 16:9 do começo ao fim
 
-Na imagem, gere 21:9 e corte as laterais. **No vídeo, gere 16:9** — normalmente
-é só o que os modelos de movimento oferecem. Confira o que sua conta libera.
+Imagem e vídeo saem os dois em 16:9, e os dois vão ser cortados para 2:1 na
+edição. A regra de composição está no topo deste arquivo e vale para todo
+quadro: assunto no centro vertical, horizonte perto do meio, nada essencial nos
+12% de cima nem nos 12% de baixo.
 
-Não se preocupe com resolução: 16:9 em 1080p, cortado para 2:1, dá 1920 × 960, e
-o painel tem 1379 de largura. Sobra pixel. Deixe a timeline em 2760 × 1380 e
-escale o clipe dentro dela — o processador de LED faz o downscale final.
+O erro caro aqui é aprovar o still olhando o 16:9 cheio. **Olhe já cortado.**
+Ponha uma máscara 2:1 por cima na hora de escolher — o que você aprova é o que
+vai ao telão, não o que o Higgsfield mostra.
 
 ## O que nunca fazer
 
@@ -708,7 +718,8 @@ escale o clipe dentro dela — o processador de LED faz o downscale final.
 
 # Checklist antes de animar cada quadro
 
-- [ ] Está em 21:9 e corta limpo para 2:1 sem perder o assunto?
+- [ ] Com máscara 2:1 por cima, o quadro continua de pé? (o corte come 11% da
+      altura — 12% de cima e de baixo do 16:9 não existem no telão)
 - [ ] O assunto está no centro, com nada crítico a menos de 8% da borda?
 - [ ] A luz bate com o LOOK LOCK (fim de tarde), exceto o bloco 18?
 - [ ] O público parece brasileiro do interior, não figurante americano?

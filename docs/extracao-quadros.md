@@ -54,11 +54,28 @@ Um número só vale para todos os vídeos; vários, um por vídeo, na mesma orde
 
 | Opção | Efeito |
 |---|---|
-| `--saida PASTA` | Onde gravar. Padrão: `extracao` |
+| `--saida PASTA` | Onde gravar os quadros. Padrão: `extracao` |
+| `--folhas PASTA` | Folhas de contato em outro lugar — inclusive outro HD |
 | `--png` | PNG em vez de JPEG. Arquivo grande, sem perda |
 | `--qualidade N` | Qualidade JPEG, 2 = melhor (padrão), 31 = pior |
 | `--nitidez` | Testa 3 instantes por quadro e guarda o menos borrado |
 | `--sem-folhas` | Só os quadros, sem folha de contato |
+| `--sem-pausa` | Não espera Enter no final (para rodar dentro de outro script) |
+
+### Folhas em outro HD
+
+```bash
+python scripts/extrair_quadros.py --pasta "E:/AGROSHOW/footage" ^
+    --saida "E:/AGROSHOW/extracao" --folhas "D:/AGROSHOW/folhas"
+```
+
+Os quadros ficam no `--saida`, as folhas vão para o `--folhas`, cada vídeo na sua
+subpasta com o nome dele. O `INDICE.md` fica junto dos quadros e registra os dois
+caminhos completos, então você acha as folhas depois mesmo tendo separado.
+
+As duas pastas são criadas **antes** de começar a extrair. Se o HD das folhas não
+estiver conectado, o script para na hora com a mensagem — não depois de meia hora
+extraindo.
 
 ### Sobre `--nitidez`
 
@@ -92,6 +109,25 @@ o nome te diz o minuto exato para voltar no vídeo e cortar o trecho na edição
 Os quadros são distribuídos por igual ao longo do vídeo, com uma folga de 2% nas
 pontas — fade de entrada e de saída costumam ser preto, e não vale gastar quadro
 com eles.
+
+## Se a janela fechar sozinha
+
+O console do Windows fecha assim que o script termina — inclusive quando termina
+com erro. Por isso o script agora **espera Enter no final**, dê certo ou dê
+errado. Se aparecer um traceback, ele fica na tela para você copiar.
+
+Se mesmo assim fechar rápido demais, abra o Prompt de Comando e rode de lá em vez
+de dois cliques:
+
+```
+cd /d E:\AGROSHOW
+python caminho\para\extrair_quadros.py --pasta "E:\AGROSHOW\footage"
+```
+
+Erro de ffmpeg em quadro individual também não é mais silencioso: o script conta
+quantos falharam e mostra o que o ffmpeg reclamou. Se os três primeiros falharem
+seguidos, ele para em vez de tentar as outras dezenas à toa — quase sempre é
+codec sem suporte, arquivo corrompido ou caminho de rede que caiu.
 
 ## Para que serve o INDICE.md
 

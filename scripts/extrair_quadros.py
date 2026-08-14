@@ -176,14 +176,20 @@ def marcas(dur: float, n: int) -> list[float]:
     return [margem + util * i / (n - 1) for i in range(n)]
 
 
-def extrair_quadro(video: Path, t: float, destino: Path, qualidade: int) -> bool:
+def extrair_quadro(video: Path, t: float, destino: Path, qualidade: int):
+    """Devolve (deu_certo, mensagem_de_erro_do_ffmpeg)."""
     cmd = ["ffmpeg", "-nostdin", "-v", "error", "-y", "-ss", f"{t:.3f}",
            "-i", str(video), "-frames:v", "1"]
     if destino.suffix.lower() in (".jpg", ".jpeg"):
         cmd += ["-q:v", str(qualidade)]
     cmd.append(str(destino))
-    subprocess.run(cmd, capture_output=True)
-    return destino.exists() and destino.stat().st_size > 0
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, errors="replace")
+    except OSError as e:
+        return False, str(e)
+    if destino.exists() and destino.stat().st_size > 0:
+        return True, ""
+    return False, (r.stderr or "").strip() or "ffmpeg nao gravou o arquivo"
 
 
 def nitidez(caminho: Path):
@@ -216,11 +222,12 @@ def extrair_mais_nitido(video: Path, t: float, destino: Path, qualidade: int,
     candidatos = [t - JANELA_NITIDEZ, t, t + JANELA_NITIDEZ]
     candidatos = [max(0.0, min(c, max(dur - 0.1, 0.0))) for c in candidatos]
 
-    melhor_valor = None
+    melhor_valor, erro = None, ""
     with tempfile.TemporaryDirectory() as tmp:
         for i, c in enumerate(candidatos):
             provisorio = Path(tmp) / f"c{i}{destino.suffix}"
-            if not extrair_quadro(video, c, provisorio, qualidade):
+            ok, erro = extrair_quadro(video, c, provisorio, qualidade)
+            if not ok:
                 continue
             valor = nitidez(provisorio)
             if valor is None:  # sem Pillow/numpy — fica com o instante do meio
@@ -228,7 +235,9 @@ def extrair_mais_nitido(video: Path, t: float, destino: Path, qualidade: int,
             if melhor_valor is None or valor > melhor_valor:
                 melhor_valor = valor
                 shutil.copy(provisorio, destino)
-    return destino.exists() and destino.stat().st_size > 0
+    if destino.exists() and destino.stat().st_size > 0:
+        return True, ""
+    return False, erro
 
 
 def extrair_do_video(video: Path, quantidade: int, pasta_saida: Path,
@@ -241,19 +250,34 @@ def extrair_do_video(video: Path, quantidade: int, pasta_saida: Path,
     pasta_quadros = pasta_saida / "quadros"
     pasta_quadros.mkdir(parents=True, exist_ok=True)
 
-    resultados = []
+    resultados, falhas, primeiro_erro = [], 0, ""
     instantes = marcas(dur, quantidade)
     for i, t in enumerate(instantes, 1):
         destino = pasta_quadros / f"q{i:03d}_{tc(t)}{extensao}"
         if usar_nitidez:
-            ok = extrair_mais_nitido(video, t, destino, qualidade, dur)
+            ok, erro = extrair_mais_nitido(video, t, destino, qualidade, dur)
         else:
-            ok = extrair_quadro(video, t, destino, qualidade)
+            ok, erro = extrair_quadro(video, t, destino, qualidade)
         if ok:
             resultados.append((destino, t))
+        else:
+            falhas += 1
+            primeiro_erro = primeiro_erro or erro
+            if falhas == 3 and not resultados:
+                # Tres falhas seguidas logo de cara: nao adianta insistir nas
+                # outras dezenas. Mostra o que o ffmpeg reclamou e para.
+                break
         print(f"\r  {video.name}: {len(resultados)}/{quantidade} quadros",
               end="", flush=True)
     print()
+
+    if falhas:
+        print(f"  ! {falhas} quadro(s) falharam em {video.name}")
+        if primeiro_erro:
+            print(f"    ffmpeg disse: {primeiro_erro.splitlines()[0]}")
+        if not resultados:
+            print("    Nenhum quadro saiu. Codec sem suporte, arquivo corrompido")
+            print("    ou caminho inacessivel — confira abrindo o video no player.")
     return resultados
 
 
@@ -340,10 +364,9 @@ def folhas_com_ffmpeg(quadros, pasta_folhas: Path) -> int:
     return paginas
 
 
-def montar_folhas(quadros, pasta_saida: Path, titulo: str) -> int:
+def montar_folhas(quadros, pasta_folhas: Path, titulo: str) -> int:
     if not quadros:
         return 0
-    pasta_folhas = pasta_saida / "folhas"
     pasta_folhas.mkdir(parents=True, exist_ok=True)
     try:
         import PIL  # noqa: F401
@@ -366,15 +389,15 @@ def escrever_indice(saida: Path, relatorio):
         "aproveitavel, ele entra no lugar da imagem de IA.",
         "",
     ]
-    for video, dur, quadros, paginas in relatorio:
-        pasta = nome_limpo(video.stem)
+    for video, dur, quadros, paginas, pasta_quadros, pasta_folhas in relatorio:
         linhas += [
             f"## {video.name}",
             "",
             f"Duracao {tc_legivel(dur)} · {len(quadros)} quadros · "
             f"{paginas} folha(s) de contato",
             "",
-            f"`{pasta}/quadros/` · `{pasta}/folhas/`",
+            f"Quadros: `{pasta_quadros}`",
+            f"Folhas:  `{pasta_folhas}`",
             "",
             "| Quadro | Timecode | Bloco |",
             "|---|---|---|",
@@ -408,8 +431,13 @@ def main():
     p.add_argument("--nitidez", action="store_true",
                    help="testa 3 instantes por quadro e guarda o menos borrado "
                         "(3x mais lento, precisa de Pillow e numpy)")
+    p.add_argument("--folhas", type=Path,
+                   help="pasta das folhas de contato. Pode ser outro HD "
+                        "(ex: D:/AGROSHOW/folhas). Padrao: junto dos quadros")
     p.add_argument("--sem-folhas", action="store_true",
                    help="nao montar as folhas de contato")
+    p.add_argument("--sem-pausa", action="store_true",
+                   help="nao esperar Enter no final")
     args = p.parse_args()
 
     checar_ferramentas()
@@ -448,7 +476,17 @@ def main():
         quantidades = [perguntar_quantidade(v, duracoes[v]) for v in videos]
 
     extensao = ".png" if args.png else ".jpg"
-    args.saida.mkdir(parents=True, exist_ok=True)
+
+    # Cria as duas pastas ANTES de extrair. Descobrir que o HD das folhas nao
+    # esta montado depois de meia hora de extracao seria a pior hora possivel.
+    for rotulo, destino in (("--saida", args.saida), ("--folhas", args.folhas)):
+        if destino is None:
+            continue
+        try:
+            destino.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            sys.exit(f"Nao consegui criar {rotulo} em '{destino}': {e}\n"
+                     "Confira se o HD esta conectado e se o caminho existe.")
 
     if args.nitidez:
         try:
@@ -459,23 +497,65 @@ def main():
             print("  Seguindo sem a selecao de nitidez.\n")
             args.nitidez = False
 
-    print(f"\nExtraindo para {args.saida.resolve()}\n")
+    print(f"\nQuadros em  {args.saida.resolve()}")
+    if args.folhas:
+        print(f"Folhas em   {args.folhas.resolve()}")
+    print()
+
     relatorio = []
     for video, quantidade in zip(videos, quantidades):
-        pasta_video = args.saida / nome_limpo(video.stem)
+        nome = nome_limpo(video.stem)
+        pasta_video = args.saida / nome
+        pasta_folhas = (args.folhas / nome) if args.folhas else (pasta_video / "folhas")
+
         quadros = extrair_do_video(video, quantidade, pasta_video, extensao,
                                    args.qualidade, args.nitidez)
-        paginas = 0 if args.sem_folhas else montar_folhas(quadros, pasta_video,
+        paginas = 0 if args.sem_folhas else montar_folhas(quadros, pasta_folhas,
                                                           video.name)
-        relatorio.append((video, duracoes[video], quadros, paginas))
+        relatorio.append((video, duracoes[video], quadros, paginas,
+                          (pasta_video / "quadros").resolve(),
+                          pasta_folhas.resolve()))
 
     escrever_indice(args.saida, relatorio)
 
-    total = sum(len(q) for _, _, q, _ in relatorio)
-    folhas = sum(f for _, _, _, f in relatorio)
+    total = sum(len(r[2]) for r in relatorio)
+    folhas = sum(r[3] for r in relatorio)
     print(f"\nPronto. {total} quadros, {folhas} folha(s) de contato.")
     print(f"Indice em {(args.saida / 'INDICE.md').resolve()}")
 
 
+def pausar():
+    """Segura a janela aberta.
+
+    Quem roda com dois cliques no Windows perde o console assim que o script
+    termina — inclusive quando termina com erro. Sem isso, qualquer falha
+    'fecha sozinho' e nao sobra mensagem nenhuma para diagnosticar.
+    """
+    try:
+        if sys.stdin and sys.stdin.isatty():
+            input("\nEnter para fechar.")
+    except (EOFError, KeyboardInterrupt):
+        pass
+
+
 if __name__ == "__main__":
-    main()
+    quer_pausa = "--sem-pausa" not in sys.argv
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nInterrompido.")
+    except SystemExit as e:
+        if isinstance(e.code, str):
+            print(e.code)
+        if quer_pausa:
+            pausar()
+        raise SystemExit(1 if e.code not in (0, None) else 0)
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        print("\nDeu erro acima. Copie essa mensagem inteira se for pedir ajuda.")
+        if quer_pausa:
+            pausar()
+        raise SystemExit(1)
+    if quer_pausa:
+        pausar()
