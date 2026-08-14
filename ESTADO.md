@@ -1,7 +1,7 @@
 # ESTADO DO PROJETO — leia isto primeiro
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Atualizado em 12/08/2026.
+Atualizado em 14/08/2026.
 
 Este arquivo existe para retomar o trabalho em outra sessão sem perder contexto.
 Leia daqui e siga para os documentos citados.
@@ -136,17 +136,39 @@ Frases literais, não reescrever:
 
 ## Próximos passos, em ordem de valor
 
-1. **Câmera está baixa demais.** No quadro de conferência ela vê telhado de
-   estande. Suba `ALTURA_CAMERA` e aumente `INCLINACAO_CAM`, ou faça a altura
-   variar por trecho — aéreo nas transições, baixo nos pontos de interesse.
+1. **Câmera está baixa demais** — e agora existe o número certo, medido.
+   A telemetria dos 62 voos do próprio Natan neste recinto dá:
+   **altura mediana 24,0 m** (quartis 18,2 / 44,7; máxima 122,3) e
+   **gimbal pitch mediano −18,8°** (quartis −28,8 / −12,4).
+   Ele **quase não usa nadir**: 0,7% dos quadros abaixo de −80°, 51% acima de
+   −20°. A linguagem dele é percurso oblíquo baixo, não mapa visto de cima —
+   o que confirma a escolha do cliente pelo percurso 3D.
+   Ajuste `ALTURA_CAMERA` e `INCLINACAO_CAM` para esses valores medidos, e faça
+   variar por trecho. Dados em `_triagem\telemetria\camera-real.json`.
 2. **HDRI no lugar do céu procedural.** `construir_ceu()` hoje é uma cor chapada.
-   Um HDRI de fim de tarde do Poly Haven (CC0) muda o render inteiro.
-3. **Texturas PBR** em vez das cores base. Poly Haven e ambientCG, ambos CC0:
-   grama, lona, brita, telha metálica.
+   A **temperatura de cor medida** nos voos vai de 3318 K a 8061 K, mediana
+   5206 K. O footage sustenta bem dois momentos: sol duro de meio-dia com
+   cumulus, e golden hour de fim de tarde — e a maior parte do material bom de
+   material está no segundo. Ver a seção de luz no dossiê.
+3. **Texturas PBR** em vez das cores base — **as referências já estão
+   escolhidas**, com vídeo, timecode e quadro de prova em resolução nativa:
+   `docs/MATERIAIS-referencia.md`. Poly Haven e ambientCG, ambos CC0.
 4. **Vegetação e povoamento** com assets CC0 (Quaternius, Kenney, Poly Haven).
 5. **Portal, palco e camarotes** modelados — hoje só existem como caixa ou nem
-   isso. O portal é o primeiro e o último plano.
-6. Confirmar as alturas dos patamares com um quadro de drone.
+   isso. O portal é o primeiro e o último plano. **Os três têm referência
+   agora**, e vale saber de onde vem cada uma:
+   - **Portal:** não aparece em nenhuma das 173 folhas. A referência é a foto
+     que o cliente mandou, e ela estava solta fora do repositório —
+     `E:\Projetos todos\Mapa - agroshow\WhatsApp Image 2026-08-12 at 13.15.32.jpeg`.
+     É a foto que o `reference/PORTAL-referencia.md` descreve.
+   - **Palco:** vários, o melhor em `DJI_20251127184447_0110_D` 00:00:02 —
+     montado e vazio, com treliça, cobertura tensionada, telões e deck.
+   - **Camarotes:** `DJI_20251128224305_0163_D` 00:00:09 — deck elevado de
+     madeira, módulos separados por gradil branco de tubo, e **sem
+     arquibancada**, o que confirma a restrição 1 por imagem do próprio recinto.
+6. Confirmar as alturas dos patamares com um quadro de drone — **continua
+   aberto**, e a telemetria não resolve (ver o dossiê: o barômetro da DJI não
+   recalibra entre decolagens da mesma sessão).
 
 Feito em 13/08/2026: o agente `.claude/agents/render-agroshow.md` foi reescrito
 para o caminho 3D. Ele é **sistema próprio** — não responde ao Cláudio (o
@@ -159,10 +181,46 @@ decisão do Natan.
 
 | # | Pendência | Impacto |
 |---|---|---|
-| 1 | Footage de edições anteriores — prometido, não chegou | Alto — vira textura e referência |
-| 2 | Quadro de drone lateral da arena | Médio — trava as cotas dos patamares |
+| ~~1~~ | ~~Footage de edições anteriores~~ — **chegou em 13/08/2026** | Resolvida — ver abaixo |
+| 2 | Quadro de drone **lateral** da arena | Médio — trava as cotas dos patamares |
 | 3 | Medida real de qualquer estrutura | Médio — confirma a escala |
 | 4 | Identidade visual AGROSHOW 2026 em vetor | Médio — títulos e letreiros |
+
+A pendência 2 **continua aberta e ficou mais estreita**: das 173 folhas triadas,
+nenhuma traz perfil lateral da arena com elemento de cota conhecida. Os melhores
+candidatos (`DJI_20251126155259_0053_D` 00:02:11, `DJI_20251128150656_0136_D`
+00:00:15, `DJI_20251126120722_0045_D_stabilized` 00:00:00) provam que o degrau
+existe e que **não há arquibancada**, mas são oblíquos altos: dão a forma do
+talude, não a altura. O que falta é um voo lateral rasante, com o drone à altura
+do patamar intermediário.
+
+---
+
+## O footage chegou — 137 GB, 173 vídeos
+
+Em `E:\Projetos todos\Mapa - agroshow\Brutos Expo`. **Não está neste repositório
+e não deve entrar**: é material de cliente e o `origin` é público. O que sobe
+para cá é o dossiê e o caminho absoluto de cada prova.
+
+Triagem completa em 14/08/2026 — 173 folhas de contato, 10 quadros por vídeo com
+timecode gravado no quadro, mais a análise de todas elas por classe de material.
+As escolhas estão em **`docs/MATERIAIS-referencia.md`**.
+
+Ferramentas, em `E:\Projetos todos\Mapa - agroshow\Comandos\`:
+
+| script | o que faz |
+|---|---|
+| `extrair_quadros.py` | folhas de contato e passada densa (decode em CUDA, tonemap de HLG) |
+| `extrair_telemetria.py` | telemetria de voo dos streams `djmd` via exiftool |
+| `cotas_do_terreno.py` | tentativa de cotar os patamares pelo barômetro — **não funciona**, ver dossiê |
+| `camera_real.py` | altura de voo, gimbal e luz medidos dos 62 voos |
+| `extrair_provas.py` | rajadas em resolução nativa dos materiais escolhidos |
+
+**Registro de material sondado que não está no disco:** há 17 `.ffprobe.json` em
+`_triagem\metadados\` de arquivos `dji_fly_20260813_*` que não existem mais na
+pasta. Vieram de um zip que falhou na descompactação de 13/08 e foi apagado
+depois de extraído. Não é perda conhecida — é uma ausência que ninguém decidiu.
+Decisão do Natan.
 
 ---
 
