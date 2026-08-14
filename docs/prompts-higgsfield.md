@@ -597,6 +597,115 @@ O prazo não comporta gerar os 20 na mesma pressa. Esta é a fila por valor:
 
 ---
 
+# Como executar esta pauta no Higgsfield
+
+## Regra de ouro: still primeiro, sempre
+
+Não gere vídeo por texto. Para um lugar específico como o parque, text-to-video
+não tem controle nenhum: cada tentativa é cara, sai diferente da anterior e você
+não consegue repetir o acerto.
+
+O caminho é sempre o mesmo, bloco a bloco:
+
+```
+prompt → 4 stills → escolhe 1 → still vira start frame → clipe de 5s
+```
+
+O still é barato de refazer e o vídeo é caro. Toda decisão de conteúdo —
+enquadramento, luz, se tem arquibancada na arena — se resolve na imagem parada.
+
+## As três rotas de cada bloco
+
+Depois de rodar a extração de quadros e preencher a coluna **Bloco** do
+`INDICE.md`, cada um dos 20 blocos cai numa destas rotas:
+
+| Rota | Quando | O que fazer |
+|---|---|---|
+| **A · Footage real** | O bloco tem quadro aproveitável do material antigo | Usa o clipe original na edição. Não gera nada |
+| **B · Still real → vídeo** | Tem quadro real, mas parado ou curto demais | Sobe o quadro extraído como start frame e anima com o preset do bloco |
+| **C · Geração completa** | Não tem footage | Prompt do bloco → still → anima |
+
+A rota B é a mais subaproveitada e a que mais rende neste projeto: você anima o
+parque **de verdade**, com a arquitetura certa, e ainda ganha movimento de câmera
+que a filmagem original não tinha.
+
+Mesmo na rota C, suba um quadro extraído como **referência de imagem** junto com
+o prompt. Sem isso o modelo inventa um pavilhão genérico — e o Tega conhece o
+parque de cor.
+
+## Gere TODOS os stills antes de animar qualquer um
+
+Este é o ponto que separa percurso de colagem. Consistência de look não se julga
+clipe a clipe, se julga com tudo lado a lado.
+
+Faça as 23 imagens, monte uma folha de contato com elas e olhe o conjunto. O
+plano que estiver fora do tom — mais claro, mais saturado, luz de outra hora —
+aparece na hora nessa grade, e não aparece nunca se você animar um por vez.
+Refaz o destoante, e só então parte para os vídeos.
+
+## Sessões, na ordem que descobre problema cedo
+
+| Sessão | Blocos | Por quê primeiro |
+|---|---|---|
+| 1 | 01, 19, 17, 18 | Portal, rodeio e palco. Se o portal e a arena sem arquibancada não saírem, o filme não fecha — descubra isso no primeiro dia, não no último |
+| 2 | 13 A+B, 05, 07 A+B | Os quatro diferenciais |
+| 3 | 10 A+B, 02/04, 03, 09, 14 | Corpo do percurso |
+| 4 | 00, 06, 08, 11, 12, 15, 16 | Se o prazo apertar, viram mapa + letreiro |
+
+## Conta de clipes e duração
+
+23 clipes (20 blocos + os quadros A/B de 07, 10 e 13). A 5 s cada, dá **1min55s**
+de percurso, antes dos respiros de letreiro. É duração de sobra para telão.
+
+Para planejar crédito, conte com rejeito: algo como 4 stills por bloco (~90
+imagens) e 1,5 tentativa de animação por clipe (~35 vídeos). Portal e rodeio
+puxam mais — reserve 6 a 8 stills para cada um desses dois.
+
+## Continuidade entre blocos
+
+Se a sua conta tiver start frame **e** end frame, encadeie: o último quadro do
+clipe A vira o start frame do clipe B. O resultado parece um trajeto contínuo em
+vez de planos soltos — que é exatamente o que o cliente descreveu. Ele narrou um
+percurso a pé, não um catálogo de áreas.
+
+Onde não der para encadear, resolva na edição com transição de movimento: clipe
+que termina indo para a direita entra em clipe que começa indo para a direita.
+
+## Movimento: um eixo só, devagar
+
+Presets agressivos — crash zoom, bullet time — parecem ótimos no preview do
+celular e desmancham num LED de 4 metros. O painel tem 951 mil pixels; movimento
+rápido vira borrão comprimido. Dolly, crane e arc lentos.
+
+E prefira **mover a câmera a mover o assunto**: cena parada com câmera andando
+segura muito melhor que multidão gesticulando. É por isso que o bloco 17 é o
+clipe mais arriscado da pauta — o touro em movimento é justamente o que quebra.
+Se houver footage real de rodeio, use o real ali.
+
+## Proporção no vídeo — diferente da imagem
+
+Na imagem, gere 21:9 e corte as laterais. **No vídeo, gere 16:9** — normalmente
+é só o que os modelos de movimento oferecem. Confira o que sua conta libera.
+
+Não se preocupe com resolução: 16:9 em 1080p, cortado para 2:1, dá 1920 × 960, e
+o painel tem 1379 de largura. Sobra pixel. Deixe a timeline em 2760 × 1380 e
+escale o clipe dentro dela — o processador de LED faz o downscale final.
+
+## O que nunca fazer
+
+- **Texto na geração.** Todo letreiro é feito na edição, dentro da área de
+  segurança de 90%. Modelo de imagem não escreve português confiável.
+- **Grade final no Higgsfield.** Cor se resolve no NLE, com tudo junto. Grade
+  clipe a clipe destrói a unidade do percurso.
+- **Aceitar o primeiro resultado do bloco 17.** Confira arquibancada em cada
+  still antes de animar.
+
+> As especificidades de interface do Higgsfield mudam rápido — nomes de preset,
+> duração máxima de clipe e proporções disponíveis valem conferir na hora. O
+> fluxo acima não depende disso.
+
+---
+
 # Checklist antes de animar cada quadro
 
 - [ ] Está em 21:9 e corta limpo para 2:1 sem perder o assunto?
