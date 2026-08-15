@@ -583,3 +583,60 @@ virou cobertura de lona em naves de duas águas — o contrato dela **já declar
 **Motivo:** a área de espera é, por definição, "peça cujo lugar eu não sei".
 Agora que a tenda tem lugar — 134 deles, medidos —, deixar uma cópia parada ao
 lado do mapa faz o arquivo abrir com duas verdades e ninguém sabendo qual vale.
+
+### D034 · Flow travado como plataforma, e os 166 s aceitos
+**Ordem dele, 15/08:** *"O filme fica 12 s mais longo pode ser não tenho limite
+de tempo. quero fazer no flow então."*
+**Decisão:** `flow` gravado como plataforma escolhida em `data/cenas-ia.json`;
+o filme fica com **166 s**. O Higgsfield continua no arquivo como segunda opção
+medida, e `--plataforma higgsfield` continua funcionando e continua acusando os
+4 planos que não cabem na grade dele.
+**Consequência:** nenhum plano precisou de ajuste de câmera — os 22 entraram na
+grade de 4/6/8 s com a velocidade dentro da faixa cinematográfica.
+
+### D035 · Cinco letreiros estavam no plano errado
+**O que aconteceu:** montando a linha de tempo da montagem, o cruzamento entre
+`letreiros.json` e `planos.json` mostrou que **5 dos 17 letreiros estavam
+amarrados ao plano errado** — "Pista de Julgamentos" no plano das máquinas,
+"Área de Shows" no do palco, e a frase de assinatura na saída pelo portal. Pior:
+o TAMANHO de cada um tinha sido calculado com a lente e a distância do plano
+errado, então nem a regra de 8% valia para o plano em que ele apareceria.
+**Decisão:** os cinco reamarrados (P16→P12, P17→P13, P18→P16, P20→P18, P22→P21),
+com o motivo gravado em cada item.
+**Por que ninguém tinha visto:** os dois arquivos só se falavam pelo `id`, e
+**id errado é id válido**. Agora `cenas_ia.py --conferir` compara o TEXTO do
+letreiro com o TÍTULO do plano em que ele está, e falha na divergência.
+**E a checagem é apertada de propósito:** as duas divergências legítimas
+("Pavilhão 3" para o plano das Agroindústrias, "Alimentação no Bosque" para a
+Praça Aberta) tiveram de ser **declaradas no arquivo**, item a item. Afrouxar o
+comparador para engoli-las deixaria passar de novo as cinco de cima.
+
+### D036 · Três planos não tinham letreiro, e a falta estava mascarada
+**Ambiguidade:** com os cinco no lugar certo, P01, P17 e P20 ficaram sem
+letreiro nenhum — a ausência estava escondida pelos que sentavam em cima deles.
+**Decisão:** acrescentados os três (*Estacionamento*, *Veículos e Motos
+Náuticas*, *Palco Principal*). São 20 letreiros.
+**Motivo:** não é invenção de texto de cliente — `docs/BRIEFING.md` já dita os
+três nos blocos 00, 15 e 18, e `planos.json` já intitula os três planos com
+essas mesmas palavras. É transcrição.
+
+### D037 · No Plano A o letreiro é texto 2D, não o objeto 3D da cena
+**Ambiguidade:** os letreiros foram construídos em 15/08 como billboards 3D,
+dimensionados pela lente e pela distância de cada plano.
+**Decisão:** no Plano A eles entram na montagem como **texto 2D**, por
+`drawtext`, e a regra de 8%/4% vira conta direta sobre os 1380 px do master.
+**Motivo, e é o que decide:** o clipe da IA **não segue o caminho da câmera
+quadro a quadro** — ela interpola entre os dois extremos travados do jeito dela.
+Um letreiro renderizado do nosso percurso exato ia **deslizar contra a imagem**.
+A geometria 3D deles não foi apagada: continua válida e é o que vale no Plano B.
+
+### D038 · O texto do letreiro vai em arquivo, não dentro do filtro
+**O que o teste pegou:** *"Dois, em frente ao parque"* tem **vírgula**, e vírgula
+é o separador de filtros do ffmpeg. E a primeira versão trocava apóstrofo por
+`’` para escapar — ou seja, **alterava texto de cliente em silêncio** para se
+proteger de um problema de sintaxe.
+**Decisão:** `textfile=` com `expansion=none`, um arquivo por campo.
+**Motivo:** a string é lida verbatim e a classe inteira de bug desaparece de uma
+vez -- vírgula, dois-pontos, apóstrofo, porcento e acento passam iguais. Nenhum
+escape, nenhuma substituição, nenhum texto do cliente alterado. Conferido: 35
+filtros, aspas balanceadas, e o texto sai byte a byte.

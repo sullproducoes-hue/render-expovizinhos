@@ -38,6 +38,14 @@
  },
  "letreiros": [
   {
+   "plano": "P01",
+   "texto": "Estacionamento",
+   "apoio": "Dois, em frente ao parque",
+   "nivel": "titulo",
+   "audio": "AUDIO 1 [00:00] 'bem em frente nos vamos ter os estacionamentos' e [00:03] 'os dois estacionamentos, quem chega no parque'",
+   "acrescentado_15_08": "docs/BRIEFING.md linha 108 ja dita este titulo (bloco 00, 'Estacionamento'). Estava faltando -- ver D036."
+  },
+  {
    "plano": "P02",
    "texto": "É daqui que sai o alimento que sustenta o mundo",
    "nivel": "frase",
@@ -76,6 +84,7 @@
    "plano": "P07",
    "texto": "Pavilhão 3",
    "apoio": "Cozinha Didática",
+   "texto_difere_do_titulo": "o plano se chama 'Agroindustrias' na decupagem e o letreiro diz 'Pavilhao 3'. Os dois estao certos: o audio [01:20] poe as agroindustrias DENTRO do pavilhao 3. Na tela vale o nome do lugar; na decupagem, o assunto do plano.",
    "nivel": "titulo",
    "audio": "AUDIO 2 [00:15] 'No Pavilhão 3, mercado do produtor, café colonial, cozinha didática'"
   },
@@ -90,6 +99,7 @@
    "plano": "P09",
    "texto": "Alimentação no Bosque",
    "apoio": "Área externa",
+   "texto_difere_do_titulo": "o plano se chama 'Praca de Alimentacao Aberta' e o letreiro diz 'Alimentacao no Bosque'. Mesmo lugar: o audio [02:05] diz 'uma praca de alimentacao embaixo do bosque'. O letreiro usa a palavra dele.",
    "nivel": "titulo",
    "audio": "AUDIO 2 [00:20] 'Daí no bosque, área de alimentação externa'"
   },
@@ -116,22 +126,25 @@
    "atencao": "A PALAVRA 'KIDS' E PROIBIDA -- [00:55] 'Kids é muito americanizado'. Nome grande, descricao pequena embaixo, na hierarquia que ele ditou."
   },
   {
-   "plano": "P16",
+   "plano": "P12",
    "texto": "Pista de Julgamentos",
+   "corrigido_15_08": "estava em P16, que e o plano das MAQUINAS. A Pista de Julgamentos e o P12.",
    "apoio": "Julgamento de animais",
    "nivel": "titulo",
    "audio": "AUDIO 2 [00:30] 'Aí pista de julgamento, do julgamento de animais'"
   },
   {
-   "plano": "P17",
+   "plano": "P13",
    "texto": "Expositores Externos",
+   "corrigido_15_08": "estava em P17, que e o plano dos VEICULOS. Expositores Externos e o P13.",
    "apoio": null,
    "nivel": "titulo",
    "audio": "AUDIO 2 [00:36] 'A área de expositores externos'"
   },
   {
-   "plano": "P18",
+   "plano": "P16",
    "texto": "Máquinas e Implementos",
+   "corrigido_15_08": "estava em P18, que e o plano da AREA DE SHOWS. As Maquinas sao o P16.",
    "apoio": "Equipamentos agrícolas e veículos",
    "nivel": "titulo",
    "audio": "AUDIO 1 [03:48] e [04:02]"
@@ -144,15 +157,33 @@
    "audio": "AUDIO 2 [01:32] 'o rodeio é um diferencial do Agroshow'"
   },
   {
-   "plano": "P20",
+   "plano": "P17",
+   "texto": "Veículos e Motos Náuticas",
+   "apoio": null,
+   "nivel": "titulo",
+   "audio": "AUDIO 1 [04:02] 'depois as maquinas equipamentos, ai vem a parte de veiculos, motos'",
+   "acrescentado_15_08": "docs/BRIEFING.md linha 123 ja dita este titulo (bloco 15). O plano so parecia ter letreiro porque o de Expositores Externos estava fora de lugar em cima dele -- ver D036."
+  },
+  {
+   "plano": "P18",
    "texto": "Área de Shows",
+   "corrigido_15_08": "estava em P20, que e o plano do PALCO. A Area de Shows e o P18.",
    "apoio": null,
    "nivel": "titulo",
    "audio": "AUDIO 2 [01:08] 'descendo a arena de shows'"
   },
   {
-   "plano": "P22",
+   "plano": "P20",
+   "texto": "Palco Principal",
+   "apoio": "Shows durante toda a feira",
+   "nivel": "titulo",
+   "audio": "AUDIO 1 [04:19] 'dai faz no palco um show, coloca imagens de um artista cantando'",
+   "acrescentado_15_08": "docs/BRIEFING.md linha 126 ja dita este titulo (bloco 18). So parecia ter letreiro porque o de Area de Shows estava fora de lugar em cima dele -- ver D036."
+  },
+  {
+   "plano": "P21",
    "texto": "Aqui será um grande balcão de negócios",
+   "corrigido_15_08": "estava em P22, que e a saida pelo portal e nao leva letreiro. O P21 e a subida de assinatura, e planos.json ja o intitula com esta frase.",
    "nivel": "frase",
    "audio": "AUDIO 2 [02:04], literal",
    "nota": "frase de fechamento. ESTADO.md manda nao reescrever. O plano final sai pelo portal (restricao 6)."

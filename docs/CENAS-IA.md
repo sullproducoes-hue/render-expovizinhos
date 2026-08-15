@@ -56,6 +56,11 @@ python3 scripts/cenas_ia.py --plataforma higgsfield --conferir
 
 ---
 
+> **Decidido em 15/08:** *"quero fazer no flow então"* e *"o filme fica 12 s mais
+> longo pode ser, não tenho limite de tempo"*. Então: **Flow**, e o filme fica
+> com **166 s**. Nenhum plano precisou de ajuste de câmera — os 22 entraram na
+> grade com a velocidade dentro da faixa.
+
 ## Flow ou Higgsfield? — Flow, e o motivo é medido
 
 | | Flow (Veo 3.1) | Higgsfield (Kling 2.6 / 3.0) |
@@ -132,9 +137,55 @@ palavra. Passar por uma IA as suas duas frases literais —
 sobrevive a um modelo que resolve "melhorar" um letreiro de área infantil.
 
 Então o `render_guias.py` esconde a coleção `LETREIROS`, e o texto entra
-**depois**, na montagem, por cima do clipe pronto. A regra de 8%/4% da altura
-continua valendo, medida sobre o master 2760 × 1380 — que é onde ela sempre foi
-medida.
+**depois**, na montagem, por cima do clipe pronto.
+
+### E no Plano A ele deixa de ser objeto 3D
+
+No Plano B o letreiro é geometria: um billboard plantado no mundo, dimensionado
+pela lente e pela distância daquele plano, que a câmera atravessa e que muda de
+tamanho durante o movimento. **No Plano A isso deixa de servir** — e o motivo é
+que o clipe da IA **não segue o caminho da câmera quadro a quadro**. Ela
+interpola entre os dois extremos travados do jeito dela. Um letreiro renderizado
+do nosso percurso exato ia **deslizar contra a imagem**, e texto que desliza
+contra o fundo é o tipo de erro que só aparece no telão.
+
+Como **texto 2D** ele não tem com o que brigar. E a regra de 8%/4% fica mais
+simples, não mais frouxa — vira conta direta sobre os 1380 px do master:
+
+| nível | fração | pixels | onde |
+|---|---|---|---|
+| frase | 11,5% | 159 px | as duas frases literais dele |
+| diferencial | 10,8% | 149 px | os quatro diferenciais |
+| título | 8,0% | 110 px | o mínimo da regra, exato |
+| apoio | 4,2% | 58 px | a descrição pequena embaixo |
+
+O `montar_flow.sh` grava os 35 campos de texto com `drawtext`, cada um entrando
+e saindo junto com o plano dele (meio segundo de folga em cada ponta, para o
+letreiro não piscar no corte).
+
+### Cinco letreiros estavam no plano errado — corrigido em 15/08
+
+Achado ao montar a linha de tempo, e ia para a entrega:
+
+| letreiro | estava em | é o plano |
+|---|---|---|
+| Pista de Julgamentos | P16 (Máquinas) | **P12** |
+| Expositores Externos | P17 (Veículos) | **P13** |
+| Máquinas e Implementos | P18 (Área de Shows) | **P16** |
+| Área de Shows | P20 (Palco) | **P18** |
+| *Aqui será um grande balcão de negócios* | P22 (saída) | **P21** |
+
+Nada acusava, porque `letreiros.json` e `planos.json` só se falavam pelo `id` —
+e id errado é id válido. Agora se falam **pelo texto também**, e
+`cenas_ia.py --conferir` compara o texto do letreiro com o título do plano em
+que ele está. Divergência de palavra que é intencional (o letreiro diz *Pavilhão
+3* onde a decupagem diz *Agroindústrias*) tem de ser **declarada no arquivo** —
+afrouxar o comparador para engolir essas duas deixaria passar as cinco de cima.
+
+O mesmo conferidor mostrou que **P01, P17 e P20 não tinham letreiro nenhum** — a
+falta estava mascarada pelos que sentavam em cima deles. Os três títulos já
+estavam ditados em `docs/BRIEFING.md` (blocos 00, 15 e 18), então entraram por
+transcrição, não por invenção. São 20 letreiros agora.
 
 ---
 
@@ -178,9 +229,37 @@ prompt em português para você conferir antes de mandar.
 quadro → colar o prompt → 16:9 → a duração que o caderno manda (4, 6 ou 8 s) →
 gerar em 4K.
 
-**6. Na montagem:** cortar a faixa central 2:1, montar na ordem P01→P22, entrar
-com os 16 letreiros por cima, e exportar `.mov` (ProRes 422 HQ) **e** `.mp4`
-(H.264), mais a cartela de teste de 10 s.
+Baixe cada clipe **com o nome que o caderno dá** — `P01.mp4`, `P02-1.mp4`,
+`P02-2.mp4`… — numa pasta só. O nome é o que amarra o clipe à linha de tempo; a
+montagem não adivinha por ordem de download.
+
+**6. Montar:**
+
+```bash
+bash scripts/montar_flow.sh out/cenas/flow/clipes out/cenas/flow
+```
+
+Ele confere cada clipe **antes** de montar (existe? duração certa? 16:9? não é
+720p?) e **para** se algo estiver errado — descobrir isso depois de exportar
+custa a exportação inteira. Depois corta a faixa 2:1, conforma para 30 fps,
+emenda na ordem do percurso e grava os letreiros por cima.
+
+Se a fonte não estiver no caminho declarado, ele avisa e sai **sem letreiro** em
+vez de trocar por outra: tipografia errada num telão de 4 m é visível.
+
+```bash
+FONTE=/caminho/ArchivoNarrow-Bold.ttf bash scripts/montar_flow.sh
+```
+
+**7. Entregar:**
+
+```bash
+bash scripts/encode.sh out/cenas/flow/montagem_2760x1380.mov out/entrega
+```
+
+O `encode.sh` agora aceita os dois caminhos — uma pasta de PNG (Plano B) ou um
+vídeo (Plano A) — e a especificação de entrega mora só nele: ProRes 422 HQ,
+H.264 principal, reserva leve de 1380×690 e a cartela de teste de 10 s.
 
 ---
 
@@ -206,11 +285,10 @@ Na ordem em que costumam falhar:
 
 ## O que muda no filme
 
-O encaixe na grade estica o filme de **154 s para 166 s** (+12 s, +7,8%). Não há
-duração contratada — o cliente nunca pediu um tempo — e a alternativa seria
-comprimir planos para fora da faixa cinematográfica. **Fica o filme mais longo.**
-Se você quiser os 154 s de volta, o caminho é encurtar percurso de câmera, não
-duração de clipe, e o conferidor imprime quanto.
+O encaixe na grade estica o filme de **154 s para 166 s** (+12 s, +7,8%).
+**Decidido por ele em 15/08: fica assim** — *"não tenho limite de tempo"*. A
+alternativa era comprimir planos para fora da faixa cinematográfica, e não
+existe duração contratada.
 
 ---
 

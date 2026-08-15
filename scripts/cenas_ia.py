@@ -312,6 +312,13 @@ def conferir(lote, pacote, contrato):
     print(f"  a 10,0 s/quadro ....... {lote['quadros_guia'] * 10.0 / 60:.0f} min "
           f"contra as 12,9 h do Plano B")
 
+    letras = carregar_letreiros()
+    p_let = conferir_letreiros(lote, letras)
+    problemas += p_let
+    lt = linha_do_tempo(lote, letras)
+    print(f"  letreiros ............. {len(lt['letreiros'])} na linha de tempo, "
+          f"{'casando com o plano que nomeiam' if not p_let else 'COM PROBLEMA'}")
+
     print()
     if problemas:
         print(f"  {len(problemas)} PROBLEMA(S):")
@@ -319,7 +326,7 @@ def conferir(lote, pacote, contrato):
             print(f"    - {x}")
     else:
         print("  encaixe limpo: toda velocidade continua na faixa "
-              "cinematografica depois da grade.")
+              "cinematografica depois da grade, e todo letreiro esta no seu plano.")
     print("=" * 100)
     return problemas
 
@@ -386,6 +393,127 @@ def roteiro(lote, contrato):
     return "\n".join(L)
 
 
+def carregar_letreiros(caminho=None):
+    p = Path(caminho) if caminho else RAIZ / "data" / "letreiros.json"
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def linha_do_tempo(lote, letras, altura_master=1380):
+    """A montagem: cada clipe e cada letreiro com entrada e saida em segundos.
+
+    E aqui que o filme vira ordem de edicao. Sem isto, montar 29 clipes na mao
+    e apostar que a ordem saiu certa -- e a ordem do percurso e o produto: o
+    cliente comprou reconhecer o parque dele na sequencia em que se anda nele.
+
+    **O letreiro entra como texto 2D, e nao como o objeto 3D da cena.** No Plano
+    B ele e geometria: billboard plantado no mundo, que a camera atravessa e que
+    muda de tamanho durante o plano. No Plano A isso deixa de servir, e o motivo
+    e que o clipe da IA **nao segue o caminho da camera quadro a quadro** -- ela
+    interpola entre os dois extremos travados do jeito dela. Um letreiro
+    renderizado do nosso percurso exato ia deslizar contra a imagem. Como texto
+    2D, ele nao tem com o que brigar, e a regra de 8%/4% passa a ser conta
+    direta sobre a altura do master.
+    """
+    escala = letras.get("escala_por_nivel", {})
+    por_plano = {x["plano"]: x for x in letras.get("letreiros", [])}
+
+    t, clipes, sobreposicoes = 0.0, [], []
+    for q in lote["planos"]:
+        t_plano = t
+        for c in q["clipes"]:
+            clipes.append({
+                "id": c["id"], "plano": q["id"],
+                "arquivo": f"{c['id']}.mp4",
+                "entra_s": round(t, 3),
+                "sai_s": round(t + c["duracao_s"], 3),
+                "duracao_s": c["duracao_s"],
+                "quadro_ini": c["quadro_ini"], "quadro_fim": c["quadro_fim"],
+            })
+            t += c["duracao_s"]
+
+        item = por_plano.get(q["id"])
+        if item:
+            nivel = item["nivel"]
+            frac = escala.get(nivel, {}).get("fracao_da_altura", 0.08)
+            # Meio segundo de folga em cada ponta: letreiro que nasce e morre
+            # junto com o corte pisca. E o de baixo (o apoio) e sempre menor,
+            # com o minimo de 4% da regra de entrega.
+            sobreposicoes.append({
+                "plano": q["id"],
+                "texto": item["texto"],
+                "apoio": item.get("apoio"),
+                "nivel": nivel,
+                "entra_s": round(t_plano + 0.5, 3),
+                "sai_s": round(t - 0.5, 3),
+                "altura_px": int(round(frac * altura_master)),
+                "altura_apoio_px": int(round(
+                    escala.get("apoio", {}).get("fracao_da_altura", 0.042)
+                    * altura_master)),
+                "fracao": frac,
+            })
+
+    return {"total_s": round(t, 3), "clipes": clipes, "letreiros": sobreposicoes}
+
+
+def conferir_letreiros(lote, letras):
+    """O letreiro esta no plano que ele nomeia? E cabe na regra de 8%/4%?
+
+    Existe por causa de um defeito que quase foi para a entrega: **5 dos 17
+    letreiros estavam amarrados ao plano errado** -- "Pista de Julgamentos" no
+    plano das maquinas, a frase de assinatura na saida pelo portal. Nada
+    acusava, porque `letreiros.json` e `planos.json` so se falam pelo `id`, e id
+    errado e id valido. Agora se falam pelo TEXTO tambem.
+    """
+    import unicodedata
+
+    def norm(s):
+        s = unicodedata.normalize("NFKD", s or "").encode("ascii", "ignore").decode()
+        return "".join(c for c in s.lower() if c.isalnum() or c == " ").strip()
+
+    def parece(a, b):
+        a, b = norm(a), norm(b)
+        if not a or not b:
+            return False
+        if a in b or b in a:
+            return True
+        return len(set(a.split()) & set(b.split())) >= 2
+
+    titulos = {q["id"]: q["titulo"] for q in lote["planos"]}
+    problemas = []
+    vistos = set()
+
+    for item in letras.get("letreiros", []):
+        pid = item["plano"]
+        if pid in vistos:
+            problemas.append(f"letreiro: {pid} tem mais de um letreiro")
+        vistos.add(pid)
+        if pid not in titulos:
+            problemas.append(f"letreiro {item['texto']!r}: plano {pid} nao existe")
+            continue
+        tit = titulos[pid]
+        # Divergencia DECLARADA passa. Ha dois casos legitimos em que o letreiro
+        # usa outra palavra que a decupagem -- "Pavilhao 3" para o plano das
+        # Agroindustrias, "Alimentacao no Bosque" para a Praca Aberta --, e nos
+        # dois o texto e a palavra do cliente. Declarar caso a caso e o que
+        # deixa a checagem apertada: afrouxar o comparador para engoli-los
+        # deixaria passar tambem os cinco que estavam de fato no plano errado.
+        if item.get("texto_difere_do_titulo"):
+            continue
+        if tit and not parece(item["texto"], tit):
+            onde = [k for k, v in titulos.items() if parece(item["texto"], v)]
+            problemas.append(
+                f"letreiro {item['texto']!r} esta em {pid} (que se chama "
+                f"{tit!r})" + (f" -- o texto bate com {onde}" if onde else ""))
+
+    for q in lote["planos"]:
+        if q["titulo"] and q["id"] not in vistos:
+            problemas.append(f"{q['id']} tem titulo {q['titulo'][:30]!r} na "
+                             f"decupagem e NENHUM letreiro")
+    return problemas
+
+
 def lista_de_quadros(lote):
     """Os quadros-guia, sem repetir a emenda. E o que o render precisa."""
     q = set()
@@ -405,6 +533,10 @@ def main():
                     help="o caderno de prompts, em markdown, para o stdout")
     ap.add_argument("--quadros", action="store_true",
                     help="so a lista de quadros-guia, um por linha")
+    ap.add_argument("--timeline", action="store_true",
+                    help="a linha de tempo da montagem em json: ordem dos "
+                         "clipes e entrada/saida de cada letreiro. E o que o "
+                         "scripts/montar_flow.sh consome")
     ap.add_argument("--json", action="store_true",
                     help="o lote inteiro em json, para outro script consumir")
     args = ap.parse_args()
@@ -419,6 +551,13 @@ def main():
     if args.quadros:
         for n in lista_de_quadros(lote):
             print(n)
+        return
+    if args.timeline:
+        lt = linha_do_tempo(lote, carregar_letreiros())
+        lt["plataforma"] = lote["plataforma"]
+        lt["tipografia"] = carregar_letreiros().get("tipografia", {})
+        lt["cor_do_texto"] = carregar_letreiros().get("cor", {})
+        print(json.dumps(lt, ensure_ascii=False, indent=1))
         return
     if args.json:
         print(json.dumps(lote, ensure_ascii=False, indent=1))

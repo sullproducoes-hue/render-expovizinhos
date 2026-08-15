@@ -13,6 +13,22 @@
 
  "por_que_os_letreiros_ficam_de_fora_do_quadro_guia": "os 16 letreiros de data/letreiros.json NAO entram no render dos quadros-guia. Modelo generativo destroi tipografia: reescreve letra, troca acento e inventa palavra. O texto entra DEPOIS, na montagem, por cima do clipe pronto -- e ai a regra de 8%/4% da altura do quadro continua valendo, medida sobre o master 2760x1380. Isso tambem protege as duas frases literais dele e a proibicao da palavra Kids.",
 
+ "plataforma_escolhida": {
+  "qual": "flow",
+  "quando": "15/08/2026",
+  "ordem_dele": "'quero fazer no flow entao'.",
+  "e_a_medicao_concorda": "na grade de 4/6/8 s do Flow os 22 planos cabem com a velocidade dentro da faixa cinematografica; na de 5/10 s do Higgsfield, 4 nao cabem (P04, P10, P13, P22). Ver docs/CENAS-IA.md.",
+  "o_higgsfield_continua_no_arquivo": "como segunda opcao medida, para os planos em que o movimento e o assunto. `--plataforma higgsfield` continua funcionando e continua acusando os 4."
+ },
+
+ "duracao_do_filme": {
+  "decidido_por_ele_15_08": "'O filme fica 12 s mais longo pode ser nao tenho limite de tempo.'",
+  "de_s": 154,
+  "para_s": 166,
+  "por_que": "a grade de duracao da plataforma nao bate exato com a duracao medida de cada plano, e a alternativa a esticar era comprimir plano para fora da faixa cinematografica de drone. Com tempo livre, estica.",
+  "consequencia": "nenhum plano precisou de ajuste de camera. Os 22 entraram na grade com a velocidade dentro da faixa."
+ },
+
  "plataformas": {
   "flow": {
    "quem_e": "Google Flow, o app de cinema do Veo 3.1. Exige assinatura Google AI Pro ou Ultra.",

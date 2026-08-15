@@ -126,7 +126,8 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Decupagem do filme | `data/planos.json` + `scripts/planos.py` | 22 planos, conferidos em velocidade — ver `docs/PLANOS.md` |
 | Gerador da cena 3D | `scripts/build_scene.py` | Roda ponta a ponta. `--plano` corta por região, `--export-fbx` exporta FBX |
 | Render retomável | `scripts/render_shots.py` | Plano a plano, animatic, calibração de tempo (`--cronometrar`) |
-| Entrega | `scripts/encode.sh` | Os 3 arquivos + cartela de teste, a partir da sequência de PNG |
+| Entrega | `scripts/encode.sh` | Os 3 arquivos + cartela de teste. Aceita os **dois** caminhos: pasta de PNG (Plano B) ou vídeo (Plano A) |
+| **Montagem do Plano A** | `scripts/montar_flow.sh` | Os 29 clipes do Flow → master 2:1 com letreiro. Confere cada clipe **antes** de montar e para se algo estiver errado |
 | Transcrição dos áudios | `docs/brief-audios.md` | Fonte primária do roteiro **e do conteúdo de cada ambiente** |
 | Footprint das zonas | `scripts/extrair_footprints.py` + `data/footprints.json` | Mede o desenho. **18 zonas com footprint que serve; 35 só têm rótulo** — ver `docs/FOOTPRINTS.md` |
 | Estimativa das demais | `data/estimativas.json` + `scripts/estimativas.py` | 33 zonas na coleção **ESTIMADO**, carimbadas. Autorizado por ele em 14/08. Medida e estimativa não se misturam |
@@ -139,7 +140,7 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | **Cenas para IA (Plano A)** | `data/cenas-ia.json` + `scripts/cenas_ia.py` + `docs/CENAS-IA.md` | Os 22 planos quebrados na grade da plataforma, com prompt por clipe e os quadros-guia. **Flow: 29 clipes, 51 quadros, zero planos fora da faixa. Higgsfield: 4 planos não cabem na grade de 5/10 s** |
 | **Render dos quadros-guia** | `scripts/render_guias.py` | 3840×2160 (16:9), **sem letreiro**, só as pontas de clipe. ~8 min contra 12,9 h |
 | Peças avulsas | `data/pecas-avulsas.json` + `scripts/avulsas.py` | **8** peças na coleção **AREA_DE_ESPERA** em (520, −240), etiquetadas: silo, conjunto de silos, porteira, guichê, curral, torre, inflável, trator. **Ele posiciona no Blender.** As 3 tendas saíram da espera em 15/08 — agora têm 134 lugares medidos |
-| Letreiros | `data/letreiros.json` + `scripts/letreiros.py` | 16 letreiros com o texto do áudio dele. O tamanho sai da regra de 8%/4% por conta, e o script **acusa** quem cair abaixo. Cada um só existe durante o plano dele. Tipografia é proposta |
+| Letreiros | `data/letreiros.json` + `scripts/letreiros.py` | **20** letreiros com o texto do áudio dele. **5 estavam no plano errado e foram corrigidos em 15/08** (ver D035); 3 faltavam e entraram por transcrição do BRIEFING. O tamanho sai da regra de 8%/4% por conta, e o script **acusa** quem cair abaixo. Cada um só existe durante o plano dele. Tipografia é proposta |
 | Mobiliário | `data/mobiliario.json` + `scripts/mobiliario.py` | 209 peças **CC0 de verdade** (cadeira monobloco, mesa de piquenique, mesa de 4 lugares) nas duas praças e no Café Colonial. Pedido dele em [00:57] |
 | **Saída de render** | `data/saida.json` + `scripts/saida.py` | Três slots. **Half+DWAA destrói o Cryptomatte** (hash é float 32, DWAA é lossy) — por isso o dado vai em Float32/ZIP à parte. `save_as_render` é a mesma chave invertida entre PNG e EXR |
 | **Conferidor de matte** | `scripts/conferir_matte.py` | Extrai matte de verdade do EXR: MurmurHash3 do nome, casamento bit a bit, cobertura por faixa. **É o portão** — não se renderiza a fila com crypto quebrado |
@@ -192,6 +193,9 @@ blender --background --python scripts/build_scene.py  -- --out out/cena.blend
 python3 scripts/cenas_ia.py --conferir
 blender --background --python scripts/render_guias.py -- --blend out/cena.blend --plataforma flow
 python3 scripts/cenas_ia.py --roteiro > out/cenas/roteiro-flow.md
+# ... gera os 29 clipes no Flow, baixa com o nome que o roteiro dá ...
+bash scripts/montar_flow.sh out/cenas/flow/clipes out/cenas/flow
+bash scripts/encode.sh out/cenas/flow/montagem_2760x1380.mov out/entrega
 ```
 
 Na máquina do Natan o gerador roda pelo Blender instalado, não pelo `bpy` do

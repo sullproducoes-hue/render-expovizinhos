@@ -38,19 +38,49 @@ if ! command -v ffmpeg >/dev/null 2>&1; then
     exit 1
 fi
 
-primeiro=$(ls "$ENTRADA"/*.png 2>/dev/null | sort | head -n1 || true)
-if [ -z "$primeiro" ]; then
-    echo "nenhum PNG em $ENTRADA -- rode scripts/render_shots.py antes" >&2
-    exit 1
-fi
-inicio=$(basename "$primeiro" .png)
-inicio=$((10#$inicio))   # forca base 10: "00001" nao pode virar octal
-echo "primeiro quadro: $inicio ($primeiro)"
+# A entrada vem de um dos dois caminhos, e o script aceita os dois:
+#
+#   Plano B -- uma PASTA com a sequencia de PNG de scripts/render_shots.py
+#   Plano A -- um ARQUIVO de video, a montagem dos clipes do Flow que sai de
+#              scripts/montar_flow.sh
+#
+# O que vem depois do master e identico nos dois. A especificacao de entrega
+# mora aqui e em nenhum outro lugar -- duplicar os quatro ffmpeg no montar_flow
+# seria duas verdades sobre o que o cliente recebe.
+MASTER="$SAIDA/master_${LARGURA}x${ALTURA}.mov"
 
-# Confere contra a decupagem: um lote parcial (calibracao, corte por --plano)
-# nao deve ir para o cliente sem que alguem saiba que esta parcial.
-if command -v python3 >/dev/null 2>&1 && [ -f data/planos.json ]; then
-    esperado=$(python3 - <<'PY'
+if [ -f "$ENTRADA" ]; then
+    echo "entrada: video (Plano A) -- $ENTRADA"
+    dur=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$ENTRADA")
+    dim=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height \
+          -of csv=p=0:s=x "$ENTRADA")
+    echo "  $dim · ${dur}s"
+    if [ "$dim" != "${LARGURA}x${ALTURA}" ]; then
+        echo "AVISO: a montagem esta em $dim e a entrega e ${LARGURA}x${ALTURA}." >&2
+        echo "       Vai ser reescalada. Confira se o corte 2:1 foi feito." >&2
+    fi
+    echo "== master ProRes 422 HQ =="
+    ffmpeg -y -i "$ENTRADA" \
+        -vf "scale=${LARGURA}:${ALTURA}:flags=lanczos,setsar=1" \
+        -c:v prores_ks -profile:v 3 -pix_fmt yuv422p10le -vendor apl0 \
+        -colorspace bt709 -color_primaries bt709 -color_trc bt709 \
+        "$MASTER"
+else
+    primeiro=$(ls "$ENTRADA"/*.png 2>/dev/null | sort | head -n1 || true)
+    if [ -z "$primeiro" ]; then
+        echo "nem video nem PNG em $ENTRADA." >&2
+        echo "  Plano A: bash scripts/montar_flow.sh   -> passe o .mov dele aqui" >&2
+        echo "  Plano B: blender ... render_shots.py   -> passe a pasta out/final" >&2
+        exit 1
+    fi
+    inicio=$(basename "$primeiro" .png)
+    inicio=$((10#$inicio))   # forca base 10: "00001" nao pode virar octal
+    echo "entrada: sequencia de PNG (Plano B) -- primeiro quadro $inicio ($primeiro)"
+
+    # Confere contra a decupagem: um lote parcial (calibracao, corte por --plano)
+    # nao deve ir para o cliente sem que alguem saiba que esta parcial.
+    if command -v python3 >/dev/null 2>&1 && [ -f data/planos.json ]; then
+        esperado=$(python3 - <<'PY'
 import sys
 sys.path.insert(0, "scripts")
 import terreno, planos as planos_mod
@@ -59,18 +89,19 @@ pacote = planos_mod.carregar("data/planos.json", dados=dados)
 print(pacote["total_quadros"])
 PY
 )
-    encontrado=$(ls "$ENTRADA"/*.png 2>/dev/null | wc -l | tr -d ' ')
-    if [ "$encontrado" != "$esperado" ]; then
-        echo "AVISO: $encontrado quadros em $ENTRADA, esperado $esperado (filme completo)." >&2
-        echo "       Confira se e um lote parcial de proposito antes de mandar." >&2
+        encontrado=$(ls "$ENTRADA"/*.png 2>/dev/null | wc -l | tr -d ' ')
+        if [ "$encontrado" != "$esperado" ]; then
+            echo "AVISO: $encontrado quadros em $ENTRADA, esperado $esperado (filme completo)." >&2
+            echo "       Confira se e um lote parcial de proposito antes de mandar." >&2
+        fi
     fi
-fi
 
-echo "== master ProRes 422 HQ =="
-ffmpeg -y -framerate "$FPS" -start_number "$inicio" -i "$ENTRADA/%05d.png" \
-    -c:v prores_ks -profile:v 3 -pix_fmt yuv422p10le -vendor apl0 \
-    -colorspace bt709 -color_primaries bt709 -color_trc bt709 \
-    "$SAIDA/master_${LARGURA}x${ALTURA}.mov"
+    echo "== master ProRes 422 HQ =="
+    ffmpeg -y -framerate "$FPS" -start_number "$inicio" -i "$ENTRADA/%05d.png" \
+        -c:v prores_ks -profile:v 3 -pix_fmt yuv422p10le -vendor apl0 \
+        -colorspace bt709 -color_primaries bt709 -color_trc bt709 \
+        "$MASTER"
+fi
 
 echo "== H.264 principal (operador) =="
 ffmpeg -y -i "$SAIDA/master_${LARGURA}x${ALTURA}.mov" \
