@@ -453,3 +453,38 @@ linha de `grep` e sobre uma estrutura a partir de uma folha de contato. Nas duas
 vezes o conserto foi **abrir o arquivo e olhar o quadro inteiro**. É o mesmo que
 a memória do projeto já guarda como *ver antes de afirmar*, e é a terceira vez
 nesta semana.
+
+### D025 · A sobreposição das vias não certifica as 42 — e mostra por quê
+**Ambiguidade:** a pendência 9 diz que as 42 vias estão `conferido_pelo_natan:
+false` e que o aéreo nadir "destrava" a conferência. Destrava, mas não do jeito
+que eu esperava.
+
+**Feito:** `scripts/sobrepor_aereo.py` projeta as vias sobre `1 (2)__0076s` por
+uma semelhança (escala, rotação, translação), com cada parte tirada de coisa já
+medida — centro da arena `(−74,7 / −3,2)` marcado por ele, rotação do eixo dos
+pavilhões (rumo de mapa 108°), escala do raio dos patamares.
+
+**A validação é honesta porque o validador não entra no ajuste:** centro, escala
+e rotação saem da arena e dos pavilhões; quem confere são as **vias**, que não
+foram usadas em nada disso.
+
+**O que a folha mostra:**
+
+- a **escala e o centro fecham bem** — os anéis de 45 e 62 m do modelo pousam em
+  cima dos terraços que aparecem na foto. A primeira leitura do centro estava
+  470 px fora, e foi a própria sobreposição que denunciou;
+- **e boa parte das "vias" cai em cima dos terraços da arena.** V19, V24, V27,
+  V32, V35, V43, V50 e vizinhas desenham arcos concêntricos dentro da bacia. Isso
+  não é estrada: **é a curva de nível da arquibancada, lida como linha pelo
+  Hough**. O `vias.json` já avisava que o traçado é leitura de bitmap; a foto
+  mostra o que ele leu.
+
+**Decisão: não marcar nenhuma como conferida.** O campo se chama
+`conferido_pelo_natan` e o nome diz de quem é. O que fica escrito é uma
+suspeita **com prova em quadro** — que um subconjunto das 42 é contorno de
+patamar, não via — e ela é acionável: quem for usar `vias.json` para geometria
+precisa separar isso antes.
+
+**O que fecharia:** classificar por forma. Traçado que é arco concêntrico ao
+centro da arena, dentro de r < 150 m, é candidato a patamar; o resto é candidato
+a via. É conta sobre dado que já está no arquivo — não precisa dele.
