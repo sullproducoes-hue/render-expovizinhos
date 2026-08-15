@@ -1,0 +1,356 @@
+{
+ "_procedencia": "registro -- medicao. Cor-base das classes que o parque tem e a cena nao tinha, do footage de 13/08, em linear 16 bits, com o iluminante MEDIDO no ceu do proprio quadro.",
+ "_metodo": "ceu encoberto como fotometro. E_h = pi*L_ceu; a orientacao de cada superficie entra por FATOR_VISTA; albedo = pi*L_superficie / E_superficie.",
+ "_por_que_nao_a_ancora_de_14_08": "ancora no telhado mede luz que a parede vertical nao recebe. Com a telha declarada em 0,70 o tijolo saiu com albedo 1,000 no vermelho, que e mais vermelho do que o branco reflete. O erro foi de ORIENTACAO, nao de caixa.",
+ "_fator_vista": {
+  "horizontal": 1.0,
+  "vertical_aberta": 0.54,
+  "vertical_sob_beiral": 0.32,
+  "telhado_baixa_inclinacao": 0.96
+ },
+ "_area_minima_px": 20000,
+ "_estouro_maximo": 0.005,
+ "quadros": {
+  "1 (17)__0006s": {
+   "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\linear\\1 (17)\\1 (17)__0006s.png",
+   "por_que": "o quadro-chave do conjunto: fachada de tijolo, chapa azul, estrada de brita, mata e **ceu NAO estourado** (99,9% em 0,957, so 0,06% dos pixels no teto). E o unico que permite medir o iluminante em vez de arbitrar.",
+   "ceu": {
+    "caixa": [
+     1520,
+     40,
+     2160,
+     280
+    ],
+    "onde": "vao de ceu encoberto acima da linha de arvores, ao centro-alto",
+    "radiancia_linear_rgb": [
+     0.68359,
+     0.77656,
+     0.85324
+    ]
+   },
+   "ancora_transferida": null,
+   "E_horizontal": [
+    2.14756,
+    2.43964,
+    2.68053
+   ],
+   "itens": {
+    "tijolo_vermelho": {
+     "material": "MAT_TIJOLO",
+     "onde": "pano cheio de alvenaria vermelha do galpao, a direita do vao. A primeira caixa caiu 200 px a esquerda, em cima da GRADE de ventilacao escura, e devolveu albedo 0,013 -- tijolo mais escuro que a mata, que nao existe",
+     "caixa_px": [
+      2940,
+      460,
+      3220,
+      980
+     ],
+     "orientacao": "vertical_aberta",
+     "fator_vista": 0.54,
+     "albedo_linear": [
+      0.5639,
+      0.0727,
+      0.0705
+     ],
+     "hex_aproximado": "#c64c4b",
+     "luminancia": 0.1769,
+     "estouro_na_amostra": 0.0
+    },
+    "chapa_azul": {
+     "material": "MAT_CHAPA_AZUL",
+     "onde": "faixa de chapa azul da agua do telhado, seguindo a diagonal. A primeira caixa era um retangulo grande sobre uma faixa inclinada e pegava parede no canto de baixo",
+     "caixa_px": [
+      2320,
+      220,
+      2720,
+      480
+     ],
+     "orientacao": "telhado_baixa_inclinacao",
+     "fator_vista": 0.96,
+     "albedo_linear": [
+      0.0361,
+      0.2743,
+      0.5925
+     ],
+     "hex_aproximado": "#358fca",
+     "luminancia": 0.2466,
+     "estouro_na_amostra": 0.00295
+    },
+    "brita_estrada": {
+     "material": "MAT_SAIBRO",
+     "onde": "estrada de brita e saibro no primeiro plano, grande e chapada",
+     "caixa_px": [
+      1400,
+      1560,
+      3400,
+      1980
+     ],
+     "orientacao": "horizontal",
+     "fator_vista": 1.0,
+     "albedo_linear": [
+      0.2609,
+      0.189,
+      0.1619
+     ],
+     "hex_aproximado": "#8c7870",
+     "luminancia": 0.2023,
+     "estouro_na_amostra": 0.00024
+    },
+    "chao_batido": {
+     "material": null,
+     "onde": "faixa de chao batido entre a alameda e a estrada. **Estava rotulada `grama` e nao e.** Saiu 0,339/0,240/0,159, que e bege, e o debug mostrou terra pisada entre as arvores. Renomeada em vez de forcada: rotulo errado sobre medida certa e pior que medida faltando. Vira o SEGUNDO controle -- bate com a classe `terra` de 14/08",
+     "caixa_px": [
+      1320,
+      1032,
+      1880,
+      1140
+     ],
+     "orientacao": "horizontal",
+     "fator_vista": 1.0,
+     "albedo_linear": [
+      0.3389,
+      0.2404,
+      0.159
+     ],
+     "hex_aproximado": "#9d876f",
+     "luminancia": 0.2554,
+     "estouro_na_amostra": 0.00159,
+     "controle_contra_14_08": {
+      "referencia": [
+       0.2659,
+       0.1875,
+       0.1548
+      ],
+      "razao_por_canal": [
+       1.275,
+       1.282,
+       1.027
+      ],
+      "razao_de_luminancia": 1.266,
+      "veredito": "PASSA"
+     }
+    },
+    "copa_controle": {
+     "material": null,
+     "onde": "massa fechada de mata no centro do quadro. CONTROLE: a mata e perene e ja foi medida em 14/08 (0,132/0,154/0,046). Se sair longe disso, o modelo de ceu esta errado",
+     "caixa_px": [
+      800,
+      320,
+      2000,
+      960
+     ],
+     "orientacao": "vertical_aberta",
+     "fator_vista": 0.54,
+     "albedo_linear": [
+      0.1353,
+      0.1435,
+      0.0655
+     ],
+     "hex_aproximado": "#676a48",
+     "luminancia": 0.1361,
+     "estouro_na_amostra": 0.00039,
+     "controle_contra_14_08": {
+      "referencia": [
+       0.1324,
+       0.1538,
+       0.0455
+      ],
+      "razao_por_canal": [
+       1.022,
+       0.933,
+       1.44
+      ],
+      "razao_de_luminancia": 0.963,
+      "veredito": "PASSA"
+     }
+    }
+   },
+   "alertas": []
+  },
+  "1 (17)__0037s": {
+   "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\linear\\1 (17)\\1 (17)__0037s.png",
+   "por_que": "de perto, a mesma fachada: e o unico quadro com a pilastra azul grande e chapada o bastante para sobreviver ao 4:2:0, e com o portao de chapa inteiro.",
+   "ceu": null,
+   "ancora_transferida": {
+    "classe_aqui": "tijolo_vermelho",
+    "de_quadro": "1 (17)__0006s",
+    "de_classe": "tijolo_vermelho",
+    "canais_limpos": [
+     1,
+     2
+    ],
+    "por_que": "Mesma parede, mesmo galpao, mesmo dia -- mas neste plano fechado a camera expos para o interior escuro do vao e **41% dos pixels do tijolo estao no teto do VERMELHO**. O verde e o azul continuam limpos. Entao a cadeia carrega so o NIVEL, medido em G e B, e reusa a COR do iluminante do quadro aberto -- que e o mesmo dia, o mesmo ceu encoberto e o mesmo balanco de branco da camera. Ancorar no canal saturado transportaria um valor que a camera nao viu; ancorar so nos limpos transporta o que ela viu."
+   },
+   "E_horizontal": [
+    10.01778,
+    11.38026,
+    12.50394
+   ],
+   "itens": {
+    "tijolo_vermelho": {
+     "material": null,
+     "onde": "pano de alvenaria vermelha a direita da pilastra azul. So os canais G e B desta amostra entram na cadeia -- o R esta estourado em 41% dos pixels, e esta dito",
+     "caixa_px": [
+      730,
+      1000,
+      1120,
+      1310
+     ],
+     "orientacao": "vertical_aberta",
+     "fator_vista": 0.54,
+     "albedo_linear": [
+      0.5513,
+      0.0828,
+      0.0607
+     ],
+     "hex_aproximado": "#c45146",
+     "luminancia": 0.1808,
+     "estouro_na_amostra": 0.0
+    },
+    "coluna_azul": {
+     "material": "MAT_COLUNA_AZUL",
+     "onde": "pilastra azul larga a direita do vao -- a mais chapada do conjunto",
+     "caixa_px": [
+      3140,
+      300,
+      3290,
+      1200
+     ],
+     "orientacao": "vertical_aberta",
+     "fator_vista": 0.54,
+     "albedo_linear": [
+      0.0176,
+      0.0601,
+      0.1651
+     ],
+     "hex_aproximado": "#244571",
+     "luminancia": 0.0587,
+     "estouro_na_amostra": 0.00025
+    },
+    "portao_chapa": {
+     "material": "MAT_CHAPA_PORTAO",
+     "onde": "portao de chapa ondulada azul-ardosia, fechado, no centro. Fica recuado sob o avanco do telhado -- por isso a orientacao dele nao e a mesma da fachada",
+     "caixa_px": [
+      1400,
+      500,
+      1820,
+      1500
+     ],
+     "orientacao": "vertical_sob_beiral",
+     "fator_vista": 0.32,
+     "albedo_linear": [
+      0.0664,
+      0.0775,
+      0.0981
+     ],
+     "hex_aproximado": "#494f58",
+     "luminancia": 0.0766,
+     "estouro_na_amostra": 0.0
+    },
+    "terra_batida": {
+     "material": "MAT_TERRA_BATIDA",
+     "onde": "piso de terra batida avermelhada DENTRO do vao. Chao coberto ve pouco ceu: entra como sob beiral, nao como horizontal aberto",
+     "caixa_px": [
+      2100,
+      1450,
+      2800,
+      1650
+     ],
+     "orientacao": "vertical_sob_beiral",
+     "fator_vista": 0.32,
+     "albedo_linear": [
+      0.0974,
+      0.0325,
+      0.0164
+     ],
+     "hex_aproximado": "#583323",
+     "luminancia": 0.0452,
+     "estouro_na_amostra": 0.0
+    }
+   },
+   "alertas": []
+  },
+  "1 (14)__0011s": {
+   "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\linear\\1 (14)\\1 (14)__0011s.png",
+   "modo": "relativo",
+   "por_que": "MANGUEIRAS por dentro: coluna de concreto, estrutura de telhado vermelha e grade de manejo. E o unico quadro do conjunto com concreto estrutural grande e chapado -- e o unico sem nenhum fotometro.",
+   "referencia": "grade_cinza",
+   "_a_razao_NAO_e_reflectancia_entre_regimes": "dentro deste galpao a luz nao e uniforme: o primeiro plano recebe ceu pelos vaos abertos e o fundo coberto nao. Grade e piso estao no mesmo regime e sao comparaveis entre si; a coluna esta noutro e le 3x mais escura POR ILUMINACAO. Comparar as duas familias como se fossem albedo e o erro que este campo existe para impedir.",
+   "_o_que_falta": "o NIVEL. O galpao e aberto e todo o fundo claro que aparece pelos vaos esta estourado nos dez quadros extraidos, entao nao ha ceu para inverter e nao ha superficie de albedo conhecido no quadro. A COR esta medida (o iluminante daquele dia tem R/B 0,80, medido no 1 (17)); o albedo absoluto NAO. Nao arbitrei um valor: vira pendencia.",
+   "_como_fechar": "duas saidas baratas: (a) o Natan diz o albedo do concreto daquela coluna -- concreto envelhecido de mercado fica entre 0,20 e 0,30, e uma palavra dele fecha o quadro inteiro; ou (b) um quadro do mesmo dia com a coluna e o ceu nao estourado juntos.",
+   "itens": {
+    "concreto_coluna": {
+     "material": "MAT_CONCRETO",
+     "onde": "coluna de concreto do vao direito, a mais proxima, de cima a baixo. A primeira caixa ficava 700 px a esquerda e metade dela era MATA ao fundo, pelo vao aberto. E a REFERENCIA deste quadro",
+     "caixa_px": [
+      3620,
+      700,
+      3740,
+      1560
+     ],
+     "orientacao": "vertical_sob_beiral",
+     "razao_vs_referencia": [
+      0.3236,
+      0.2973,
+      0.2058
+     ],
+     "cor_balanceada_normalizada": [
+      1.0,
+      0.9758,
+      0.7037
+     ],
+     "hex_balanceado": "#fffcda",
+     "albedo_linear": null,
+     "estouro_na_amostra": 0.00186
+    },
+    "grade_cinza": {
+     "material": "MAT_GRADE",
+     "onde": "grade de manejo pintada de cinza, primeiro plano",
+     "caixa_px": [
+      200,
+      1700,
+      1400,
+      2050
+     ],
+     "orientacao": "vertical_sob_beiral",
+     "razao_vs_referencia": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "cor_balanceada_normalizada": [
+      0.9038,
+      0.96,
+      1.0
+     ],
+     "hex_balanceado": "#f4faff",
+     "albedo_linear": null,
+     "estouro_na_amostra": 5e-05
+    },
+    "piso_curral": {
+     "material": "MAT_PISO_CURRAL",
+     "onde": "piso do curral entre as grades. A decupagem de 15/08 escreveu 'piso de brita'; o quadro mostra terra com MARAVALHA. A cor sai daqui, nao do rotulo",
+     "caixa_px": [
+      1720,
+      1720,
+      2080,
+      1880
+     ],
+     "orientacao": "horizontal",
+     "razao_vs_referencia": [
+      0.8865,
+      0.7891,
+      0.6534
+     ],
+     "cor_balanceada_normalizada": [
+      1.0,
+      0.9455,
+      0.8156
+     ],
+     "hex_balanceado": "#fff9e9",
+     "albedo_linear": null,
+     "estouro_na_amostra": 0.0
+    }
+   }
+  }
+ }
+}

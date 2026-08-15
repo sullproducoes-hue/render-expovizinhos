@@ -40,7 +40,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import bpy
 
+import placa as placa_mod
 import planos as planos_mod
+import saida as saida_mod
 import terreno
 
 
@@ -62,10 +64,21 @@ def quadros_do_plano(plano, limite=None):
     return range(ini, fim + 1)
 
 
-def renderizar_quadro(cena, quadro, destino):
+def renderizar_quadro(cena, quadro, destino, nos_saida=None):
     cena.frame_set(quadro)
-    cena.render.filepath = str(destino / f"{quadro:05d}")
-    bpy.ops.render.render(write_still=True)
+    if nos_saida:
+        # A saida de verdade sao os tres File Output; o nome do arquivo tem
+        # que ser cravado ANTES de cada quadro, senao todo quadro grava por
+        # cima do anterior. Ver scripts/saida.py.
+        saida_mod.nomear(nos_saida, quadro)
+        # `write_still=False` de proposito: os File Output gravam durante a
+        # composicao, independente disso. Com True, o Blender gravava AINDA um
+        # `_descartar_.png` de 5 MB por quadro que ninguem usa -- 23 GB no
+        # filme inteiro, no disco que e o recurso apertado aqui.
+        bpy.ops.render.render(write_still=False)
+    else:
+        cena.render.filepath = str(destino / f"{quadro:05d}")
+        bpy.ops.render.render(write_still=True)
 
 
 def aplicar_rascunho(cena, escala):
@@ -102,6 +115,12 @@ def main():
                          "Use com --plano e --quadros para calibrar antes do render de verdade")
     ap.add_argument("--forcar", action="store_true",
                     help="re-renderiza mesmo quadro ja existente em disco")
+    ap.add_argument("--png-so", action="store_true",
+                    help="grava so PNG, sem EXR. Para animatic e calibracao, "
+                         "onde os passes nao servem para nada")
+    ap.add_argument("--permitir-cpu", action="store_true",
+                    help="segue mesmo sem GPU. So com motivo: na CPU esta fila "
+                         "leva ~60 h em vez de ~15 h")
     args = ap.parse_args(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:])
 
     if not Path(args.blend).exists():
@@ -109,6 +128,14 @@ def main():
 
     bpy.ops.wm.open_mainfile(filepath=str(Path(args.blend).resolve()))
     cena = bpy.context.scene
+
+    # PRIMEIRA coisa depois de abrir. As preferencias sao da instalacao, nao do
+    # .blend: aberto numa sessao nova, o arquivo anuncia GPU e o Cycles
+    # renderiza na CPU sem avisar. Medido em 15/08: 4x mais lento.
+    if args.permitir_cpu:
+        placa_mod.ligar(cena)
+    else:
+        placa_mod.exigir(cena)
 
     dados = terreno.carregar_mapa(args.dados)
     pacote = planos_mod.carregar(args.planos_json, dados=dados)
@@ -120,6 +147,18 @@ def main():
     if args.animatic:
         aplicar_rascunho(cena, args.escala)
         print(f"animatic: resolucao {args.escala}%, amostras baixas, sem motion blur -> {destino}")
+
+    # Animatic e calibracao nao precisam de passe nenhum: sao para julgar corte
+    # e medir tempo. Guardar 20 MB de EXR por quadro de rascunho e queimar
+    # disco a toa -- e o disco e o recurso apertado deste projeto.
+    so_png = args.png_so or args.animatic or args.cronometrar
+    nos_saida = None
+    if so_png:
+        cena.render.image_settings.file_format = "PNG"
+        print("saida: so PNG (rascunho) -- sem EXR nem passes")
+    else:
+        print("saida: tres slots (beauty EXR / data EXR / preview PNG)")
+        nos_saida = saida_mod.montar(cena, destino)
 
     total_planos = len(selecionados)
     total_quadros = pulados = renderizados = 0
@@ -140,13 +179,18 @@ def main():
 
         for quadro in quadros:
             total_quadros += 1
-            arq = destino / f"{quadro:05d}.png"
+            # A retomada olha o PNG de entrega dos dois arranjos: no rascunho
+            # ele esta na raiz, e no render de verdade em preview/. E o PNG e
+            # o ultimo dos tres a ser gravado, entao encontra-lo significa que
+            # o quadro fechou inteiro -- um EXR sozinho seria quadro pela metade.
+            arq = (destino / f"{quadro:05d}.png" if so_png
+                   else saida_mod.caminhos_do_quadro(destino, quadro)["preview"])
             if arq.exists() and not args.forcar:
                 pulados += 1
                 continue
 
             t0 = time.time()
-            renderizar_quadro(cena, quadro, destino)
+            renderizar_quadro(cena, quadro, destino, nos_saida)
             dt = time.time() - t0
             tempos.append(dt)
             renderizados += 1

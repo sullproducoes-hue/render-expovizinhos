@@ -1,0 +1,22 @@
+{
+ "o_que_e": "Luminancia linear media de cada mapa Diffuse. Serve para normalizar a variacao de cor: dividido por esta media, o mapa tem media 1,0 e a cor MEDIDA no footage sobrevive como media da superficie.",
+ "gerado_por": "scripts/texturas.py --medir",
+ "itens": {
+  "MAT_ARENA": {
+   "slug": "dirt_aerial_03",
+   "arquivo": "assets/textura/dirt_aerial_03_Diffuse_2k.jpg",
+   "luminancia_media": 0.138156,
+   "luminancia_p05": 0.102243,
+   "luminancia_p95": 0.193954,
+   "pixels": 4194304
+  },
+  "MAT_SAIBRO": {
+   "slug": "gravel_road",
+   "arquivo": "assets/textura/gravel_road_Diffuse_2k.jpg",
+   "luminancia_media": 0.115579,
+   "luminancia_p05": 0.089687,
+   "luminancia_p95": 0.140988,
+   "pixels": 4194304
+  }
+ }
+}

@@ -1,0 +1,177 @@
+{
+  "_procedencia": "registro — decupagem do footage que o Natan filmou na quinta-feira 13/08/2026 e entregou em 15/08. Cada linha é o que a imagem mostra, não o que eu suponho que ela mostre.",
+  "_onde": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente",
+  "_ordem_dele": "usar como cores e texturas; os locais que já estão lá não mudam; o que falta é completado pelo mapa (a planta Mapa_AGROSHOW26).",
+
+  "tecnica": {
+    "resolucao": [3840, 2160],
+    "pix_fmt": "yuv420p10le",
+    "color_transfer": "bt709",
+    "color_primaries": "bt709",
+    "color_space": "bt709",
+    "_conferido": "ffprobe nos 17, em 15/08. Todos iguais.",
+    "_nao_e_hdr": [
+      "Isto é o oposto do que o material antigo do AgroShow ensinou. Os IMG_91xx",
+      "da triagem de 14/08 são HLG bt2020 (Dolby Vision) e exigem tonemap, e a",
+      "memória do projeto registra 'material do AgroShow é HDR' como armadilha.",
+      "ESTES NÃO SÃO. São bt709 SDR de ponta a ponta. Aplicar a cadeia de HLG",
+      "aqui destruiria a cor — e o defeito seria silencioso, porque a imagem sai,",
+      "só sai errada. Por isso o ffprobe vem ANTES de medir, sempre."
+    ],
+    "_4_2_0_e_o_que_isso_custa": [
+      "Croma subamostrado pela metade nos dois eixos. Os dois materiais mais",
+      "críticos deste parque são justamente os piores casos: a chapa/parede",
+      "VERMELHA saturada e a coluna AZUL saturada. Perto de uma borda de cor o",
+      "valor lido é uma mistura inventada pelo decodificador.",
+      "REGRA: medir só em região grande e chapada, longe de borda e de transição.",
+      "Dez bits ajudam na quantização, não na resolução de croma."
+    ]
+  },
+
+  "_o_que_o_conjunto_entrega": [
+    "Sete dos dezessete vídeos são o mesmo prédio redondo de dois andares. Ele é",
+    "o edifício-símbolo do parque e hoje na cena não existe como forma — é caixa.",
+    "Dois são aéreos verticais de drone, e esses valem para POSIÇÃO, não só cor:",
+    "mostram a arena com as arquibancadas em arco e o traçado real do recinto.",
+    "O resto é interior de pavilhão, o salão de leilões, as mangueiras e a alameda."
+  ],
+
+  "videos": [
+    {
+      "id": "1 (1)", "duracao_s": 30, "camera": "mão",
+      "mostra": "interior de pavilhão vazio",
+      "materiais": ["telha metálica cinza (água interna)", "parede bordô/vinho na base",
+                    "piso de concreto queimado com terra avermelhada", "estrutura metálica clara"],
+      "prova_de_forma": ["pé-direito do pavilhão", "vão livre entre colunas"],
+      "datum": "van Sprinter no quadro (~2,60 m de altura, ~5,90 m de comprimento)",
+      "serve_para": ["MAT_TELHA (face interna)", "cor da parede de pavilhão", "MAT_PISO_CONCRETO"]
+    },
+    {
+      "id": "1 (2)", "duracao_s": 96, "camera": "drone, nadir e alto oblíquo",
+      "mostra": "ARENA DE RODEIO vista de cima, com arquibancadas em ARCO, galpões brancos, terra vermelha",
+      "prova_de_forma": ["desenho real da arena e das arquibancadas concêntricas",
+                         "posição relativa dos galpões", "traçado das vias de terra"],
+      "datum": "escala pelo próprio footprint da arena, cruzada com a planta",
+      "serve_para": ["CONFERIR POSIÇÃO (pendência 9 das vias)", "forma da bacia/arquibancada",
+                     "cor da terra da pista", "cor do gramado"],
+      "_atencao": "é a MELHOR fonte de posição que este projeto já teve depois do satélite, e é mais recente"
+    },
+    {
+      "id": "1 (3)", "duracao_s": 83, "camera": "drone, nadir alto",
+      "mostra": "mesma arena de mais alto, layout geral do recinto com os galpões",
+      "prova_de_forma": ["layout do recinto inteiro num quadro só"],
+      "serve_para": ["conferir posição", "conferir a ferradura da bacia (pendência 4/8)"]
+    },
+    {
+      "id": "1 (4)", "duracao_s": 20, "camera": "drone baixo",
+      "mostra": "PALCO — estrutura branca de cobertura sobre base azul, na pista de terra",
+      "prova_de_forma": ["proporção e altura do palco real", "cor: branco e azul, não madeira"],
+      "serve_para": ["forma do PALCO (hoje é caixa)", "posição do palco dentro da bacia"]
+    },
+    {
+      "id": "1 (5)", "duracao_s": 25, "camera": "drone médio",
+      "mostra": "PRÉDIO REDONDO de dois andares, telhado piramidal, estacionamento com carros",
+      "prova_de_forma": ["planta poligonal/circular", "dois pavimentos", "varanda em volta",
+                         "telhado em pirâmide de baixa inclinação", "banda branca e faixa vermelha"],
+      "datum": "carros de passeio no estacionamento (~1,45 m de altura, ~4,4 m de comprimento)",
+      "serve_para": ["FORMA do prédio-símbolo", "cor do telhado", "cor da alvenaria"]
+    },
+    {
+      "id": "1 (6)", "duracao_s": 35, "camera": "drone",
+      "mostra": "prédio redondo mais o galpão azul e branco vizinho, e a cobertura longa de estandes",
+      "prova_de_forma": ["relação de tamanho entre o redondo e os vizinhos",
+                         "a cobertura longa com pilares — é o que a cena chama de pavilhão"],
+      "serve_para": ["forma do galpão azul", "forma da galeria de pilares"]
+    },
+    {
+      "id": "1 (7)", "duracao_s": 16, "camera": "drone baixo",
+      "mostra": "prédio redondo com pessoas na varanda; prédio azul (agência) ao lado",
+      "datum": "PESSOAS na varanda — o melhor datum de escala do conjunto (~1,70 m)",
+      "serve_para": ["altura do pavimento", "altura do guarda-corpo", "escala do redondo"]
+    },
+    {
+      "id": "1 (8)", "duracao_s": 46, "camera": "mão, na varanda",
+      "mostra": "varanda do prédio redondo por dentro, com banners de patrocinador no guarda-corpo",
+      "materiais": ["piso da varanda", "guarda-corpo", "lona impressa dos banners"],
+      "serve_para": ["MAT_LONA impressa (doutrina §9.4)", "altura de guarda-corpo por pessoa no quadro"]
+    },
+    {
+      "id": "1 (9)", "duracao_s": 6, "camera": "mão",
+      "mostra": "salão interno do prédio redondo: caixilhos escuros, teto forrado",
+      "serve_para": ["profundidade da varanda", "proporção do vão envidraçado"]
+    },
+    {
+      "id": "1 (10)", "duracao_s": 47, "camera": "drone orbitando",
+      "mostra": "ÓRBITA COMPLETA do prédio redondo, com público na varanda",
+      "prova_de_forma": ["número de faces do polígono", "ritmo dos pilares", "geometria do telhado"],
+      "serve_para": ["a melhor prova de forma do prédio-símbolo — órbita fecha a volta inteira"]
+    },
+    {
+      "id": "1 (11)", "duracao_s": 29, "camera": "mão e drone",
+      "mostra": "prédio redondo com grupo posando; e aérea do recinto com TENDAS BRANCAS montadas",
+      "serve_para": ["prova de que as tendas existem e onde ficam", "cor da lona ao sol"]
+    },
+    {
+      "id": "1 (12)", "duracao_s": 62, "camera": "mão",
+      "mostra": "SALÃO DE LEILÕES por dentro: teto de MADEIRA RIPADA em curva, luminárias embutidas, cadeiras pretas, balcões, banners verdes",
+      "materiais": ["madeira ripada do forro", "piso", "cadeira preta"],
+      "serve_para": ["interior do Recinto de Leilões (o áudio [02:18] pede o leilão acontecendo)",
+                     "MAT_MADEIRA de verdade — o contrato de textura deixou madeira de fora esperando isto"]
+    },
+    {
+      "id": "1 (13)", "duracao_s": 11, "camera": "mão",
+      "mostra": "leilão: púlpito do leiloeiro, grades azuis do recinto de animais, cadeiras",
+      "serve_para": ["o púlpito, que o áudio nomeia", "cor das grades azuis"]
+    },
+    {
+      "id": "1 (14)", "duracao_s": 30, "camera": "mão",
+      "mostra": "MANGUEIRAS / currais de manejo: grades metálicas em série, piso de brita, cobertura de telha",
+      "prova_de_forma": ["altura e ritmo real das grades", "vão da cobertura"],
+      "serve_para": ["as MANGUEIRAS, que a pendência 2c lista como estimativa fraca — a planta só tinha o rótulo, e 14,1 x 2,4 m era o tamanho da PALAVRA",
+                     "MAT_BRITA de perto"]
+    },
+    {
+      "id": "1 (15)", "duracao_s": 30, "camera": "mão, em movimento",
+      "mostra": "ALAMEDA de entrada: via, árvores em fileira, postes, portaria azul, prédio ao fundo",
+      "serve_para": ["largura real da via (pendência 9)", "porte e espaçamento das árvores da alameda",
+                     "cor do asfalto/terra da via"]
+    },
+    {
+      "id": "1 (16)", "duracao_s": 174, "camera": "mão, percurso longo",
+      "mostra": "percurso por dentro e por fora dos pavilhões: COLUNAS AZUIS, alvenaria de TIJOLO VERMELHO, piso de concreto, estrutura de telhado vermelha, galpões fechados",
+      "prova_de_forma": ["seção da coluna", "altura do peitoril", "ritmo dos vãos", "beiral"],
+      "datum": "pessoa em pé no quadro aos ~110 s",
+      "serve_para": ["A PALETA DO PARQUE: tijolo, azul, telha. É o vídeo mais longo e o mais rico em material",
+                     "MAT_TIJOLO, MAT_COLUNA_AZUL, MAT_PISO_CONCRETO"]
+    },
+    {
+      "id": "1 (17)", "duracao_s": 60, "camera": "mão",
+      "mostra": "galpão VERMELHO com portas AZUIS, estrada de terra, interior de pavilhão com van",
+      "serve_para": ["confirma a paleta vermelho+azul como identidade do parque",
+                     "cor da estrada de terra"]
+    }
+  ],
+
+  "regra_de_desempate": {
+    "_ordem_dele": "os locais que já estão lá não mudam; o que falta é completado pelo mapa",
+    "forma_e_proporcao": "FOOTAGE vence. A planta é bitmap reamostrado e não desenha forma; a câmera desenha.",
+    "posicao_e_footprint": "PLANTA vence. É a ordem dele, e a conferência de 14/08 (escala 0,5611 m/pt, norte a −11,5°, centro da arena marcado por ele) foi validada contra satélite.",
+    "altura": "FOOTAGE, por datum declarado no quadro. Altura de PATAMAR continua com o cliente (pendência 8) — patamar não aparece em quadro.",
+    "divergencia_grande": "acima de 5 m entre o que o footage mostra e o que a planta diz, NÃO escolher: vira pendência com o quadro recortado, para ele decidir.",
+    "_por_que_5_m": "é maior que a incerteza de medir por imagem (a medição do norte por satélite divergiu 2,9°, e a escala fecha em ±6% na área) e menor que um erro que muda a leitura do plano."
+  },
+
+  "extracao": {
+    "triagem": {
+      "onde": "extracao/<video>/quadros e /folhas",
+      "como": "JPEG sRGB, gerado por extrair_quadros.py em 14/08",
+      "para": "olho humano — escolher quadro",
+      "_nao_medir_aqui": "JPEG em sRGB com gama. O método de medição (âncora conhecida no mesmo quadro, mediana, divisão) só é válido em LINEAR; medir aqui dá número consistente sobre dado errado, e o --conferir não acusa."
+    },
+    "medicao": {
+      "onde": "extracao/linear/<video>/",
+      "como": "PNG 16 bits, linear, sem view transform — scripts/extrair_linear.py",
+      "para": "medir cor e retificar textura"
+    }
+  }
+}

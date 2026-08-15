@@ -31,8 +31,34 @@ Em particular, estas regras do 2.5D **não valem mais**:
 `E:\I.A Edit\render-expovizinhos` — repositório `sullproducoes-hue/render-expovizinhos`.
 Todo caminho relativo abaixo parte dessa pasta.
 
+## A precedência, e ela não se inverte
+
+Decidida em 15/08/2026, quando o Natan entregou a doutrina de render:
+
+```
+ordem direta do Natan  →  reference/DOUTRINA-RENDER-3D.md  →  doutrina do projeto
+```
+
+A **`DOUTRINA-RENDER-3D.md`** é ordem norteadora dele: *"aprenda com os erros e
+com o que não fazer"*. Ela cobre modelagem, posicionamento, materiais, luz,
+câmera, saída, decals e produção sob prazo — com marcadores de confiança
+(`[Certo]`, `[Provável]`, `[Suposição]`) que dizem quanto cada linha pesa.
+
+**Onde ela contraria uma ordem direta dele, a ordem vence — e a divergência fica
+escrita em `DECISOES.md`.** Já há quatro registradas: golden hour (ordem do
+cliente), samples 128/0,1 (config ditada por ele, e medida: empata com 0,01),
+crowd em proxy (a decisão Plano A/B é dele e está aberta) e os passes de luz
+fora do beauty (a §7.4 pede "luz separada", e o disco não comportava).
+
+**O regime também é ordem dele, de 15/08:** trabalhar de forma autônoma até o
+fim, não perguntar; em ambiguidade, escolher o **mais conservador**, registrar a
+decisão e o motivo em `DECISOES.md` e seguir; se algo travar de vez, pular para
+a próxima tarefa e **documentar o bloqueio**.
+
 Ordem de leitura antes de agir:
 
+0. **`DECISOES.md`** — o que já foi decidido sem ele, e por quê. Ler antes de
+   redecidir qualquer coisa.
 1. **`ESTADO.md`** — onde o trabalho parou e o que vem a seguir. Manda em tudo,
    inclusive neste documento.
 2. **`docs/PROPOSTA-3-DIAS.md`** — o prazo é 3 dias a partir de 14/08/2026, não

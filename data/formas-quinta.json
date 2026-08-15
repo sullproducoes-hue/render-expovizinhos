@@ -1,0 +1,138 @@
+{
+ "_procedencia": "registro — o que o footage de 13/08 PROVA sobre a forma dos prédios do parque. Cada linha aponta o quadro que a sustenta. O que está aqui foi visto em quadro; o que não foi, está na lista de pendências no fim, com o motivo.",
+ "_regra_que_manda_aqui": "data/footage-quinta.json → regra_de_desempate: FORMA e PROPORÇÃO vencem pelo footage (a planta é bitmap reamostrado e não desenha forma); POSIÇÃO e FOOTPRINT vencem pela planta (ordem dele, e a conferência de 14/08 foi validada contra satélite). Nada aqui move posição.",
+ "_travas_da_etapa_3": [
+  "âncora da troca de forma = CENTROIDE do footprint. Trocar pelo canto move tudo e a conferência de posição de 14/08 deixaria de valer sem ninguém perceber.",
+  "reexecutar conferir_posicao.py + sobrepor.py DEPOIS de cada troca.",
+  "altura por datum declarado EM QUADRO, registrado por prédio.",
+  "re-ancorar os 16 letreiros depois: fachada que muda de forma leva o letreiro junto, e a fração de 8% recalcula onde a distância mudou."
+ ],
+ "predios": {
+  "PREDIO_REDONDO": {
+   "o_que_e": "o edifício-símbolo do parque. Sete dos dezessete vídeos são ele. Hoje na cena é uma CAIXA.",
+   "quadros_que_provam": [
+    "1 (10) — órbita completa em 47 s, 24 quadros lineares extraídos. A melhor prova de forma que este projeto já teve",
+    "1 (10)__0041s — a órbita se afasta no fim e mostra o volume inteiro",
+    "1 (5)__0009s — elevado de frente: o telhado superior inteiro, com as águas e o espigão",
+    "1 (6)__0012s — de cima e de lado: é aqui que as faces se contam",
+    "1 (7), 1 (8), 1 (9), 1 (11) — varanda por dentro, guarda-corpo, caixilhos"
+   ],
+   "topologia": {
+    "planta": "POLÍGONO REGULAR, não círculo",
+    "faces": 10,
+    "confianca_das_faces": "media",
+    "como_foi_contado": "quebras do guarda-corpo e da saia do telhado inferior em 1 (6)__0012s e 1 (10)__0041s: cinco segmentos ao longo de aproximadamente meio perímetro. Os segmentos aparecem desiguais no quadro, e isso é perspectiva de polígono regular, não polígono irregular.",
+    "o_que_fecharia": "uma vista de topo (nadir) que pegue o prédio. Os aéreos 1 (2) e 1 (3) enquadram a ARENA; se o redondo aparecer na borda de algum quadro, a contagem sai exata e vira confiança alta.",
+    "pavimentos": 2
+   },
+   "partes": {
+    "base_terreo": {
+     "o_que_e": "embasamento pintado de VERMELHO, com pilares, e passeio de bloco intertravado em volta",
+     "cobertura": "saia de telha metálica marrom-avermelhada, larga, em painéis trapezoidais radiais — um por face",
+     "material_medido": "MAT_TIJOLO (0,564/0,073/0,071) é a família do vermelho do parque; o embasamento é pintura, não tijolo aparente"
+    },
+    "pavimento_superior": {
+     "o_que_e": "recuado sobre a base, envidraçado e escuro, com pilares CREME entre os panos",
+     "varanda": "circunda o pavimento inteiro, com guarda-corpo tomado por banner de patrocinador",
+     "guarda_corpo": {
+      "altura_m": 1.1,
+      "de_onde": "NBR 9077 — guarda-corpo de edificação de uso coletivo tem 1,10 m. NÃO foi medido em quadro: é norma, e está dito. Serve de DATUM secundário, e é o mais confiável do conjunto porque dá a volta no prédio inteiro"
+     }
+    },
+    "telhado_superior": {
+     "tipo": "quatro-águas sobre polígono — espigão central curto e tacaniças nas pontas",
+     "inclinacao": "baixa",
+     "material": "telha metálica ondulada, marrom-acinzentada, com sinais de oxidação",
+     "quadro": "1 (5)__0009s"
+    },
+    "anexo": {
+     "o_que_e": "bloco RETANGULAR encostado no lado esquerdo, alvenaria vermelha e telhado de duas águas cinza",
+     "atencao": "é outro volume, não é o redondo. Se virar geometria, vira separado — senão o polígono nasce deformado"
+    }
+   },
+   "datums_disponiveis": [
+    {
+     "o_que": "pessoas na varanda",
+     "valor_m": 1.7,
+     "quadro": "1 (7), 1 (10) inteiro",
+     "qualidade": "boa — há dezenas delas, ao longo da órbita"
+    },
+    {
+     "o_que": "guarda-corpo",
+     "valor_m": 1.1,
+     "quadro": "todos os da órbita",
+     "qualidade": "boa — norma, e dá a volta no prédio"
+    },
+    {
+     "o_que": "carro de passeio no estacionamento",
+     "valor_m": 4.4,
+     "quadro": "1 (5)__0009s, 1 (6)__0012s",
+     "qualidade": "média — o modelo muda o comprimento em ±0,6 m"
+    }
+   ],
+   "o_que_ainda_NAO_esta_medido": [
+    "o DIÂMETRO em metros. A órbita prova a forma e as proporções; o tamanho absoluto sai do footprint da planta, que é quem manda em footprint pela regra de desempate — falta casar qual zona da planta é este prédio.",
+    "a altura de cada pavimento. Os datums estão listados e o quadro existe; é trabalho de medir, não de descobrir."
+   ]
+  },
+  "PALCO": {
+   "o_que_e": "CORRIGIDO em 15/08 — ver DECISOES.md D024. O video 1 (4) NAO mostra o palco da cena.",
+   "o_que_o_1_4_mostra": "uma CONCHA PERMANENTE de alvenaria: base azul de ~1,2 m, paredes claras (fundo e duas alas), cobertura inclinada escura, plantada em gramado ao lado de uma pista de terra. Oito quadros lineares extraidos.",
+   "o_que_a_cena_tem": "estruturas.palco = o palco DE EVENTO, montado: deck 16 x 11 m, quatro torres de trelica de 10,5 m, cobertura tensionada, telao de LED, deck preto. Procedencia na propria funcao: DJI_20251127184447_0110_D 00:00:02, de novembro.",
+   "sao_dois_objetos": true,
+   "o_que_falta": "a concha permanente NAO existe na cena. Ela e um 'local que ja esta la', e a ordem dele diz que esses nao mudam -- mas NAO EXISTIR e diferente de mudar.",
+   "por_que_nao_medi_a_cota": "o ESTADO.md aponta a pessoa em pe no 1 (4) 00:00:02 como datum de 1,70 m 'no mesmo quadro que o palco fixo'. Ela esta no primeiro plano e o palco a dezenas de metros atras. Altura em pixel de coisa a outra profundidade NAO escala. Falta datum na mesma profundidade.",
+   "luz_deste_video": "golden hour, sombra longa e quente -- ao contrario dos outros 16, que sao de dia encoberto. Se for medir cor aqui, o metodo do ceu NAO se aplica."
+  },
+  "MANGUEIRAS": {
+   "o_que_e": "currais de manejo: grades metálicas em série, colunas de CONCRETO, cobertura de telha com terças vermelhas",
+   "quadros_que_provam": [
+    "1 (14) — 30 s, 10 quadros lineares"
+   ],
+   "por_que_isto_importa": "a pendência 2c listava as mangueiras como estimativa FRACA, porque a planta só tinha o rótulo e `14,1 × 2,4 m` era o tamanho da PALAVRA MANGUEIRAS. Agora há quadro, e sai por medição.",
+   "correcao_da_decupagem": "o `footage-quinta.json` escreveu 'piso de brita'. O quadro mostra TERRA com MARAVALHA.",
+   "achado_de_luz": "dentro do galpão a luz não é uniforme — o primeiro plano recebe céu pelos vãos abertos e o fundo coberto não. A coluna lê 3× mais escura que as grades POR ILUMINAÇÃO. Ver data/materiais-quinta.json.",
+   "o_que_falta": "vão entre colunas e altura da cobertura, por datum. Não há pessoa nos quadros extraídos; a grade de manejo tem altura de norma de manejo (~1,60 m) e serve, mas é preciso confirmar em quadro."
+  },
+  "GALPAO_AZUL_E_TIJOLO": {
+   "o_que_e": "galpão de alvenaria VERMELHA com telhado e pilastras AZUIS, portões de chapa azul-ardósia",
+   "quadros_que_provam": [
+    "1 (17)__0006s (aberto, com céu não estourado)",
+    "1 (17)__0037s (fechado, a fachada de perto)",
+    "1 (16) — o percurso interno, colunas azuis e alvenaria"
+   ],
+   "paleta_medida": "é daqui que saiu a paleta do parque inteira. Ver data/materiais-quinta.json",
+   "identidade": "vermelho + azul é a identidade construída do parque, e ela se repete no 1 (16) e no 1 (17). Isso não é escolha estética minha: está em três vídeos"
+  },
+  "GALERIA_DE_PILARES": {
+   "o_que_e": "cobertura longa e aberta sobre pilares claros, o que a cena chama de 'pavilhão'",
+   "quadros_que_provam": [
+    "1 (6)__0003s",
+    "1 (6)__0012s ao fundo"
+   ],
+   "o_que_falta": "ritmo dos pilares e vão. O quadro existe e é medível"
+  }
+ },
+ "pendencias_desta_etapa": [
+  {
+   "n": "3a",
+   "o_que": "casar cada prédio do footage com a zona da planta, pelo footprint. Sem isso a forma medida não sabe onde pousar",
+   "com_quem": "próxima sessão — é trabalho, não decisão"
+  },
+  {
+   "n": "3b",
+   "o_que": "contagem exata das faces do prédio redondo",
+   "com_quem": "próxima sessão — depende de achar uma vista de topo que o pegue"
+  },
+  {
+   "n": "3c",
+   "o_que": "alturas por datum, prédio a prédio",
+   "com_quem": "próxima sessão"
+  },
+  {
+   "n": "3d",
+   "o_que": "a CONCHA permanente do 1 (4) nao existe na cena. Construir precisa de datum na mesma profundidade para a cota",
+   "com_quem": "proxima sessao"
+  }
+ ]
+}

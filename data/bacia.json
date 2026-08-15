@@ -1,0 +1,47 @@
+{
+ "o_que_e": "Contrato da bacia da arena. Ate 14/08 ela era um CILINDRO: as bandas radiais de terreno.PATAMARES valiam igual em todos os rumos. A planta diz que nao e, e diz por duas testemunhas independentes.",
+
+ "a_medicao": {
+  "centro_da_arena_m": [-74.7, -3.2],
+  "convencao_do_azimute": "0 graus = +x (leste do mapa), 90 = +y (norte do mapa), anti-horario. O norte do mapa esta a -11,5 graus do norte verdadeiro (data/luz.json), o que nao muda o quadrante de nada aqui.",
+
+  "testemunha_1_taludes": {
+   "o_que_e": "as 15 anotacoes 'Talude' da planta, em azimute e raio a partir do centro da arena",
+   "azimutes": [34.2, 38.1, 38.1, 39.0, 75.4, 81.2, 103.9, 128.0, 128.9, 170.6, 187.3, 190.5, 196.6, 201.0, 231.3],
+   "faixa_de_raio_m": [27.8, 137.1],
+   "setor_ocupado_graus": [34, 232],
+   "setor_vazio_graus": [232, 394]
+  },
+
+  "testemunha_2_estandes_serie_c": {
+   "o_que_e": "os 93 estandes da serie C, que formam o anfiteatro em volta da pista",
+   "por_setor_de_30_graus": {
+    "0": 2, "30": 5, "60": 4, "90": 2, "120": 5, "150": 3,
+    "180": 35, "210": 37,
+    "240": 0, "270": 0, "300": 0, "330": 0
+   },
+   "setor_vazio_graus": [240, 360]
+  },
+
+  "conclusao": "As duas testemunhas concordam sem se falarem: de 240 a 360 graus NAO HA talude e NAO HA estande. O arrimo envolve ~210 graus de arco e a bacia fica ABERTA em ~120 graus.",
+
+  "correcao_de_registro": "O RETOMAR.md dizia 'ferradura aberta para NORDESTE'. Esta errado e nunca teve numero atras. Nordeste e azimute ~45, e la estao QUATRO dos 15 taludes (34,2 / 38,1 / 38,1 / 39,0) -- e o lado mais arrimado que existe. A abertura, medida, aponta para SUL-SUDESTE: o setor vai de sudoeste, passa pelo sul e pelo sudeste, e termina no leste, com o centro por volta do rumo 150 da bussola.",
+
+  "o_que_ha_no_setor_aberto": "PALCO (az 300-305, r 21-26 m), Bar (245), SANEPAR (314), SANITARIOS QUIMICOS (250 e 355), AREA RESTRITA (252), Bosque e Mata Nativa. Palco no chao da pista e o esperado num rodeio: ele olha para a arena. O acesso de animal e de veiculo tambem precisa chegar na pista em nivel, e e por ai que chega."
+ },
+
+ "o_que_muda_no_modelo": {
+  "regra": "So muda o que a medicao alcanca. Os taludes medidos vao de 27,8 a 137,1 m de raio, entao a mudanca para em r = 150 m. Alem disso o platao do recinto continua em 10 m em TODOS os rumos.",
+  "por_que_essa_trava": "Abrir o setor ate a borda da prancha rebaixaria em 10 m tudo o que esta longe naquele rumo -- AREA RESTRITA a 179 m, bosque, mata -- sem uma unica medida que peca isso. Seria trocar um erro simetrico por um erro maior e assimetrico.",
+  "no_setor_arrimado": "PATAMARES como sempre foi: pista 0 ate 45 m, shows 3,5, anel 7, platao 10 a partir de 150 m.",
+  "no_setor_aberto": "o chao da pista se estende ate 78 m e so entao sobe, chegando aos mesmos 10 m em 150 m. Nao ha degrau: e a mesma cota final, alcancada por outro caminho.",
+  "transicao": "smoothstep de 20 graus em cada ponta do setor. Corte reto deixaria uma parede radial de 3,5 m que nenhuma planta mostra."
+ },
+
+ "setor_aberto_graus": [240.0, 360.0],
+ "transicao_graus": 20.0,
+ "raio_do_piso_aberto_m": 78.0,
+ "raio_de_reencontro_m": 150.0,
+
+ "o_que_continua_estimado": "As ALTURAS (3,5 / 7 / 10 m) seguem estimadas por proporcao -- isto aqui nao as confirma. O que a planta confirmou foi ONDE ha arrimo e onde nao ha. Um quadro de drone lateral da arena continua sendo o que trava as cotas (pendencia 3 com o cliente)."
+}

@@ -1,0 +1,142 @@
+{
+ "o_que_e": "O censo do recinto: quem esta em cada ambiente, quantos, e fazendo o que. Sai do AUDIO DO CLIENTE (docs/brief-audios.md), que o ESTADO.md declara ser 'a regua do que vai dentro de cada ambiente -- conteudo, posicao e detalhe'.",
+
+ "a_procedencia_de_cada_coisa": {
+  "QUEM e ONDE": "palavra do cliente, com o minuto citado item a item. E a fonte mais forte que existe para isto -- nao ha footage do evento cheio no acervo.",
+  "QUANTOS": "DECLARADO por mim, com fundamento escrito em cada linha. Nao e medida e nao se apresenta como tal.",
+  "A FORMA": "PROXY. Ver 'o_elefante_na_sala' abaixo -- isto aqui NAO sao os personagens finais."
+ },
+
+ "o_elefante_na_sala": {
+  "o_problema": "Nao ha figura humana nem animal em CC0 que sirva direto. O Poly Haven tem 521 modelos e nenhum e gente ou gado -- e biblioteca de props. Kenney e Quaternius tem, em CC0 de verdade, mas em estilo de jogo estilizado: num sobrevoo de golden hour a 4-15 m de altura, boneco estilizado fica PIOR que recinto vazio.",
+  "por_que_isso_e_decisao_dele_e_nao_minha": "A resposta depende do Plano A vs Plano B, que e escolha dele e esta no ESTADO.md. No PLANO A os quadros aprovados viram entrada de IA geradora de video com prompt ultra-realista: ali proxy e o certo -- ele da massa, silhueta, escala e composicao, e a IA poe a pele. No PLANO B o render local e a entrega, e ai gente e gado precisam de modelo e de animacao de verdade, que e outro tamanho de trabalho.",
+  "o_que_esta_feito_enquanto_isso": "Proxy declarado, na colecao POVOAMENTO, que se esconde num clique igual a ESTIMADO. Escala certa (1,70 m medido no footage), densidade e posicao vindas do audio. Serve aos dois planos: no A e o produto final da etapa; no B e o layout que os modelos de verdade vao substituir, um por um, sem refazer o censo."
+ },
+
+ "escala": {
+  "pessoa_m": 1.70,
+  "fonte": "MEDIDA -- a pessoa em pe no quadro '1 (4)' 00:00:02 da ~1,70 m no mesmo quadro que o palco fixo (docs/MATERIAIS-referencia.md). Nao e trena, mas e melhor que proporcao.",
+  "bovino_altura_m": 1.45, "bovino_comprimento_m": 2.40,
+  "equino_altura_m": 1.60, "equino_comprimento_m": 2.40,
+  "ovino_altura_m": 0.85, "ovino_comprimento_m": 1.20,
+  "cao_altura_m": 0.55, "cao_comprimento_m": 0.95,
+  "fonte_dos_animais": "faixa adulta de mercado por especie. DECLARADO, nao medido."
+ },
+
+ "semente": 20260814,
+
+ "ambientes": [
+  {
+   "zona": "ARENA DE RODEIO", "raio_m": 40.0, "tipo": "touro", "quantos": 1,
+   "audio": "[04:14] bem em frente ao palco e a arena do rodeio, daí pode fazer touro pulando",
+   "fundamento": "um touro na pista: e uma montaria por vez, e o cliente pede o touro pulando"
+  },
+  {
+   "zona": "ARENA DE RODEIO", "raio_m": 42.0, "raio_minimo_m": 30.0, "tipo": "pessoa", "quantos": 6,
+   "audio": "[04:14] arena de rodeio",
+   "fundamento": "peao, salva-vidas de arena e juizes na beira da pista"
+  },
+  {
+   "zona": "Área de Show", "raio_m": 55.0, "tipo": "pessoa", "quantos": 900,
+   "audio": "[04:33] e toda aquela área embaixo, toda ela lotada de público",
+   "fundamento": "'lotada' e palavra dele. 900 pessoas no patamar de shows dao ~1 pessoa a cada 10 m2 -- publico em pe assistindo, folgado o bastante para nao virar mancha solida vista de cima"
+  },
+  {
+   "zona": "Área de Show", "raio_m": 14.0, "tipo": "pessoa", "quantos": 4,
+   "audio": "[04:25] coloca imagens de um artista cantando",
+   "fundamento": "artista e banda no palco"
+  },
+  {
+   "zona": "PAVILHÃO - GADO LEITE", "raio_m": 22.0, "tipo": "bovino_leite", "quantos": 34,
+   "audio": "[02:28] primeiro pavilhão é o gado de leite",
+   "fundamento": "pavilhao de 720 m2 em baias: ~20 m2 por animal com corredor"
+  },
+  {
+   "zona": "PAVILHÃO - NÚCLEO CARA BRANCA", "raio_m": 22.0, "tipo": "bovino_cara_branca", "quantos": 34,
+   "audio": "[02:28] segundo pavilhão é do núcleo Hereford e Braford / [02:40] o corpo do animal vermelho e a cabeça é cara branca",
+   "fundamento": "mesma densidade; a COR vem da palavra dele, literal"
+  },
+  {
+   "zona": "PAVILHÃO - GADO CORTE", "raio_m": 22.0, "tipo": "bovino_nelore", "quantos": 34,
+   "audio": "[02:43] pavilhão 3, animais de diversas raças / [02:47] pode usar o gado nelore, de repente, que é o gado branco",
+   "fundamento": "mesma densidade; nelore branco, palavra dele"
+  },
+  {
+   "zona": "PAVILHÃO - OVINOS E CAPRINOS", "raio_m": 20.0, "tipo": "ovino", "quantos": 48,
+   "audio": "[02:51] no 4 é ovinos e caprinos",
+   "fundamento": "bicho menor, baia menor: ~11 m2 por cabeca"
+  },
+  {
+   "zona": "PAVILHÃO - EQUÍNOS", "raio_m": 22.0, "tipo": "equino", "quantos": 22,
+   "audio": "[03:00] no sexto é o pavilhão dos equinos, cavalos",
+   "fundamento": "baia de cavalo e maior: ~32 m2 por animal"
+  },
+  {
+   "zona": "PISTA DE JULGAMENTOS", "raio_m": 30.0, "tipo": "bovino_cara_branca", "quantos": 8,
+   "audio": "[03:07] volta pro lado, tem a pista de julgamento",
+   "fundamento": "julgamento e poucos animais na pista de cada vez, com o jurado"
+  },
+  {
+   "zona": "PISTA DE JULGAMENTOS", "raio_m": 34.0, "tipo": "pessoa", "quantos": 40,
+   "audio": "[03:11] aquela área de pasto verde",
+   "fundamento": "jurados e publico em volta da pista"
+  },
+  {
+   "zona": "RECINTO DE LEILÕES", "raio_m": 24.0, "tipo": "pessoa", "quantos": 70,
+   "audio": "[02:15] entra no recinto, tem leilões / [02:18] os leilões acontecendo",
+   "fundamento": "salao de leilao cheio; o audio pede o leilao ACONTECENDO, nao a sala vazia"
+  },
+  {
+   "zona": "Fazendinha", "raio_m": 26.0, "tipo": "pessoa", "quantos": 55,
+   "audio": "[03:27] a fazendinha é a área das crianças / [03:31] onde vai ter pro pessoal andar a cavalo, andar de pônei",
+   "fundamento": "criança com acompanhante. RESTRICAO DURA do cliente: a palavra 'Kids' e proibida, e 'Fazendinha' que vai no letreiro"
+  },
+  {
+   "zona": "Fazendinha", "raio_m": 24.0, "tipo": "equino", "quantos": 4,
+   "audio": "[03:31] pro pessoal andar a cavalo, andar de pônei",
+   "fundamento": "cavalo e ponei do passeio das criancas"
+  },
+  {
+   "zona": "Fazendinha", "raio_m": 22.0, "tipo": "ovino", "quantos": 9,
+   "audio": "[03:37] é a apresentação dos cachorros lá, do Border Collie, com as ovelhas",
+   "fundamento": "o rebanho da apresentacao de pastoreio"
+  },
+  {
+   "zona": "Fazendinha", "raio_m": 22.0, "tipo": "cao", "quantos": 2,
+   "audio": "[03:37] apresentação dos cachorros lá, do Border Collie",
+   "fundamento": "os dois Border Collie do pastoreio"
+  },
+  {
+   "zona": "Praça de Alimentação Coberta", "raio_m": 30.0, "tipo": "pessoa", "quantos": 120,
+   "audio": "[00:57] mesas, cadeiras, o pessoal com os guichês lá / [01:04] os guichezinhos do pessoal vendendo comida, bebida",
+   "fundamento": "praca coberta de 145 x 34 m: publico sentado e fila de guiche"
+  },
+  {
+   "zona": "Praça de Alimentação Aberta", "raio_m": 26.0, "tipo": "pessoa", "quantos": 70,
+   "audio": "[02:05] a área do bosque segue e tem uma praça de alimentação embaixo do bosque",
+   "fundamento": "praca aberta sob o bosque, menor movimento que a coberta"
+  },
+  {
+   "zona": "Exposição de Máquinas,Equipamentos e Veículos e Implementos", "raio_m": 40.0, "tipo": "pessoa", "quantos": 90,
+   "audio": "[03:48] aonde são a exposição de máquinas, equipamentos, implementos agrícolas / [04:02] aí vem a parte de veículos, motos",
+   "fundamento": "anel de maquinas: visitante circulando entre os estandes"
+  },
+  {
+   "zona": "Expositores Industria/Comércio e Serviços", "raio_m": 40.0, "tipo": "pessoa", "quantos": 80,
+   "audio": "[00:03] Pavilhão 1, indústria e comércio",
+   "fundamento": "circulacao entre os pavilhoes 1 e 2"
+  },
+  {
+   "zona": "Expositores Externo", "raio_m": 40.0, "tipo": "pessoa", "quantos": 50,
+   "audio": "[03:11] e tem toda a área de expositores externos",
+   "fundamento": "area externa, circulacao mais rala"
+  }
+ ],
+
+ "o_que_o_audio_pede_e_NAO_esta_aqui": {
+  "PAVILHÃO - PEQUENOS ANIMAIS": "[02:51] 'no 5 pequenos animais'. Nao ha censo: 'pequenos animais' pode ser ave, coelho, suino. Perguntar em vez de inventar seis especies.",
+  "brinquedos_inflaveis": "[03:31] pedido literal na Fazendinha. E geometria propria, nao povoamento -- entra na modelagem.",
+  "maquinas_e_implementos": "[03:48] o anel tem trator, colheitadeira, implemento e moto. Sao objetos grandes e MUITO visiveis, e o Poly Haven nao tem nenhum. Fica como pendencia propria, nao como gente.",
+  "mesas_e_cadeiras_da_praca": "[00:57] pedido literal. Estes O POLY HAVEN TEM (27 modelos de mesa, 17 de cadeira, CC0) -- e o caminho mais barato de todos e ainda nao foi andado."
+ }
+}

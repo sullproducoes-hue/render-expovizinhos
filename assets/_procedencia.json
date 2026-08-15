@@ -42,6 +42,114 @@
    "evs_cap": 12
   },
   {
+   "arquivo": "assets/modelo/plastic_monobloc_chair_01/plastic_monobloc_chair_01_1k.blend",
+   "tipo": "modelo",
+   "nome": "Plastic Monobloc Chair 01",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Kuutti Siitonen"
+   ],
+   "url": "https://polyhaven.com/a/plastic_monobloc_chair_01",
+   "md5": "c5c2ee7961ad5638f4d8169f690dd6eb",
+   "bytes": 197566,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    641.8611407279968,
+    627.5919079780579,
+    879.8411972820759
+   ],
+   "texturas_anexas": [
+    "textures/plastic_monobloc_chair_01_diff_1k.jpg",
+    "textures/plastic_monobloc_chair_01_metal_1k.exr",
+    "textures/plastic_monobloc_chair_01_nor_gl_1k.exr",
+    "textures/plastic_monobloc_chair_01_rough_1k.exr"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/wooden_picnic_table/wooden_picnic_table_1k.blend",
+   "tipo": "modelo",
+   "nome": "Wooden Picnic Table",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Ulan Cabanilla"
+   ],
+   "url": "https://polyhaven.com/a/wooden_picnic_table",
+   "md5": "09183939c50beebf274a2c0f681dc3e0",
+   "bytes": 356157,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    2240.9759759902954,
+    3022.329568862915,
+    745.9869086742401
+   ],
+   "texturas_anexas": [
+    "textures/wooden_picnic_table_bottom_diff_1k.png",
+    "textures/wooden_picnic_table_bottom_metal_1k.png",
+    "textures/wooden_picnic_table_bottom_nor_gl_1k.png",
+    "textures/wooden_picnic_table_bottom_rough_1k.png",
+    "textures/wooden_picnic_table_top_diff_1k.png",
+    "textures/wooden_picnic_table_top_metal_1k.png",
+    "textures/wooden_picnic_table_top_nor_gl_1k.png",
+    "textures/wooden_picnic_table_top_rough_1k.png"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/wooden_table_02/wooden_table_02_1k.blend",
+   "tipo": "modelo",
+   "nome": "Wooden Table 02",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Serhii Khromov"
+   ],
+   "url": "https://polyhaven.com/a/wooden_table_02",
+   "md5": "929cb02727466a65b7caf5c2352d5664",
+   "bytes": 137139,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    1134.41663980484,
+    706.0248255729675,
+    799.5428870490286
+   ],
+   "texturas_anexas": [
+    "textures/wooden_table_02_diff_1k.jpg",
+    "textures/wooden_table_02_metal_1k.exr",
+    "textures/wooden_table_02_nor_gl_1k.exr",
+    "textures/wooden_table_02_rough_1k.jpg"
+   ]
+  },
+  {
+   "arquivo": "assets/relevo/entorno_alturas.npy",
+   "tipo": "dado",
+   "nome": "Relevo do entorno (desnivel em relacao ao sitio)",
+   "fonte": "AWS Terrain Tiles (terrarium) — dado SRTM sobre o Brasil",
+   "licenca": "dominio publico (SRTM) — sem chave, sem cadastro",
+   "autores": [
+    "NASA/NGA (SRTM)",
+    "Mapzen/Linux Foundation (tiles)"
+   ],
+   "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+   "md5": "e303501cc0ab8c494bd4258fee4f8881",
+   "gerado_por": "scripts/relevo_entorno.py",
+   "conferido": "contra opentopodata (SRTM 30 m) em 5 pontos ao longo de 16 km: +-5 m"
+  },
+  {
+   "arquivo": "assets/relevo/entorno_cobertura.png",
+   "tipo": "dado",
+   "nome": "Cobertura do solo do entorno, pintada com as cores medidas no footage",
+   "fonte": "ESA WorldCover 10 m 2021 v200",
+   "licenca": "CC-BY 4.0 — ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021)",
+   "autores": [
+    "ESA WorldCover project"
+   ],
+   "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/",
+   "md5": "493c8f4cbe2c2477d4ec02f464134178",
+   "gerado_por": "scripts/cobertura_entorno.py",
+   "atencao": "CC-BY EXIGE credito. A linha de licenca acima e o credito e nao pode sumir da entrega."
+  },
+  {
    "arquivo": "assets/textura/aerial_grass_rock_Rough_2k.jpg",
    "tipo": "textura",
    "nome": "Aerial Grass Rock — Rough",

@@ -1,0 +1,28 @@
+{
+ "o_que_e": "Desnivel do entorno em relacao ao sitio, em metros, ja amortecido para nao tocar no recinto. Some 10 m (o platao) para ter a cota na cena.",
+ "fonte": "AWS Terrain Tiles (terrarium), dominio publico; sobre o Brasil o dado e SRTM",
+ "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+ "licenca": "dominio publico (SRTM) — sem chave, sem cadastro",
+ "nao_serve_para": "os patamares do recinto. 30 m de resolucao dao ~27 pixels no recinto inteiro e os taludes somem. A bacia continua vindo da planta.",
+ "centro": {
+  "lat": -25.73144,
+  "lon": -53.07627
+ },
+ "altitude_do_sitio_m": 602.0,
+ "zoom": 12,
+ "metros_por_pixel": 34.43,
+ "lado_px": 699,
+ "lado_m": 24065.7,
+ "amortecimento": {
+  "comeca_m": 600.0,
+  "inteiro_m": 1500.0,
+  "por_que": "o recinto tem geometria medida e o DEM de 30 m nao pode mexer nela"
+ },
+ "desnivel_m": {
+  "min": -435.0,
+  "max": 117.0,
+  "p05": -201.0,
+  "p95": 20.0
+ },
+ "grid": "assets/relevo/entorno_alturas.npy"
+}

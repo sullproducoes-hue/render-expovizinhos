@@ -1,0 +1,35 @@
+{
+ "_procedencia": "registro — conferencia da ferradura contra aereo nadir de 13/08",
+ "quadro": "1 (2)__0076s",
+ "metodo": "angulo entre o eixo dos pavilhoes e a boca da bacia, medido dentro da imagem; somado ao azimute do eixo, que vem do desenho. Nadir, entao angulo na imagem = angulo no mundo.",
+ "pontos_px": {
+  "pavilhao_a": [
+   1760,
+   140
+  ],
+  "pavilhao_b": [
+   2800,
+   820
+  ],
+  "bacia_centro": [
+   1820,
+   1600
+  ],
+  "bacia_boca": [
+   1820,
+   2100
+  ]
+ },
+ "angulo_entre_graus": 56.8,
+ "azimute_pavilhoes": 108.0,
+ "candidatos": [
+  164.8,
+  344.8
+ ],
+ "ambiguidade": "180 graus — a reta dos pavilhoes tem dois sentidos e a foto nao os separa. Desempatada pela planta.",
+ "azimute_da_planta": 150.0,
+ "escolhido": 164.8,
+ "desvio_graus": 14.8,
+ "tolerancia_graus": 20.0,
+ "veredito": "CONFERE"
+}

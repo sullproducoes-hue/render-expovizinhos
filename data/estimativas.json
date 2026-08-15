@@ -96,7 +96,7 @@
    },
    "PALCO AFTER": {
     "altura_m": 8.0, "forma": "cobertura", "material": "MAT_LONA",
-    "fundamento": "palco coberto: a medida de 60 x 14,5 m e a area do palco com as alas, nao a caixa cenica. Nao usa estruturas.palco porque aquele e o palco fixo da arena, de outro tamanho"
+    "fundamento": "palco coberto: a medida de 60 x 14,5 m e a area do palco com as alas, nao a caixa cenica. Nao usa estruturas.palco porque aquele e o palco DE EVENTO (treliça, telão, deck preto), de outro tamanho. CORRIGIDO em 15/08: este comentario dizia 'palco fixo', e o palco fixo e outra estrutura -- concha de alvenaria com base azul, vista no video 1 (4), e que a cena NAO tem. Ver DECISOES.md D024"
    },
    "RESIDÊNCIA": {
     "altura_m": 3.5, "forma": "caixa", "material": "MAT_LONA",

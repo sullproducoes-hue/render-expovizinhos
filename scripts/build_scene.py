@@ -45,11 +45,18 @@ import bpy
 import bmesh
 from mathutils import Matrix, Vector
 
+import avulsas
+import cobertura_entorno
 import estimativas
 import estruturas
+import letreiros
+import mobiliario
 import planos as planos_mod
+import povoamento
 import sol
+import relevo_entorno
 import terreno
+import texturas
 
 # --------------------------------------------------------------------------
 # Constantes proprias do gerador (geometria e bacia vivem em terreno.py)
@@ -176,6 +183,7 @@ def criar_materiais():
     em Overlay a 0,2-0,35 sobre a cor base quebra o padrao repetido visto do
     alto -- e o que mais entrega CG num terreno de 800 m, nao a textura."""
     feitos = {}
+    com_textura = []
     for nome, (cor, rug, met) in MATERIAIS.items():
         mat = bpy.data.materials.new(nome)
         mat.use_nodes = True
@@ -195,7 +203,17 @@ def criar_materiais():
             _variar_por_instancia(mat, bsdf, cor)
         if nome == "MAT_TERRENO":
             _manchar_terreno(mat, bsdf)
+        # Textura PBR CC0 por cima, onde data/texturas.json declara. Vem DEPOIS
+        # da mancha do terreno de proposito: a mancha decide a cor (duas gramas
+        # medidas) e a textura decide relevo e brilho. Uma nao pisa na outra --
+        # o contrato proibe biblioteca virar albedo do terreno.
+        if texturas.aplicar(mat, bsdf, nome, cor, rug):
+            com_textura.append(nome)
         feitos[nome] = mat
+
+    if com_textura:
+        print(f"textura PBR ....... {len(com_textura)} materiais: "
+              f"{', '.join(sorted(com_textura))}")
     return feitos
 
 
@@ -244,8 +262,26 @@ def _manchar_terreno(mat, bsdf):
 
     rampa = nt.nodes.new("ShaderNodeValToRGB")
     rampa.location = (-520, -200)
-    rampa.color_ramp.elements[0].position = 0.38     # mais campo que desgaste
-    rampa.color_ramp.elements[1].position = 0.72
+    # CALIBRADA em 14/08 a noite, e ela estava mentindo. O comentario dizia
+    # "mais campo que desgaste" e o valor 0,38/0,72 entregava meio a meio: a cor
+    # media do recinto saia 0,192 / 0,175 / 0,076 -- 42% do caminho ate a grama
+    # PISADA -- e o p05 dava 0,151, ou seja, em lugar NENHUM o gramado chegava
+    # aos 0,129 medidos no footage. E a mesma falha que ja tinha deixado a cena
+    # "com cara de deserto", em dose menor e por isso mais dificil de ver.
+    #
+    # Medido por render ortografico de topo com mundo branco e view transform
+    # Standard (o pixel vira o albedo), varrendo a posicao da rampa:
+    #
+    #   0,38 / 0,72 -> media 0,1923   42,5% de desgaste   <- estava aqui
+    #   0,50 / 0,85 -> media 0,1508   14,6%               <- esta aqui
+    #   0,58 / 0,90 -> media 0,1427    9,2%
+    #   0,65 / 0,95 -> media 0,1416    8,5%  (satura: o ruido fino nao deixa cair mais)
+    #
+    # 0,50/0,85 e o unico ponto da varredura que atende as duas coisas ao mesmo
+    # tempo: a grama SA domina (a media encosta nos 0,129 medidos) e a mancha de
+    # passagem continua existindo. Passar disso a mancha morre sem baratear nada.
+    rampa.color_ramp.elements[0].position = 0.50
+    rampa.color_ramp.elements[1].position = 0.85
 
     sa = nt.nodes.new("ShaderNodeRGB")
     sa.location = (-520, 80)
@@ -398,20 +434,84 @@ def construir_terreno(dados, col, centro_arena, relevo=None):
     return obj
 
 
-def construir_entorno(col, centro, mats, raio=3000.0):
-    """Disco de terreno ate 3 km, so para fechar o horizonte.
+def _material_do_entorno(mats, raio):
+    """Material proprio do entorno: cobertura do solo REAL, com cor MEDIDA.
+
+    Se `cobertura_entorno.py` nao tiver rodado, devolve o MAT_TERRENO de sempre
+    -- o entorno volta a ser verde uniforme, e o build avisa.
+
+    O par de fontes e o que faz isto valer: o ESA WorldCover (10 m, CC-BY, sem
+    chave) diz O QUE e cada pedaco de chao -- lavoura, mata, campo, agua, cidade
+    --, e `data/materiais-medidos.json` diz QUE COR aquilo tem naquela luz. A
+    lavoura em especial usa a amostra `campo`, que tinha sido medida so como
+    controle do metodo e nunca tinha virado material.
+    """
+    png = cobertura_entorno.caminho()
+    if png is None:
+        print("  entorno: SEM cobertura do solo -- verde uniforme. Rode "
+              "`python scripts/cobertura_entorno.py`")
+        return mats["MAT_TERRENO"]
+
+    meta = json.loads((RAIZ / "data" / "cobertura-entorno.json").read_text(
+        encoding="utf-8"))
+    lado = float(meta["lado_m"])
+
+    mat = bpy.data.materials.new("MAT_ENTORNO")
+    mat.use_nodes = True
+    nt = mat.node_tree
+    bsdf = nt.nodes.get("Principled BSDF")
+    bsdf.inputs["Roughness"].default_value = 0.95
+
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    coord.location = (-900, 0)
+    mapa = nt.nodes.new("ShaderNodeMapping")
+    mapa.location = (-700, 0)
+    # o PNG cobre `lado` metros centrados na origem; a UV vai de 0 a 1
+    for eixo in range(2):
+        mapa.inputs["Scale"].default_value[eixo] = 1.0 / lado
+        mapa.inputs["Location"].default_value[eixo] = 0.5
+    nt.links.new(coord.outputs["Object"], mapa.inputs["Vector"])
+
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.location = (-480, 0)
+    tex.image = bpy.data.images.load(str(png), check_existing=True)
+    tex.extension = "EXTEND"   # fora do PNG repete a borda; REPEAT espelharia
+    # a cidade do outro lado do mapa
+    nt.links.new(mapa.outputs["Vector"], tex.inputs["Vector"])
+    nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+
+    # cor de viewport: a media do censo, so para o modo solido nao abrir cinza
+    mat.diffuse_color = (0.18, 0.19, 0.09, 1.0)
+    mat.roughness = 0.95
+
+    censo = meta["censo"]
+    print("  entorno: cobertura do solo REAL -- " + ", ".join(
+        f"{n} {c['fracao_pct']:.0f}%" for n, c in list(censo.items())[:4]))
+    return mat
+
+
+def construir_entorno(col, centro, mats, raio=None):
+    """Terreno regional que fecha o horizonte -- agora com o relevo REAL.
 
     Sem isto o terreno acaba em 969 x 545 m e, com o sol a 10 graus e a camera
     baixa, aparece CEU ABAIXO DA LINHA DO HORIZONTE -- o tell classico de CG,
     que mata o quadro por melhor que esteja a luz.
 
     Fora de r=150 m do centro da arena, `terreno.elevacao` e constante em 10 m
-    (ver PATAMARES), entao o disco casa com a borda sem costura. Fica 2 cm
+    (ver PATAMARES), entao o disco casa com a borda sem costura. Fica 5 cm
     abaixo para nao brigar em z com o terreno detalhado.
 
-    E liso, e isso e uma limitacao declarada: a regiao de Dois Vizinhos e
-    ondulada. Relevo real de entorno sai de TOPODATA/INPE (SRTM refinado, 30 m,
-    uso livre) com imagem Sentinel-2 -- cabe na verba zero, mas e outra rodada.
+    **Deixou de ser liso em 14/08.** `scripts/relevo_entorno.py` baixa o DEM
+    publico (AWS Terrain Tiles / SRTM, sem chave) e grava o desnivel em relacao
+    ao sitio; aqui ele entra por cima da elevacao da planta. O sitio esta a
+    602 m e a regiao cai ate -435 m dentro de 12 km -- o terreno DESPENCA para
+    o norte, e e isso que da perfil ao horizonte em vez de linha de regua.
+
+    O DEM foi conferido contra o opentopodata (SRTM 30 m, outra fonte) em 5
+    pontos ao longo de 16 km: bate dentro de +-5 m.
+
+    Se o DEM nao tiver sido baixado, cai no disco chapado de antes e AVISA --
+    a cena continua saindo, so que com a limitacao antiga e dita em voz alta.
     """
     # Grid grosso que usa a MESMA funcao de elevacao do terreno detalhado, e
     # fica 5 cm abaixo dele. Assim os dois casam sem costura e sem z-fighting:
@@ -421,7 +521,22 @@ def construir_entorno(col, centro, mats, raio=3000.0):
     # Estava errado e escondia a cena: a bacia da arena e ESCAVADA ate z=0,
     # entao o disco passava por cima dela e da metade do terreno. So apareceu
     # na conferencia de topo -- de frente, com a camera baixa, nao dava para ver.
-    div = 120
+    dem = relevo_entorno.carregar()
+    if dem is None:
+        grid_dem, mpp, lado = None, None, None
+        raio = raio or 3000.0
+        div = 120
+        print("  entorno: SEM relevo real -- disco chapado de 3 km. Rode "
+              "`python scripts/relevo_entorno.py` para o horizonte ganhar perfil")
+    else:
+        grid_dem, mpp, lado = dem
+        # o disco vai ate onde o DEM vai, e nem um metro alem: fora dele o
+        # desnivel seria zero e voltaria a reta que estamos consertando
+        raio = raio or lado / 2.0
+        # 34 m/px de DEM em 24 km pedem malha fina o bastante para a silhueta
+        # do morro nao virar escada. 500 divisoes = 48 m por quad.
+        div = 500
+
     bpy.ops.mesh.primitive_grid_add(x_subdivisions=div, y_subdivisions=div,
                                     size=1.0, location=(0, 0, 0))
     obj = bpy.context.active_object
@@ -433,14 +548,31 @@ def construir_entorno(col, centro, mats, raio=3000.0):
     for v in obj.data.vertices:
         v.co.x *= raio * 2.0
         v.co.y *= raio * 2.0
-        v.co.z = terreno.elevacao(v.co.x, v.co.y, centro) - 0.05
+        z = terreno.elevacao(v.co.x, v.co.y, centro) - 0.05
+        if grid_dem is not None:
+            # o desnivel ja vem amortecido a zero dentro de 600 m do centro,
+            # entao a soma nao toca no recinto medido
+            z += relevo_entorno.altura(grid_dem, mpp, v.co.x, v.co.y)
+        v.co.z = z
 
-    aplicar(obj, mats["MAT_TERRENO"])
+    mat_entorno = _material_do_entorno(mats, raio)
+    # entra no dicionario: o despacho do final do main() reaplica material pelo
+    # NOME que o objeto declara, e um nome fora do dicionario derruba o build
+    mats[mat_entorno.name] = mat_entorno
+    aplicar(obj, mat_entorno)
     # declara tambem na propriedade, senao o dispatch do main o acusa de "sem
     # material declarado" a cada build -- aviso falso que ja despistou uma vez
-    obj["material"] = "MAT_TERRENO"
-    obj["nota"] = ("horizonte ate 3 km; segue a mesma elevacao do terreno, mas "
-                   "grosso e sem relevo regional -- TOPODATA/Sentinel-2 e outra rodada")
+    obj["material"] = mat_entorno.name
+    if grid_dem is not None:
+        obj["nota"] = (f"horizonte ate {raio/1000:.1f} km com relevo REAL "
+                       f"(AWS Terrain Tiles/SRTM, conferido contra opentopodata "
+                       f"em +-5 m). Falta cobertura do solo: lavoura e mata "
+                       f"regional ainda saem com a cor da grama do recinto")
+        print(f"  entorno: relevo real, {raio/1000:.1f} km de raio, "
+              f"{div}x{div} ({(div+1)**2//1000}k vertices)")
+    else:
+        obj["nota"] = ("horizonte ate 3 km, disco CHAPADO -- limitacao "
+                       "declarada, ver scripts/relevo_entorno.py")
     return obj
 
 
@@ -797,6 +929,112 @@ def malha_de_arvore(porte):
     return malha
 
 
+def malha_de_arbusto(porte):
+    """UMA malha de arbusto, compartilhada -- mesma economia da arvore.
+
+    Nao tem tronco: arbusto de contencao de talude e massa de folha encostando
+    no chao. Sao tres bolhas baixas e achatadas, deslocadas, com o mesmo
+    material MEDIDO da copa.
+    """
+    malha = bpy.data.meshes.new("ArbustoBase")
+    bm = bmesh.new()
+    for dx, dy, dz, k in ((0.00, 0.00, 0.10, 1.00),
+                          (0.55, 0.30, -0.12, 0.72),
+                          (-0.48, -0.36, -0.15, 0.66)):
+        bmesh.ops.create_icosphere(
+            bm, subdivisions=1, radius=k,
+            matrix=Matrix.Translation(Vector((dx, dy, dz)))
+            @ Matrix.Diagonal(Vector((1.0, 0.92, 0.60, 1.0))))
+    bmesh.ops.transform(bm, matrix=Matrix.Translation(Vector((0, 0, 0.55))),
+                        verts=bm.verts)
+    bm.to_mesh(malha)
+    bm.free()
+    for p in malha.polygons:
+        p.use_smooth = True
+    return malha
+
+
+def _declive(x, y, centro_arena, passo=2.0):
+    """Inclinacao do terreno em (x, y), em m/m. Diferenca central.
+
+    E ela que separa talude de platao: o rotulo 'Talude' fica ONDE CABE no
+    desenho, nem sempre em cima do declive. Plantar pelo rotulo puro encheria
+    de arbusto o chao plano ao lado.
+    """
+    zx = (terreno.elevacao(x + passo, y, centro_arena)
+          - terreno.elevacao(x - passo, y, centro_arena)) / (2 * passo)
+    zy = (terreno.elevacao(x, y + passo, centro_arena)
+          - terreno.elevacao(x, y - passo, centro_arena)) / (2 * passo)
+    return math.hypot(zx, zy)
+
+
+def construir_arbustos_de_talude(dados, col, centro_arena, veg, bbox=None,
+                                 solidos=None):
+    """Arbusto nos 15 taludes que a planta anota. Contrato em vegetacao.json.
+
+    O que faz isto ser medida e nao enfeite: o arbusto so nasce onde o terreno
+    TEM DECLIVE (`declive_minimo`, 0,08 m/m). O rotulo da a regiao, o declive da
+    o lugar. Onde o talude nao existe na geometria, nao nasce nada -- e isso e
+    resultado, nao falha: depois que a bacia virou ferradura, o setor aberto
+    ficou plano e nao deve ganhar arbusto de contencao.
+    """
+    tipo = veg["tipos"].get("talude")
+    if tipo is None or "Talude" not in veg.get("por_rotulo", {}):
+        return 0, 0
+
+    porte = veg["porte_arbusto"]
+    malha = malha_de_arbusto(porte)
+    mat = bpy.data.materials.get(porte.get("material", "MAT_COPA"))
+    if mat:
+        malha.materials.append(mat)
+
+    rnd = random.Random(veg["semente"] + 17)   # semente propria: mexer no
+    # arbusto nao pode reposicionar as 418 arvores ja conferidas
+    origem = dados["_origem"]
+    raio = tipo["raio_m"]
+    dmin = tipo["declive_minimo"]
+    plantados, recusados = 0, 0
+    raio_livre = veg.get("raio_livre_da_arena_m", 49.0)
+
+    for z in dados["zonas"]:
+        if veg["por_rotulo"].get(z["rotulo"]) != "talude":
+            continue
+        cx, cy = terreno.para_mundo(z["x"], z["y"], origem)
+        quantos = max(1, int(math.pi * raio ** 2 / tipo["m2_por_arbusto"]))
+        for _ in range(quantos):
+            a = rnd.uniform(0, 2 * math.pi)
+            r = raio * math.sqrt(rnd.random())
+            x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+            if not dentro(bbox, x, y):
+                recusados += 1
+                continue
+            if math.hypot(x - centro_arena[0], y - centro_arena[1]) < raio_livre:
+                recusados += 1                      # pista da arena
+                continue
+            if _declive(x, y, centro_arena) < dmin:
+                recusados += 1                      # chao plano: nao e talude
+                continue
+            if any(q[0] - 2.0 <= x <= q[2] + 2.0 and q[1] - 2.0 <= y <= q[3] + 2.0
+                   for _n, q, _c in (solidos or [])):
+                recusados += 1
+                continue
+
+            obj = bpy.data.objects.new("ArbustoTalude", malha)
+            col.objects.link(obj)
+            obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
+            ka = 1.0 + rnd.uniform(-1, 1) * porte["altura_variacao"]
+            kr = 1.0 + rnd.uniform(-1, 1) * porte["raio_variacao"]
+            obj.scale = (porte["raio_m"] * kr,
+                         porte["raio_m"] * kr * rnd.uniform(0.85, 1.15),
+                         porte["altura_m"] * ka)
+            obj.rotation_euler = (0.0, 0.0, rnd.uniform(0, 2 * math.pi))
+            obj["estimado"] = True
+            obj["fundamento"] = "vegetacao.json/tipos.talude + filtro de declive"
+            plantados += 1
+
+    return plantados, recusados
+
+
 def construir_vegetacao(dados, col, centro_arena, bbox=None, solidos=None):
     """Os 6 Bosques e as 2 Matas Nativas que a planta nomeia e nao desenha.
 
@@ -838,6 +1076,11 @@ def construir_vegetacao(dados, col, centro_arena, bbox=None, solidos=None):
     for z in dados["zonas"]:
         tipo_nome = veg["por_rotulo"].get(z["rotulo"])
         if tipo_nome is None:
+            continue
+        if tipo_nome == "talude":
+            # talude leva ARBUSTO, e quem planta e construir_arbustos_de_talude.
+            # Sem esta linha o laco plantaria arvore de 12 m no talude, porque
+            # "Talude" passou a existir em por_rotulo nesta rodada.
             continue
         tipo = veg["tipos"][tipo_nome]
         cx, cy = terreno.para_mundo(z["x"], z["y"], origem)
@@ -1649,6 +1892,26 @@ def main():
         for o in cols["EVENTO"].objects if o.type == "MESH"]
     n_arv, n_arv_rec = construir_vegetacao(dados, cols["ESTIMADO"], centro, bbox,
                                            solidos=ocupado)
+
+    caminho_veg = RAIZ / "data" / "vegetacao.json"
+    n_arb = n_arb_rec = 0
+    if caminho_veg.exists():
+        n_arb, n_arb_rec = construir_arbustos_de_talude(
+            dados, cols["ESTIMADO"], centro,
+            json.loads(caminho_veg.read_text(encoding="utf-8")),
+            bbox, solidos=ocupado)
+        print(f"  arbustos de talude .. {n_arb} ({n_arb_rec} recusados: "
+              f"chao plano, pista ou predio)")
+
+    n_pov, n_pov_rec = povoamento.construir(dados, bpy.context.scene.collection,
+                                            centro, solidos=ocupado, bbox=bbox)
+    mobiliario.construir(dados, bpy.context.scene.collection, centro,
+                         solidos=ocupado, bbox=bbox)
+    letreiros.construir(dados, bpy.context.scene.collection, centro, pacote)
+    avulsas.construir(dados, bpy.context.scene.collection, centro,
+                      fonte=letreiros._fonte(json.loads(
+                          (RAIZ / "data" / "letreiros.json").read_text(
+                              encoding="utf-8"))["tipografia"]["arquivo"]))
 
     n_cam = 0
     if not args.sem_camera:

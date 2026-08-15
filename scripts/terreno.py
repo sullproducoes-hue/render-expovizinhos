@@ -136,6 +136,65 @@ def centro_da_arena(dados):
 # --------------------------------------------------------------------------
 # Bacia
 
+# --------------------------------------------------------------------------
+# A bacia nao e um cilindro -- ver data/bacia.json
+#
+# Duas testemunhas independentes da planta concordam: de 240 a 360 graus de
+# azimute NAO ha nenhuma das 15 anotacoes "Talude" e NENHUM dos 93 estandes da
+# serie C. O arrimo envolve ~210 graus e a bacia fica ABERTA em ~120 -- que e
+# por onde o palco olha para a pista e por onde animal e veiculo chegam em
+# nivel.
+#
+# (O RETOMAR dizia "aberta para nordeste". Estava errado: nordeste e azimute
+# ~45 e la estao QUATRO dos 15 taludes. A abertura aponta para sul-sudeste.)
+#
+# A mudanca so alcanca o que a medicao alcanca: os taludes medidos vao ate
+# 137 m, entao em r = 150 m os dois setores se reencontram na mesma cota. O
+# platao do recinto continua em 10 m em todos os rumos -- abrir ate a borda
+# rebaixaria em 10 m a AREA RESTRITA, o bosque e a mata sem uma unica medida
+# que peca isso.
+ABERTURA_INICIO = 240.0   # graus
+ABERTURA_FIM = 360.0
+ABERTURA_TRANSICAO = 20.0
+PISO_ABERTO_R = 78.0      # ate onde o chao da pista se estende no setor aberto
+REENCONTRO_R = 150.0      # onde os dois setores voltam a mesma cota
+
+# O perfil do setor aberto: mesma cota final, outro caminho ate ela.
+PATAMARES_ABERTO = [
+    (0.0, PISO_ABERTO_R, 0.0, 0.0),
+    (PISO_ABERTO_R, REENCONTRO_R, 0.0, 10.0),
+    (REENCONTRO_R, 9999.0, 10.0, 10.0),
+]
+
+
+def _smoothstep(t):
+    t = max(0.0, min(1.0, t))
+    return t * t * (3.0 - 2.0 * t)
+
+
+def _perfil(r, bandas):
+    for r_int, r_ext, z_int, z_ext in bandas:
+        if r < r_ext:
+            if r <= r_int:
+                return z_int
+            return z_int + (z_ext - z_int) * _smoothstep((r - r_int) / (r_ext - r_int))
+    return bandas[-1][3]
+
+
+def peso_aberto(azimute_deg):
+    """Quanto o ponto pertence ao setor SEM arrimo, de 0 a 1.
+
+    Corte reto deixaria uma parede radial de 3,5 m que nenhuma planta mostra,
+    entao as duas pontas do setor entram por smoothstep.
+    """
+    a = azimute_deg % 360.0
+    if not (ABERTURA_INICIO <= a < ABERTURA_FIM):
+        return 0.0
+    # quanto o ponto esta para DENTRO do setor, medido da ponta mais proxima
+    dentro = min(a - ABERTURA_INICIO, ABERTURA_FIM - a)
+    return _smoothstep(dentro / ABERTURA_TRANSICAO)
+
+
 def elevacao(x, y, centro_arena):
     """Altura do terreno em metros, para um ponto do mundo.
 
@@ -143,16 +202,20 @@ def elevacao(x, y, centro_arena):
     disponiveis (SRTM, Copernicus, NASADEM, AW3D30) sao todos de ~30 m: num
     recinto de 800 m isso da cerca de 27 amostras de ponta a ponta, e os
     patamares de poucos metros que o cliente descreve simplesmente somem.
+
+    Desde 14/08 ela tambem depende do AZIMUTE: ver o bloco acima e
+    data/bacia.json. Fora de r = 150 m os dois perfis dao o mesmo valor, entao
+    nada longe da arena mudou.
     """
-    r = math.hypot(x - centro_arena[0], y - centro_arena[1])
-    for r_int, r_ext, z_int, z_ext in PATAMARES:
-        if r < r_ext:
-            if r <= r_int:
-                return z_int
-            t = (r - r_int) / (r_ext - r_int)
-            t = t * t * (3.0 - 2.0 * t)   # smoothstep no talude
-            return z_int + (z_ext - z_int) * t
-    return PATAMARES[-1][3]
+    dx, dy = x - centro_arena[0], y - centro_arena[1]
+    r = math.hypot(dx, dy)
+    z_arrimo = _perfil(r, PATAMARES)
+    if r >= REENCONTRO_R:
+        return z_arrimo          # os dois perfis coincidem: nem calcula o azimute
+    w = peso_aberto(math.degrees(math.atan2(dy, dx)))
+    if w <= 0.0:
+        return z_arrimo
+    return z_arrimo + (_perfil(r, PATAMARES_ABERTO) - z_arrimo) * w
 
 
 def polar(centro, raio_m, azimute_deg):

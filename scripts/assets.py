@@ -195,6 +195,70 @@ def baixar_textura(slug, mapas, res=RES_TEXTURA):
     return entradas
 
 
+def baixar_modelo(slug, res="1k"):
+    """Baixa o .blend de um modelo do Poly Haven E as texturas que ele referencia.
+
+    O `.blend` sozinho nao serve: ele aponta para as texturas por caminho
+    RELATIVO, e sem elas o objeto aparece rosa de textura faltando. A API
+    entrega essa lista em `include`, com o caminho relativo de cada uma -- e e
+    esse caminho que tem de ser respeitado em disco, senao o Blender nao acha.
+
+    1k e nao 4k, e por um motivo diferente do da textura de chao: cadeira e
+    mesa aparecem a 4-15 m e ocupam poucas dezenas de pixels. 4k aqui seria
+    16x a memoria para detalhe que nao chega ao painel.
+    """
+    arquivos = _json(f"{API_PH}/files/{slug}")
+    info = _json(f"{API_PH}/info/{slug}")
+
+    entrada = arquivos.get("blend", {}).get(res, {}).get("blend")
+    if not entrada:
+        raise SystemExit(f"{slug}: nao existe blend/{res} na API")
+
+    pasta = ASSETS / "modelo" / slug
+    destino = pasta / f"{slug}_{res}.blend"
+    if destino.exists() and _md5(destino) == entrada.get("md5"):
+        print(f"  {slug}: ja esta em disco e o md5 confere")
+    else:
+        print(f"  {slug}: baixando {entrada['size'] / 1e6:.2f} MB + "
+              f"{len(entrada.get('include', {}))} texturas...")
+        _baixar(entrada["url"], destino, entrada.get("md5"))
+
+    for rel, sub in (entrada.get("include") or {}).items():
+        alvo = pasta / rel.replace("\\", "/")
+        if alvo.exists() and _md5(alvo) == sub.get("md5"):
+            continue
+        _baixar(sub["url"], alvo, sub.get("md5"))
+
+    return {
+        "arquivo": str(destino.relative_to(RAIZ)).replace("\\", "/"),
+        "tipo": "modelo",
+        "nome": info.get("name", slug),
+        "fonte": "Poly Haven",
+        "licenca": "CC0",
+        "autores": sorted(info.get("authors", {}).keys()),
+        "url": f"https://polyhaven.com/a/{slug}",
+        "md5": entrada.get("md5"),
+        "bytes": entrada.get("size"),
+        "resolucao": res,
+        # o tamanho real e o que decide se o objeto esta na escala do mundo:
+        # modelo fora de escala num recinto de 800 m nao se percebe de longe
+        "dimensoes_mm": info.get("dimensions"),
+        "texturas_anexas": sorted((entrada.get("include") or {}).keys()),
+    }
+
+
+def baixar_mobiliario():
+    """Le data/mobiliario.json e baixa exatamente o que ele declara."""
+    contrato = json.loads((RAIZ / "data" / "mobiliario.json").read_text(
+        encoding="utf-8"))
+    res = contrato.get("resolucao", "1k")
+    entradas = []
+    for item in contrato["pecas"]:
+        print(f"{item['papel']}: {item['slug']}")
+        entradas.append(baixar_modelo(item["slug"], res))
+    return entradas
+
+
 def baixar_do_contrato():
     """Le data/texturas.json e baixa exatamente o que ele declara.
 
@@ -253,7 +317,9 @@ def escrever_manifesto():
     ]
 
     for tipo, titulo in (("hdri", "Céu"), ("textura", "Texturas"),
-                         ("vegetacao", "Vegetação")):
+                         ("vegetacao", "Vegetação"),
+                         ("modelo", "Modelos 3D"),
+                         ("dado", "Dado geográfico (relevo e cobertura do solo)")):
         do_tipo = [i for i in itens if i.get("tipo") == tipo]
         if not do_tipo:
             continue
@@ -319,6 +385,8 @@ def main():
                     help="baixa estes HDRIs em 4k .hdr")
     ap.add_argument("--texturas", action="store_true",
                     help="baixa os mapas que data/texturas.json declara")
+    ap.add_argument("--mobiliario", action="store_true",
+                    help="baixa os modelos que data/mobiliario.json declara")
     ap.add_argument("--manifesto", action="store_true",
                     help="reescreve assets/MANIFESTO.md a partir da procedencia")
     args = ap.parse_args()
@@ -342,6 +410,12 @@ def main():
         _gitignore()
         entradas = baixar_do_contrato()
         registrar(entradas)
+        escrever_manifesto()
+        return
+
+    if args.mobiliario:
+        _gitignore()
+        registrar(baixar_mobiliario())
         escrever_manifesto()
         return
 

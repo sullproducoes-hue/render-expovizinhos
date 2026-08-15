@@ -1,0 +1,77 @@
+{
+ "o_que_e": "As pecas que o mapa e o audio descrevem e que ainda nao tinham geometria. As que tem posicao conhecida vao para o lugar; as que NAO tem vao para a AREA DE ESPERA ao lado do mapa, etiquetadas, para o Natan arrastar no Blender.",
+
+ "ordem_dele_15_08": "'faça o silo ao lado do mapa que eu reposiciono no blender depois, quero que crie todos as tendas e estruturas e posicione no lugar que ja sabe mas o que não sabe quero que deixe do lado'.",
+
+ "por_que_nao_veio_de_biblioteca": {
+  "free3d": "os dois silos gratuitos da busca sao 'Licenca de Uso Pessoal' -- e isto e entrega de CLIENTE. Alem disso sao modelos de impressao 3D ('pet hideaway novelties'), sem textura e fora de escala agricola.",
+  "turbosquid": "exige criar conta ate para o gratuito, e conta eu nao crio.",
+  "polyhaven": "521 modelos, nenhum silo, nenhuma tenda de evento -- e biblioteca de props de interior.",
+  "conclusao": "os dois caminhos estao fechados por LICENCA e por CADASTRO, nao por dificuldade. Silo, tenda e porteira sao geometria de revolucao e caixa: sai mais rapido feito do que negociado, na escala certa e ja com os materiais MEDIDOS da cena.",
+  "se_ele_quiser_biblioteca_mesmo_assim": "com o login dele feito na maquina, o download passa a ser possivel -- mas a licenca de uso pessoal continua barrando o free3d. O TurboSquid gratuito e Royalty Free e SERVE; falta so a conta."
+ },
+
+ "area_de_espera": {
+  "canto_m": [520.0, -240.0],
+  "passo_m": 34.0,
+  "colunas": 5,
+  "por_que_aqui": "a prancha vai a ~485 m em x e ~273 m em y. O canto em (520, -240) fica FORA do terreno detalhado e fora do recinto, mas dentro do entorno -- entao as pecas pousam em chao existente, ficam visiveis na vista de topo e nao aparecem em nenhum dos 22 planos.",
+  "etiqueta": "cada peca leva um texto flutuante com o nome, na mesma fonte dos letreiros, para nao ter que clicar objeto por objeto no outliner."
+ },
+
+ "pecas": [
+  {"nome": "Silo", "tipo": "silo", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"diametro": 9.0, "altura_cilindro": 16.0, "altura_cone": 3.2},
+   "fundamento": "silo de graos de propriedade rural media no Sudoeste do PR: 9 m de diametro e 16 m de fuste e a faixa comum. Leva cone de teto, escada lateral e as ondulacoes da chapa corrugada.",
+   "audio_ou_prova": "PROVA EM IMAGEM: o quadro DJI_20251129182345_0168_D 00:00:52 mostra o conjunto de silos atras do recinto. A POSICAO nao esta medida -- por isso vai para a espera, como ele mandou."},
+
+  {"nome": "Conjunto de silos", "tipo": "silo_conjunto", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"unidades": 3, "espacamento": 11.0},
+   "fundamento": "silo raramente vem sozinho; o quadro mostra um conjunto."},
+
+  {"nome": "Tenda piramidal 10x10", "tipo": "tenda_piramidal", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"lado": 10.0, "pe_direito": 3.0, "altura_total": 5.2},
+   "fundamento": "a tenda de feira padrao no Brasil e 10x10 com pe-direito de 3 m. E a que cobre estande de expositor."},
+
+  {"nome": "Tenda piramidal 5x5", "tipo": "tenda_piramidal", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"lado": 5.0, "pe_direito": 2.6, "altura_total": 3.9},
+   "fundamento": "a menor da mesma familia, para guiche e ponto de venda."},
+
+  {"nome": "Tenda galpao", "tipo": "tenda_galpao", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"largura": 15.0, "comprimento": 30.0, "pe_direito": 3.5, "altura_total": 6.5},
+   "fundamento": "tenda de duas aguas, a que cobre praca de alimentacao e area de leilao."},
+
+  {"nome": "Porteira da Fazendinha", "tipo": "porteira", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"vao": 6.0, "altura_moirao": 3.6, "altura_travessa": 4.4},
+   "audio_ou_prova": "AUDIO 1 [03:18] 'daí faz uma porteira bacana pra ser a fazendinha'. Pedido literal.",
+   "fundamento": "porteira de madeira com travessa alta, do tipo entrada de fazenda. A POSICAO e a pendencia 2 com o cliente -- ele ia mandar print e nao mandou, entao vai para a espera."},
+
+  {"nome": "Guiche de alimentacao", "tipo": "guiche", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"largura": 3.0, "profundidade": 2.2, "altura": 2.8},
+   "audio_ou_prova": "AUDIO 1 [01:04] 'os guichezinhos do pessoal vendendo comida, bebida'. Pedido literal.",
+   "fundamento": "trailer/quiosque de balcao com toldo."},
+
+  {"nome": "Curral de manejo", "tipo": "curral", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"largura": 18.0, "comprimento": 26.0, "altura": 1.7, "baias": 6},
+   "fundamento": "as MANGUEIRAS da planta sao galpao dividido em dezenas de currais, e o footprint delas foi RECUSADO (docs/FOOTPRINTS.md: 14,1 x 2,4 m era o tamanho da palavra escrita no mapa). Por isso a peca existe e a posicao nao."},
+
+  {"nome": "Torre de iluminacao", "tipo": "torre_luz", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"altura": 12.0, "base": 1.6},
+   "fundamento": "evento noturno precisa de torre de refletor. O footage tem material noturno, entao existe no recinto real."},
+
+  {"nome": "Brinquedo inflavel", "tipo": "inflavel", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"largura": 8.0, "profundidade": 8.0, "altura": 5.0},
+   "audio_ou_prova": "AUDIO 1 [03:31] 'onde vai ter os brinquedos infláveis'. Pedido literal.",
+   "fundamento": "castelo inflavel, forma de bloco com torres nos cantos."},
+
+  {"nome": "Trator", "tipo": "trator", "quantos": 1, "posicao": "espera",
+   "medidas_m": {"comprimento": 4.6, "largura": 2.2, "altura": 2.9},
+   "fundamento": "PROXY GROSSEIRO, e esta declarado: e a pendencia 14d. Trator de verdade tem cabine de vidro, pneu com garra e capo esculpido -- nada disso esta aqui. Serve de massa e escala no anel de maquinas ate haver modelo com licenca que sirva."}
+ ],
+
+ "o_que_continua_sem_peca": {
+  "colheitadeira e implementos": "14d. Forma complexa demais para valer proxy: uma colheitadeira mal feita chama mais atencao que a ausencia dela.",
+  "logo AGROSHOW 2026": "15c, esperando o arquivo.",
+  "socalco da lavoura": "11c, relevo de ~10 m que o DEM de 30 m nao ve."
+ }
+}

@@ -32,6 +32,21 @@ mesmos arquivos, conferidos por md5.
 | `assets/textura/gravel_road_Rough_2k.jpg` | Gravel Road — Rough | Poly Haven | CC0 | Amal Kumar | https://polyhaven.com/a/gravel_road | `bbd4f6c7c1b8` |
 | `assets/textura/gravel_road_nor_gl_2k.jpg` | Gravel Road — nor_gl | Poly Haven | CC0 | Amal Kumar | https://polyhaven.com/a/gravel_road | `7c25211b3cf3` |
 
+## Modelos 3D
+
+| arquivo | asset | fonte | licença | autores | URL | md5 |
+|---|---|---|---|---|---|---|
+| `assets/modelo/plastic_monobloc_chair_01/plastic_monobloc_chair_01_1k.blend` | Plastic Monobloc Chair 01 | Poly Haven | CC0 | Kuutti Siitonen | https://polyhaven.com/a/plastic_monobloc_chair_01 | `c5c2ee7961ad` |
+| `assets/modelo/wooden_picnic_table/wooden_picnic_table_1k.blend` | Wooden Picnic Table | Poly Haven | CC0 | Ulan Cabanilla | https://polyhaven.com/a/wooden_picnic_table | `09183939c50b` |
+| `assets/modelo/wooden_table_02/wooden_table_02_1k.blend` | Wooden Table 02 | Poly Haven | CC0 | Serhii Khromov | https://polyhaven.com/a/wooden_table_02 | `929cb0272746` |
+
+## Dado geográfico (relevo e cobertura do solo)
+
+| arquivo | asset | fonte | licença | autores | URL | md5 |
+|---|---|---|---|---|---|---|
+| `assets/relevo/entorno_alturas.npy` | Relevo do entorno (desnivel em relacao ao sitio) | AWS Terrain Tiles (terrarium) — dado SRTM sobre o Brasil | dominio publico (SRTM) — sem chave, sem cadastro | NASA/NGA (SRTM), Mapzen/Linux Foundation (tiles) | https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png | `e303501cc0ab` |
+| `assets/relevo/entorno_cobertura.png` | Cobertura do solo do entorno, pintada com as cores medidas no footage | ESA WorldCover 10 m 2021 v200 | CC-BY 4.0 — ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) | ESA WorldCover project | https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ | `493c8f4cbe2c` |
+
 ## Por que estes HDRIs
 
 A latitude do céu decide: um HDRI capturado perto de −25,7°

@@ -1,0 +1,71 @@
+{
+ "o_que_e": "Mobiliario da praca de alimentacao e do cafe colonial, em modelo CC0 de verdade -- nao proxy. Pedido literal do cliente no audio.",
+
+ "o_pedido_dele": "[00:57] 'Então, mesas, cadeiras, o pessoal com os guichês lá, todos naquele lado da churrasqueira lá' e [01:04] 'os guichezinhos do pessoal vendendo comida, bebida'. E a praca de alimentacao aparece duas vezes no percurso: a COBERTA no pavilhao e a ABERTA embaixo do bosque, [02:05].",
+
+ "por_que_isto_e_diferente_do_povoamento": "Aqui o modelo CC0 EXISTE e serve. Gente e gado nao tem em CC0 utilizavel e por isso viraram proxy (data/povoamento.json); mesa e cadeira o Poly Haven tem, em CC0, com textura, na escala certa. Era o caminho mais barato do projeto e estava parado.",
+
+ "resolucao": "1k",
+ "por_que_1k": "Cadeira e mesa aparecem a 4-15 m de camera e ocupam poucas dezenas de pixels no painel P2,9. 4k seria 16x a memoria para detalhe que nao chega na tela. Diferente do chao, que ocupa metade do quadro.",
+
+ "semente": 20260814,
+
+ "pecas": [
+  {
+   "slug": "plastic_monobloc_chair_01",
+   "papel": "cadeira",
+   "dimensoes_m": [0.64, 0.63, 0.88],
+   "por_que_esta": "e a cadeira branca de plastico monobloco -- a cadeira de evento no Brasil. Nao ha escolha mais fiel para praca de alimentacao de feira agropecuaria, e ela e reconhecivel de longe pela silhueta e pelo branco.",
+   "procedencia_da_escolha": "DECLARADA por mim. Nao ha quadro de praca cheia no acervo para conferir -- o footage e de fim de evento e de sobrevoo."
+  },
+  {
+   "slug": "wooden_picnic_table",
+   "papel": "mesa_aberta",
+   "dimensoes_m": [2.24, 3.02, 0.75],
+   "por_que_esta": "mesa de piquenique com banco junto, que e o que se usa em area aberta sob arvore. Vai na Praca de Alimentacao ABERTA, a do bosque [02:05], onde nao ha cobertura para prender mesa e cadeira separadas.",
+   "procedencia_da_escolha": "DECLARADA."
+  },
+  {
+   "slug": "wooden_table_02",
+   "papel": "mesa_coberta",
+   "dimensoes_m": [1.13, 0.71, 0.80],
+   "por_que_esta": "mesa retangular de 1,13 x 0,71 m, tamanho de mesa de refeicao para quatro. Vai na praca COBERTA, com as cadeiras de plastico em volta.",
+   "procedencia_da_escolha": "DECLARADA."
+  }
+ ],
+
+ "arranjos": [
+  {
+   "zona": "Praça de Alimentação Coberta",
+   "conjuntos": 26,
+   "raio_m": 30.0,
+   "mesa": "mesa_coberta",
+   "cadeiras_por_mesa": 4,
+   "raio_da_cadeira_m": 0.95,
+   "fundamento": "a praca coberta mede 145,5 x 33,6 m (footprint MEDIDO, docs/FOOTPRINTS.md). 26 conjuntos de 4 lugares dao 104 assentos, que e coerente com as 120 pessoas que o censo poe ali."
+  },
+  {
+   "zona": "Praça de Alimentação Aberta",
+   "conjuntos": 16,
+   "raio_m": 26.0,
+   "mesa": "mesa_aberta",
+   "cadeiras_por_mesa": 0,
+   "fundamento": "mesa de piquenique ja tem banco. 16 mesas x 6 lugares = 96, para as 70 pessoas do censo -- area aberta tem mais mesa vazia que a coberta."
+  },
+  {
+   "zona": "Café Colonial",
+   "conjuntos": 14,
+   "raio_m": 16.0,
+   "mesa": "mesa_coberta",
+   "cadeiras_por_mesa": 4,
+   "raio_da_cadeira_m": 0.95,
+   "fundamento": "o Cafe Colonial e um dos QUATRO DIFERENCIAIS que o cliente manda dar mais tela (ESTADO.md, restricao 5). Se ele ganha plano proprio, nao pode aparecer como galpao vazio."
+  }
+ ],
+
+ "regras": [
+  "Nada de mesa dentro de solido ja construido: a mesma conferencia de pegada das zonas estimadas vale aqui.",
+  "Semente fixa: a cena nao pode mudar a cada build, senao nenhuma conferencia de quadro vale.",
+  "Giro sorteado por conjunto, nao alinhado: praca de alimentacao alinhada em grade e leitura de CG. Cadeira ganha giro proprio ainda por cima -- ninguem devolve a cadeira ao lugar."
+ ]
+}

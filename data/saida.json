@@ -1,0 +1,112 @@
+{
+  "_procedencia": "lei — decisão do Natan em 15/08/2026 (EXR + Cryptomatte) somada à revisão do plano dele no mesmo dia, que corrigiu o formato do slot de dado",
+  "_por_que_tres_slots": [
+    "Cryptomatte guarda hash de ID como float 32. DWAA/DWAB é LOSSY: altera o valor",
+    "do rank e a extração de matte vira lixo. Half tem 10 bits de mantissa e não",
+    "representa o hash. Gravar crypto junto do beauty em Half/DWAA é gravar crypto",
+    "quebrado — e o defeito só aparece no dia em que alguém for isolar um objeto.",
+    "Por isso o beauty vai comprimido e barato, o dado vai lossless e caro, e o",
+    "espelho PNG continua existindo porque o ffmpeg não lê EXR multilayer."
+  ],
+
+  "slots": {
+    "beauty": {
+      "pasta": "beauty",
+      "formato": "OPEN_EXR_MULTILAYER",
+      "profundidade": "16",
+      "codec": "DWAA",
+      "save_as_render": false,
+      "_save_as_render": "DESLIGADO de propósito: grava linear de cena. Ligado, o AgX sai assado dentro do EXR e não há como desfazer no Resolve.",
+      "passes": ["Combined", "Emit", "Env", "AO"],
+      "_sem_shadow": "o Cycles do Blender 5.2 nao oferece socket 'Shadow' no Render Layers. Pedido e removido aqui em vez de virar slot preto.",
+      "_por_que_sem_difuso_e_glossy": [
+        "Medido no P11 (plano fechado, pior caso), custo do slot beauty por quadro:",
+        "  8 camadas ................. 19,8 MB",
+        "  Combined + Diff + Gloss ... 18,2 MB",
+        "  so Combined ...............  2,2 MB",
+        "Logo: os QUATRO passes de difuso/glossy custam 16,0 MB e os tres restantes",
+        "(Emit, Env, AO) custam 1,6 MB somados. O peso do beauty inteiro sao eles.",
+        "",
+        "E a folga nao existia: amostrados SEIS planos, a media real e 63 MB/quadro",
+        "e o filme dava 285 GB de 300 GB livres no F:. Quinze GB de folga para um",
+        "render de ~15 h e um render que morre em 90%.",
+        "",
+        "A doutrina secao 7.4 pede 'luz separada' entre os AOVs que dao margem, e",
+        "esta e uma divergencia consciente: o que ela protege — poder mexer sem",
+        "re-renderizar — continua protegido por Cryptomatte (isolar qualquer objeto),",
+        "Depth (atmosfera e separacao de plano) e Normal (relight de superficie). O",
+        "que se perde e rebalancear difuso contra especular no filme todo, que",
+        "ninguem pediu. O que se ganha e o render caber no disco.",
+        "AO fica porque a doutrina o nomeia e custa quase nada."
+      ]
+    },
+    "data": {
+      "pasta": "data",
+      "formato": "OPEN_EXR_MULTILAYER",
+      "profundidade": "32",
+      "codec": "ZIP",
+      "save_as_render": false,
+      "_save_as_render": "dado não é imagem: view transform sobre Normal/Depth/Cryptomatte corrompe o valor",
+      "passes": ["CryptoObject", "CryptoMaterial", "Normal", "Depth"],
+      "_position_e_vector_ficaram_de_fora": [
+        "Medido no smoke a 2760x1380: com os quatro passes o slot data dava 33,85 MB",
+        "por quadro, 156,9 GB no filme, e o total dos tres slots batia 266 GB de 299 GB",
+        "livres no F: — 33 GB de folga para um render de 47 s/quadro que roda dias.",
+        "Disco que acaba no meio da fila custa mais que passe que ninguem usou.",
+        "Vector: o motion blur ja e RENDERIZADO na camera (use_motion_blur=True).",
+        "  Vector serve para BORRAR EM POS o que saiu nitido — e nada aqui sai nitido.",
+        "  Guardar os dois e pagar duas vezes pelo mesmo borrao.",
+        "Position: e recuperavel de Depth mais a matriz da camera, que esta no .blend",
+        "  e no planos.json. Guardar o derivado ao lado do que o deriva e redundancia",
+        "  cara: sao 4 canais float 32 em cada um dos 4.635 quadros.",
+        "O que NAO saiu, e por que: Cryptomatte (e a decisao dele), Depth (nevoa,",
+        "  profundidade de campo e separacao de plano em pos) e Normal (relight e",
+        "  correcao de superficie sem re-render)."
+      ]
+    },
+    "preview": {
+      "pasta": "preview",
+      "formato": "PNG",
+      "profundidade": "8",
+      "codec": "NONE",
+      "save_as_render": true,
+      "_save_as_render": "LIGADO de propósito: é o entregável, tem que sair com o AgX aplicado. Desligado, o PNG sai lavado.",
+      "_por_que_existe": "o encode.sh e o ffmpeg não leem EXR multilayer; a cadeia de entrega pro telão continua saindo daqui, sem mudança"
+    }
+  },
+
+  "cryptomatte": {
+    "levels": 2,
+    "_levels": [
+      "A revisão do plano manda 2 (máx 3), contra o default 6. Levels é quantas",
+      "camadas de cobertura por pixel o crypto guarda — cada nível a mais é mais",
+      "canal gravado em float 32. Precisa de 6 quem tem cabelo, folhagem fina",
+      "empilhada e transparência em série. Aqui é arquitetura opaca; 2 cobre",
+      "sujeito + fundo no mesmo pixel de borda, que é o caso real."
+    ],
+    "objeto": true,
+    "material": true,
+    "asset": false
+  },
+
+  "denoise": {
+    "onde": "render",
+    "_onde": [
+      "Fica no render, e não em post, por três motivos medidos ou declarados:",
+      "1) a config que ele ditou em 14/08 tem denoise ligado na cena — mudar isso",
+      "   sozinho é mudar a ordem dele;",
+      "2) o beauty gravado JÁ denoisado é o que alimenta o espelho PNG do encode,",
+      "   e é o PNG que vai pro telão;",
+      "3) denoisar em post exigiria guardar Denoising Albedo/Normal em float 32",
+      "   no slot de dado, o que engorda o disco sem entregar nada hoje.",
+      "Se o passo 0.3 mostrar que o OIDN na GPU estoura os 8 GB da 4060, esta",
+      "chave vira 'post' e os passes de denoise entram no slot data."
+    ]
+  },
+
+  "disco": {
+    "resolucao": [2760, 1380],
+    "quadros_do_filme": 4635,
+    "_conta": "medida no smoke test, não estimada — ver ESTADO.md"
+  }
+}

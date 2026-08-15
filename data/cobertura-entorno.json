@@ -1,0 +1,91 @@
+{
+ "o_que_e": "Cobertura do solo do entorno pintada com as cores MEDIDAS no footage. O WorldCover diz o QUE e cada pedaco de chao; o materiais-medidos.json diz que COR aquilo tem naquela luz.",
+ "fonte_das_classes": "ESA WorldCover 10 m 2021 v200",
+ "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S27W054_Map.tif",
+ "licenca": "CC-BY 4.0 — ESA WorldCover project / Contains modified Copernicus Sentinel data",
+ "fonte_das_cores": "data/materiais-medidos.json (medido no footage do recinto) para as classes que tem amostra; declarado para as que nao tem, com o motivo escrito",
+ "achado": "a amostra 'campo' foi medida em 14/08 como CONTROLE do metodo e marcada 'NAO entra em material nenhum'. Ela e a lavoura ao fundo do quadro, e e exatamente a classe 40 do WorldCover. Deixou de ser so controle.",
+ "lado_m": 24065.7,
+ "lado_px": 699,
+ "metros_por_pixel": 34.43,
+ "arquivo": "assets/relevo/entorno_cobertura.png",
+ "censo": {
+  "lavoura": {
+   "classe_worldcover": 40,
+   "fracao_pct": 44.62,
+   "cor_de": "MEDIDO: materiais-medidos.json/campo",
+   "albedo_linear": [
+    0.2327,
+    0.2723,
+    0.1268
+   ],
+   "por_que": "a amostra 'campo' de materiais-medidos.json E a lavoura ao fundo do quadro -- foi medida como controle do metodo e nunca tinha sido usada. Aqui ela finalmente e o que mediu"
+  },
+  "arvore": {
+   "classe_worldcover": 10,
+   "fracao_pct": 37.61,
+   "cor_de": "MEDIDO: materiais-medidos.json/arvore",
+   "albedo_linear": [
+    0.1324,
+    0.1538,
+    0.0455
+   ],
+   "por_que": "mata e capao: a copa foi MEDIDA no footage"
+  },
+  "campo": {
+   "classe_worldcover": 30,
+   "fracao_pct": 14.38,
+   "cor_de": "MEDIDO: materiais-medidos.json/grama",
+   "albedo_linear": [
+    0.1286,
+    0.1239,
+    0.0369
+   ],
+   "por_que": "pastagem: a mesma grama sa medida do recinto"
+  },
+  "construido": {
+   "classe_worldcover": 50,
+   "fracao_pct": 2.13,
+   "cor_de": "DECLARADO",
+   "albedo_linear": [
+    0.19,
+    0.175,
+    0.165
+   ],
+   "por_que": "telhado e asfalto de cidade misturados a 10 m de pixel"
+  },
+  "agua": {
+   "classe_worldcover": 80,
+   "fracao_pct": 1.11,
+   "cor_de": "DECLARADO",
+   "albedo_linear": [
+    0.022,
+    0.035,
+    0.048
+   ],
+   "por_que": "agua doce vista de cima e escura; o brilho vem do reflexo, nao do albedo"
+  },
+  "solo_nu": {
+   "classe_worldcover": 60,
+   "fracao_pct": 0.14,
+   "cor_de": "MEDIDO: materiais-medidos.json/terra",
+   "albedo_linear": [
+    0.2659,
+    0.1875,
+    0.1548
+   ],
+   "por_que": "solo exposto: o chao batido medido no recinto"
+  },
+  "umida": {
+   "classe_worldcover": 90,
+   "fracao_pct": 0.0,
+   "cor_de": "MEDIDO: materiais-medidos.json/grama",
+   "albedo_linear": [
+    0.1286,
+    0.1239,
+    0.0369
+   ],
+   "por_que": "vegetacao alagada: sem amostra propria, usa a grama medida"
+  }
+ }
+}

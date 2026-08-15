@@ -1,0 +1,186 @@
+{
+ "o_que_e": "Os titulos e letreiros do filme -- passo 3 do fluxo de 5 passos do Natan. O TEXTO nao e meu: sai do audio dele, palavra por palavra, com o minuto citado.",
+ "a_regra_de_tamanho_nao_e_gosto_e_uma_conta": {
+  "a_regra_dele": "ESTADO.md, entrega: 'Titulo com no minimo 8% da altura do quadro; apoio nunca abaixo de 4%'. O painel P2,9 entrega 1379 x 690 nativos e um texto pequeno demais some.",
+  "a_conta": "fracao_da_altura = altura_do_texto_m * lente_mm / (distancia_m * sensor_vertical_mm). O sensor do Blender e 36 mm na horizontal; em 2:1 o vertical e 18 mm.",
+  "logo": "altura_do_texto_m = fracao * distancia * 18 / lente. Cada letreiro e dimensionado pelo PLANO que o mostra -- data/planos.json ja declara alvo, lente e distancia de cada um dos 22. Nao ha numero escolhido a olho aqui.",
+  "conferencia": "scripts/letreiros.py imprime a fracao obtida por letreiro. Se algum ficar abaixo da regra, ele ACUSA."
+ },
+ "restricoes_duras_do_cliente": {
+  "kids_proibido": "[00:48] 'a área destinada, a área para atividades kids' -> [00:55] 'Kids é muito americanizado'. A palavra NAO entra. O letreiro e 'Fazendinha'.",
+  "fazendinha": "[00:42] 'a fazendinha daí, o nome é a fazendinha, embaixo a descrição'. Nome grande em cima, descricao pequena embaixo -- e essa hierarquia esta no contrato, nao no meu gosto.",
+  "quatro_diferenciais": "[01:29] a [01:38], literal: 'a fazendinha é um diferencial do Agroshow, o rodeio é um diferencial, o café colonial é um diferencial, o mercado do produtor é um diferencial'. Os quatro ganham escala 'diferencial', que e 1,35x a de titulo.",
+  "sem_arquibancada": "[01:16] 'na arena de rodeio não dá pra colocar arquibancada'. Nao e letreiro, mas esta aqui porque quem mexer na arena precisa ver."
+ },
+ "tipografia": {
+  "arquivo": "E:/I.A Edit/fontes 2026/ArchivoNarrow-Bold.ttf",
+  "por_que": "condensada e pesada: em 1379 px de largura, letra estreita cabe mais texto na mesma altura sem cair abaixo dos 8%. Archivo Narrow e OFL (uso comercial liberado), o que importa porque isto e entrega de CLIENTE -- ha fontes na pasta marcadas 'personal use only' e elas estao fora.",
+  "alternativas_na_pasta": [
+   "BEBAS.TTF (display, so caixa alta)",
+   "ArchivoNarrow-SemiBold.ttf (menos peso)"
+  ],
+  "reprovada_antes": "BarlowCondensed foi reprovada por ele em OUTRO projeto (legenda do Peters V1). Contexto diferente, mas nao vou propor de novo sem ele pedir.",
+  "ISTO_E_PROPOSTA": "tipografia e escolha dele. O campo 'arquivo' troca em uma linha e a cena reconstroi."
+ },
+ "modo": "billboard",
+ "modos_possiveis": {
+  "billboard": "o texto flutua sobre a area e sempre encara a camera do plano. E a leitura de MAPA, que e o que o filme e -- e e o unico modo que garante a regra dos 8% em todos os planos, porque texto girado encolhe na tela.",
+  "placa": "o texto fica de pe no chao, como placa do recinto. Mais cinematografico e mais fragil: em plano oblíquo a leitura cai, e em sobrevoo some."
+ },
+ "cor": {
+  "texto": [
+   0.92,
+   0.9,
+   0.86
+  ],
+  "por_que": "branco levemente quente, para nao brigar com o golden hour. Emissivo fraco (0,35) para o texto nao escurecer no contraluz -- num plano contra o sol, texto so difuso vira silhueta cinza.",
+  "emissao": 0.35
+ },
+ "letreiros": [
+  {
+   "plano": "P02",
+   "texto": "É daqui que sai o alimento que sustenta o mundo",
+   "nivel": "frase",
+   "audio": "AUDIO 3 [00:36] e [00:40], repetida por ele duas vezes seguidas",
+   "nota": "frase de abertura, LITERAL -- ESTADO.md manda nao reescrever. Ele pediu 'pra colocar na entrada' [00:47]"
+  },
+  {
+   "plano": "P03",
+   "texto": "Pavilhão 1",
+   "apoio": "Indústria, Comércio e Serviços",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:03] 'Pavilhão 1, indústria e comércio'"
+  },
+  {
+   "plano": "P04",
+   "texto": "Praça de Alimentação",
+   "apoio": "Área coberta",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:06] 'Pavilhão praça de alimentação interna, que é a área coberta'"
+  },
+  {
+   "plano": "P05",
+   "texto": "Pavilhão 2",
+   "apoio": "Indústria, Comércio e Serviços",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:11] 'Pavilhão 2, indústria e comércio'"
+  },
+  {
+   "plano": "P06",
+   "texto": "Mercado do Produtor",
+   "apoio": "Um diferencial do AGROSHOW",
+   "nivel": "diferencial",
+   "audio": "AUDIO 2 [00:15] e [01:38] 'o mercado do produtor é um diferencial'"
+  },
+  {
+   "plano": "P07",
+   "texto": "Pavilhão 3",
+   "apoio": "Cozinha Didática",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:15] 'No Pavilhão 3, mercado do produtor, café colonial, cozinha didática'"
+  },
+  {
+   "plano": "P08",
+   "texto": "Café Colonial",
+   "apoio": "Um diferencial do AGROSHOW",
+   "nivel": "diferencial",
+   "audio": "AUDIO 2 [01:35] 'o café colonial é um diferencial do Agroshow'"
+  },
+  {
+   "plano": "P09",
+   "texto": "Alimentação no Bosque",
+   "apoio": "Área externa",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:20] 'Daí no bosque, área de alimentação externa'"
+  },
+  {
+   "plano": "P10",
+   "texto": "Recinto de Leilões",
+   "apoio": "Exposição de Animais",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:24] 'lá recinto de leilões, a exposição de animais'"
+  },
+  {
+   "plano": "P11",
+   "texto": "Pavilhões de Animais",
+   "apoio": "Gado de leite, corte, ovinos, caprinos e equinos",
+   "nivel": "titulo",
+   "audio": "AUDIO 1 [02:28] a [03:00], a sequencia dos seis pavilhoes"
+  },
+  {
+   "plano": "P14",
+   "texto": "Fazendinha",
+   "apoio": "Área para atividades infantis",
+   "nivel": "diferencial",
+   "audio": "AUDIO 2 [00:40] 'Aí desce a fazendinha' e [00:42] 'o nome é a fazendinha, embaixo a descrição'",
+   "atencao": "A PALAVRA 'KIDS' E PROIBIDA -- [00:55] 'Kids é muito americanizado'. Nome grande, descricao pequena embaixo, na hierarquia que ele ditou."
+  },
+  {
+   "plano": "P16",
+   "texto": "Pista de Julgamentos",
+   "apoio": "Julgamento de animais",
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:30] 'Aí pista de julgamento, do julgamento de animais'"
+  },
+  {
+   "plano": "P17",
+   "texto": "Expositores Externos",
+   "apoio": null,
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [00:36] 'A área de expositores externos'"
+  },
+  {
+   "plano": "P18",
+   "texto": "Máquinas e Implementos",
+   "apoio": "Equipamentos agrícolas e veículos",
+   "nivel": "titulo",
+   "audio": "AUDIO 1 [03:48] e [04:02]"
+  },
+  {
+   "plano": "P19",
+   "texto": "Arena de Rodeio",
+   "apoio": "Um diferencial do AGROSHOW",
+   "nivel": "diferencial",
+   "audio": "AUDIO 2 [01:32] 'o rodeio é um diferencial do Agroshow'"
+  },
+  {
+   "plano": "P20",
+   "texto": "Área de Shows",
+   "apoio": null,
+   "nivel": "titulo",
+   "audio": "AUDIO 2 [01:08] 'descendo a arena de shows'"
+  },
+  {
+   "plano": "P22",
+   "texto": "Aqui será um grande balcão de negócios",
+   "nivel": "frase",
+   "audio": "AUDIO 2 [02:04], literal",
+   "nota": "frase de fechamento. ESTADO.md manda nao reescrever. O plano final sai pelo portal (restricao 6)."
+  }
+ ],
+ "escala_por_nivel": {
+  "frase": {
+   "fracao_da_altura": 0.115,
+   "por_que": "frase de impacto: ele pediu 'bem de impacto'. Acima do minimo de titulo"
+  },
+  "diferencial": {
+   "fracao_da_altura": 0.108,
+   "por_que": "os quatro diferenciais ganham mais tela, ordem dele. 1,35x o titulo"
+  },
+  "titulo": {
+   "fracao_da_altura": 0.08,
+   "por_que": "o MINIMO da regra de entrega, exato"
+  },
+  "apoio": {
+   "fracao_da_altura": 0.042,
+   "por_que": "acima do minimo de 4%, com folga de meio ponto"
+  }
+ },
+ "o_que_nao_esta_aqui": {
+  "logo_AGROSHOW_2026": "decisao dele em 14/08: 'usar o JPEG achado na internet ou o nome simples'. Enquanto nao ha arquivo, os letreiros usam o NOME SIMPLES -- que e o caminho que ele autorizou.",
+  "P12_P13_P15_P21": "planos sem letreiro proprio: sao passagem, sobrevoo ou continuidade. Letreiro em todo plano vira legenda de documentario, e o filme tem 154 s."
+ },
+ "aproximacao": 0.45,
+ "por_que_aproximacao": "O letreiro nao fica em cima do rotulo: vem 45% do caminho na direcao da camera. Motivo MEDIDO -- na primeira prova o letreiro da Fazendinha saiu metade tapado por uma arvore, porque estava plantado no rotulo, atras do bosque que o proprio plano atravessa. O tamanho e recalculado pela distancia nova, entao a fracao na tela continua sendo exatamente a declarada.",
+ "por_que_altura_livre": "A altura segue a MIRA do plano (mira_alt_m), nao uma cota alta. Tentei 17 m para passar por cima da copa e o letreiro saiu FORA DO QUADRO -- a camera olha para a mira, entao texto muito acima disso nao esta no enquadramento. Quem resolve oclusao e a aproximacao, nao a altura."
+}
