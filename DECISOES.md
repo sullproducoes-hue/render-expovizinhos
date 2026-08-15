@@ -1041,3 +1041,19 @@ Registrado para não se repetir tentativa:
 | `conferir_posicao.py` + `sobrepor.py` | a re-conferência de posição depois de trocar forma | precisam do satélite e do footage, que moram no `E:` do Natan e não entram no repositório |
 | `conferir_mapa_comprado.py` | o mapa 3D de 15/08 | mesmo motivo: está no `E:` |
 | pendências 2, 3, 6, 7, 8, 9 do `ESTADO.md` | Fazendinha, cota do patamar, fotos do portal | são dele, e inferir já custou caro três vezes esta semana |
+
+### D045 · A cena perdeu 101 árvores, e isso é conserto e não perda
+A folga entre árvore e prédio era **3,0 m com copa de 8,0 m** (±25%): a árvore
+parava a 3 m da parede e a copa entrava **7 m prédio adentro**. O
+`conferir_estimados.py` mediu 17 delas cobrindo de 11% a 31% da própria pegada
+em cima de `RESIDÊNCIA`, `PALCO AFTER`, `CAMAROTES` e `Praça Coberta` —
+interpenetração, o erro da doutrina §3.2 que *"passa despercebido no viewport e
+aparece no render final"*.
+
+**Decisão:** a folga passa a ser o **raio da copa**, que é o número físico da
+coisa, e não um número redondo. **389 → 288 árvores.**
+
+**Conferido antes de aceitar a perda:** nenhum bosque ficou vazio — o menor tem
+15 de 31, as duas matas 55 e 86 de 115, e a **alameda ficou inteira** (47 de
+47), que é a que importa para o P02. Bosque com zero árvore seria a planta
+dizendo uma coisa e a cena dizendo outra, e aí o conserto seria pior.
