@@ -605,3 +605,42 @@ técnica, não medida.
 quadro fechado e em dia encoberto — que é a luz em que o método do céu funciona,
 e sem sol direto o reflexo especular é muito menor. Dá para medir a telha de
 verdade pela primeira vez.
+
+### D032 · A skill `blender-assembly` foi instalada, contra a minha recomendação
+Ele mandou o repositório e disse *"instala se fizer sentido"*. Eu li os três
+arquivos, conferi regra por regra contra o código e **recomendei não instalar**.
+Ele respondeu *"instala a skill"*. **Decisão dele, e está feita** — o
+`CLAUDE.md` diz que discordar faz parte, uma vez, e que se ele bater o pé
+registra e segue.
+
+**O que foi instalado:** `SKILL.md`, `README.md` e a imagem, verbatim, do commit
+`afad3b18`. Markdown puro — **nenhum código executável, nenhum addon, nenhum
+servidor MCP**. Instalar não tinha risco técnico; a objeção era de adequação.
+
+**Onde:** `render-expovizinhos/.claude/skills/blender-assembly/`, e **não** no
+`.claude/skills/` do cofre, onde moram as 91 outras. Ela é de Blender, e os
+outros nove sistemas da casa não têm nada com isso — `CLAUDE.md`: *"nove
+sistemas convivem aqui e não devem se misturar"*. Se ele quiser no cofre
+inteiro, é mover uma pasta.
+
+**Não editei uma linha do `SKILL.md`.** Skill de terceiro se instala como está
+ou não se instala. O que esta casa pensa dela ficou em `PROCEDENCIA.md`, ao
+lado, com a procedência, o que serve, o que não serve e por quê.
+
+**As duas regras que quebram a cena estão marcadas como veto naquele arquivo:**
+`finalize()` chama `shade_smooth()` em tudo (arredonda quina de caixa de
+arquitetura; o conserto certo da etapa 5 é **bevel**), e `audit_all()` exige
+`rotation = (0,0,0)` (a cena inteira depende de rotação em Z, e esse audit
+reprovaria todo prédio que está certo). A precedência do `CLAUDE.md` já resolve
+isso sozinha — **skill é o último elo** —, mas fica escrito para não depender de
+alguém lembrar.
+
+**E há um erro dentro dela que é o nosso erro de 14/08:** o `verify_bounds()`
+lê `matrix_world` sem `view_layer.update()` antes. É a **armadilha 18** deste
+projeto, a que afastou 33 objetos em 20 m cada sem erro na tela. Está avisado no
+`PROCEDENCIA.md`, porque a skill não avisa.
+
+**O que dela vale, e eu vou usar:** o mapa de conexões. Este projeto testa
+colisão e não testa contato — o que *tem* que se encostar. Não fez falta
+enquanto tudo era caixa solta; passa a fazer agora que há laje sobre porão,
+cobertura sobre parede e grade em série.
