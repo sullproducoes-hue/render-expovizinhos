@@ -1207,12 +1207,22 @@ def construir_vegetacao(dados, col, centro_arena, bbox=None, solidos=None):
 
     raio_livre = veg.get("raio_livre_da_arena_m", 49.0)
 
+    # A folga contra predio e' o RAIO DA COPA, nao um numero redondo. Estava em
+    # 3,0 m com copa de 8,0 m (+25% de variacao): a arvore parava a 3 m da
+    # parede e a copa entrava 7 m predio adentro. O `conferir_estimados.py`
+    # mediu isso em 15/08 -- 17 arvores cobrindo de 11% a 31% da propria pegada
+    # em cima de RESIDENCIA, PALCO AFTER, CAMAROTES e Praca Coberta. Copa nao
+    # atravessa parede, e interpenetracao e' o erro da doutrina 3.2 que "passa
+    # despercebido no viewport e aparece no render final".
+    folga_copa = porte["raio_copa_m"] * (1.0 + porte["raio_variacao"])
+
     def livre(x, y):
         if math.hypot(x - centro_arena[0], y - centro_arena[1]) < raio_livre:
             return False                      # pista da arena
         for _nome, q, _c in (solidos or []):
-            if q[0] - 3.0 <= x <= q[2] + 3.0 and q[1] - 3.0 <= y <= q[3] + 3.0:
-                return False                  # dentro (ou colado) de predio
+            if (q[0] - folga_copa <= x <= q[2] + folga_copa
+                    and q[1] - folga_copa <= y <= q[3] + folga_copa):
+                return False                  # a copa entraria no predio
         return True
 
     por_zona = []
@@ -1422,13 +1432,37 @@ def afastar_do_medido(obj, largura, profundidade, giro, medidos,
         dy = min(p[3], q[3]) - max(p[1], q[1])
         return dx * dy if dx > 0 and dy > 0 else 0.0
 
+    # PRIMEIRO o mais coberto, e nao o primeiro da lista. E o laco tenta de novo
+    # depois de andar, porque sair de um predio pode ser entrar em outro: em
+    # 15/08 o `PORTAL` andou 7,5 m para sair do PortalCeleiro e parou com 58,1%
+    # de si dentro do AUDITORIO, e a versao anterior desta funcao dava a coisa
+    # por resolvida sem reconferir.
+    total_andado, ultimo = 0.0, None
+    for _rodada in range(5):
+        andado, nome = _afastar_uma_vez(obj, largura, profundidade, giro,
+                                        medidos, limite, margem, passos,
+                                        sobrepoe)
+        if nome is None:
+            break
+        total_andado += andado
+        ultimo = nome
+    else:
+        print(f"  AVISO: {obj.name} continua sobre geometria medida depois de "
+              f"5 tentativas ({total_andado:.1f} m andados) -- posicao fica "
+              f"como esta, e o conferidor vai acusar")
+    return total_andado, ultimo
+
+
+def _afastar_uma_vez(obj, largura, profundidade, giro, medidos,
+                     limite, margem, passos, sobrepoe):
     p = pegada_prevista(obj.location.x, obj.location.y, largura, profundidade, giro)
     area = max((p[2] - p[0]) * (p[3] - p[1]), 1e-6)
     culpado = None
+    pior = limite
     for nome, q, centro in medidos:
-        if sobrepoe(p, q) / area > limite:
-            culpado = (q, centro, nome)
-            break
+        fracao = sobrepoe(p, q) / area
+        if fracao > pior:
+            culpado, pior = (q, centro, nome), fracao
     if culpado is None:
         return 0.0, None
 
