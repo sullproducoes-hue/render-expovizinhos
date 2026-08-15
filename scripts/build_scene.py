@@ -385,6 +385,62 @@ def _variar_por_instancia(mat, bsdf, cor):
     nt.links.new(mix.outputs[2], bsdf.inputs["Base Color"])
 
 
+def vestir_com_a_paleta(col, mats):
+    """Poe a paleta MEDIDA nos predios que a planta desenha de verdade.
+
+    Ate 15/08 os predios do recinto sairam todos em `MAT_PAVILHAO`, um cinza
+    (0,55 / 0,56 / 0,58) que ninguem mediu e que eu inventei numa sessao
+    anterior. E exatamente o *design system default* que o `CLAUDE.md` proibe --
+    decisao estetica que ninguem declarou, repetida em 37 objetos.
+
+    Agora ha medida: `data/materiais-quinta.json`, tirada do footage de 13/08 do
+    proprio recinto, com o iluminante medido no ceu do quadro (D018) e aprovada
+    por ele em 15/08 -- *"a paleta de cores esta ok"*.
+
+    ## Por que dois materiais por predio, e nao um
+
+    Caixa com um material so pinta o TELHADO de tijolo. E o filme e quase todo
+    aereo: o que a camera mais ve destes volumes e a agua de cima. Entao a caixa
+    ganha dois slots e a face de cima vai para o telhado -- `normal.z` decide,
+    nao o nome do objeto (nome de objeto nao decide material neste arquivo, e a
+    correcao do portal de 14/08 esta escrita logo abaixo).
+
+    ## O que sustenta a escolha, e o que NAO entra
+
+    - **parede = `MAT_TIJOLO`.** `1 (16)` percorre os pavilhoes por dentro e por
+      fora e mostra alvenaria de tijolo vermelho; `1 (17)` mostra a mesma
+      alvenaria de perto e de longe. Vermelho + azul se repete em tres videos --
+      e identidade construida do parque, nao gosto meu.
+    - **telhado = `MAT_TELHA`.** O aereo nadir `1 (2)` mostra as aguas CLARAS
+      vistas de cima. O azul medido existe (`MAT_CHAPA_AZUL`), mas ele e de UM
+      galpao especifico do `1 (17)`; espalhar azul por todos seria inventar.
+    - **so quem tem `footprint_medido`.** Sao os predios que a planta desenha de
+      verdade. As zonas da colecao ESTIMADO continuam no cinza de propósito:
+      elas SAO estimativa, precisam ler como tal, e vivem numa colecao que ele
+      esconde num clique.
+    - **cobertura sobre pilar nao entra.** Ela nao tem parede; o material dela
+      ja esta declarado e continua valendo.
+
+    Devolve quantos predios foram vestidos.
+    """
+    parede, telhado = mats["MAT_TIJOLO"], mats["MAT_TELHA"]
+    n = 0
+    for o in col.objects:
+        if o.type != "MESH" or not o.get("footprint_medido"):
+            continue
+        if o.get("material") in (None, "MAT_LONA", "MAT_GRADIL", "MAT_ASFALTO"):
+            continue
+        me = o.data
+        me.materials.clear()
+        me.materials.append(parede)
+        me.materials.append(telhado)
+        for f in me.polygons:
+            f.material_index = 1 if f.normal.z > 0.7 else 0
+        o["paleta"] = "medida em 13/08 -- parede MAT_TIJOLO, telhado MAT_TELHA"
+        n += 1
+    return n
+
+
 def aplicar(obj, mat):
     if obj.data and hasattr(obj.data, "materials"):
         obj.data.materials.clear()
@@ -1913,6 +1969,10 @@ def main():
             sem_material.append(o.name)
     if sem_material:
         print(f"  AVISO: sem material declarado: {sem_material[:6]}")
+
+    n_vestidos = vestir_com_a_paleta(cols["BASE"], mats)
+    print(f"  paleta medida .... {n_vestidos} predios vestidos "
+          "(parede tijolo, telhado telha). O cinza inventado saiu.")
 
     print("construindo as zonas estimadas...")
     # so os solidos entram na conta de colisao -- terreno, pista e as vias

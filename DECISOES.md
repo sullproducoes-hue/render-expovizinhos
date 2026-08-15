@@ -557,3 +557,51 @@ marcador, duas vezes.
 
 `prova_concha.py` limpa os marcadores na sessão (o `.blend` em disco não muda).
 Vale para qualquer prova futura nesta cena.
+
+### D030 · Plano A **e** B, e o que isso muda na régua
+Ordem dele em 15/08: *"Vou utilizar os dois planos o A e o B, depois de o
+restante estiver concluído"*.
+
+**A pendência 14b deixa de ser bifurcação e vira ordem.** Não é "escolher entre
+render local e IA generativa" — é os dois, e os dois depois que o resto fechar.
+
+**Consequência dura, e ela é a régua de agora em diante:** vale o teto do Plano
+B. Proxy de gente e de gado **não** é entrega — no Plano A ele serve, mas o
+Plano B pede modelo e animação de verdade. Então a pendência 14 continua aberta
+com o padrão mais alto, e a estimativa de conclusão desce, não sobe: era ~66%
+pelo Plano A e ~55% pelo Plano B, e agora vale **~55%**.
+
+### D031 · A paleta medida entrou nos 52 prédios — e o efeito é menor do que eu disse
+Ordem dele: *"Aplica o efeito mais barato"*, depois de eu dizer que era o passo
+com mais efeito por menos trabalho.
+
+**Feito:** `vestir_com_a_paleta()` em `build_scene.py`. Os 52 prédios com
+`footprint_medido` deixaram de sair no cinza `MAT_PAVILHAO` (0,55 / 0,56 /
+0,58), que ninguém mediu e que eu inventei numa sessão anterior — o *design
+system default* que o `CLAUDE.md` proíbe, repetido em dezenas de objetos.
+
+**Dois materiais por prédio, não um.** Caixa com material único pintaria o
+telhado de tijolo. Quem decide é `normal.z`, não o nome do objeto — a mesma
+correção do portal de 14/08. Parede `MAT_TIJOLO` (medido), telhado `MAT_TELHA`.
+As zonas da coleção ESTIMADO continuam no cinza **de propósito**: elas são
+estimativa e precisam ler como tal.
+
+**E agora a parte que me desmente.** Eu disse que isto *"muda o quadro inteiro"*.
+**Não muda.** As duas provas mostram por quê:
+
+- **o filme é quase todo aéreo, e do alto se vê TELHADO.** O tijolo medido só
+  aparece nas laterais, e as laterais quase não entram em quadro;
+- **o anel de mata tapa o rasante.** No quadro a 32 m de altura o recinto quase
+  não aparece atrás das copas.
+
+**O que isso ensina, e vale mais que a paleta:** num filme aéreo o material que
+manda é a **cobertura** — e `MAT_TELHA` é justamente o que **não está medido**.
+A medição de 14/08 estourou nele (albedo 1,00 / 1,00 / 0,95, no teto) porque
+telha metálica reflete o céu de forma especular: o que a câmera vê não é a cor
+dela, é o céu. Ficou um cinza galvanizado com metallic 0,55, que é decisão
+técnica, não medida.
+
+**Próximo passo que isto abre, e é barato:** o footage de 13/08 tem telhado em
+quadro fechado e em dia encoberto — que é a luz em que o método do céu funciona,
+e sem sol direto o reflexo especular é muito menor. Dá para medir a telha de
+verdade pela primeira vez.
