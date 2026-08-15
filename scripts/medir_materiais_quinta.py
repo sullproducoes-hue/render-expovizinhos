@@ -297,6 +297,26 @@ QUADROS = {
             },
         },
     },
+
+    # A TELHA CONTINUA SEM MEDIDA, e agora com numero atras.
+    #
+    # Tentei medir no nadir `1 (2)__0076s` -- telhado horizontal, fator de vista
+    # 1,00, dia encoberto, a agua inteira em quadro. Era a melhor chance que este
+    # acervo oferece, e falhou. As tres caixas que tentei vieram com 2,2%, 0,9% e
+    # 4,8% de pixel no teto, e em vez de mexer na caixa ate passar (armadilha 16)
+    # eu medi o problema: `scripts/varrer_estouro.py`.
+    #
+    # **30% a 40% dos 3% mais claros de cada nadir estao saturados.** Num nadir de
+    # parque os 3% mais claros SAO o telhado. O drone expos para o chao e a chapa
+    # estourou -- em dia encoberto, sem disco solar em lugar nenhum.
+    #
+    # Isso desmente o que eu tinha escrito: eu disse que o estouro de 14/08 era
+    # reflexo especular do sol e que sob ceu fechado daria. Nao e so do sol, e
+    # exposicao, e acontece com ceu fechado tambem.
+    #
+    # O que fecharia, e e barato quando alguem estiver la: **um quadro exposto
+    # para o TELHADO**, nem que o chao va a preto. Meia parada de diafragma.
+    # Ver data/estouro-telhado.json.
 }
 
 

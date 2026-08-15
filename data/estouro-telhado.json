@@ -1,0 +1,163 @@
+{
+ "_procedencia": "registro — varredura de saturacao no telhado, 15/08/2026",
+ "_por_que": "tres tentativas de medir MAT_TELHA devolveram caixas com 2,2%, 0,9% e 4,8% de pixel no teto. Em vez de mexer na caixa ate o numero passar (armadilha 16), mediu-se o problema.",
+ "teto_16_bits": 65000,
+ "percentil_claro": 97,
+ "melhor_quadro": "1 (2)__0009s",
+ "melhor_estouro_nos_claros": 0.0008,
+ "mediana_estouro_nos_claros": 0.2977,
+ "veredito": "MAT_TELHA nao e medivel neste footage",
+ "o_que_fecharia": "um quadro exposto para o TELHADO, nem que o chao va a preto. Meia parada de diafragma. Material de medicao nao precisa ser bonito.",
+ "quadros": {
+  "1 (2)__0009s": {
+   "estouro_no_quadro": 2.5438850308641975e-05,
+   "estouro_nos_claros": 0.0008488691132335073,
+   "luminancia_p97": 0.6763704829480429
+  },
+  "1 (2)__0014s": {
+   "estouro_no_quadro": 0.0005993200231481482,
+   "estouro_nos_claros": 0.019217862726107277,
+   "luminancia_p97": 0.4901902403295949
+  },
+  "1 (2)__0019s": {
+   "estouro_no_quadro": 0.0017684220679012345,
+   "estouro_nos_claros": 0.05119703564381106,
+   "luminancia_p97": 0.7820330907148851
+  },
+  "1 (2)__0025s": {
+   "estouro_no_quadro": 0.006117139274691358,
+   "estouro_nos_claros": 0.2032937885802469,
+   "luminancia_p97": 0.6635211364003962
+  },
+  "1 (2)__0030s": {
+   "estouro_no_quadro": 0.005736641589506173,
+   "estouro_nos_claros": 0.1903444949149817,
+   "luminancia_p97": 0.6882737987335011
+  },
+  "1 (2)__0035s": {
+   "estouro_no_quadro": 0.00944360050154321,
+   "estouro_nos_claros": 0.3018977186357659,
+   "luminancia_p97": 0.7013392721446554
+  },
+  "1 (2)__0040s": {
+   "estouro_no_quadro": 0.007210648148148148,
+   "estouro_nos_claros": 0.2291947980967078,
+   "luminancia_p97": 0.7571530161593037
+  },
+  "1 (2)__0045s": {
+   "estouro_no_quadro": 0.00923876350308642,
+   "estouro_nos_claros": 0.2422682276908979,
+   "luminancia_p97": 0.7594557198443579
+  },
+  "1 (2)__0050s": {
+   "estouro_no_quadro": 0.010513478973765433,
+   "estouro_nos_claros": 0.29470202667674045,
+   "luminancia_p97": 0.7635607690547036
+  },
+  "1 (2)__0055s": {
+   "estouro_no_quadro": 0.012542438271604938,
+   "estouro_nos_claros": 0.37506028163580246,
+   "luminancia_p97": 0.781371852170595
+  },
+  "1 (2)__0060s": {
+   "estouro_no_quadro": 0.013381558641975308,
+   "estouro_nos_claros": 0.40351582281024684,
+   "luminancia_p97": 0.7956166994735637
+  },
+  "1 (2)__0066s": {
+   "estouro_no_quadro": 0.011693070023148148,
+   "estouro_nos_claros": 0.3561372980054736,
+   "luminancia_p97": 0.8017934019989318
+  },
+  "1 (2)__0071s": {
+   "estouro_no_quadro": 0.009875337577160494,
+   "estouro_nos_claros": 0.3006526491769547,
+   "luminancia_p97": 0.8364725327229589
+  },
+  "1 (2)__0076s": {
+   "estouro_no_quadro": 0.012597294560185185,
+   "estouro_nos_claros": 0.3928286980796615,
+   "luminancia_p97": 0.8547709163042648
+  },
+  "1 (2)__0081s": {
+   "estouro_no_quadro": 0.01292775848765432,
+   "estouro_nos_claros": 0.40469396776915967,
+   "luminancia_p97": 0.8607375936522468
+  },
+  "1 (2)__0086s": {
+   "estouro_no_quadro": 0.012817081404320987,
+   "estouro_nos_claros": 0.40105789056942004,
+   "luminancia_p97": 0.859094554055085
+  },
+  "1 (3)__0008s": {
+   "estouro_no_quadro": 0.012737871334876543,
+   "estouro_nos_claros": 0.4084000450102881,
+   "luminancia_p97": 0.8309412995193405
+  },
+  "1 (3)__0014s": {
+   "estouro_no_quadro": 0.012918354552469136,
+   "estouro_nos_claros": 0.4113999340904889,
+   "luminancia_p97": 0.8502372137026015
+  },
+  "1 (3)__0020s": {
+   "estouro_no_quadro": 0.01123022762345679,
+   "estouro_nos_claros": 0.35357899263343606,
+   "luminancia_p97": 0.8693631830319676
+  },
+  "1 (3)__0026s": {
+   "estouro_no_quadro": 0.010431495949074074,
+   "estouro_nos_claros": 0.32641529149820353,
+   "luminancia_p97": 0.8649831357289998
+  },
+  "1 (3)__0030s": {
+   "estouro_no_quadro": 0.008295235339506173,
+   "estouro_nos_claros": 0.2545393166308987,
+   "luminancia_p97": 0.8438142702372778
+  },
+  "1 (3)__0032s": {
+   "estouro_no_quadro": 0.008125361689814814,
+   "estouro_nos_claros": 0.2491922260802469,
+   "luminancia_p97": 0.8045882760051823
+  },
+  "1 (3)__0038s": {
+   "estouro_no_quadro": 0.009496166087962964,
+   "estouro_nos_claros": 0.3017578125,
+   "luminancia_p97": 0.7833241748073543
+  },
+  "1 (3)__0044s": {
+   "estouro_no_quadro": 0.007807074652777778,
+   "estouro_nos_claros": 0.24221343428741368,
+   "luminancia_p97": 0.8501200854505225
+  },
+  "1 (3)__0050s": {
+   "estouro_no_quadro": 0.012143132716049382,
+   "estouro_nos_claros": 0.3828802729628378,
+   "luminancia_p97": 0.8956243961242083
+  },
+  "1 (3)__0052s": {
+   "estouro_no_quadro": 0.007765359760802469,
+   "estouro_nos_claros": 0.24086532226689145,
+   "luminancia_p97": 0.8846608834973677
+  },
+  "1 (3)__0056s": {
+   "estouro_no_quadro": 0.009682315779320988,
+   "estouro_nos_claros": 0.30858571244855965,
+   "luminancia_p97": 0.7471692209658958
+  },
+  "1 (3)__0062s": {
+   "estouro_no_quadro": 0.0057664207175925925,
+   "estouro_nos_claros": 0.18664400077160495,
+   "luminancia_p97": 0.5876017452964064
+  },
+  "1 (3)__0068s": {
+   "estouro_no_quadro": 0.007595003858024692,
+   "estouro_nos_claros": 0.23581439104600022,
+   "luminancia_p97": 0.8203936888685435
+  },
+  "1 (3)__0074s": {
+   "estouro_no_quadro": 0.008815586419753087,
+   "estouro_nos_claros": 0.2930893132716049,
+   "luminancia_p97": 0.6403949933928421
+  }
+ }
+}

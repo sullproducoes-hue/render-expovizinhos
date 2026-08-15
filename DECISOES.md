@@ -644,3 +644,46 @@ projeto, a que afastou 33 objetos em 20 m cada sem erro na tela. Está avisado n
 colisão e não testa contato — o que *tem* que se encostar. Não fez falta
 enquanto tudo era caixa solta; passa a fazer agora que há laje sobre porão,
 cobertura sobre parede e grade em série.
+
+### D033 · A telha não se mede neste material — e eu tinha dito o contrário
+**Eu propus isto como o passo mais barato e mais valioso:** `MAT_TELHA` é o
+material que mais aparece num filme aéreo e é o único grande da cena sem
+medição. E eu escrevi que a medição de 14/08 estourou por **reflexo especular
+do sol**, e que num quadro de dia encoberto daria para medir.
+
+**Falhou, e a explicação que eu tinha dado estava errada.**
+
+Tentei no nadir `1 (2)__0076s` — que é a melhor condição que este acervo
+oferece: telhado horizontal, fator de vista 1,00, dia encoberto, a água inteira
+em quadro. As três caixas que tentei voltaram com **2,2%**, **0,9%** e **4,8%**
+de pixel no teto.
+
+**E aqui eu quase cometi a armadilha 16.** Estava mexendo na caixa e tentando de
+novo — que é exatamente *"parâmetro que muda a resposta não é medida"*. Parei e
+medi o problema: `scripts/varrer_estouro.py`.
+
+Num nadir de parque os **3% de pixel mais claros do quadro SÃO o telhado** — não
+há outra superfície grande e clara ali. Que fração deles está saturada:
+
+| | |
+|---|---|
+| mediana entre **30 quadros** de `1 (2)` e `1 (3)` | **29,8%** |
+| pior caso | 40,4% |
+| melhor quadro (`1 (2)__0009s`, oblíquo e distante) | 0,1% |
+
+**O estouro não é do sol, é de exposição.** O drone expôs para o chão, e a chapa
+metálica — a coisa mais clara do parque — saturou em dia encoberto, sem disco
+solar em lugar nenhum. Enquanto o material for este, `MAT_TELHA` não se mede.
+
+**O que fica:** o quadro nadir saiu do contrato de medição e no lugar dele ficou
+o comentário com o número, para a próxima sessão não repetir a tentativa.
+`data/estouro-telhado.json` guarda a varredura dos 30 quadros.
+
+**O que fecharia, e é barato quando alguém estiver lá:** um quadro **exposto
+para o telhado**, nem que o chão vá a preto. Meia parada de diafragma. Material
+de medição não precisa ser bonito — e essa é a única coisa que falta para a
+paleta do parque ficar inteira.
+
+**A ressalva que sobrevive de tudo isso:** `MAT_TELHA` continua sendo o cinza
+galvanizado com metallic 0,55, que é decisão técnica declarada, não medida. E
+ele é o material que mais aparece no filme.
