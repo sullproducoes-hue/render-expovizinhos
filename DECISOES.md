@@ -488,3 +488,72 @@ precisa separar isso antes.
 **O que fecharia:** classificar por forma. Traçado que é arco concêntrico ao
 centro da arena, dentro de r < 150 m, é candidato a patamar; o resto é candidato
 a via. É conta sobre dado que já está no arquivo — não precisa dele.
+
+---
+
+## 2026-08-15 — as quatro respostas dele
+
+Ele respondeu a folha de prova: *"a concha entra na cena, a paleta de cores está
+ok. O prédio é polígono mesmo. Isso mesmo é curva de nível a estrada fica um
+pouco acima. É concreto envelhecido, o albedo o daquela coluna"*.
+
+### D026 · O concreto fecha uma classe e denuncia as outras duas
+Com `MAT_CONCRETO = 0,25` (faixa de mercado 0,20–0,30, meio dela), a coluna sai
+em albedo absoluto. **E as outras duas saem impossíveis:** a grade dá 0,773 /
+0,841 / 1,000 e o piso 0,685 / 0,664 / 0,794. Tinta cinza clara de mercado não
+passa de ~0,60.
+
+**Isso não é erro do número, é o número provando o que eu já suspeitava:** o
+excesso não é cor, é luz. A grade do primeiro plano recebe céu pelos vãos
+abertos e a coluna do fundo coberto não. Então o valor delas entra no JSON com
+`_ressalva` dizendo que é **teto, não medida** — e o teto ainda é útil, porque
+limita por cima.
+
+### D027 · As 19 curvas de nível, separadas por geometria
+Ele confirmou: *"Isso mesmo é curva de nível, a estrada fica um pouco acima"*.
+`scripts/classificar_vias.py` separa por dois testes duros, sem parâmetro de
+gosto — desvio relativo do raio abaixo de 18% (menos que a distância entre dois
+patamares vizinhos, que é 27–35% do raio) e raio médio dentro dos 150 m de
+alcance da bacia. Piso de 25 m de comprimento, porque traço curto parece arco
+por acidente.
+
+**19 curva de nível · 14 estrada · 9 indeterminado.** Nenhuma marcada como
+conferida — `conferido_pelo_natan` continua dele. E a palavra *"a estrada fica
+um pouco acima"* ficou gravada no arquivo: quem for tirar geometria de via
+precisa dessa oposição, porque o arco marca a cota e a estrada está um pouco
+além dela.
+
+### D028 · A concha entrou, e onde ela pousa resolve a contradição do palco
+`estruturas.concha()`, quatro peças sob um pai: porão azul de 2,4 m com laje,
+caixa cênica clara de 8,9 m de pé-direito, cobertura caindo de 11,0 para 9,6 m.
+
+**Footprint da planta, alturas do footage** — a regra de desempate que já estava
+escrita. A zona é `PALCO PALCO` (20,28 × 17,67 m): o rótulo aparece **duas
+vezes** na prancha, a 5 m um do outro, e é a mesma palavra escrita duas vezes,
+não dois palcos. As alturas saem de proporção medida em `1 (4)__0012s` contra a
+largura conhecida, e carregam ~20% de incerteza — está declarado, não vendido
+como cota.
+
+**E isso fecha a contradição da D024:** a zona PALCO da planta é a concha
+permanente. O palco de evento estava construído em cima dela. Ele **não foi
+apagado** — `nada se apaga` —, foi para a **ÁREA DE ESPERA**, que é o mecanismo
+que o próprio Natan pediu para peça que existe mas cuja posição é dele.
+
+**Duas ressalvas, e as duas ele vê no quadro:**
+
+1. **as três cores da concha são PROPOSTA, não medida.** O `1 (4)` é o único dos
+   dezessete filmado em golden hour, e o método do céu (D018) só vale em dia
+   encoberto. Trocar é uma linha em `MATERIAIS`;
+2. **`rumo_confiavel: false`** no footprint dela — preenchimento 0,816 e partição
+   por watershed. Entrou assim mesmo porque a alternativa era chutar, e fica
+   dito: se a concha aparecer torta contra o aéreo, é daqui que vem.
+
+### D029 · Armadilha 34 — marcador de câmera vence `scene.camera`
+As duas provas da concha saíram **idênticas** na primeira tentativa, e sem erro
+nenhum. Os 22 planos do filme estão presos a **marcadores de timeline**, e
+marcador de câmera vence `scene.camera` na hora do render — então as duas
+câmeras que eu criei foram ignoradas e o Blender renderizou o plano do
+marcador, duas vezes.
+
+`prova_concha.py` limpa os marcadores na sessão (o `.blend` em disco não muda).
+Vale para qualquer prova futura nesta cena.

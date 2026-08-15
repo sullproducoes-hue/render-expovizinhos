@@ -1,2594 +1,2823 @@
 {
-  "fonte": "Mapa_AGROSHOW26.pdf",
-  "metodo": "Hough probabilistico sobre mascara de linha fina, 300 dpi, segmento minimo 35.0 pt",
-  "aviso": "TRACADO LIDO DE BITMAP, NAO CONFERIDO. Nem o PDF nem o DWG tem vetor, entao isto e leitura de imagem e pode estar errado. Nada daqui vira geometria antes de 'conferido_pelo_natan': true.",
-  "escala_m_por_pt": 0.5611,
-  "resumo": {
-    "tracos": 50,
-    "vias": 42
+ "fonte": "Mapa_AGROSHOW26.pdf",
+ "metodo": "Hough probabilistico sobre mascara de linha fina, 300 dpi, segmento minimo 35.0 pt",
+ "aviso": "TRACADO LIDO DE BITMAP, NAO CONFERIDO. Nem o PDF nem o DWG tem vetor, entao isto e leitura de imagem e pode estar errado. Nada daqui vira geometria antes de 'conferido_pelo_natan': true.",
+ "escala_m_por_pt": 0.5611,
+ "resumo": {
+  "tracos": 50,
+  "vias": 42
+ },
+ "vias": [
+  {
+   "id": "V01",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 145.6,
+   "comprimento_m": 590.9,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     9.84,
+     22.08
+    ],
+    [
+     1062.96,
+     22.56
+    ]
+   ],
+   "pontos_m": [
+    [
+     -398.47,
+     214.86
+    ],
+    [
+     192.43,
+     214.59
+    ]
+   ],
+   "conferido_pelo_natan": false
   },
-  "vias": [
-    {
-      "id": "V01",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 145.6,
-      "comprimento_m": 590.9,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          9.84,
-          22.08
-        ],
-        [
-          1062.96,
-          22.56
-        ]
-      ],
-      "pontos_m": [
-        [
-          -398.47,
-          214.86
-        ],
-        [
-          192.43,
-          214.59
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V02",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 133.2,
-      "comprimento_m": 469.0,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          35.04,
-          32.16
-        ],
-        [
-          870.96,
-          32.4
-        ]
-      ],
-      "pontos_m": [
-        [
-          -384.33,
-          209.2
-        ],
-        [
-          84.7,
-          209.07
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V03",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 154.6,
-      "comprimento_m": 450.3,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          36.72,
-          35.76
-        ],
-        [
-          839.28,
-          36.0
-        ]
-      ],
-      "pontos_m": [
-        [
-          -383.39,
-          207.18
-        ],
-        [
-          66.93,
-          207.05
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V04",
-      "e_via": true,
-      "tipo": "perimetro",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 27.8,
-      "comprimento_m": 216.6,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          112.8,
-          162.24
-        ],
-        [
-          77.28,
-          328.32
-        ],
-        [
-          54.96,
-          414.72
-        ],
-        [
-          47.76,
-          541.44
-        ]
-      ],
-      "pontos_m": [
-        [
-          -340.7,
-          136.21
-        ],
-        [
-          -360.63,
-          43.03
-        ],
-        [
-          -373.15,
-          -5.45
-        ],
-        [
-          -377.19,
-          -76.56
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V05",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 76.0,
-      "comprimento_m": 197.0,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          864.0,
-          35.76
-        ],
-        [
-          907.92,
-          76.32
-        ],
-        [
-          920.64,
-          55.68
-        ],
-        [
-          907.92,
-          75.6
-        ],
-        [
-          865.68,
-          36.24
-        ],
-        [
-          1051.44,
-          36.0
-        ]
-      ],
-      "pontos_m": [
-        [
-          80.8,
-          207.18
-        ],
-        [
-          105.44,
-          184.42
-        ],
-        [
-          112.58,
-          196.0
-        ],
-        [
-          105.44,
-          184.83
-        ],
-        [
-          81.74,
-          206.91
-        ],
-        [
-          185.97,
-          207.05
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V06",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 89.9,
-      "comprimento_m": 173.6,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          33.6,
-          210.24
-        ],
-        [
-          34.08,
-          519.6
-        ]
-      ],
-      "pontos_m": [
-        [
-          -385.14,
-          109.28
-        ],
-        [
-          -384.87,
-          -64.3
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V07",
-      "e_via": true,
-      "tipo": "perimetro",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 21.0,
-      "comprimento_m": 131.1,
-      "vertices": 7,
-      "pontos_pt": [
-        [
-          36.72,
-          288.72
-        ],
-        [
-          36.72,
-          292.08
-        ],
-        [
-          65.76,
-          300.72
-        ],
-        [
-          69.6,
-          306.96
-        ],
-        [
-          57.84,
-          339.12
-        ],
-        [
-          43.68,
-          404.64
-        ],
-        [
-          38.88,
-          495.84
-        ]
-      ],
-      "pontos_m": [
-        [
-          -383.39,
-          65.24
-        ],
-        [
-          -383.39,
-          63.36
-        ],
-        [
-          -367.09,
-          58.51
-        ],
-        [
-          -364.94,
-          55.01
-        ],
-        [
-          -371.54,
-          36.97
-        ],
-        [
-          -379.48,
-          0.2
-        ],
-        [
-          -382.18,
-          -50.97
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V08",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 131.7,
-      "comprimento_m": 100.9,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          873.36,
-          32.16
-        ],
-        [
-          1053.12,
-          32.4
-        ]
-      ],
-      "pontos_m": [
-        [
-          86.05,
-          209.2
-        ],
-        [
-          186.91,
-          209.07
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V09",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "caixa do carimbo",
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 433.0,
-      "comprimento_m": 99.5,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          876.48,
-          789.6
-        ],
-        [
-          1047.84,
-          789.84
-        ],
-        [
-          1048.32,
-          795.84
-        ]
-      ],
-      "pontos_m": [
-        [
-          87.8,
-          -215.8
-        ],
-        [
-          183.95,
-          -215.93
-        ],
-        [
-          184.22,
-          -219.3
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V10",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 429.9,
-      "comprimento_m": 98.6,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          874.56,
-          786.48
-        ],
-        [
-          1050.24,
-          786.96
-        ]
-      ],
-      "pontos_m": [
-        [
-          86.72,
-          -214.05
-        ],
-        [
-          185.3,
-          -214.32
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V11",
-      "e_via": true,
-      "tipo": "perimetro",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 9.8,
-      "comprimento_m": 96.4,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          100.56,
-          164.64
-        ],
-        [
-          74.88,
-          290.16
-        ],
-        [
-          68.88,
-          292.8
-        ],
-        [
-          37.44,
-          282.96
-        ],
-        [
-          37.2,
-          281.04
-        ],
-        [
-          36.72,
-          283.2
-        ]
-      ],
-      "pontos_m": [
-        [
-          -347.57,
-          134.87
-        ],
-        [
-          -361.98,
-          64.44
-        ],
-        [
-          -365.34,
-          62.96
-        ],
-        [
-          -382.98,
-          68.48
-        ],
-        [
-          -383.12,
-          69.55
-        ],
-        [
-          -383.39,
-          68.34
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V12",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 181.7,
-      "comprimento_m": 85.9,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          334.32,
-          152.88
-        ],
-        [
-          259.44,
-          161.52
-        ],
-        [
-          258.72,
-          170.16
-        ],
-        [
-          270.0,
-          188.4
-        ],
-        [
-          252.72,
-          202.56
-        ],
-        [
-          234.72,
-          184.8
-        ]
-      ],
-      "pontos_m": [
-        [
-          -216.41,
-          141.46
-        ],
-        [
-          -258.42,
-          136.62
-        ],
-        [
-          -258.82,
-          131.77
-        ],
-        [
-          -252.5,
-          121.53
-        ],
-        [
-          -262.19,
-          113.59
-        ],
-        [
-          -272.29,
-          123.55
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V13",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 355.0,
-      "comprimento_m": 85.1,
-      "vertices": 5,
-      "pontos_pt": [
-        [
-          425.52,
-          136.32
-        ],
-        [
-          456.96,
-          137.52
-        ],
-        [
-          456.96,
-          199.44
-        ],
-        [
-          427.92,
-          199.92
-        ],
-        [
-          457.2,
-          199.92
-        ]
-      ],
-      "pontos_m": [
-        [
-          -165.23,
-          150.76
-        ],
-        [
-          -147.59,
-          150.08
-        ],
-        [
-          -147.59,
-          115.34
-        ],
-        [
-          -163.89,
-          115.07
-        ],
-        [
-          -147.46,
-          115.07
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V14",
-      "e_via": true,
-      "tipo": "perimetro",
-      "descarte": null,
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 22.9,
-      "comprimento_m": 78.0,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          930.96,
-          66.72
-        ],
-        [
-          918.48,
-          87.12
-        ],
-        [
-          985.44,
-          133.92
-        ],
-        [
-          1014.96,
-          149.52
-        ]
-      ],
-      "pontos_m": [
-        [
-          118.37,
-          189.81
-        ],
-        [
-          111.37,
-          178.36
-        ],
-        [
-          148.94,
-          152.1
-        ],
-        [
-          165.5,
-          143.35
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V15",
-      "e_via": true,
-      "tipo": "perimetro",
-      "descarte": null,
-      "rotulo_mais_proximo": "AVENIDA JOSÉ MARCANTE",
-      "distancia_ao_rotulo_pt": 13.4,
-      "comprimento_m": 77.5,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          1011.6,
-          287.04
-        ],
-        [
-          953.76,
-          394.08
-        ],
-        [
-          966.0,
-          405.12
-        ]
-      ],
-      "pontos_m": [
-        [
-          163.62,
-          66.19
-        ],
-        [
-          131.16,
-          6.13
-        ],
-        [
-          138.03,
-          -0.07
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V16",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 259.5,
-      "comprimento_m": 67.6,
-      "vertices": 7,
-      "pontos_pt": [
-        [
-          368.88,
-          276.0
-        ],
-        [
-          357.84,
-          291.6
-        ],
-        [
-          335.52,
-          353.04
-        ],
-        [
-          336.72,
-          368.16
-        ],
-        [
-          329.28,
-          367.68
-        ],
-        [
-          336.48,
-          368.64
-        ],
-        [
-          337.92,
-          374.64
-        ]
-      ],
-      "pontos_m": [
-        [
-          -197.01,
-          72.38
-        ],
-        [
-          -203.21,
-          63.63
-        ],
-        [
-          -215.73,
-          29.15
-        ],
-        [
-          -215.06,
-          20.67
-        ],
-        [
-          -219.23,
-          20.94
-        ],
-        [
-          -215.19,
-          20.4
-        ],
-        [
-          -214.39,
-          17.03
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V17",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 408.9,
-      "comprimento_m": 61.7,
-      "vertices": 9,
-      "pontos_pt": [
-        [
-          492.48,
-          464.4
-        ],
-        [
-          493.68,
-          476.4
-        ],
-        [
-          495.6,
-          476.64
-        ],
-        [
-          503.04,
-          498.24
-        ],
-        [
-          487.2,
-          503.76
-        ],
-        [
-          484.08,
-          498.24
-        ],
-        [
-          479.76,
-          477.36
-        ],
-        [
-          484.32,
-          500.4
-        ],
-        [
-          487.2,
-          504.72
-        ]
-      ],
-      "pontos_m": [
-        [
-          -127.66,
-          -33.33
-        ],
-        [
-          -126.99,
-          -40.06
-        ],
-        [
-          -125.91,
-          -40.2
-        ],
-        [
-          -121.74,
-          -52.32
-        ],
-        [
-          -130.62,
-          -55.41
-        ],
-        [
-          -132.37,
-          -52.32
-        ],
-        [
-          -134.8,
-          -40.6
-        ],
-        [
-          -132.24,
-          -53.53
-        ],
-        [
-          -130.62,
-          -55.95
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V18",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 401.0,
-      "comprimento_m": 51.4,
-      "vertices": 11,
-      "pontos_pt": [
-        [
-          420.48,
-          559.92
-        ],
-        [
-          415.92,
-          561.6
-        ],
-        [
-          412.8,
-          569.52
-        ],
-        [
-          424.08,
-          599.76
-        ],
-        [
-          422.16,
-          601.68
-        ],
-        [
-          425.28,
-          603.36
-        ],
-        [
-          429.12,
-          614.4
-        ],
-        [
-          426.0,
-          613.68
-        ],
-        [
-          423.6,
-          616.56
-        ],
-        [
-          429.36,
-          615.12
-        ],
-        [
-          434.88,
-          629.28
-        ]
-      ],
-      "pontos_m": [
-        [
-          -168.06,
-          -86.93
-        ],
-        [
-          -170.62,
-          -87.87
-        ],
-        [
-          -172.37,
-          -92.31
-        ],
-        [
-          -166.04,
-          -109.28
-        ],
-        [
-          -167.12,
-          -110.36
-        ],
-        [
-          -165.37,
-          -111.3
-        ],
-        [
-          -163.21,
-          -117.49
-        ],
-        [
-          -164.96,
-          -117.09
-        ],
-        [
-          -166.31,
-          -118.71
-        ],
-        [
-          -163.08,
-          -117.9
-        ],
-        [
-          -159.98,
-          -125.84
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V19",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 375.3,
-      "comprimento_m": 50.7,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          511.92,
-          341.52
-        ],
-        [
-          500.16,
-          360.72
-        ],
-        [
-          499.68,
-          396.24
-        ],
-        [
-          506.16,
-          427.92
-        ]
-      ],
-      "pontos_m": [
-        [
-          -116.75,
-          35.62
-        ],
-        [
-          -123.35,
-          24.85
-        ],
-        [
-          -123.62,
-          4.92
-        ],
-        [
-          -119.99,
-          -12.86
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V20",
-      "e_via": false,
-      "tipo": null,
-      "descarte": "moldura da prancha",
-      "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
-      "distancia_ao_rotulo_pt": 89.6,
-      "comprimento_m": 50.1,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          1050.96,
-          54.48
-        ],
-        [
-          1051.44,
-          143.76
-        ]
-      ],
-      "pontos_m": [
-        [
-          185.7,
-          196.68
-        ],
-        [
-          185.97,
-          146.58
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V21",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 221.8,
-      "comprimento_m": 47.8,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          315.12,
-          252.96
-        ],
-        [
-          307.92,
-          261.12
-        ],
-        [
-          305.04,
-          286.8
-        ],
-        [
-          319.68,
-          306.72
-        ],
-        [
-          332.16,
-          316.56
-        ],
-        [
-          340.08,
-          316.56
-        ]
-      ],
-      "pontos_m": [
-        [
-          -227.18,
-          85.31
-        ],
-        [
-          -231.22,
-          80.73
-        ],
-        [
-          -232.83,
-          66.32
-        ],
-        [
-          -224.62,
-          55.14
-        ],
-        [
-          -217.62,
-          49.62
-        ],
-        [
-          -213.17,
-          49.62
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V22",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 347.8,
-      "comprimento_m": 38.1,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          420.48,
-          136.32
-        ],
-        [
-          420.48,
-          199.92
-        ],
-        [
-          424.8,
-          199.92
-        ]
-      ],
-      "pontos_m": [
-        [
-          -168.06,
-          150.76
-        ],
-        [
-          -168.06,
-          115.07
-        ],
-        [
-          -165.64,
-          115.07
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V23",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 437.8,
-      "comprimento_m": 38.0,
-      "vertices": 5,
-      "pontos_pt": [
-        [
-          440.4,
-          594.48
-        ],
-        [
-          452.16,
-          634.56
-        ],
-        [
-          447.12,
-          639.6
-        ],
-        [
-          437.52,
-          639.36
-        ],
-        [
-          446.64,
-          640.56
-        ]
-      ],
-      "pontos_m": [
-        [
-          -156.88,
-          -106.32
-        ],
-        [
-          -150.29,
-          -128.81
-        ],
-        [
-          -153.11,
-          -131.63
-        ],
-        [
-          -158.5,
-          -131.5
-        ],
-        [
-          -153.38,
-          -132.17
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V24",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 359.6,
-      "comprimento_m": 36.2,
-      "vertices": 10,
-      "pontos_pt": [
-        [
-          527.52,
-          346.32
-        ],
-        [
-          524.16,
-          356.4
-        ],
-        [
-          519.36,
-          363.12
-        ],
-        [
-          517.2,
-          361.92
-        ],
-        [
-          518.4,
-          364.56
-        ],
-        [
-          515.28,
-          370.8
-        ],
-        [
-          510.24,
-          359.52
-        ],
-        [
-          513.12,
-          372.24
-        ],
-        [
-          514.32,
-          371.28
-        ],
-        [
-          513.12,
-          377.52
-        ]
-      ],
-      "pontos_m": [
-        [
-          -108.0,
-          32.93
-        ],
-        [
-          -109.89,
-          27.27
-        ],
-        [
-          -112.58,
-          23.5
-        ],
-        [
-          -113.79,
-          24.17
-        ],
-        [
-          -113.12,
-          22.69
-        ],
-        [
-          -114.87,
-          19.19
-        ],
-        [
-          -117.7,
-          25.52
-        ],
-        [
-          -116.08,
-          18.38
-        ],
-        [
-          -115.41,
-          18.92
-        ],
-        [
-          -116.08,
-          15.42
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V25",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 399.1,
-      "comprimento_m": 36.0,
-      "vertices": 8,
-      "pontos_pt": [
-        [
-          446.4,
-          464.4
-        ],
-        [
-          456.96,
-          489.12
-        ],
-        [
-          457.92,
-          497.04
-        ],
-        [
-          461.52,
-          501.36
-        ],
-        [
-          460.32,
-          505.2
-        ],
-        [
-          464.4,
-          507.12
-        ],
-        [
-          464.4,
-          510.48
-        ],
-        [
-          455.52,
-          518.16
-        ]
-      ],
-      "pontos_m": [
-        [
-          -153.52,
-          -33.33
-        ],
-        [
-          -147.59,
-          -47.2
-        ],
-        [
-          -147.05,
-          -51.64
-        ],
-        [
-          -145.03,
-          -54.07
-        ],
-        [
-          -145.71,
-          -56.22
-        ],
-        [
-          -143.42,
-          -57.3
-        ],
-        [
-          -143.42,
-          -59.18
-        ],
-        [
-          -148.4,
-          -63.49
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V26",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 211.2,
-      "comprimento_m": 35.0,
-      "vertices": 7,
-      "pontos_pt": [
-        [
-          656.16,
-          310.32
-        ],
-        [
-          656.88,
-          321.6
-        ],
-        [
-          647.76,
-          314.88
-        ],
-        [
-          651.36,
-          320.16
-        ],
-        [
-          657.6,
-          322.32
-        ],
-        [
-          666.96,
-          330.0
-        ],
-        [
-          676.32,
-          341.28
-        ]
-      ],
-      "pontos_m": [
-        [
-          -35.82,
-          53.12
-        ],
-        [
-          -35.42,
-          46.8
-        ],
-        [
-          -40.53,
-          50.57
-        ],
-        [
-          -38.51,
-          47.6
-        ],
-        [
-          -35.01,
-          46.39
-        ],
-        [
-          -29.76,
-          42.08
-        ],
-        [
-          -24.51,
-          35.75
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V27",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 387.0,
-      "comprimento_m": 34.6,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          484.32,
-          329.04
-        ],
-        [
-          482.16,
-          341.28
-        ],
-        [
-          466.08,
-          355.44
-        ],
-        [
-          466.08,
-          351.36
-        ],
-        [
-          464.4,
-          352.08
-        ],
-        [
-          463.92,
-          373.92
-        ]
-      ],
-      "pontos_m": [
-        [
-          -132.24,
-          42.62
-        ],
-        [
-          -133.45,
-          35.75
-        ],
-        [
-          -142.47,
-          27.81
-        ],
-        [
-          -142.47,
-          30.1
-        ],
-        [
-          -143.42,
-          29.69
-        ],
-        [
-          -143.69,
-          17.44
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V28",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 312.4,
-      "comprimento_m": 34.4,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          559.68,
-          275.76
-        ],
-        [
-          574.08,
-          281.04
-        ],
-        [
-          567.84,
-          283.92
-        ],
-        [
-          557.04,
-          281.76
-        ],
-        [
-          564.0,
-          285.6
-        ],
-        [
-          583.68,
-          281.52
-        ]
-      ],
-      "pontos_m": [
-        [
-          -89.96,
-          72.52
-        ],
-        [
-          -81.88,
-          69.55
-        ],
-        [
-          -85.38,
-          67.94
-        ],
-        [
-          -91.44,
-          69.15
-        ],
-        [
-          -87.53,
-          67.0
-        ],
-        [
-          -76.49,
-          69.28
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V29",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 182.8,
-      "comprimento_m": 33.7,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          200.16,
-          501.84
-        ],
-        [
-          193.68,
-          505.92
-        ],
-        [
-          188.4,
-          517.2
-        ],
-        [
-          199.68,
-          555.6
-        ]
-      ],
-      "pontos_m": [
-        [
-          -291.68,
-          -54.34
-        ],
-        [
-          -295.32,
-          -56.63
-        ],
-        [
-          -298.28,
-          -62.96
-        ],
-        [
-          -291.95,
-          -84.5
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V30",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 298.1,
-      "comprimento_m": 33.7,
-      "vertices": 8,
-      "pontos_pt": [
-        [
-          359.52,
-          406.32
-        ],
-        [
-          354.24,
-          409.44
-        ],
-        [
-          355.44,
-          414.96
-        ],
-        [
-          355.2,
-          409.44
-        ],
-        [
-          358.32,
-          407.28
-        ],
-        [
-          366.48,
-          408.48
-        ],
-        [
-          376.08,
-          436.08
-        ],
-        [
-          377.52,
-          435.6
-        ]
-      ],
-      "pontos_m": [
-        [
-          -202.27,
-          -0.74
-        ],
-        [
-          -205.23,
-          -2.49
-        ],
-        [
-          -204.55,
-          -5.59
-        ],
-        [
-          -204.69,
-          -2.49
-        ],
-        [
-          -202.94,
-          -1.28
-        ],
-        [
-          -198.36,
-          -1.95
-        ],
-        [
-          -192.97,
-          -17.44
-        ],
-        [
-          -192.17,
-          -17.17
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V31",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 235.8,
-      "comprimento_m": 33.6,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          643.2,
-          279.36
-        ],
-        [
-          646.8,
-          284.64
-        ],
-        [
-          647.76,
-          297.36
-        ],
-        [
-          647.04,
-          284.64
-        ],
-        [
-          652.56,
-          288.72
-        ],
-        [
-          655.92,
-          309.6
-        ]
-      ],
-      "pontos_m": [
-        [
-          -43.09,
-          70.5
-        ],
-        [
-          -41.07,
-          67.53
-        ],
-        [
-          -40.53,
-          60.4
-        ],
-        [
-          -40.94,
-          67.53
-        ],
-        [
-          -37.84,
-          65.24
-        ],
-        [
-          -35.96,
-          53.53
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V32",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 326.6,
-      "comprimento_m": 33.3,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          560.64,
-          343.68
-        ],
-        [
-          537.12,
-          363.6
-        ],
-        [
-          530.64,
-          372.48
-        ],
-        [
-          525.36,
-          389.28
-        ]
-      ],
-      "pontos_m": [
-        [
-          -89.42,
-          34.41
-        ],
-        [
-          -102.61,
-          23.23
-        ],
-        [
-          -106.25,
-          18.25
-        ],
-        [
-          -109.21,
-          8.82
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V33",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 375.4,
-      "comprimento_m": 32.9,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          515.52,
-          421.2
-        ],
-        [
-          529.44,
-          476.4
-        ],
-        [
-          531.12,
-          476.4
-        ]
-      ],
-      "pontos_m": [
-        [
-          -114.73,
-          -9.09
-        ],
-        [
-          -106.92,
-          -40.06
-        ],
-        [
-          -105.98,
-          -40.06
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V34",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 133.3,
-      "comprimento_m": 32.8,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          745.68,
-          349.68
-        ],
-        [
-          754.56,
-          372.24
-        ],
-        [
-          752.64,
-          372.48
-        ],
-        [
-          753.36,
-          374.64
-        ],
-        [
-          744.96,
-          389.52
-        ],
-        [
-          732.72,
-          393.36
-        ]
-      ],
-      "pontos_m": [
-        [
-          14.41,
-          31.04
-        ],
-        [
-          19.39,
-          18.38
-        ],
-        [
-          18.31,
-          18.25
-        ],
-        [
-          18.72,
-          17.03
-        ],
-        [
-          14.01,
-          8.69
-        ],
-        [
-          7.14,
-          6.53
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V35",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 364.0,
-      "comprimento_m": 32.0,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          431.04,
-          392.4
-        ],
-        [
-          437.52,
-          436.08
-        ],
-        [
-          441.36,
-          448.32
-        ]
-      ],
-      "pontos_m": [
-        [
-          -162.14,
-          7.07
-        ],
-        [
-          -158.5,
-          -17.44
-        ],
-        [
-          -156.34,
-          -24.31
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V36",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 350.6,
-      "comprimento_m": 30.7,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          562.8,
-          223.2
-        ],
-        [
-          551.04,
-          231.36
-        ],
-        [
-          537.12,
-          234.24
-        ],
-        [
-          513.12,
-          244.56
-        ]
-      ],
-      "pontos_m": [
-        [
-          -88.2,
-          102.01
-        ],
-        [
-          -94.8,
-          97.43
-        ],
-        [
-          -102.61,
-          95.81
-        ],
-        [
-          -116.08,
-          90.02
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V37",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 206.5,
-      "comprimento_m": 29.9,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          650.88,
-          254.64
-        ],
-        [
-          673.44,
-          268.56
-        ],
-        [
-          677.76,
-          276.72
-        ],
-        [
-          694.56,
-          281.52
-        ]
-      ],
-      "pontos_m": [
-        [
-          -38.78,
-          84.37
-        ],
-        [
-          -26.12,
-          76.56
-        ],
-        [
-          -23.7,
-          71.98
-        ],
-        [
-          -14.27,
-          69.28
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V38",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 344.0,
-      "comprimento_m": 29.2,
-      "vertices": 5,
-      "pontos_pt": [
-        [
-          550.08,
-          287.04
-        ],
-        [
-          535.2,
-          291.12
-        ],
-        [
-          532.32,
-          289.2
-        ],
-        [
-          533.52,
-          291.36
-        ],
-        [
-          505.44,
-          303.6
-        ]
-      ],
-      "pontos_m": [
-        [
-          -95.34,
-          66.19
-        ],
-        [
-          -103.69,
-          63.9
-        ],
-        [
-          -105.31,
-          64.98
-        ],
-        [
-          -104.63,
-          63.76
-        ],
-        [
-          -120.39,
-          56.9
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V39",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 166.0,
-      "comprimento_m": 26.5,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          701.76,
-          311.04
-        ],
-        [
-          712.8,
-          330.96
-        ],
-        [
-          720.96,
-          354.0
-        ]
-      ],
-      "pontos_m": [
-        [
-          -10.23,
-          52.72
-        ],
-        [
-          -4.04,
-          41.54
-        ],
-        [
-          0.54,
-          28.62
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V40",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 248.3,
-      "comprimento_m": 25.8,
-      "vertices": 5,
-      "pontos_pt": [
-        [
-          605.04,
-          340.8
-        ],
-        [
-          625.44,
-          352.8
-        ],
-        [
-          636.24,
-          364.8
-        ],
-        [
-          635.04,
-          366.48
-        ],
-        [
-          638.88,
-          368.16
-        ]
-      ],
-      "pontos_m": [
-        [
-          -64.5,
-          36.02
-        ],
-        [
-          -53.06,
-          29.29
-        ],
-        [
-          -47.0,
-          22.56
-        ],
-        [
-          -47.67,
-          21.61
-        ],
-        [
-          -45.52,
-          20.67
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V41",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 351.3,
-      "comprimento_m": 25.6,
-      "vertices": 4,
-      "pontos_pt": [
-        [
-          428.16,
-          354.96
-        ],
-        [
-          429.84,
-          381.12
-        ],
-        [
-          422.88,
-          375.12
-        ],
-        [
-          430.8,
-          381.6
-        ]
-      ],
-      "pontos_m": [
-        [
-          -163.75,
-          28.08
-        ],
-        [
-          -162.81,
-          13.4
-        ],
-        [
-          -166.71,
-          16.77
-        ],
-        [
-          -162.27,
-          13.13
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V42",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 340.1,
-      "comprimento_m": 24.4,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          386.64,
-          462.0
-        ],
-        [
-          402.72,
-          502.32
-        ]
-      ],
-      "pontos_m": [
-        [
-          -187.05,
-          -31.98
-        ],
-        [
-          -178.03,
-          -54.61
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V43",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 375.1,
-      "comprimento_m": 23.6,
-      "vertices": 6,
-      "pontos_pt": [
-        [
-          512.4,
-          378.24
-        ],
-        [
-          512.4,
-          396.96
-        ],
-        [
-          510.48,
-          398.4
-        ],
-        [
-          512.4,
-          398.64
-        ],
-        [
-          513.12,
-          413.28
-        ],
-        [
-          515.76,
-          416.64
-        ]
-      ],
-      "pontos_m": [
-        [
-          -116.48,
-          15.02
-        ],
-        [
-          -116.48,
-          4.51
-        ],
-        [
-          -117.56,
-          3.7
-        ],
-        [
-          -116.48,
-          3.57
-        ],
-        [
-          -116.08,
-          -4.65
-        ],
-        [
-          -114.6,
-          -6.53
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V44",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 254.0,
-      "comprimento_m": 21.5,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          630.96,
-          320.88
-        ],
-        [
-          634.8,
-          325.68
-        ],
-        [
-          602.64,
-          323.52
-        ]
-      ],
-      "pontos_m": [
-        [
-          -49.96,
-          47.2
-        ],
-        [
-          -47.81,
-          44.51
-        ],
-        [
-          -65.85,
-          45.72
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V45",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 236.3,
-      "comprimento_m": 21.5,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          622.56,
-          334.32
-        ],
-        [
-          641.28,
-          348.72
-        ],
-        [
-          650.64,
-          360.0
-        ]
-      ],
-      "pontos_m": [
-        [
-          -54.67,
-          39.66
-        ],
-        [
-          -44.17,
-          31.58
-        ],
-        [
-          -38.92,
-          25.25
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V46",
-      "e_via": true,
-      "tipo": "perimetro",
-      "descarte": null,
-      "rotulo_mais_proximo": "AVENIDA JOSÉ MARCANTE",
-      "distancia_ao_rotulo_pt": 36.8,
-      "comprimento_m": 21.2,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          1028.64,
-          219.6
-        ],
-        [
-          1011.6,
-          249.36
-        ],
-        [
-          1012.8,
-          252.72
-        ]
-      ],
-      "pontos_m": [
-        [
-          173.18,
-          104.03
-        ],
-        [
-          163.62,
-          87.33
-        ],
-        [
-          164.29,
-          85.44
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V47",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 358.7,
-      "comprimento_m": 20.6,
-      "vertices": 5,
-      "pontos_pt": [
-        [
-          462.0,
-          272.88
-        ],
-        [
-          449.76,
-          288.48
-        ],
-        [
-          448.08,
-          288.0
-        ],
-        [
-          449.28,
-          288.96
-        ],
-        [
-          441.6,
-          300.24
-        ]
-      ],
-      "pontos_m": [
-        [
-          -144.76,
-          74.13
-        ],
-        [
-          -151.63,
-          65.38
-        ],
-        [
-          -152.57,
-          65.65
-        ],
-        [
-          -151.9,
-          65.11
-        ],
-        [
-          -156.21,
-          58.78
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V48",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "PR 473",
-      "distancia_ao_rotulo_pt": 303.1,
-      "comprimento_m": 20.4,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          356.64,
-          415.92
-        ],
-        [
-          367.68,
-          448.32
-        ],
-        [
-          369.84,
-          448.32
-        ]
-      ],
-      "pontos_m": [
-        [
-          -203.88,
-          -6.13
-        ],
-        [
-          -197.69,
-          -24.31
-        ],
-        [
-          -196.47,
-          -24.31
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V49",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 160.0,
-      "comprimento_m": 20.2,
-      "vertices": 2,
-      "pontos_pt": [
-        [
-          719.28,
-          354.96
-        ],
-        [
-          730.32,
-          389.28
-        ]
-      ],
-      "pontos_m": [
-        [
-          -0.4,
-          28.08
-        ],
-        [
-          5.79,
-          8.82
-        ]
-      ],
-      "conferido_pelo_natan": false
-    },
-    {
-      "id": "V50",
-      "e_via": true,
-      "tipo": "interna",
-      "descarte": null,
-      "rotulo_mais_proximo": "RUA JORGE AMADO",
-      "distancia_ao_rotulo_pt": 405.5,
-      "comprimento_m": 19.9,
-      "vertices": 3,
-      "pontos_pt": [
-        [
-          481.44,
-          362.4
-        ],
-        [
-          479.04,
-          378.72
-        ],
-        [
-          482.4,
-          397.44
-        ]
-      ],
-      "pontos_m": [
-        [
-          -133.86,
-          23.9
-        ],
-        [
-          -135.2,
-          14.75
-        ],
-        [
-          -133.32,
-          4.24
-        ]
-      ],
-      "conferido_pelo_natan": false
-    }
-  ]
+  {
+   "id": "V02",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 133.2,
+   "comprimento_m": 469.0,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     35.04,
+     32.16
+    ],
+    [
+     870.96,
+     32.4
+    ]
+   ],
+   "pontos_m": [
+    [
+     -384.33,
+     209.2
+    ],
+    [
+     84.7,
+     209.07
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V03",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 154.6,
+   "comprimento_m": 450.3,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     36.72,
+     35.76
+    ],
+    [
+     839.28,
+     36.0
+    ]
+   ],
+   "pontos_m": [
+    [
+     -383.39,
+     207.18
+    ],
+    [
+     66.93,
+     207.05
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V04",
+   "e_via": true,
+   "tipo": "perimetro",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 27.8,
+   "comprimento_m": 216.6,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     112.8,
+     162.24
+    ],
+    [
+     77.28,
+     328.32
+    ],
+    [
+     54.96,
+     414.72
+    ],
+    [
+     47.76,
+     541.44
+    ]
+   ],
+   "pontos_m": [
+    [
+     -340.7,
+     136.21
+    ],
+    [
+     -360.63,
+     43.03
+    ],
+    [
+     -373.15,
+     -5.45
+    ],
+    [
+     -377.19,
+     -76.56
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 300 m, fora do alcance da bacia",
+   "raio_medio_m": 299.9,
+   "desvio_de_raio": 0.072
+  },
+  {
+   "id": "V05",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 76.0,
+   "comprimento_m": 197.0,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     864.0,
+     35.76
+    ],
+    [
+     907.92,
+     76.32
+    ],
+    [
+     920.64,
+     55.68
+    ],
+    [
+     907.92,
+     75.6
+    ],
+    [
+     865.68,
+     36.24
+    ],
+    [
+     1051.44,
+     36.0
+    ]
+   ],
+   "pontos_m": [
+    [
+     80.8,
+     207.18
+    ],
+    [
+     105.44,
+     184.42
+    ],
+    [
+     112.58,
+     196.0
+    ],
+    [
+     105.44,
+     184.83
+    ],
+    [
+     81.74,
+     206.91
+    ],
+    [
+     185.97,
+     207.05
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 275 m, fora do alcance da bacia",
+   "raio_medio_m": 275.4,
+   "desvio_de_raio": 0.272
+  },
+  {
+   "id": "V06",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 89.9,
+   "comprimento_m": 173.6,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     33.6,
+     210.24
+    ],
+    [
+     34.08,
+     519.6
+    ]
+   ],
+   "pontos_m": [
+    [
+     -385.14,
+     109.28
+    ],
+    [
+     -384.87,
+     -64.3
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V07",
+   "e_via": true,
+   "tipo": "perimetro",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 21.0,
+   "comprimento_m": 131.1,
+   "vertices": 7,
+   "pontos_pt": [
+    [
+     36.72,
+     288.72
+    ],
+    [
+     36.72,
+     292.08
+    ],
+    [
+     65.76,
+     300.72
+    ],
+    [
+     69.6,
+     306.96
+    ],
+    [
+     57.84,
+     339.12
+    ],
+    [
+     43.68,
+     404.64
+    ],
+    [
+     38.88,
+     495.84
+    ]
+   ],
+   "pontos_m": [
+    [
+     -383.39,
+     65.24
+    ],
+    [
+     -383.39,
+     63.36
+    ],
+    [
+     -367.09,
+     58.51
+    ],
+    [
+     -364.94,
+     55.01
+    ],
+    [
+     -371.54,
+     36.97
+    ],
+    [
+     -379.48,
+     0.2
+    ],
+    [
+     -382.18,
+     -50.97
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 306 m, fora do alcance da bacia",
+   "raio_medio_m": 306.0,
+   "desvio_de_raio": 0.066
+  },
+  {
+   "id": "V08",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 131.7,
+   "comprimento_m": 100.9,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     873.36,
+     32.16
+    ],
+    [
+     1053.12,
+     32.4
+    ]
+   ],
+   "pontos_m": [
+    [
+     86.05,
+     209.2
+    ],
+    [
+     186.91,
+     209.07
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V09",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "caixa do carimbo",
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 433.0,
+   "comprimento_m": 99.5,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     876.48,
+     789.6
+    ],
+    [
+     1047.84,
+     789.84
+    ],
+    [
+     1048.32,
+     795.84
+    ]
+   ],
+   "pontos_m": [
+    [
+     87.8,
+     -215.8
+    ],
+    [
+     183.95,
+     -215.93
+    ],
+    [
+     184.22,
+     -219.3
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V10",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 429.9,
+   "comprimento_m": 98.6,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     874.56,
+     786.48
+    ],
+    [
+     1050.24,
+     786.96
+    ]
+   ],
+   "pontos_m": [
+    [
+     86.72,
+     -214.05
+    ],
+    [
+     185.3,
+     -214.32
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V11",
+   "e_via": true,
+   "tipo": "perimetro",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 9.8,
+   "comprimento_m": 96.4,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     100.56,
+     164.64
+    ],
+    [
+     74.88,
+     290.16
+    ],
+    [
+     68.88,
+     292.8
+    ],
+    [
+     37.44,
+     282.96
+    ],
+    [
+     37.2,
+     281.04
+    ],
+    [
+     36.72,
+     283.2
+    ]
+   ],
+   "pontos_m": [
+    [
+     -347.57,
+     134.87
+    ],
+    [
+     -361.98,
+     64.44
+    ],
+    [
+     -365.34,
+     62.96
+    ],
+    [
+     -382.98,
+     68.48
+    ],
+    [
+     -383.12,
+     69.55
+    ],
+    [
+     -383.39,
+     68.34
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 308 m, fora do alcance da bacia",
+   "raio_medio_m": 308.2,
+   "desvio_de_raio": 0.071
+  },
+  {
+   "id": "V12",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 181.7,
+   "comprimento_m": 85.9,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     334.32,
+     152.88
+    ],
+    [
+     259.44,
+     161.52
+    ],
+    [
+     258.72,
+     170.16
+    ],
+    [
+     270.0,
+     188.4
+    ],
+    [
+     252.72,
+     202.56
+    ],
+    [
+     234.72,
+     184.8
+    ]
+   ],
+   "pontos_m": [
+    [
+     -216.41,
+     141.46
+    ],
+    [
+     -258.42,
+     136.62
+    ],
+    [
+     -258.82,
+     131.77
+    ],
+    [
+     -252.5,
+     121.53
+    ],
+    [
+     -262.19,
+     113.59
+    ],
+    [
+     -272.29,
+     123.55
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 222 m, fora do alcance da bacia",
+   "raio_medio_m": 222.4,
+   "desvio_de_raio": 0.145
+  },
+  {
+   "id": "V13",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 355.0,
+   "comprimento_m": 85.1,
+   "vertices": 5,
+   "pontos_pt": [
+    [
+     425.52,
+     136.32
+    ],
+    [
+     456.96,
+     137.52
+    ],
+    [
+     456.96,
+     199.44
+    ],
+    [
+     427.92,
+     199.92
+    ],
+    [
+     457.2,
+     199.92
+    ]
+   ],
+   "pontos_m": [
+    [
+     -165.23,
+     150.76
+    ],
+    [
+     -147.59,
+     150.08
+    ],
+    [
+     -147.59,
+     115.34
+    ],
+    [
+     -163.89,
+     115.07
+    ],
+    [
+     -147.46,
+     115.07
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 155 m, fora do alcance da bacia",
+   "raio_medio_m": 154.9,
+   "desvio_de_raio": 0.257
+  },
+  {
+   "id": "V14",
+   "e_via": true,
+   "tipo": "perimetro",
+   "descarte": null,
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 22.9,
+   "comprimento_m": 78.0,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     930.96,
+     66.72
+    ],
+    [
+     918.48,
+     87.12
+    ],
+    [
+     985.44,
+     133.92
+    ],
+    [
+     1014.96,
+     149.52
+    ]
+   ],
+   "pontos_m": [
+    [
+     118.37,
+     189.81
+    ],
+    [
+     111.37,
+     178.36
+    ],
+    [
+     148.94,
+     152.1
+    ],
+    [
+     165.5,
+     143.35
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 272 m, fora do alcance da bacia",
+   "raio_medio_m": 271.7,
+   "desvio_de_raio": 0.079
+  },
+  {
+   "id": "V15",
+   "e_via": true,
+   "tipo": "perimetro",
+   "descarte": null,
+   "rotulo_mais_proximo": "AVENIDA JOSÉ MARCANTE",
+   "distancia_ao_rotulo_pt": 13.4,
+   "comprimento_m": 77.5,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     1011.6,
+     287.04
+    ],
+    [
+     953.76,
+     394.08
+    ],
+    [
+     966.0,
+     405.12
+    ]
+   ],
+   "pontos_m": [
+    [
+     163.62,
+     66.19
+    ],
+    [
+     131.16,
+     6.13
+    ],
+    [
+     138.03,
+     -0.07
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 222 m, fora do alcance da bacia",
+   "raio_medio_m": 222.3,
+   "desvio_de_raio": 0.19
+  },
+  {
+   "id": "V16",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 259.5,
+   "comprimento_m": 67.6,
+   "vertices": 7,
+   "pontos_pt": [
+    [
+     368.88,
+     276.0
+    ],
+    [
+     357.84,
+     291.6
+    ],
+    [
+     335.52,
+     353.04
+    ],
+    [
+     336.72,
+     368.16
+    ],
+    [
+     329.28,
+     367.68
+    ],
+    [
+     336.48,
+     368.64
+    ],
+    [
+     337.92,
+     374.64
+    ]
+   ],
+   "pontos_m": [
+    [
+     -197.01,
+     72.38
+    ],
+    [
+     -203.21,
+     63.63
+    ],
+    [
+     -215.73,
+     29.15
+    ],
+    [
+     -215.06,
+     20.67
+    ],
+    [
+     -219.23,
+     20.94
+    ],
+    [
+     -215.19,
+     20.4
+    ],
+    [
+     -214.39,
+     17.03
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (4% de variacao) a 144 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 143.7,
+   "desvio_de_raio": 0.037
+  },
+  {
+   "id": "V17",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 408.9,
+   "comprimento_m": 61.7,
+   "vertices": 9,
+   "pontos_pt": [
+    [
+     492.48,
+     464.4
+    ],
+    [
+     493.68,
+     476.4
+    ],
+    [
+     495.6,
+     476.64
+    ],
+    [
+     503.04,
+     498.24
+    ],
+    [
+     487.2,
+     503.76
+    ],
+    [
+     484.08,
+     498.24
+    ],
+    [
+     479.76,
+     477.36
+    ],
+    [
+     484.32,
+     500.4
+    ],
+    [
+     487.2,
+     504.72
+    ]
+   ],
+   "pontos_m": [
+    [
+     -127.66,
+     -33.33
+    ],
+    [
+     -126.99,
+     -40.06
+    ],
+    [
+     -125.91,
+     -40.2
+    ],
+    [
+     -121.74,
+     -52.32
+    ],
+    [
+     -130.62,
+     -55.41
+    ],
+    [
+     -132.37,
+     -52.32
+    ],
+    [
+     -134.8,
+     -40.6
+    ],
+    [
+     -132.24,
+     -53.53
+    ],
+    [
+     -130.62,
+     -55.95
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "varia 23% do raio",
+   "raio_medio_m": 70.3,
+   "desvio_de_raio": 0.227
+  },
+  {
+   "id": "V18",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 401.0,
+   "comprimento_m": 51.4,
+   "vertices": 11,
+   "pontos_pt": [
+    [
+     420.48,
+     559.92
+    ],
+    [
+     415.92,
+     561.6
+    ],
+    [
+     412.8,
+     569.52
+    ],
+    [
+     424.08,
+     599.76
+    ],
+    [
+     422.16,
+     601.68
+    ],
+    [
+     425.28,
+     603.36
+    ],
+    [
+     429.12,
+     614.4
+    ],
+    [
+     426.0,
+     613.68
+    ],
+    [
+     423.6,
+     616.56
+    ],
+    [
+     429.36,
+     615.12
+    ],
+    [
+     434.88,
+     629.28
+    ]
+   ],
+   "pontos_m": [
+    [
+     -168.06,
+     -86.93
+    ],
+    [
+     -170.62,
+     -87.87
+    ],
+    [
+     -172.37,
+     -92.31
+    ],
+    [
+     -166.04,
+     -109.28
+    ],
+    [
+     -167.12,
+     -110.36
+    ],
+    [
+     -165.37,
+     -111.3
+    ],
+    [
+     -163.21,
+     -117.49
+    ],
+    [
+     -164.96,
+     -117.09
+    ],
+    [
+     -166.31,
+     -118.71
+    ],
+    [
+     -163.08,
+     -117.9
+    ],
+    [
+     -159.98,
+     -125.84
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (17% de variacao) a 140 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 140.0,
+   "desvio_de_raio": 0.171
+  },
+  {
+   "id": "V19",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 375.3,
+   "comprimento_m": 50.7,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     511.92,
+     341.52
+    ],
+    [
+     500.16,
+     360.72
+    ],
+    [
+     499.68,
+     396.24
+    ],
+    [
+     506.16,
+     427.92
+    ]
+   ],
+   "pontos_m": [
+    [
+     -116.75,
+     35.62
+    ],
+    [
+     -123.35,
+     24.85
+    ],
+    [
+     -123.62,
+     4.92
+    ],
+    [
+     -119.99,
+     -12.86
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "varia 21% do raio",
+   "raio_medio_m": 52.3,
+   "desvio_de_raio": 0.209
+  },
+  {
+   "id": "V20",
+   "e_via": false,
+   "tipo": null,
+   "descarte": "moldura da prancha",
+   "rotulo_mais_proximo": "AV. VER. DORVALINO TOSI",
+   "distancia_ao_rotulo_pt": 89.6,
+   "comprimento_m": 50.1,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     1050.96,
+     54.48
+    ],
+    [
+     1051.44,
+     143.76
+    ]
+   ],
+   "pontos_m": [
+    [
+     185.7,
+     196.68
+    ],
+    [
+     185.97,
+     146.58
+    ]
+   ],
+   "conferido_pelo_natan": false
+  },
+  {
+   "id": "V21",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 221.8,
+   "comprimento_m": 47.8,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     315.12,
+     252.96
+    ],
+    [
+     307.92,
+     261.12
+    ],
+    [
+     305.04,
+     286.8
+    ],
+    [
+     319.68,
+     306.72
+    ],
+    [
+     332.16,
+     316.56
+    ],
+    [
+     340.08,
+     316.56
+    ]
+   ],
+   "pontos_m": [
+    [
+     -227.18,
+     85.31
+    ],
+    [
+     -231.22,
+     80.73
+    ],
+    [
+     -232.83,
+     66.32
+    ],
+    [
+     -224.62,
+     55.14
+    ],
+    [
+     -217.62,
+     49.62
+    ],
+    [
+     -213.17,
+     49.62
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 165 m, fora do alcance da bacia",
+   "raio_medio_m": 164.7,
+   "desvio_de_raio": 0.179
+  },
+  {
+   "id": "V22",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 347.8,
+   "comprimento_m": 38.1,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     420.48,
+     136.32
+    ],
+    [
+     420.48,
+     199.92
+    ],
+    [
+     424.8,
+     199.92
+    ]
+   ],
+   "pontos_m": [
+    [
+     -168.06,
+     150.76
+    ],
+    [
+     -168.06,
+     115.07
+    ],
+    [
+     -165.64,
+     115.07
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 160 m, fora do alcance da bacia",
+   "raio_medio_m": 160.0,
+   "desvio_de_raio": 0.193
+  },
+  {
+   "id": "V23",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 437.8,
+   "comprimento_m": 38.0,
+   "vertices": 5,
+   "pontos_pt": [
+    [
+     440.4,
+     594.48
+    ],
+    [
+     452.16,
+     634.56
+    ],
+    [
+     447.12,
+     639.6
+    ],
+    [
+     437.52,
+     639.36
+    ],
+    [
+     446.64,
+     640.56
+    ]
+   ],
+   "pontos_m": [
+    [
+     -156.88,
+     -106.32
+    ],
+    [
+     -150.29,
+     -128.81
+    ],
+    [
+     -153.11,
+     -131.63
+    ],
+    [
+     -158.5,
+     -131.5
+    ],
+    [
+     -153.38,
+     -132.17
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (15% de variacao) a 147 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 146.7,
+   "desvio_de_raio": 0.146
+  },
+  {
+   "id": "V24",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 359.6,
+   "comprimento_m": 36.2,
+   "vertices": 10,
+   "pontos_pt": [
+    [
+     527.52,
+     346.32
+    ],
+    [
+     524.16,
+     356.4
+    ],
+    [
+     519.36,
+     363.12
+    ],
+    [
+     517.2,
+     361.92
+    ],
+    [
+     518.4,
+     364.56
+    ],
+    [
+     515.28,
+     370.8
+    ],
+    [
+     510.24,
+     359.52
+    ],
+    [
+     513.12,
+     372.24
+    ],
+    [
+     514.32,
+     371.28
+    ],
+    [
+     513.12,
+     377.52
+    ]
+   ],
+   "pontos_m": [
+    [
+     -108.0,
+     32.93
+    ],
+    [
+     -109.89,
+     27.27
+    ],
+    [
+     -112.58,
+     23.5
+    ],
+    [
+     -113.79,
+     24.17
+    ],
+    [
+     -113.12,
+     22.69
+    ],
+    [
+     -114.87,
+     19.19
+    ],
+    [
+     -117.7,
+     25.52
+    ],
+    [
+     -116.08,
+     18.38
+    ],
+    [
+     -115.41,
+     18.92
+    ],
+    [
+     -116.08,
+     15.42
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (13% de variacao) a 47 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 47.2,
+   "desvio_de_raio": 0.134
+  },
+  {
+   "id": "V25",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 399.1,
+   "comprimento_m": 36.0,
+   "vertices": 8,
+   "pontos_pt": [
+    [
+     446.4,
+     464.4
+    ],
+    [
+     456.96,
+     489.12
+    ],
+    [
+     457.92,
+     497.04
+    ],
+    [
+     461.52,
+     501.36
+    ],
+    [
+     460.32,
+     505.2
+    ],
+    [
+     464.4,
+     507.12
+    ],
+    [
+     464.4,
+     510.48
+    ],
+    [
+     455.52,
+     518.16
+    ]
+   ],
+   "pontos_m": [
+    [
+     -153.52,
+     -33.33
+    ],
+    [
+     -147.59,
+     -47.2
+    ],
+    [
+     -147.05,
+     -51.64
+    ],
+    [
+     -145.03,
+     -54.07
+    ],
+    [
+     -145.71,
+     -56.22
+    ],
+    [
+     -143.42,
+     -57.3
+    ],
+    [
+     -143.42,
+     -59.18
+    ],
+    [
+     -148.4,
+     -63.49
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (12% de variacao) a 88 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 87.9,
+   "desvio_de_raio": 0.123
+  },
+  {
+   "id": "V26",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 211.2,
+   "comprimento_m": 35.0,
+   "vertices": 7,
+   "pontos_pt": [
+    [
+     656.16,
+     310.32
+    ],
+    [
+     656.88,
+     321.6
+    ],
+    [
+     647.76,
+     314.88
+    ],
+    [
+     651.36,
+     320.16
+    ],
+    [
+     657.6,
+     322.32
+    ],
+    [
+     666.96,
+     330.0
+    ],
+    [
+     676.32,
+     341.28
+    ]
+   ],
+   "pontos_m": [
+    [
+     -35.82,
+     53.12
+    ],
+    [
+     -35.42,
+     46.8
+    ],
+    [
+     -40.53,
+     50.57
+    ],
+    [
+     -38.51,
+     47.6
+    ],
+    [
+     -35.01,
+     46.39
+    ],
+    [
+     -29.76,
+     42.08
+    ],
+    [
+     -24.51,
+     35.75
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (9% de variacao) a 64 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 64.1,
+   "desvio_de_raio": 0.095
+  },
+  {
+   "id": "V27",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 387.0,
+   "comprimento_m": 34.6,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     484.32,
+     329.04
+    ],
+    [
+     482.16,
+     341.28
+    ],
+    [
+     466.08,
+     355.44
+    ],
+    [
+     466.08,
+     351.36
+    ],
+    [
+     464.4,
+     352.08
+    ],
+    [
+     463.92,
+     373.92
+    ]
+   ],
+   "pontos_m": [
+    [
+     -132.24,
+     42.62
+    ],
+    [
+     -133.45,
+     35.75
+    ],
+    [
+     -142.47,
+     27.81
+    ],
+    [
+     -142.47,
+     30.1
+    ],
+    [
+     -143.42,
+     29.69
+    ],
+    [
+     -143.69,
+     17.44
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (8% de variacao) a 74 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 73.7,
+   "desvio_de_raio": 0.077
+  },
+  {
+   "id": "V28",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 312.4,
+   "comprimento_m": 34.4,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     559.68,
+     275.76
+    ],
+    [
+     574.08,
+     281.04
+    ],
+    [
+     567.84,
+     283.92
+    ],
+    [
+     557.04,
+     281.76
+    ],
+    [
+     564.0,
+     285.6
+    ],
+    [
+     583.68,
+     281.52
+    ]
+   ],
+   "pontos_m": [
+    [
+     -89.96,
+     72.52
+    ],
+    [
+     -81.88,
+     69.55
+    ],
+    [
+     -85.38,
+     67.94
+    ],
+    [
+     -91.44,
+     69.15
+    ],
+    [
+     -87.53,
+     67.0
+    ],
+    [
+     -76.49,
+     69.28
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (8% de variacao) a 73 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 73.4,
+   "desvio_de_raio": 0.08
+  },
+  {
+   "id": "V29",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 182.8,
+   "comprimento_m": 33.7,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     200.16,
+     501.84
+    ],
+    [
+     193.68,
+     505.92
+    ],
+    [
+     188.4,
+     517.2
+    ],
+    [
+     199.68,
+     555.6
+    ]
+   ],
+   "pontos_m": [
+    [
+     -291.68,
+     -54.34
+    ],
+    [
+     -295.32,
+     -56.63
+    ],
+    [
+     -298.28,
+     -62.96
+    ],
+    [
+     -291.95,
+     -84.5
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "raio medio 228 m, fora do alcance da bacia",
+   "raio_medio_m": 228.3,
+   "desvio_de_raio": 0.04
+  },
+  {
+   "id": "V30",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 298.1,
+   "comprimento_m": 33.7,
+   "vertices": 8,
+   "pontos_pt": [
+    [
+     359.52,
+     406.32
+    ],
+    [
+     354.24,
+     409.44
+    ],
+    [
+     355.44,
+     414.96
+    ],
+    [
+     355.2,
+     409.44
+    ],
+    [
+     358.32,
+     407.28
+    ],
+    [
+     366.48,
+     408.48
+    ],
+    [
+     376.08,
+     436.08
+    ],
+    [
+     377.52,
+     435.6
+    ]
+   ],
+   "pontos_m": [
+    [
+     -202.27,
+     -0.74
+    ],
+    [
+     -205.23,
+     -2.49
+    ],
+    [
+     -204.55,
+     -5.59
+    ],
+    [
+     -204.69,
+     -2.49
+    ],
+    [
+     -202.94,
+     -1.28
+    ],
+    [
+     -198.36,
+     -1.95
+    ],
+    [
+     -192.97,
+     -17.44
+    ],
+    [
+     -192.17,
+     -17.17
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (10% de variacao) a 126 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 125.9,
+   "desvio_de_raio": 0.097
+  },
+  {
+   "id": "V31",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 235.8,
+   "comprimento_m": 33.6,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     643.2,
+     279.36
+    ],
+    [
+     646.8,
+     284.64
+    ],
+    [
+     647.76,
+     297.36
+    ],
+    [
+     647.04,
+     284.64
+    ],
+    [
+     652.56,
+     288.72
+    ],
+    [
+     655.92,
+     309.6
+    ]
+   ],
+   "pontos_m": [
+    [
+     -43.09,
+     70.5
+    ],
+    [
+     -41.07,
+     67.53
+    ],
+    [
+     -40.53,
+     60.4
+    ],
+    [
+     -40.94,
+     67.53
+    ],
+    [
+     -37.84,
+     65.24
+    ],
+    [
+     -35.96,
+     53.53
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (15% de variacao) a 76 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 75.9,
+   "desvio_de_raio": 0.151
+  },
+  {
+   "id": "V32",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 326.6,
+   "comprimento_m": 33.3,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     560.64,
+     343.68
+    ],
+    [
+     537.12,
+     363.6
+    ],
+    [
+     530.64,
+     372.48
+    ],
+    [
+     525.36,
+     389.28
+    ]
+   ],
+   "pontos_m": [
+    [
+     -89.42,
+     34.41
+    ],
+    [
+     -102.61,
+     23.23
+    ],
+    [
+     -106.25,
+     18.25
+    ],
+    [
+     -109.21,
+     8.82
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (10% de variacao) a 38 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 38.4,
+   "desvio_de_raio": 0.1
+  },
+  {
+   "id": "V33",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 375.4,
+   "comprimento_m": 32.9,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     515.52,
+     421.2
+    ],
+    [
+     529.44,
+     476.4
+    ],
+    [
+     531.12,
+     476.4
+    ]
+   ],
+   "pontos_m": [
+    [
+     -114.73,
+     -9.09
+    ],
+    [
+     -106.92,
+     -40.06
+    ],
+    [
+     -105.98,
+     -40.06
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "estrada",
+   "_motivo_da_classe": "varia 19% do raio",
+   "raio_medio_m": 45.9,
+   "desvio_de_raio": 0.185
+  },
+  {
+   "id": "V34",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 133.3,
+   "comprimento_m": 32.8,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     745.68,
+     349.68
+    ],
+    [
+     754.56,
+     372.24
+    ],
+    [
+     752.64,
+     372.48
+    ],
+    [
+     753.36,
+     374.64
+    ],
+    [
+     744.96,
+     389.52
+    ],
+    [
+     732.72,
+     393.36
+    ]
+   ],
+   "pontos_m": [
+    [
+     14.41,
+     31.04
+    ],
+    [
+     19.39,
+     18.38
+    ],
+    [
+     18.31,
+     18.25
+    ],
+    [
+     18.72,
+     17.03
+    ],
+    [
+     14.01,
+     8.69
+    ],
+    [
+     7.14,
+     6.53
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (15% de variacao) a 92 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 92.5,
+   "desvio_de_raio": 0.153
+  },
+  {
+   "id": "V35",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 364.0,
+   "comprimento_m": 32.0,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     431.04,
+     392.4
+    ],
+    [
+     437.52,
+     436.08
+    ],
+    [
+     441.36,
+     448.32
+    ]
+   ],
+   "pontos_m": [
+    [
+     -162.14,
+     7.07
+    ],
+    [
+     -158.5,
+     -17.44
+    ],
+    [
+     -156.34,
+     -24.31
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (4% de variacao) a 86 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 85.8,
+   "desvio_de_raio": 0.043
+  },
+  {
+   "id": "V36",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 350.6,
+   "comprimento_m": 30.7,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     562.8,
+     223.2
+    ],
+    [
+     551.04,
+     231.36
+    ],
+    [
+     537.12,
+     234.24
+    ],
+    [
+     513.12,
+     244.56
+    ]
+   ],
+   "pontos_m": [
+    [
+     -88.2,
+     102.01
+    ],
+    [
+     -94.8,
+     97.43
+    ],
+    [
+     -102.61,
+     95.81
+    ],
+    [
+     -116.08,
+     90.02
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (4% de variacao) a 103 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 103.4,
+   "desvio_de_raio": 0.039
+  },
+  {
+   "id": "V37",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 206.5,
+   "comprimento_m": 29.9,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     650.88,
+     254.64
+    ],
+    [
+     673.44,
+     268.56
+    ],
+    [
+     677.76,
+     276.72
+    ],
+    [
+     694.56,
+     281.52
+    ]
+   ],
+   "pontos_m": [
+    [
+     -38.78,
+     84.37
+    ],
+    [
+     -26.12,
+     76.56
+    ],
+    [
+     -23.7,
+     71.98
+    ],
+    [
+     -14.27,
+     69.28
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (4% de variacao) a 93 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 93.3,
+   "desvio_de_raio": 0.041
+  },
+  {
+   "id": "V38",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 344.0,
+   "comprimento_m": 29.2,
+   "vertices": 5,
+   "pontos_pt": [
+    [
+     550.08,
+     287.04
+    ],
+    [
+     535.2,
+     291.12
+    ],
+    [
+     532.32,
+     289.2
+    ],
+    [
+     533.52,
+     291.36
+    ],
+    [
+     505.44,
+     303.6
+    ]
+   ],
+   "pontos_m": [
+    [
+     -95.34,
+     66.19
+    ],
+    [
+     -103.69,
+     63.9
+    ],
+    [
+     -105.31,
+     64.98
+    ],
+    [
+     -104.63,
+     63.76
+    ],
+    [
+     -120.39,
+     56.9
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (4% de variacao) a 74 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 73.8,
+   "desvio_de_raio": 0.042
+  },
+  {
+   "id": "V39",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 166.0,
+   "comprimento_m": 26.5,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     701.76,
+     311.04
+    ],
+    [
+     712.8,
+     330.96
+    ],
+    [
+     720.96,
+     354.0
+    ]
+   ],
+   "pontos_m": [
+    [
+     -10.23,
+     52.72
+    ],
+    [
+     -4.04,
+     41.54
+    ],
+    [
+     0.54,
+     28.62
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (4% de variacao) a 84 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 83.6,
+   "desvio_de_raio": 0.044
+  },
+  {
+   "id": "V40",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 248.3,
+   "comprimento_m": 25.8,
+   "vertices": 5,
+   "pontos_pt": [
+    [
+     605.04,
+     340.8
+    ],
+    [
+     625.44,
+     352.8
+    ],
+    [
+     636.24,
+     364.8
+    ],
+    [
+     635.04,
+     366.48
+    ],
+    [
+     638.88,
+     368.16
+    ]
+   ],
+   "pontos_m": [
+    [
+     -64.5,
+     36.02
+    ],
+    [
+     -53.06,
+     29.29
+    ],
+    [
+     -47.0,
+     22.56
+    ],
+    [
+     -47.67,
+     21.61
+    ],
+    [
+     -45.52,
+     20.67
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (10% de variacao) a 38 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 38.4,
+   "desvio_de_raio": 0.1
+  },
+  {
+   "id": "V41",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 351.3,
+   "comprimento_m": 25.6,
+   "vertices": 4,
+   "pontos_pt": [
+    [
+     428.16,
+     354.96
+    ],
+    [
+     429.84,
+     381.12
+    ],
+    [
+     422.88,
+     375.12
+    ],
+    [
+     430.8,
+     381.6
+    ]
+   ],
+   "pontos_m": [
+    [
+     -163.75,
+     28.08
+    ],
+    [
+     -162.81,
+     13.4
+    ],
+    [
+     -166.71,
+     16.77
+    ],
+    [
+     -162.27,
+     13.13
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "curva_de_nivel",
+   "_motivo_da_classe": "raio quase constante (6% de variacao) a 92 m do centro da arena, dentro do alcance da bacia. Acompanha a cota em vez de cruza-la: e o contorno do patamar, nao estrada",
+   "raio_medio_m": 91.8,
+   "desvio_de_raio": 0.058
+  },
+  {
+   "id": "V42",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 340.1,
+   "comprimento_m": 24.4,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     386.64,
+     462.0
+    ],
+    [
+     402.72,
+     502.32
+    ]
+   ],
+   "pontos_m": [
+    [
+     -187.05,
+     -31.98
+    ],
+    [
+     -178.03,
+     -54.61
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 24 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 115.7,
+   "desvio_de_raio": 0.005
+  },
+  {
+   "id": "V43",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 375.1,
+   "comprimento_m": 23.6,
+   "vertices": 6,
+   "pontos_pt": [
+    [
+     512.4,
+     378.24
+    ],
+    [
+     512.4,
+     396.96
+    ],
+    [
+     510.48,
+     398.4
+    ],
+    [
+     512.4,
+     398.64
+    ],
+    [
+     513.12,
+     413.28
+    ],
+    [
+     515.76,
+     416.64
+    ]
+   ],
+   "pontos_m": [
+    [
+     -116.48,
+     15.02
+    ],
+    [
+     -116.48,
+     4.51
+    ],
+    [
+     -117.56,
+     3.7
+    ],
+    [
+     -116.48,
+     3.57
+    ],
+    [
+     -116.08,
+     -4.65
+    ],
+    [
+     -114.6,
+     -6.53
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 24 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 42.5,
+   "desvio_de_raio": 0.13
+  },
+  {
+   "id": "V44",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 254.0,
+   "comprimento_m": 21.5,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     630.96,
+     320.88
+    ],
+    [
+     634.8,
+     325.68
+    ],
+    [
+     602.64,
+     323.52
+    ]
+   ],
+   "pontos_m": [
+    [
+     -49.96,
+     47.2
+    ],
+    [
+     -47.81,
+     44.51
+    ],
+    [
+     -65.85,
+     45.72
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 22 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 53.5,
+   "desvio_de_raio": 0.12
+  },
+  {
+   "id": "V45",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 236.3,
+   "comprimento_m": 21.5,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     622.56,
+     334.32
+    ],
+    [
+     641.28,
+     348.72
+    ],
+    [
+     650.64,
+     360.0
+    ]
+   ],
+   "pontos_m": [
+    [
+     -54.67,
+     39.66
+    ],
+    [
+     -44.17,
+     31.58
+    ],
+    [
+     -38.92,
+     25.25
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 22 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 46.4,
+   "desvio_de_raio": 0.034
+  },
+  {
+   "id": "V46",
+   "e_via": true,
+   "tipo": "perimetro",
+   "descarte": null,
+   "rotulo_mais_proximo": "AVENIDA JOSÉ MARCANTE",
+   "distancia_ao_rotulo_pt": 36.8,
+   "comprimento_m": 21.2,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     1028.64,
+     219.6
+    ],
+    [
+     1011.6,
+     249.36
+    ],
+    [
+     1012.8,
+     252.72
+    ]
+   ],
+   "pontos_m": [
+    [
+     173.18,
+     104.03
+    ],
+    [
+     163.62,
+     87.33
+    ],
+    [
+     164.29,
+     85.44
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 21 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 260.0,
+   "desvio_de_raio": 0.058
+  },
+  {
+   "id": "V47",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 358.7,
+   "comprimento_m": 20.6,
+   "vertices": 5,
+   "pontos_pt": [
+    [
+     462.0,
+     272.88
+    ],
+    [
+     449.76,
+     288.48
+    ],
+    [
+     448.08,
+     288.0
+    ],
+    [
+     449.28,
+     288.96
+    ],
+    [
+     441.6,
+     300.24
+    ]
+   ],
+   "pontos_m": [
+    [
+     -144.76,
+     74.13
+    ],
+    [
+     -151.63,
+     65.38
+    ],
+    [
+     -152.57,
+     65.65
+    ],
+    [
+     -151.9,
+     65.11
+    ],
+    [
+     -156.21,
+     58.78
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 21 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 103.4,
+   "desvio_de_raio": 0.019
+  },
+  {
+   "id": "V48",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "PR 473",
+   "distancia_ao_rotulo_pt": 303.1,
+   "comprimento_m": 20.4,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     356.64,
+     415.92
+    ],
+    [
+     367.68,
+     448.32
+    ],
+    [
+     369.84,
+     448.32
+    ]
+   ],
+   "pontos_m": [
+    [
+     -203.88,
+     -6.13
+    ],
+    [
+     -197.69,
+     -24.31
+    ],
+    [
+     -196.47,
+     -24.31
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 20 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 125.9,
+   "desvio_de_raio": 0.045
+  },
+  {
+   "id": "V49",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 160.0,
+   "comprimento_m": 20.2,
+   "vertices": 2,
+   "pontos_pt": [
+    [
+     719.28,
+     354.96
+    ],
+    [
+     730.32,
+     389.28
+    ]
+   ],
+   "pontos_m": [
+    [
+     -0.4,
+     28.08
+    ],
+    [
+     5.79,
+     8.82
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 20 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 81.0,
+   "desvio_de_raio": 0.009
+  },
+  {
+   "id": "V50",
+   "e_via": true,
+   "tipo": "interna",
+   "descarte": null,
+   "rotulo_mais_proximo": "RUA JORGE AMADO",
+   "distancia_ao_rotulo_pt": 405.5,
+   "comprimento_m": 19.9,
+   "vertices": 3,
+   "pontos_pt": [
+    [
+     481.44,
+     362.4
+    ],
+    [
+     479.04,
+     378.72
+    ],
+    [
+     482.4,
+     397.44
+    ]
+   ],
+   "pontos_m": [
+    [
+     -133.86,
+     23.9
+    ],
+    [
+     -135.2,
+     14.75
+    ],
+    [
+     -133.32,
+     4.24
+    ]
+   ],
+   "conferido_pelo_natan": false,
+   "classe_geometrica": "indeterminado",
+   "_motivo_da_classe": "traco de 20 m, abaixo do piso de 25 m. Traco curto parece arco por acidente -- o teste nao tem o que medir",
+   "raio_medio_m": 62.4,
+   "desvio_de_raio": 0.096
+  }
+ ],
+ "_classificacao_geometrica": {
+  "quando": "2026-08-15",
+  "por_que": "a sobreposicao no aereo nadir mostrou tracos desenhando arcos concentricos dentro da bacia, e o Natan confirmou olhando: 'Isso mesmo e curva de nivel, a estrada fica um pouco acima'",
+  "criterio": {
+   "desvio_maximo_de_raio": 0.18,
+   "raio_maximo_m": 150.0,
+   "comprimento_minimo_m": 25.0
+  },
+  "resultado": {
+   "curva_de_nivel": [
+    "V16",
+    "V18",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "V30",
+    "V31",
+    "V32",
+    "V34",
+    "V35",
+    "V36",
+    "V37",
+    "V38",
+    "V39",
+    "V40",
+    "V41"
+   ],
+   "estrada": [
+    "V04",
+    "V05",
+    "V07",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V17",
+    "V19",
+    "V21",
+    "V22",
+    "V29",
+    "V33"
+   ],
+   "indeterminado": [
+    "V42",
+    "V43",
+    "V44",
+    "V45",
+    "V46",
+    "V47",
+    "V48",
+    "V49",
+    "V50"
+   ]
+  },
+  "_palavra_dele": "'a estrada fica um pouco acima' -- a estrada de verdade corre por FORA do arco que o Hough leu. Quem for tirar geometria de via daqui precisa dessa oposicao: o arco marca a cota, a estrada esta um pouco alem dela.",
+  "_o_que_isto_NAO_e": "conferencia. Nenhuma via foi marcada como conferida; `conferido_pelo_natan` continua false em todas, e o nome do campo diz de quem e."
+ }
 }

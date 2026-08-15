@@ -81,6 +81,18 @@ RUMO_PAVILHOES = 341.0   # = azimute 108,4 depois da conversao. Ver azimute_para
 RUMO_PORTAL = 73.0       # de frente para quem chega pela Dorvalino Tosi
 RUMO_PALCO = 334.0       # de frente para a arena
 
+RUMO_CONCHA = 116.6
+"""Rumo de mapa do footprint `PALCO PALCO`, medido do desenho.
+
+`footprints.json` marca `rumo_confiavel: false` neste item -- o preenchimento
+da mancha e 0,816 e a particao veio de watershed. Entra assim mesmo porque a
+alternativa e chutar, e fica DITO: se a concha aparecer torta contra o aereo,
+e daqui que vem."""
+
+ESPERA_PALCO = (520.0, -285.0)
+"""Onde o palco DE EVENTO passa a ficar: ao lado da AREA_DE_ESPERA (520, -240),
+45 m ao sul para nao encostar nas 11 pecas que ja estao la."""
+
 
 # --------------------------------------------------------------------------
 # Utilitarios de cena
@@ -173,6 +185,38 @@ MATERIAIS = {
     # tronco NAO e medido: no quadro aereo ele tem poucos pixels e esta sob a
     # copa. Casca de arvore de parque, faixa fisica 0,08-0,12.
     "MAT_TRONCO":   ((0.095, 0.078, 0.062), 0.90, 0.0),
+
+    # ---- A PALETA DO PARQUE, medida no footage de 13/08 e aprovada por ele em
+    # 15/08 (*"a paleta de cores esta ok"*). scripts/medir_materiais_quinta.py,
+    # data/materiais-quinta.json.
+    #
+    # O metodo NAO e o mesmo de 14/08, e a diferenca esta registrada em D018:
+    # aquele footage e golden hour e a ancora foi a lona ao sol; este e dia
+    # encoberto, e em ceu encoberto a irradiancia depende da ORIENTACAO da
+    # superficie -- telhado ve o hemisferio inteiro, parede ve metade. Ancorar
+    # no telhado devolveu tijolo com albedo 1,000 no vermelho. Aqui o
+    # iluminante e MEDIDO no proprio ceu do quadro.
+    "MAT_TIJOLO":        ((0.564, 0.073, 0.071), 0.85, 0.0),  # medido
+    "MAT_CHAPA_AZUL":    ((0.036, 0.274, 0.592), 0.42, 0.45),  # medido
+    "MAT_COLUNA_AZUL":   ((0.018, 0.060, 0.165), 0.78, 0.0),  # medido
+    "MAT_CHAPA_PORTAO":  ((0.066, 0.077, 0.098), 0.45, 0.40),  # medido
+    "MAT_TERRA_BATIDA":  ((0.097, 0.033, 0.016), 0.93, 0.0),  # medido
+
+    # DECLARADO POR ELE em 15/08: *"e concreto envelhecido, o albedo o daquela
+    # coluna"*. Faixa de mercado 0,20-0,30; 0,25 e o meio. Nao e medicao minha
+    # -- nas mangueiras nao ha ceu medivel nem superficie de refletancia
+    # conhecida, e sem uma palavra dele o quadro nao fechava.
+    "MAT_CONCRETO":      ((0.250, 0.250, 0.250), 0.88, 0.0),
+
+    # ---- PROPOSTA, nao medida, e o motivo e um so: o video `1 (4)` e o UNICO
+    # dos dezessete filmado em golden hour, e o metodo do ceu (D018) so vale em
+    # dia encoberto. Estas tres sao leitura de olho sobre quadro quente, e ele
+    # pode trocar qualquer uma numa linha.
+    "MAT_CONCHA_AZUL":   ((0.045, 0.115, 0.330), 0.55, 0.0),  # PROPOSTA
+    "MAT_CONCHA_CLARO":  ((0.600, 0.585, 0.545), 0.80, 0.0),  # PROPOSTA
+    # tercas e rufos da cobertura. Nao entrou por medicao: so existe em peca de
+    # 20 a 40 px, e croma 4:2:0 de peca fina e mistura inventada (D021).
+    "MAT_ESTRUTURA_VERMELHA": ((0.190, 0.055, 0.040), 0.82, 0.0),  # PROPOSTA
 }
 
 
@@ -1398,9 +1442,23 @@ def construir_estruturas(dados, col, centro_arena, bbox=None):
         feitos.append(estruturas.portal("PortalCeleiro", *p, col,
                                         rumo_graus=RUMO_PORTAL))
 
+    # A zona PALCO da planta e a CONCHA de alvenaria, nao o palco de evento.
+    # Ordem dele em 15/08: *"a concha entra na cena"*. O rumo vem do footprint
+    # medido (116,6 graus de rumo de mapa) -- e ATENCAO a convencao, que ja
+    # enganou uma vez neste arquivo: `_girar()` aplica angulo MATEMATICO, e
+    # `angulo = 90 - rumo`. `RUMO_PALCO = 334.0` logo acima esta escrito nessa
+    # mesma convencao torta e por isso da certo; nao mexer nele.
     p = posicao("PALCO")
     if p:
-        feitos.append(estruturas.palco("Palco", *p, col,
+        feitos.append(estruturas.concha("ConchaPalco", *p, col,
+                                        rumo_graus=90.0 - RUMO_CONCHA))
+
+        # O palco DE EVENTO continua existindo -- `nada se apaga`. Ele sai da
+        # arena porque a zona PALCO e da concha, e vai para a AREA DE ESPERA,
+        # que e o mecanismo que ele proprio pediu em 15/08 para peca que existe
+        # mas cuja posicao e dele: *"o que nao sabe quero que deixe do lado"*.
+        feitos.append(estruturas.palco("Palco de evento", ESPERA_PALCO[0],
+                                       ESPERA_PALCO[1], 0.0, col,
                                        rumo_graus=RUMO_PALCO))
 
     # Os dois camarotes ladeiam a arena -- restricao 1 do cliente, e o mapa

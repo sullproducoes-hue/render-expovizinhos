@@ -299,7 +299,12 @@
       0.7037
      ],
      "hex_balanceado": "#fffcda",
-     "albedo_linear": null,
+     "albedo_linear": [
+      0.25,
+      0.25,
+      0.25
+     ],
+     "_ressalva": null,
      "estouro_na_amostra": 0.00186
     },
     "grade_cinza": {
@@ -323,7 +328,12 @@
       1.0
      ],
      "hex_balanceado": "#f4faff",
-     "albedo_linear": null,
+     "albedo_linear": [
+      0.7725,
+      0.8409,
+      1.0
+     ],
+     "_ressalva": "IMPLAUSIVEL como albedo. Tinta cinza clara de mercado nao passa de ~0,60, e isto passou. O excesso NAO e cor: e luz. Esta peca recebe ceu pelo vao aberto e a coluna do fundo nao, entao o numero aqui e TETO, nao medida.",
      "estouro_na_amostra": 5e-05
     },
     "piso_curral": {
@@ -347,7 +357,12 @@
       0.8156
      ],
      "hex_balanceado": "#fff9e9",
-     "albedo_linear": null,
+     "albedo_linear": [
+      0.6848,
+      0.6636,
+      0.7937
+     ],
+     "_ressalva": "IMPLAUSIVEL como albedo. Tinta cinza clara de mercado nao passa de ~0,60, e isto passou. O excesso NAO e cor: e luz. Esta peca recebe ceu pelo vao aberto e a coluna do fundo nao, entao o numero aqui e TETO, nao medida.",
      "estouro_na_amostra": 0.0
     }
    }

@@ -243,6 +243,19 @@ QUADROS = {
     "1 (14)__0011s": {
         "modo": "relativo",
         "referencia": "grade_cinza",
+        "ancora_declarada_por_ele": {
+            "classe": "concreto_coluna",
+            "albedo": 0.25,
+            "quem_disse": ("o Natan, em 15/08, perguntado: *“e concreto envelhecido, "
+                           "o albedo o daquela coluna”*. A faixa de mercado para "
+                           "concreto envelhecido e 0,20-0,30 e 0,25 e o meio dela."),
+            "por_que_isso_fecha_o_quadro": (
+                "sem ceu medivel aqui, faltava UMA refletancia conhecida para inverter o "
+                "quadro inteiro. Com ela, grade e piso saem em albedo absoluto junto -- "
+                "mas ATENCAO: so as classes no MESMO regime de luz da referencia. A "
+                "coluna esta no fundo coberto e le 3x mais escura que as grades do "
+                "primeiro plano, e isso e iluminacao, nao cor."),
+        },
         "por_que": ("MANGUEIRAS por dentro: coluna de concreto, estrutura de "
                     "telhado vermelha e grade de manejo. E o unico quadro do "
                     "conjunto com concreto estrutural grande e chapado -- e o "
@@ -377,6 +390,11 @@ def main():
             print("  MODO RELATIVO -- nao ha ceu medivel neste quadro.")
             print(f"  referencia: {q['referencia']}; cor do iluminante reusada "
                   f"do 1 (17)__0006s (R/B 0,80)\n")
+            itens_razao = {}
+            for cls, a in q["amostras"].items():
+                lin_, _ = amostrar(bruto, a["caixa"], f"{nome}/{cls}")
+                itens_razao[cls] = list(lin_ / np.maximum(l_ref, 1e-9))
+
             print(f"  {'classe':22s} {'razao vs referencia':>22s}  {'hex balanceado':>15s}")
             itens = {}
             for cls, a in q["amostras"].items():
@@ -390,6 +408,21 @@ def main():
                 srgb = linear_para_srgb(bal)
                 hexa = "#" + "".join(f"{int(round(v*255)):02x}" for v in srgb)
                 print(f"  {cls:22s} {razao[0]:6.3f} {razao[1]:6.3f} {razao[2]:6.3f}  {hexa:>15s}")
+                anc = q.get("ancora_declarada_por_ele")
+                absoluto, nota = None, None
+                if anc:
+                    # a referencia dos ratios e `grade_cinza`; a ancora dele e o
+                    # concreto. Entao o fator que leva um ao outro sai da propria
+                    # razao do concreto contra a referencia.
+                    r_conc = np.array(itens_razao["concreto_coluna"])
+                    esc = np.array(anc["albedo"]) / np.maximum(r_conc, 1e-9)
+                    absoluto = np.clip(razao * esc, 0.0, 1.0)
+                    if cls != anc["classe"] and float(np.mean(absoluto)) > 0.62:
+                        nota = ("IMPLAUSIVEL como albedo. Tinta cinza clara de "
+                                "mercado nao passa de ~0,60, e isto passou. O "
+                                "excesso NAO e cor: e luz. Esta peca recebe ceu "
+                                "pelo vao aberto e a coluna do fundo nao, entao "
+                                "o numero aqui e TETO, nao medida.")
                 itens[cls] = {
                     "material": a["material"],
                     "onde": a["onde"],
@@ -398,9 +431,14 @@ def main():
                     "razao_vs_referencia": [round(float(v), 4) for v in razao],
                     "cor_balanceada_normalizada": [round(float(v), 4) for v in bal],
                     "hex_balanceado": hexa,
-                    "albedo_linear": None,
+                    "albedo_linear": ([round(float(v), 4) for v in absoluto]
+                                      if absoluto is not None else None),
+                    "_ressalva": nota,
                     "estouro_na_amostra": round(est, 5),
                 }
+                if absoluto is not None:
+                    print(f"       -> albedo {absoluto[0]:.3f} {absoluto[1]:.3f} "
+                          f"{absoluto[2]:.3f}" + ("   << " + nota[:46] if nota else ""))
             saida["quadros"][nome] = {
                 "arquivo": str(png),
                 "modo": "relativo",

@@ -367,3 +367,114 @@ def via(nome, pontos_m, colecao, elevacao, largura=VIA_LARGURA):
     obj["material"] = "MAT_ASFALTO"
     obj["fonte"] = "data/vias.json -- tracado lido do bitmap da planta"
     return obj
+
+
+# --------------------------------------------------------------------------
+# Concha acustica -- o palco FIXO do parque
+#
+# Entrou em 15/08 por ordem dele: *"a concha entra na cena"*.
+#
+# **Ela nao e o `palco()` acima, e a confusao ja custou um registro errado
+# (DECISOES.md D024).** O `palco()` e o palco DE EVENTO -- trelica, telao,
+# deck preto -- tirado do footage de novembro. Esta aqui e alvenaria
+# permanente, e aparece nos oito quadros do video `1 (4)` de 13/08: base
+# AZUL com respiro de porao, caixa cenica de parede CLARA, cobertura
+# inclinada escura sobre estrutura vermelha.
+#
+# ## De onde sai cada numero
+#
+# **Planta manda em footprint** (regra de desempate em `footage-quinta.json`):
+# `data/footprints.json` -> `PALCO PALCO`, 20,28 x 17,67 m. O rotulo aparece
+# DUAS vezes na prancha, a 5 m um do outro -- e a mesma palavra escrita duas
+# vezes, nao dois palcos, e o extrator colapsou os dois num item so
+# (armadilha 17). A posicao e a media dos dois rotulos.
+#
+# **Footage manda em forma e proporcao.** As alturas saem da razao medida no
+# quadro `1 (4)__0012s` contra a largura conhecida da planta. Isso NAO e trena:
+# e proporcao em vista quase frontal, e carrega ~20% de incerteza. Fica
+# declarado em `alturas_por_proporcao`, e nao inventado como se fosse cotado.
+#
+# **O que NAO se mediu:** a cor. O `1 (4)` e o unico dos dezessete filmado em
+# golden hour, e o metodo do ceu (D018) so vale em dia encoberto. O azul e o
+# claro daqui sao PROPOSTA, e estao marcados como tal em MATERIAIS.
+
+CONCHA_LARGURA = 20.28       # planta, footprints.json PALCO PALCO
+CONCHA_PROFUNDIDADE = 17.67  # planta
+CONCHA_BASE = 2.4            # porao ventilado -- os respiros aparecem no quadro
+CONCHA_LAJE = 0.35
+CONCHA_PAREDE = 0.35
+CONCHA_BOCA = 8.9            # pe-direito da caixa cenica acima do deck
+CONCHA_COBERTURA_FUNDO = 11.0
+CONCHA_COBERTURA_FRENTE = 9.6
+CONCHA_BEIRAL = 1.4
+
+
+def concha(nome, x, y, z, colecao, rumo_graus=0.0):
+    """Palco fixo de alvenaria: porao azul, caixa cenica clara, cobertura escura.
+
+    Devolve TRES objetos sob um pai vazio, porque cada um tem material
+    proprio e `obj["material"]` e um so por objeto. O pai existe para ele
+    arrastar a coisa inteira no Blender sem cacar peca por peca -- mesma
+    solucao do conjunto de silos da AREA_DE_ESPERA.
+
+    Referencia: `1 (4)` de 13/08, oito quadros lineares extraidos.
+    """
+    lx = CONCHA_LARGURA / 2.0
+    ly = CONCHA_PROFUNDIDADE / 2.0
+    pecas = []
+
+    # --- porao azul, com a laje do deck por cima
+    obj, bm = _novo(f"{nome} - porao", colecao)
+    _cubo(bm, 0.0, 0.0, CONCHA_BASE / 2.0,
+          CONCHA_LARGURA, CONCHA_PROFUNDIDADE, CONCHA_BASE)
+    obj = _fechar(obj, bm)
+    obj["material"] = "MAT_CONCHA_AZUL"
+    pecas.append(obj)
+
+    # --- laje do deck, avancando um pouco alem do porao (aparece no quadro)
+    obj, bm = _novo(f"{nome} - deck", colecao)
+    _cubo(bm, 0.0, 0.0, CONCHA_BASE + CONCHA_LAJE / 2.0,
+          CONCHA_LARGURA + 0.9, CONCHA_PROFUNDIDADE + 0.6, CONCHA_LAJE)
+    obj = _fechar(obj, bm)
+    obj["material"] = "MAT_CONCRETO"
+    pecas.append(obj)
+
+    # --- caixa cenica: fundo e duas alas. A frente fica ABERTA -- e uma
+    #     concha, e a boca aberta e a coisa toda.
+    obj, bm = _novo(f"{nome} - caixa", colecao)
+    z0 = CONCHA_BASE + CONCHA_LAJE
+    _cubo(bm, 0.0, ly - CONCHA_PAREDE / 2.0, z0 + CONCHA_BOCA / 2.0,
+          CONCHA_LARGURA, CONCHA_PAREDE, CONCHA_BOCA)          # fundo
+    for lado in (-1, 1):
+        _cubo(bm, lado * (lx - CONCHA_PAREDE / 2.0), 0.0, z0 + CONCHA_BOCA / 2.0,
+              CONCHA_PAREDE, CONCHA_PROFUNDIDADE, CONCHA_BOCA)  # alas
+    obj = _fechar(obj, bm)
+    obj["material"] = "MAT_CONCHA_CLARO"
+    pecas.append(obj)
+
+    # --- cobertura, caindo do fundo para a frente, com beiral avancado
+    obj, bm = _novo(f"{nome} - cobertura", colecao)
+    verts = _cubo(bm, 0.0, -CONCHA_BEIRAL / 2.0,
+                  z0 + (CONCHA_COBERTURA_FUNDO + CONCHA_COBERTURA_FRENTE) / 2.0,
+                  CONCHA_LARGURA + 0.7,
+                  CONCHA_PROFUNDIDADE + CONCHA_BEIRAL, 0.30)
+    # inclina: quem esta na frente (y menor) desce
+    caida = (CONCHA_COBERTURA_FUNDO - CONCHA_COBERTURA_FRENTE) / 2.0
+    for v in verts:
+        v.co.z += caida * (v.co.y / (ly + CONCHA_BEIRAL / 2.0))
+    obj = _fechar(obj, bm)
+    obj["material"] = "MAT_ESTRUTURA_VERMELHA"
+    pecas.append(obj)
+
+    pai = bpy.data.objects.new(nome, None)
+    pai.empty_display_type = "PLAIN_AXES"
+    pai.empty_display_size = 4.0
+    colecao.objects.link(pai)
+    pai.location = (x, y, z)
+    _girar(pai, rumo_graus)
+    for p in pecas:
+        p.parent = pai
+        p["referencia"] = "1 (4) de 13/08 -- oito quadros lineares"
+        p["footprint"] = "data/footprints.json PALCO PALCO (20,28 x 17,67 m)"
+        p["alturas"] = "proporcao medida em 1 (4)__0012s, ~20% de incerteza"
+    return pai
