@@ -1,0 +1,423 @@
+{
+ "_o_que_e": "casamento PROPOSTO entre os predios provados no footage de 13/08 e as zonas da planta. Nao e' medida de campo e nao virou geometria: e' ranking por criterio declarado",
+ "_regra": "so vira proposta quando o primeiro ganha do segundo por 0.15 em nota de 0 a 1. Empate vira sem_veredito, com o que falta escrito",
+ "_nao_faz": "nao troca geometria, nao renomeia zona, nao decide nomenclatura -- nomenclatura e posicao de area sao material de venda de espaco fisico",
+ "margem": 0.15,
+ "predios": {
+  "PREDIO_REDONDO": {
+   "o_que_e": "poligono regular de ~10 faces, dois pavimentos, varanda em volta, telhado de quatro aguas de baixa inclinacao",
+   "quadros_que_provam": [
+    "1 (5)",
+    "1 (6)",
+    "1 (7)",
+    "1 (8)",
+    "1 (9)",
+    "1 (10)",
+    "1 (11)"
+   ],
+   "criterios": [
+    {
+     "tipo": "razao_bbox",
+     "alvo": 1.0,
+     "tolerancia": 0.3,
+     "peso": 3,
+     "porque": "a bbox de um poligono regular e quase quadrada; a de um galpao de duas aguas nao e"
+    },
+    {
+     "tipo": "area_minima",
+     "valor": 500.0,
+     "eliminatorio": true,
+     "porque": "1 (10) mostra dezenas de pessoas na varanda de um predio de dois pavimentos. Uma casa de 13 x 12 m nao comporta a orbita nem o publico"
+    },
+    {
+     "tipo": "perto_de_rotulo",
+     "rotulo": "ESTACIONAMENTO",
+     "max_m": 90.0,
+     "peso": 3,
+     "porque": "1 (5) enquadra o predio COM o estacionamento cheio de carros no mesmo quadro -- e o carro e um dos datums"
+    },
+    {
+     "tipo": "vizinho_retangular",
+     "max_m": 60.0,
+     "razao_min": 1.6,
+     "peso": 1,
+     "porque": "1 (10) mostra um anexo RETANGULAR encostado nele, que e outro volume"
+    }
+   ],
+   "ranking": [
+    {
+     "nota": 0.6016,
+     "rotulo": "RESIDÊNCIA",
+     "x_m": 73.0,
+     "y_m": 33.1,
+     "largura_m": 39.1,
+     "profundidade_m": 36.09,
+     "provas": [
+      "[peso 3] razao 1.08 contra alvo 1.00 (tolerancia 0.30) -> 0.72",
+      "area 1411 m2 >= 500 m2 (eliminatorio)",
+      "[peso 3] ESTACIONAMENTO mais proximo a 59 m (limite 90 m) -> 0.35",
+      "[peso 1] vizinho retangular a menos de 60 m: AUDITÓRIO (49 m)"
+     ]
+    },
+    {
+     "nota": 0.4429,
+     "rotulo": "RECINTO DE LEILÕES",
+     "x_m": -311.9,
+     "y_m": -7.3,
+     "largura_m": 38.23,
+     "profundidade_m": 35.07,
+     "provas": [
+      "[peso 3] razao 1.09 contra alvo 1.00 (tolerancia 0.30) -> 0.70",
+      "area 1341 m2 >= 500 m2 (eliminatorio)",
+      "[peso 3] ESTACIONAMENTO mais proximo a 167 m (limite 90 m) -> 0.00",
+      "[peso 1] vizinho retangular a menos de 60 m: JULGAMENTO RUSTICO (23 m), É CHURRASCO! (35 m)"
+     ]
+    },
+    {
+     "nota": 0.3698,
+     "rotulo": "PAVILHÃO 2",
+     "x_m": -119.4,
+     "y_m": 138.1,
+     "largura_m": 46.05,
+     "profundidade_m": 30.8,
+     "provas": [
+      "[peso 3] razao 1.50 contra alvo 1.00 (tolerancia 0.30) -> 0.00",
+      "area 1418 m2 >= 500 m2 (eliminatorio)",
+      "[peso 3] ESTACIONAMENTO mais proximo a 42 m (limite 90 m) -> 0.53",
+      "[peso 1] vizinho retangular a menos de 60 m: Café Colonial Cozinha Didática (37 m), PAVILHÃO 3 (39 m)"
+     ]
+    },
+    {
+     "nota": 0.3454,
+     "rotulo": "Praça de Alimentação Coberta",
+     "x_m": -51.4,
+     "y_m": 128.9,
+     "largura_m": 145.53,
+     "profundidade_m": 33.64,
+     "provas": [
+      "[peso 3] razao 4.33 contra alvo 1.00 (tolerancia 0.30) -> 0.00",
+      "area 4896 m2 >= 500 m2 (eliminatorio)",
+      "[peso 3] ESTACIONAMENTO mais proximo a 47 m (limite 90 m) -> 0.47",
+      "[peso 1] vizinho retangular a menos de 60 m: PAVILHÃO 1 (56 m)"
+     ]
+    },
+    {
+     "nota": 0.2952,
+     "rotulo": "PAVILHÃO 1",
+     "x_m": 4.3,
+     "y_m": 133.9,
+     "largura_m": 51.85,
+     "profundidade_m": 25.59,
+     "provas": [
+      "[peso 3] razao 2.03 contra alvo 1.00 (tolerancia 0.30) -> 0.00",
+      "area 1327 m2 >= 500 m2 (eliminatorio)",
+      "[peso 3] ESTACIONAMENTO mais proximo a 58 m (limite 90 m) -> 0.36",
+      "[peso 1] vizinho retangular a menos de 60 m: Praça de Alimentação Coberta (56 m)"
+     ]
+    }
+   ],
+   "veredito": "proposto",
+   "zona": "RESIDÊNCIA",
+   "ressalva_da_mancha": "preenchimento 0.687 do proprio retangulo. Abaixo de 0,80 e' a assinatura de mancha contaminada (o PAVILHAO - EQUINOS deu 0,71 contra 0,99 dos irmaos), e o ROTULO desta zona pode nao ser o do predio que a mancha desenha",
+   "vantagem_sobre_o_segundo": 0.1588,
+   "margem_apertada": true,
+   "_leia_assim": "a vantagem mal passou do limiar. Isto e' o primeiro colocado, nao e' o predio identificado -- trate como candidato principal e nao como resposta",
+   "ainda_precisa_de": "confirmacao antes de virar geometria: um quadro que mostre a zona e o predio no mesmo enquadramento, ou a palavra dele"
+  },
+  "GALERIA_DE_PILARES": {
+   "o_que_e": "cobertura longa e aberta sobre pilares claros",
+   "quadros_que_provam": [
+    "1 (6)__0003s",
+    "1 (6)__0012s"
+   ],
+   "criterios": [
+    {
+     "tipo": "razao_bbox",
+     "alvo": 4.0,
+     "tolerancia": 2.0,
+     "peso": 2,
+     "porque": "e uma galeria: comprida e estreita"
+    },
+    {
+     "tipo": "area_minima",
+     "valor": 300.0,
+     "eliminatorio": true,
+     "porque": "cobertura de estande nao aparece assim no quadro"
+    },
+    {
+     "tipo": "forma_declarada",
+     "valor": "cobertura",
+     "peso": 3,
+     "porque": "aberta e sem parede -- e o que a declaracao de altura chama de `cobertura`"
+    }
+   ],
+   "ranking": [
+    {
+     "nota": 0.9722,
+     "rotulo": "PALCO AFTER",
+     "x_m": -19.6,
+     "y_m": 20.1,
+     "largura_m": 60.02,
+     "profundidade_m": 14.5,
+     "provas": [
+      "[peso 2] razao 4.14 contra alvo 4.00 (tolerancia 2.00) -> 0.93",
+      "area 870 m2 >= 300 m2 (eliminatorio)",
+      "[peso 3] forma declarada cobertura contra cobertura -> 1.00"
+     ]
+    },
+    {
+     "nota": 0.9348,
+     "rotulo": "Praça de Alimentação Coberta",
+     "x_m": -51.4,
+     "y_m": 128.9,
+     "largura_m": 145.53,
+     "profundidade_m": 33.64,
+     "provas": [
+      "[peso 2] razao 4.33 contra alvo 4.00 (tolerancia 2.00) -> 0.84",
+      "area 4896 m2 >= 300 m2 (eliminatorio)",
+      "[peso 3] forma declarada cobertura contra cobertura -> 1.00"
+     ]
+    },
+    {
+     "nota": 0.2566,
+     "rotulo": "PAVILHÃO - GADO LEITE",
+     "x_m": -334.4,
+     "y_m": -57.6,
+     "largura_m": 55.72,
+     "profundidade_m": 16.97,
+     "provas": [
+      "[peso 2] razao 3.28 contra alvo 4.00 (tolerancia 2.00) -> 0.64",
+      "area 946 m2 >= 300 m2 (eliminatorio)",
+      "[peso 3] forma declarada None contra cobertura -> 0.00"
+     ]
+    },
+    {
+     "nota": 0.1452,
+     "rotulo": "PAVILHÃO - GADO CORTE",
+     "x_m": -319.9,
+     "y_m": -101.2,
+     "largura_m": 45.85,
+     "profundidade_m": 16.82,
+     "provas": [
+      "[peso 2] razao 2.73 contra alvo 4.00 (tolerancia 2.00) -> 0.36",
+      "area 771 m2 >= 300 m2 (eliminatorio)",
+      "[peso 3] forma declarada None contra cobertura -> 0.00"
+     ]
+    },
+    {
+     "nota": 0.1452,
+     "rotulo": "PAVILHÃO - OVINOS E CAPRINOS",
+     "x_m": -314.1,
+     "y_m": -123.4,
+     "largura_m": 45.85,
+     "profundidade_m": 16.82,
+     "provas": [
+      "[peso 2] razao 2.73 contra alvo 4.00 (tolerancia 2.00) -> 0.36",
+      "area 771 m2 >= 300 m2 (eliminatorio)",
+      "[peso 3] forma declarada None contra cobertura -> 0.00"
+     ]
+    }
+   ],
+   "veredito": "sem_veredito",
+   "empate_entre": [
+    "PALCO AFTER",
+    "Praça de Alimentação Coberta"
+   ],
+   "o_que_falta": "os dois primeiros ficaram dentro da margem. Separa: um quadro nadir que pegue o predio, ou a palavra dele sobre qual zona e"
+  },
+  "GALPAO_AZUL_E_TIJOLO": {
+   "o_que_e": "galpao de alvenaria vermelha com telhado e pilastras azuis",
+   "quadros_que_provam": [
+    "1 (17)__0006s",
+    "1 (17)__0037s",
+    "1 (16)"
+   ],
+   "criterios": [
+    {
+     "tipo": "razao_bbox",
+     "alvo": 2.5,
+     "tolerancia": 1.5,
+     "peso": 1,
+     "porque": "galpao de duas aguas, mais comprido que largo"
+    },
+    {
+     "tipo": "area_minima",
+     "valor": 300.0,
+     "eliminatorio": true,
+     "porque": "o portao de chapa do quadro tem porte de galpao"
+    }
+   ],
+   "ranking": [
+    {
+     "nota": 0.9653,
+     "rotulo": "PAVILHÃO - EQUÍNOS",
+     "x_m": -294.4,
+     "y_m": -165.4,
+     "largura_m": 49.55,
+     "profundidade_m": 20.24,
+     "provas": [
+      "[peso 1] razao 2.45 contra alvo 2.50 (tolerancia 1.50) -> 0.97",
+      "area 1003 m2 >= 300 m2 (eliminatorio)"
+     ]
+    },
+    {
+     "nota": 0.9527,
+     "rotulo": "Café Colonial Cozinha Didática",
+     "x_m": -155.9,
+     "y_m": 136.1,
+     "largura_m": 34.34,
+     "profundidade_m": 14.14,
+     "provas": [
+      "[peso 1] razao 2.43 contra alvo 2.50 (tolerancia 1.50) -> 0.95",
+      "area 486 m2 >= 300 m2 (eliminatorio)"
+     ]
+    },
+    {
+     "nota": 0.8647,
+     "rotulo": "PAVILHÃO - PEQUENOS ANIMAIS",
+     "x_m": -305.4,
+     "y_m": -144.9,
+     "largura_m": 45.85,
+     "profundidade_m": 16.96,
+     "provas": [
+      "[peso 1] razao 2.70 contra alvo 2.50 (tolerancia 1.50) -> 0.86",
+      "area 778 m2 >= 300 m2 (eliminatorio)"
+     ]
+    },
+    {
+     "nota": 0.8507,
+     "rotulo": "PAVILHÃO - NÚCLEO CARRA BRANCA",
+     "x_m": -327.0,
+     "y_m": -79.4,
+     "largura_m": 45.88,
+     "profundidade_m": 16.84,
+     "provas": [
+      "[peso 1] razao 2.72 contra alvo 2.50 (tolerancia 1.50) -> 0.85",
+      "area 773 m2 >= 300 m2 (eliminatorio)"
+     ]
+    },
+    {
+     "nota": 0.8493,
+     "rotulo": "PAVILHÃO - GADO CORTE",
+     "x_m": -319.9,
+     "y_m": -101.2,
+     "largura_m": 45.85,
+     "profundidade_m": 16.82,
+     "provas": [
+      "[peso 1] razao 2.73 contra alvo 2.50 (tolerancia 1.50) -> 0.85",
+      "area 771 m2 >= 300 m2 (eliminatorio)"
+     ]
+    }
+   ],
+   "_aviso": "a assinatura deste e' quase toda COR (vermelho + azul), e a planta e' um bitmap cinza sem cor de edificacao. Os criterios geometricos sozinhos nao separam um galpao dos outros -- espera-se `sem_veredito`, e isso e' resultado, nao falha",
+   "veredito": "sem_veredito",
+   "empate_entre": [
+    "PAVILHÃO - EQUÍNOS",
+    "Café Colonial Cozinha Didática"
+   ],
+   "o_que_falta": "os dois primeiros ficaram dentro da margem. Separa: um quadro nadir que pegue o predio, ou a palavra dele sobre qual zona e"
+  },
+  "PALCO_CONCHA": {
+   "o_que_e": "CONTROLE -- a concha permanente, ja casada com `PALCO PALCO` em 15/08 (D028). O script tem de reencontrar isto sozinho",
+   "quadros_que_provam": [
+    "1 (4)"
+   ],
+   "criterios": [
+    {
+     "tipo": "razao_bbox",
+     "alvo": 1.15,
+     "tolerancia": 0.35,
+     "peso": 2,
+     "porque": "boca larga e pouca profundidade, quase quadrada em planta"
+    },
+    {
+     "tipo": "area_minima",
+     "valor": 200.0,
+     "eliminatorio": true,
+     "porque": "a caixa cenica do 1 (4) e' de porte de palco, nao de bar"
+    },
+    {
+     "tipo": "categoria",
+     "valor": "arena",
+     "peso": 3,
+     "porque": "a concha olha para a pista; a planta classifica a zona dela como `arena`"
+    }
+   ],
+   "ranking": [
+    {
+     "nota": 0.9977,
+     "rotulo": "PALCO PALCO",
+     "x_m": -61.8,
+     "y_m": -23.4,
+     "largura_m": 20.28,
+     "profundidade_m": 17.67,
+     "provas": [
+      "[peso 2] razao 1.15 contra alvo 1.15 (tolerancia 0.35) -> 0.99",
+      "area 358 m2 >= 200 m2 (eliminatorio)",
+      "[peso 3] categoria arena contra arena -> 1.00"
+     ]
+    },
+    {
+     "nota": 0.6,
+     "rotulo": "PALCO AFTER",
+     "x_m": -19.6,
+     "y_m": 20.1,
+     "largura_m": 60.02,
+     "profundidade_m": 14.5,
+     "provas": [
+      "[peso 2] razao 4.14 contra alvo 1.15 (tolerancia 0.35) -> 0.00",
+      "area 870 m2 >= 200 m2 (eliminatorio)",
+      "[peso 3] categoria arena contra arena -> 1.00"
+     ]
+    },
+    {
+     "nota": 0.3314,
+     "rotulo": "RECINTO DE LEILÕES",
+     "x_m": -311.9,
+     "y_m": -7.3,
+     "largura_m": 38.23,
+     "profundidade_m": 35.07,
+     "provas": [
+      "[peso 2] razao 1.09 contra alvo 1.15 (tolerancia 0.35) -> 0.83",
+      "area 1341 m2 >= 200 m2 (eliminatorio)",
+      "[peso 3] categoria pecuaria contra arena -> 0.00"
+     ]
+    },
+    {
+     "nota": 0.3234,
+     "rotulo": "RESIDÊNCIA",
+     "x_m": 73.0,
+     "y_m": 33.1,
+     "largura_m": 39.1,
+     "profundidade_m": 36.09,
+     "provas": [
+      "[peso 2] razao 1.08 contra alvo 1.15 (tolerancia 0.35) -> 0.81",
+      "area 1411 m2 >= 200 m2 (eliminatorio)",
+      "[peso 3] categoria infra contra arena -> 0.00"
+     ]
+    },
+    {
+     "nota": 0.0057,
+     "rotulo": "PAVILHÃO 2",
+     "x_m": -119.4,
+     "y_m": 138.1,
+     "largura_m": 46.05,
+     "profundidade_m": 30.8,
+     "provas": [
+      "[peso 2] razao 1.50 contra alvo 1.15 (tolerancia 0.35) -> 0.01",
+      "area 1418 m2 >= 200 m2 (eliminatorio)",
+      "[peso 3] categoria pavilhoes contra arena -> 0.00"
+     ]
+    }
+   ],
+   "veredito": "proposto",
+   "zona": "PALCO PALCO",
+   "vantagem_sobre_o_segundo": 0.3977,
+   "ainda_precisa_de": "confirmacao antes de virar geometria: um quadro que mostre a zona e o predio no mesmo enquadramento, ou a palavra dele",
+   "controle": {
+    "resposta_conhecida": "PALCO PALCO",
+    "acertou": true
+   }
+  }
+ }
+}
