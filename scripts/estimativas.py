@@ -91,17 +91,36 @@ def resolver(footprints=None, tabela=None, angulos=None):
         json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"itens": []})
     angulos = angulos if angulos is not None else _angulos_dos_rotulos()
 
+    # As zonas cuja MEDIDA foi recusada (confianca "baixa": a mancha e quase toda
+    # a tinta da palavra) sumiam em silencio -- nao entravam como medida e este
+    # laco nem olhava para elas. Cada uma agora tem destino escrito no contrato,
+    # e quem nao tiver sai em `recusados`, nunca em silencio.
+    recusadas = tabela.get("medida_recusada_vira_estimativa", {}).get("zonas", {})
+
     estimados, recusados = [], []
     for it in fp["itens"]:
-        if it.get("metodo") not in ("so o rotulo", "sem mancha"):
-            continue
-
         rotulo = it["rotulo"]
+        de_medida_recusada = False
+        if it.get("metodo") not in ("so o rotulo", "sem mancha"):
+            if it.get("confianca") != "baixa":
+                continue
+            decisao = recusadas.get(rotulo)
+            if decisao is None:
+                recusados.append((rotulo, "medida recusada pelo extrator e sem "
+                                          "decisao declarada em "
+                                          "medida_recusada_vira_estimativa"))
+                continue
+            if decisao["decisao"] != "estimar":
+                recusados.append((rotulo, decisao["porque"]))
+                continue
+            de_medida_recusada = True
+
         if rotulo in tabela["nao_estimar"]:
             recusados.append((rotulo, tabela["nao_estimar"][rotulo]))
             continue
 
-        tipo_nome = tabela["por_rotulo"].get(rotulo)
+        tipo_nome = (recusadas[rotulo]["tipo"] if de_medida_recusada
+                     else tabela["por_rotulo"].get(rotulo))
         if tipo_nome is None:
             recusados.append((rotulo, "nenhum tipo declarado para este rotulo"))
             continue
@@ -135,6 +154,7 @@ def resolver(footprints=None, tabela=None, angulos=None):
             "giro_graus": round(giro, 1),
             "giro_do_rotulo": do_rotulo,
             "estimado": True,
+            "de_medida_recusada": de_medida_recusada,
             "procedencia": f"{fonte}. {tipo['fundamento']}",
         })
     return estimados, recusados

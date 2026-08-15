@@ -3,14 +3,12 @@
  "autoridade": "O Natan autorizou em 14/08/2026, com estas palavras: 'pode fazer com uma estimativa aproximada'. Ate ali as 35 zonas sem footprint estavam paradas esperando decisao dele.",
  "como_substituir": "Quando chegar print, medida de campo ou planta vetorial de uma zona, apague a entrada dela aqui: o gerador passa a usar o dado real e nada mais precisa mudar.",
  "escrito_em": "2026-08-14",
-
  "de_onde_vem_o_numero": [
   "A planta tem vocabulario proprio de modulo: 5x5 (25 m2), 8x8 (64 m2) e 10x10 (100 m2) sao as cotas que se repetem nos estandes. Predio pequeno de infra usa esse modulo -- e emprestar a unidade do proprio desenho em vez de inventar uma.",
   "Onde a planta COTA a area da zona, a cota manda e so a proporcao e assumida. Sao dois casos: ARENA DO CONHECIMENTO (200 m2, a 5 pt do rotulo) e EQ. LIMPEZA (100 m2, a 3 pt).",
   "O rumo nao e estimado: vem de `angulo_graus` em data/locais.json, o angulo com que a planta escreve o rotulo. O rotulo de um galpao e escrito no eixo dele. O sinal inverte da pagina para o mundo (a pagina tem y para baixo) -- e a mesma relacao que ja liga RUMO_PORTAL=73 ao angulo -73,2 do rotulo do portal.",
   "Altura segue as constantes ja usadas na cena: estande 3,2 m, pavilhao 7,0 m."
  ],
-
  "nao_estimar": {
   "Portal de Entrada": "ja construido: estruturas.portal -> PortalCeleiro",
   "PALCO": "ja construido: estruturas.palco",
@@ -18,92 +16,149 @@
   "CAMAROTES - LADO B": "ja construido: estruturas.camarote",
   "ARENA DE RODEIO": "e a bacia do terreno, feita em terreno.PATAMARES -- nao e edificacao"
  },
-
  "tipos": {
   "quiosque": {
-   "largura_m": 5.0, "profundidade_m": 5.0, "altura_m": 3.2, "forma": "caixa",
+   "largura_m": 5.0,
+   "profundidade_m": 5.0,
+   "altura_m": 3.2,
+   "forma": "caixa",
    "fundamento": "modulo de 25 m2, o menor cotado na planta. Bar de feira e um quiosque desse tamanho"
   },
   "cobertura_de_mesas": {
-   "largura_m": 12.0, "profundidade_m": 8.0, "altura_m": 3.2, "forma": "cobertura",
+   "largura_m": 12.0,
+   "profundidade_m": 8.0,
+   "altura_m": 3.2,
+   "forma": "cobertura",
    "fundamento": "area coberta com mesas e cadeiras, sem parede. O audio pede 'mesas, cadeiras, os guiches'"
   },
   "praca_coberta_menor": {
-   "largura_m": 25.0, "profundidade_m": 15.0, "altura_m": 3.5, "forma": "cobertura",
+   "largura_m": 25.0,
+   "profundidade_m": 15.0,
+   "altura_m": 3.5,
+   "forma": "cobertura",
    "fundamento": "o audio: 'a area do bosque segue e tem uma praca de alimentacao embaixo do bosque'. Menor que a Coberta, que foi medida em 145 x 34 m"
   },
   "galpao_cotado": {
-   "proporcao": 2.0, "altura_m": 4.0, "forma": "caixa",
+   "proporcao": 2.0,
+   "altura_m": 4.0,
+   "forma": "caixa",
    "fundamento": "AREA COTADA NA PLANTA -- so a proporcao 2:1 e assumida"
   },
   "galpao_pequeno": {
-   "largura_m": 10.0, "profundidade_m": 6.0, "altura_m": 3.5, "forma": "caixa",
+   "largura_m": 10.0,
+   "profundidade_m": 6.0,
+   "altura_m": 3.5,
+   "forma": "caixa",
    "fundamento": "galpao de servico de uma agua"
   },
   "bloco_sanitario": {
-   "largura_m": 12.0, "profundidade_m": 5.0, "altura_m": 3.0, "forma": "caixa",
+   "largura_m": 12.0,
+   "profundidade_m": 5.0,
+   "altura_m": 3.0,
+   "forma": "caixa",
    "fundamento": "bloco de sanitarios de evento: fileira de cabines com circulacao na frente"
   },
   "bloco_sanitario_duplo": {
-   "largura_m": 16.0, "profundidade_m": 5.0, "altura_m": 3.0, "forma": "caixa",
+   "largura_m": 16.0,
+   "profundidade_m": 5.0,
+   "altura_m": 3.0,
+   "forma": "caixa",
    "fundamento": "dois usos no mesmo bloco (masculino e chuveiros), por isso mais comprido"
   },
   "fileira_de_cabines": {
-   "largura_m": 6.0, "profundidade_m": 1.2, "altura_m": 2.3, "forma": "caixa",
+   "largura_m": 6.0,
+   "profundidade_m": 1.2,
+   "altura_m": 2.3,
+   "forma": "caixa",
    "fundamento": "cabine quimica tem ~1,2 m de lado e vem em fileira de cinco"
   },
   "guarita": {
-   "largura_m": 5.0, "profundidade_m": 5.0, "altura_m": 3.0, "forma": "caixa",
+   "largura_m": 5.0,
+   "profundidade_m": 5.0,
+   "altura_m": 3.0,
+   "forma": "caixa",
    "fundamento": "modulo de 25 m2 da propria planta"
   },
   "sala_tecnica": {
-   "largura_m": 6.0, "profundidade_m": 2.5, "altura_m": 2.6, "forma": "caixa",
+   "largura_m": 6.0,
+   "profundidade_m": 2.5,
+   "altura_m": 2.6,
+   "forma": "caixa",
    "fundamento": "conteiner de obra, medida de mercado"
   },
   "portao_secundario": {
-   "largura_m": 8.0, "profundidade_m": 1.5, "altura_m": 5.0, "forma": "caixa",
+   "largura_m": 8.0,
+   "profundidade_m": 1.5,
+   "altura_m": 5.0,
+   "forma": "caixa",
    "fundamento": "portao de passagem, nao o portal celeiro. O celeiro e so o Portal de Entrada"
   },
   "estacionamento": {
-   "largura_m": 60.0, "profundidade_m": 40.0, "altura_m": 0.0, "forma": "chao",
+   "largura_m": 60.0,
+   "profundidade_m": 40.0,
+   "altura_m": 0.0,
+   "forma": "chao",
    "fundamento": "NAO e predio: e superficie. Sai como chapa no chao com material proprio, nunca como caixa. O tamanho e o mais fraco desta tabela"
   },
   "currais": {
-   "largura_m": 60.0, "profundidade_m": 35.0, "altura_m": 2.5, "forma": "cercado",
+   "largura_m": 60.0,
+   "profundidade_m": 35.0,
+   "altura_m": 2.5,
+   "forma": "cercado",
    "fundamento": "A MAIS FRACA DE TODAS. As mangueiras sao desenhadas como grade de dezenas de currais e tres metodos falharam em medir (ver docs/FOOTPRINTS.md). O numero vem da mancha que a grade ocupa no desenho, a olho. Trocar assim que houver print"
+  },
+  "casa_de_servico": {
+   "largura_m": 13.2,
+   "profundidade_m": 11.9,
+   "altura_m": 4.0,
+   "forma": "caixa",
+   "fundamento": "mediana das TRES RESIDENCIAS medidas no proprio desenho (13,0 x 12,3 e 13,5 x 11,4, confianca alta). Nao e numero de mercado: e a casa que este parque ja tem, medida. Altura de casa terrea com telhado"
   }
  },
-
  "altura_das_zonas_medidas": {
   "o_que_e": "Estas zonas TEM footprint medido em data/footprints.json -- largura, profundidade e rumo saem do desenho. O que a planta nao diz de nenhuma delas e a ALTURA, e altura nao se mede em planta baixa. Entao aqui so a altura e a forma sao estimadas, e o objeto sai com altura_estimada=true e footprint_medido=true, para nao confundir as duas coisas.",
   "regua": "A unica referencia de altura do projeto e a pessoa em pe de ~1,70 m no quadro `1 (4)` 00:00:02 do footage, ao lado do palco fixo (ver ESTADO.md). Confirmar com um quadro de drone lateral.",
   "zonas": {
    "Praça de Alimentação Coberta": {
-    "altura_m": 5.0, "forma": "cobertura", "material": "MAT_LONA",
+    "altura_m": 5.0,
+    "forma": "cobertura",
+    "material": "MAT_LONA",
     "fundamento": "o audio: 'sai do pavilhao 1 e ja la no fundo tem a area coberta... nessa area coberta vai ser uma praca de alimentacao coberta'. Cobertura sem parede, pe-direito alto para ventilar 145 x 34 m"
    },
    "Café Colonial Cozinha Didática": {
-    "altura_m": 5.0, "forma": "caixa", "material": "MAT_PAVILHAO",
+    "altura_m": 5.0,
+    "forma": "caixa",
+    "material": "MAT_PAVILHAO",
     "fundamento": "o audio poe cozinha de um lado e cozinha didatica do outro -- e predio fechado, nao cobertura. E um dos quatro diferenciais do cliente"
    },
    "RECINTO DE LEILÕES": {
-    "altura_m": 7.0, "forma": "caixa", "material": "MAT_PAVILHAO",
+    "altura_m": 7.0,
+    "forma": "caixa",
+    "material": "MAT_PAVILHAO",
     "fundamento": "o audio: 'entra no recinto, tem leiloes, os leiloes acontecendo'. Salao com arquibancada interna e pista central pede pe-direito de pavilhao"
    },
    "AUDITÓRIO": {
-    "altura_m": 6.0, "forma": "caixa", "material": "MAT_PAVILHAO",
+    "altura_m": 6.0,
+    "forma": "caixa",
+    "material": "MAT_PAVILHAO",
     "fundamento": "auditorio com plateia em piso inclinado"
    },
    "PALCO AFTER": {
-    "altura_m": 8.0, "forma": "cobertura", "material": "MAT_LONA",
+    "altura_m": 8.0,
+    "forma": "cobertura",
+    "material": "MAT_LONA",
     "fundamento": "palco coberto: a medida de 60 x 14,5 m e a area do palco com as alas, nao a caixa cenica. Nao usa estruturas.palco porque aquele e o palco DE EVENTO (treliça, telão, deck preto), de outro tamanho. CORRIGIDO em 15/08: este comentario dizia 'palco fixo', e o palco fixo e outra estrutura -- concha de alvenaria com base azul, vista no video 1 (4), e que a cena NAO tem. Ver DECISOES.md D024"
    },
    "RESIDÊNCIA": {
-    "altura_m": 3.5, "forma": "caixa", "material": "MAT_LONA",
+    "altura_m": 3.5,
+    "forma": "caixa",
+    "material": "MAT_LONA",
     "fundamento": "casa terrea. Sao tres no recinto e nenhuma aparece na decupagem -- entram para o fundo nao ficar vazio"
    },
    "LAVAGEM ANIMAIS": {
-    "altura_m": 3.5, "forma": "cobertura", "material": "MAT_TELHA",
+    "altura_m": 3.5,
+    "forma": "cobertura",
+    "material": "MAT_TELHA",
     "fundamento": "baia de lavagem e cobertura sobre piso lavavel, aberta dos lados"
    }
   },
@@ -115,7 +170,6 @@
    "ARENA DE RODEIO": "terreno.PATAMARES"
   }
  },
-
  "por_rotulo": {
   "Bar": "quiosque",
   "ESPAÇO P/ MESAS": "cobertura_de_mesas",
@@ -132,5 +186,44 @@
   "ESTACIONAMENTO": "estacionamento",
   "MANGUEIRAS": "currais",
   "ORDENHADEIRA": "galpao_pequeno"
+ },
+ "medida_recusada_vira_estimativa": {
+  "o_que_e": "As zonas cuja medida o extrator RECUSOU (confianca 'baixa': a mancha e quase toda a tinta da propria palavra) sumiam em silencio: nao entravam como medida, e o resolver so olhava 'so o rotulo' e 'sem mancha'. Aqui cada uma tem destino escrito.",
+  "decidido_em": "2026-08-15, sessao autonoma. Ver DECISOES.md.",
+  "a_regra_que_mandou": "caixa por CATEGORIA quando existe analogo -- de preferencia um analogo MEDIDO nesta mesma planta; e nao construir quando o que falta e justamente a extensao da coisa. Construir sobre footprint errado e pior que nao construir.",
+  "zonas": {
+   "Bar": {
+    "decisao": "estimar",
+    "tipo": "quiosque",
+    "porque": "quatro dos dez Bar tiveram a medida recusada e os outros seis ja saem como quiosque. Tratar irmao igual a irmao e o conservador: a alternativa era o mesmo rotulo virar predio em seis lugares e nada em quatro"
+   },
+   "É CHURRASCO!": {
+    "decisao": "estimar",
+    "tipo": "quiosque",
+    "porque": "mancha 0,992 preenchida por 20 m2 fora do rotulo: e a palavra. Barraca de comida de feira e o mesmo modulo de 25 m2 dos Bar, que e cota da propria planta"
+   },
+   "CASA DO MÉDICO VETERINÁRIO": {
+    "decisao": "estimar",
+    "tipo": "casa_de_servico",
+    "porque": "e uma CASA, e este parque tem tres residencias MEDIDAS no desenho. O analogo medido vale mais que qualquer tabela de mercado"
+   },
+   "Mercado do Produtor": {
+    "decisao": "nao_construir",
+    "porque": "nao e edificacao propria: o audio dele diz 'No Pavilhao 3, mercado do produtor, cafe colonial, cozinha didatica' [00:15] e 'ja na entrada pode colocar o mercado do produtor e o cafe colonial' [01:24]. E uso DENTRO do Pavilhao 3. E os tres rotulos estao a 4 a 10 m um do outro na planta -- PAVILHAO 3 a 4,1 m do Cafe Colonial e a 7,4 m do Mercado: um bloco so, e ele ja esta na cena como 'Cafe Colonial Cozinha Didatica' (34,3 x 14,1 medidos). Construir caixa aqui seria um segundo predio dentro do primeiro",
+    "o_que_muda_isso": "uma palavra dele, ou um print. E vale conferir o tamanho: 486 m2 e pequeno para o pavilhao que abriga tres usos -- os pavilhoes 1 e 2 medem 1.327 e 1.418 m2"
+   },
+   "PAVILHÃO 3": {
+    "decisao": "nao_construir",
+    "porque": "mesmo bloco do Mercado do Produtor e do Cafe Colonial (4,1 m entre os rotulos). A mancha dele tem 0,3 m2 fora do rotulo: nao ha predio desenhado ali, ha a palavra. Construir uma caixa de pavilhao por cima do Cafe Colonial medido seria empilhar dois predios no mesmo lugar"
+   },
+   "JULGAMENTO RUSTICO": {
+    "decisao": "nao_construir",
+    "porque": "pista de julgamento e SUPERFICIE, e a extensao dela e justamente o dado que falta -- a mancha tem preenchimento 0,377, que e a palavra. Retangulo inventado no meio do recinto le como defeito e nao como area"
+   },
+   "PISTA DE JULGAMENTOS": {
+    "decisao": "nao_construir",
+    "porque": "mesma razao, e uma a mais: a ancora da FAZENDINHA (planos P14/P15) foi inferida do audio como sendo ao lado da pista de julgamentos. Inventar a pista contamina uma ancora que ja esta declarada como estimada"
+   }
+  }
  }
 }
