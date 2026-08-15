@@ -882,3 +882,162 @@ usa **602,0 m**, do SRTM conferido contra o opentopodata. A diferença de **6,6 
 está dentro da incerteza da fonte mais grossa — que é esta, com 38 m de
 amostragem. **Não muda nada**: o 602,0 continua valendo, porque veio da fonte
 mais fina e já tem segunda testemunha.
+
+---
+
+## 2026-08-15 — oitava sessão (autônoma, ele fora por ~4 h)
+
+> **Nota de numeração, antes de tudo:** os números **D034 e D035 estão usados
+> duas vezes** neste arquivo — uma na sétima sessão (a ordem "primeiro os
+> quadros" e o portão de câmera) e outra logo abaixo (o mapa 3D comprado e as
+> curvas de nível dele). **Não renumerei**: há texto no `RETOMAR.md` citando os
+> dois pares, e trocar número quebra referência. Esta sessão segue de **D038**.
+
+### D038 · Máquina sem biblioteca CC0: `--sem-textura`, e ele nasce desligado
+**Ambiguidade:** o gerador **aborta** quando um material do contrato não acha o
+arquivo PBR — e aborta certo, porque textura que não carrega vira superfície
+chapada sem avisar. Nesta sessão o proxy nega `api.polyhaven.com` (403 no
+CONNECT, medido), então `scripts/assets.py --texturas` não baixa nada e **a cena
+não se constrói** — o que travaria a fila inteira.
+
+**Decisão:** `build_scene.py --sem-textura`, **padrão desligado**, que declara em
+voz alta que a cena serve para conferir **geometria** e não para render de
+entrega. A cor MEDIDA continua valendo; o que falta é relevo, rugosidade e
+mancha.
+
+**Motivo de ser o conservador:** não mexe no caminho de entrega (sem a bandeira,
+o comportamento é o de antes, abortar), não inventa textura substituta e não
+apaga o contrato. Na máquina dele o acesso é direto e a bandeira não se usa.
+
+### D039 · O teste de contato virou portão — e ele achou 20 peças no ar
+**Era o próximo passo escrito no `RETOMAR.md`**, e virou `scripts/conferir_contato.py`.
+Roda contra o `.blend` salvo, sai com código 1, e tem três testes: pares
+declarados (reusa a função do gerador — uma régua só, armadilha 19), apoio (chão
+ou outra peça) e afundamento.
+
+**O que ele achou, e ninguém via:**
+
+| defeito | número |
+|---|---|
+| pilares da Praça de Alimentação Coberta com o pé no ar | 17 de 26, de 0,10 a 1,55 m |
+| pilares do PALCO AFTER e da Praça Aberta no ar | 8 |
+| brinquedo inflável flutuando | 0,07 m |
+
+**Causa dos pilares, e ela é de código:** `pilares()` punha todos na cota do
+**centroide da zona**. Numa praça de 145 m sobre terreno com declive, o pé do
+pilar da ponta fica no ar. **Consertado:** cada pilar nasce na cota do chão sob
+ele e o **comprimento vira consequência** — a mesma regra que consertou a
+cobertura da concha em 15/08. Contato manda; altura não é um segundo palpite.
+
+**Duas afirmações minhas foram desmentidas pela própria medição, no mesmo dia:**
+
+1. **apoio por raio para baixo** disse *"nada embaixo"* para a cobertura da
+   concha, que está apoiada em 20 m² de parede. O raio partia do vértice mais
+   baixo — a ponta do beiral, que está no ar de propósito. Agora o apoio se mede
+   por **distância entre superfícies, nos dois sentidos**;
+2. **ler o chão pela superfície mais alta entre `Terreno` e `Entorno`** acusou
+   **1.123 objetos afundados**, entre eles gente de 1,70 m com 2,5 m de terra em
+   cima. Não era afundamento: dentro do recinto o `Entorno` é malha grossa e
+   passa por cima da bacia escavada. Com o `Terreno` mandando onde existe, o
+   número real é **63**.
+
+**Cena de hoje: zero peças no ar, três pares da concha encostando.**
+
+### D040 · O afundamento fica MEDIDO, e não consertado
+**Ambiguidade:** 63 objetos com mais de 30 cm abaixo do chão — o palco de evento
+a 9,95 m, os dois camarotes a ~3,5 m, 35 estandes da série C e 20 vias no
+talude. Corrigir é uma linha por família.
+
+**Decisão: medir, relatar e não consertar nesta sessão.** O `--afundamento-fatal`
+existe e **nasce desligado**.
+
+**Motivo:** o afundamento de estande e via no talude é consequência direta das
+**cotas dos patamares (0 → 3,5 → 7 → 10 m), que são ESTIMADAS por proporção** e
+são a pendência 8, aberta com o cliente. Assentar tudo agora seria acomodar
+geometria a um número que vai mudar — e depois assentar de novo. E o palco de
+evento e os camarotes ficam na pista da arena, cuja cota é a mesma pendência.
+Fica a medida, objeto a objeto, em `out/contato-medido.json`.
+
+### D041 · O prédio redondo tem candidato, não tem identidade
+`scripts/casar_predios.py` pontua cada zona da planta contra a assinatura de
+cada prédio provado no footage — critério, peso e o **quadro** que sustenta cada
+um. O **controle passa**: sem saber a resposta, o método reencontra sozinho o
+casamento da concha com a zona `PALCO PALCO` (0,998 contra 0,600), decidido em
+15/08 por outro caminho (D028).
+
+| prédio | veredito |
+|---|---|
+| **PREDIO_REDONDO** | **proposto** — a zona rotulada `RESIDÊNCIA` em (+73, +33) |
+| GALERIA_DE_PILARES | sem veredito — `PALCO AFTER` e `Praça Coberta` a 0,037 |
+| GALPAO_AZUL_E_TIJOLO | sem veredito, e era o esperado |
+
+**E a proposta vem com duas ressalvas escritas, porque ela é fraca:**
+
+1. a vantagem sobre o segundo (`RECINTO DE LEILÕES`) é **0,159 contra margem de
+   0,150** — mal passou. O JSON carrega `margem_apertada: true`;
+2. a mancha dela tem **preenchimento 0,687**, que é a assinatura de mancha
+   contaminada (o `PAVILHÃO - EQUÍNOS` deu 0,71 contra 0,99 dos irmãos). Uma
+   "residência" de **1.411 m²** não é uma residência: **o rótulo pode não ser o
+   do prédio que a mancha desenha.**
+
+**Nada virou geometria e nenhuma zona foi renomeada.** O que separa os dois
+candidatos é barato: um quadro nadir que pegue o prédio, ou uma palavra dele.
+
+### D042 · As 10 zonas de medida recusada sumiam em silêncio
+**Achado:** o resolver de estimativa só olhava `so o rotulo` e `sem mancha`. As
+zonas com confiança **baixa** — aquelas cuja mancha o extrator recusou porque é
+a tinta da própria palavra — não entravam como medida **nem** como estimativa.
+Não eram 35 zonas pendentes: eram 35 resolvidas e **10 invisíveis**.
+
+**Decisão, zona a zona, escrita em `data/estimativas.json`:**
+
+- **estimar (6):** os quatro `Bar` que faltavam (os outros seis já saem como
+  quiosque — irmão igual a irmão), `É CHURRASCO!` (mesmo módulo de 25 m², que é
+  cota da própria planta) e a `CASA DO MÉDICO VETERINÁRIO`, com o tipo novo
+  `casa_de_servico` de 13,2 × 11,9 m tirado da **mediana das três RESIDÊNCIAS
+  medidas nesta mesma planta** — analógo medido vale mais que tabela de mercado;
+- **não construir (4):** `Mercado do Produtor` e `PAVILHÃO 3`, porque **não são
+  prédios a mais** (abaixo), e `JULGAMENTO RUSTICO` e `PISTA DE JULGAMENTOS`,
+  porque pista é **superfície** e a extensão dela é justamente o dado que falta —
+  e inventar a pista contaminaria a âncora da Fazendinha (P14/P15), que já é
+  estimada.
+
+**O achado que paga o item:** o áudio dele diz *"No Pavilhão 3, mercado do
+produtor, café colonial, cozinha didática"* `[00:15]`, e na planta os **três
+rótulos estão a 4,1 e 7,4 m um do outro**. É um bloco só, e ele **já está na
+cena**, medido, como `Café Colonial Cozinha Didática` (34,3 × 14,1 m). Duas
+fontes que não se falam concordando. Construir caixa ali seria pôr um segundo
+prédio dentro do primeiro — e o Mercado do Produtor é um dos quatro
+diferenciais.
+
+**Ressalva que fica aberta:** 486 m² é pequeno para o pavilhão que abriga três
+usos (os pavilhões 1 e 2 medem 1.327 e 1.418 m²). Ou a mancha é parcial, ou o
+Pavilhão 3 é menor mesmo. **Uma palavra dele resolve.**
+
+### D043 · O portão de câmera reprova 8 pontas, e nenhuma é regressão desta sessão
+Rodado depois de todas as mudanças de geometria: `conferir_camera.py` acusa
+**P06 fim, P08 fim, P09 ini, P12 fim, P19 fim, P20 fim** (superfície a menos de
+8 m na mira) e **P22 fim** (câmera dentro de geometria fechada, e a 4,1 m na
+mira).
+
+**Conferido item a item que não é regressão:** a lista bate com a da D035, da
+sétima sessão, e o P22 fim está **dentro do `AUDITÓRIO`** — zona medida que
+existe na cena desde 14/08, sem relação com o que mudou hoje (pilar assentado,
+inflável e seis caixas estimadas novas). **Fica registrado como linha de base**,
+para a próxima sessão saber separar herança de estrago.
+
+**Não mexi em `data/planos.json`**, pelo mesmo motivo da D035: consertar câmera
+é re-decupagem, cascateia na velocidade e no `alvo_fim`, e enquadramento é
+decisão de quem dirige.
+
+### D044 · O que ficou bloqueado nesta sessão, e por quê
+Registrado para não se repetir tentativa:
+
+| bloqueio | o que trava | o que destrava |
+|---|---|---|
+| `MAT_TELHA` sem medida | o material que mais aparece no filme | **um quadro exposto para o telhado** (D033). Não há footage novo, e não se inventa correção sem medição |
+| textura PBR | `api.polyhaven.com` nega CONNECT com 403 no proxy | roda na máquina dele, onde não há proxy |
+| `conferir_matte.py`, `medir_render.py`, quadros de conferência | exigem render Cycles e o EXR de dado | GPU. Aqui não há OptiX: o próprio gerador imprime *"nenhuma GPU encontrada"* |
+| `conferir_posicao.py` + `sobrepor.py` | a re-conferência de posição depois de trocar forma | precisam do satélite e do footage, que moram no `E:` do Natan e não entram no repositório |
+| `conferir_mapa_comprado.py` | o mapa 3D de 15/08 | mesmo motivo: está no `E:` |
+| pendências 2, 3, 6, 7, 8, 9 do `ESTADO.md` | Fazendinha, cota do patamar, fotos do portal | são dele, e inferir já custou caro três vezes esta semana |
