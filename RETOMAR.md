@@ -1,9 +1,115 @@
 # RETOMAR — handoff do render-agroshow
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Reescrito em 15/08/2026, fim da **sétima** sessão.
+Reescrito em 15/08/2026, fim da **oitava** sessão.
 
-> **ENTREGA DA SÉTIMA SESSÃO, e é por onde ele volta:**
+---
+
+## O QUE MUDOU NA OITAVA SESSÃO (15/08, ele fora por ~4 h) — leia primeiro
+
+**Sessão autônoma, sem ninguém para perguntar.** Regime dele em vigor: escolher o
+mais conservador, registrar em `DECISOES.md` e seguir; travou, documenta e pula.
+Entradas novas: **D038 a D045**.
+
+### A entrega: dois portões novos e uma cena mais limpa
+
+`out/cena.blend` foi regerado quatro vezes ao longo da sessão e **passa nos três
+portões que rodam sem GPU**:
+
+```
+conferir_contato.py .... zero peca no ar (eram 20)      NOVO, e sai com codigo 1
+conferir_estimados.py .. zero cruzamento com o medido (eram 18)
+planos.py --conferir ... 22 planos na faixa cinematografica
+conferir_camera.py ..... 8 pontas reprovadas -- TODAS herdadas, ver D043
+```
+
+### O teste de contato existia como parágrafo e virou portão
+
+Era o próximo passo escrito aqui. `scripts/conferir_contato.py` roda contra o
+`.blend` salvo, com três testes: **pares declarados** (reusa a função do próprio
+gerador — uma régua só), **apoio** (chão ou outra peça) e **afundamento**.
+
+**O que ele achou, e ninguém via em quadro nenhum:**
+
+| defeito | número | conserto |
+|---|---|---|
+| pilares com o pé no ar | **25**, de 0,10 a 1,55 m | cada pilar nasce na cota do chão sob ele; o comprimento vira consequência |
+| brinquedo inflável flutuando | 0,07 m | centro em 0,275h, não 0,28h |
+| objetos afundados > 30 cm | **63** | **medido e não consertado** — ver D040 |
+
+E **duas medições minhas foram desmentidas pela própria medição no mesmo dia**:
+apoio por raio para baixo diz *"nada embaixo"* num contato de 20 m² (o beiral da
+concha), e ler o chão pela superfície mais alta entre `Terreno` e `Entorno`
+acusou **1.123 afundados** — gente de 1,70 m com 2,5 m de terra em cima. Era o
+`Entorno` grosso passando por cima da bacia escavada. As duas ficam escritas no
+código.
+
+### O casamento prédio × zona: há candidato, não há identidade
+
+`scripts/casar_predios.py` pontua cada zona da planta contra a assinatura de cada
+prédio provado no footage, com o peso e o **quadro** de cada critério.
+**O controle passa:** sem saber a resposta, o método reencontra sozinho o
+casamento da concha com `PALCO PALCO` (0,998 × 0,600), decidido em 15/08 por
+outro caminho.
+
+- **PREDIO_REDONDO → proposto: a zona rotulada `RESIDÊNCIA` em (+73, +33)**, e a
+  proposta é **fraca de propósito**: ganha do `RECINTO DE LEILÕES` por 0,159
+  contra margem de 0,150, e a mancha dela tem preenchimento **0,687** — a
+  assinatura de mancha contaminada. Uma "residência" de 1.411 m² não é uma
+  residência: **o rótulo pode não ser o do prédio que a mancha desenha**;
+- GALERIA_DE_PILARES e GALPAO_AZUL_E_TIJOLO: **sem veredito**, com o que falta
+  escrito.
+
+**Nada virou geometria.** O que separa os dois candidatos é barato: um quadro
+nadir que pegue o prédio, ou uma palavra dele.
+
+### As 10 zonas que sumiam em silêncio
+
+O resolver de estimativa só olhava `so o rotulo` e `sem mancha`. As de confiança
+**baixa** — mancha recusada porque é a tinta da palavra — não entravam como
+medida **nem** como estimativa. Cada uma tem destino escrito agora (D042):
+**6 viram caixa** (4 `Bar`, `É CHURRASCO!` e a `CASA DO MÉDICO VETERINÁRIO`, com
+tipo novo tirado da mediana das três residências **medidas**) e **4 não se
+constroem**.
+
+**E o achado que paga o item:** `Mercado do Produtor` e `PAVILHÃO 3` **não são
+prédios a mais**. O áudio diz *"No Pavilhão 3, mercado do produtor, café
+colonial, cozinha didática"* `[00:15]`, e na planta os três rótulos estão a
+**4,1 e 7,4 m** um do outro — é um bloco só, e ele já está na cena, medido, como
+`Café Colonial Cozinha Didática`. Construir caixa ali seria um segundo prédio
+dentro do primeiro, e o Mercado do Produtor é um dos quatro diferenciais.
+
+### Dois defeitos de código que a conferência pegou de quebra
+
+- **copa de árvore atravessando parede:** a folga era 3,0 m com copa de 8,0 m.
+  Agora a folga **é o raio da copa**. 389 → 288 árvores, nenhum bosque vazio, a
+  alameda inteira (D045);
+- **caixa estimada afastada sem reconferir onde caiu:** o `PORTAL` saía do
+  PortalCeleiro e parava com **58,1%** de si dentro do `AUDITÓRIO`. Agora ataca
+  o mais coberto primeiro, repete e avisa se sobrar.
+
+### É DAQUI QUE SE CONTINUA (oitava sessão)
+
+1. **Confirmar o prédio redondo** — é a única coisa que destrava a etapa 3
+   inteira, e custa um quadro nadir ou uma frase dele. Enquanto não vier, a
+   forma medida na órbita continua sem onde pousar.
+2. **Assentar o que está afundado**, depois que a cota dos patamares fechar
+   (pendência 8): palco de evento 9,95 m, camarotes ~3,5 m, 35 estandes e 20
+   vias no talude. Está tudo medido, objeto a objeto, em `out/contato-medido.json`.
+3. **As 8 pontas de câmera reprovadas** (D035 e D043) continuam de pé, e
+   consertá-las é re-decupagem — decisão de quem dirige.
+4. **`MAT_TELHA` continua sem medida** e não se resolve sem footage novo.
+
+### O que esta sessão NÃO pôde tocar, e por quê
+
+Textura PBR (o proxy nega `api.polyhaven.com` com 403), qualquer render Cycles
+(não há GPU aqui — o gerador imprime *"nenhuma GPU encontrada"*), a
+re-conferência de posição por satélite e o mapa comprado (moram no `E:` dele).
+Lista inteira em **D044**.
+
+---
+
+> **ENTREGA DA SÉTIMA SESSÃO, e continua valendo como material de aprovação:**
 > **`out/quadros-ia/INDICE.html`** — abrir no navegador. É a página de
 > aprovação das placas que entram na IA: um bloco por local do percurso, o
 > quadro da cena ao lado dos quadros do footage real, o motivo de cada escolha
@@ -210,8 +316,9 @@ da concha, e o quadro exposto para o telhado.
 ```
 8 pavilhoes .............. forma medida do desenho, area fechada na cota da planta
 9 zonas medidas .......... footprint do desenho + altura declarada (BASE)
-33 zonas estimadas ....... caixa por tipo declarada    (colecao ESTIMADO)
-418 arvores .............. 6 bosques, 2 matas, alameda (1 malha instanciada)
+39 zonas estimadas ....... caixa por tipo declarada    (colecao ESTIMADO)
+288 arvores .............. 6 bosques, 2 matas, alameda (1 malha instanciada)
+                           -- eram 418: a folga contra predio virou o raio da copa
 189 arbustos ............. so onde o terreno TEM declive (os 15 taludes)
 1681 figuras PROXY ....... censo tirado do audio do cliente -- NAO sao os finais
 209 pecas de mobiliario .. mesa e cadeira CC0 de verdade, nas duas pracas
@@ -220,6 +327,7 @@ da concha, e o quadro exposto para o telhado.
 5 estruturas ............. portal, CONCHA, palco de evento (na espera), 2 camarotes
 bacia .................... ferradura aberta 120 graus para SUL-SUDESTE (medida)
 42 vias · 134 estandes · 22 planos de camera
+contato .................. zero peca no ar; 63 objetos afundados, MEDIDOS (D040)
 luz .................... kloppenheim_06, 27/11 18:15, sol a 10,1 graus, 8 bits
 materiais .............. cor-base MEDIDA no footage; terreno com mancha de 2 gramas
 paleta do parque ....... 6 classes medidas em 13/08 + concreto declarado por ele;
@@ -441,6 +549,9 @@ E segue de pé: **construir sobre footprint errado é pior que não construir.**
 | `data/estimativas.json` | tamanho ESTIMADO das zonas que a planta não desenha, por tipo, com o fundamento de cada número | — |
 | `scripts/estimativas.py` | resolve a estimativa por zona (roda sem bpy) | venv |
 | `scripts/conferir_estimados.py` | acusa estimativa em cima de geometria medida | Blender |
+| `scripts/conferir_contato.py` | **portao de CONTATO**: pares declarados, apoio (chao ou peca) e afundamento. Sai com codigo 1 | Blender |
+| `scripts/casar_predios.py` | casa predio do footage com zona da planta por criterio declarado; so decide com margem | venv (stdlib) |
+| `data/casamento-predios.json` | o ranking inteiro, criterio a criterio, com o veredito e o que falta | — |
 | `scripts/medir_materiais.py` | tira a cor-base de cada material do footage, com âncora e teste de controle | venv |
 | `data/materiais-medidos.json` | as cores medidas, com o recorte de cada amostra | — |
 | `data/vegetacao.json` | contrato da vegetação: porte, raio da mancha, densidade | — |

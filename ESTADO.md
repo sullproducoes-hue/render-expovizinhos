@@ -149,6 +149,8 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Mobiliário | `data/mobiliario.json` + `scripts/mobiliario.py` | 209 peças **CC0 de verdade** (cadeira monobloco, mesa de piquenique, mesa de 4 lugares) nas duas praças e no Café Colonial. Pedido dele em [00:57] |
 | **Saída de render** | `data/saida.json` + `scripts/saida.py` | Três slots. **Half+DWAA destrói o Cryptomatte** (hash é float 32, DWAA é lossy) — por isso o dado vai em Float32/ZIP à parte. `save_as_render` é a mesma chave invertida entre PNG e EXR |
 | **Conferidor de matte** | `scripts/conferir_matte.py` | Extrai matte de verdade do EXR: MurmurHash3 do nome, casamento bit a bit, cobertura por faixa. **É o portão** — não se renderiza a fila com crypto quebrado |
+| **Portão de contato** | `scripts/conferir_contato.py` | O que TEM de se encostar está encostado? Pares declarados + apoio (chão ou peça) + afundamento. Sai com código 1. Achou 25 pilares no ar e 63 objetos afundados |
+| **Casamento prédio × zona** | `scripts/casar_predios.py` + `data/casamento-predios.json` | Ranking por critério declarado, com o quadro que sustenta cada um. Só decide com margem; o controle da concha passa |
 | **GPU** | `scripts/placa.py` | Liga OptiX e desliga a CPU. Chamar depois de abrir o `.blend`, **sempre** |
 | **Medição de render** | `scripts/medir_render.py` + `medir_ruido.py` + `medir_compressao.py` | Tempo, ruído local e custo em disco por arranjo. Render e medição são passos separados: o Python do Blender não tem cv2 |
 | **Footage de 13/08** | `data/footage-quinta.json` | Os 17 vídeos decupados: o que cada um mostra, quais servem de prova de forma e quais de amostra de material, o datum de escala de cada um, e a **regra de desempate footage × planta**. Todos **bt709 SDR 10 bits 4:2:0** — não são HDR |
@@ -167,9 +169,9 @@ entorno ............. relevo REAL ate 12 km (SRTM), sitio a 602 m
 cobertura do solo ... ESA WorldCover 10 m: 45% lavoura, 38% mata, 14% campo
 pavilhoes ........... 8
 zonas medidas ....... 9 (footprint do desenho, altura declarada)
-zonas estimadas ..... 33 na colecao ESTIMADO (4 recusadas) -- NAO SAO MEDIDA
+zonas estimadas ..... 39 na colecao ESTIMADO (8 recusadas) -- NAO SAO MEDIDA
 estandes ............ 74 instanciados + 60 proprios
-arvores ............. 418 + 189 arbustos de talude (so onde ha declive)
+arvores ............. 288 + 189 arbustos de talude (so onde ha declive)
 povoamento .......... 1681 figuras PROXY na colecao POVOAMENTO -- NAO sao finais
 mobiliario .......... 209 pecas CC0 (mesa e cadeira) na colecao MOBILIARIO
 letreiros ........... 16, texto do audio dele, tamanho pela regra de 8%
@@ -369,6 +371,26 @@ Frases literais, não reescrever:
 
 ---
 
+## O que a oitava sessão fechou (15/08, autônoma)
+
+Detalhe em `RETOMAR.md` e em `DECISOES.md` D038–D045.
+
+1. **O teste de contato virou portão** — `scripts/conferir_contato.py`, três
+   testes, sai com código 1. Achou **25 pilares com o pé no ar** (nasciam na cota
+   do centroide da zona; agora nascem na cota do chão sob eles) e **63 objetos
+   afundados**, que ficam **medidos e não consertados**: o afundamento vem das
+   cotas dos patamares, que são a pendência 3 com o cliente.
+2. **O casamento prédio × zona ganhou método** — `scripts/casar_predios.py`, com
+   controle que passa. O prédio redondo tem **candidato** (a zona rotulada
+   `RESIDÊNCIA`), e a proposta é fraca de propósito: margem de 0,009 acima do
+   limiar e mancha com preenchimento 0,687. **Não virou geometria.**
+3. **As 10 zonas de medida recusada** deixaram de sumir em silêncio: 6 viram
+   caixa declarada, 4 não se constroem — entre elas `Mercado do Produtor` e
+   `PAVILHÃO 3`, que **são o mesmo bloco** do Café Colonial já construído (áudio
+   `[00:15]` + os três rótulos a 4,1 e 7,4 m um do outro).
+4. **Dois defeitos de código a mais:** copa de árvore atravessando parede
+   (18 cruzamentos → 0) e caixa estimada afastada sem reconferir onde caiu.
+
 ## Próximos passos
 
 **O veredito do Natan em 14/08, olhando o primeiro quadro renderizado:**
@@ -459,6 +481,8 @@ altura por ambiente e a configuração de render.
 | 2 | **Posição da Fazendinha e do portão** — não existe na planta, só no áudio | **O Natan vai mandar um print com a posição e instruções.** Enquanto não chega, P14/P15 seguem com âncora `estimada` |
 | 3 | Quadro de drone **lateral** da arena, rasante, com elemento de altura conhecida | Médio — trava as cotas dos patamares. Das 173 folhas, nenhuma serve: todas são oblíquas altas |
 | 4 | Medida real de qualquer estrutura | Médio — confirma a escala de 0,5611 m/pt |
+| 10 | **Qual zona da planta é o prédio redondo** — o candidato é a rotulada `RESIDÊNCIA` (+73, +33), por 0,009 de margem. Um quadro nadir que o pegue, ou uma frase dele, fecha | **Alto** — trava a etapa 3 inteira |
+| 11 | **O Pavilhão 3 tem 486 m²?** É o que a mancha do `Café Colonial` mede, e ele abriga três usos. Os pavilhões 1 e 2 medem 1.327 e 1.418 m² | Médio |
 | 5 | Identidade visual AGROSHOW 2026 em vetor | Baixo agora — decisão do Natan: **usar o JPEG achado na internet ou o nome simples** |
 | 6 | **4 a 6 fotos do portal** — três quartos dos dois lados, lateral pura, detalhe do tabuado e da ferragem, uma com pessoa em pé ao lado | **Alto** — existe **uma** imagem do portal celeiro no mundo, frontal. É o primeiro e o último plano do filme, e uma frontal não modela |
 | 7 | **Qual dos dois portais** abre e fecha o filme: o de madeira da foto de 12/08 ou o pórtico azul do `0126_D` | **Alto** — os dois têm o letreiro PARQUE DE EXPOSIÇÕES; podem ser duas entradas |
