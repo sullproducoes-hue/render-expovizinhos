@@ -488,3 +488,98 @@ precisa separar isso antes.
 **O que fecharia:** classificar por forma. Traçado que é arco concêntrico ao
 centro da arena, dentro de r < 150 m, é candidato a patamar; o resto é candidato
 a via. É conta sobre dado que já está no arquivo — não precisa dele.
+
+### D026 · Plano A destravado: as cenas vão para IA por quadro-para-vídeo
+**Ambiguidade:** ele mandou *"gerar as cenas no flow (...) ou no flow ou no
+higgsfield mas não posso cometer erros o lugar tem que ser exatamente o lugar"*,
+sem dizer **como** garantir o lugar.
+**Decisão:** **nenhum clipe é texto-para-vídeo.** Todo clipe é quadro-para-vídeo,
+com os DOIS extremos renderizados da cena medida — e o prompt **proibido de
+descrever posição**. Contrato em `data/cenas-ia.json`, gerador em
+`scripts/cenas_ia.py`, doc operável em `docs/CENAS-IA.md`.
+**Motivo:** é a única forma que não deixa a escolha do lugar com a IA. Descrever
+o parque em palavras piora: quanto mais detalhe, mais ela compõe *um* parque e
+menos *este*. Travando os dois extremos, ela só preenche o meio. E a decupagem
+já entregava isso de graça — cada plano declara câmera de início e de fim desde
+14/08, que é literalmente o que o *Frames to Video* pede.
+**Fecha a pendência 14b** do `RETOMAR.md`: é o Plano A, e o proxy do povoamento
+passa a ser o certo — ele dá massa, silhueta e escala, e a IA põe a pele.
+
+### D027 · Flow como caminho principal, e o motivo é a grade de duração
+**Ambiguidade:** ele deixou a escolha aberta entre as duas.
+**Decisão:** **Flow**. Higgsfield fica para os planos em que o movimento é o
+assunto (P19 touro, P20 público).
+**Motivo:** medido, não preferido. A grade do Flow é 4/6/8 s e a do Higgsfield é
+5/10 s. Como o caminho da câmera não muda, encaixar um plano numa duração
+diferente **muda a velocidade** — e a faixa cinematográfica de drone é o motivo
+de a decupagem existir. Na grade do Flow os 22 planos cabem; na do Higgsfield
+**4 não cabem** (P04, P10, P13, P22): para esses, nem 5 s nem 10 s ficam dentro
+da faixa. O conserto existe e é pequeno (encurtar percurso para 87–98%), então o
+Higgsfield não está descartado — só cobra quatro correções que o Flow não cobra.
+
+### D028 · O encaixe na grade obedece à faixa de velocidade, não ao relógio
+**Ambiguidade:** com que critério quebrar um plano de 9,0 s numa grade de 4/6/8.
+**Decisão:** a regra de velocidade vem **antes** do erro de duração no critério
+de escolha.
+**Motivo:** a primeira versão desempatava por "menos clipes" e escolhia 8,0 s
+(um clipe, erro 1,0 s) em vez de 4+6 (dois clipes, erro 1,0 s). Os dois erram o
+mesmo 1 segundo — mas **encurtar acelera a câmera e alongar desacelera**. Os 8 s
+jogavam o push-in do P02 a 2,35 m/s, fora da faixa; os 10 s o deixavam em 1,88,
+dentro. **Empate em duração não é empate em cinema.** Foi o próprio conferidor
+que pegou, acusando 5 planos fora da faixa antes de eu perceber o defeito.
+
+### D029 · A negativa de arquibancada só entra onde há público
+**Ambiguidade:** a restrição 1 do cliente vale para o filme inteiro; o prompt é
+por clipe.
+**Decisão:** a negativa *"no grandstands"* entra em **6** dos 22 planos — P10,
+P12, P18, P19, P20, P21 —, os que têm público assistindo alguma coisa. Lista
+declarada em `data/cenas-ia.json`, revisável.
+**Motivo:** negativa só protege onde o risco existe, e modelo generativo carrega
+o conceito que a palavra traz **mesmo na negativa**. Citar arquibancada num
+plano de estacionamento não protege nada e pode desenhar uma.
+
+### D030 · Os letreiros não passam pela IA
+**Decisão:** `render_guias.py` esconde a coleção `LETREIROS`. O texto entra na
+montagem, por cima do clipe pronto.
+**Motivo:** modelo generativo destrói tipografia — reescreve letra, troca acento,
+inventa palavra. As duas frases dele são **literais** por ordem escrita, e a
+palavra *Kids* é proibida: nenhuma das duas coisas sobrevive a um modelo que
+resolve "melhorar" um letreiro. A regra de 8%/4% continua valendo, medida sobre
+o master 2760×1380, que é onde ela sempre foi medida.
+
+### D031 · 16:9 no guia, 2:1 no corte — e a prova de que não se perde nada
+**Ambiguidade:** a entrega é 2:1 e nenhuma das duas plataformas gera 2:1.
+**Decisão:** guia e geração em **16:9**; a entrega sai cortando a faixa central.
+Nunca esticar. `sensor_fit` declarado **HORIZONTAL** no render do guia.
+**Motivo:** o corte é seguro **por construção**, não por sorte — toda câmera
+mira o alvo por constraint *Track To*, então o assunto está no centro do quadro,
+e corte simétrico de topo e base não pode perdê-lo. A largura não muda: 16:9 e
+2:1 têm a mesma horizontal. O `sensor_fit` vai explícito porque no AUTO o
+Blender ajusta pela maior dimensão — daria no mesmo hoje, mas passaria a
+depender da resolução, e isso é o fallback mudo da doutrina §12.
+
+### D032 · Os 134 estandes viram tenda, e a planta provou a família
+**Ambiguidade:** ele mandou *"colocar as tendas nas posições reais"*; as posições
+já eram reais desde sempre — o que era falso era a **forma** (caixa de 3,2 m).
+**Decisão:** cada estande vira tenda piramidal de lona da família padrão mais
+próxima (3×3, 5×5, 10×10), com escala em X/Y fechando a área cotada e **Z sem
+escalar**. Teto de ±30%: **131 dos 134 viram instância de 3 malhas**, 3 saem com
+malha própria. Contrato em `data/tendas.json`, conferidor sem `bpy`.
+**Motivo, e não é escolha de gosto:** o histograma das áreas cotadas mostra que
+**a planta foi desenhada na grade de tenda padrão** — 35 dos 41 estandes da
+série A têm 25,00 m² (5×5 exata) e 39 dos 93 da série C têm 100,00 m² (10×10
+exata). As duas modas caem em cima das medidas que a doutrina manda não errar.
+Z não escala porque pé-direito é medida de mercado, não proporção: tenda maior
+tem mais chão, não mais pé.
+**De quebra fecha a pendência 12b:** a lona ganhou barriga (flecha de 3,5% do vão
+no beiral, 2% na água), que era o defeito de "ler como placa rígida de perto".
+E a Praça de Alimentação Coberta deixou de ser laje de 0,3 m sobre pilares e
+virou cobertura de lona em naves de duas águas — o contrato dela **já declarava**
+`MAT_LONA`; laje de lona não existe.
+
+### D033 · As três tendas saem da área de espera
+**Decisão:** peça com `posicao` diferente de `"espera"` não é mais construída na
+`AREA_DE_ESPERA`. As três tendas saíram; as outras 8 peças ficam.
+**Motivo:** a área de espera é, por definição, "peça cujo lugar eu não sei".
+Agora que a tenda tem lugar — 134 deles, medidos —, deixar uma cópia parada ao
+lado do mapa faz o arquivo abrir com duas verdades e ninguém sabendo qual vale.

@@ -1,14 +1,25 @@
 # RETOMAR — handoff do render-agroshow
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Reescrito em 15/08/2026, fim da **sexta** sessão.
+Reescrito em 15/08/2026, fim da **sétima** sessão.
 
-> **Entrega desta sessão, e é por onde ele volta:**
-> `data/materiais-quinta.json` (a paleta do parque, medida),
-> `data/formas-quinta.json` (o que a câmera prova de forma) e
+> **Entrega da sétima sessão, e é por onde ele volta:**
+> **`docs/CENAS-IA.md`** — o Plano A operável, do `.blend` até o Flow.
+> Ele escolheu o Plano A e pediu as tendas nas posições reais; as duas coisas
+> estão feitas e conferidas sem GPU:
+>
+> ```bash
+> python3 scripts/tendas.py --conferir      # 131 tendas instanciadas, 3 próprias
+> python3 scripts/cenas_ia.py --conferir    # 29 clipes, 51 quadros-guia, ~8 min
+> ```
+>
+> **A regra que garante o lugar:** nenhum clipe é texto-para-vídeo. Todo clipe é
+> quadro-para-vídeo, com os **dois** extremos renderizados da cena medida, e o
+> prompt é **proibido de descrever posição**. Decisões em D026–D033.
+>
+> **Entrega da sexta sessão:** `data/materiais-quinta.json` (a paleta do parque,
+> medida), `data/formas-quinta.json` (o que a câmera prova de forma) e
 > `data/ferradura-conferida.json` (a bacia conferida contra foto de drone).
-> A cena em disco **não mudou** — nenhuma geometria foi trocada ainda, e o
-> motivo está em D023.
 
 Abra este arquivo, depois **`DECISOES.md`**, depois `docs/FOOTPRINTS.md`, depois
 `ESTADO.md`. Aqui está só o que a próxima sessão precisa para continuar sem
@@ -16,7 +27,70 @@ reler conversa.
 
 ---
 
-## O QUE MUDOU NA SEXTA SESSÃO (15/08, à noite) — leia antes de tudo
+## O QUE MUDOU NA SÉTIMA SESSÃO (15/08) — leia antes de tudo
+
+Ele deu duas ordens numa frase só, e as duas estão fechadas.
+
+### 1. As tendas nas posições reais — e a planta provou a família
+
+*"preciso colocar as tendas nas posições reais"*. **As posições já eram reais
+desde sempre; o que era falso era a forma.** Os 134 estandes eram caixa de
+3,2 m, na coordenada medida do desenho. Caixa branca em fileira não lê como
+feira: lê como maquete de estudo.
+
+Agora cada estande é **tenda piramidal de lona**, e a família não foi escolhida
+— foi medida. O histograma das áreas cotadas mostra que **a planta foi desenhada
+na grade de tenda padrão**, e isso não estava escrito em lugar nenhum:
+
+```
+serie A ... 35 dos 41 estandes tem 25,00 m²  -> tenda 5x5 EXATA
+serie C ... 39 dos 93 estandes tem 100,00 m² -> tenda 10x10 EXATA
+```
+
+As duas modas caem **em cima** das medidas que a doutrina manda não errar
+(3×3, 5×5, 10×10). Com teto de escala de ±30%, **131 dos 134 são instância de
+três malhas** e 3 saem com malha própria. Contrato em `data/tendas.json`,
+conferidor sem `bpy` em `scripts/tendas.py --conferir`.
+
+De quebra fecharam duas pendências antigas: a **12b** (a lona ganhou barriga —
+flecha de 3,5% do vão no beiral e 2% na água) e a laje da **Praça de
+Alimentação Coberta**, que era caixa de 0,3 m sobre pilares e virou cobertura de
+lona em naves de duas águas. O contrato dela **já declarava** `MAT_LONA`: laje
+de lona não existe.
+
+### 2. O Plano A, operável — `docs/CENAS-IA.md`
+
+*"gerar as cenas no flow (...) não posso cometer erros o lugar tem que ser
+exatamente o lugar"*. **A resposta não é prompt melhor — é não deixar a escolha
+com a IA.**
+
+Todo clipe é **quadro-para-vídeo**, com os DOIS extremos renderizados da cena
+medida, e o prompt é **proibido de descrever posição** (o quadro já a tem; repetir
+em palavra é convidar a IA a discordar do quadro). A decupagem já entregava isso
+de graça: cada plano declara câmera de início e de fim desde 14/08, que é
+literalmente o que o *Frames to Video* do Flow pede.
+
+```
+FLOW ......... 29 clipes · 51 quadros-guia · 166 s · nenhum plano fora da faixa
+HIGGSFIELD ... 23 clipes · 45 quadros-guia · 165 s · 4 planos NAO cabem na grade
+custo ........ ~8 min de render (1,1% dos 4.635 quadros) contra 12,9 h
+```
+
+**Por que Flow e não Higgsfield:** a grade do Flow é 4/6/8 s e a do Higgsfield é
+5/10 s. Como o caminho da câmera não muda, encaixar um plano noutra duração
+**muda a velocidade** — e a faixa cinematográfica é o motivo de a decupagem
+existir. No Higgsfield, P04, P10, P13 e P22 não cabem nem em 5 s nem em 10 s. O
+conserto é pequeno (encurtar percurso para 87–98%) e o conferidor imprime o
+número, então o Higgsfield não está descartado — só cobra quatro correções.
+
+**O que o conferidor pegou de mim:** a primeira versão do encaixe desempatava
+por "menos clipes" e mandava um plano de 9,0 s para 8,0 s em vez de 4+6. Os dois
+erram 1 segundo, mas **encurtar acelera a câmera**: os 8 s jogavam o P02 a
+2,35 m/s, fora da faixa. Empate em duração não é empate em cinema. Ver D028.
+
+---
+
+## O QUE MUDOU NA SEXTA SESSÃO (15/08, à noite)
 
 Etapa 2 fechada, etapa 3 **medida mas não aplicada**, e a pendência 4 ganhou uma
 segunda testemunha que não é a planta.
@@ -1151,10 +1225,10 @@ nada de addon pode entrar no caminho crítico do gerador.
 | 11c | **O silo está feito, a posição não.** Silo e conjunto de 3 construídos em 15/08 e postos na `AREA_DE_ESPERA`, por ordem dele. A posição está no quadro `DJI_20251129182345_0168_D` 00:00:52 e **não foi medida** — dá para tirar dali, é trabalho de verdade | **Natan** posiciona, ou medir no quadro |
 | 11d | **O socalco da lavoura** continua faltando: relevo de ~10 m que um DEM de 30 m não enxerga | próxima sessão |
 | ~~12~~ | ~~Falta textura~~ — **feito em 14/08 à noite.** 4 materiais com normal, rugosidade e mancha CC0, contrato em `data/texturas.json`, custo medido de +5,2%. Lona, copa e madeira ficaram de fora **com motivo escrito**. A rampa das duas gramas foi calibrada de quebra (0,192 → 0,152 de albedo) | Resolvida |
-| 12b | **A barriga do pano das tendas** é geometria, não textura — a lona ficou de fora do contrato por isso, e continua lendo como plano rígido de perto | próxima sessão |
+| ~~12b~~ | ~~**A barriga do pano das tendas**~~ — **feito em 15/08**, junto com a troca de caixa por tenda. A lona ganhou flecha de **3,5% do vão no beiral e 2% na água**, que é o que tira a leitura de placa rígida de perto. Custa 16 triângulos de telhado em vez de 4, **uma vez só**: as 131 instâncias dividem a malha | Resolvida |
 | ~~13~~ | ~~Vegetação: falta o arbusto dos 15 taludes~~ — **feito em 14/08 à noite: 189 arbustos.** O que faz isso ser medida e não enfeite é o **filtro de declive**: o rótulo dá a região, o gradiente do terreno dá o lugar. Conferido — caíram **só** nas três faixas de talude do `PATAMARES`, zero nos platôs, zero no setor aberto | Resolvida |
-| 14 | **Povoamento** — **o censo está feito e 1.681 figuras estão na cena, mas são PROXY.** `data/povoamento.json` tira do áudio dele, minuto a minuto, quem está em cada ambiente e quantos. A forma é que não existe: não há gente nem gado em CC0 que sirva (o Poly Haven tem 521 modelos e nenhum é ser vivo). **A 130 m lê como público; a 6 m lê como balizador.** | **Natan** — ver 14b |
-| 14b | **A pergunta que destrava a 14: Plano A ou Plano B?** No **Plano A** (quadros → IA geradora com prompt ultra-realista) o proxy é o certo e a etapa está pronta: ele dá massa, silhueta, escala e composição, e a IA põe a pele. No **Plano B** (render local é a entrega) gente e gado precisam de modelo e animação de verdade — outro tamanho de trabalho, e vale a pena eu pesquisar Quaternius/Kenney com o seu aval | **Natan** |
+| ~~14~~ | ~~**Povoamento**~~ — **destravada em 15/08 pela escolha do Plano A: o proxy é o certo.** O censo está feito e 1.681 figuras estão na cena. `data/povoamento.json` tira do áudio dele, minuto a minuto, quem está em cada ambiente e quantos. A forma é que não existe: não há gente nem gado em CC0 que sirva (o Poly Haven tem 521 modelos e nenhum é ser vivo). **A 130 m lê como público; a 6 m lê como balizador** — e no Plano A é a IA que põe a pele, então proxy é exatamente o que se quer: massa, silhueta, escala e composição. | Resolvida |
+| ~~14b~~ | ~~**A pergunta que destrava a 14: Plano A ou Plano B?**~~ — **respondida por ele em 15/08: Plano A.** Ver `docs/CENAS-IA.md` e D026–D031. O texto antigo: No **Plano A** (quadros → IA geradora com prompt ultra-realista) o proxy é o certo e a etapa está pronta: ele dá massa, silhueta, escala e composição, e a IA põe a pele. No **Plano B** (render local é a entrega) gente e gado precisam de modelo e animação de verdade — outro tamanho de trabalho, e vale a pena eu pesquisar Quaternius/Kenney com o seu aval | Resolvida |
 | ~~14c~~ | ~~Mesas e cadeiras da praça~~ — **feito em 14/08 à noite: 209 peças CC0 de verdade**, não proxy. Cadeira de plástico monobloco branca (a cadeira de evento no Brasil), mesa de piquenique na praça aberta e mesa de 4 lugares na coberta e no Café Colonial. Contrato em `data/mobiliario.json` | Resolvida |
 | 14d | **Máquinas e implementos** — o **trator existe como PROXY GROSSEIRO** na espera, declarado como tal. Falta **colheitadeira, implemento e caminhão**, e esses NÃO valem proxy: mal feitos chamam mais atenção que a ausência. **Caminho destravado:** ele cria conta no TurboSquid (gratuito = Royalty Free), entra no Chrome, eu baixo pela sessão | **Natan** cria a conta |
 | ~~15~~ | ~~Títulos e letreiros~~ — **feito em 15/08. 16 letreiros, 29 objetos de texto.** O TEXTO é a sua palavra, com o minuto citado em cada linha. O TAMANHO é conta, não gosto: a sua regra de 8% da altura do quadro tem solução exata, e o script **acusa** quem cair abaixo. "Kids" não entra; os quatro diferenciais ganham 1,35× | Resolvida |

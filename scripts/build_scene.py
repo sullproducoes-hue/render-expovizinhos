@@ -55,6 +55,7 @@ import planos as planos_mod
 import povoamento
 import sol
 import relevo_entorno
+import tendas
 import terreno
 import texturas
 
@@ -604,44 +605,21 @@ def orientar_estandes(postos):
 
 
 def construir_estandes(dados, col, centro_arena, bbox=None):
-    """Instancia os estandes a partir de dois modulos base.
+    """Os estandes, como TENDA -- nao mais como caixa.
 
-    39 estandes de 100 m² e 35 de 25 m² sao instancias, nao modelagens
-    separadas. Os demais recebem caixa propria dimensionada pela area.
+    Ordem do Natan em 15/08: *"preciso colocar as tendas nas posicoes reais"*.
+    A posicao ja era real desde sempre; o que era falso era a forma. Cada
+    estande virava uma caixa de 3,2 m, e caixa branca em fileira nao le como
+    feira: le como maquete de estudo.
+
+    A regra de familia (3x3, 5x5, 10x10) e o teto de escala moram em
+    `scripts/tendas.py`, com contrato em `data/tendas.json` e conferidor que
+    roda sem bpy. Aqui so se chama. O que NAO muda: `x, y` continuam vindo do
+    mesmo `dados["estandes"]` de antes, pelo mesmo `terreno.para_mundo`, e a
+    orientacao continua saindo do `orientar_estandes` logo abaixo.
     """
-    modulos = {}
-    for area, lado in ((100.0, 10.0), (25.0, 5.0)):
-        base = caixa(f"MODULO_{int(area)}m2", lado, lado, terreno.ALTURA_ESTANDE, col)
-        base.hide_render = base.hide_viewport = True
-        modulos[area] = base
-
-    origem = dados["_origem"]
-    contagem = {"instanciado": 0, "proprio": 0, "fora_do_corte": 0}
-    postos = []
-
-    for st in dados["estandes"]:
-        area = st.get("area_m2")
-        if area is None:
-            continue
-        x, y = terreno.para_mundo(st["x"], st["y"], origem)
-        if not dentro(bbox, x, y):
-            contagem["fora_do_corte"] += 1
-            continue
-
-        if area in modulos:
-            obj = bpy.data.objects.new(st["codigo"], modulos[area].data)
-            col.objects.link(obj)
-            contagem["instanciado"] += 1
-        else:
-            lado = math.sqrt(area)
-            obj = caixa(st["codigo"], lado, lado, terreno.ALTURA_ESTANDE, col)
-            contagem["proprio"] += 1
-
-        obj.location = (x, y, terreno.elevacao(x, y, centro_arena))
-        obj["area_m2"] = area
-        obj["serie"] = st["serie"]
-        postos.append((obj, x, y))
-
+    contagem, postos = tendas.construir(dados, col, centro_arena, terreno,
+                                        dentro, bbox)
     orientar_estandes(postos)
     return contagem
 
@@ -834,7 +812,16 @@ def construir_medidos(dados, col, centro_arena, bbox=None, fp=None):
         giro = azimute_para_giro(azimute if azimute is not None else 90.0)
 
         if decl["forma"] == "cobertura":
-            obj = caixa(rotulo, largura, profundidade, 0.3, col)
+            # Laje de lona nao existe. Onde o proprio contrato declara MAT_LONA
+            # -- a Praca de Alimentacao Coberta (145,5 x 33,6 m, que e o P04) e
+            # o Palco After --, a cobertura sai como tenda de duas aguas em
+            # naves, e nao como caixa de 0,3 m de espessura. A LAVAGEM ANIMAIS
+            # continua laje porque ela e MAT_TELHA: telhado de galpao, e ai a
+            # caixa esta certa.
+            if decl["material"] == "MAT_LONA":
+                obj = tendas.cobertura_de_lona(rotulo, largura, profundidade, col)
+            else:
+                obj = caixa(rotulo, largura, profundidade, 0.3, col)
             obj.location = (x, y, z + decl["altura_m"])
             pilares(rotulo, x, y, z, largura, profundidade, decl["altura_m"],
                     giro, col, marca="footprint_medido")

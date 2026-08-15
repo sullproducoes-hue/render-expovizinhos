@@ -54,10 +54,15 @@ Decidido por ele em 14/08/2026, e é isto que manda:
    o caminho que ele autorizou. Ver `data/letreiros.json`.
 4. **Projeto pronto para ele renderizar.** A cena sai salva com a configuração
    dele já marcada; **quem exporta é ele, no Blender dele**.
-5. **Plano A** (o que ele acha mais viável): os quadros aprovados viram entrada
-   de **IA geradora de vídeo** com prompt ultra-realista por local.
-   **Plano B**: se o render local convencer, renderizar o trajeto completo aqui
-   com as animações — pessoas, gado, montaria, laçada, salão do leiloeiro.
+5. ~~**Plano A**~~ — **decidido por ele em 15/08: é o Plano A.** Os quadros
+   viram entrada de **IA geradora de vídeo**, no **Flow** (ou Higgsfield).
+   Operável em **`docs/CENAS-IA.md`**; contrato em `data/cenas-ia.json`.
+   **A regra que garante o lugar: nenhum clipe é texto-para-vídeo.** Todo clipe
+   é quadro-para-vídeo, com os DOIS extremos renderizados da cena medida — e o
+   prompt é **proibido de descrever posição**, porque o quadro já a tem medida.
+   Custo: **51 quadros-guia (~8 min)** contra as 12,9 h do filme inteiro.
+   **Plano B** (render local completo) não foi apagado: continua em
+   `scripts/render_shots.py`, e é para onde se volta se a IA não convencer.
 
 **Regra permanente:** a descrição dos áudios (`docs/brief-audios.md`) é a régua
 do que vai dentro de cada ambiente — conteúdo, posição e detalhe. Dúvida sobre
@@ -130,7 +135,10 @@ das imagens de apoio, os títulos e as restrições do cliente.
 | Relevo do entorno | `scripts/relevo_entorno.py` + `data/relevo-entorno.json` | DEM público até 12 km, conferido contra segunda fonte em ±5 m. Amortecido a zero dentro de 600 m para não tocar no recinto |
 | Cobertura do solo | `scripts/cobertura_entorno.py` + `data/cobertura-entorno.json` | ESA WorldCover 10 m (CC-BY, **exige crédito**) diz o QUE é cada chão; `materiais-medidos.json` diz que COR. 45% lavoura, 38% mata, 14% campo. Faltam os silos e o socalco |
 | Povoamento | `data/povoamento.json` + `scripts/povoamento.py` | 1.681 figuras, censo tirado do áudio do cliente minuto a minuto. **São PROXY** — destravar depende da escolha Plano A vs Plano B |
-| Peças avulsas | `data/pecas-avulsas.json` + `scripts/avulsas.py` | 11 peças na coleção **AREA_DE_ESPERA** em (520, −240), etiquetadas: silo, conjunto de silos, 3 tendas, porteira, guichê, curral, torre, inflável, trator. **Ele posiciona no Blender** |
+| **Tendas nas posições reais** | `data/tendas.json` + `scripts/tendas.py` | Os 134 estandes deixaram de ser caixa de 3,2 m e viraram **tenda piramidal de lona**. **131 são instância de 3 malhas** (3×3, 5×5, 10×10), 3 têm malha própria. A posição não mudou — o que era falso era a forma. A planta provou a família: 35 dos 41 da série A têm 25,00 m² e 39 dos 93 da série C têm 100,00 m², em cima das medidas padrão |
+| **Cenas para IA (Plano A)** | `data/cenas-ia.json` + `scripts/cenas_ia.py` + `docs/CENAS-IA.md` | Os 22 planos quebrados na grade da plataforma, com prompt por clipe e os quadros-guia. **Flow: 29 clipes, 51 quadros, zero planos fora da faixa. Higgsfield: 4 planos não cabem na grade de 5/10 s** |
+| **Render dos quadros-guia** | `scripts/render_guias.py` | 3840×2160 (16:9), **sem letreiro**, só as pontas de clipe. ~8 min contra 12,9 h |
+| Peças avulsas | `data/pecas-avulsas.json` + `scripts/avulsas.py` | **8** peças na coleção **AREA_DE_ESPERA** em (520, −240), etiquetadas: silo, conjunto de silos, porteira, guichê, curral, torre, inflável, trator. **Ele posiciona no Blender.** As 3 tendas saíram da espera em 15/08 — agora têm 134 lugares medidos |
 | Letreiros | `data/letreiros.json` + `scripts/letreiros.py` | 16 letreiros com o texto do áudio dele. O tamanho sai da regra de 8%/4% por conta, e o script **acusa** quem cair abaixo. Cada um só existe durante o plano dele. Tipografia é proposta |
 | Mobiliário | `data/mobiliario.json` + `scripts/mobiliario.py` | 209 peças **CC0 de verdade** (cadeira monobloco, mesa de piquenique, mesa de 4 lugares) nas duas praças e no Café Colonial. Pedido dele em [00:57] |
 | **Saída de render** | `data/saida.json` + `scripts/saida.py` | Três slots. **Half+DWAA destrói o Cryptomatte** (hash é float 32, DWAA é lossy) — por isso o dado vai em Float32/ZIP à parte. `save_as_render` é a mesma chave invertida entre PNG e EXR |
@@ -154,12 +162,12 @@ cobertura do solo ... ESA WorldCover 10 m: 45% lavoura, 38% mata, 14% campo
 pavilhoes ........... 8
 zonas medidas ....... 9 (footprint do desenho, altura declarada)
 zonas estimadas ..... 33 na colecao ESTIMADO (4 recusadas) -- NAO SAO MEDIDA
-estandes ............ 74 instanciados + 60 proprios
+estandes ............ 131 TENDAS instanciadas + 3 proprias (eram caixas)
 arvores ............. 418 + 189 arbustos de talude (so onde ha declive)
 povoamento .......... 1681 figuras PROXY na colecao POVOAMENTO -- NAO sao finais
 mobiliario .......... 209 pecas CC0 (mesa e cadeira) na colecao MOBILIARIO
 letreiros ........... 16, texto do audio dele, tamanho pela regra de 8%
-area de espera ...... 11 pecas em (520,-240) para ele posicionar
+area de espera ...... 8 pecas em (520,-240) para ele posicionar (as 3 tendas sairam)
 textura ............. PBR CC0 em 4 materiais; a cor MEDIDA nao e sobrescrita
 planos .............. 22 de 22 (filme completo)
 render .............. 2760x1380 (2:1)
@@ -173,6 +181,17 @@ python scripts/build_scene.py --out out/cena.blend                 # filme compl
 python scripts/build_scene.py --plano P19 --out out/P19.blend      # so um plano
 python scripts/build_scene.py --export-fbx out/cena.fbx            # FBX
 python scripts/planos.py --conferir                                # velocidades, sem bpy
+python scripts/tendas.py --conferir                                # familias de tenda, sem bpy
+python scripts/cenas_ia.py --conferir                              # grade do Flow, sem bpy
+```
+
+O caminho do **Plano A**, do zero até o Flow (detalhe em `docs/CENAS-IA.md`):
+
+```bash
+blender --background --python scripts/build_scene.py  -- --out out/cena.blend
+python3 scripts/cenas_ia.py --conferir
+blender --background --python scripts/render_guias.py -- --blend out/cena.blend --plataforma flow
+python3 scripts/cenas_ia.py --roteiro > out/cenas/roteiro-flow.md
 ```
 
 Na máquina do Natan o gerador roda pelo Blender instalado, não pelo `bpy` do

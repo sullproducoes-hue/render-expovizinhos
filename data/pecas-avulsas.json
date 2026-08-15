@@ -16,7 +16,8 @@
   "passo_m": 34.0,
   "colunas": 5,
   "por_que_aqui": "a prancha vai a ~485 m em x e ~273 m em y. O canto em (520, -240) fica FORA do terreno detalhado e fora do recinto, mas dentro do entorno -- entao as pecas pousam em chao existente, ficam visiveis na vista de topo e nao aparecem em nenhum dos 22 planos.",
-  "etiqueta": "cada peca leva um texto flutuante com o nome, na mesma fonte dos letreiros, para nao ter que clicar objeto por objeto no outliner."
+  "etiqueta": "cada peca leva um texto flutuante com o nome, na mesma fonte dos letreiros, para nao ter que clicar objeto por objeto no outliner.",
+  "o_que_sai_daqui": "peca com `posicao` diferente de 'espera' NAO e mais construida aqui. A area de espera e, por definicao, 'peca cujo lugar eu nao sei' -- deixar uma copia parada ao lado do mapa depois que o lugar apareceu faz o arquivo abrir com duas verdades e ninguem sabendo qual vale."
  },
 
  "pecas": [
@@ -29,17 +30,20 @@
    "medidas_m": {"unidades": 3, "espacamento": 11.0},
    "fundamento": "silo raramente vem sozinho; o quadro mostra um conjunto."},
 
-  {"nome": "Tenda piramidal 10x10", "tipo": "tenda_piramidal", "quantos": 1, "posicao": "espera",
+  {"nome": "Tenda piramidal 10x10", "tipo": "tenda_piramidal", "quantos": 1, "posicao": "colocada",
    "medidas_m": {"lado": 10.0, "pe_direito": 3.0, "altura_total": 5.2},
-   "fundamento": "a tenda de feira padrao no Brasil e 10x10 com pe-direito de 3 m. E a que cobre estande de expositor."},
+   "fundamento": "a tenda de feira padrao no Brasil e 10x10 com pe-direito de 3 m. E a que cobre estande de expositor.",
+   "onde_foi_parar": "SAIU DA ESPERA em 15/08, por ordem dele ('preciso colocar as tendas nas posicoes reais'). Os 134 estandes da planta passaram a ser instanciados como tenda nas posicoes MEDIDAS -- 91 deles nesta familia. Ver scripts/tendas.py e data/tendas.json. Estas medidas continuam sendo a fonte do perfil de altura."},
 
-  {"nome": "Tenda piramidal 5x5", "tipo": "tenda_piramidal", "quantos": 1, "posicao": "espera",
+  {"nome": "Tenda piramidal 5x5", "tipo": "tenda_piramidal", "quantos": 1, "posicao": "colocada",
    "medidas_m": {"lado": 5.0, "pe_direito": 2.6, "altura_total": 3.9},
-   "fundamento": "a menor da mesma familia, para guiche e ponto de venda."},
+   "fundamento": "a menor da mesma familia, para guiche e ponto de venda.",
+   "onde_foi_parar": "SAIU DA ESPERA em 15/08. 39 estandes nesta familia, mais 4 numa 3x3 derivada dela por interpolacao."},
 
-  {"nome": "Tenda galpao", "tipo": "tenda_galpao", "quantos": 1, "posicao": "espera",
+  {"nome": "Tenda galpao", "tipo": "tenda_galpao", "quantos": 1, "posicao": "colocada",
    "medidas_m": {"largura": 15.0, "comprimento": 30.0, "pe_direito": 3.5, "altura_total": 6.5},
-   "fundamento": "tenda de duas aguas, a que cobre praca de alimentacao e area de leilao."},
+   "fundamento": "tenda de duas aguas, a que cobre praca de alimentacao e area de leilao.",
+   "onde_foi_parar": "SAIU DA ESPERA em 15/08. A Praca de Alimentacao Coberta (145,5 x 33,6 m) e o Palco After deixaram de ser laje de 0,3 m sobre pilares e passaram a receber cobertura de lona em naves de duas aguas, pelo footprint MEDIDO de cada uma -- e nao pelos 15 x 30 m genericos daqui. Ver tendas.cobertura_de_lona."},
 
   {"nome": "Porteira da Fazendinha", "tipo": "porteira", "quantos": 1, "posicao": "espera",
    "medidas_m": {"vao": 6.0, "altura_moirao": 3.6, "altura_travessa": 4.4},

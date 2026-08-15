@@ -1,0 +1,208 @@
+{
+ "_leia": "O pacote do Plano A: os 22 planos viram clipes de IA geradora (Flow ou Higgsfield). Confira com: python3 scripts/cenas_ia.py --conferir",
+
+ "ordem_dele_15_08": "'preciso gerar as cenas no flow para posteriormente animar, ou no flow ou no higgsfield mas nao posso cometer erros o lugar tem que ser exatamente o lugar onde sera o agroshow, preciso colocar as tendas nas posicoes reais criar o video como o tega falou'.",
+
+ "a_regra_que_garante_o_lugar": {
+  "regra": "NENHUM clipe e texto-para-video. Todo clipe e QUADRO-PARA-VIDEO, com os DOIS quadros -- o primeiro e o ultimo -- renderizados da cena medida.",
+  "por_que": "texto-para-video inventa um parque de exposicoes generico: e o modo de falha exato que ele nomeou. Travando os dois extremos com render da planta medida, a IA nao escolhe onde ficam as coisas -- ela so preenche o movimento entre dois quadros que ja sao o lugar certo. O que a IA poe e pele, luz, poeira e vida; o que ela NAO poe e posicao.",
+  "consequencia": "o prompt nunca descreve onde as coisas estao. Descrever posicao em texto e convidar a IA a discordar do quadro. O prompt descreve so movimento, materia e vida.",
+  "o_que_a_IA_pode_mudar": ["pele e roupa das figuras proxy", "pelo e movimento do gado", "poeira, fumaca de churrasqueira, barriga de lona ao vento", "folhagem, reflexo, particula de luz"],
+  "o_que_a_IA_nao_pode_mudar": ["a posicao de qualquer estrutura", "a quantidade e a fileira das tendas", "a forma dos pavilhoes e do portal", "a linha do horizonte e o relevo"]
+ },
+
+ "por_que_os_letreiros_ficam_de_fora_do_quadro_guia": "os 16 letreiros de data/letreiros.json NAO entram no render dos quadros-guia. Modelo generativo destroi tipografia: reescreve letra, troca acento e inventa palavra. O texto entra DEPOIS, na montagem, por cima do clipe pronto -- e ai a regra de 8%/4% da altura do quadro continua valendo, medida sobre o master 2760x1380. Isso tambem protege as duas frases literais dele e a proibicao da palavra Kids.",
+
+ "plataformas": {
+  "flow": {
+   "quem_e": "Google Flow, o app de cinema do Veo 3.1. Exige assinatura Google AI Pro ou Ultra.",
+   "modo": "Frames to Video -- primeiro e ultimo quadro, que e exatamente o que a decupagem ja produz",
+   "duracoes_s": [4, 6, 8],
+   "aspectos": ["16:9", "9:16"],
+   "resolucoes": ["720p", "1080p", "4K"],
+   "por_que_e_a_recomendada": "a grade de 4/6/8 s e a mais fina das duas, entao machuca menos a duracao medida de cada plano; e o Frames to Video trava os dois extremos, que e a regra acima.",
+   "cuidado": "aspecto diferente entre os dois quadros degrada o resultado. Os dois saem do mesmo render, no mesmo tamanho -- nao misturar."
+  },
+  "higgsfield": {
+   "quem_e": "Higgsfield, que serve varios modelos (Kling, Veo, Sora, Seedance) com controle de camera proprio (Cinema Studio).",
+   "modo": "image-to-video com quadro inicial e final (Kling 2.5 Turbo em diante)",
+   "duracoes_s": [5, 10],
+   "aspectos": ["16:9", "9:16", "1:1", "21:9"],
+   "resolucoes": ["1080p"],
+   "quando_usar": "onde o movimento e o assunto e a grade de 5/10 s cai bem: o touro pulando (P19), o publico do show (P20). O Cinema Studio deixa declarar lente e movimento, que a decupagem ja tem medidos.",
+   "cuidado": "a grade de 5/10 s e grossa; varios planos deslocam mais de 1 s para caber nela. O conferidor mede esse deslocamento plano a plano."
+  }
+ },
+
+ "aspecto_a_conta_que_nao_pode_errar": {
+  "problema": "a entrega e 2:1 (2760 x 1380, telao P2,9) e NENHUMA das duas plataformas gera 2:1.",
+  "solucao": "gerar em 16:9 e cortar a faixa central 2:1 na montagem. NUNCA esticar.",
+  "por_que_o_corte_e_seguro": "toda camera da cena mira o alvo por constraint Track To, entao o assunto esta no CENTRO do quadro por construcao. Cortar topo e base simetricamente nao pode perde-lo. E o corte nao mexe na largura: 16:9 e 2:1 tem a mesma horizontal, o 16:9 so tem mais ceu e mais chao.",
+  "quadro_guia_px": [3840, 2160],
+  "faixa_2_1_px": [3840, 1920],
+  "corta_de_cada_lado_px": 120,
+  "cadeia_ate_o_telao": "guia 3840x2160 -> Flow 4K 3840x2160 -> corte central 3840x1920 -> reducao para 2760x1380 (0,72x, reducao e nao ampliacao) -> painel 1379x690. Mesmo pelo caminho de 1080p a conta fecha: 1920x960 cortado ainda e maior que os 1379x690 do painel.",
+  "sensor_fit": "HORIZONTAL, declarado no render do guia. No AUTO o Blender ajusta o sensor pela maior dimensao e daria no mesmo hoje -- mas ai a moldura passaria a depender da resolucao, e isso e fallback mudo."
+ },
+
+ "look_lock": {
+  "hora": "27/11, 18:15 -- fim de tarde, sol a 10,1 graus acima do horizonte",
+  "temperatura_k": 5206,
+  "fonte": "data/luz.json e data/hdri-medido.json; a temperatura e a mediana medida nos 173 videos do recinto",
+  "paleta_medida": "data/materiais-quinta.json -- tijolo #c64c4b, telhado #358fca, coluna #244571, portao #494f58, terra batida #583323, brita #8c7870",
+  "en": "late afternoon golden hour, low sun about 10 degrees above the horizon, warm 5200K key light, long soft shadows, light atmospheric haze in the distance",
+  "camera_en": "documentary aerial drone footage, natural color, no stylization, no film grain overlay, steady constant-speed move"
+ },
+
+ "proibicoes_duras": {
+  "_por_que": "sao as restricoes do cliente. Violar e rejeicao, e a IA erra justamente nelas se ninguem falar.",
+  "arquibancada": {
+   "pt": "a arena de rodeio NAO tem arquibancada -- so a pista, camarote dos dois lados e o palco de frente",
+   "en": "absolutely no grandstands, no bleachers, no stadium seating anywhere",
+   "fonte": "AUDIO 2 [01:16], confirmado por imagem no footage do proprio recinto",
+   "vale_em": ["P10", "P12", "P18", "P19", "P20", "P21"],
+   "por_que_nao_em_todos": "negativa so protege onde o risco existe, e citar arquibancada num plano de estacionamento e pior que nao citar: modelo generativo puxa o conceito que a palavra traz, mesmo na negativa. Os seis da lista sao aqueles em que ha publico assistindo alguma coisa -- leilao, julgamento, shows, rodeio, palco e a vista geral do recinto --, que e onde uma arquibancada apareceria sozinha."
+  },
+  "texto_no_quadro": {
+   "pt": "nenhum texto, legenda, logo ou marca-dagua no clipe -- os letreiros entram na montagem",
+   "en": "no on-screen text, no captions, no signage lettering, no logos, no watermarks, no subtitles"
+  },
+  "palavra_kids": {
+   "pt": "a palavra Kids e proibida em qualquer lugar. O nome e Fazendinha",
+   "fonte": "AUDIO 2 [00:55] 'Kids e muito americanizado'"
+  },
+  "deriva_de_camera": {
+   "en": "do not change the camera path, do not add cuts, do not speed ramp, do not zoom",
+   "por_que": "a velocidade de cada plano esta dentro da faixa cinematografica de drone e foi conferida. Deixar a IA improvisar movimento joga isso fora."
+  }
+ },
+
+ "planos": {
+  "P01": {
+   "acao_pt": "carros e caminhonetes chegando e estacionando em fileira no chao batido, poeira leve subindo atras das rodas, familias descendo dos veiculos e caminhando na direcao do portal",
+   "acao_en": "cars and pickup trucks arriving and parking in rows on packed dirt, light dust drifting behind the wheels, families getting out and walking toward the entrance gate",
+   "audio": "AUDIO 1 [00:00] 'bem em frente nos vamos ter os estacionamentos, quem chega no parque'"
+  },
+  "P02": {
+   "acao_pt": "fluxo continuo de visitantes entrando pelo portal de madeira, luz de fim de tarde atravessando a estrutura do celeiro, bandeirinhas balancando",
+   "acao_en": "a steady flow of visitors walking in through the wooden barn-style gate, late afternoon light raking through the timber structure, small pennant flags fluttering",
+   "audio": "AUDIO 1 [00:14] 'da forma como eu mandei uma foto do celeiro' -- o portal e o da foto do cliente",
+   "cuidado": "o portal e o da foto (reference/PORTAL-referencia.md). A IA nao inventa fachada: o quadro ja tem a dela"
+  },
+  "P03": {
+   "acao_pt": "visitantes entrando e saindo do pavilhao, expositores em pe nos estandes, movimento nas portas largas",
+   "acao_en": "visitors walking in and out of the exhibition hall, exhibitors standing at their booths, movement at the wide doorways",
+   "audio": "AUDIO 1 [00:43] 'pavilhao 1 com os expositores, exposicao da industria e comercio e prestacao de servicos'"
+  },
+  "P04": {
+   "acao_pt": "praca de alimentacao cheia sob a lona, mesas e cadeiras ocupadas, fumaca de churrasqueira subindo de um lado, fila nos guiches de comida e bebida",
+   "acao_en": "a busy food court under the white canvas roof, tables and chairs occupied, barbecue smoke rising on one side, queues at the food and drink kiosks",
+   "audio": "AUDIO 1 [00:57] 'mesas, cadeiras, o pessoal com os guiches, todos naquele lado da churrasqueira, os guichezinhos vendendo comida, bebida'"
+  },
+  "P05": {
+   "acao_pt": "visitantes circulando entre os estandes do pavilhao, expositores conversando com clientes",
+   "acao_en": "visitors moving between the booths of the exhibition hall, exhibitors talking with customers",
+   "audio": "AUDIO 1 [01:12] 'pavilhao 2, industria e comercio, prestacao de servicos'"
+  },
+  "P06": {
+   "acao_pt": "bancas do mercado do produtor com caixas de hortifruti, queijo e embutido, produtores atendendo, clientes escolhendo e ensacando",
+   "acao_en": "farmers market stalls with crates of fresh produce, cheese and cured meats, growers serving customers, shoppers picking and bagging",
+   "audio": "AUDIO 1 [01:24] 'ja na entrada pode colocar o mercado do produtor e o cafe colonial'",
+   "peso": "DIFERENCIAL -- mais tela, pedido dele em AUDIO 2 [01:38]"
+  },
+  "P07": {
+   "acao_pt": "guiches das agroindustrias com produtos na bancada, expositores oferecendo degustacao, visitantes parando de banca em banca",
+   "acao_en": "agro-industry booths with products on the counters, exhibitors offering tastings, visitors stopping from stand to stand",
+   "audio": "AUDIO 1 [01:37] 'os guichezinhos dos expositores das agroindustrias'"
+  },
+  "P08": {
+   "acao_pt": "mesas postas de cafe colonial com bolos, paes e cucas, gente servindo e sentando, e do outro lado da meia parede a cozinha didatica com uma aula acontecendo",
+   "acao_en": "colonial-style afternoon tea tables laid with cakes, breads and pastries, people serving and sitting down, and beyond the half-height partition a teaching kitchen with a class in progress",
+   "audio": "AUDIO 1 [01:44] 'na parte dos fundos faz o cafe colonial. Num lado a cozinha, no outro a cozinha didatica'",
+   "peso": "DIFERENCIAL"
+  },
+  "P09": {
+   "acao_pt": "mesas a sombra das arvores do bosque, gente comendo e conversando, luz de fim de tarde filtrada pelas copas, folhagem balancando",
+   "acao_en": "tables in the shade of the woodland, people eating and talking, late afternoon light filtering through the canopy, leaves moving in the breeze",
+   "audio": "AUDIO 1 [02:05] 'a area do bosque segue e tem uma praca de alimentacao embaixo do bosque'"
+  },
+  "P10": {
+   "acao_pt": "leilao acontecendo: leiloeiro no pulpito, compradores sentados de frente levantando a mao, um animal sendo conduzido na pista",
+   "acao_en": "a livestock auction in progress: auctioneer at the rostrum, seated buyers raising their hands, a single animal being led across the ring",
+   "audio": "AUDIO 1 [02:15] 'entra no recinto, tem leiloes. Os leiloes acontecendo'"
+  },
+  "P11": {
+   "acao_pt": "gado nas baias dos pavilhoes cobertos e tratadores trabalhando entre eles, na ordem: gado de leite, depois cara branca de corpo vermelho e cabeca branca, depois nelore branco, depois ovinos e caprinos",
+   "acao_en": "cattle in the pens of the covered barns with handlers working between them, in order: dairy cattle, then red-bodied white-faced cattle, then white Nelore cattle, then sheep and goats",
+   "audio": "AUDIO 1 [02:28] a [02:53]. A cor de cada raca e palavra dele, literal",
+   "cuidado": "a ordem fisica norte-sul bate com a ditada -- nao ha divergencia entre audio e planta"
+  },
+  "P12": {
+   "acao_pt": "animal sendo apresentado ao cabresto na pista de pasto verde, jurado avaliando de perto, publico encostado na cerca assistindo",
+   "acao_en": "an animal being shown on a halter on the green judging lawn, a judge inspecting it closely, spectators leaning on the rail watching",
+   "audio": "AUDIO 1 [03:07] 'tem a pista de julgamento, aquela area de pasto verde'"
+  },
+  "P13": {
+   "acao_pt": "fileiras de tendas brancas de expositor com as lonas balancando, bandeiras nos mastros, visitantes circulando pelos corredores entre elas",
+   "acao_en": "rows of white peaked exhibitor tents with canvas rippling, flags on poles, visitors walking the aisles between them",
+   "audio": "AUDIO 1 [03:11] 'toda a area de expositores externos'"
+  },
+  "P14": {
+   "acao_pt": "entrada da Fazendinha pela porteira de madeira, criancas correndo para dentro, brinquedos inflaveis coloridos ao fundo",
+   "acao_en": "the little-farm area entered through a wooden farm gate, children running in, colorful inflatable play structures beyond",
+   "audio": "AUDIO 1 [03:18] 'dai faz uma porteira bacana pra ser a fazendinha' -- pedido literal",
+   "peso": "DIFERENCIAL",
+   "cuidado": "a palavra Kids e proibida. Nome grande, descricao pequena embaixo -- e isso entra na montagem, nao no clipe"
+  },
+  "P15": {
+   "acao_pt": "criancas pulando nos inflaveis, uma crianca andando de ponei conduzida por um adulto, e um Border Collie tocando um pequeno lote de ovelhas",
+   "acao_en": "children bouncing on the inflatables, a child riding a pony led by an adult, and a Border Collie herding a small flock of sheep",
+   "audio": "AUDIO 1 [03:31] 'brinquedos inflaveis, andar a cavalo, andar de ponei, a apresentacao dos cachorros, do Border Collie, com as ovelhas'"
+  },
+  "P16": {
+   "acao_pt": "tratores e implementos agricolas alinhados no anel, vendedores conversando com produtores ao lado das maquinas",
+   "acao_en": "tractors and farm implements lined up along the terrace, sales reps talking with farmers beside the machines",
+   "audio": "AUDIO 1 [03:48] 'exposicao de maquinas, equipamentos, implementos agricolas'"
+  },
+  "P17": {
+   "acao_pt": "carros, motos e jet-skis expostos em fileira, visitantes rodeando e olhando de perto",
+   "acao_en": "cars, motorcycles and jet-skis on display in a row, visitors walking around and inspecting them",
+   "audio": "AUDIO 1 [04:02] 'depois as maquinas equipamentos, ai vem a parte de veiculos, motos'"
+  },
+  "P18": {
+   "acao_pt": "publico se juntando no patamar de shows no fim da tarde, grupos caminhando na direcao do palco",
+   "acao_en": "a crowd gathering on the concert terrace in the late afternoon, groups walking toward the stage",
+   "audio": "AUDIO 1 [04:09] 'do segundo patamar descendo ja e a area de shows'"
+  },
+  "P19": {
+   "acao_pt": "touro pulando na pista com o peao montado, salva-vidas de arena atentos na beira, publico nos camarotes dos dois lados",
+   "acao_en": "a bucking bull with a rider in the dirt arena, bullfighters watching from the rail, spectators in the private boxes on both sides",
+   "audio": "AUDIO 1 [04:14] 'a arena do rodeio, dai pode fazer touro pulando'",
+   "peso": "DIFERENCIAL",
+   "cuidado": "SEM ARQUIBANCADA. E a restricao 1 do cliente e a IA erra nela sozinha se ninguem falar"
+  },
+  "P20": {
+   "acao_pt": "artista cantando no palco com a banda, refletores varrendo, publico lotado embaixo com as maos levantadas, comemorando",
+   "acao_en": "a singer performing on stage with the band, stage lights sweeping, a packed crowd below with raised hands, celebrating",
+   "audio": "AUDIO 1 [04:25] 'coloca imagens de um artista cantando, o pessoal comemorando, se divertindo, bebendo, fazendo festa, e toda aquela area embaixo lotada de publico'"
+  },
+  "P21": {
+   "acao_pt": "o recinto inteiro vivo no fim da tarde visto de cima, movimento nas alamedas, as primeiras luzes de torre acendendo",
+   "acao_en": "the whole fairground alive in the late afternoon seen from above, movement along the walkways, the first tower floodlights coming on",
+   "audio": "AUDIO 2 [02:04] 'Aqui sera um grande balcao de negocios' -- a frase entra na montagem, nao no clipe"
+  },
+  "P22": {
+   "acao_pt": "saindo pelo portal de dentro para fora, visitantes cruzando em contraluz, o campo abrindo do lado de fora",
+   "acao_en": "moving out through the entrance gate from inside to outside, visitors crossing in backlight, open country opening up beyond",
+   "audio": "'Finalizacao do video a mesma que voce ja fez desse ultimo que ficou top (Saindo pelo portao)' -- reference/Sobre_os_audios.txt. Exigencia do cliente"
+  }
+ },
+
+ "movimento_em_ingles": {
+  "push-in": "slow steady push in toward the subject",
+  "orbita": "slow steady orbit around the subject",
+  "travelling": "slow lateral tracking move",
+  "sobrevoo": "steady low-altitude flyover",
+  "subida": "steady crane rise, tilting down to hold the subject"
+ }
+}

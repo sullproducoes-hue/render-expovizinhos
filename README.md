@@ -14,6 +14,8 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
    de segurança em EEVEE), portão de decisão, riscos
 3. `docs/PLANOS.md` — a decupagem: 22 planos, cada um com alvo, lente, altura,
    movimento e duração, conferidos contra a faixa cinematográfica de drone
+3b. **`docs/CENAS-IA.md`** — o **Plano A** operável: os planos viram clipes no
+   Flow (ou Higgsfield), por quadro-para-vídeo. É o caminho ativo de finalização
 4. `docs/brief-audios.md` — transcrição literal dos áudios do cliente (fonte primária)
 5. `docs/BRIEFING.md` — roteiro, restrições e especificações de entrega
 6. `.claude/agents/render-agroshow.md` — agente diretor técnico da cena 3D
@@ -28,13 +30,29 @@ python3 scripts/build_scene.py --plano P19 --out out/P19.blend      # so a regia
 python3 scripts/build_scene.py --export-fbx out/cena.fbx            # para o Twinmotion
 
 python3 scripts/planos.py --conferir     # confere a decupagem, sem bpy
+python3 scripts/tendas.py --conferir     # confere as famílias de tenda, sem bpy
+python3 scripts/cenas_ia.py --conferir   # confere a grade do Flow, sem bpy
 ```
 
-134 estandes, 6 pavilhões, bacia da arena em 3 patamares, **22 planos** de
-câmera (não mais uma curva única — ver `docs/PLANOS.md`), 154 s a 30 fps,
-render em 2760×1380.
+134 estandes **como tenda de lona nas posições medidas** (131 instanciados de 3
+malhas — ver `data/tendas.json`), 8 pavilhões, bacia da arena em 3 patamares,
+**22 planos** de câmera (não mais uma curva única — ver `docs/PLANOS.md`),
+154 s a 30 fps, render em 2760×1380.
 
-## Renderizar e entregar
+## Plano A — gerar as cenas no Flow (caminho ativo)
+
+```bash
+blender --background --python scripts/render_guias.py -- \
+    --blend out/cena.blend --plataforma flow      # 51 quadros-guia, ~8 min
+python3 scripts/cenas_ia.py --roteiro > out/cenas/roteiro-flow.md
+```
+
+**Nenhum clipe é texto-para-vídeo.** Cada clipe recebe o primeiro e o último
+quadro renderizados da cena medida, e o prompt é proibido de descrever posição —
+é isso que garante que o lugar seja este lugar, e não um parque genérico. Passo
+a passo, regras de aspecto e o que conferir em cada clipe: **`docs/CENAS-IA.md`**.
+
+## Plano B — renderizar tudo aqui e entregar
 
 ```bash
 blender --background --python scripts/render_shots.py -- --blend out/cena.blend

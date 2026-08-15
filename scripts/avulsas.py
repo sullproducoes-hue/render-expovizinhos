@@ -295,8 +295,16 @@ def construir(dados, col_pai, centro_arena, fonte=None):
     x0, y0 = esp["canto_m"]
     passo, cols = esp["passo_m"], int(esp["colunas"])
 
+    # A area de espera e, por definicao, "peca cujo lugar eu nao sei". Assim que
+    # o lugar aparece, a peca sai daqui -- senao o Blender abre com uma copia
+    # sobrando ao lado do mapa e ninguem sabe qual das duas vale. Foi o que
+    # aconteceu com as tres tendas em 15/08: elas passaram a ser instanciadas
+    # nas 134 posicoes medidas (scripts/tendas.py) e continuavam paradas aqui.
+    na_espera = [p for p in cont["pecas"] if p.get("posicao", "espera") == "espera"]
+    saidas = [p["nome"] for p in cont["pecas"] if p not in na_espera]
+
     postos = 0
-    for i, peca in enumerate(cont["pecas"]):
+    for i, peca in enumerate(na_espera):
         f = CONSTRUTORES.get(peca["tipo"])
         if f is None:
             continue
@@ -329,4 +337,7 @@ def construir(dados, col_pai, centro_arena, fonte=None):
 
     print(f"  area de espera ..... {postos} pecas ao lado do mapa, em "
           f"({x0:.0f}, {y0:.0f}), etiquetadas -- ele reposiciona no Blender")
+    if saidas:
+        print(f"  sairam da espera ... {len(saidas)} ja posicionadas: "
+              f"{', '.join(saidas)}")
     return postos
