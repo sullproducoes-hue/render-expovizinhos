@@ -844,3 +844,41 @@ a silhueta urbana no horizonte, isso é decisão dele** — e vale lembrar que a
 D017 recusou o `blosm` por este mesmo motivo, e o mapa comprado tem o mesmo
 problema com um agravante: cobre só ~1 km de raio, e a silhueta que apareceria
 nos planos está a 3–8 km, fora dele.
+
+### D035 · As curvas de nível do mapa comprado — ele perguntou, e eu tinha passado batido
+Ele leu o veredito da D034 e perguntou: *"nem as curvas de níveis?"*. **Pergunta
+certa, e eu tinha ignorado o material `contour` no OBJ.** As cotas dos patamares
+são a **pendência 8**, aberta com o cliente desde o começo — se as curvas
+resolvessem, fechariam a mais antiga do projeto.
+
+**Medido, não argumentado.** As curvas existem: **1.400 vértices em 9 alturas**,
+intervalo constante de **11,10 m**:
+
+> 550,5 · 561,6 · 572,7 · 583,8 · 594,9 · 606,0 · 617,1 · 628,2 · 639,3 m
+
+**E é isso que mata a ideia:**
+
+| | |
+|---|---|
+| patamares da arena | 0 → 3,5 → 7 → 10 m |
+| profundidade da bacia **inteira** | **10 m** |
+| intervalo entre curvas | **11,10 m** |
+
+**A bacia inteira cabe dentro de 0,90 de um intervalo de curva.** Nenhum
+patamar produz uma curva — nem o mais fundo. E o sítio, a 602 m, cai no vão
+entre a curva de 594,9 e a de 606,0.
+
+O horizontal confirma pelo outro lado: a malha do chão tem **38 m por quad**, e
+os taludes têm de 17 a 30 m de largura radial. É a mesma limitação que o
+`ESTADO.md` já registrava para o SRTM de 30 m — *"os taludes somem"* —, só que
+pior.
+
+**A pendência 8 continua com o cliente**, e continua precisando do que sempre
+precisou: um quadro de drone **lateral**, ou a cota dita por quem construiu.
+
+**O que as curvas dão, e é pouco mas é honesto:** uma **terceira fonte** de
+altitude para o sítio. O mapa comprado põe o chão em **608,6 m** ali; o projeto
+usa **602,0 m**, do SRTM conferido contra o opentopodata. A diferença de **6,6 m**
+está dentro da incerteza da fonte mais grossa — que é esta, com 38 m de
+amostragem. **Não muda nada**: o 602,0 continua valendo, porque veio da fonte
+mais fina e já tem segunda testemunha.
