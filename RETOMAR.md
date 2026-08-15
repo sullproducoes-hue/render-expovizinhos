@@ -4,32 +4,36 @@
 Reescrito em 15/08/2026, fim da **sexta** sessão.
 
 > **Entrega desta sessão, e é por onde ele volta:**
-> `data/materiais-quinta.json` (a paleta do parque, medida),
-> `data/formas-quinta.json` (o que a câmera prova de forma) e
-> `data/ferradura-conferida.json` (a bacia conferida contra foto de drone).
-> A cena em disco **não mudou** — nenhuma geometria foi trocada ainda, e o
-> motivo está em D023.
+> `out/cena.blend` — **a geometria mudou**: a concha entrou e 52 prédios
+> deixaram o cinza inventado. Junto vão `data/materiais-quinta.json` (a paleta
+> medida e aprovada por ele), `data/formas-quinta.json`, `data/vias.json` (agora
+> com a classe geométrica de cada uma) e `data/estouro-telhado.json`.
 
-Abra este arquivo, depois **`DECISOES.md`**, depois `docs/FOOTPRINTS.md`, depois
-`ESTADO.md`. Aqui está só o que a próxima sessão precisa para continuar sem
-reler conversa.
+## O QUE MUDOU NA SEXTA SESSÃO (15/08) — leia antes de tudo
 
----
+Sessão longa, com ele acompanhando e respondendo. **Quatro respostas dele viraram
+lei**, e três coisas que eu afirmei foram desmentidas por medição — as três estão
+corrigidas nos arquivos e registradas em `DECISOES.md` D018 a D033.
 
-## O QUE MUDOU NA SEXTA SESSÃO (15/08, à noite) — leia antes de tudo
+### As ordens dele nesta sessão, literais
 
-Etapa 2 fechada, etapa 3 **medida mas não aplicada**, e a pendência 4 ganhou uma
-segunda testemunha que não é a planta.
+| ordem | onde virou trabalho |
+|---|---|
+| *"a concha entra na cena"* | `estruturas.concha()`, construída na zona PALCO |
+| *"a paleta de cores está ok"* | 52 prédios vestidos, `vestir_com_a_paleta()` |
+| *"o prédio é polígono mesmo"* | confirmado em `formas-quinta.json`, ainda não virou geometria |
+| *"isso mesmo é curva de nível, a estrada fica um pouco acima"* | `classificar_vias.py` |
+| *"é concreto envelhecido, o albedo daquela coluna"* | `MAT_CONCRETO = 0,25` |
+| *"vou utilizar os dois planos, o A e o B, depois de o restante estar concluído"* | **a régua passou a ser a do Plano B** |
+| *"instala a skill"* | `.claude/skills/blender-assembly/`, com `PROCEDENCIA.md` ao lado |
+| *"se não demorar muito, a cada etapa importante gere .blend"* | vale de agora em diante |
 
-**68 quadros lineares** extraídos dos 17 vídeos, mais 90 densos nos que provam
-forma (`1 (10)` com 24, `1 (2)` com 16, `1 (3)`, `1 (5)`, `1 (4)`, `1 (14)`,
-`1 (15)`). Ferramenta nova: `scripts/preview_linear.py`, que faz a versão
-olhável com **grade em pixel do quadro original** — sem ela eu chutaria caixa de
-amostra, e chute em caixa é chute em cor.
+### A paleta do parque, medida e aplicada
 
-### A paleta do parque está medida, e o método mudou por um motivo físico
-
-`data/materiais-quinta.json`, gerado por `scripts/medir_materiais_quinta.py`:
+`data/materiais-quinta.json` — e o método mudou por motivo físico, D018. Em dia
+encoberto a irradiância depende da **orientação**: telhado vê o hemisfério
+inteiro, parede vê metade. Âncora no telhado devolveu tijolo com albedo **1,000
+no vermelho**. O conserto foi **medir o iluminante no céu do próprio quadro**.
 
 | classe | albedo linear | hex |
 |---|---|---|
@@ -37,146 +41,100 @@ amostra, e chute em caixa é chute em cor.
 | chapa azul (telhado) | 0,036 / 0,274 / 0,592 | `#358fca` |
 | coluna azul | 0,018 / 0,060 / 0,165 | `#244571` |
 | portão de chapa | 0,066 / 0,077 / 0,098 | `#494f58` |
-| terra batida (interna) | 0,097 / 0,033 / 0,016 | `#583323` |
+| terra batida | 0,097 / 0,033 / 0,016 | `#583323` |
 | brita / estrada | 0,261 / 0,189 / 0,162 | `#8c7870` |
+| concreto | 0,250 (declarado por ele) | — |
 
-**A âncora de 14/08 não serve aqui, e o número denunciou antes de mim.** Com a
-telha declarada em 0,70 o tijolo saiu com albedo **1,000 no vermelho** — parede
-refletindo mais vermelho que o branco reflete. A causa é orientação: em dia
-encoberto o telhado vê o hemisfério de céu inteiro e a parede vê metade. O
-conserto foi **usar o céu do próprio quadro como fotômetro** (`1 (17)__0006s`
-tem o céu não estourado — 99,9% em 0,957). Doutrina inteira em D018.
+**Dois controles independentes passam**, contra a medição de 14/08 feita noutro
+dia, outra luz e outro método: mata **0,96×**, terra **1,27×**.
 
-**E ele passa em dois controles independentes**, contra a medição de 14/08 que
-saiu de outro dia, outra luz e outro método: mata **0,96×**, terra **1,27×**. E
-a estrada aqui dá 0,261/0,189/0,162 contra 0,266/0,188/0,155 da classe `terra`
-de lá — dois caminhos que não se falam chegando no mesmo número.
+**Aplicada em 52 prédios**, com **dois materiais por caixa** — parede
+`MAT_TIJOLO`, telhado `MAT_TELHA`, e quem decide é `normal.z`, não o nome do
+objeto. As zonas da coleção ESTIMADO continuam no cinza **de propósito**: elas
+são estimativa e precisam ler como tal.
 
-### A ferradura da bacia, agora com testemunha direta
+> **E aqui eu me desmenti.** Vendi isso como *"muda o quadro inteiro"*. **Não
+> muda.** O filme é quase todo aéreo, e do alto se vê **telhado** — o tijolo só
+> aparece nas laterais. Provas em `out/paleta/`.
 
-Em 14/08 ela foi deduzida do desenho, por ausência de talude e de estande num
-setor. O `1 (2)` é **nadir de drone e mostra a boca**. Medindo o ângulo entre o
-eixo dos pavilhões (azimute 108°, do desenho) e a boca, dentro da mesma imagem:
-**rumo de mapa 164,8°** contra os **150,0°** do `data/bacia.json` — **14,8° de
-desvio**, dentro de uma boca que tem 120° de largura. `conferir_ferradura.py`, e
-D022, inclusive a parte de que a primeira versão publicou **0,2°** e o número
-estava errado: eu tinha escrito 165 à mão dizendo que era o que o arquivo dizia,
-e a convenção de azimute daquele arquivo não é a da bússola.
+### A telha continua sem medida, e agora com número atrás
 
-### O prédio redondo é polígono, e há duas estruturas chamadas "palco"
+Era o passo que eu propus como mais valioso, e **falhou**. Tentei no nadir, a
+melhor condição do acervo. Três caixas, três recusas por pixel no teto.
 
-`data/formas-quinta.json`. O edifício-símbolo tem **~10 faces**, dois pavimentos
-com o superior recuado, varanda com guarda-corpo de 1,10 m, telhado de quatro
-águas de baixa inclinação, e um **anexo retangular** encostado que é outro
-volume. **E o "palco" são dois objetos, não um** — errei isso primeiro e a correção está
-em D024. O `1 (4)` mostra uma **concha permanente de alvenaria** que a cena não
-tem; `estruturas.palco` é o **palco de evento** de novembro, com treliça e telão.
-De quebra apareceu uma contradição que não é minha: `estimativas.json` chamava
-`estruturas.palco` de *"palco fixo"*. Comentário corrigido, geometria intocada.
+Em vez de mexer na caixa até passar — **armadilha 16** — medi o problema com
+`scripts/varrer_estouro.py`. Num nadir de parque os 3% mais claros do quadro
+**são** o telhado, e a mediana de 30 quadros diz que **29,8% deles estão
+saturados**.
 
-**Nada disso virou geometria ainda, de propósito** (D023): falta casar cada
-prédio com a zona da planta, e `construir sobre footprint errado é pior que não
-construir`.
+**O estouro é de EXPOSIÇÃO, não de sol.** Eu havia escrito que era reflexo
+especular e que num dia encoberto daria — não dá. O drone expôs para o chão.
 
-### Trava nova, em código
+**O que fecha, e é barato:** um quadro **exposto para o telhado**, nem que o chão
+vá a preto. É a única coisa que falta para a paleta ficar inteira, e `MAT_TELHA`
+é o material que mais aparece no filme.
 
-`ESTOURO_MAXIMO = 0,5%` — amostra com mais que isso de pixel no teto é recusada
-com o número impresso. Foi ela que pegou **três** caixas erradas nesta sessão, e
-nenhuma delas dava erro na tela. Some-se a ela a regra que virou hábito: **o
-`--debug` não é conveniência.** Três vezes nesta série eu li a imagem e o número
-desmentiu, e nas três o que pegou foi desenhar a caixa no quadro e olhar.
+### A concha entrou, e resolveu a contradição do palco
+
+`estruturas.concha()` — porão azul de 2,4 m, caixa cênica clara de 8,9 m,
+cobertura caindo de 11,0 para 9,6 m. Quatro peças sob um pai.
+
+**A zona `PALCO` da planta é a concha permanente**, não o palco de evento: o
+rótulo aparece **duas vezes** na prancha, a 5 m um do outro, e é a mesma palavra
+escrita duas vezes (armadilha 17). O palco de evento estava construído em cima
+dela e **não foi apagado** — foi para a `AREA_DE_ESPERA`.
+
+**Três ressalvas, e as três estão no código:**
+
+1. as **cores da concha são PROPOSTA** — o `1 (4)` é o único dos dezessete em
+   golden hour, e o método do céu não vale lá;
+2. **`rumo_confiavel: false`** no footprint dela;
+3. **tem uma árvore plantada na frente**, tapando a boca de cena — visível em
+   `out/concha/frente.png`. Ou a árvore sai, ou a concha não aparece em plano
+   nenhum. **É decisão dele.**
+
+### As 42 vias, separadas por geometria
+
+`scripts/classificar_vias.py`, depois de ele confirmar olhando a folha:
+**19 curva de nível · 14 estrada · 9 indeterminado**. Dois testes duros, sem
+parâmetro de gosto. **Nenhuma marcada como conferida** — o campo se chama
+`conferido_pelo_natan`.
+
+A frase dele ficou gravada no arquivo: *"a estrada fica um pouco acima"* — o arco
+marca a cota, a estrada está um pouco além dela.
+
+### Onde o projeto está, medido e não estimado
+
+| pacote | peso | pronto |
+|---|---|---|
+| levantamento e georreferência | 10% | 90% |
+| geometria do recinto | 30% | 50% |
+| materiais e textura | 15% | 60% |
+| luz | 8% | 90% |
+| câmera e decupagem | 12% | 70% |
+| pipeline de saída | 10% | 95% |
+| **render final e entrega** | 15% | **0%** |
+
+**≈ 55%**, pela régua do Plano B — que passou a valer porque ele quer os dois
+planos. Eram ~66% pela régua do A. **Zero de 4.635 quadros renderizados.**
+
+### É DAQUI QUE SE CONTINUA
+
+**1. O teste de contato.** É o próximo passo e já está decidido. Este projeto
+testa **colisão** (o que não pode se encostar) e não testa **contato** (o que
+tem que se encostar). Não fez falta enquanto tudo era caixa solta; faz agora: a
+concha tem **laje sobre porão** e **cobertura sobre parede**, e ninguém
+verificou nenhuma das duas. A ideia veio da skill que ele mandou instalar — é a
+única coisa dela que serve aqui. Vira portão em código, não parágrafo
+(delta `0029`).
+
+**2. Casar cada prédio com a zona da planta.** É o gargalo de tudo: sem isso a
+forma medida do prédio redondo não sabe onde pousar.
+
+**3. As duas perguntas para ele**, que valem meia sessão cada: a árvore na frente
+da concha, e o quadro exposto para o telhado.
 
 ---
-
-## O QUE MUDOU NA QUINTA SESSÃO (15/08) — leia antes de tudo
-
-Ele entregou três coisas novas e deu uma ordem de regime:
-
-1. **17 vídeos de quinta-feira (13/08)** em
-   `E:\Projetos todos\Mapa - agroshow\Brutos Expo\agroshow extrator somente\`
-   — o parque **como está hoje**, vazio, em luz difusa, de perto. Ordem:
-   *usar como cores e texturas; os locais que já estão lá não mudam; o que falta
-   é completado pelo mapa (a planta).* Decupagem em `data/footage-quinta.json`.
-2. **`reference/DOUTRINA-RENDER-3D.md`** — ordem norteadora do processo.
-   Precedência: **ordem do Natan → doutrina → resto**.
-3. **Regime autônomo**, palavras dele: *"Trabalhe de forma autônoma até o fim.
-   Não me pergunte nada: quando houver ambiguidade, escolha a opção mais
-   conservadora, registre a decisão e o motivo em DECISOES.md e siga."*
-   → **`DECISOES.md` é obrigatório e é onde estão os 17 registros desta sessão.**
-
-E ele decidiu duas coisas: **saída em EXR MultiLayer + Cryptomatte** (supera o
-PNG-8 de 14/08) e **corrigir a forma de todos os prédios que têm footage**,
-mantendo a posição.
-
-### Três números deste arquivo estavam ERRADOS, e agora estão medidos
-
-| | dizia antes | é |
-|---|---|---|
-| tempo por quadro | 36–38 s | **10,0 s** |
-| filme inteiro | 46–49 h | **12,9 h** |
-| disco | — | **176 GB** de 300 GB livres no F: |
-
-**A causa do erro é o achado maior da sessão: o render vinha rodando na CPU.**
-A cena guarda `cycles.device = "GPU"`, mas o dispositivo mora nas *preferências*,
-que são da instalação e não do `.blend`. Aberto numa sessão limpa, o arquivo
-anunciava GPU e o Cycles caía para a CPU **sem avisar** — é o fallback
-silencioso da doutrina §12. Conserto em `scripts/placa.py`, e `render_shots.py`
-agora **aborta** se não achar GPU (`--permitir-cpu` para forçar).
-
-### O que passou a existir
-
-| arquivo | o que faz |
-|---|---|
-| `DECISOES.md` | as 17 decisões desta sessão, com o motivo de cada uma |
-| `data/saida.json` + `scripts/saida.py` | os **três slots** de saída e por que são três |
-| `scripts/conferir_matte.py` | abre o EXR e **extrai um matte de verdade**. É o portão |
-| `scripts/smoke_saida.py` | 1 quadro + medida real de disco |
-| `scripts/placa.py` | liga a GPU. Chamar **sempre**, e no começo |
-| `scripts/medir_render.py` + `medir_ruido.py` | o comparativo de amostragem |
-| `scripts/medir_compressao.py` | custo em disco de cada arranjo, no mesmo quadro |
-| `data/footage-quinta.json` | a decupagem dos 17, com datum e regra de desempate |
-| `scripts/extrair_linear.py` | a **segunda** extração: linear 16 bits, para medir |
-
-### A saída são TRÊS arquivos por quadro, e o motivo não é gosto
-
-| slot | conteúdo | formato |
-|---|---|---|
-| `beauty/` | Combined + Emit + Env + AO | EXR MultiLayer, **Half, DWAA** |
-| `data/` | CryptoObject + CryptoMaterial + Normal + Depth | EXR MultiLayer, **Full Float 32, ZIP** |
-| `preview/` | a entrega | **PNG 8**, `%05d.png` — o `encode.sh` não mudou |
-
-**Half + DWAA destrói o Cryptomatte.** O hash do nome do objeto é um float 32;
-DWAA é *lossy* e altera o valor, e Half tem 10 bits de mantissa e não representa
-o hash. Num pixel de cor, alterar um pouquinho é imperceptível; num pixel que
-carrega um hash, é trocar o objeto por outro. **E o defeito não aparece no
-render** — aparece no dia em que alguém for isolar um objeto no Resolve.
-
-**`save_as_render` é a mesma chave invertida entre os slots:** ligada no PNG (que
-precisa do AgX) e desligada nos EXR (que não podem tê-lo assado dentro).
-Provado: o EXR tem **18,5% dos pixels acima de 1,0** (headroom linear intacto) e
-o PNG tem máximo 0,922 com mediana 0,549 contra 0,705 do sRGB ingênuo.
-
-**Cryptomatte conferido de verdade:** `Terreno` → hash `0x1ed9a684`, casado bit a
-bit no arquivo; 99,69% dos pixels com objeto fecham cobertura em 1,0 com
-**levels 2**. O matte extraído bate com o gramado do preview.
-
-### A config de amostragem dele se sustenta, e agora está medida
-
-Medido no P08 (o plano mais fechado, com luz indireta), as quatro combinações:
-
-| config | tempo | ruído local |
-|---|---|---|
-| 128 / 0,1 **sem** denoise | 3,9 s | 0,00765 |
-| **128 / 0,1 com denoise** | **2,9 s** | **0,00261** |
-| max / 0,01 com denoise | 10,3 s | 0,00262 |
-
-**0,01 custa +255% de tempo e entrega −0,4% de ruído.** Empatam — o OIDN já
-resolveu. A doutrina pede 0,01 `[Certo]` e aqui não se aplica: a regra dela
-existe contra *compensar samples baixos com denoise agressivo*, e 128 já
-converge nesta cena. **Nada muda sem ele.**
-
----
-
 ## COMO A CENA ESTÁ AGORA — leia estes 12 números primeiro
 
 ```
@@ -189,11 +147,14 @@ converge nesta cena. **Nada muda sem ele.**
 209 pecas de mobiliario .. mesa e cadeira CC0 de verdade, nas duas pracas
 11 pecas na ESPERA ....... silo, tendas, porteira, curral, torre -- ele posiciona
 16 letreiros ............. texto do audio dele; tamanho resolvido pela regra de 8%
-4 estruturas ............. portal, palco, 2 camarotes
+5 estruturas ............. portal, CONCHA, palco de evento (na espera), 2 camarotes
 bacia .................... ferradura aberta 120 graus para SUL-SUDESTE (medida)
 42 vias · 134 estandes · 22 planos de camera
 luz .................... kloppenheim_06, 27/11 18:15, sol a 10,1 graus, 8 bits
 materiais .............. cor-base MEDIDA no footage; terreno com mancha de 2 gramas
+paleta do parque ....... 6 classes medidas em 13/08 + concreto declarado por ele;
+                         52 predios vestidos (parede tijolo, telhado telha).
+                         MAT_TELHA continua SEM medida -- ver D033
 textura ................ PBR CC0 em 4 materiais (normal + rugosidade + mancha)
 entorno ................ relevo REAL ate 12 km (SRTM) + cobertura ESA WorldCover
 render ................. 2760x1380, Cycles 128 samples, OptiX
@@ -1123,6 +1084,16 @@ nada de addon pode entrar no caminho crítico do gerador.
     a amostra pela âncora, e divisão só vale em linear. Em sRGB a conta roda,
     devolve número consistente, e o `--conferir` não acusa nada. Por isso a
     extração de medição é **separada** da de triagem, e linear de 16 bits.
+34. **Marcador de timeline vence `scene.camera`.** Os 22 planos estão presos a
+    marcadores, e marcador de câmera ganha do `scene.camera` na hora do render.
+    Duas provas da concha saíram **idênticas**, com a câmera de um plano
+    qualquer, e sem erro nenhum na tela. `prova_concha.py` limpa os marcadores
+    na sessão — o `.blend` em disco não muda.
+35. **Caçar caixa de amostra até o estouro passar é ajustar parâmetro.** Foi o
+    que eu quase fiz com a telha: 2,2% → 0,9% → 4,8%, mexendo na caixa. O certo
+    é medir o problema (`varrer_estouro.py`), e o problema tinha número: 29,8%
+    do telhado saturado. Armadilha 16 vale para caixa de amostra também.
+
 33. **Pixel de céu tem cobertura zero no Cryptomatte, e isso é o certo.** A
     primeira versão do conferidor exigia cobertura ~1 em todo pixel e reprovou
     um arquivo bom porque metade do quadro é céu. O que acusa defeito é a
@@ -1166,6 +1137,10 @@ nada de addon pode entrar no caminho crítico do gerador.
 | 20 | **A CONCHA permanente do `1 (4)` não existe na cena** — base azul, paredes claras, cobertura inclinada, num gramado ao lado de pista de terra. Ela é um *local que já está lá*, e não existir é diferente de mudar. **Não é o palco da cena:** `estruturas.palco` é o palco DE EVENTO, de novembro. Ver D024 | próxima sessão |
 | 21 | **O prédio redondo é polígono de ~10 faces**, medido no `1 (10)` e no `1 (6)`, e na cena é caixa. Não virou geometria porque falta casar qual zona da planta é ele. Ver `data/formas-quinta.json` e D023 | próxima sessão |
 | 22 | **Concreto, grade e piso de curral saíram só com a COR**, sem nível: nas mangueiras não há céu medível nem superfície de albedo conhecido. Uma palavra dele sobre o albedo daquela coluna de concreto (0,20–0,30 de mercado) fecha o quadro inteiro | **Natan**, se quiser |
+| 24 | **Tem uma árvore plantada na frente da concha**, tapando a boca de cena — `out/concha/frente.png`. Ou a árvore sai, ou a concha não aparece em plano nenhum | **Natan** |
+| 25 | **A telha não se mede neste footage** — 29,8% do telhado saturado, mediana de 30 quadros. Fecha com **um quadro exposto para o telhado**, nem que o chão vá a preto. É o material que mais aparece no filme | **Natan**, quando alguém for lá |
+| 26 | **A cobertura da concha está chapada** — de cima lê como slab. No `1 (4)` há terça vermelha aparente e beiral avançado. É modelagem a mais; não sei se paga pelo tamanho em tela | próxima sessão |
+| 27 | **Teste de CONTATO** — o projeto testa colisão e não testa contato. A concha tem laje sobre porão e cobertura sobre parede, nenhuma verificada. **É o próximo passo** | próxima sessão |
 | 23 | **A estrutura de telhado vermelha não tem medida**: só existe em terça e rufo, peças de 20–40 px, e croma 4:2:0 de peça fina é mistura inventada pelo decodificador | próxima sessão, com quadro mais fechado |
 | 10 | 37 estandes com categoria ambígua | cliente |
 | ~~16~~ | ~~Saída de render~~ — **fechado em 15/08.** Três slots provados, Cryptomatte extraído com hash casado bit a bit, `save_as_render` conferido nos dois sentidos, 176 GB medidos em seis planos. Ver `DECISOES.md` D004–D014 | Resolvida |
