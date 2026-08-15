@@ -232,7 +232,10 @@ def torre_luz(med, mats, col):
 def inflavel(med, mats, col):
     l, p, h = med["largura"], med["profundidade"], med["altura"]
     bm = bmesh.new()
-    _caixa(bm, l, p, h * 0.55, (0, 0, h * 0.28), mat=0)
+    # centro em 0,275h e nao em 0,28h: com 0,28 a base do castelo ficava
+    # h*0,005 acima do chao -- 7 cm medidos pelo `conferir_contato.py`. Peca
+    # inflavel assenta no chao inteira; e o contato que segura a sombra.
+    _caixa(bm, l, p, h * 0.55, (0, 0, h * 0.275), mat=0)
     for sx in (-1, 1):
         for sy in (-1, 1):
             ini = len(bm.faces)

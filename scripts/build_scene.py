@@ -937,7 +937,8 @@ def construir_medidos(dados, col, centro_arena, bbox=None, fp=None):
             obj = caixa(rotulo, largura, profundidade, 0.3, col)
             obj.location = (x, y, z + decl["altura_m"])
             pilares(rotulo, x, y, z, largura, profundidade, decl["altura_m"],
-                    giro, col, marca="footprint_medido")
+                    giro, col, marca="footprint_medido",
+                    elevacao=lambda px, py: terreno.elevacao(px, py, centro_arena))
         else:
             obj = caixa(rotulo, largura, profundidade, decl["altura_m"], col)
             obj.location = (x, y, z)
@@ -1332,13 +1333,21 @@ def construir_vegetacao(dados, col, centro_arena, bbox=None, solidos=None):
 
 
 def pilares(nome, x, y, z, largura, profundidade, altura, giro, col,
-            passo=12.0, secao=0.4, marca=None):
+            passo=12.0, secao=0.4, marca=None, elevacao=None):
     """Pilares em malha sob uma cobertura, e nao so nos quatro cantos.
 
     A primeira versao punha quatro pilares em qualquer cobertura, e nas provas
     de luz a Praca de Alimentacao Coberta -- 145 x 34 m -- apareceu como uma
     chapa branca flutuando. Vao de galpao nao passa de ~12 m sem apoio, e o
     telhado e o que se ve do alto no sobrevoo.
+
+    CADA PILAR NASCE NA COTA DO CHAO SOB ELE, e nao na cota do centroide da
+    zona. Sem `elevacao` todos partiam do mesmo z: numa Praca de 145 m sobre
+    terreno com declive, 17 dos 26 pilares ficavam com o pe no ar -- de 0,10 a
+    1,55 m, medido pelo `conferir_contato.py` em 15/08. O comprimento vira
+    consequencia (o topo continua encostado na laje), que e a mesma regra que
+    consertou a cobertura da concha: quem manda e o contato, nao um segundo
+    palpite de altura.
     """
     nx = max(2, int(round(largura / passo)) + 1)
     ny = max(2, int(round(profundidade / passo)) + 1)
@@ -1350,8 +1359,13 @@ def pilares(nome, x, y, z, largura, profundidade, altura, giro, col,
             ly = -profundidade / 2 + 0.6 + (profundidade - 1.2) * j / (ny - 1)
             if 0 < i < nx - 1 and 0 < j < ny - 1:
                 continue                 # so o perimetro: o miolo fica livre
-            pe = caixa(f"{nome} pilar", secao, secao, altura, col)
-            pe.location = (x + lx * c - ly * s, y + lx * s + ly * c, z)
+            px = x + lx * c - ly * s
+            py = y + lx * s + ly * c
+            z_pe = z if elevacao is None else elevacao(px, py)
+            # o topo continua onde a laje esta; o pe desce ate o chao dele
+            pe = caixa(f"{nome} pilar", secao, secao,
+                       max(0.2, z + altura - z_pe), col)
+            pe.location = (px, py, z_pe)
             pe.rotation_euler = (0.0, 0.0, math.radians(giro))
             pe["material"] = "MAT_TRELICA"
             if marca:
@@ -1476,7 +1490,8 @@ def construir_estimados(col, centro_arena, bbox=None, origem=None, medidos=None)
             alto = e["altura_m"]
             obj["material"] = "MAT_LONA"
             pilares(e["rotulo"], x, y, z, largura, profundidade, e["altura_m"],
-                    e["giro_graus"], col, secao=0.3, marca="estimado")
+                    e["giro_graus"], col, secao=0.3, marca="estimado",
+                    elevacao=lambda px, py: terreno.elevacao(px, py, centro_arena))
         elif e["forma"] == "cercado":
             # Curral e cerca, nao caixa fechada: quatro panos baixos.
             obj = caixa(e["rotulo"], largura, 0.2, e["altura_m"], col)
@@ -1614,8 +1629,12 @@ CONTATOS_EXIGIDOS = [
 TOLERANCIA_CONTATO = 0.02      # 2 cm: abaixo disso e' ruido de float, nao vao
 
 
-def conferir_contato(tolerancia=TOLERANCIA_CONTATO):
+def conferir_contato(tolerancia=TOLERANCIA_CONTATO, abortar=True):
     """Portao: peca que se apoia em outra tem de ENCOSTAR nela.
+
+    `abortar=False` devolve `(falhas, linhas)` em vez de levantar SystemExit --
+    e' o que `scripts/conferir_contato.py` usa para somar este teste aos outros
+    dois sem ter duas reguas para a mesma pergunta (armadilha 19).
 
     Mede o topo do objeto de baixo contra a base do de cima, em coordenada de
     mundo (`matrix_world`, depois do update -- armadilha 18). Vao positivo e'
@@ -1710,6 +1729,9 @@ def conferir_contato(tolerancia=TOLERANCIA_CONTATO):
                       f"{txt:>10}   {estado}")
         if not ok:
             falhas.append((nome_baixo, nome_cima, folga))
+
+    if not abortar:
+        return falhas, linhas
 
     print("conferindo contato (o que se apoia tem de encostar):")
     for l in linhas:
@@ -2122,7 +2144,18 @@ def main():
                          "Sem isso, constroi o recinto inteiro")
     ap.add_argument("--sem-camera", action="store_true",
                     help="pula a montagem das cameras -- so para conferir geometria")
+    ap.add_argument("--sem-textura", action="store_true",
+                    help="constroi sem o PBR CC0 de data/texturas.json. NAO e' "
+                         "opcao de acabamento: existe para maquina que nao "
+                         "alcanca a biblioteca (o proxy da sessao remota nega "
+                         "api.polyhaven.com). A cor MEDIDA continua valendo; o "
+                         "que falta e' relevo, rugosidade e mancha")
     args = ap.parse_args(argv)
+
+    if args.sem_textura:
+        texturas.SEM_TEXTURA = True
+        print("ATENCAO: --sem-textura ligado. Esta cena serve para conferir "
+              "GEOMETRIA e nao para render de entrega.")
 
     dados = terreno.carregar_mapa(args.dados)
 

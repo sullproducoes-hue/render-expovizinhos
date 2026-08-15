@@ -156,6 +156,16 @@ def conferir():
 # --------------------------------------------------------------------------
 # Metade 2: os nos (roda dentro do Blender)
 
+# Interruptor de AMBIENTE, nunca de gosto. Fica DESLIGADO por padrao: a cena
+# que o Natan abre tem de sair com a textura do contrato, e material listado com
+# arquivo faltando continua sendo erro que aborta (foi assim que o portal saiu de
+# metal escovado uma vez). O unico caso em que se liga isto e' maquina que nao
+# alcanca a biblioteca CC0 -- em sessao remota o proxy nega `api.polyhaven.com`
+# (403 no CONNECT), e sem ele nao ha como conferir GEOMETRIA neste repositorio.
+# Ligado, a cena sai declaradamente SEM textura e diz isso em voz alta.
+SEM_TEXTURA = False
+
+
 def aplicar(mat, bsdf, material, cor, rugosidade):
     """Liga a textura declarada para `material`. Devolve True se ligou algo.
 
@@ -170,6 +180,10 @@ def aplicar(mat, bsdf, material, cor, rugosidade):
     contrato = carregar_contrato()
     item = contrato["itens"].get(material)
     if item is None:
+        return False
+    if SEM_TEXTURA:
+        print(f"  SEM TEXTURA (ambiente): {material} sai com a cor MEDIDA e "
+              f"sem o PBR de {item['slug']} -- cena de conferencia, nao de render")
         return False
 
     res = contrato.get("resolucao", "2k")
