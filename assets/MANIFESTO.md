@@ -62,3 +62,22 @@ Hemisfério norte tem o arco espelhado e denuncia.
 macio: o HDRI entrega céu, ambiente e reflexo, e a luz SUN
 entrega a chave. Um HDRI de sol íntegro somado a uma SUN
 produz **duas sombras**.
+
+---
+
+## Mapa 3D comprado no maps3d.io — 15/08/2026
+
+Comprado pelo Natan. Fica em
+`E:\Projetos todos\Mapa - agroshow\Mapa 3d comprado\`, fora do repositório
+(binário de 36 MB nos dois formatos, gltf e obj).
+
+**A atribuição é obrigatória e é condição da licença.** O `README.txt` do
+pacote: *"Você pode usá-lo para qualquer finalidade, desde que adicione a
+atribuição correta para as imagens utilizadas"*. Uso comercial liberado — o que
+importa, porque isto é entrega de cliente.
+
+> Imagens: **Satlas — Allen Institute for AI** (https://satlas.allen.ai/)
+> Dados topográficos (edifícios, estradas, água): **© OpenStreetMap contributors**
+
+**Estas duas linhas não podem sumir da entrega**, pela mesma regra que já vale
+para o ESA WorldCover.

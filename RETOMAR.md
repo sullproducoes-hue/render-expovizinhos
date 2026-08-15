@@ -1,15 +1,84 @@
 # RETOMAR — handoff do render-agroshow
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Reescrito em 15/08/2026, fim da **sexta** sessão.
+Reescrito em 15/08/2026, fim da **sétima** sessão.
 
-> **Entrega desta sessão, e é por onde ele volta:**
+> **ENTREGA DA SÉTIMA SESSÃO, e é por onde ele volta:**
+> **`out/quadros-ia/INDICE.html`** — abrir no navegador. É a página de
+> aprovação das placas que entram na IA: um bloco por local do percurso, o
+> quadro da cena ao lado dos quadros do footage real, o motivo de cada escolha
+> e o bloqueio escrito onde existe. **Nada foi gerado por IA** — ele disse
+> *"depois crio os vídeos"*, e criar é passo dele.
+
+## O QUE MUDOU NA SÉTIMA SESSÃO (15/08) — leia antes de tudo
+
+**A ordem dele, literal:** *"Levante as melhores imagens para criar com IA, para
+usar essas imagens reais e colocar tipo uma exposição nesse lugar, primeiro os
+quadros e depois crio os vídeos."*
+
+### O que foi entregue
+
+| o que | onde | quanto |
+|---|---|---|
+| Catálogo das placas, por local | `data/quadros-ia.json` | 22 locais, 44 quadros reais catalogados com procedência |
+| Quadros-chave da cena | `out/quadros-ia/<Pxx>_<local>/3d/` | 52 quadros a 2760×1380 (ini, fim e o meio dos planos com defeito) |
+| Quadros do footage, resolução nativa | `out/quadros-ia/<Pxx>_<local>/real/` | 44 quadros + a foto do portal |
+| Folha de contato por local | `out/quadros-ia/<Pxx>_<local>/CONTATO.jpg` | 22 folhas |
+| **Página de aprovação** | `out/quadros-ia/INDICE.html` | 8,1 MB, tudo embutido, abre offline |
+
+Scripts novos, os três versionados: `scripts/quadros_ia.py` (renderiza as pontas
+de cada plano), `scripts/quadros_reais.py` (extrai o footage por timecode) e
+`scripts/pagina_quadros.py` (monta a página). Mais o portão, abaixo.
+
+### O achado que paga a sessão: 6 dos 22 planos sairiam quebrados
+
+Medindo os 44 quadros-chave por pixel:
+
+| plano | defeito |
+|---|---|
+| P12 fim, P19 fim | **quadro preto** — câmera dentro de geometria |
+| P08 fim, P09 ini | **chapado** — desvio 3,4 e 3,2 num quadro inteiro |
+| P09, P12 | a câmera corre **dentro da copa do bosque**, o plano inteiro |
+| P10, P20 | prédio ocupando a tela toda a poucos metros |
+
+**`planos.py --conferir` não pega isso** — ele mede velocidade, e os seis estão
+dentro da faixa. Virou código: **`scripts/conferir_camera.py`**, três testes
+(abaixo do solo, dentro de sólido fechado, superfície a menos de 8 m na mira),
+sai com código 1. **Rodar antes de qualquer fila de render.**
+
+Causa provável: os 22 planos foram decupados quando a cena era caixa solta, e as
+**418 árvores entraram depois**. Ninguém reconferiu.
+
+**`data/planos.json` não foi tocado.** Consertar seis câmeras é re-decupagem e
+cascateia na velocidade e no `alvo_fim`; é enquadramento, e enquadramento é
+decisão de quem dirige. No lugar disso renderizei o **quadro do meio** dos planos
+afetados — salvou P06, P08, P14, P15, P19 e P20 com a decupagem intacta. **P09 e
+P12 continuam sem placa 3D possível.**
+
+### O dado mais duro que saiu do catálogo
+
+**Três dos quatro diferenciais não têm uma única imagem confirmada por placa em
+173 vídeos:** Fazendinha, Café Colonial e Mercado do Produtor. A Arena de Rodeio
+tem a bacia, mas a placa que aparece diz **ARENA DE EVENTOS**. Há candidatos, e
+os quatro estão marcados `nao_confirmado` no catálogo com o bloqueio escrito.
+São os planos mais longos do filme (9 a 16 s cada, por pedido do cliente) apoiados
+no material mais fraco do acervo. Ver `DECISOES.md` D037.
+
+### Registrado em DECISOES.md
+
+**D034** a leitura da ordem e as duas ambiguidades · **D035** o portão de câmera
+e os 6 planos · **D036** nenhuma imagem foi gerada por IA · **D037** os três
+diferenciais sem imagem.
+
+---
+
+## A SEXTA SESSÃO (15/08)
+
+> **Entrega da sexta sessão:**
 > `out/cena.blend` — **a geometria mudou**: a concha entrou e 52 prédios
 > deixaram o cinza inventado. Junto vão `data/materiais-quinta.json` (a paleta
 > medida e aprovada por ele), `data/formas-quinta.json`, `data/vias.json` (agora
 > com a classe geométrica de cada uma) e `data/estouro-telhado.json`.
-
-## O QUE MUDOU NA SEXTA SESSÃO (15/08) — leia antes de tudo
 
 Sessão longa, com ele acompanhando e respondendo. **Quatro respostas dele viraram
 lei**, e três coisas que eu afirmei foram desmentidas por medição — as três estão

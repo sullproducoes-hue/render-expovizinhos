@@ -41,6 +41,18 @@ def main():
 
     cena = bpy.context.scene
 
+    # O chao sai do quadro. Com `Terreno` e `Entorno` ligados a silhueta cobre
+    # metade da prancha e o contorno detectado vira a linha do horizonte -- que
+    # nao diz nada sobre posicao. O que se quer conferir e' CONSTRUCAO.
+    # O povoamento tambem sai: 1.681 proxies de 1,7 m viram chuvisco de topo.
+    escondidos = []
+    for o in bpy.data.objects:
+        if (o.name in ("Terreno", "Entorno")
+                or o.name.startswith(("Proxy_", "Arvore_", "ArbustoTalude"))):
+            o.hide_render = True
+            escondidos.append(o.name)
+    print(f"escondidos .... {len(escondidos)} objetos de chao e povoamento")
+
     # camera ortografica de topo, cobrindo a prancha inteira
     dc = bpy.data.cameras.new("CamTopoPlanta")
     dc.type = "ORTHO"
@@ -52,6 +64,16 @@ def main():
     cam.location = (0.0, 0.0, 1500.0)
     cam.rotation_euler = (0.0, 0.0, 0.0)   # sem giro: a planta E o referencial
     cena.camera = cam
+
+    # ARMADILHA 34 do RETOMAR, e ela me pegou aqui: marcador de timeline VENCE
+    # `scene.camera`. Os 22 planos estao presos a marcadores, entao esta vista
+    # de topo saia renderizada pela camera de um plano qualquer -- em
+    # perspectiva, de lado, e sem erro nenhum na tela. A cena em disco nao muda:
+    # isto e' so' na sessao deste script.
+    n_marcadores = len(cena.timeline_markers)
+    cena.timeline_markers.clear()
+    print(f"marcadores .... {n_marcadores} removidos nesta sessao "
+          f"(senao a camera do plano vence a de topo)")
 
     # 3600 x 2025 e o mesmo raster do sobrepor_planta.py com --zoom 2.5
     cena.render.resolution_x = 3600

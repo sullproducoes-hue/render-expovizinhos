@@ -85,13 +85,54 @@ def completar_com_locais(dados, caminho=LOCAIS_PADRAO):
     return dados
 
 
-def carregar_mapa(caminho=MAPA_PADRAO, completar=True):
+CORRECAO_PADRAO = (Path(__file__).resolve().parent.parent / "data"
+                   / "correcao-posicao-1508.json")
+
+
+def aplicar_correcoes_do_natan(dados, caminho=CORRECAO_PADRAO):
+    """Move zona que ELE corrigiu marcando na tela.
+
+    Em 15/08 ele olhou a sobreposicao e disse que o portal estava fora do lugar,
+    marcando de laranja onde ele fica. `scripts/digitalizar_marcas.py` virou a
+    marca em metro; aqui ela entra na FONTE UNICA -- entao `build_scene.py`,
+    `planos.py` e `letreiros.py` passam a ver a posicao corrigida sem que nenhum
+    deles precise saber que houve correcao.
+
+    A posicao antiga fica gravada no proprio JSON de correcao e a zona guarda
+    `_corrigido_pelo_natan` -- `nada se apaga`, e a procedencia acompanha o dado.
+    """
+    caminho = Path(caminho)
+    if not caminho.exists():
+        return dados
+
+    corr = json.loads(caminho.read_text(encoding="utf-8"))
+    por = corr.get("portal")
+    if not por or not por.get("novo_m"):
+        return dados
+
+    origem = dados["_origem"]
+    # metro -> ponto de PDF: a inversa exata de `para_mundo`
+    x_pt = por["novo_m"][0] / ESCALA + origem[0]
+    y_pt = -por["novo_m"][1] / ESCALA + origem[1]
+
+    z = achar_zona(dados, "Portal de Entrada")
+    if z is not None:
+        z["_x_antes_da_correcao"] = z["x"]
+        z["_y_antes_da_correcao"] = z["y"]
+        z["x"], z["y"] = x_pt, y_pt
+        z["_corrigido_pelo_natan"] = "marca em tela, 15/08/2026"
+    return dados
+
+
+def carregar_mapa(caminho=MAPA_PADRAO, completar=True, corrigir=True):
     """Le a planta extraida e crava a origem no centro da prancha."""
     dados = json.loads(Path(caminho).read_text(encoding="utf-8"))
     dados["_origem"] = (dados["prancha"]["largura_pt"] / 2,
                         dados["prancha"]["altura_pt"] / 2)
     if completar:
         completar_com_locais(dados)
+    if corrigir:
+        aplicar_correcoes_do_natan(dados)
     return dados
 
 

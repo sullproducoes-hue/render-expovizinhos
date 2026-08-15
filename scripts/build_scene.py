@@ -1135,6 +1135,48 @@ def construir_arbustos_de_talude(dados, col, centro_arena, veg, bbox=None,
     return plantados, recusados
 
 
+def veto_da_boca_da_concha(dados, alcance_m=34.0, folga_m=5.0):
+    """Retangulo NA FRENTE da concha onde arvore nao pode nascer.
+
+    Pendencia 24 do RETOMAR: havia uma arvore plantada bem na boca de cena, e
+    com ela a concha nao aparecia em plano nenhum. Decisao dele em 15/08: *"tira
+    a arvore"*.
+
+    Tirar a instancia a mao nao resolveria: a vegetacao e' sorteada por semente,
+    e qualquer mudanca no gerador replanta tudo -- a arvore voltaria no proximo
+    build, em outro lugar da mesma boca. Entao a decisao vira TRAVA, que e' o que
+    a doutrina manda (delta 0029: promessa em markdown ja falhou).
+
+    A concha e' construida com a boca aberta para -Y local e girada por
+    `90 - RUMO_CONCHA` em angulo matematico. A area vetada e' a projecao dessa
+    boca para frente, com folga lateral.
+
+    Devolve uma entrada no mesmo formato de `solidos` -- (nome, bbox, centro) --
+    para entrar na lista que `livre()` ja consulta, sem inventar mecanismo novo.
+    """
+    p = terreno.ponto_da_zona(dados, "PALCO")
+    if p is None:
+        return None
+
+    ang = math.radians(90.0 - RUMO_CONCHA)          # mesma convencao do _girar
+    # frente local = -Y, levada para o mundo pela mesma rotacao
+    fx, fy = math.sin(ang), -math.cos(ang)
+    meia_larg = estruturas.CONCHA_LARGURA / 2.0 + folga_m
+    # canto de saida: a boca comeca na borda da caixa, nao no centro
+    borda = estruturas.CONCHA_PROFUNDIDADE / 2.0
+
+    cantos = []
+    for d in (borda, borda + alcance_m):
+        for lado in (-1, 1):
+            cantos.append((p[0] + fx * d - fy * lado * meia_larg,
+                           p[1] + fy * d + fx * lado * meia_larg))
+    xs = [c[0] for c in cantos]
+    ys = [c[1] for c in cantos]
+    quad = (min(xs), min(ys), max(xs), max(ys))
+    return ("VETO_boca_da_concha", quad,
+            ((quad[0] + quad[2]) / 2, (quad[1] + quad[3]) / 2))
+
+
 def construir_vegetacao(dados, col, centro_arena, bbox=None, solidos=None):
     """Os 6 Bosques e as 2 Matas Nativas que a planta nomeia e nao desenha.
 
@@ -1559,6 +1601,173 @@ def construir_vias(col, centro_arena, bbox=None, caminho=None):
     return feitas
 
 
+# Pares que TEM que se encostar: (sufixo de baixo, sufixo de cima). O projeto
+# testava COLISAO -- o que nao pode se tocar -- e nao testava CONTATO, o que tem
+# de se tocar. A diferenca nao fazia falta enquanto tudo era caixa solta no
+# chao; passou a fazer quando a concha entrou, com laje sobre porao e cobertura
+# sobre parede. Na primeira medicao a cobertura estava 0,499 m no ar.
+CONTATOS_EXIGIDOS = [
+    ("ConchaPalco - porao", "ConchaPalco - deck"),
+    ("ConchaPalco - deck", "ConchaPalco - caixa"),
+    ("ConchaPalco - caixa", "ConchaPalco - cobertura"),
+]
+TOLERANCIA_CONTATO = 0.02      # 2 cm: abaixo disso e' ruido de float, nao vao
+
+
+def conferir_contato(tolerancia=TOLERANCIA_CONTATO):
+    """Portao: peca que se apoia em outra tem de ENCOSTAR nela.
+
+    Mede o topo do objeto de baixo contra a base do de cima, em coordenada de
+    mundo (`matrix_world`, depois do update -- armadilha 18). Vao positivo e'
+    peca flutuando; negativo alem da tolerancia e' peca enfiada dentro da outra.
+
+    Isto e' portao e nao relatorio de propostito: promessa em markdown ja falhou
+    neste projeto, e a regra que pode virar codigo vira codigo.
+    """
+    import mathutils
+
+    bpy.context.view_layer.update()
+    falhas, linhas = [], []
+    for nome_baixo, nome_cima in CONTATOS_EXIGIDOS:
+        a = bpy.data.objects.get(nome_baixo)
+        b = bpy.data.objects.get(nome_cima)
+        if a is None or b is None:
+            linhas.append(f"  {nome_baixo} -> {nome_cima}: PECA AUSENTE")
+            falhas.append((nome_baixo, nome_cima, None))
+            continue
+
+        # Por GRADE de raios verticais sobre a area em que as duas se sobrepoem
+        # em planta. Tres tentativas anteriores erraram, e o motivo de cada uma
+        # fica escrito para nao voltar:
+        #
+        # 1. bounding box: a bbox de um telhado inclinado tem a base la' na
+        #    frente, 1,4 m abaixo do fundo -- acusou "-1,451 m" numa concha ja'
+        #    corrigida;
+        # 2. amostrar os VERTICES de uma peca: sao 8 cantos, e a peca de cima
+        #    quase sempre e' maior (deck, beiral). Os cantos caem fora da outra
+        #    e o raio nao acerta nada -- "SEM APOIO" em contato que existe;
+        # 3. partir o raio da propria superficie: com o desvio de epsilon o
+        #    ponto entra DENTRO do solido e o raio sai pela face de baixo --
+        #    mediu 0,350 m, que e' a espessura do deck, nao um vao.
+        #
+        # A grade nao depende de onde estao os vertices, e a medida e' sempre a
+        # mesma pergunta: nesta vertical, onde termina a de baixo e onde comeca
+        # a de cima?
+        def _bbox_mundo(o):
+            cs = [o.matrix_world @ mathutils.Vector(c) for c in o.bound_box]
+            return (min(c.x for c in cs), min(c.y for c in cs),
+                    max(c.x for c in cs), max(c.y for c in cs),
+                    min(c.z for c in cs), max(c.z for c in cs))
+
+        ax0, ay0, ax1, ay1, az0, az1 = _bbox_mundo(a)
+        bx0, by0, bx1, by1, bz0, bz1 = _bbox_mundo(b)
+        ix0, iy0 = max(ax0, bx0), max(ay0, by0)
+        ix1, iy1 = min(ax1, bx1), min(ay1, by1)
+
+        def _superficie(o, x, y, z_de, direcao):
+            """z da primeira face de `o` na vertical (x,y), vindo de `z_de`."""
+            inv = o.matrix_world.inverted()
+            org = inv @ mathutils.Vector((x, y, z_de))
+            d = (inv.to_3x3() @ mathutils.Vector((0, 0, direcao))).normalized()
+            bateu, onde, _, _ = o.ray_cast(org, d)
+            return (o.matrix_world @ onde).z if bateu else None
+
+        N = 14
+        margem = 0.02
+        folgas = []
+        if ix1 > ix0 and iy1 > iy0:
+            for i in range(N):
+                for j in range(N):
+                    x = ix0 + (ix1 - ix0) * (i + 0.5) / N
+                    y = iy0 + (iy1 - iy0) * (j + 0.5) / N
+                    # topo da de baixo: raio descendo de bem acima dela
+                    topo = _superficie(a, x, y, az1 + 1.0, -1)
+                    # base da de cima: raio subindo de bem abaixo dela
+                    base = _superficie(b, x, y, bz0 - 1.0, +1)
+                    if topo is not None and base is not None:
+                        folgas.append(base - topo)
+
+        if not folgas:
+            folga, estado = None, "SEM SOBREPOSICAO"
+        else:
+            menor = min(folgas, key=abs)
+            pior = min(folgas)
+            if pior < -tolerancia:
+                folga = pior
+                estado = (f"INTERPENETRA "
+                          f"({sum(1 for f in folgas if f < -tolerancia)}/"
+                          f"{len(folgas)} pontos)")
+            elif abs(menor) <= tolerancia:
+                folga, estado = menor, "OK"
+            else:
+                folga, estado = menor, "VAO"
+        del margem
+
+        ok = estado == "OK"
+        txt = "  -  " if folga is None else f"{folga:+.3f} m"
+        linhas.append(f"  {nome_baixo.split(' - ')[-1]:<10} -> "
+                      f"{nome_cima.split(' - ')[-1]:<10} menor distancia "
+                      f"{txt:>10}   {estado}")
+        if not ok:
+            falhas.append((nome_baixo, nome_cima, folga))
+
+    print("conferindo contato (o que se apoia tem de encostar):")
+    for l in linhas:
+        print(l)
+    if falhas:
+        detalhe = "; ".join(
+            f"{b} sobre {a}: {'ausente' if f is None else f'{f:+.3f} m'}"
+            for a, b, f in falhas)
+        raise SystemExit(f"ABORTADO -- contato reprovado: {detalhe}")
+    print(f"  {len(CONTATOS_EXIGIDOS)} pares conferidos, todos encostam "
+          f"(tolerancia {tolerancia*100:.0f} cm)")
+    return len(CONTATOS_EXIGIDOS)
+
+
+def construir_estrada_do_natan(col, centro_arena, bbox=None, caminho=None):
+    """A estrada de asfalto que ELE marcou de azul, em 15/08.
+
+    Ordem literal: *"em azul onde tem que ter a estrada de asfalto"*. E ela nao
+    e' uma via a mais na lista: das 42 de `data/vias.json`, nenhuma foi conferida
+    por ele (`conferido_pelo_natan: false` em todas). Esta e' a primeira com o
+    carimbo verdadeiro, e por isso nasce separada, com nome proprio e material
+    proprio -- as internas sao SAIBRO por medicao do footage, e chamar de asfalto
+    o que e' saibro seria desfazer uma medida para caber numa palavra.
+
+    Largura de 8 m: pista de mao dupla com acostamento magro, que e' o que uma
+    via de acesso de parque de exposicoes tem. Nao esta medida em lugar nenhum --
+    fica declarada aqui e no JSON, e uma palavra dele muda.
+    """
+    caminho = Path(caminho or RAIZ / "data" / "correcao-posicao-1508.json")
+    if not caminho.exists():
+        return 0
+
+    corr = json.loads(caminho.read_text(encoding="utf-8"))
+    est = corr.get("estrada_asfalto")
+    if not est or len(est.get("pontos_m", [])) < 2:
+        return 0
+
+    pontos = [(x, y) for x, y in est["pontos_m"] if dentro(bbox, x, y)]
+    if len(pontos) < 2:
+        print("  estrada do Natan: fora do recorte deste plano")
+        return 0
+
+    obj = estruturas.via("Via_asfalto_do_Natan", pontos, col,
+                         lambda x, y: terreno.elevacao(x, y, centro_arena),
+                         largura=est.get("largura_m", 8.0))
+    if not obj:
+        return 0
+    obj["material"] = "MAT_ASFALTO"
+    obj["fonte"] = ("marca em tela do Natan, 15/08/2026 -- "
+                    "data/correcao-posicao-1508.json")
+    obj["conferido_pelo_natan"] = True
+    obj["largura_declarada_m"] = est.get("largura_m", 8.0)
+    print(f"  estrada de asfalto do Natan: {len(pontos)} vertices, "
+          f"{est.get('comprimento_m', 0):.0f} m, "
+          f"{est.get('largura_m', 8.0):.0f} m de largura")
+    return 1
+
+
 def configurar_render(cena, motor="cycles"):
     cena.render.resolution_x = LARGURA_RENDER
     cena.render.resolution_y = ALTURA_RENDER
@@ -1953,6 +2162,7 @@ def main():
 
     print("construindo vias...")
     n_vias = construir_vias(cols["BASE"], centro, bbox)
+    n_vias += construir_estrada_do_natan(cols["BASE"], centro, bbox)
 
     # Cada estrutura declara o material que a define, em estruturas.py, e aqui
     # so se obedece. O que havia antes era `if "Camarote" not in o.name`, um
@@ -2008,8 +2218,19 @@ def main():
          ((_pegada_xy(o)[0] + _pegada_xy(o)[2]) / 2,
           (_pegada_xy(o)[1] + _pegada_xy(o)[3]) / 2))
         for o in cols["EVENTO"].objects if o.type == "MESH"]
+    # A boca de cena da concha e' vetada para VEGETACAO apenas -- e o "apenas"
+    # e' a parte importante. Publico na frente do palco e' o certo (o audio dele
+    # descreve a area de shows "toda ela lotada"), entao o veto NAO entra na
+    # lista que povoamento e mobiliario consultam. Arvore de 12 m e' que nao pode.
+    veto_concha = veto_da_boca_da_concha(dados)
+    ocupado_veg = ocupado + ([veto_concha] if veto_concha else [])
+    if veto_concha:
+        q = veto_concha[1]
+        print(f"  veto da boca da concha: x {q[0]:.0f}..{q[2]:.0f}, "
+              f"y {q[1]:.0f}..{q[3]:.0f} m (so' vegetacao)")
+
     n_arv, n_arv_rec = construir_vegetacao(dados, cols["ESTIMADO"], centro, bbox,
-                                           solidos=ocupado)
+                                           solidos=ocupado_veg)
 
     caminho_veg = RAIZ / "data" / "vegetacao.json"
     n_arb = n_arb_rec = 0
@@ -2017,7 +2238,7 @@ def main():
         n_arb, n_arb_rec = construir_arbustos_de_talude(
             dados, cols["ESTIMADO"], centro,
             json.loads(caminho_veg.read_text(encoding="utf-8")),
-            bbox, solidos=ocupado)
+            bbox, solidos=ocupado_veg)
         print(f"  arbustos de talude .. {n_arb} ({n_arb_rec} recusados: "
               f"chao plano, pista ou predio)")
 
@@ -2107,6 +2328,10 @@ def main():
     print(f"  patamares ........... arena 0 m -> shows {terreno.PATAMARES[2][2]} m "
           f"-> anel {terreno.PATAMARES[4][2]} m -> plato {terreno.PATAMARES[6][2]} m")
     print("=" * 58)
+
+    # O portao roda ANTES de salvar: arquivo com peca flutuando nao chega ao
+    # disco para depois alguem descobrir num render de 12 h.
+    conferir_contato()
 
     if args.out:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)

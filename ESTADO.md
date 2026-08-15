@@ -58,6 +58,20 @@ Decidido por ele em 14/08/2026, e é isto que manda:
    de **IA geradora de vídeo** com prompt ultra-realista por local.
    **Plano B**: se o render local convencer, renderizar o trajeto completo aqui
    com as animações — pessoas, gado, montaria, laçada, salão do leiloeiro.
+   Decisão dele em 15/08 (D030): **os dois**, depois que o resto fechar.
+
+   > **O passo 5 tem material esperando ele, desde 15/08.** Ordem literal:
+   > *"Levante as melhores imagens para criar com IA, para usar essas imagens
+   > reais e colocar tipo uma exposição nesse lugar, primeiro os quadros e
+   > depois crio os vídeos."*
+   >
+   > **Abrir `out/quadros-ia/INDICE.html`.** 22 locais, o quadro da cena ao lado
+   > do quadro do footage real de cada um, com o motivo da escolha e o bloqueio
+   > onde existe. Catálogo versionado em `data/quadros-ia.json`.
+   >
+   > **Nada foi gerado por IA** — *"depois crio os vídeos"* é primeira pessoa, e
+   > a geração é passo dele. **O filme não foi renderizado**: são 52 quadros de
+   > cena, não os 4.635. Ver `DECISOES.md` D034 a D037.
 
 **Regra permanente:** a descrição dos áudios (`docs/brief-audios.md`) é a régua
 do que vai dentro de cada ambiente — conteúdo, posição e detalhe. Dúvida sobre
@@ -446,6 +460,10 @@ altura por ambiente e a configuração de render.
 | 3 | Quadro de drone **lateral** da arena, rasante, com elemento de altura conhecida | Médio — trava as cotas dos patamares. Das 173 folhas, nenhuma serve: todas são oblíquas altas |
 | 4 | Medida real de qualquer estrutura | Médio — confirma a escala de 0,5611 m/pt |
 | 5 | Identidade visual AGROSHOW 2026 em vetor | Baixo agora — decisão do Natan: **usar o JPEG achado na internet ou o nome simples** |
+| 6 | **4 a 6 fotos do portal** — três quartos dos dois lados, lateral pura, detalhe do tabuado e da ferragem, uma com pessoa em pé ao lado | **Alto** — existe **uma** imagem do portal celeiro no mundo, frontal. É o primeiro e o último plano do filme, e uma frontal não modela |
+| 7 | **Qual dos dois portais** abre e fecha o filme: o de madeira da foto de 12/08 ou o pórtico azul do `0126_D` | **Alto** — os dois têm o letreiro PARQUE DE EXPOSIÇÕES; podem ser duas entradas |
+| 8 | **Uma foto com placa de Fazendinha, Café Colonial e Mercado do Produtor** | **Alto** — três dos quatro diferenciais não têm nenhuma imagem confirmada em 173 vídeos, e são os planos mais longos do filme. Ver `DECISOES.md` D037 |
+| 9 | A **árvore na frente da concha** sai ou fica | Médio — tapa a boca de cena; ou ela sai, ou a concha não aparece em plano nenhum |
 
 ---
 

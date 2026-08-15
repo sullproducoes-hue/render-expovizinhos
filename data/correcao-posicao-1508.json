@@ -1,0 +1,109 @@
+{
+  "fonte": "marca em tela do Natan, 15/08/2026",
+  "ordem": "aqui ta em laranja a localizacao do portal e em azul onde tem que ter a estrada de asfalto",
+  "print": "E:\\Projetos todos\\Mapa - agroshow\\Localização das coisas\\Posição do portal e da estrada de asfalto.png",
+  "alinhamento": {
+    "matriz_print_para_base": [
+      [
+        1.388889,
+        0.0,
+        2.388889
+      ],
+      [
+        0.0,
+        1.388889,
+        0.833333
+      ]
+    ],
+    "erro_medio_de_reprojecao": 8.67
+  },
+  "portal": {
+    "novo_m": [
+      51.38,
+      91.78
+    ],
+    "antigo_m": [
+      68.34,
+      89.24
+    ],
+    "desvio_m": 17.2,
+    "raio_marca_m": 14.8
+  },
+  "estrada_asfalto": {
+    "pontos_m": [
+      [
+        142.37,
+        145.39
+      ],
+      [
+        93.12,
+        95.82
+      ],
+      [
+        48.85,
+        65.9
+      ],
+      [
+        33.58,
+        60.91
+      ],
+      [
+        -3.2,
+        73.38
+      ],
+      [
+        -36.56,
+        100.81
+      ],
+      [
+        -66.17,
+        116.09
+      ],
+      [
+        -91.11,
+        115.77
+      ],
+      [
+        -129.14,
+        107.36
+      ],
+      [
+        -154.7,
+        89.9
+      ],
+      [
+        -170.29,
+        69.95
+      ],
+      [
+        -180.26,
+        51.87
+      ],
+      [
+        -186.19,
+        24.75
+      ],
+      [
+        -202.08,
+        6.98
+      ],
+      [
+        -232.94,
+        -13.9
+      ],
+      [
+        -282.82,
+        -28.24
+      ],
+      [
+        -286.87,
+        -33.54
+      ]
+    ],
+    "vertices": 17,
+    "comprimento_m": 543.0,
+    "largura_m": 8.0,
+    "material": "MAT_ASFALTO",
+    "conferido_pelo_natan": true
+  }
+}

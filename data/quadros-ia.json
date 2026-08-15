@@ -1,0 +1,412 @@
+{
+  "_procedencia": {
+    "escrito_em": "2026-08-15",
+    "quem": "render-agroshow",
+    "regime": "autonomo, ordem dele de 15/08 -- na duvida, a opcao mais conservadora, registrada em DECISOES.md",
+    "ordem_literal": "Levante as melhores imagens para criar com IA, para usar essas imagens reais e colocar tipo uma exposicao nesse lugar, primeiro os quadros e depois crio os videos."
+  },
+
+  "_o_que_isto_e": [
+    "O catalogo das PLACAS: as imagens que entram na IA, uma lista por local do percurso.",
+    "Duas familias por local, e elas nao se substituem:",
+    "  3d   -- quadro renderizado da cena, na moldura exata do plano. Diz ENQUADRAMENTO,",
+    "          posicao, hora do dia e o que esta em quadro. Hoje e volumetria: caixa branca,",
+    "          telhado, arvore. Nao e foto e nao deve ser vendida como tal.",
+    "  real -- quadro do footage do proprio recinto, resolucao nativa. Diz COMO O LUGAR E:",
+    "          cor, material, forma construida, luz de verdade.",
+    "A leitura da ordem dele que este arquivo assume: 'imagens reais' sao as do footage, e o",
+    "trabalho da IA e por a feira montada em cima delas. O quadro 3d entra como guia de",
+    "composicao do mesmo local, nao como concorrente."
+  ],
+
+  "_o_que_isto_nao_e": [
+    "Nao ha nenhuma imagem gerada por IA aqui. Ele disse 'depois crio os videos' -- gerar e passo dele.",
+    "Nao e a fila de render do filme. O filme sao 4.635 quadros e 12,9 h; aqui sao 44 quadros de cena.",
+    "Nao arbitra nome nem posicao de area. Onde o footage nao confirma o nome, o campo",
+    "'confianca' diz 'nao_confirmado' e o local carrega um 'bloqueio' escrito."
+  ],
+
+  "raizes": {
+    "brutos": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo",
+    "quinta": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente",
+    "foto_portal": "E:\\Projetos todos\\Mapa - agroshow\\WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
+    "saida": "out/quadros-ia"
+  },
+
+  "_fontes_do_julgamento": [
+    "_triagem/analise/lideres.md e notas-lote-01..12.md -- 173 folhas ja lidas e pontuadas em 14/08",
+    "data/footage-quinta.json -- os 17 videos de 13/08, decupados em 15/08",
+    "data/planos.json -- os 22 planos, que definem quais locais existem no filme"
+  ],
+
+  "_criterio": [
+    "O criterio AQUI nao e o mesmo da triagem de 14/08. La se procurava material para textura:",
+    "close, superficie chapada, grao legivel. Aqui se procura PLACA DE BASE para a IA vestir:",
+    "  1. o lugar tem que caber no quadro -- plano aberto o suficiente para a feira entrar;",
+    "  2. de dia, e de preferencia com o recinto VAZIO (a IA poe o evento; se ja tem evento,",
+    "     ela tem que apagar antes, e apagar e o que ela faz pior);",
+    "  3. nitido e sem marca queimada de patrocinador;",
+    "  4. luz que case com a do filme -- fim de tarde, 18:20 a 18:55, que e a hora declarada",
+    "     em data/luz.json. Encoberto serve; sol a pino briga com o render.",
+    "Quando o melhor quadro de um local viola um desses, o motivo esta escrito no item."
+  ],
+
+  "locais": [
+    {
+      "plano": "P01",
+      "local": "Estacionamento",
+      "diferencial": false,
+      "cena_3d": "terreno e vias; sem carro, sem guarita",
+      "reais": [
+        { "video": "DJI_20251127184025_0104_D.MP4", "raiz": "brutos", "tc": 40.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "asfalto com vaga pintada virando saibro vermelho, sol a ~5 graus. E a hora do filme." },
+        { "video": "1 (15).mp4", "raiz": "quinta", "tc": 2.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "entrada do Recinto de Leiloes com estacionamento e cerca, com sol -- uma das tres folhas de sol do lote 01." },
+        { "video": "IMG_9131-004.MOV", "raiz": "brutos", "tc": 9.0,
+          "papel": "apoio", "confianca": "confirmado",
+          "porque": "parque VAZIO de manha: via asfaltica com terra vermelha arrastada por cima. Placa limpa, sem nada para a IA apagar." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P02",
+      "local": "Portal -- 'E daqui que sai o alimento que sustenta o mundo'",
+      "diferencial": false,
+      "cena_3d": "portal modelado como estrutura simples",
+      "reais": [
+        { "video": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg", "raiz": "foto_portal", "tc": null,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "a UNICA imagem do portal celeiro que existe. Frontal, unica vista. Referencia obrigatoria do primeiro e do ultimo plano." },
+        { "video": "DJI_20251127211702_0126_D.MP4", "raiz": "brutos", "tc": 16.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "o portico ATUAL do parque -- metalico, azul, com esferas e telao. NOTURNO (o arquivo e de 21:17): serve de FORMA e de leitura de sinalizacao, nao de luz. Nao e o celeiro; entra porque a duvida das duas entradas esta aberta." },
+        { "video": "1 (15).mp4", "raiz": "quinta", "tc": 12.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "a alameda de entrada com arvores em fileira e postes: o corredor por onde o plano de abertura passa." },
+        { "video": "DJI_20251127211745_0128_D.MP4", "raiz": "brutos", "tc": 0.5,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "duas casas de madeira ja construidas no recinto: tabuado vertical, telha ceramica, varanda. E a leitura ECONOMICA do celeiro, que e a que o cliente pediu. NOTURNO (21:17) -- vale a forma e o detalhe de madeira, nao a cor." }
+      ],
+      "bloqueio": "Duas entradas ou uma? A foto de 12/08 e o portico azul do 0126_D tem o mesmo letreiro PARQUE DE EXPOSICOES. Qual dos dois abre e fecha o filme e pergunta para ele. Registrado em lideres.md e nao arbitrado aqui."
+    },
+    {
+      "plano": "P03",
+      "local": "Pavilhao 1 -- Industria, Comercio e Prestacao de Servicos",
+      "diferencial": false,
+      "cena_3d": "caixa com footprint medido, parede tijolo + telhado telha",
+      "reais": [
+        { "video": "1 (16).mp4", "raiz": "quinta", "tc": 110.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "coluna azul, alvenaria de tijolo vermelho, estrutura de telhado vermelha, e uma pessoa em pe dando escala. E a paleta do parque em um quadro." },
+        { "video": "IMG_9131-004.MOV", "raiz": "brutos", "tc": 176.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "cobertura POR DENTRO: telha ondulada, tesoura vermelha, terca, pilar azul, piso de cimento gasto. Parque vazio." },
+        { "video": "1 (1).mp4", "raiz": "quinta", "tc": 8.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "interior de pavilhao VAZIO -- o vao livre pronto para a IA montar estande dentro." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P04",
+      "local": "Praca de Alimentacao Coberta",
+      "diferencial": false,
+      "cena_3d": "footprint medido por watershed no bloco norte (145,5 x 33,6 m)",
+      "reais": [
+        { "video": "DJI_0935_stabilized_1.mp4", "raiz": "brutos", "tc": 5.0,
+          "papel": "apoio", "confianca": "nao_confirmado",
+          "porque": "rua dos food stands ao nivel do chao. Nenhuma placa confirma que seja esta praca." }
+      ],
+      "bloqueio": "Nenhum quadro do acervo confirma a Praca de Alimentacao Coberta por placa. O candidato entra como tipologia, nao como local."
+    },
+    {
+      "plano": "P05",
+      "local": "Pavilhao 2 -- Industria, Comercio e Prestacao de Servicos",
+      "diferencial": false,
+      "cena_3d": "caixa com footprint medido",
+      "reais": [
+        { "video": "1 (17).mp4", "raiz": "quinta", "tc": 4.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "galpao VERMELHO com portas AZUIS -- confirma vermelho+azul como identidade construida do parque." },
+        { "video": "1 (16).mp4", "raiz": "quinta", "tc": 30.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "ritmo dos vaos e beiral do mesmo tipo de pavilhao, por fora." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P06",
+      "local": "Mercado do Produtor",
+      "diferencial": true,
+      "cena_3d": "zona ESTIMADA -- caixa cinza por tipo, sem footprint desenhado na planta",
+      "reais": [
+        { "video": "1 (16).mp4", "raiz": "quinta", "tc": 60.0,
+          "papel": "placa-base", "confianca": "nao_confirmado",
+          "porque": "o lote 01 registrou que este pavilhao vazio de pilar azul e alvenaria vermelha e a coisa mais parecida com o Mercado do Produtor montado que o acervo tem -- e esta VAZIO, sem banca nenhuma. Placa perfeita para a IA montar as bancas; nome nao confirmado." }
+      ],
+      "bloqueio": "Um dos quatro diferenciais e nao existe um unico quadro do acervo com o Mercado do Produtor confirmado por placa. Posicao vem da planta; aparencia nao vem de lugar nenhum."
+    },
+    {
+      "plano": "P07",
+      "local": "Agroindustrias",
+      "diferencial": false,
+      "cena_3d": "zona ESTIMADA",
+      "reais": [
+        { "video": "1 (17).mp4", "raiz": "quinta", "tc": 30.0,
+          "papel": "apoio", "confianca": "nao_confirmado",
+          "porque": "galpao e estrada de terra do mesmo setor. Tipologia, nao nome." }
+      ],
+      "bloqueio": "Sem confirmacao nominal no acervo."
+    },
+    {
+      "plano": "P08",
+      "local": "Cafe Colonial",
+      "diferencial": true,
+      "cena_3d": "zona ESTIMADA + 209 pecas de mobiliario CC0",
+      "reais": [
+        { "video": "DJI_0964_stabilized_1.mp4", "raiz": "brutos", "tc": 5.0,
+          "papel": "apoio", "confianca": "nao_confirmado",
+          "porque": "fogo de chao com costelas e gradil metalico -- material de gastronomia do proprio recinto. O lote 04 registrou como Cafe Colonial POSSIVEL, sem placa." }
+      ],
+      "bloqueio": "Um dos quatro diferenciais, sem quadro nominalmente confirmado. O lote 03 tambem achou um salao com mesas e escreveu, literal, que SUPOE ser Centro de Convivencia ou Cafe Colonial. Suposicao nao vira referencia de area: e material de venda de espaco fisico."
+    },
+    {
+      "plano": "P09",
+      "local": "Praca de Alimentacao Aberta",
+      "diferencial": false,
+      "cena_3d": "zona ESTIMADA",
+      "reais": [
+        { "video": "DJI_20251128150932_0138_D.MP4", "raiz": "brutos", "tc": 6.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "fechamento de lona branca com dobra, vinco e translucidez -- a tenda como ela e montada aqui. Serve de gabarito para a IA nao inventar tenda de outro lugar." },
+        { "video": "DJI_0935_stabilized_1.mp4", "raiz": "brutos", "tc": 3.0,
+          "papel": "apoio", "confianca": "nao_confirmado",
+          "porque": "rua de food stands em operacao." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P10",
+      "local": "Recinto de Leiloes",
+      "diferencial": false,
+      "cena_3d": "zona ESTIMADA -- e o predio redondo ainda e caixa",
+      "reais": [
+        { "video": "DJI_20251126155259_0053_D.MP4", "raiz": "brutos", "tc": 46.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "top-down do predio de telhado radial com a fachada dizendo RECINTO DE LEILOES ERVELINO COLETTI -- lido em recorte ampliado. E a unica confirmacao nominal por placa deste local no acervo inteiro." },
+        { "video": "1 (10).mp4", "raiz": "quinta", "tc": 20.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "orbita COMPLETA do predio redondo: numero de faces, ritmo de pilar, geometria do telhado. A melhor prova de forma que este projeto tem." },
+        { "video": "1 (12).mp4", "raiz": "quinta", "tc": 20.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "salao de leiloes POR DENTRO: forro de madeira ripada em curva, luminaria embutida, cadeira preta, balcao. O audio [02:18] pede o leilao acontecendo." },
+        { "video": "1 (13).mp4", "raiz": "quinta", "tc": 4.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "o pulpito do leiloeiro e as grades azuis do ringue -- o audio nomeia o pulpito." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P11",
+      "local": "Exposicao de Animais",
+      "diferencial": false,
+      "cena_3d": "6 pavilhoes com forma medida do desenho, na ordem ditada pelo cliente",
+      "reais": [
+        { "video": "DJI_20251126185721_0082_D.MP4", "raiz": "brutos", "tc": 16.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "os SEIS pavilhoes em fila sob sol rasante, com a pista de julgamento gramada ao lado. O quadro mais completo da camada BASE em todo o acervo, e na hora do filme." },
+        { "video": "DJI_20251126185022_0065_D.MP4", "raiz": "brutos", "tc": 1.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "a placa diz EXPO VIZINHOS . GADO DE LEITE -- confirmacao nominal do pavilhao. No mesmo quadro, a telha vista de baixo e a brita ao nivel do chao." },
+        { "video": "1 (14).mp4", "raiz": "quinta", "tc": 6.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "MANGUEIRAS / currais: grade metalica em serie sobre brita, com cobertura. A planta so tinha o rotulo -- 14,1 x 2,4 m era o tamanho da PALAVRA." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P12",
+      "local": "Pista de Julgamentos",
+      "diferencial": false,
+      "cena_3d": "zona ESTIMADA",
+      "reais": [
+        { "video": "DJI_20251126185721_0082_D.MP4", "raiz": "brutos", "tc": 20.0,
+          "papel": "placa-base", "confianca": "provavel",
+          "porque": "pista de julgamento gramada e cercada, verde uniforme, com arvore isolada dentro e sombra longa atravessando. Duas gramas distintas no mesmo quadro." }
+      ],
+      "bloqueio": "O lote 05 achou outra pista gramada cercada por tapume branco COM CAVALOS e escreveu que supoe ser julgamento e nao arena. Duas candidatas, nenhuma com placa."
+    },
+    {
+      "plano": "P13",
+      "local": "Expositores Externos",
+      "diferencial": false,
+      "cena_3d": "estandes instanciados da planta",
+      "reais": [
+        { "video": "DJI_20251128150932_0138_D.MP4", "raiz": "brutos", "tc": 16.0,
+          "papel": "placa-base", "confianca": "provavel",
+          "porque": "brita e saibro com pedra solta, placa de concreto rente ao chao -- o chao onde o estande externo pousa." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P14",
+      "local": "Fazendinha",
+      "diferencial": true,
+      "cena_3d": "zona ESTIMADA em (-164,4 . -18,6) m, posicao decidida por ele em 14/08 pelo mapa",
+      "reais": [
+        { "video": "DJI_20251127211745_0128_D.MP4", "raiz": "brutos", "tc": 0.5,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "casas de madeira construidas no recinto: tabuado vertical, telha ceramica, varanda, cerca de mourao. O lote 10 aponta este quadro como vocabulario da Fazendinha e do portal ao mesmo tempo. NOTURNO (21:17) -- forma sim, cor nao." },
+        { "video": "DJI_20251128151108_0140_D.MP4", "raiz": "brutos", "tc": 4.0,
+          "papel": "apoio", "confianca": "provavel",
+          "porque": "area infantil EM USO: painel pintado, cones, animadores, criancas. Referencia de como a area funciona na pratica -- sem usar a palavra proibida." },
+        { "video": "DJI_0962_stabilized.mp4", "raiz": "brutos", "tc": 5.0,
+          "papel": "apoio", "confianca": "nao_confirmado",
+          "porque": "conjunto de casinhas de madeira com cara de tema rural. O lote 04 escreveu, literal, que NAO tem certeza de que seja a Fazendinha." }
+      ],
+      "bloqueio": "Um dos quatro diferenciais. Nenhum quadro confirma a Fazendinha por placa. A posicao ja e dele (mapa, 14/08); a APARENCIA continua sem fonte no acervo."
+    },
+    {
+      "plano": "P15",
+      "local": "Fazendinha (continuacao, orbita)",
+      "diferencial": true,
+      "cena_3d": "mesma zona do P14",
+      "reais": [
+        { "video": "DJI_20251128151108_0140_D.MP4", "raiz": "brutos", "tc": 7.5,
+          "papel": "apoio", "confianca": "provavel",
+          "porque": "segundo angulo da mesma area infantil, para a IA nao repetir o mesmo enquadramento no par de planos." }
+      ],
+      "bloqueio": "O mesmo do P14."
+    },
+    {
+      "plano": "P16",
+      "local": "Maquinas, Equipamentos e Implementos Agricolas",
+      "diferencial": false,
+      "cena_3d": "estandes da planta + 1 trator na AREA_DE_ESPERA",
+      "reais": [
+        { "video": "DJI_0937_stabilized.mp4", "raiz": "brutos", "tc": 6.0,
+          "papel": "placa-base", "confianca": "provavel",
+          "porque": "alameda de tratores -- exatamente o setor, com a implantacao real dos equipamentos em fila sob arvore." },
+        { "video": "DJI_0935_stabilized_2.mp4", "raiz": "brutos", "tc": 2.5,
+          "papel": "apoio", "confianca": "provavel",
+          "porque": "alameda de maquinas sob as arvores, outro angulo e outra hora." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P17",
+      "local": "Veiculos e Motos Nauticas",
+      "diferencial": false,
+      "cena_3d": "12 estandes azuis da planta, centroide em (-34,2 . 58,4) m",
+      "reais": [],
+      "bloqueio": "Nenhum quadro do acervo mostra o setor de veiculos e motos nauticas identificado. A separacao entre maquinas e veiculos so existe pela COR com que a planta pinta o estande -- ver scripts/classificar_estandes.py."
+    },
+    {
+      "plano": "P18",
+      "local": "Area de Shows",
+      "diferencial": false,
+      "cena_3d": "bacia + concha permanente na zona PALCO",
+      "reais": [
+        { "video": "DJI_0937_stabilized_1.mp4", "raiz": "brutos", "tc": 6.0,
+          "papel": "placa-base", "confianca": "provavel",
+          "porque": "area de shows com o palco montado, de dia." },
+        { "video": "DJI_0961_stabilized.mp4", "raiz": "brutos", "tc": 11.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "a bacia inteira num quadro: anel de saibro, talude gramado descendo, esplanada rebaixada com deck e palco ao fundo. Conferido: NAO HA ARQUIBANCADA." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P19",
+      "local": "Arena de Rodeio",
+      "diferencial": true,
+      "cena_3d": "arena + 2 camarotes, sem arquibancada (restricao 1)",
+      "reais": [
+        { "video": "1 (2).mp4", "raiz": "quinta", "tc": 11.0,
+          "papel": "placa-base", "confianca": "provavel",
+          "porque": "nadir da arena: terra escura batida com rastro circular de arraste, halo de terra vermelha, luz encoberta difusa. A melhor fonte de POSICAO do acervo depois do satelite, e mais recente." },
+        { "video": "IMG_9133.MOV", "raiz": "brutos", "tc": 5.0,
+          "papel": "placa-base", "confianca": "provavel",
+          "porque": "a pista batida VAZIA inteira, em arco, do nivel do chao, recinto sem gente. Unico registro da pista sem nada em cima -- a placa mais limpa que existe para a IA vestir." },
+        { "video": "DJI_0961_stabilized.mp4", "raiz": "brutos", "tc": 11.0,
+          "papel": "forma", "confianca": "provavel",
+          "porque": "o perfil da bacia com palco e tendas 5x5 de regua." }
+      ],
+      "bloqueio": "Onze dos doze lotes usam 'bacia' com ressalva: a placa que aparece diz ARENA DE EVENTOS, nao arena de rodeio. E o acervo NAO TEM arena de rodeio montada -- zero quadros de brete, porteira de partida ou prova. Como o rodeio fica configurado nao vem do footage."
+    },
+    {
+      "plano": "P20",
+      "local": "Palco Principal",
+      "diferencial": false,
+      "cena_3d": "concha permanente construida (porao azul 2,4 m, caixa cenica 8,9 m)",
+      "reais": [
+        { "video": "1 (4).mp4", "raiz": "quinta", "tc": 2.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "o palco existente de frente, em SOL RASANTE: estrutura branca sobre base azul, nao madeira. E a melhor luz do lote 01 e a que casa com o HDRI do filme. No mesmo quadro, grama proxima e uma pessoa em pe dando escala." },
+        { "video": "IMG_9133.MOV", "raiz": "brutos", "tc": 4.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "o palco fixo da bacia vazio e de dia, quatro angulos dentro da janela. E a concha que entrou na cena em 15/08." },
+        { "video": "DJI_20251127184447_0110_D.MP4", "raiz": "brutos", "tc": 2.0,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "palco de EVENTO montado e vazio, e na frente dele o esquema real dos camarotes: deck de madeira modular, gradil branco, terreo, SEM ARQUIBANCADA. Prova por imagem da restricao 1." }
+      ],
+      "bloqueio": "Ha uma arvore plantada na frente da concha, tapando a boca de cena -- out/concha/frente.png. Ou a arvore sai, ou a concha nao aparece em plano nenhum. E decisao dele."
+    },
+    {
+      "plano": "P21",
+      "local": "'Aqui sera um grande balcao de negocios' -- subida final",
+      "diferencial": false,
+      "cena_3d": "subida de 15 a 48 m sobre a arena; e a assinatura do filme",
+      "reais": [
+        { "video": "1 (3).mp4", "raiz": "quinta", "tc": 30.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "nadir alto com o recinto INTEIRO dentro do quadro. E o unico quadro que mostra a coisa toda de uma vez." },
+        { "video": "1 (11).mp4", "raiz": "quinta", "tc": 20.0,
+          "papel": "placa-base", "confianca": "confirmado",
+          "porque": "sobe do predio redondo e abre para o recinto com as TENDAS BRANCAS montadas -- e o unico aereo do lote com evento em pe." }
+      ],
+      "bloqueio": null
+    },
+    {
+      "plano": "P22",
+      "local": "Saida pelo portal",
+      "diferencial": false,
+      "cena_3d": "mesmo portal do P02",
+      "reais": [
+        { "video": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg", "raiz": "foto_portal", "tc": null,
+          "papel": "forma", "confianca": "confirmado",
+          "porque": "restricao 6: o plano final sai pelo portal. A mesma e unica foto." }
+      ],
+      "bloqueio": "O mesmo do P02, e pesa mais aqui: nao existe nenhuma vista lateral, traseira, de topo ou de perto do portal. Para modelar em 3D, uma frontal e pouco."
+    }
+  ],
+
+  "_quadros_3d_reprovados": {
+    "_o_que_e": [
+      "Julgados no olho depois da medicao de pixel, em 15/08. A medicao acha quadro preto e",
+      "quadro chapado; ela NAO acha quadro em que a camera esta a dez metros de uma parede",
+      "grande e o predio ocupa a tela inteira -- ali ha duas cores fortes e o desvio passa.",
+      "Estes ficam marcados na pagina para ele nao julgar a cena por um quadro quebrado."
+    ],
+    "P09 ini": "camera dentro da copa do bosque -- tela verde inteira",
+    "P09 meio": "idem, o plano inteiro corre dentro da copa",
+    "P10 ini": "parede de tijolo e agua de telhado ocupando o quadro todo; nao se ve o predio",
+    "P10 fim": "o mesmo, um pouco mais aberto",
+    "P12 fim": "quadro preto -- camera dentro de geometria",
+    "P12 meio": "dentro de talude/copa, sem assunto legivel",
+    "P19 fim": "quadro preto -- superficie a 1,5 m na mira",
+    "P08 fim": "chapado -- superficie a 2,5 m na mira",
+    "P20 ini": "parede da concha ocupando o quadro todo",
+    "P20 fim": "o mesmo"
+  },
+
+  "_pedidos_que_isto_gera": [
+    "4 a 6 fotos do portal: tres quartos dos dois lados, lateral pura, detalhe do tabuado e da ferragem, e uma com pessoa em pe ao lado.",
+    "Qual dos dois portais abre e fecha o filme -- o de madeira da foto ou o portico azul do 0126_D.",
+    "Confirmacao nominal de Fazendinha, Cafe Colonial e Mercado do Produtor: uma foto de cada, do ano passado, com placa. Tres dos quatro diferenciais nao tem imagem confirmada.",
+    "A arvore na frente da concha sai ou fica.",
+    "O quadro de drone lateral da arena, que ainda trava as cotas dos patamares."
+  ]
+}

@@ -687,3 +687,160 @@ paleta do parque ficar inteira.
 **A ressalva que sobrevive de tudo isso:** `MAT_TELHA` continua sendo o cinza
 galvanizado com metallic 0,55, que é decisão técnica declarada, não medida. E
 ele é o material que mais aparece no filme.
+
+### D034 · "Primeiro os quadros" — o que eu entendi, e por que a leitura conservadora
+Ordem dele, 15/08: *"Levante as melhores imagens para criar com IA, para usar
+essas imagens reais e colocar tipo uma exposição nesse lugar, primeiro os
+quadros e depois crio os vídeos."*
+
+**Duas ambiguidades, e as duas resolvidas pelo lado mais barato de desfazer.**
+
+**1. "Essas imagens reais" — footage ou render?** Podia ser qualquer um dos dois.
+Resolvi por **os dois, com papel declarado**, e não escolhendo um:
+
+- **`real`** = quadro do footage do próprio recinto, resolução nativa. É o que a
+  frase dele descreve literalmente — *pôr uma exposição **nesse lugar***
+  pressupõe um lugar que já existe na imagem. Um render de caixa branca não é
+  "imagem real" em nenhuma leitura.
+- **`3d`** = quadro da cena, na moldura exata do plano. Entra como **guia de
+  composição**, não como concorrente: é ele que diz de onde a câmera olha, a que
+  altura, com que lente e o que cabe no quadro.
+
+Entregar os dois custa uma sessão e não fecha porta nenhuma. Entregar só um
+obrigaria a refazer se eu tivesse lido errado.
+
+**2. Ele está antecipando o Plano A, ou só pedindo material?** O D030 diz que os
+dois planos entram *"depois de o restante estar concluído"*, e o restante está em
+~55%. **Não arbitrei.** O que fiz não antecipa o Plano A nem atrapalha o B:
+nenhuma imagem foi gerada por IA, nenhum quadro do filme foi renderizado, a
+decupagem não mudou e `planos.json` está intacto. O que existe é o **material de
+entrada, catalogado e pronto para ele aprovar** — que é o que "primeiro os
+quadros" pede em qualquer uma das duas leituras.
+
+**O que NÃO foi feito, de propósito:** o render master (4.635 quadros, 12,9 h,
+176 GB). Ele pediu quadros, não o filme, e o filme é o passo 4 dele — *"quem
+exporta é ele, no Blender dele"*.
+
+**Custo real:** 52 quadros de cena a 2760×1380 (~9,4 s cada, 8 min de GPU) e 44
+quadros de footage em resolução nativa. Contra 12,9 h do filme.
+
+**Onde está:** `data/quadros-ia.json` (o catálogo, versionado),
+`out/quadros-ia/` (as imagens) e `out/quadros-ia/INDICE.html` (a página que ele
+abre para aprovar).
+
+### D035 · O portão de câmera, e os 6 planos que sairiam quebrados
+**Este é o achado que paga a sessão inteira.** Ao medir os 44 quadros-chave por
+pixel, seis planos dos 22 vieram inutilizáveis:
+
+| plano | o que aconteceu |
+|---|---|
+| P12 fim, P19 fim | **quadro preto** — câmera dentro de geometria |
+| P08 fim, P09 ini | **chapado** — desvio 3,4 e 3,2 num quadro de 2760×1380 |
+| P09 (inteiro), P12 (meio) | a câmera corre **dentro da copa do bosque** |
+| P10 ini/fim, P20 ini/fim | prédio ocupando a tela inteira a poucos metros |
+
+**O conferidor que já existia não pega isso.** `planos.py --conferir` mede
+**velocidade**, e os seis estão todos dentro da faixa cinematográfica. São duas
+checagens diferentes e faltava a segunda.
+
+Virou código, não parágrafo (delta `0029`): **`scripts/conferir_camera.py`**, com
+três testes — câmera abaixo do solo (raycast para baixo), câmera dentro de sólido
+fechado (paridade de cruzamentos em 4 direções) e superfície a menos de `--folga`
+metros na mira. Ele sai com código 1 e **é para rodar antes de qualquer fila de
+render**.
+
+**A causa provável, e ela não é da câmera.** Os 22 planos foram decupados quando
+a cena era caixa solta; as **418 árvores** entraram depois. Ninguém reconferiu.
+P09 e P12 correm dentro do bosque do começo ao fim.
+
+**E há uma parte que a medição não pega, registrada como tal.** P10 e P20 passam
+no desvio — parede de tijolo e água de telhado são duas cores fortes. Quem
+reprovou foi o olho, e a reprovação está escrita em
+`_quadros_3d_reprovados` no catálogo, item a item, com o motivo. Medição e olho
+não se substituem, e o arquivo diz qual foi qual.
+
+**O que NÃO fiz:** mexer em `data/planos.json`. Consertar seis câmeras é
+re-decupagem, cascateia no `alvo_fim` e na velocidade (o `PLANOS.md` já avisa) e
+é enquadramento — decisão de quem dirige. No lugar disso rendeirizei o **quadro
+do meio** dos planos afetados, que salvou P06, P08, P14, P15, P19 e P20 com a
+decupagem intacta. P09 e P12 continuam sem placa 3D possível: os dois estão
+dentro da vegetação no plano inteiro.
+
+### D036 · Nenhuma imagem foi gerada por IA nesta sessão
+Registrado porque a ordem dele contém a palavra IA e alguém vai ler este
+repositório procurando o que foi gerado. **Nada foi.**
+
+A frase é *"primeiro os quadros e depois **crio** os vídeos"* — primeira pessoa.
+A geração é passo dele, e um passo que gasta crédito dele. O que este agente faz
+é entregar a entrada catalogada e pronta.
+
+Vale também o que a doutrina do projeto já dizia e continua valendo: **a IA não
+conhece a planta, não mantém continuidade entre planos e não escreve português
+confiável.** Placa, totem e logo são compostos com máscara de Cryptomatte, nunca
+gerados — e é o texto que vende espaço físico.
+
+### D037 · Três dos quatro diferenciais não têm uma única imagem confirmada
+Levantado ao montar o catálogo, e é o dado mais duro que saiu dele.
+
+| diferencial | imagem confirmada por placa |
+|---|---|
+| Arena de Rodeio | a bacia existe, mas a placa que aparece diz **ARENA DE EVENTOS** |
+| **Fazendinha** | **nenhuma** |
+| **Café Colonial** | **nenhuma** |
+| **Mercado do Produtor** | **nenhuma** |
+
+Existem candidatos — casinhas de madeira no `DJI_0962_stabilized`, área infantil
+em uso no `0140_D`, fogo de chão com costelas no `DJI_0964_stabilized_1`,
+pavilhão vazio de pilar azul no `1 (16)` — e **os quatro estão marcados
+`nao_confirmado` no catálogo**, com o bloqueio escrito por local.
+
+**Não arbitro nomenclatura nem posição de área: é material de venda de espaço
+físico.** O pedido que isso gera é barato e está na lista: uma foto de cada, do
+ano passado, com placa em quadro.
+
+Isso pesa mais do que parece porque o cliente pediu **mais tempo de tela** para
+esses quatro, e o roteiro dá 9 a 16 s a cada um. São os planos mais longos do
+filme apoiados no material mais fraco do acervo.
+
+### D034 · O mapa 3D comprado: onde ele ajuda e onde não
+Ele comprou em 15/08 um mapa do `maps3d.io` de 1,97 × 1,42 km centrado no
+parque e perguntou se ajuda. **Ajuda numa coisa só, e não é a que parece.**
+
+**O que ele NÃO é:** fotogrametria. É construção procedural, e o
+`metadata.json` diz cada fonte. Conferido no OBJ, não deduzido:
+
+| parte | o que veio | contra o que o projeto já tem |
+|---|---|---|
+| relevo | canvas 52×37 sobre 1973 m → **37,9 m por amostra** | SRTM de **30 m até 12 km**, conferido ±5 m contra segunda fonte. **Pior e cobre 6× menos** |
+| prédios | **1.351 caixas** de OSM, **uma cor chapada** (0,945/0,925/0,882), altura inventada entre 6 e 10 m (`heightRandomnessPercent: 0`, `detailed: false`) | footprint **medido** da planta + forma medida no footage. **Substituir seria trocar medida por chute** |
+| vias | 185 segmentos de OSM | 42 lidas do bitmap, já classificadas em 19 curva de nível / 14 estrada |
+| chão | imagem Satlas, **2,39 m/px reais** (826×594 px) | ESA WorldCover a 10 m + cor medida no footage |
+
+**A tentativa de usar as vias de OSM para fechar a pendência 9 foi
+inconclusiva**, e o motivo não é o mapa: **OSM mapeia rua pública, e as 42 vias
+do projeto são a circulação INTERNA do recinto.** Os dois conjuntos quase não
+descrevem as mesmas coisas, então não podem se confirmar. A folha está em
+`out/mapa-comprado/vias-osm-x-planta.png`, e ela carrega uma suposição declarada
+que também não se pôde validar: o mundo da cena tem origem no **centro da
+prancha**, que é ponto de desenho e não geográfico — não há lat/lon guardado
+para ele.
+
+**Onde ele ajuda de verdade, e isso vale:** é uma **imagem de satélite
+LICENCIADA para uso comercial**, a 2,39 m/px, com a ferradura da arena visível.
+A conferência de posição de 14/08 usou o **satélite do Google** como segunda
+fonte (`data/luz.json`: *"169,0 no satélite do Google"*) — e isso é entrega de
+cliente. Trocar a referência por esta remove uma dependência de imagem sem
+licença. **É mais grossa** (o espaçamento entre pavilhões, que foi a medida que
+validou a escala, dá 9,6 px aqui contra muito mais no Google), então serve como
+**segunda fonte, não como substituta da medição**.
+
+**Atribuição obrigatória, e entrou em `assets/MANIFESTO.md`:** Satlas / Allen
+Institute for AI, e © OpenStreetMap contributors. Mesma regra do ESA WorldCover.
+
+**O que eu NÃO fiz, de propósito:** não importei nada para a cena. Trazer os
+1.351 prédios de OSM colidiria com a geometria medida do recinto, e trazer o
+relevo de 38 m rebaixaria o SRTM de 30 m que já está conferido. **Se ele quiser
+a silhueta urbana no horizonte, isso é decisão dele** — e vale lembrar que a
+D017 recusou o `blosm` por este mesmo motivo, e o mapa comprado tem o mesmo
+problema com um agravante: cobre só ~1 km de raio, e a silhueta que apareceria
+nos planos está a 3–8 km, fora dele.

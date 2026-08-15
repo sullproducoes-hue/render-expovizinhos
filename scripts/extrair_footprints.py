@@ -371,14 +371,33 @@ def semear(rot, caixa, escala, forma, cresce_max_px, passo_px):
 def medir_pontos(xs, ys, escala, escala_m):
     """largura, profundidade, rumo, area e preenchimento de um conjunto de px."""
     pts = np.column_stack([xs, ys]).astype(np.float32)
-    (_, _), (w, h), ang = cv2.minAreaRect(pts)
+    caixa = cv2.minAreaRect(pts)
+    (_, _), (w, h), _ang = caixa
     if w < h:
         w, h = h, w
-        ang += 90.0
-    # o angulo do minAreaRect e em tela (y para baixo); vira azimute de
-    # compasso do mesmo jeito que em conferir_norte
-    rumo = math.degrees(math.atan2(math.cos(math.radians(-ang)),
-                                   -math.sin(math.radians(-ang)))) % 180.0
+
+    # O RUMO SAI DOS CANTOS, nao do angulo do minAreaRect.
+    #
+    # A versao anterior convertia `ang` por formula, e a formula pressupunha a
+    # convencao antiga do OpenCV (angulo em [-90,0)). O cv2 5.0 devolve [0,90),
+    # e o resultado saia ESPELHADO em 90 graus: um predio a 70 era gravado como
+    # 110, um a 108 como 72. Provado com retangulo sintetico de rumo conhecido
+    # -- 70->110, 108->72, 20->160, e 90 e 0 passando porque sao os dois pontos
+    # fixos do espelho, que e' o que fazia o erro parecer inexistente.
+    #
+    # Foi isto que deixou os seis pavilhoes de animais girados ~37 graus na
+    # cena, cruzando os retangulos desenhados. Tres fontes concordam com o valor
+    # novo: a medicao por Hough direto no bitmap (71,5), a perpendicular da
+    # fileira dos centros (70,3) e a sobreposicao.
+    #
+    # Medir pelos cantos nao depende de convencao nenhuma e sobrevive a proxima
+    # troca de versao -- que ja mordeu este projeto uma vez (armadilha 10).
+    cantos = cv2.boxPoints(caixa)
+    lados = [(cantos[(i + 1) % 4] - cantos[i]) for i in range(4)]
+    dx, dy = max(lados, key=lambda v: float(np.hypot(v[0], v[1])))
+    # y do raster cresce para BAIXO; azimute cresce de norte para leste
+    rumo = math.degrees(math.atan2(float(dx), float(-dy))) % 180.0
+
     npx = float(len(xs))
     return {
         "largura_m": round(w / escala * escala_m, 2),

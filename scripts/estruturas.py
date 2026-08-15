@@ -441,27 +441,65 @@ def concha(nome, x, y, z, colecao, rumo_graus=0.0):
 
     # --- caixa cenica: fundo e duas alas. A frente fica ABERTA -- e uma
     #     concha, e a boca aberta e a coisa toda.
-    obj, bm = _novo(f"{nome} - caixa", colecao)
+    #
+    # AS PAREDES ACOMPANHAM A QUEDA DO TELHADO. Com altura constante de 8,9 m
+    # elas terminavam todas em 11,65 sob uma cobertura que cai para 10,25 na
+    # frente: a ala atravessava o telhado por 1,45 m. O teste de contato de
+    # 15/08 e' que achou -- de olho, num plano so', nao se ve.
+    #
+    # Empena inclinada e' o que uma concha acustica tem de verdade, e mantem as
+    # duas medidas do `1 (4)`: o pe-direito de 8,9 m no FUNDO (que e' onde ele
+    # foi medido) e a caida de 1,4 m do telhado.
     z0 = CONCHA_BASE + CONCHA_LAJE
-    _cubo(bm, 0.0, ly - CONCHA_PAREDE / 2.0, z0 + CONCHA_BOCA / 2.0,
-          CONCHA_LARGURA, CONCHA_PAREDE, CONCHA_BOCA)          # fundo
+    caida = (CONCHA_COBERTURA_FUNDO - CONCHA_COBERTURA_FRENTE) / 2.0
+    alcance_y = ly + CONCHA_BEIRAL / 2.0
+
+    def _topo_em(y_local):
+        """Altura do topo da parede em cada y -- a mesma reta do telhado."""
+        return z0 + CONCHA_BOCA + caida * (y_local / alcance_y - 1.0)
+
+    obj, bm = _novo(f"{nome} - caixa", colecao)
+    vs_fundo = _cubo(bm, 0.0, ly - CONCHA_PAREDE / 2.0, z0 + CONCHA_BOCA / 2.0,
+                     CONCHA_LARGURA, CONCHA_PAREDE, CONCHA_BOCA)      # fundo
+    vs_alas = []
     for lado in (-1, 1):
-        _cubo(bm, lado * (lx - CONCHA_PAREDE / 2.0), 0.0, z0 + CONCHA_BOCA / 2.0,
-              CONCHA_PAREDE, CONCHA_PROFUNDIDADE, CONCHA_BOCA)  # alas
+        vs_alas += _cubo(bm, lado * (lx - CONCHA_PAREDE / 2.0), 0.0,
+                         z0 + CONCHA_BOCA / 2.0,
+                         CONCHA_PAREDE, CONCHA_PROFUNDIDADE, CONCHA_BOCA)
+    # so' os vertices de cima descem; a base fica assentada no deck
+    for v in vs_fundo + vs_alas:
+        if v.co.z > z0 + CONCHA_BOCA - 0.01:
+            v.co.z = _topo_em(v.co.y)
     obj = _fechar(obj, bm)
     obj["material"] = "MAT_CONCHA_CLARO"
+    obj["empena"] = ("inclinada para acompanhar o telhado -- pe-direito de "
+                     f"{CONCHA_BOCA} m vale no fundo")
     pecas.append(obj)
 
     # --- cobertura, caindo do fundo para a frente, com beiral avancado
+    #
+    # ELA ASSENTA NA PAREDE, e isto foi medido: o teste de contato de 15/08
+    # achou a cobertura FLUTUANDO 0,499 m acima da caixa cenica. A causa eram
+    # duas reguas somadas -- `CONCHA_COBERTURA_FUNDO/FRENTE` (11,0 e 9,6) sao
+    # alturas medidas A PARTIR DO SOLO no `1 (4)`, e o codigo as somava a `z0`,
+    # que ja e' o topo do deck. O telhado subia para 12,1-13,8 e a parede, que
+    # termina em 11,65, ficava com um vao aberto embaixo dele.
+    #
+    # O conserto e' o conservador: mantem a CAIDA medida (1,4 m entre fundo e
+    # frente) e as alturas de parede e porao como estao, e so' encosta o telhado
+    # onde ele fisicamente se apoia. Altura de cobertura vira consequencia do
+    # contato, nao um segundo palpite.
+    espessura = 0.30
+    # a face de BAIXO da cobertura tem de coincidir com `_topo_em(y)` da parede
+    centro_z = z0 + CONCHA_BOCA + espessura / 2.0 - caida
+
     obj, bm = _novo(f"{nome} - cobertura", colecao)
-    verts = _cubo(bm, 0.0, -CONCHA_BEIRAL / 2.0,
-                  z0 + (CONCHA_COBERTURA_FUNDO + CONCHA_COBERTURA_FRENTE) / 2.0,
+    verts = _cubo(bm, 0.0, -CONCHA_BEIRAL / 2.0, centro_z,
                   CONCHA_LARGURA + 0.7,
-                  CONCHA_PROFUNDIDADE + CONCHA_BEIRAL, 0.30)
+                  CONCHA_PROFUNDIDADE + CONCHA_BEIRAL, espessura)
     # inclina: quem esta na frente (y menor) desce
-    caida = (CONCHA_COBERTURA_FUNDO - CONCHA_COBERTURA_FRENTE) / 2.0
     for v in verts:
-        v.co.z += caida * (v.co.y / (ly + CONCHA_BEIRAL / 2.0))
+        v.co.z += caida * (v.co.y / alcance_y)
     obj = _fechar(obj, bm)
     obj["material"] = "MAT_ESTRUTURA_VERMELHA"
     pecas.append(obj)
