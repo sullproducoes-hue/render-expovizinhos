@@ -1083,6 +1083,24 @@ apareceu na vista de topo. Agora é um grid que usa a mesma `terreno.elevacao()`
 
 ## Comandos
 
+**Os portões, e é com eles que se começa qualquer sessão:**
+
+```bash
+"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python scripts/conferir_contato.py -- --blend out/cena.blend --json out/contato-medido.json
+```
+
+```bash
+"C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python scripts/conferir_camera.py -- --blend out/cena.blend
+```
+
+```bash
+.venv/Scripts/python.exe scripts/planos.py --conferir
+```
+
+```bash
+.venv/Scripts/python.exe scripts/casar_predios.py
+```
+
 **Os da quinta sessão, na ordem em que se usam:**
 
 ```bash

@@ -220,3 +220,43 @@ Três coisas a mais que a conferência trouxe, para ninguém repetir o caminho:
 ```bash
 .venv/Scripts/python.exe scripts/extrair_footprints.py --diagnostico
 ```
+
+---
+
+## As 10 que a triagem deixava invisíveis — resolvido em 15/08
+
+A tabela acima separa **18 que servem**, **35 só o rótulo** e **38 fora do
+alcance**. Sobram **10 medidas com confiança `baixa`** — aquelas cuja mancha o
+extrator mediu e recusou, porque é a tinta da própria palavra.
+
+**Elas não entravam em lugar nenhum.** Não valiam como medida (a confiança é
+baixa de propósito) e o resolver de estimativa só olhava `so o rotulo` e
+`sem mancha`. Não eram 35 zonas pendentes: eram 35 resolvidas e **10
+invisíveis** — e entre elas está o **Mercado do Produtor**, que é um dos quatro
+diferenciais do cliente.
+
+Agora cada uma tem destino escrito em `data/estimativas.json`, no bloco
+`medida_recusada_vira_estimativa`, e quem não tiver decisão sai em `recusados`,
+nunca em silêncio.
+
+| zona | preenchimento | decisão |
+|---|---|---|
+| `Bar` (4 delas) | 0,31 – 0,80 | **estimar** como quiosque, igual aos seis irmãos |
+| `É CHURRASCO!` | 0,992 | **estimar** como quiosque (módulo de 25 m² da própria planta) |
+| `CASA DO MÉDICO VETERINÁRIO` | 0,895 | **estimar** com o tipo novo `casa_de_servico`, 13,2 × 11,9 m — a **mediana das três RESIDÊNCIAS medidas** nesta mesma planta |
+| `Mercado do Produtor` | 0,851 | **não construir** — é uso dentro do Pavilhão 3 |
+| `PAVILHÃO 3` | 0,844 | **não construir** — mesmo bloco |
+| `JULGAMENTO RUSTICO` | 0,377 | **não construir** — pista é superfície, e a extensão é o dado que falta |
+| `PISTA DE JULGAMENTOS` | 0,720 | **não construir** — idem, e inventá-la contaminaria a âncora da Fazendinha |
+
+**O que sustenta o "não construir" do primeiro par**, e são duas fontes que não
+se falam: o áudio do cliente diz *"No Pavilhão 3, mercado do produtor, café
+colonial, cozinha didática"* `[00:15]`; e na planta os três rótulos estão a
+**4,1 m** (`PAVILHÃO 3` ↔ `Café Colonial`) e **7,4 m** (`PAVILHÃO 3` ↔
+`Mercado do Produtor`) um do outro. É um bloco só — e ele **já está na cena**,
+com footprint medido, como `Café Colonial Cozinha Didática` (34,3 × 14,1 m).
+
+**Fica uma dúvida honesta:** 486 m² é pequeno para um pavilhão que abriga três
+usos. Os pavilhões 1 e 2 medem 1.327 e 1.418 m². Ou a mancha é parcial, ou o
+Pavilhão 3 é menor mesmo — **uma palavra dele resolve**, e está na tabela de
+pendências do `ESTADO.md`.
