@@ -135,6 +135,7 @@ forma medida do prédio redondo não sabe onde pousar.
 da concha, e o quadro exposto para o telhado.
 
 ---
+
 ## COMO A CENA ESTÁ AGORA — leia estes 12 números primeiro
 
 ```
