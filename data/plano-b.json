@@ -31,9 +31,9 @@
   "planos_que_partem_em_dois": 3,
   "prontos": 10,
   "com_ressalva": 11,
-  "sem_placa": 1,
-  "placas_resolvidas": 44,
-  "placas_totais": 44,
+  "sem_placa": 0,
+  "placas_resolvidas": 46,
+  "placas_totais": 46,
   "duracao_total_s": 182.5
  },
  "planos": [
@@ -1716,8 +1716,8 @@
    "lente_mm": 24,
    "movimento": "travelling",
    "altura_m": 21.0,
-   "estado": "SEM PLACA",
-   "porque_o_estado": "nenhuma referencia de imagem existe para este plano",
+   "estado": "PLACA EMPRESTADA",
+   "porque_o_estado": "sem placa propria; usa a do P16 por ordem dele",
    "bloqueio": "Nenhum quadro do acervo mostra o setor de veiculos e motos nauticas identificado. A separacao entre maquinas e veiculos so existe pela COR com que a planta pinta o estande -- ver scripts/classificar_estandes.py.",
    "cena_3d": "12 estandes azuis da planta, centroide em (-34,2 . 58,4) m",
    "pasta_de_trabalho": "out/plano-b/P17",
@@ -1730,9 +1730,82 @@
      "primeiro_quadro": "a imagem gerada do plano"
     }
    ],
-   "placas": [],
+   "placas": [
+    {
+     "video": "DJI_0937_stabilized.mp4",
+     "raiz": "brutos",
+     "tc_s": 6.0,
+     "papel": "placa-base",
+     "confianca": "emprestada",
+     "porque": "alameda de tratores -- exatamente o setor, com a implantacao real dos equipamentos em fila sob arvore.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q013_00-00-06.jpg",
+     "thumb": "thumbs/dji-0937-stabilized/q013_00-00-06.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q014_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 61.9,
+       "thumb": "thumbs/dji-0937-stabilized/q014_00-00-06.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q011_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 57.7,
+       "thumb": "thumbs/dji-0937-stabilized/q011_00-00-05.jpg"
+      }
+     ],
+     "id": "dji-0937-stabilized__q013_00-00-06",
+     "tc_do_arquivo": "00:00:06",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 74.6,
+     "tier": "bom",
+     "periodo": "fim de tarde",
+     "emprestada_de": "P16",
+     "porque_emprestada": "Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta."
+    },
+    {
+     "video": "DJI_0935_stabilized_2.mp4",
+     "raiz": "brutos",
+     "tc_s": 2.5,
+     "papel": "apoio",
+     "confianca": "emprestada",
+     "porque": "alameda de maquinas sob as arvores, outro angulo e outra hora.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q005_00-00-02.jpg",
+     "thumb": "thumbs/dji-0935-stabilized-2/q005_00-00-02.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q006_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 81.6,
+       "thumb": "thumbs/dji-0935-stabilized-2/q006_00-00-02.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q007_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 87.7,
+       "thumb": "thumbs/dji-0935-stabilized-2/q007_00-00-02.jpg"
+      }
+     ],
+     "id": "dji-0935-stabilized-2__q005_00-00-02",
+     "tc_do_arquivo": "00:00:02",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 45.0,
+     "tier": "bom",
+     "periodo": "fim de tarde",
+     "emprestada_de": "P16",
+     "porque_emprestada": "Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta."
+    }
+   ],
    "prompts": {
-    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area — pickup trucks and boats on trailers, dealer stands, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area. KEEP the layout of the reference image — the same tree-lined avenue, the same row of units parked at the same angle, the same ground and the same light — but REPLACE every tractor and farm implement with pickup trucks, SUVs and motorboats and jet-skis sitting on road trailers. No agricultural machinery anywhere in the frame. Dealer banners beside the units, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
     "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
     "animacao": "slow lateral tracking move, camera sliding sideways at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
     "letreiro_na_tela": null,

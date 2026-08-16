@@ -2,9 +2,9 @@
 
 > Gerado por `scripts/plano_b.py`. Não editar à mão — editar a fonte e regerar.
 
-**22 planos · 182.5 s de filme · 44 de 44 placas resolvem para arquivo em disco.**
+**22 planos · 182.5 s de filme · 46 de 46 placas resolvem para arquivo em disco.**
 
-10 prontos · 11 prontos com ressalva · 1 sem placa utilizável.
+10 prontos · 11 prontos com ressalva · 0 sem placa utilizável.
 
 
 ## O ciclo, por plano — sempre os mesmos cinco passos
@@ -84,13 +84,13 @@ O filme roda P01→P22. O **trabalho** não: começa pelo que tem mais tela e pe
 | **P18** | Area de Shows | 5.5 s | PRONTO |
 | **P20** | Palco Principal | 7.0 s | PRONTO COM RESSALVA |
 
-### Onda 4 — o que não tem placa
+### Onda 4 — o plano de placa emprestada
 
-*só entra depois que as três primeiras fecharem: gera sem referência, ou sai do filme.*
+*P17 é o único do filme sem imagem própria no acervo. Por ordem dele (16/08), usa a placa das máquinas do P16 pela implantação — mesma alameda, mesma hora — e o prompt troca trator por picape e barco. Vai por último porque é o único que depende de a troca convencer.*
 
 | plano | local | dur. | estado |
 |---|---|---|---|
-| **P17** | Veiculos e Motos Nauticas | 5.0 s | SEM PLACA |
+| **P17** | Veiculos e Motos Nauticas | 5.0 s | PLACA EMPRESTADA |
 
 ---
 
@@ -781,7 +781,7 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 6.0 
 
 ### P17 — Veiculos e Motos Nauticas
 
-`SEM PLACA` · 5.0 s · 24 mm · travelling · câmera a 21.0 m
+`PLACA EMPRESTADA` · 5.0 s · 24 mm · travelling · câmera a 21.0 m
 
 
 > **Bloqueio:** Nenhum quadro do acervo mostra o setor de veiculos e motos nauticas identificado. A separacao entre maquinas e veiculos so existe pela COR com que a planta pinta o estande -- ver scripts/classificar_estandes.py.
@@ -790,14 +790,23 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 6.0 
 **Placas** (abrir estas):
 
 
-*Nenhuma. Este plano não tem imagem de referência no projeto.*
+- `F:\Extração quadros expo 2025\DJI_0937_stabilized\quadros\q013_00-00-06.jpg`  
+  placa-base · emprestada · fim de tarde · nota 74.6  
+  *alameda de tratores -- exatamente o setor, com a implantacao real dos equipamentos em fila sob arvore.*
+  
+  **Emprestada do P16.** Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta.
 
+- `F:\Extração quadros expo 2025\DJI_0935_stabilized_2\quadros\q005_00-00-02.jpg`  
+  apoio · emprestada · fim de tarde · nota 45.0  
+  *alameda de maquinas sob as arvores, outro angulo e outra hora.*
+  
+  **Emprestada do P16.** Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta.
 
 
 **Prompt de imagem:**
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area — pickup trucks and boats on trailers, dealer stands, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area. KEEP the layout of the reference image — the same tree-lined avenue, the same row of units parked at the same angle, the same ground and the same light — but REPLACE every tractor and farm implement with pickup trucks, SUVs and motorboats and jet-skis sitting on road trailers. No agricultural machinery anywhere in the frame. Dealer banners beside the units, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
 **Negativo:**

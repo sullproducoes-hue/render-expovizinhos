@@ -286,8 +286,15 @@ CONTEUDO_EN = {
     "P16": "agricultural machinery exhibition — tractors, combine harvesters, "
            "seeders and implements lined up on gravel, buyers inspecting them, "
            "manufacturer flags",
-    "P17": "vehicle and nautical display area — pickup trucks and boats on "
-           "trailers, dealer stands, buyers walking the line",
+    # A placa deste plano e emprestada do P16 e mostra TRATORES. O prompt tem
+    # de mandar a troca de forma explicita, senao a IA devolve trator.
+    "P17": "vehicle and nautical display area. KEEP the layout of the reference "
+           "image — the same tree-lined avenue, the same row of units parked at "
+           "the same angle, the same ground and the same light — but REPLACE "
+           "every tractor and farm implement with pickup trucks, SUVs and "
+           "motorboats and jet-skis sitting on road trailers. No agricultural "
+           "machinery anywhere in the frame. Dealer banners beside the units, "
+           "buyers walking the line",
     "P18": "large open show ground filling with a crowd at dusk, stage lighting "
            "towers, sound system, the crowd facing the stage",
     "P19": "rodeo arena — an oval dirt track with a bucking bull and a mounted "
@@ -306,6 +313,25 @@ TENDAS_EN = (
     "white peaked event marquees and tents pitched across the grounds, "
     "guy ropes and steel poles visible"
 )
+
+
+# PLACA EMPRESTADA. Plano sem imagem nenhuma no acervo pega a placa de um
+# vizinho -- nao pela aparencia do conteudo, mas pela IMPLANTACAO: mesma
+# alameda, mesma arvore, mesma hora, mesma altura de camera. O que muda e o que
+# esta exposto no chao, e isso o prompt troca.
+#
+# Ordem do Natan, 16/08: "usa a imagem de referencia dos tratores para trocar
+# por motos nauticas". P17 e o unico plano do filme sem placa propria.
+PLACAS_EMPRESTADAS = {
+    "P17": {
+        "de": "P16",
+        "porque": "Ordem dele em 16/08. O acervo nao tem um unico quadro da area "
+                  "de veiculos e nauticos. A alameda de maquinas do P16 da a "
+                  "IMPLANTACAO certa -- fila de equipamentos sob as arvores, "
+                  "mesma hora, mesma altura -- e o prompt troca o que esta "
+                  "exposto: sai trator, entra picape e barco sobre carreta.",
+    },
+}
 
 
 def povoar_en(plano_id: str, povoamento: dict) -> str:
@@ -399,14 +425,36 @@ def montar() -> dict:
     letr = {l["plano"]: l for l in letreiros_j["letreiros"]}
 
     registros = []
+    placas_por_plano: dict[str, list] = {}
+    for local in ia["locais"]:
+        placas_por_plano[local["plano"]] = [
+            resolver(r, por_pasta, ia["raizes"]) for r in (local.get("reais") or [])]
+
     for local in ia["locais"]:
         pid = local["plano"]
         plano = por_id.get(pid, {})
-        placas = [resolver(r, por_pasta, ia["raizes"]) for r in (local.get("reais") or [])]
+        placas = placas_por_plano[pid]
+
+        # Plano sem placa propria toma emprestada a do vizinho declarado. O
+        # emprestimo fica MARCADO na placa -- ela nao vira placa dele.
+        emprestimo = PLACAS_EMPRESTADAS.get(pid)
+        if emprestimo and not placas:
+            for origem in placas_por_plano.get(emprestimo["de"], []):
+                if not origem["resolvido"]:
+                    continue
+                copia = dict(origem)
+                copia["emprestada_de"] = emprestimo["de"]
+                copia["porque_emprestada"] = emprestimo["porque"]
+                copia["confianca"] = "emprestada"
+                placas.append(copia)
+
         resolvidas = [p for p in placas if p["resolvido"]]
 
         # O estado do plano é uma conta, não uma opinião.
-        if not placas:
+        if emprestimo and resolvidas:
+            estado, porque = ("PLACA EMPRESTADA",
+                              f"sem placa propria; usa a do {emprestimo['de']} por ordem dele")
+        elif not placas:
             estado, porque = "SEM PLACA", "nenhuma referencia de imagem existe para este plano"
         elif not resolvidas:
             estado, porque = "PLACA NAO RESOLVE", "as referencias existem mas nenhuma virou arquivo em disco"
@@ -531,9 +579,11 @@ def escrever_md(d: dict) -> str:
         ("Onda 3 — o corpo do percurso",
          "planos de 5 a 11 s, o miolo. Rodam em série, sem decisão nova.",
          ["P03", "P04", "P05", "P07", "P09", "P10", "P11", "P12", "P13", "P16", "P18", "P20"]),
-        ("Onda 4 — o que não tem placa",
-         "só entra depois que as três primeiras fecharem: gera sem referência, "
-         "ou sai do filme.",
+        ("Onda 4 — o plano de placa emprestada",
+         "P17 é o único do filme sem imagem própria no acervo. Por ordem dele "
+         "(16/08), usa a placa das máquinas do P16 pela implantação — mesma "
+         "alameda, mesma hora — e o prompt troca trator por picape e barco. "
+         "Vai por último porque é o único que depende de a troca convencer.",
          ["P17"]),
     ]
     por_id = {p["plano"]: p for p in d["planos"]}
@@ -570,6 +620,9 @@ def escrever_md(d: dict) -> str:
                          f"  {pl['papel']} · {pl['confianca']} · {pl.get('periodo')} · "
                          f"nota {pl.get('nota')}{extra}  \n"
                          f"  *{pl['porque']}*")
+                if pl.get("emprestada_de"):
+                    L.append(f"  \n  **Emprestada do {pl['emprestada_de']}.** "
+                             f"{pl['porque_emprestada']}")
             else:
                 L.append(f"\n- **{pl['video']}** — não resolve: {pl['motivo_nao_resolvido']}  \n"
                          f"  *{pl['porque']}*")
@@ -604,6 +657,7 @@ def escrever_md(d: dict) -> str:
 def escrever_html(d: dict) -> str:
     r = d["_resumo"]
     cor = {"PRONTO": "#2f7d32", "PRONTO COM RESSALVA": "#b06000",
+           "PLACA EMPRESTADA": "#7a5aa0",
            "SEM PLACA": "#a02020", "PLACA NAO RESOLVE": "#a02020"}
     e = html.escape
 
@@ -621,6 +675,9 @@ def escrever_html(d: dict) -> str:
                     f'alt {e(str(a.get("tc") or ""))}</button>'
                     for a in pl["alternativas"])
                 pe = '<b class="av">EM PÉ</b>' if pl.get("em_pe") else ""
+                empr = (f'<p class="empr"><b>Placa emprestada do {e(pl["emprestada_de"])}.</b> '
+                        f'{e(pl["porque_emprestada"])}</p>'
+                        if pl.get("emprestada_de") else "")
                 placas.append(f"""
         <div class="placa">
           {visual}
@@ -630,6 +687,7 @@ def escrever_html(d: dict) -> str:
             <button class="cam principal" data-c="{e(pl['arquivo'])}">copiar caminho</button>
             {alts}
             <code>{e(pl['arquivo'])}</code>
+            {empr}
             <p>{e(pl['porque'] or '')}</p>
           </div>
         </div>""")
@@ -736,6 +794,8 @@ def escrever_html(d: dict) -> str:
    letter-spacing:.06em; margin:0 0 5px; display:flex; align-items:center; gap:8px }}
  pre {{ background:#101008; border:1px solid var(--ln); border-radius:5px; padding:10px;
    margin:0; white-space:pre-wrap; font-size:12.5px; color:#cfc9b4 }}
+ .empr {{ background:#2a2038; border-left:3px solid #7a5aa0; padding:6px 9px;
+   margin:6px 0; font-size:12px; color:#cfc0e0; border-radius:0 4px 4px 0 }}
  .corte {{ background:#3a2a10; border-left:3px solid #b06000; padding:8px 10px;
    margin-top:8px; font-size:12.5px; border-radius:0 4px 4px 0 }}
  .corte ul {{ margin:6px 0 0; padding-left:18px; color:var(--mu) }}
