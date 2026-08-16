@@ -106,3 +106,53 @@ por área pavimentada.
 alternativa honesta é medir o asfalto num quadro do footage pelo mesmo método do
 `medir_materiais.py` — é meia hora de máquina, não é pesquisa. Fica esperando a
 decisão dele sobre se vale.
+
+---
+
+## P06 · Três das cinco placas novas do P19 não sei de que voo são
+
+**O contexto.** Em 16/08 ele subiu **cinco quadros** como placa do P19 (Arena de
+Rodeio), pelo painel de upload. São melhores do que as três do catálogo, e
+**resolvem parte do bloqueio escrito no P19**: aquele texto dizia que o acervo
+não tem a arena montada. Continua sem brete e sem porteira de partida — mas
+agora tem, **de foto e não de suposição**, a bacia de terra, o palco fixo de
+frente e a **ausência de arquibancada**, que é a restrição dura do cliente.
+
+O que elas mostram, olhando:
+
+| | |
+|---|---|
+| uma | a bacia **em dia de evento** — palco de truss com painel, balões, tendas brancas de pico, gradil em volta da pista. Sol a pino, céu azul duro: **luz errada para o filme**, mas é a única leitura de "como o evento se veste" |
+| quatro | o **palco fixo** — concha branca, base azul, cobertura de aço vermelha — com a bacia de terra riscada de rastro de pneu. **Fim de tarde, sol baixo, sombra longa**: é a luz que `data/luz.json` declara (27/11, 18:15) |
+
+**A dúvida.** O painel devolve o nome do arquivo, não o caminho. Cruzei os cinco
+nomes contra `data/acervo-quadros.json` e **só dois fecham em um voo só**:
+
+| nome | caminho | como sei |
+|---|---|---|
+| `q052_00-00-08.jpg` | `E:\…\extracao\1 _4_\quadros\q052_00-00-08.jpg` | candidato único |
+| `q079_00-00-12.jpg` | `E:\…\extracao\1 _4_\quadros\q079_00-00-12.jpg` | candidato único |
+| `q015_00-00-12.jpg` | `E:\…\extracao\1 _2_\quadros\q015_00-00-12.jpg` | 2 candidatos; o outro é noturno e estas não são |
+
+Os outros dois **não fecham**: `q007_00-00-01.jpg` tem **28** candidatos e
+`q014_00-00-02.jpg` tem **15**, espalhados por voos diferentes. O melhor palpite
+para os dois é a família `DJI_0953_stabilized` (fim de tarde, nota 88,5 no
+primeiro), mas **é palpite, e palpite não vira caminho no projeto**.
+
+Convém notar que `1 (4)` é justamente o voo onde `docs/MATERIAIS-referencia.md`
+mediu a pessoa de 1,70 m ao lado do palco fixo — as placas novas caem no mesmo
+material que já serve de gabarito de escala.
+
+**O que ela trava.** Nada da geração: os cinco assets já estão na Artlist e o
+prompt já foi montado em cima deles. Trava só **gravar a procedência** em
+`data/quadros-ia.json`, e procedência é o que este projeto não inventa.
+
+**PROVISÓRIO — não escrevi nenhum dos cinco em `quadros-ia.json`.** Motivo: dois
+dos caminhos seriam chute, e `quadros-ia.json` é a fonte das âncoras conferidas
+a olho. Uma linha errada ali contamina a esteira inteira, porque
+`scripts/plano_b.py` resolve tudo a partir dela.
+
+**O conserto é de trinta segundos, e é dele:** abrir os dois arquivos que ele
+subiu e dizer de que pasta saíram. Com isso os cinco entram como placa do P19,
+com `confianca: confirmado` e `papel: forma`, e o bloqueio do P19 pode ser
+reescrito para dizer o que passou a existir.
