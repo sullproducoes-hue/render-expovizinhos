@@ -36,8 +36,12 @@ e a pasta onde salvar o que voltar.
 
 `out/` não versiona, então a página e as pastas nascem localmente — e é o certo:
 os caminhos são de `F:` e `E:`, e as miniaturas vêm de `out/acervo/thumbs/`.
-**As 44 placas do catálogo resolvem para arquivo em disco; só P17 (Veículos e
-Motos Náuticas) não tem imagem de referência nenhuma.**
+**As 46 placas resolvem para arquivo em disco**; P17, que não tinha imagem
+nenhuma, usa a das máquinas do P16 como placa emprestada, por ordem dele.
+
+`docs/ONDE-GERAR.md` diz **onde** gerar: o estado de cada conta, o custo por
+geração, a saída grátis pelo Google AI Studio, a regra de prompt
+imagem-para-imagem e os cinco itens a conferir antes de animar.
 
 ## Gerar a cena 3D
 
