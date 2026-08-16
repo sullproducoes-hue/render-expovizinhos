@@ -1,0 +1,686 @@
+{
+ "_o_que_isto_prova": "Que os voos DJI_2025112* foram gravados no Parque de Exposicoes de Dois Vizinhos. Fecha a duvida aberta em DECISOES.md D055 e corrige o aviso de docs/COMO-O-PARQUE-ESCREVE.md.",
+ "_como": "GPS do proprio drone, amostra a amostra, no stream djmd do MP4. Nao e' inferencia visual: e' a coordenada que o aparelho gravou.",
+ "referencia": {
+  "lat": -25.73144,
+  "lon": -53.07627,
+  "o_que_e": "R. Jorge Amado, Jardim Marcante, Dois Vizinhos - PR"
+ },
+ "raio_do_recinto_m": 470.0,
+ "resumo": {
+  "pastas_em_duvida": 71,
+  "com_gps_dentro": 60,
+  "quadros_com_gps_dentro": 2440,
+  "com_gps_fora": 0,
+  "sem_gps": 11,
+  "quadros_sem_gps": 330
+ },
+ "voos": [
+  {
+   "pasta": "DJI_20251127211745_0128_D",
+   "voo_base": "DJI_20251127211745_0128_D",
+   "quadros": 30,
+   "lat": -25.7314537727228,
+   "lon": -53.076030770647,
+   "m": 24.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127184025_0104_D",
+   "voo_base": "DJI_20251127184025_0104_D",
+   "quadros": 30,
+   "lat": -25.7319882190372,
+   "lon": -53.0757688172322,
+   "m": 79.1,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251129182606_0171_D",
+   "voo_base": "DJI_20251129182606_0171_D",
+   "quadros": 30,
+   "lat": -25.7316971160199,
+   "lon": -53.0770792632966,
+   "m": 86.1,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128214925_0152_D",
+   "voo_base": "DJI_20251128214925_0152_D",
+   "quadros": 100,
+   "lat": -25.7321331891949,
+   "lon": -53.0766581607002,
+   "m": 86.4,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127211728_0127_D",
+   "voo_base": "DJI_20251127211728_0127_D",
+   "quadros": 30,
+   "lat": -25.7315705327477,
+   "lon": -53.0753901366585,
+   "m": 89.4,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127211437_0124_D",
+   "voo_base": "DJI_20251127211437_0124_D",
+   "quadros": 100,
+   "lat": -25.73155499482545,
+   "lon": -53.077190527572,
+   "m": 93.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128214740_0151_D",
+   "voo_base": "DJI_20251128214740_0151_D",
+   "quadros": 30,
+   "lat": -25.731920464544,
+   "lon": -53.0754794943714,
+   "m": 95.6,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127184319_0108_D",
+   "voo_base": "DJI_20251127184319_0108_D",
+   "quadros": 30,
+   "lat": -25.7311319659297,
+   "lon": -53.0753048808731,
+   "m": 102.7,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127211702_0126_D",
+   "voo_base": "DJI_20251127211702_0126_D",
+   "quadros": 30,
+   "lat": -25.7312018093325,
+   "lon": -53.0752618379632,
+   "m": 104.5,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126231950_0100_D",
+   "voo_base": "DJI_20251126231950_0100_D",
+   "quadros": 30,
+   "lat": -25.7315054508841,
+   "lon": -53.07744883206965,
+   "m": 118.4,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128215311_0154_D",
+   "voo_base": "DJI_20251128215311_0154_D",
+   "quadros": 30,
+   "lat": -25.7315062758896,
+   "lon": -53.07757592384175,
+   "m": 131.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185647_0078_D",
+   "voo_base": "DJI_20251126185647_0078_D",
+   "quadros": 30,
+   "lat": -25.7325916346995,
+   "lon": -53.0757282856786,
+   "m": 139.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127184259_0107_D",
+   "voo_base": "DJI_20251127184259_0107_D",
+   "quadros": 30,
+   "lat": -25.7310053959729,
+   "lon": -53.0749041380087,
+   "m": 145.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128224202_0157_D",
+   "voo_base": "DJI_20251128224202_0157_D",
+   "quadros": 30,
+   "lat": -25.7315458734006,
+   "lon": -53.07772299689066,
+   "m": 146.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128224107_0156_D",
+   "voo_base": "DJI_20251128224107_0156_D",
+   "quadros": 30,
+   "lat": -25.7320961949443,
+   "lon": -53.07757046977245,
+   "m": 149.5,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128230502_0166_D",
+   "voo_base": "DJI_20251128230502_0166_D",
+   "quadros": 30,
+   "lat": -25.731944861817,
+   "lon": -53.0776863861926,
+   "m": 152.8,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128224305_0163_D",
+   "voo_base": "DJI_20251128224305_0163_D",
+   "quadros": 30,
+   "lat": -25.7317967103896,
+   "lon": -53.0777574023864,
+   "m": 154.4,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128230549_0167_D",
+   "voo_base": "DJI_20251128230549_0167_D",
+   "quadros": 30,
+   "lat": -25.7318261026908,
+   "lon": -53.0777879506351,
+   "m": 158.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126232103_0102_D",
+   "voo_base": "DJI_20251126232103_0102_D",
+   "quadros": 30,
+   "lat": -25.7321717256322,
+   "lon": -53.0776481809299,
+   "m": 160.4,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127184447_0110_D",
+   "voo_base": "DJI_20251127184447_0110_D",
+   "quadros": 30,
+   "lat": -25.7319694494104,
+   "lon": -53.0778383412578,
+   "m": 168.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126155520_0054_D",
+   "voo_base": "DJI_20251126155520_0054_D",
+   "quadros": 30,
+   "lat": -25.7323046398985,
+   "lon": -53.0776462895234,
+   "m": 168.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128230040_0165_D-001",
+   "voo_base": "DJI_20251128230040_0165_D",
+   "quadros": 150,
+   "lat": -25.7316422059493,
+   "lon": -53.07796990399645,
+   "m": 171.9,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128230040_0165_D-002",
+   "voo_base": "DJI_20251128230040_0165_D",
+   "quadros": 100,
+   "lat": -25.7316422059493,
+   "lon": -53.07796990399645,
+   "m": 171.9,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126210442_0012_D",
+   "voo_base": "DJI_20251126210442_0012_D",
+   "quadros": 30,
+   "lat": -25.7324913074189,
+   "lon": -53.0775623136197,
+   "m": 174.6,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127184535_0112_D",
+   "voo_base": "DJI_20251127184535_0112_D",
+   "quadros": 30,
+   "lat": -25.7314623269617,
+   "lon": -53.0780935807911,
+   "m": 182.9,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126210459_0013_D",
+   "voo_base": "DJI_20251126210459_0013_D",
+   "quadros": 30,
+   "lat": -25.7327136379474,
+   "lon": -53.0774939597454,
+   "m": 187.5,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185721_0082_D",
+   "voo_base": "DJI_20251126185721_0082_D",
+   "quadros": 30,
+   "lat": -25.7317386333568,
+   "lon": -53.0781355089478,
+   "m": 190.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185403_0074_D",
+   "voo_base": "DJI_20251126185403_0074_D",
+   "quadros": 30,
+   "lat": -25.7297087364634,
+   "lon": -53.0763874145822,
+   "m": 193.1,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126232040_0101_D",
+   "voo_base": "DJI_20251126232040_0101_D",
+   "quadros": 30,
+   "lat": -25.7321610957096,
+   "lon": -53.0780828106069,
+   "m": 198.7,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185441_0075_D",
+   "voo_base": "DJI_20251126185441_0075_D",
+   "quadros": 10,
+   "lat": -25.7302464466596,
+   "lon": -53.0778606895728,
+   "m": 207.6,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128220207_0155_D",
+   "voo_base": "DJI_20251128220207_0155_D",
+   "quadros": 30,
+   "lat": -25.7319014525629,
+   "lon": -53.078455412337,
+   "m": 225.1,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185328_0073_D",
+   "voo_base": "DJI_20251126185328_0073_D",
+   "quadros": 30,
+   "lat": -25.7318956307373,
+   "lon": -53.0784635998818,
+   "m": 225.7,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126210416_0011_D",
+   "voo_base": "DJI_20251126210416_0011_D",
+   "quadros": 30,
+   "lat": -25.732544048265,
+   "lon": -53.0786925419334,
+   "m": 272.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126210515_0014_D",
+   "voo_base": "DJI_20251126210515_0014_D",
+   "quadros": 150,
+   "lat": -25.7327197171989,
+   "lon": -53.0787405782064,
+   "m": 285.8,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185307_0072_D",
+   "voo_base": "DJI_20251126185307_0072_D",
+   "quadros": 30,
+   "lat": -25.7317565417507,
+   "lon": -53.0792212142727,
+   "m": 298.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185254_0071_D",
+   "voo_base": "DJI_20251126185254_0071_D",
+   "quadros": 30,
+   "lat": -25.7317010443647,
+   "lon": -53.0792463964693,
+   "m": 299.9,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185232_0069_D",
+   "voo_base": "DJI_20251126185232_0069_D",
+   "quadros": 30,
+   "lat": -25.7317317922354,
+   "lon": -53.0792469194213,
+   "m": 300.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185246_0070_D",
+   "voo_base": "DJI_20251126185246_0070_D",
+   "quadros": 30,
+   "lat": -25.731692252708,
+   "lon": -53.0792512148103,
+   "m": 300.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185147_0068_D",
+   "voo_base": "DJI_20251126185147_0068_D",
+   "quadros": 30,
+   "lat": -25.7317102900649,
+   "lon": -53.0792550033019,
+   "m": 300.8,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185131_0067_D",
+   "voo_base": "DJI_20251126185131_0067_D",
+   "quadros": 30,
+   "lat": -25.7317338051786,
+   "lon": -53.0792703359986,
+   "m": 302.7,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126155259_0053_D",
+   "voo_base": "DJI_20251126155259_0053_D",
+   "quadros": 100,
+   "lat": -25.7317652780902,
+   "lon": -53.0793838104329,
+   "m": 314.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127184005_0103_D",
+   "voo_base": "DJI_20251127184005_0103_D",
+   "quadros": 30,
+   "lat": -25.7318041418333,
+   "lon": -53.0794620218448,
+   "m": 322.7,
+   "de": "exiftool -ee no MP4 original",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127211824_0131_D",
+   "voo_base": "DJI_20251127211824_0131_D",
+   "quadros": 100,
+   "lat": -25.73295823223475,
+   "lon": -53.07909621404095,
+   "m": 330.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127212915_0135_D",
+   "voo_base": "DJI_20251127212915_0135_D",
+   "quadros": 30,
+   "lat": -25.7329742968726,
+   "lon": -53.079121031267,
+   "m": 333.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128151122_0141_D",
+   "voo_base": "DJI_20251128151122_0141_D",
+   "quadros": 30,
+   "lat": -25.7323782154522,
+   "lon": -53.0794345647116,
+   "m": 334.1,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128150656_0136_D",
+   "voo_base": "DJI_20251128150656_0136_D",
+   "quadros": 30,
+   "lat": -25.7321778506351,
+   "lon": -53.0795089948404,
+   "m": 335.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251129182345_0168_D",
+   "voo_base": "DJI_20251129182345_0168_D",
+   "quadros": 100,
+   "lat": -25.7322901963109,
+   "lon": -53.0794876233113,
+   "m": 336.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128151139_0142_D",
+   "voo_base": "DJI_20251128151139_0142_D",
+   "quadros": 30,
+   "lat": -25.7323714621854,
+   "lon": -53.079473255328,
+   "m": 337.5,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128151108_0140_D",
+   "voo_base": "DJI_20251128151108_0140_D",
+   "quadros": 30,
+   "lat": -25.7324911776025,
+   "lon": -53.0794275093737,
+   "m": 337.6,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185059_0066_D",
+   "voo_base": "DJI_20251126185059_0066_D",
+   "quadros": 30,
+   "lat": -25.7319244053991,
+   "lon": -53.0796571597749,
+   "m": 343.9,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185022_0065_D",
+   "voo_base": "DJI_20251126185022_0065_D",
+   "quadros": 30,
+   "lat": -25.731888061603,
+   "lon": -53.079683984861,
+   "m": 346.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127185405_0115_D",
+   "voo_base": "DJI_20251127185405_0115_D",
+   "quadros": 30,
+   "lat": -25.7322106486426,
+   "lon": -53.0796304868897,
+   "m": 347.7,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128151038_0139_D",
+   "voo_base": "DJI_20251128151038_0139_D",
+   "quadros": 30,
+   "lat": -25.7326170724817,
+   "lon": -53.0794867747443,
+   "m": 348.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128150932_0138_D",
+   "voo_base": "DJI_20251128150932_0138_D",
+   "quadros": 30,
+   "lat": -25.7326675106146,
+   "lon": -53.079542719129,
+   "m": 355.5,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126210242_0009_D",
+   "voo_base": "DJI_20251126210242_0009_D",
+   "quadros": 30,
+   "lat": -25.7328527974439,
+   "lon": -53.0795690185279,
+   "m": 366.3,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251128150752_0137_D",
+   "voo_base": "DJI_20251128150752_0137_D",
+   "quadros": 30,
+   "lat": -25.7329159736558,
+   "lon": -53.0796330137577,
+   "m": 375.1,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126210403_0010_D",
+   "voo_base": "DJI_20251126210403_0010_D",
+   "quadros": 30,
+   "lat": -25.7330876792589,
+   "lon": -53.0796103293149,
+   "m": 381.9,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251127212305_0134_D",
+   "voo_base": "DJI_20251127212305_0134_D",
+   "quadros": 30,
+   "lat": -25.7335658099936,
+   "lon": -53.07927506282945,
+   "m": 383.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251129182505_0169_D",
+   "voo_base": "DJI_20251129182505_0169_D",
+   "quadros": 30,
+   "lat": -25.7321655499929,
+   "lon": -53.0800159606043,
+   "m": 384.2,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126185751_0083_D",
+   "voo_base": "DJI_20251126185751_0083_D",
+   "quadros": 30,
+   "lat": -25.7319805384679,
+   "lon": -53.0800825278637,
+   "m": 387.0,
+   "de": "telemetria/*.resumo.json (14/08)",
+   "dentro_do_recinto": true
+  },
+  {
+   "pasta": "DJI_20251126115731_0034_D_stabilized",
+   "voo_base": "DJI_20251126115731_0034_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126115801_0035_D_stabilized",
+   "voo_base": "DJI_20251126115801_0035_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126115801_0035_D_stabilized_1",
+   "voo_base": "DJI_20251126115801_0035_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126115900_0036_D_stabilized",
+   "voo_base": "DJI_20251126115900_0036_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126115900_0036_D_stabilized_1",
+   "voo_base": "DJI_20251126115900_0036_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126115933_0037_D_stabilized",
+   "voo_base": "DJI_20251126115933_0037_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126120009_0038_D_stabilized",
+   "voo_base": "DJI_20251126120009_0038_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126120135_0040_D_stabilized",
+   "voo_base": "DJI_20251126120135_0040_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126120213_0041_D_stabilized",
+   "voo_base": "DJI_20251126120213_0041_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126120722_0045_D_stabilized",
+   "voo_base": "DJI_20251126120722_0045_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  },
+  {
+   "pasta": "DJI_20251126120740_0046_D_stabilized",
+   "voo_base": "DJI_20251126120740_0046_D",
+   "quadros": 30,
+   "de": "sem metadado -- o arquivo e' export estabilizado e o estabilizador nao copia o stream djmd; o MP4 original nao esta mais no disco"
+  }
+ ]
+}

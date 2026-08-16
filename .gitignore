@@ -3,3 +3,8 @@ __pycache__/
 out/
 *.blend1
 .venv/
+
+# Ferramenta rebaixavel, nao fonte: 1,5 GB de binario do COLMAP em duas
+# versoes, mais os zips de origem. Quem precisar rebaixa -- os caminhos e as
+# versoes estao em docs/FOTOGRAMETRIA.md.
+.ferramentas/

@@ -42,6 +42,268 @@
    "evs_cap": 12
   },
   {
+   "arquivo": "assets/modelo/concrete_road_barrier/concrete_road_barrier_1k.blend",
+   "tipo": "modelo",
+   "nome": "Concrete Road Barrier",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Amal Kumar"
+   ],
+   "url": "https://polyhaven.com/a/concrete_road_barrier",
+   "md5": "a3e468415944c7271bd85b4c0c616fd6",
+   "bytes": 2597168,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    1545.3570485115051,
+    640.9457623958588,
+    835.279269143939
+   ],
+   "texturas_anexas": [
+    "textures/concrete_road_barrier_diff_1k.jpg",
+    "textures/concrete_road_barrier_disp_1k.png",
+    "textures/concrete_road_barrier_nor_gl_1k.exr",
+    "textures/concrete_road_barrier_rough_1k.exr"
+   ],
+   "triangulos": 60928,
+   "para_que_serve": "barreira de concreto: contencao de via dentro do recinto",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/concrete_road_barrier_02/concrete_road_barrier_02_1k.blend",
+   "tipo": "modelo",
+   "nome": "Concrete Road Barrier 02",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Amal Kumar"
+   ],
+   "url": "https://polyhaven.com/a/concrete_road_barrier_02",
+   "md5": "63257e46600deeff8cf63ea39a31c6b5",
+   "bytes": 1681853,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    1566.9698119163513,
+    442.20101833343506,
+    1111.9812715332955
+   ],
+   "texturas_anexas": [
+    "textures/concrete_road_barrier_02_diff_1k.jpg",
+    "textures/concrete_road_barrier_02_disp_1k.png",
+    "textures/concrete_road_barrier_02_nor_gl_1k.exr",
+    "textures/concrete_road_barrier_02_rough_1k.exr"
+   ],
+   "triangulos": 23822,
+   "para_que_serve": "barreira de concreto, variante mais alta e mais barata",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/island_tree_01/island_tree_01_1k.blend",
+   "tipo": "modelo",
+   "nome": "Island Tree 01",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rico Cilliers",
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/island_tree_01",
+   "md5": "9482a71fc5482b65d3e07babb7c3a936",
+   "bytes": 58077856,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    12464.419603347778,
+    4818.506717681885,
+    5027.44660153985
+   ],
+   "texturas_anexas": [
+    "textures/island_tree_01_branches_diff_1k.png",
+    "textures/island_tree_01_branches_nor_gl_1k.png",
+    "textures/island_tree_01_branches_rough_1k.png",
+    "textures/island_tree_01_diff_1k.jpg",
+    "textures/island_tree_01_leaves_alpha_1k.png",
+    "textures/island_tree_01_leaves_diff_1k.png",
+    "textures/island_tree_01_leaves_nor_gl_1k.png",
+    "textures/island_tree_01_leaves_rough_1k.png",
+    "textures/island_tree_01_nor_gl_1k.exr",
+    "textures/island_tree_01_rough_1k.exr"
+   ],
+   "triangulos": 1599403,
+   "para_que_serve": "arvore media de copa larga (5,0 m alt x 12,5 m copa): quebra o porte unico do bosque",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/island_tree_02/island_tree_02_1k.blend",
+   "tipo": "modelo",
+   "nome": "Island Tree 02",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rico Cilliers",
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/island_tree_02",
+   "md5": "eeacbddb0ae5ceafa70115d066f21178",
+   "bytes": 38795227,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    8485.51321029663,
+    4078.6155462265015,
+    3408.9039135724306
+   ],
+   "texturas_anexas": [
+    "textures/island_tree_02_branches_diff_1k.png",
+    "textures/island_tree_02_branches_nor_gl_1k.png",
+    "textures/island_tree_02_branches_rough_1k.png",
+    "textures/island_tree_02_diff_1k.jpg",
+    "textures/island_tree_02_leaves_alpha_1k.png",
+    "textures/island_tree_02_leaves_diff_1k.png",
+    "textures/island_tree_02_leaves_nor_gl_1k.png",
+    "textures/island_tree_02_leaves_rough_1k.png",
+    "textures/island_tree_02_nor_gl_1k.exr",
+    "textures/island_tree_02_rough_1k.exr"
+   ],
+   "triangulos": 1072213,
+   "para_que_serve": "arvore baixa (3,4 m): sub-bosque e borda da mancha",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/jacaranda_tree/jacaranda_tree_1k.blend",
+   "tipo": "modelo",
+   "nome": "Jacaranda Tree",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rico Cilliers",
+    "Rob Tuytel"
+   ],
+   "url": "https://polyhaven.com/a/jacaranda_tree",
+   "md5": "1b827c7c364c6ebb2cbbff0f02b52a15",
+   "bytes": 180228496,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    24169.849395751953,
+    18028.766632080078,
+    19829.095542430878
+   ],
+   "texturas_anexas": [
+    "textures/jacaranda_tree_branches_diff_1k.png",
+    "textures/jacaranda_tree_branches_nor_gl_1k.png",
+    "textures/jacaranda_tree_branches_rough_1k.png",
+    "textures/jacaranda_tree_leaves_alpha_1k.png",
+    "textures/jacaranda_tree_leaves_diff_1k.png",
+    "textures/jacaranda_tree_leaves_nor_gl_1k.png",
+    "textures/jacaranda_tree_leaves_rough_1k.png",
+    "textures/jacaranda_tree_trunk_diff_1k.png",
+    "textures/jacaranda_tree_trunk_nor_gl_1k.png",
+    "textures/jacaranda_tree_trunk_rough_1k.png"
+   ],
+   "triangulos": 3863832,
+   "para_que_serve": "arvore-mae do bosque: 19,8 m de altura e copa de 24 m. Jacaranda mimosifolia e arvore de parque do sul do Brasil, e a folha vem em CARTAO com alpha, nao em malha",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/metal_trash_can/metal_trash_can_1k.blend",
+   "tipo": "modelo",
+   "nome": "Metal Trash Can",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "GurJas Studios"
+   ],
+   "url": "https://polyhaven.com/a/metal_trash_can",
+   "md5": "75246b680d1c202fd17f69b61c3a759b",
+   "bytes": 445758,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    1846.9352722167969,
+    556.2898814678192,
+    906.1697272554738
+   ],
+   "texturas_anexas": [
+    "textures/metal_trash_can_diff_1k.jpg",
+    "textures/metal_trash_can_metal_1k.exr",
+    "textures/metal_trash_can_nor_gl_1k.exr",
+    "textures/metal_trash_can_rough_1k.exr",
+    "textures/metal_trash_can_rust_diff_1k.png",
+    "textures/metal_trash_can_rust_metal_1k.png",
+    "textures/metal_trash_can_rust_nor_gl_1k.png",
+    "textures/metal_trash_can_rust_rough_1k.png"
+   ],
+   "triangulos": 13960,
+   "para_que_serve": "lixeira de recinto",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/modular_chainlink_fence/modular_chainlink_fence_1k.blend",
+   "tipo": "modelo",
+   "nome": "Modular Chainlink Fence",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Amal Kumar",
+    "James Ray Cock"
+   ],
+   "url": "https://polyhaven.com/a/modular_chainlink_fence",
+   "md5": "7b14d5286d9db59d0ea70f4d3ab43a25",
+   "bytes": 1890136,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    8115.001916885376,
+    2149.1531878709793,
+    2522.9129791259766
+   ],
+   "texturas_anexas": [
+    "textures/modular_chainlink_fence_posts_diff_1k.png",
+    "textures/modular_chainlink_fence_posts_metal_1k.png",
+    "textures/modular_chainlink_fence_posts_nor_gl_1k.png",
+    "textures/modular_chainlink_fence_posts_rough_1k.png",
+    "textures/modular_chainlink_fence_wire_alpha_1k.png",
+    "textures/modular_chainlink_fence_wire_diff_1k.png",
+    "textures/modular_chainlink_fence_wire_metal_1k.png",
+    "textures/modular_chainlink_fence_wire_nor_gl_1k.png",
+    "textures/modular_chainlink_fence_wire_rough_1k.png"
+   ],
+   "triangulos": 89232,
+   "para_que_serve": "alambrado modular de 8,1 m: cerca de recinto e de area de maquina",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
+   "arquivo": "assets/modelo/painted_wooden_bench/painted_wooden_bench_1k.blend",
+   "tipo": "modelo",
+   "nome": "Painted Wooden Bench",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Kirill Sannikov"
+   ],
+   "url": "https://polyhaven.com/a/painted_wooden_bench",
+   "md5": "2a3eedc9e85e0fcbf7f92145aeb61bc2",
+   "bytes": 133171,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    1164.9435758590698,
+    496.5430945158005,
+    889.2914750613272
+   ],
+   "texturas_anexas": [
+    "textures/painted_wooden_bench_diff_1k.jpg",
+    "textures/painted_wooden_bench_nor_gl_1k.exr",
+    "textures/painted_wooden_bench_rough_1k.exr"
+   ],
+   "triangulos": 630,
+   "para_que_serve": "banco de parque (630 triangulos: o mais barato do lote)",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
+  },
+  {
    "arquivo": "assets/modelo/plastic_monobloc_chair_01/plastic_monobloc_chair_01_1k.blend",
    "tipo": "modelo",
    "nome": "Plastic Monobloc Chair 01",
@@ -65,6 +327,650 @@
     "textures/plastic_monobloc_chair_01_nor_gl_1k.exr",
     "textures/plastic_monobloc_chair_01_rough_1k.exr"
    ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Female_LookingUp.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female LookingUp",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "ab1e8b242620d5f65314e7e1e29b67a2",
+   "bytes": 679016,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 1304,
+   "vertices": 654,
+   "caixa_unidades_yup": [
+    1.365,
+    3.591,
+    1.066
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Female_LookingUp.obj",
+    "OBJ/Female_LookingUp.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Female_Standing.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Standing",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "b515663e0176d58c2bd9e7c20baa594d",
+   "bytes": 687344,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 1356,
+   "vertices": 680,
+   "caixa_unidades_yup": [
+    1.014,
+    3.702,
+    0.699
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Female_Standing.obj",
+    "OBJ/Female_Standing.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Female_Standing_CoveringEyes.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Standing CoveringEyes",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "d7889da59573f6f2467171cd84823321",
+   "bytes": 687344,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 1356,
+   "vertices": 680,
+   "caixa_unidades_yup": [
+    1.021,
+    3.767,
+    0.941
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Female_Standing_CoveringEyes.obj",
+    "OBJ/Female_Standing_CoveringEyes.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Female_Standing_Hips.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Standing Hips",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "2623f5adfc569241037656413c93266c",
+   "bytes": 679016,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 1304,
+   "vertices": 654,
+   "caixa_unidades_yup": [
+    1.441,
+    3.724,
+    0.697
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Female_Standing_Hips.obj",
+    "OBJ/Female_Standing_Hips.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Female_Walking.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Walking",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "7e9cf55812be293ddfaaad1660499ca5",
+   "bytes": 687344,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 1356,
+   "vertices": 680,
+   "caixa_unidades_yup": [
+    1.059,
+    3.707,
+    1.353
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Female_Walking.obj",
+    "OBJ/Female_Walking.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Male_LookingUp.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male LookingUp",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "dbbdf1b7eea7cd06b6455478b641438d",
+   "bytes": 655340,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 888,
+   "vertices": 446,
+   "caixa_unidades_yup": [
+    1.986,
+    3.686,
+    1.183
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Male_LookingUp.obj",
+    "OBJ/Male_LookingUp.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Male_Standing.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Standing",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "ac6d224389a9feed24e235ca61f4b14e",
+   "bytes": 655260,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 888,
+   "vertices": 446,
+   "caixa_unidades_yup": [
+    1.239,
+    3.832,
+    0.692
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Male_Standing.obj",
+    "OBJ/Male_Standing.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Male_Standing_CoveringEyes.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Standing CoveringEyes",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "dd65240cac422c65003c39600e8d2104",
+   "bytes": 652420,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 888,
+   "vertices": 446,
+   "caixa_unidades_yup": [
+    1.438,
+    3.854,
+    0.928
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Male_Standing_CoveringEyes.obj",
+    "OBJ/Male_Standing_CoveringEyes.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Male_Standing_Hips.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Standing Hips",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "7a4b816120928d4bc7e0add86861ce7c",
+   "bytes": 652404,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 888,
+   "vertices": 446,
+   "caixa_unidades_yup": [
+    1.984,
+    3.82,
+    0.721
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Male_Standing_Hips.obj",
+    "OBJ/Male_Standing_Hips.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Male_Standing_Waving.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Standing Waving",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "fe2b9de34d12f5bac54c2d0635619ef8",
+   "bytes": 652372,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 888,
+   "vertices": 446,
+   "caixa_unidades_yup": [
+    1.566,
+    4.468,
+    0.782
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Male_Standing_Waving.obj",
+    "OBJ/Male_Standing_Waving.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Male_Walking.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Walking",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "c6a0a6f1ae920eb739770a3e0f3291bc",
+   "bytes": 655260,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 888,
+   "vertices": 446,
+   "caixa_unidades_yup": [
+    1.217,
+    3.843,
+    1.459
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Male_Walking.obj",
+    "OBJ/Male_Walking.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/Woman_Standing_Waving.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Woman Standing Waving",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "641cd63ebc849e92b3bc3f9538a2fe63",
+   "bytes": 681736,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "publico do recinto: instancia em pe a ~24 m da camera, onde le a silhueta e nao o rosto",
+   "sem_textura": "o pack e SEM textura: a cor vem de 4 materiais (Pants, Shirt, Shoes, Skin), o que deixa sortear a roupa por instancia sem gastar mapa nenhum",
+   "atencao_escala": "o OBJ/blend vem Y-up e com ~3,8 unidades de altura; para 1,72 m de gente real e escala ~0,455 e rotacao X +90 graus",
+   "triangulos": 1330,
+   "vertices": 667,
+   "caixa_unidades_yup": [
+    1.062,
+    4.207,
+    0.704
+   ],
+   "materiais": [
+    "Pants",
+    "Shirt",
+    "Shoes",
+    "Skin"
+   ],
+   "arquivos_anexos": [
+    "OBJ/Woman_Standing_Waving.obj",
+    "OBJ/Woman_Standing_Waving.mtl"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Female_Hairstyle_1.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Hairstyle 1",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "8696018eda0930c64d5ae85e082f26a2",
+   "bytes": 519152,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 376,
+   "vertices": 190,
+   "caixa_unidades_yup": [
+    0.523,
+    0.635,
+    0.558
+   ],
+   "materiais": [
+    "Hair"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Female_Hairstyle_2.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Hairstyle 2",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "6678d35b10b0b1883dca8d6c788326e6",
+   "bytes": 519152,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 376,
+   "vertices": 190,
+   "caixa_unidades_yup": [
+    0.617,
+    0.828,
+    0.558
+   ],
+   "materiais": [
+    "Hair"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Female_Hairstyle_3.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Hairstyle 3",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "a25515ea6681ed098c0527c75a983664",
+   "bytes": 515448,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 268,
+   "vertices": 136,
+   "caixa_unidades_yup": [
+    0.523,
+    0.523,
+    0.558
+   ],
+   "materiais": [
+    "Hair"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Female_Hairstyle_4.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Female Hairstyle 4",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "a2b675d9e55cc2e0aa3a5f5ba3eb7af4",
+   "bytes": 537064,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 316,
+   "vertices": 160,
+   "caixa_unidades_yup": [
+    0.523,
+    0.763,
+    0.787
+   ],
+   "materiais": [
+    "Hair",
+    "HairTie"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Male_Hairstyle_1.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Hairstyle 1",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "7cfbcfb2141f4e6ff8c285a1ac329a57",
+   "bytes": 533072,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 172,
+   "vertices": 88,
+   "caixa_unidades_yup": [
+    0.503,
+    0.62,
+    0.512
+   ],
+   "materiais": [
+    "Hair"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Male_Hairstyle_2.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Hairstyle 2",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "9e1183a59d84fc14f95a7edc6b9f0015",
+   "bytes": 542608,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 188,
+   "vertices": 96,
+   "caixa_unidades_yup": [
+    0.503,
+    0.525,
+    0.572
+   ],
+   "materiais": [
+    "Hair.001"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Male_Hairstyle_3.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Hairstyle 3",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "99243d3c59165e2783ea86d79ac141da",
+   "bytes": 548896,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 220,
+   "vertices": 112,
+   "caixa_unidades_yup": [
+    0.52,
+    0.631,
+    0.598
+   ],
+   "materiais": [
+    "Hair.001"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/quaternius_background_humans/cabelo/Male_Hairstyle_4.blend",
+   "tipo": "modelo",
+   "nome": "Background Posed Humans — Male Hairstyle 4",
+   "fonte": "Quaternius — pack 'Background Posed Humans' (agosto/2018)",
+   "licenca": "CC0",
+   "autores": [
+    "Quaternius"
+   ],
+   "url": "https://quaternius.com/packs/backgroundposedhumans.html",
+   "md5": "55f4ac4b91ae07a74cecc948d07817f3",
+   "bytes": 525296,
+   "baixado_em": "2026-08-16",
+   "para_que_serve": "cabeleira avulsa do pack -- o corpo sai careca sem ela; trocar entre instancias quebra a repeticao da silhueta",
+   "triangulos": 180,
+   "vertices": 92,
+   "caixa_unidades_yup": [
+    0.505,
+    0.406,
+    0.582
+   ],
+   "materiais": [
+    "Hair"
+   ]
+  },
+  {
+   "arquivo": "assets/modelo/tree_small_02/tree_small_02_1k.blend",
+   "tipo": "modelo",
+   "nome": "Tree Small 02",
+   "fonte": "Poly Haven",
+   "licenca": "CC0",
+   "autores": [
+    "Rico Cilliers"
+   ],
+   "url": "https://polyhaven.com/a/tree_small_02",
+   "md5": "d602d9e4df77457454ac427fd37d0b53",
+   "bytes": 63805841,
+   "resolucao": "1k",
+   "dimensoes_mm": [
+    2921.434998512268,
+    4292.873501777649,
+    4649.933725595474
+   ],
+   "texturas_anexas": [
+    "textures/tree_small_02_branch_diff_1k.png",
+    "textures/tree_small_02_branch_nor_gl_1k.png",
+    "textures/tree_small_02_branch_rough_1k.png",
+    "textures/tree_small_02_diff_1k.jpg",
+    "textures/tree_small_02_leaves_alpha_1k.png",
+    "textures/tree_small_02_leaves_diff_1k.png",
+    "textures/tree_small_02_leaves_nor_gl_1k.png",
+    "textures/tree_small_02_leaves_rough_1k.png",
+    "textures/tree_small_02_nor_gl_1k.exr",
+    "textures/tree_small_02_rough_1k.exr"
+   ],
+   "triangulos": 2062487,
+   "para_que_serve": "arvore pequena de copa alta e estreita (4,6 m): alameda e recuo",
+   "baixado_em": "2026-08-16",
+   "triangulos_medidos_em": "glTF 1k da API do Poly Haven (mesma geometria do .blend), somando accessors de indices -- nao foi aberto nenhum .blend"
   },
   {
    "arquivo": "assets/modelo/wooden_picnic_table/wooden_picnic_table_1k.blend",

@@ -53,13 +53,13 @@
     "alt_fim_m": 15.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +9 m, distancia +0 m, azimute +0 graus. Antes falhava em dominio (dominio=0.356, vegetacao=0.089, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.089, perto=0.0, alvo=1.0."
+   "conserto_1508": "reenquadrado por medida: altura +9 m, distancia x1.00, azimute +0 graus. Antes falhava em dominio (dominio=0.356, vegetacao=0.089, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.089, perto=0.0, alvo=1.0."
   },
   {
    "id": "P02",
    "titulo": "É daqui que sai o alimento que sustenta o mundo",
    "peso": "abertura",
-   "duracao_s": 9.0,
+   "duracao_s": 22.0,
    "lente_mm": 35,
    "movimento": "push-in",
    "alvo": {
@@ -67,11 +67,11 @@
     "rotulo": "Portal de Entrada"
    },
    "camera": {
-    "azimute_deg": 60.0,
-    "dist_ini_m": 72.0,
-    "dist_fim_m": 54.0,
-    "alt_ini_m": 12.0,
-    "alt_fim_m": 6.5,
+    "azimute_deg": 92.0,
+    "dist_ini_m": 100.8,
+    "dist_fim_m": 57.6,
+    "alt_ini_m": 15.0,
+    "alt_fim_m": 9.5,
     "giro_deg": 0
    },
    "mira_alt_m": 6,
@@ -85,13 +85,15 @@
     "alt_fim_m": 6.5,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia +30 m, azimute +0 graus. Antes falhava em dominio (dominio=0.333, vegetacao=0.089, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.156, perto=0.0, alvo=1.0."
+   "conserto_1508": "reenquadrado por medida: altura +3 m, distancia x2.40, azimute +32 graus. Antes falhava em dominio (dominio=0.333, vegetacao=0.089, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.067, perto=0.0, alvo=1.0.",
+   "duracao_antes_1508": 9.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 4.84 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 9.0 s para 22.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P03",
    "titulo": "Pavilhão 1 — Indústria, Comércio e Prestação de Serviços",
    "peso": "normal",
-   "duracao_s": 6.0,
+   "duracao_s": 22.0,
    "lente_mm": 24,
    "movimento": "push-in",
    "alvo": {
@@ -99,11 +101,11 @@
     "rotulo": "PAVILHÃO 1"
    },
    "camera": {
-    "azimute_deg": 342.0,
-    "dist_ini_m": 33.8,
-    "dist_fim_m": 23.0,
-    "alt_ini_m": 46.0,
-    "alt_fim_m": 46.0,
+    "azimute_deg": 50.0,
+    "dist_ini_m": 71.4,
+    "dist_fim_m": 30.4,
+    "alt_ini_m": 11.0,
+    "alt_fim_m": 11.0,
     "giro_deg": 12
    },
    "mira_alt_m": 2.0,
@@ -124,13 +126,15 @@
     "alt_fim_m": 2.0,
     "giro_deg": 12
    },
-   "conserto_1508": "MELHOR ESFORCO -- nenhum candidato passou em tudo. reenquadrado por medida: altura +44 m, distancia +15 m, azimute -18 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.044, perto=0.8, alvo=1.0); depois dominio=0.444, vegetacao=0.0, perto=0.0, alvo=0.882."
+   "conserto_1508": "MELHOR ESFORCO -- nenhum candidato passou em tudo. reenquadrado por medida: altura +9 m, distancia x3.80, azimute +50 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.044, perto=0.8, alvo=1.0); depois dominio=0.422, vegetacao=0.2, perto=0.089, alvo=0.573.",
+   "duracao_antes_1508": 6.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 7.27 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 6.0 s para 22.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P04",
    "titulo": "Praça de Alimentação Coberta",
    "peso": "normal",
-   "duracao_s": 7.0,
+   "duracao_s": 25.0,
    "lente_mm": 24,
    "movimento": "push-in",
    "alvo": {
@@ -139,8 +143,8 @@
    },
    "camera": {
     "azimute_deg": 343.3,
-    "dist_ini_m": 65.0,
-    "dist_fim_m": 52.0,
+    "dist_ini_m": 95.0,
+    "dist_fim_m": 45.6,
     "alt_ini_m": 11.0,
     "alt_fim_m": 11.0,
     "giro_deg": 0
@@ -160,9 +164,9 @@
     "alt_fim_m": 2.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +9 m, distancia +40 m, azimute -18 graus. Antes falhava em dentro (dominio=None, vegetacao=None, perto=None, alvo=None); depois dominio=0.267, vegetacao=0.111, perto=0.133, alvo=0.611.",
-   "duracao_antes_1508": 5.5,
-   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.53 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 5.5 s para 7.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos.",
+   "conserto_1508": "reenquadrado por medida: altura +9 m, distancia x3.80, azimute -18 graus. Antes falhava em dentro (dominio=None, vegetacao=None, perto=None, alvo=None); depois dominio=0.267, vegetacao=0.111, perto=0.156, alvo=0.599.",
+   "duracao_antes_1508": 7.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 7.07 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 7.0 s para 25.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos.",
    "interior": true,
    "por_que_interior": "Ordem dele em 15/08 à noite: a câmera passava POR CIMA do galpão e o quadro saía tomado de telhado branco. Passa por dentro, a 2,0 m, que é a altura que ele já tinha ditado para interior de pavilhão. Galpão: Praça de Alimentação Coberta · laje sobre pilares de 5 m. As duas pontas do percurso ficam dentro da pegada — entrar de fora custaria +11 s neste plano, e a duração já estava aprovada.",
    "por_que_lente": "24 mm porque ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. A 5-20 m de distância dentro de um galpão, 35 mm mostra uma parede."
@@ -171,7 +175,7 @@
    "id": "P05",
    "titulo": "Pavilhão 2 — Indústria, Comércio e Prestação de Serviços",
    "peso": "normal",
-   "duracao_s": 5.0,
+   "duracao_s": 14.5,
    "lente_mm": 24,
    "movimento": "push-in",
    "alvo": {
@@ -180,10 +184,10 @@
    },
    "camera": {
     "azimute_deg": 75.3,
-    "dist_ini_m": 31.0,
-    "dist_fim_m": 22.0,
-    "alt_ini_m": 14.0,
-    "alt_fim_m": 14.0,
+    "dist_ini_m": 48.0,
+    "dist_fim_m": 21.0,
+    "alt_ini_m": 11.0,
+    "alt_fim_m": 11.0,
     "giro_deg": 10
    },
    "mira_alt_m": 2.0,
@@ -203,7 +207,9 @@
     "alt_fim_m": 2.0,
     "giro_deg": 10
    },
-   "conserto_1508": "MELHOR ESFORCO -- nenhum candidato passou em tudo. reenquadrado por medida: altura +12 m, distancia +15 m, azimute +75 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.0, perto=0.778, alvo=1.0); depois dominio=0.622, vegetacao=0.178, perto=0.022, alvo=0.678."
+   "conserto_1508": "MELHOR ESFORCO -- nenhum candidato passou em tudo. reenquadrado por medida: altura +9 m, distancia x3.00, azimute +75 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.0, perto=0.778, alvo=1.0); depois dominio=0.6, vegetacao=0.178, perto=0.267, alvo=0.595.",
+   "duracao_antes_1508": 5.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 5.65 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 5.0 s para 14.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P06",
@@ -235,7 +241,7 @@
     "alt_fim_m": 3.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +12 m, distancia +0 m, azimute +0 graus. Antes falhava em dominio (dominio=0.333, vegetacao=0.089, perto=0.333, alvo=0.434); depois dominio=0.267, vegetacao=0.333, perto=0.0, alvo=0.68.",
+   "conserto_1508": "reenquadrado por medida: altura +12 m, distancia x1.00, azimute +0 graus. Antes falhava em dominio (dominio=0.333, vegetacao=0.089, perto=0.333, alvo=0.434); depois dominio=0.267, vegetacao=0.333, perto=0.0, alvo=0.68.",
    "duracao_antes_1508": 14.0,
    "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.45 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 14.0 s para 17.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos.",
    "por_que_altura": "Baixada de 19→10 m para 8→3 m pela mesma ordem dos galpões. NÃO virou interior porque o Mercado do Produtor não tem estrutura própria na cena — o telhado branco que tomava o quadro era o do Café Colonial e o do Pavilhão 3, sobrevoados no caminho. Enquanto o galpão dele não existir, o conserto possível é voar baixo."
@@ -244,7 +250,7 @@
    "id": "P07",
    "titulo": "Agroindústrias",
    "peso": "normal",
-   "duracao_s": 5.0,
+   "duracao_s": 14.5,
    "lente_mm": 24,
    "movimento": "push-in",
    "alvo": {
@@ -253,8 +259,8 @@
    },
    "camera": {
     "azimute_deg": 40.3,
-    "dist_ini_m": 29.0,
-    "dist_fim_m": 20.0,
+    "dist_ini_m": 42.0,
+    "dist_fim_m": 15.0,
     "alt_ini_m": 46.0,
     "alt_fim_m": 46.0,
     "giro_deg": 12
@@ -270,10 +276,12 @@
     "alt_fim_m": 2.0,
     "giro_deg": 12
    },
-   "conserto_1508": "reenquadrado por medida: altura +44 m, distancia +15 m, azimute -50 graus. Antes falhava em dentro (dominio=None, vegetacao=None, perto=None, alvo=None); depois dominio=0.244, vegetacao=0.333, perto=0.0, alvo=0.88.",
+   "conserto_1508": "reenquadrado por medida: altura +44 m, distancia x3.00, azimute -50 graus. Antes falhava em dentro (dominio=None, vegetacao=None, perto=None, alvo=None); depois dominio=0.267, vegetacao=0.333, perto=0.0, alvo=0.879.",
    "interior": true,
    "por_que_interior": "Ordem dele em 15/08 à noite: a câmera passava POR CIMA do galpão e o quadro saía tomado de telhado branco. Passa por dentro, a 2,0 m, que é a altura que ele já tinha ditado para interior de pavilhão. Galpão: PAVILHÃO 3 · 36,5 x 21,0 m, pé-direito 7,5 m. As duas pontas do percurso ficam dentro da pegada — entrar de fora custaria +11 s neste plano, e a duração já estava aprovada.",
-   "por_que_lente": "24 mm porque ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. A 5-20 m de distância dentro de um galpão, 35 mm mostra uma parede."
+   "por_que_lente": "24 mm porque ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. A 5-20 m de distância dentro de um galpão, 35 mm mostra uma parede.",
+   "duracao_antes_1508": 5.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 5.68 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 5.0 s para 14.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P08",
@@ -330,8 +338,8 @@
    },
    "camera": {
     "azimute_deg": 42.0,
-    "dist_ini_m": 139.3,
-    "dist_fim_m": 139.3,
+    "dist_ini_m": 175.9,
+    "dist_fim_m": 175.9,
     "alt_ini_m": 33.0,
     "alt_fim_m": 31.0,
     "giro_deg": 0
@@ -351,13 +359,13 @@
     "alt_fim_m": 31.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia +22 m, azimute -18 graus. Antes falhava em vegetacao (dominio=0.244, vegetacao=0.422, perto=0.0, alvo=0.669); depois dominio=0.244, vegetacao=0.333, perto=0.0, alvo=0.649."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.50, azimute -18 graus. Antes falhava em vegetacao (dominio=0.244, vegetacao=0.422, perto=0.0, alvo=0.669); depois dominio=0.222, vegetacao=0.2, perto=0.0, alvo=0.628."
   },
   {
    "id": "P10",
    "titulo": "Recinto de Leilões",
    "peso": "normal",
-   "duracao_s": 8.0,
+   "duracao_s": 10.5,
    "lente_mm": 35,
    "movimento": "push-in",
    "alvo": {
@@ -366,10 +374,10 @@
    },
    "camera": {
     "azimute_deg": 116.0,
-    "dist_ini_m": 68.0,
-    "dist_fim_m": 53.0,
-    "alt_ini_m": 9.0,
-    "alt_fim_m": 5.0,
+    "dist_ini_m": 78.0,
+    "dist_fim_m": 58.5,
+    "alt_ini_m": 13.0,
+    "alt_fim_m": 8.0,
     "giro_deg": 0
    },
    "mira_alt_m": 4,
@@ -387,9 +395,9 @@
     "alt_fim_m": 8.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura -4 m, distancia +8 m, azimute +18 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.044, perto=0.0, alvo=0.573); depois dominio=0.222, vegetacao=0.0, perto=0.044, alvo=0.632.",
-   "duracao_antes_1508": 6.0,
-   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.64 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 6.0 s para 8.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.30, azimute +18 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.044, perto=0.0, alvo=0.573); depois dominio=0.267, vegetacao=0.0, perto=0.022, alvo=0.666.",
+   "duracao_antes_1508": 8.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.52 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 8.0 s para 10.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P11",
@@ -408,8 +416,8 @@
    },
    "camera": {
     "azimute_deg": 90.0,
-    "dist_ini_m": 86.0,
-    "dist_fim_m": 86.0,
+    "dist_ini_m": 92.0,
+    "dist_fim_m": 92.0,
     "alt_ini_m": 14.0,
     "alt_fim_m": 14.0,
     "giro_deg": 0
@@ -430,13 +438,13 @@
     "alt_fim_m": 8.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +6 m, distancia +40 m, azimute +0 graus. Antes falhava em dominio (dominio=0.6, vegetacao=0.0, perto=0.6, alvo=0.153); depois dominio=0.244, vegetacao=0.111, perto=0.0, alvo=0.64."
+   "conserto_1508": "reenquadrado por medida: altura +6 m, distancia x2.00, azimute +0 graus. Antes falhava em dominio (dominio=0.6, vegetacao=0.0, perto=0.6, alvo=0.153); depois dominio=0.289, vegetacao=0.133, perto=0.0, alvo=0.603."
   },
   {
    "id": "P12",
    "titulo": "Pista de Julgamentos",
    "peso": "normal",
-   "duracao_s": 5.0,
+   "duracao_s": 7.5,
    "lente_mm": 35,
    "movimento": "orbita",
    "alvo": {
@@ -445,8 +453,8 @@
    },
    "camera": {
     "azimute_deg": 170.0,
-    "dist_ini_m": 46.0,
-    "dist_fim_m": 43.7,
+    "dist_ini_m": 80.5,
+    "dist_fim_m": 76.5,
     "alt_ini_m": 26.0,
     "alt_fim_m": 23.0,
     "giro_deg": 10
@@ -455,15 +463,17 @@
    "ancora": "planta",
    "nota": "area de pasto verde",
    "camera_antes_1508": {
-    "azimute_deg": 120.0,
+    "azimute_deg": 170.0,
     "dist_ini_m": 46.0,
     "dist_fim_m": 43.7,
-    "alt_ini_m": 30.0,
-    "alt_fim_m": 27.0,
+    "alt_ini_m": 26.0,
+    "alt_fim_m": 23.0,
     "giro_deg": 10
    },
-   "conserto_1508": "MELHOR ESFORCO -- nenhum candidato passou em tudo. reenquadrado por medida: altura -4 m, distancia +0 m, azimute +50 graus. Antes falhava em dominio (dominio=0.511, vegetacao=0.333, perto=0.0, alvo=0.717); depois dominio=0.311, vegetacao=0.244, perto=0.0, alvo=0.687.",
-   "por_que_lente": "50 mm para 35 mm por ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. No still de 15/08 este plano era parede ou copa ocupando a tela. Só a lente muda — distância e altura ficam, então a velocidade não se mexe."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.75, azimute +0 graus. Antes falhava em dominio (dominio=0.311, vegetacao=0.244, perto=0.0, alvo=0.687); depois dominio=0.2, vegetacao=0.111, perto=0.0, alvo=0.78.",
+   "por_que_lente": "50 mm para 35 mm por ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. No still de 15/08 este plano era parede ou copa ocupando a tela. Só a lente muda — distância e altura ficam, então a velocidade não se mexe.",
+   "duracao_antes_1508": 5.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.98 m/s, fora da faixa 1.3-2.2 de orbita. Alongado de 5.0 s para 7.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P13",
@@ -563,7 +573,7 @@
    "id": "P15",
    "titulo": "",
    "peso": "normal",
-   "duracao_s": 7.0,
+   "duracao_s": 10.5,
    "lente_mm": 50,
    "movimento": "orbita",
    "alvo": {
@@ -571,11 +581,11 @@
     "rotulo": "Fazendinha"
    },
    "camera": {
-    "azimute_deg": 84.0,
-    "dist_ini_m": 33.8,
-    "dist_fim_m": 31.2,
-    "alt_ini_m": 38.0,
-    "alt_fim_m": 37.0,
+    "azimute_deg": 344.0,
+    "dist_ini_m": 50.7,
+    "dist_fim_m": 46.8,
+    "alt_ini_m": 12.0,
+    "alt_fim_m": 11.0,
     "giro_deg": 22
    },
    "mira_alt_m": 1.7,
@@ -598,9 +608,9 @@
     "alt_fim_m": 11.0,
     "giro_deg": 22
    },
-   "conserto_1508": "reenquadrado por medida: altura +26 m, distancia +0 m, azimute +50 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.244, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.311, perto=0.0, alvo=1.0.",
-   "duracao_antes_1508": 6.0,
-   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.21 m/s, fora da faixa 1.3-2.2 de orbita. Alongado de 6.0 s para 7.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.50, azimute -50 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.244, perto=0.0, alvo=1.0); depois dominio=0.222, vegetacao=0.333, perto=0.0, alvo=1.0.",
+   "duracao_antes_1508": 7.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.90 m/s, fora da faixa 1.3-2.2 de orbita. Alongado de 7.0 s para 10.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P16",
@@ -620,8 +630,8 @@
    },
    "camera": {
     "azimute_deg": 186.0,
-    "dist_ini_m": 68.0,
-    "dist_fim_m": 68.0,
+    "dist_ini_m": 69.0,
+    "dist_fim_m": 69.0,
     "alt_ini_m": 11.0,
     "alt_fim_m": 9.0,
     "giro_deg": 0
@@ -654,7 +664,7 @@
     "alt_fim_m": 9.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia +22 m, azimute -18 graus. Antes falhava em dominio (dominio=0.378, vegetacao=0.2, perto=0.022, alvo=0.821); depois dominio=0.267, vegetacao=0.2, perto=0.0, alvo=0.751."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.50, azimute -18 graus. Antes falhava em dominio (dominio=0.378, vegetacao=0.2, perto=0.022, alvo=0.821); depois dominio=0.267, vegetacao=0.222, perto=0.0, alvo=0.751."
   },
   {
    "id": "P17",
@@ -755,7 +765,7 @@
    "id": "P19",
    "titulo": "Arena de Rodeio",
    "peso": "diferencial",
-   "duracao_s": 12.0,
+   "duracao_s": 20.0,
    "lente_mm": 35,
    "movimento": "orbita",
    "alvo": {
@@ -763,11 +773,11 @@
     "rotulo": "ARENA DE RODEIO"
    },
    "camera": {
-    "azimute_deg": 45.0,
-    "dist_ini_m": 95.6,
-    "dist_fim_m": 85.2,
-    "alt_ini_m": 32.0,
-    "alt_fim_m": 26.0,
+    "azimute_deg": 120.0,
+    "dist_ini_m": 141.0,
+    "dist_fim_m": 122.9,
+    "alt_ini_m": 23.0,
+    "alt_fim_m": 17.0,
     "giro_deg": 14
    },
    "mira_alt_m": 2.0,
@@ -785,15 +795,15 @@
     "alt_fim_m": 14.0,
     "giro_deg": 14
    },
-   "conserto_1508": "reenquadrado por medida: altura +12 m, distancia +15 m, azimute -75 graus. Antes falhava em dominio (dominio=0.378, vegetacao=0.444, perto=0.178, alvo=1.0); depois dominio=0.289, vegetacao=0.222, perto=0.0, alvo=1.0.",
-   "duracao_antes_1508": 10.0,
-   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 2.35 m/s, fora da faixa 1.3-2.2 de orbita. Alongado de 10.0 s para 12.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
+   "conserto_1508": "reenquadrado por medida: altura +3 m, distancia x1.75, azimute +0 graus. Antes falhava em dominio (dominio=0.378, vegetacao=0.444, perto=0.178, alvo=1.0); depois dominio=0.156, vegetacao=0.333, perto=0.0, alvo=0.594.",
+   "duracao_antes_1508": 12.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 3.33 m/s, fora da faixa 1.3-2.2 de orbita. Alongado de 12.0 s para 20.0 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P20",
    "titulo": "Palco Principal",
    "peso": "normal",
-   "duracao_s": 7.0,
+   "duracao_s": 11.5,
    "lente_mm": 24,
    "movimento": "push-in",
    "alvo": {
@@ -801,11 +811,11 @@
     "rotulo": "PALCO"
    },
    "camera": {
-    "azimute_deg": 20.0,
-    "dist_ini_m": 50.0,
-    "dist_fim_m": 38.0,
-    "alt_ini_m": 22.0,
-    "alt_fim_m": 19.0,
+    "azimute_deg": 38.0,
+    "dist_ini_m": 101.5,
+    "dist_fim_m": 80.5,
+    "alt_ini_m": 16.0,
+    "alt_fim_m": 13.0,
     "giro_deg": 0
    },
    "mira_alt_m": 6,
@@ -823,8 +833,10 @@
     "alt_fim_m": 13.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +6 m, distancia -8 m, azimute +0 graus. Antes falhava em vegetacao (dominio=0.133, vegetacao=0.422, perto=0.267, alvo=0.736); depois dominio=0.244, vegetacao=0.244, perto=0.044, alvo=0.68.",
-   "por_que_lente": "50 mm para 24 mm por ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. No still de 15/08 este plano era parede ou copa ocupando a tela. Só a lente muda — distância e altura ficam, então a velocidade não se mexe."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.75, azimute +18 graus. Antes falhava em vegetacao (dominio=0.133, vegetacao=0.422, perto=0.267, alvo=0.736); depois dominio=0.2, vegetacao=0.267, perto=0.178, alvo=0.879.",
+   "por_que_lente": "50 mm para 24 mm por ordem dele: 'pode ser ampliado mais pra pegar o quadro maior'. No still de 15/08 este plano era parede ou copa ocupando a tela. Só a lente muda — distância e altura ficam, então a velocidade não se mexe.",
+   "duracao_antes_1508": 7.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 3.28 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 7.0 s para 11.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   },
   {
    "id": "P21",
@@ -860,13 +872,13 @@
     "alt_fim_m": 48.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia +0 m, azimute -18 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.222, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.333, perto=0.0, alvo=1.0."
+   "conserto_1508": "reenquadrado por medida: altura +0 m, distancia x1.00, azimute -18 graus. Antes falhava em dominio (dominio=0.4, vegetacao=0.222, perto=0.0, alvo=1.0); depois dominio=0.289, vegetacao=0.333, perto=0.0, alvo=1.0."
   },
   {
    "id": "P22",
    "titulo": "",
    "peso": "fechamento",
-   "duracao_s": 6.0,
+   "duracao_s": 9.5,
    "lente_mm": 35,
    "movimento": "push-in",
    "alvo": {
@@ -874,9 +886,9 @@
     "rotulo": "Portal de Entrada"
    },
    "camera": {
-    "azimute_deg": 240.0,
-    "dist_ini_m": 38.0,
-    "dist_fim_m": 26.0,
+    "azimute_deg": 222.0,
+    "dist_ini_m": 45.0,
+    "dist_fim_m": 27.0,
     "alt_ini_m": 16.0,
     "alt_fim_m": 12.0,
     "giro_deg": 0
@@ -892,7 +904,9 @@
     "alt_fim_m": 9.0,
     "giro_deg": 0
    },
-   "conserto_1508": "reenquadrado por medida: altura +3 m, distancia +8 m, azimute +0 graus. Antes falhava em dominio (dominio=0.511, vegetacao=0.133, perto=0.178, alvo=0.793); depois dominio=0.289, vegetacao=0.133, perto=0.178, alvo=0.857."
+   "conserto_1508": "reenquadrado por medida: altura +3 m, distancia x1.50, azimute -18 graus. Antes falhava em dominio (dominio=0.511, vegetacao=0.133, perto=0.178, alvo=0.793); depois dominio=0.244, vegetacao=0.111, perto=0.111, alvo=0.875.",
+   "duracao_antes_1508": 6.0,
+   "por_que_alongou_1508": "o reenquadramento de 15/08 afastou a camera e o pico foi a 3.07 m/s, fora da faixa 1.3-2.2 de push-in. Alongado de 6.0 s para 9.5 s para voltar a ~2.0 m/s. Alongar em vez de encurtar o percurso porque o cliente pediu MAIS tempo de tela, nao menos."
   }
  ],
  "_altura_de_camera": {

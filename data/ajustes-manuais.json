@@ -1,0 +1,2047 @@
+{
+  "o_que_e": "Ajuste manual do Natan, feito no ajustador visual. MANDA ACIMA de footprints.json e de qualquer medicao.",
+  "autoridade": "ele",
+  "unidade": "metros no mundo da cena; rumo em azimute de prancha",
+  "pecas": {
+    "CAMAROTES - LADO A": {
+      "objeto_na_cena": "CAMAROTES - LADO A",
+      "x_m": -31.26,
+      "y_m": 8.83,
+      "rumo_graus": 144.2,
+      "largura_m": 34.45,
+      "profundidade_m": 11.63,
+      "altura_m": 4,
+      "nota_do_natan": "",
+      "antes": {
+        "x_m": -30.5,
+        "y_m": 9.2,
+        "rumo_graus": 90,
+        "largura_m": 60,
+        "profundidade_m": 8
+      }
+    },
+    "CAMAROTES - LADO B": {
+      "objeto_na_cena": "CAMAROTES - LADO B",
+      "x_m": -107.31,
+      "y_m": -22.83,
+      "rumo_graus": 340.5,
+      "largura_m": 33.85,
+      "profundidade_m": 12.98,
+      "altura_m": 4,
+      "nota_do_natan": "",
+      "antes": {
+        "x_m": -107.66,
+        "y_m": -22.85,
+        "rumo_graus": 90,
+        "largura_m": 60,
+        "profundidade_m": 8
+      }
+    },
+    "PORTAL": {
+      "objeto_na_cena": "PortalCeleiro",
+      "x_m": 49.43,
+      "y_m": 91.36,
+      "rumo_graus": 340.9,
+      "largura_m": 35.38,
+      "profundidade_m": 8.7,
+      "altura_m": 4,
+      "nota_do_natan": "",
+      "antes": {
+        "x_m": 51.38,
+        "y_m": 91.78,
+        "rumo_graus": 73,
+        "largura_m": 20,
+        "profundidade_m": 8
+      }
+    },
+    "PAVILHÃO - EQUÍNOS": {
+      "objeto_na_cena": "PAVILHÃO - EQUÍNOS",
+      "x_m": -298.71,
+      "y_m": -166.19,
+      "rumo_graus": 71.9,
+      "largura_m": 46.07,
+      "profundidade_m": 19.1,
+      "altura_m": 7,
+      "nota_do_natan": "PAVILHÃO - EQUÍNOS",
+      "antes": {
+        "x_m": -294.37,
+        "y_m": -165.35,
+        "rumo_graus": 72.1,
+        "largura_m": 49.55,
+        "profundidade_m": 20.24
+      }
+    },
+    "PAVILHÃO - GADO CORTE": {
+      "objeto_na_cena": "PAVILHÃO - GADO CORTE",
+      "x_m": -319.94,
+      "y_m": -102.31,
+      "rumo_graus": 71.6,
+      "largura_m": 45.85,
+      "profundidade_m": 16.82,
+      "altura_m": 7,
+      "nota_do_natan": "PAVILHÃO - GADO CORTE",
+      "antes": {
+        "x_m": -319.94,
+        "y_m": -101.22,
+        "rumo_graus": 71.6,
+        "largura_m": 45.85,
+        "profundidade_m": 16.82
+      }
+    },
+    "PAVILHÃO - GADO LEITE": {
+      "objeto_na_cena": "PAVILHÃO - GADO LEITE",
+      "x_m": -335.34,
+      "y_m": -58.12,
+      "rumo_graus": 71.7,
+      "largura_m": 55.72,
+      "profundidade_m": 16.97,
+      "altura_m": 7,
+      "nota_do_natan": "PAVILHÃO - GADO LEITE",
+      "antes": {
+        "x_m": -334.39,
+        "y_m": -57.56,
+        "rumo_graus": 71.7,
+        "largura_m": 55.72,
+        "profundidade_m": 16.97
+      }
+    },
+    "PAVILHÃO - NÚCLEO CARRA BRANCA": {
+      "objeto_na_cena": "PAVILHÃO - NÚCLEO CARRA BRANCA",
+      "x_m": -326.91,
+      "y_m": -80.61,
+      "rumo_graus": 71.7,
+      "largura_m": 46.42,
+      "profundidade_m": 16.76,
+      "altura_m": 7,
+      "nota_do_natan": "PAVILHÃO - NÚCLEO CARRA BRANCA",
+      "antes": {
+        "x_m": -327.04,
+        "y_m": -79.37,
+        "rumo_graus": 71.7,
+        "largura_m": 45.88,
+        "profundidade_m": 16.84
+      }
+    },
+    "PAVILHÃO - OVINOS E CAPRINOS": {
+      "objeto_na_cena": "PAVILHÃO - OVINOS E CAPRINOS",
+      "x_m": -312.99,
+      "y_m": -123.85,
+      "rumo_graus": 71.6,
+      "largura_m": 44.9,
+      "profundidade_m": 15.6,
+      "altura_m": 7,
+      "nota_do_natan": "PAVILHÃO - OVINOS E CAPRINOS",
+      "antes": {
+        "x_m": -314.09,
+        "y_m": -123.41,
+        "rumo_graus": 71.6,
+        "largura_m": 45.85,
+        "profundidade_m": 16.82
+      }
+    },
+    "PAVILHÃO - PEQUENOS ANIMAIS": {
+      "objeto_na_cena": "PAVILHÃO - PEQUENOS ANIMAIS",
+      "x_m": -305.64,
+      "y_m": -145.98,
+      "rumo_graus": 71.7,
+      "largura_m": 44.22,
+      "profundidade_m": 16.42,
+      "altura_m": 7,
+      "nota_do_natan": "PAVILHÃO - PEQUENOS ANIMAIS",
+      "antes": {
+        "x_m": -305.42,
+        "y_m": -144.89,
+        "rumo_graus": 71.6,
+        "largura_m": 45.85,
+        "profundidade_m": 16.96
+      }
+    },
+    "PAVILHÃO 1": {
+      "objeto_na_cena": "PAVILHÃO 1",
+      "x_m": 5.76,
+      "y_m": 135.43,
+      "rumo_graus": 90,
+      "largura_m": 63.33,
+      "profundidade_m": 28.61,
+      "altura_m": 7,
+      "nota_do_natan": "",
+      "antes": {
+        "x_m": 4.25,
+        "y_m": 133.91,
+        "rumo_graus": 90,
+        "largura_m": 51.85,
+        "profundidade_m": 25.59
+      }
+    },
+    "PAVILHÃO 2": {
+      "objeto_na_cena": "PAVILHÃO 2",
+      "x_m": -120.25,
+      "y_m": 134.76,
+      "rumo_graus": 89.7,
+      "largura_m": 46.05,
+      "profundidade_m": 30.8,
+      "altura_m": 7,
+      "nota_do_natan": "",
+      "antes": {
+        "x_m": -119.36,
+        "y_m": 138.14,
+        "rumo_graus": 89.7,
+        "largura_m": 46.05,
+        "profundidade_m": 30.8
+      }
+    },
+    "PAVILHÃO 3": {
+      "objeto_na_cena": "PAVILHÃO 3",
+      "x_m": -157.44,
+      "y_m": 132.74,
+      "rumo_graus": 89.7,
+      "largura_m": 19.56,
+      "profundidade_m": 35.06,
+      "altura_m": 7,
+      "nota_do_natan": "",
+      "antes": {
+        "x_m": -157.84,
+        "y_m": 132.46,
+        "rumo_graus": 90,
+        "largura_m": 12.57,
+        "profundidade_m": 3.59
+      }
+    }
+  },
+  "blocos_novos": [
+    {
+      "nome": "Area 1",
+      "objeto_na_cena": "NOVO_poligono_1",
+      "forma": "poligono",
+      "x_m": -22.83,
+      "y_m": 139.99,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 327.46,
+      "profundidade_m": 130.5,
+      "pontos_m": [
+        [
+          61.85,
+          74.74
+        ],
+        [
+          140.9,
+          144.08
+        ],
+        [
+          120.12,
+          155.95
+        ],
+        [
+          105.83,
+          131.67
+        ],
+        [
+          79.39,
+          149.2
+        ],
+        [
+          91.12,
+          175.33
+        ],
+        [
+          56.98,
+          205.24
+        ],
+        [
+          -14.03,
+          204.94
+        ],
+        [
+          -186.56,
+          168.68
+        ],
+        [
+          -185.66,
+          150.25
+        ],
+        [
+          45.8,
+          150.55
+        ],
+        [
+          46.7,
+          110.37
+        ],
+        [
+          55.16,
+          112.78
+        ],
+        [
+          55.77,
+          112.48
+        ],
+        [
+          58.79,
+          102.51
+        ],
+        [
+          51.82,
+          100.34
+        ]
+      ],
+      "nota_do_natan": "Área de Estacionamento. deixar com vagas de estacionamento distribuídas, tem fotos extraídas de referencia. sem cobertura",
+      "superficie": "estacionamento"
+    },
+    {
+      "nome": "Area 2",
+      "objeto_na_cena": "NOVO_poligono_2",
+      "forma": "poligono",
+      "x_m": -61.56,
+      "y_m": 136.02,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 70.26,
+      "profundidade_m": 27.88,
+      "pontos_m": [
+        [
+          -96.69,
+          149.69
+        ],
+        [
+          -96.55,
+          122.08
+        ],
+        [
+          -26.43,
+          122.21
+        ],
+        [
+          -26.57,
+          149.96
+        ]
+      ],
+      "nota_do_natan": "Saguão Aberto, para praça de alimentação."
+    },
+    {
+      "nome": "Tenda 3",
+      "objeto_na_cena": "NOVO_tenda_3",
+      "forma": "tenda",
+      "x_m": 33.88,
+      "y_m": 116.27,
+      "rumo_graus": 133.6,
+      "altura_m": 4,
+      "largura_m": 4.41,
+      "profundidade_m": 4.25,
+      "nota_do_natan": "Tendo de vendeores"
+    },
+    {
+      "nome": "Tenda 4",
+      "objeto_na_cena": "NOVO_tenda_4",
+      "forma": "tenda",
+      "x_m": 37.66,
+      "y_m": 112.96,
+      "rumo_graus": 131.9,
+      "altura_m": 4,
+      "largura_m": 4.59,
+      "profundidade_m": 4.13,
+      "nota_do_natan": "Vendedores ambulantes"
+    },
+    {
+      "nome": "Tenda 5",
+      "objeto_na_cena": "NOVO_tenda_5",
+      "forma": "tenda",
+      "x_m": 17.47,
+      "y_m": 113.83,
+      "rumo_graus": 90.5,
+      "altura_m": 4,
+      "largura_m": 9.58,
+      "profundidade_m": 9.96,
+      "nota_do_natan": "tenda de vendedores"
+    },
+    {
+      "nome": "Tenda 6",
+      "objeto_na_cena": "NOVO_tenda_6",
+      "forma": "tenda",
+      "x_m": 7.37,
+      "y_m": 114.06,
+      "rumo_graus": 90,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "Vendedores"
+    },
+    {
+      "nome": "Tenda 7",
+      "objeto_na_cena": "NOVO_tenda_7",
+      "forma": "tenda",
+      "x_m": -3.12,
+      "y_m": 114.06,
+      "rumo_graus": 90,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "Tenda vendedores"
+    },
+    {
+      "nome": "Area 8",
+      "objeto_na_cena": "NOVO_poligono_8",
+      "forma": "poligono",
+      "x_m": -311.69,
+      "y_m": -6,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 38.66,
+      "profundidade_m": 37.69,
+      "pontos_m": [
+        [
+          -313.82,
+          -24.84
+        ],
+        [
+          -319.2,
+          -18.59
+        ],
+        [
+          -326.33,
+          -18.24
+        ],
+        [
+          -325.54,
+          -10.16
+        ],
+        [
+          -331.02,
+          -3.56
+        ],
+        [
+          -324.41,
+          0.61
+        ],
+        [
+          -323.28,
+          8.86
+        ],
+        [
+          -315.38,
+          7.73
+        ],
+        [
+          -309.13,
+          12.85
+        ],
+        [
+          -304.18,
+          6.51
+        ],
+        [
+          -295.92,
+          5.56
+        ],
+        [
+          -297.14,
+          -1.91
+        ],
+        [
+          -292.36,
+          -8.25
+        ],
+        [
+          -297.14,
+          -11.55
+        ],
+        [
+          -299.22,
+          -24.32
+        ],
+        [
+          -310.86,
+          -22.93
+        ]
+      ],
+      "nota_do_natan": "Recinto de leilões de gado."
+    },
+    {
+      "nome": "Circulo 9",
+      "objeto_na_cena": "NOVO_circulo_9",
+      "forma": "circulo",
+      "x_m": -249.11,
+      "y_m": 11.29,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 20,
+      "profundidade_m": 20,
+      "raio_m": 12,
+      "nota_do_natan": "Restaurante sociedade rural"
+    },
+    {
+      "nome": "Area 10",
+      "objeto_na_cena": "NOVO_poligono_10",
+      "forma": "poligono",
+      "x_m": -243.59,
+      "y_m": 23.16,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 19.69,
+      "profundidade_m": 15.11,
+      "pontos_m": [
+        [
+          -252.62,
+          22.89
+        ],
+        [
+          -253.43,
+          24.78
+        ],
+        [
+          -238.87,
+          30.72
+        ],
+        [
+          -233.74,
+          17.23
+        ],
+        [
+          -237.52,
+          15.61
+        ],
+        [
+          -240.63,
+          20.05
+        ],
+        [
+          -243.49,
+          21.79
+        ],
+        [
+          -245.58,
+          22.57
+        ],
+        [
+          -248.01,
+          23.01
+        ],
+        [
+          -250.88,
+          23.18
+        ]
+      ],
+      "nota_do_natan": "junto com o restaurante sociedade rural"
+    },
+    {
+      "nome": "Bloco 11",
+      "objeto_na_cena": "NOVO_retangulo_11",
+      "forma": "retangulo",
+      "x_m": -305.3,
+      "y_m": 43.44,
+      "rumo_graus": 7,
+      "altura_m": 3.2,
+      "largura_m": 64.75,
+      "profundidade_m": 36.94,
+      "nota_do_natan": "Mangueiras onde ficam os bois. No contexto rural, de pecuária e de rodeios, uma mangueira (muitas vezes chamada de curral ou mangueiro) é um grande espaço cercado, usado para prender, separar e cuidar do gado."
+    },
+    {
+      "nome": "Bloco 12",
+      "objeto_na_cena": "NOVO_retangulo_12",
+      "forma": "retangulo",
+      "x_m": -298.08,
+      "y_m": 82.15,
+      "rumo_graus": 276,
+      "altura_m": 3.2,
+      "largura_m": 33.19,
+      "profundidade_m": 12.54,
+      "nota_do_natan": "anexo as mangueira"
+    },
+    {
+      "nome": "Area 13",
+      "objeto_na_cena": "NOVO_poligono_13",
+      "forma": "poligono",
+      "x_m": -62.83,
+      "y_m": -24.14,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 22.18,
+      "profundidade_m": 21.4,
+      "pontos_m": [
+        [
+          -73.92,
+          -22.78
+        ],
+        [
+          -69.25,
+          -32.02
+        ],
+        [
+          -60.79,
+          -34.84
+        ],
+        [
+          -54.17,
+          -31.73
+        ],
+        [
+          -51.74,
+          -23.07
+        ],
+        [
+          -56.41,
+          -13.44
+        ]
+      ],
+      "nota_do_natan": "Palco principal de show"
+    },
+    {
+      "nome": "Area 14",
+      "objeto_na_cena": "NOVO_poligono_14",
+      "forma": "poligono",
+      "x_m": -74.94,
+      "y_m": -1.23,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 43.49,
+      "profundidade_m": 43.49,
+      "pontos_m": [
+        [
+          -83.94,
+          -22.98
+        ],
+        [
+          -53.2,
+          -7.41
+        ],
+        [
+          -65.46,
+          17.5
+        ],
+        [
+          -74.99,
+          20.51
+        ],
+        [
+          -93.77,
+          11.08
+        ],
+        [
+          -96.69,
+          1.83
+        ]
+      ],
+      "nota_do_natan": "Arena de roudei onde tem que ter um touro e um boiadeiro montado e ao redor da arena pessoas. sem cobertura, chaão de barro. e cercado ao redor",
+      "superficie": "arena",
+      "cercado": true
+    },
+    {
+      "nome": "Circulo 15",
+      "objeto_na_cena": "NOVO_circulo_15",
+      "forma": "circulo",
+      "x_m": -50.21,
+      "y_m": -0.4,
+      "rumo_graus": 149,
+      "altura_m": 3.2,
+      "largura_m": 20,
+      "profundidade_m": 20,
+      "raio_m": 3,
+      "nota_do_natan": "Bar, quiosque de bebida."
+    },
+    {
+      "nome": "Circulo 16",
+      "objeto_na_cena": "NOVO_circulo_16",
+      "forma": "circulo",
+      "x_m": -86.5,
+      "y_m": -28.06,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 20,
+      "profundidade_m": 20,
+      "raio_m": 3,
+      "nota_do_natan": "Bar, quiosque de bebida"
+    },
+    {
+      "nome": "Circulo 17",
+      "objeto_na_cena": "NOVO_circulo_17",
+      "forma": "circulo",
+      "x_m": -112.15,
+      "y_m": -2.66,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 20,
+      "profundidade_m": 20,
+      "raio_m": 2,
+      "nota_do_natan": "bar, quiosque de bebida."
+    },
+    {
+      "nome": "Tenda 20",
+      "objeto_na_cena": "NOVO_tenda_20",
+      "forma": "tenda",
+      "x_m": -282.93,
+      "y_m": -13.42,
+      "rumo_graus": 66.2,
+      "altura_m": 4,
+      "largura_m": 7.4,
+      "profundidade_m": 11.94,
+      "nota_do_natan": "Tenda"
+    },
+    {
+      "nome": "Tenda 21",
+      "objeto_na_cena": "NOVO_tenda_21",
+      "forma": "tenda",
+      "x_m": -275.5,
+      "y_m": -10.1,
+      "rumo_graus": 66.3,
+      "altura_m": 4,
+      "largura_m": 7.87,
+      "profundidade_m": 11.79,
+      "nota_do_natan": "Tenda de expositores"
+    },
+    {
+      "nome": "Bloco 22",
+      "objeto_na_cena": "NOVO_retangulo_22",
+      "forma": "retangulo",
+      "x_m": -19.8,
+      "y_m": 20.33,
+      "rumo_graus": 148.6,
+      "altura_m": 3.2,
+      "largura_m": 31.95,
+      "profundidade_m": 11.89,
+      "nota_do_natan": "palco after"
+    },
+    {
+      "nome": "Circulo 23",
+      "objeto_na_cena": "NOVO_circulo_23",
+      "forma": "circulo",
+      "x_m": -161.75,
+      "y_m": 86.19,
+      "rumo_graus": 120.1,
+      "altura_m": 3.2,
+      "largura_m": 20,
+      "profundidade_m": 20,
+      "raio_m": 3,
+      "nota_do_natan": "vendedor de barraca"
+    },
+    {
+      "nome": "Circulo 24",
+      "objeto_na_cena": "NOVO_circulo_24",
+      "forma": "circulo",
+      "x_m": -174.69,
+      "y_m": 78.37,
+      "rumo_graus": 90,
+      "altura_m": 3.2,
+      "largura_m": 20,
+      "profundidade_m": 20,
+      "raio_m": 3,
+      "nota_do_natan": "vendedor de barraca"
+    },
+    {
+      "nome": "Tenda 25",
+      "objeto_na_cena": "NOVO_tenda_25",
+      "forma": "tenda",
+      "x_m": -178.44,
+      "y_m": 71.09,
+      "rumo_graus": 26.6,
+      "altura_m": 4,
+      "largura_m": 5.58,
+      "profundidade_m": 5.6,
+      "nota_do_natan": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "nome": "Bloco 26",
+      "objeto_na_cena": "NOVO_retangulo_26",
+      "forma": "retangulo",
+      "x_m": -184.61,
+      "y_m": 57.19,
+      "rumo_graus": 26.2,
+      "altura_m": 3.2,
+      "largura_m": 5.3,
+      "profundidade_m": 6.1,
+      "nota_do_natan": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "nome": "Tenda 27",
+      "objeto_na_cena": "NOVO_tenda_27",
+      "forma": "tenda",
+      "x_m": -187.89,
+      "y_m": 50.84,
+      "rumo_graus": 29.9,
+      "altura_m": 4,
+      "largura_m": 5.74,
+      "profundidade_m": 6.16,
+      "nota_do_natan": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "nome": "Tenda 28",
+      "objeto_na_cena": "NOVO_tenda_28",
+      "forma": "tenda",
+      "x_m": -194.83,
+      "y_m": 42.03,
+      "rumo_graus": 30.1,
+      "altura_m": 4,
+      "largura_m": 9.4,
+      "profundidade_m": 9.36,
+      "nota_do_natan": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "nome": "Tenda 29",
+      "objeto_na_cena": "NOVO_tenda_29",
+      "forma": "tenda",
+      "x_m": -197.25,
+      "y_m": 21.91,
+      "rumo_graus": 43.7,
+      "altura_m": 4,
+      "largura_m": 9.74,
+      "profundidade_m": 4.31,
+      "nota_do_natan": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "nome": "Bloco 30",
+      "objeto_na_cena": "NOVO_retangulo_30",
+      "forma": "retangulo",
+      "x_m": 30.76,
+      "y_m": 73.49,
+      "rumo_graus": 161.9,
+      "altura_m": 3.2,
+      "largura_m": 12.73,
+      "profundidade_m": 9.5,
+      "nota_do_natan": "CCO, equipe de segurança"
+    },
+    {
+      "nome": "Bloco 31",
+      "objeto_na_cena": "NOVO_retangulo_31",
+      "forma": "retangulo",
+      "x_m": 8.99,
+      "y_m": 89.87,
+      "rumo_graus": 328.3,
+      "altura_m": 3.2,
+      "largura_m": 5.65,
+      "profundidade_m": 5.64,
+      "nota_do_natan": "casinha decorativa que tem nas imagens da extração"
+    },
+    {
+      "nome": "Bloco 32",
+      "objeto_na_cena": "NOVO_retangulo_32",
+      "forma": "retangulo",
+      "x_m": 14.44,
+      "y_m": 81.03,
+      "rumo_graus": 327.5,
+      "altura_m": 3.2,
+      "largura_m": 4.35,
+      "profundidade_m": 4.63,
+      "nota_do_natan": "casinha decorativa que tem nas imagens da extração"
+    },
+    {
+      "nome": "Bloco 33",
+      "objeto_na_cena": "NOVO_retangulo_33",
+      "forma": "retangulo",
+      "x_m": 44.26,
+      "y_m": 71.54,
+      "rumo_graus": 251.9,
+      "altura_m": 3.2,
+      "largura_m": 14.28,
+      "profundidade_m": 4.51,
+      "nota_do_natan": "Auditório"
+    },
+    {
+      "nome": "Tenda 34",
+      "objeto_na_cena": "NOVO_tenda_34",
+      "forma": "tenda",
+      "x_m": -253.26,
+      "y_m": -30.23,
+      "rumo_graus": 250.6,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 35",
+      "objeto_na_cena": "NOVO_tenda_35",
+      "forma": "tenda",
+      "x_m": -243.56,
+      "y_m": -26.81,
+      "rumo_graus": 250.5,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 36",
+      "objeto_na_cena": "NOVO_tenda_36",
+      "forma": "tenda",
+      "x_m": -239.64,
+      "y_m": -39.05,
+      "rumo_graus": 340.6,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 37",
+      "objeto_na_cena": "NOVO_tenda_37",
+      "forma": "tenda",
+      "x_m": -249.11,
+      "y_m": -42.54,
+      "rumo_graus": 160.7,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 38",
+      "objeto_na_cena": "NOVO_tenda_38",
+      "forma": "tenda",
+      "x_m": -245.44,
+      "y_m": -53.46,
+      "rumo_graus": 160.3,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 39",
+      "objeto_na_cena": "NOVO_tenda_39",
+      "forma": "tenda",
+      "x_m": -235.62,
+      "y_m": -50.09,
+      "rumo_graus": 340.4,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos"
+    },
+    {
+      "nome": "Tenda 40",
+      "objeto_na_cena": "NOVO_tenda_40",
+      "forma": "tenda",
+      "x_m": -231.7,
+      "y_m": -60.83,
+      "rumo_graus": 339.8,
+      "altura_m": 4,
+      "largura_m": 9.59,
+      "profundidade_m": 9.85,
+      "nota_do_natan": "tenda expositores externos. avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "nome": "Tenda 41",
+      "objeto_na_cena": "NOVO_tenda_41",
+      "forma": "tenda",
+      "x_m": -241.36,
+      "y_m": -64.17,
+      "rumo_graus": 160.5,
+      "altura_m": 4,
+      "largura_m": 9.6,
+      "profundidade_m": 9.84,
+      "nota_do_natan": "tenda expositores externos. avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "nome": "Tenda 42",
+      "objeto_na_cena": "NOVO_tenda_42",
+      "forma": "tenda",
+      "x_m": -225.61,
+      "y_m": -77.45,
+      "rumo_graus": 250.8,
+      "altura_m": 4,
+      "largura_m": 9.56,
+      "profundidade_m": 10.04,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 43",
+      "objeto_na_cena": "NOVO_tenda_43",
+      "forma": "tenda",
+      "x_m": -235.22,
+      "y_m": -81.05,
+      "rumo_graus": 249.8,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 44",
+      "objeto_na_cena": "NOVO_tenda_44",
+      "forma": "tenda",
+      "x_m": -267.5,
+      "y_m": -36.99,
+      "rumo_graus": 249.9,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "nome": "Tenda 45",
+      "objeto_na_cena": "NOVO_tenda_45",
+      "forma": "tenda",
+      "x_m": -263.79,
+      "y_m": -47.58,
+      "rumo_graus": 160.1,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos"
+    },
+    {
+      "nome": "Tenda 46",
+      "objeto_na_cena": "NOVO_tenda_46",
+      "forma": "tenda",
+      "x_m": -259.97,
+      "y_m": -58.26,
+      "rumo_graus": 159.8,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos"
+    },
+    {
+      "nome": "Tenda 47",
+      "objeto_na_cena": "NOVO_tenda_47",
+      "forma": "tenda",
+      "x_m": -255.94,
+      "y_m": -69.27,
+      "rumo_graus": 159.7,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "nome": "Tenda 48",
+      "objeto_na_cena": "NOVO_tenda_48",
+      "forma": "tenda",
+      "x_m": -251.93,
+      "y_m": -79.94,
+      "rumo_graus": 161.3,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 49",
+      "objeto_na_cena": "NOVO_tenda_49",
+      "forma": "tenda",
+      "x_m": -247.88,
+      "y_m": -90.32,
+      "rumo_graus": 160.8,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 50",
+      "objeto_na_cena": "NOVO_tenda_50",
+      "forma": "tenda",
+      "x_m": -244.69,
+      "y_m": -100.36,
+      "rumo_graus": 160.9,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 51",
+      "objeto_na_cena": "NOVO_tenda_51",
+      "forma": "tenda",
+      "x_m": -240.87,
+      "y_m": -110.13,
+      "rumo_graus": 340.3,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 52",
+      "objeto_na_cena": "NOVO_tenda_52",
+      "forma": "tenda",
+      "x_m": -250.48,
+      "y_m": -113.79,
+      "rumo_graus": 69.3,
+      "altura_m": 4,
+      "largura_m": 10.44,
+      "profundidade_m": 9.58,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 53",
+      "objeto_na_cena": "NOVO_tenda_53",
+      "forma": "tenda",
+      "x_m": -260.1,
+      "y_m": -117.13,
+      "rumo_graus": 70.8,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 54",
+      "objeto_na_cena": "NOVO_tenda_54",
+      "forma": "tenda",
+      "x_m": -269.78,
+      "y_m": -120.49,
+      "rumo_graus": 71.5,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 55",
+      "objeto_na_cena": "NOVO_tenda_55",
+      "forma": "tenda",
+      "x_m": -289.02,
+      "y_m": -43.83,
+      "rumo_graus": 248.5,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "Estande de exposição."
+    },
+    {
+      "nome": "Tenda 56",
+      "objeto_na_cena": "NOVO_tenda_56",
+      "forma": "tenda",
+      "x_m": -296.25,
+      "y_m": -28.75,
+      "rumo_graus": 69.9,
+      "altura_m": 4,
+      "largura_m": 15.14,
+      "profundidade_m": 10.97,
+      "nota_do_natan": "Estande de exposição."
+    },
+    {
+      "nome": "Area 57",
+      "objeto_na_cena": "NOVO_poligono_57",
+      "forma": "poligono",
+      "x_m": -193.13,
+      "y_m": 91.69,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 55.9,
+      "profundidade_m": 32.23,
+      "pontos_m": [
+        [
+          -175.64,
+          107.8
+        ],
+        [
+          -174.96,
+          103.51
+        ],
+        [
+          -171.53,
+          99.57
+        ],
+        [
+          -168.44,
+          96.65
+        ],
+        [
+          -165.18,
+          88.94
+        ],
+        [
+          -197.24,
+          75.57
+        ],
+        [
+          -206.5,
+          81.22
+        ],
+        [
+          -217.99,
+          85.34
+        ],
+        [
+          -221.08,
+          90.82
+        ],
+        [
+          -217.48,
+          94.08
+        ],
+        [
+          -211.3,
+          98.54
+        ],
+        [
+          -207.87,
+          101.28
+        ]
+      ],
+      "nota_do_natan": "Área de boques mata levemente aberta, estilo parque recreação.",
+      "superficie": "bosque"
+    },
+    {
+      "nome": "Tenda 58",
+      "objeto_na_cena": "NOVO_tenda_58",
+      "forma": "tenda",
+      "x_m": -229.2,
+      "y_m": -23.73,
+      "rumo_graus": 340.9,
+      "altura_m": 4,
+      "largura_m": 14.58,
+      "profundidade_m": 11.1,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 59",
+      "objeto_na_cena": "NOVO_tenda_59",
+      "forma": "tenda",
+      "x_m": -224.16,
+      "y_m": -37.24,
+      "rumo_graus": 340.2,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 60",
+      "objeto_na_cena": "NOVO_tenda_60",
+      "forma": "tenda",
+      "x_m": -220.32,
+      "y_m": -47.81,
+      "rumo_graus": 340,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 61",
+      "objeto_na_cena": "NOVO_tenda_61",
+      "forma": "tenda",
+      "x_m": -216.45,
+      "y_m": -58.51,
+      "rumo_graus": 340.1,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "nome": "Tenda 62",
+      "objeto_na_cena": "NOVO_tenda_62",
+      "forma": "tenda",
+      "x_m": -211.6,
+      "y_m": -72.52,
+      "rumo_graus": 250.1,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 63",
+      "objeto_na_cena": "NOVO_tenda_63",
+      "forma": "tenda",
+      "x_m": -207.5,
+      "y_m": -83.17,
+      "rumo_graus": 340.9,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 64",
+      "objeto_na_cena": "NOVO_tenda_64",
+      "forma": "tenda",
+      "x_m": -231.32,
+      "y_m": -91.69,
+      "rumo_graus": 160.3,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 65",
+      "objeto_na_cena": "NOVO_tenda_65",
+      "forma": "tenda",
+      "x_m": -221.39,
+      "y_m": -88.36,
+      "rumo_graus": 341,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 66",
+      "objeto_na_cena": "NOVO_tenda_66",
+      "forma": "tenda",
+      "x_m": -218.33,
+      "y_m": -97.8,
+      "rumo_graus": 341,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 67",
+      "objeto_na_cena": "NOVO_tenda_67",
+      "forma": "tenda",
+      "x_m": -227.81,
+      "y_m": -101.47,
+      "rumo_graus": 159.5,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Tenda 68",
+      "objeto_na_cena": "NOVO_tenda_68",
+      "forma": "tenda",
+      "x_m": -208.59,
+      "y_m": -20.26,
+      "rumo_graus": 159.4,
+      "altura_m": 4,
+      "largura_m": 20.77,
+      "profundidade_m": 13.43,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 69",
+      "objeto_na_cena": "NOVO_tenda_69",
+      "forma": "tenda",
+      "x_m": -203.44,
+      "y_m": -35.23,
+      "rumo_graus": 158.8,
+      "altura_m": 4,
+      "largura_m": 7.65,
+      "profundidade_m": 12.39,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes."
+    },
+    {
+      "nome": "Tenda 70",
+      "objeto_na_cena": "NOVO_tenda_70",
+      "forma": "tenda",
+      "x_m": -199.93,
+      "y_m": -44.4,
+      "rumo_graus": 158.9,
+      "altura_m": 4,
+      "largura_m": 8.5,
+      "profundidade_m": 12.59,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes. apicultura."
+    },
+    {
+      "nome": "Tenda 71",
+      "objeto_na_cena": "NOVO_tenda_71",
+      "forma": "tenda",
+      "x_m": -195.03,
+      "y_m": -59.92,
+      "rumo_graus": 159.8,
+      "altura_m": 4,
+      "largura_m": 18.92,
+      "profundidade_m": 11.55,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes a uma mecanica de agricultores"
+    },
+    {
+      "nome": "Tenda 72",
+      "objeto_na_cena": "NOVO_tenda_72",
+      "forma": "tenda",
+      "x_m": -190.09,
+      "y_m": -77.42,
+      "rumo_graus": 70,
+      "altura_m": 4,
+      "largura_m": 12.6,
+      "profundidade_m": 9.46,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Bloco 75",
+      "objeto_na_cena": "NOVO_retangulo_75",
+      "forma": "retangulo",
+      "x_m": -176.36,
+      "y_m": -34.92,
+      "rumo_graus": 339,
+      "altura_m": 3.2,
+      "largura_m": 74.39,
+      "profundidade_m": 14.6,
+      "nota_do_natan": "área representa onde terá vários tratores agrícolas e implementos. coloque um ao lado do outro."
+    },
+    {
+      "nome": "Area 76",
+      "objeto_na_cena": "NOVO_poligono_76",
+      "forma": "poligono",
+      "x_m": -146.37,
+      "y_m": -12.87,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 21.5,
+      "profundidade_m": 60.22,
+      "pontos_m": [
+        [
+          -157.12,
+          6.7
+        ],
+        [
+          -144.22,
+          17.24
+        ],
+        [
+          -135.62,
+          -40.19
+        ],
+        [
+          -145.29,
+          -42.98
+        ]
+      ],
+      "nota_do_natan": "Área de alimentação com carrinhos de foodtruck e tendas",
+      "superficie": "alimentacao"
+    },
+    {
+      "nome": "Area 77",
+      "objeto_na_cena": "NOVO_poligono_77",
+      "forma": "poligono",
+      "x_m": -128.75,
+      "y_m": 53.08,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 56.08,
+      "profundidade_m": 63.75,
+      "pontos_m": [
+        [
+          -143.54,
+          29.26
+        ],
+        [
+          -155.44,
+          21.2
+        ],
+        [
+          -156.79,
+          35.22
+        ],
+        [
+          -154.48,
+          47.7
+        ],
+        [
+          -148.14,
+          58.83
+        ],
+        [
+          -138.74,
+          69.4
+        ],
+        [
+          -125.1,
+          77.85
+        ],
+        [
+          -111.28,
+          83.22
+        ],
+        [
+          -107.63,
+          84.37
+        ],
+        [
+          -104.36,
+          84.95
+        ],
+        [
+          -100.71,
+          73.24
+        ],
+        [
+          -116.84,
+          68.05
+        ],
+        [
+          -128.17,
+          60.56
+        ],
+        [
+          -134.32,
+          52.69
+        ],
+        [
+          -138.54,
+          44.82
+        ],
+        [
+          -141.62,
+          37.14
+        ]
+      ],
+      "nota_do_natan": "Área mostrando a Exposição de máquinas, equipamentos e veículos e implementos.",
+      "superficie": "exposicao"
+    },
+    {
+      "nome": "Area 78",
+      "objeto_na_cena": "NOVO_poligono_78",
+      "forma": "poligono",
+      "x_m": -65.03,
+      "y_m": 81.67,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 58.73,
+      "profundidade_m": 21.69,
+      "pontos_m": [
+        [
+          -94.4,
+          75.52
+        ],
+        [
+          -91.24,
+          90.88
+        ],
+        [
+          -80.67,
+          92.52
+        ],
+        [
+          -69.44,
+          91.54
+        ],
+        [
+          -60.84,
+          89.79
+        ],
+        [
+          -52.01,
+          86.96
+        ],
+        [
+          -45.15,
+          83.58
+        ],
+        [
+          -35.67,
+          75.96
+        ],
+        [
+          -43.73,
+          70.83
+        ],
+        [
+          -49.83,
+          74.43
+        ],
+        [
+          -56.48,
+          77.81
+        ],
+        [
+          -63.45,
+          79.66
+        ],
+        [
+          -71.08,
+          79.44
+        ],
+        [
+          -79.69,
+          79.44
+        ]
+      ],
+      "nota_do_natan": "Área mostrando a Exposição de Veículos  e moto náuticas",
+      "superficie": "exposicao"
+    },
+    {
+      "nome": "Area 79",
+      "objeto_na_cena": "NOVO_poligono_79",
+      "forma": "poligono",
+      "x_m": -17.3,
+      "y_m": 41.36,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 36.37,
+      "profundidade_m": 55.16,
+      "pontos_m": [
+        [
+          -35.48,
+          64.66
+        ],
+        [
+          -24.86,
+          68.94
+        ],
+        [
+          -5.7,
+          40.99
+        ],
+        [
+          0.89,
+          16.83
+        ],
+        [
+          -5.58,
+          13.78
+        ]
+      ],
+      "nota_do_natan": "Área mostrando a Exposição de Veículos  e moto náuticas",
+      "superficie": "exposicao"
+    },
+    {
+      "nome": "Area 80",
+      "objeto_na_cena": "NOVO_poligono_80",
+      "forma": "poligono",
+      "x_m": -69.88,
+      "y_m": 53.23,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 433.24,
+      "profundidade_m": 177.95,
+      "pontos_m": [
+        [
+          143.09,
+          142.21
+        ],
+        [
+          146.74,
+          141.35
+        ],
+        [
+          59.43,
+          64.35
+        ],
+        [
+          28.67,
+          55.32
+        ],
+        [
+          -1.22,
+          66.29
+        ],
+        [
+          -12.19,
+          77.69
+        ],
+        [
+          -50.19,
+          106.66
+        ],
+        [
+          -64.94,
+          109.92
+        ],
+        [
+          -87.57,
+          112.15
+        ],
+        [
+          -109.52,
+          109.41
+        ],
+        [
+          -133.86,
+          101.18
+        ],
+        [
+          -152.89,
+          85.23
+        ],
+        [
+          -169.01,
+          65.17
+        ],
+        [
+          -175.11,
+          49.01
+        ],
+        [
+          -178.56,
+          30.76
+        ],
+        [
+          -196.8,
+          8.3
+        ],
+        [
+          -255.51,
+          -21.86
+        ],
+        [
+          -284.78,
+          -35.74
+        ],
+        [
+          -286.5,
+          -31.43
+        ],
+        [
+          -211.44,
+          6.63
+        ],
+        [
+          -200.9,
+          13.3
+        ],
+        [
+          -189.29,
+          25.99
+        ],
+        [
+          -183.52,
+          34.88
+        ],
+        [
+          -176.87,
+          58.08
+        ],
+        [
+          -168.99,
+          74.41
+        ],
+        [
+          -163.23,
+          81.13
+        ],
+        [
+          -153.44,
+          90.73
+        ],
+        [
+          -139.42,
+          101.67
+        ],
+        [
+          -134.62,
+          106.09
+        ],
+        [
+          -117.03,
+          112.5
+        ],
+        [
+          -97.66,
+          115.99
+        ],
+        [
+          -63.22,
+          115.31
+        ],
+        [
+          -33.06,
+          103.99
+        ],
+        [
+          -20.07,
+          93.33
+        ],
+        [
+          -7.91,
+          83.06
+        ],
+        [
+          1.85,
+          73.29
+        ],
+        [
+          29.31,
+          61.09
+        ],
+        [
+          57.62,
+          70.02
+        ]
+      ],
+      "nota_do_natan": "Estrada de asfalto.",
+      "superficie": "asfalto"
+    },
+    {
+      "nome": "Area 82",
+      "objeto_na_cena": "NOVO_poligono_82",
+      "forma": "poligono",
+      "x_m": 96.06,
+      "y_m": 35.1,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 71.49,
+      "profundidade_m": 68.34,
+      "pontos_m": [
+        [
+          60.31,
+          65.17
+        ],
+        [
+          69.74,
+          42.75
+        ],
+        [
+          124.83,
+          0.93
+        ],
+        [
+          131.8,
+          5.98
+        ],
+        [
+          74.94,
+          47.81
+        ],
+        [
+          65.37,
+          69.27
+        ]
+      ],
+      "nota_do_natan": "Estrada de asfalto.",
+      "superficie": "asfalto"
+    },
+    {
+      "nome": "Area 83",
+      "objeto_na_cena": "NOVO_poligono_83",
+      "forma": "poligono",
+      "x_m": 121.12,
+      "y_m": 77.58,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 107.54,
+      "profundidade_m": 126.46,
+      "pontos_m": [
+        [
+          146.93,
+          140.81
+        ],
+        [
+          174.89,
+          126.4
+        ],
+        [
+          149.51,
+          75.86
+        ],
+        [
+          153.17,
+          72.42
+        ],
+        [
+          122.84,
+          14.35
+        ],
+        [
+          77.03,
+          48.76
+        ],
+        [
+          67.35,
+          69.84
+        ]
+      ],
+      "nota_do_natan": "Área de Estacionamento. deixar com vagas de estacionamento distribuídas, tem fotos extraídas de referencia. sem cobertura",
+      "superficie": "estacionamento"
+    },
+    {
+      "nome": "Tenda 84",
+      "objeto_na_cena": "NOVO_tenda_84",
+      "forma": "tenda",
+      "x_m": -251.44,
+      "y_m": -8.56,
+      "rumo_graus": 65.1,
+      "altura_m": 4,
+      "largura_m": 6.95,
+      "profundidade_m": 5.43,
+      "nota_do_natan": "Tenda vendedores"
+    },
+    {
+      "nome": "Tenda 85",
+      "objeto_na_cena": "NOVO_tenda_85",
+      "forma": "tenda",
+      "x_m": -234.11,
+      "y_m": -129.28,
+      "rumo_graus": 159.5,
+      "altura_m": 4,
+      "largura_m": 10,
+      "profundidade_m": 10,
+      "nota_do_natan": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "nome": "Bloco 86",
+      "objeto_na_cena": "NOVO_retangulo_86",
+      "forma": "retangulo",
+      "x_m": -255.82,
+      "y_m": -148.9,
+      "rumo_graus": 161.9,
+      "altura_m": 3.2,
+      "largura_m": 22.01,
+      "profundidade_m": 10.15,
+      "nota_do_natan": "Tenda, arena do conhecimento UTF - PR"
+    },
+    {
+      "nome": "Area 87",
+      "objeto_na_cena": "NOVO_poligono_87",
+      "forma": "poligono",
+      "x_m": -277.06,
+      "y_m": -83.06,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 41.28,
+      "profundidade_m": 63.83,
+      "pontos_m": [
+        [
+          -297.56,
+          -63.17
+        ],
+        [
+          -297.01,
+          -59.75
+        ],
+        [
+          -294.96,
+          -56.88
+        ],
+        [
+          -293.05,
+          -55.52
+        ],
+        [
+          -283.07,
+          -51.83
+        ],
+        [
+          -278.56,
+          -51.14
+        ],
+        [
+          -276.65,
+          -51.14
+        ],
+        [
+          -274.73,
+          -51.96
+        ],
+        [
+          -272.27,
+          -53.6
+        ],
+        [
+          -270.91,
+          -55.79
+        ],
+        [
+          -256.42,
+          -100.07
+        ],
+        [
+          -257.1,
+          -105.54
+        ],
+        [
+          -258.61,
+          -108.41
+        ],
+        [
+          -260.79,
+          -109.64
+        ],
+        [
+          -272.27,
+          -114.43
+        ],
+        [
+          -276.51,
+          -114.97
+        ],
+        [
+          -278.15,
+          -114.02
+        ],
+        [
+          -281.43,
+          -111.83
+        ],
+        [
+          -283.48,
+          -109.1
+        ],
+        [
+          -297.7,
+          -66.59
+        ]
+      ],
+      "nota_do_natan": "A pista de julgamento é um espaço em feiras e exposições agropecuárias onde animais (como bovinos, ovinos e equinos) são apresentados e avaliados por juízes especializados com base em seus padrões raciais, beleza, postura e potencial genético",
+      "superficie": "arena"
+    },
+    {
+      "nome": "Bloco 88",
+      "objeto_na_cena": "NOVO_retangulo_88",
+      "forma": "retangulo",
+      "x_m": -331.99,
+      "y_m": -41.76,
+      "rumo_graus": 72.1,
+      "altura_m": 3.2,
+      "largura_m": 9.9,
+      "profundidade_m": 6.06,
+      "nota_do_natan": "Ordenha de vaca"
+    },
+    {
+      "nome": "Area 90",
+      "objeto_na_cena": "NOVO_poligono_90",
+      "forma": "poligono",
+      "x_m": -217.93,
+      "y_m": 67.26,
+      "rumo_graus": 90,
+      "altura_m": 0.05,
+      "largura_m": 32.65,
+      "profundidade_m": 35.34,
+      "pontos_m": [
+        [
+          -225.22,
+          84.93
+        ],
+        [
+          -201.6,
+          71.49
+        ],
+        [
+          -212.35,
+          49.59
+        ],
+        [
+          -216,
+          49.59
+        ],
+        [
+          -223.68,
+          53.05
+        ],
+        [
+          -231.56,
+          62.08
+        ],
+        [
+          -234.25,
+          72.83
+        ],
+        [
+          -230.21,
+          82.05
+        ]
+      ],
+      "nota_do_natan": "Área de boques mata levemente aberta, estilo parque recreação.",
+      "superficie": "bosque"
+    },
+    {
+      "nome": "Bloco 92",
+      "objeto_na_cena": "NOVO_retangulo_92",
+      "forma": "retangulo",
+      "x_m": -172.84,
+      "y_m": -114.02,
+      "rumo_graus": 159.6,
+      "altura_m": 3.2,
+      "largura_m": 38.27,
+      "profundidade_m": 13.25,
+      "nota_do_natan": "área de banheiros."
+    }
+  ],
+  "decisoes_dele_1508": {
+    "1_duplicata": "pode substituir -- o bloco dele vence e a peca velha vai para DESCARTADO",
+    "3_superficie": "areas de chao com altura 0,05 m; a arena de rodeio tambem e superficie",
+    "4_estrada": "as Areas 80 e 82 substituem a estrada do print da manha, e estrada dentro de area e' de chao",
+    "5_portal": "posicao e rumo novos confirmados por ele",
+    "7_conteudo": "ele vai providenciar os modelos (gado, gente, trator, foodtruck); ate la a area sai vazia com a nota gravada",
+    "8_referencias": [
+      "F:\\Extração quadros expo 2025",
+      "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente"
+    ]
+  }
+}

@@ -47,9 +47,10 @@
       "audio": "AUDIO 3 [00:36] e [00:40], repetida por ele duas vezes seguidas",
       "nota": "frase de abertura, LITERAL -- ESTADO.md manda nao reescrever. Ele pediu 'pra colocar na entrada' [00:47]",
       "suporte": {
-        "modo": "placa_suspensa",
-        "objeto_na_cena": "PortalCeleiro",
-        "por_que": "A tábua pendurada voltou em 15/08/2026, à noite: ele autorizou girar a fachada do Portal Celeiro. Com o vão perpendicular à estrada dele (RUMO_PORTAL de 73° para 124°), a câmera deste plano passou de 77° para 26° da fachada, e 26° lê. É a referência A do docs/COMO-O-PARQUE-ESCREVE.md — a Pista de Laço. Ver DECISOES.md D059 e D067."
+        "modo": "painel_plantado",
+        "objeto_na_cena": null,
+        "por_que": "MEDIDO: a camera deste plano olha o portal a 77 graus da fachada -- quase de perfil. A tabua suspensa (referencia A) e' o modo certo para um portal e continua descrita em `modos_possiveis`, mas nenhum tamanho de letra sobrevive a 77 graus. As tres saidas eram: girar o portal, girar a camera, ou tirar a letra da fachada. Girar o portal mexe em geometria que ele olhou em 15/08; girar a camera reescreve o enquadramento de abertura e de fechamento do filme. Painel plantado e' a unica que nao mexe em nada dele -- ver DECISOES.md D059, que registra tambem POR QUE o portal e a camera discordam.",
+        "proposta_em_aberto": "voltar para `placa_suspensa` no PortalCeleiro assim que o rumo do portal ou o azimute do plano for decidido."
       }
     },
     {
@@ -170,7 +171,7 @@
       }
     },
     {
-      "plano": "P12",
+      "plano": "P16",
       "texto": "Pista de Julgamentos",
       "apoio": "Julgamento de animais",
       "nivel": "titulo",
@@ -179,12 +180,10 @@
         "modo": "painel_plantado",
         "objeto_na_cena": null,
         "por_que": "pista de julgamentos: tendas, sem parede."
-      },
-      "plano_antes_1508": "P16",
-      "por_que_mudou_de_plano": "MEDIDO em 15/08: o letreiro estava amarrado ao plano P16, cuja camera olha OUTRA area -- o nome sairia por cima do lugar errado, e isto e' material de venda de espaco fisico. Reamarrado a P12. Prova: alvo de P12 e' o rotulo PISTA DE JULGAMENTOS; o alvo de P16 e' 'Exposicao de Maquinas,Equipamentos e Veiculos e Implementos'."
+      }
     },
     {
-      "plano": "P13",
+      "plano": "P17",
       "texto": "Expositores Externos",
       "apoio": null,
       "nivel": "titulo",
@@ -193,12 +192,10 @@
         "modo": "painel_plantado",
         "objeto_na_cena": null,
         "por_que": "continua sem alvo na planta e por isso nao e construido. Fica declarado para o dia em que o alvo existir."
-      },
-      "plano_antes_1508": "P17",
-      "por_que_mudou_de_plano": "MEDIDO em 15/08: o letreiro estava amarrado ao plano P17, cuja camera olha OUTRA area -- o nome sairia por cima do lugar errado, e isto e' material de venda de espaco fisico. Reamarrado a P13. Prova: alvo de P13 e' o rotulo 'Expositores Externo'; P17 mira um ponto xy do patio de veiculos."
+      }
     },
     {
-      "plano": "P16",
+      "plano": "P18",
       "texto": "Máquinas e Implementos",
       "apoio": "Equipamentos agrícolas e veículos",
       "nivel": "titulo",
@@ -207,9 +204,7 @@
         "modo": "painel_plantado",
         "objeto_na_cena": null,
         "por_que": "patio de maquinas: chao aberto."
-      },
-      "plano_antes_1508": "P18",
-      "por_que_mudou_de_plano": "MEDIDO em 15/08: o letreiro estava amarrado ao plano P18, cuja camera olha OUTRA area -- o nome sairia por cima do lugar errado, e isto e' material de venda de espaco fisico. Reamarrado a P16. Prova: alvo de P16 e' o rotulo 'Exposicao de Maquinas,Equipamentos e Veiculos e Implementos'."
+      }
     },
     {
       "plano": "P19",
@@ -224,7 +219,7 @@
       }
     },
     {
-      "plano": "P18",
+      "plano": "P20",
       "texto": "Área de Shows",
       "apoio": null,
       "nivel": "titulo",
@@ -233,9 +228,7 @@
         "modo": "painel_plantado",
         "objeto_na_cena": null,
         "por_que": "NAO ha estrutura de palco no alvo do P20. O mesh 'Palco de evento' fica a 600 m, na AREA_DE_ESPERA, e o 'PALCO AFTER' foi para DESCARTADO -- sobram os pilares de 40 cm. Pendurar a letra em qualquer um dos dois seria casar por nome (armadilha 38): na primeira tentativa o letreiro foi dimensionado a 589 m de distancia e saiu com 19,4 m de altura de letra."
-      },
-      "plano_antes_1508": "P20",
-      "por_que_mudou_de_plano": "MEDIDO em 15/08: o letreiro estava amarrado ao plano P20, cuja camera olha OUTRA area -- o nome sairia por cima do lugar errado, e isto e' material de venda de espaco fisico. Reamarrado a P18. Prova: alvo de P18 e' o rotulo 'Area de Show'; o alvo de P20 e' o rotulo PALCO."
+      }
     },
     {
       "plano": "P22",
@@ -244,9 +237,10 @@
       "audio": "AUDIO 2 [02:04], literal",
       "nota": "frase de fechamento. ESTADO.md manda nao reescrever. O plano final sai pelo portal (restricao 6).",
       "suporte": {
-        "modo": "placa_suspensa",
-        "objeto_na_cena": "PortalCeleiro",
-        "por_que": "A tábua pendurada voltou em 15/08/2026, à noite: ele autorizou girar a fachada do Portal Celeiro. Com o vão perpendicular à estrada dele (RUMO_PORTAL de 73° para 124°), a câmera deste plano passou de 77° para 26° da fachada, e 26° lê. É a referência A do docs/COMO-O-PARQUE-ESCREVE.md — a Pista de Laço. Ver DECISOES.md D059 e D067."
+        "modo": "painel_plantado",
+        "objeto_na_cena": null,
+        "por_que": "MEDIDO: a camera deste plano olha o portal a 77 graus da fachada -- quase de perfil. A tabua suspensa (referencia A) e' o modo certo para um portal e continua descrita em `modos_possiveis`, mas nenhum tamanho de letra sobrevive a 77 graus. As tres saidas eram: girar o portal, girar a camera, ou tirar a letra da fachada. Girar o portal mexe em geometria que ele olhou em 15/08; girar a camera reescreve o enquadramento de abertura e de fechamento do filme. Painel plantado e' a unica que nao mexe em nada dele -- ver DECISOES.md D059, que registra tambem POR QUE o portal e a camera discordam.",
+        "proposta_em_aberto": "voltar para `placa_suspensa` no PortalCeleiro assim que o rumo do portal ou o azimute do plano for decidido."
       }
     }
   ],
@@ -283,6 +277,5 @@
     "por_que_proporcao": "prancha mais alta que 1:3 deixa de parecer letreiro e vira outdoor.",
     "espessura_m": 0.1,
     "folga_da_letra_m": 0.06
-  },
-  "_correcao_1508d": "Quatro letreiros nomeavam um lugar e eram exibidos sobre outro. A amarracao correta foi provada pelo rotulo do ALVO de cada plano em data/planos.json, nao pelo titulo -- titulo e' texto de tela e pode divergir; o alvo e' coordenada da planta. Ver DECISOES.md D062."
+  }
 }

@@ -1,0 +1,77 @@
+{
+  "o_que_e": "Configuracao de render da casa, medida na maquina do Natan. Existe porque ate 16/08/2026 ela so vivia em conversa -- um contexto novo as 4h da manha nao a tinha. Gravada, sobrevive a noite e as proximas.",
+  "escrito_em": "2026-08-16",
+  "ordem_dele": "Amostragem adaptativa minimo 10, maximo 50. Denoise OptiX. NAO inventar configuracao de Cycles. Especificacao de sessao anterior manda sobre recomendacao generica.",
+
+  "motor": {
+    "engine": "CYCLES",
+    "device": "GPU",
+    "compute_device_type": "OPTIX",
+    "por_que_optix": "RTX 4060. D009 registrou que o render ja veio na CPU sem ninguem saber -- por isso scripts/prova_cycles.py IMPRIME o dispositivo e ABORTA se nenhum OPTIX ficar ativo, em vez de assumir.",
+    "armadilha_get_devices": "prefs.devices vem VAZIA ate get_devices() ser chamado. Sem essa chamada o laco que liga a GPU nao liga nada, em silencio, e cai na CPU."
+  },
+
+  "amostragem": {
+    "use_adaptive_sampling": true,
+    "adaptive_min_samples": 10,
+    "samples": 50,
+    "adaptive_threshold": 0.01,
+    "por_que": "Ordem escrita dele em 16/08. E o preset da noite. O teste comparativo contra ~200 samples com bounces cheios decide se algum quadro vira excecao -- resultado em DECISOES.md com os dois tempos."
+  },
+
+  "denoise": {
+    "use_denoising": true,
+    "denoiser": "OPTIX",
+    "por_que": "D011 -- o denoise fica no render, e por medida."
+  },
+
+  "saida": {
+    "resolucao_x": 2560,
+    "resolucao_y": 1440,
+    "resolution_percentage": 100,
+    "por_que_2560x1440": "D044 -- a entrega virou 16:9 nativo por ordem dele de 15/08. O paineL LED P2,9 tem 1379x690 nativos.",
+    "formato_final": "OPEN_EXR",
+    "color_depth_final": "32",
+    "formato_teste": "PNG",
+    "nao_mostrar_exr_cru": "EXR linear sem grade parece lavado e quem nao e da area le como render ruim. Sempre entregar tambem um JPG com grade."
+  },
+
+  "teste_rapido": {
+    "resolucao_x": 960,
+    "resolucao_y": 540,
+    "samples": 64,
+    "medido_em_16_08": {
+      "cena": "out/cena-revisar.blend",
+      "camera": "CAM_P01",
+      "tempo_s": 7.5,
+      "arquivo_bytes": 659302,
+      "dispositivo": "NVIDIA GeForce RTX 4060 [OPTIX]",
+      "observacao": "7,5 s a 960x540/64. Render e barato nesta cena -- cabe muito mais ciclo de comparacao contra a foto real do que o plano supunha."
+    }
+  },
+
+  "persistent_data": true,
+  "por_que_persistent": "Sequencia de quadros da mesma cena: evita reconstruir a BVH a cada quadro. Custa VRAM -- e o primeiro item a cair se a memoria apertar.",
+
+  "ordem_de_sacrificio_da_vram": [
+    "1. descarregar a nuvem de pontos de referencia (serviu para modelar, nao para renderizar)",
+    "2. baixar textura de 2k para 1k nas superficies distantes da camera",
+    "3. reduzir samples e confiar mais no OptiX",
+    "4. so por ultimo, baixar a resolucao de saida"
+  ],
+  "por_que_resolucao_por_ultimo": "E a unica que o cliente enxerga direto. Degrau usado em cada quadro fica registrado em DECISOES.md.",
+
+  "vram": {
+    "total_mib": 8188,
+    "ocupado_por_outros_mib": 1539,
+    "livre_medido_mib": 6649,
+    "observacao": "Os 1.539 MiB sao a janela do Blender aberta na tela dele. Fechar devolveria a memoria, mas nao se encosta na sessao dele."
+  },
+
+  "armadilha_34": "Marcador de timeline vence scene.camera. Todo script que renderiza limpa scene.timeline_markers NA SESSAO antes de renderizar. A cena em disco nao muda. A cena-revisar.blend tem 22 marcadores.",
+
+  "fora_desta_configuracao": {
+    "grain_vinheta_aberracao": "Ficam no Premiere, decisao ja tomada pelo projeto. Nao entram no Blender.",
+    "hipew_warning": "'HIPEW initialization failed' aparece no log e e' inofensivo -- e' o backend AMD, que nao existe nesta maquina."
+  }
+}

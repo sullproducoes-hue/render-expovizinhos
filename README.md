@@ -31,8 +31,8 @@ python3 scripts/planos.py --conferir     # confere a decupagem, sem bpy
 ```
 
 134 estandes, 6 pavilhões, bacia da arena em 3 patamares, **22 planos** de
-câmera (não mais uma curva única — ver `docs/PLANOS.md`), 154 s a 30 fps,
-render em 2760×1380.
+câmera (não mais uma curva única — ver `docs/PLANOS.md`), **176 s a 30 fps**
+(5.280 quadros), render em **2560×1440**.
 
 ## Renderizar e entregar
 
@@ -61,12 +61,17 @@ teste de 10 s.
 
 ## Entrega
 
-Telão LED **P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m**. Proporção **2:1**.
+Telão LED **P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m**.
 
-Master em **2760 × 1380** (2× o nativo, dimensões pares), em `.mov` (ProRes
-422 HQ) **e** `.mp4` (H.264), mais uma reserva leve em **1380 × 690**. Os três
-arquivos, sempre — o cliente já teve falha de reprodução ao vivo. Gerados por
-`scripts/encode.sh` a partir da sequência renderizada.
+> **A proporção mudou em 15/08/2026, por ordem dele** (`DECISOES.md` D044):
+> *"sobre o painel de led eu vou exportar em 16:9 não se preocupa"*, e,
+> perguntado se era render nativo ou master 2:1 reencaixado, **nativo**. O
+> encaixe no painel passou a ser dele. Era 2:1 / 2760×1380 até então.
+
+Master em **2560 × 1440 (16:9)**, em `.mov` (ProRes 422 HQ) **e** `.mp4`
+(H.264), mais uma reserva leve em **1280 × 720**. Os três arquivos, sempre — o
+cliente já teve falha de reprodução ao vivo. Gerados por `scripts/encode.sh` a
+partir da sequência renderizada, mais uma cartela de teste de 10 s.
 
 **Nunca masterize em 1379 × 690** — largura ímpar não codifica em H.264 4:2:0.
 

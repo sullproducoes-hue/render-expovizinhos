@@ -1,0 +1,6 @@
+{"o_que_e":"TESTE das 4 formas","pecas":{},"blocos_novos":[
+ {"nome":"Bloco 1","forma":"retangulo","x_m":100,"y_m":50,"rumo_graus":90,"altura_m":3.2,"largura_m":20,"profundidade_m":20,"nota_do_natan":"teste retangulo"},
+ {"nome":"Circulo 2","forma":"circulo","x_m":-50,"y_m":20,"rumo_graus":90,"altura_m":5,"raio_m":12,"nota_do_natan":"teste circulo"},
+ {"nome":"Tenda 3","forma":"tenda","x_m":30,"y_m":-40,"rumo_graus":45,"altura_m":4,"largura_m":10,"profundidade_m":10,"nota_do_natan":"teste tenda"},
+ {"nome":"Area 4","forma":"poligono","x_m":225,"y_m":50,"rumo_graus":90,"altura_m":0.3,"pontos_m":[[200,10],[260,30],[250,90],[190,70]],"nota_do_natan":"area do estacionamento, chao de saibro, sem cobertura"}
+]}

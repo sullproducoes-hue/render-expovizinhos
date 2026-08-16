@@ -1,23 +1,161 @@
 # ESTADO DO PROJETO — leia isto primeiro
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
-Atualizado em 15/08/2026.
+Atualizado em 16/08/2026, madrugada.
+
+
+> ## 16/08, madrugada — NOITE-3-QUADROS em curso
+>
+> **O alvo mudou:** não é a cena inteira, são **três quadros parados que
+> convençam o cliente**. Contrato em `NOITE-3-QUADROS.md`, e ele manda mais que
+> este arquivo enquanto a noite durar. Fila de longo prazo em `FILA-CENA.md`.
+>
+> ```
+> FASE: C
+> Q1 portal ....... REPROVADO 2x, consertado 2x. O frontao e ASSIMETRICO
+>                   (D086) e a camera mirava x=0 (D087). Falta 3a conferencia
+> Q2 arena ........ REPROVADO, 6 de 7 consertadas, a 7a virou PROPOSTA
+>                   (a hora do LOOK LOCK -- D084)
+> Q3 pavilhao ..... NAO ABERTO — so abre com Q1 e Q2 sem reprovacao aberta
+> BLOQUEIOS: nenhum
+> ```
+>
+> | o quê | onde |
+> |---|---|
+> | **as folhas `real \| 3D`** | `out/heroi/Q1.jpg`, `out/heroi/Q2.jpg` |
+> | **a pagina para o cliente** | `out/heroi/APRESENTACAO.html` |
+> | **o antes/depois da arena** | `out/heroi/Q2-antes-depois.jpg` |
+> | cenas para abrir e conferir | `out/cena-heroi-q1.blend`, `out/cena-heroi-q2.blend` |
+> | renders finais | `F:/heroi/Q1/final-2560.png` e `F:/heroi/Q2/final-2560.png` |
+> | configuração de render, gravada | `data/render-config.json` |
+> | decisões da noite | `DECISOES.md` **D072–D088** |
+> | o que é proposta, não medida | `PROPOSTAS.md` |
+> | portão a portão | `ENTREGA.md` |
+> | o que travou | `PENDENCIAS.md` |
+>
+> **A fotogrametria fechou** (D072). As seis tentativas sempre tinham fechado —
+> eu lia o submodelo `0`, que é o descarte de duas imagens, em vez do `1`. Erro
+> de método registrado: **li a pasta, não o dado.** `D071`,
+> `RETOMAR-1608-FOTOGRAMETRIA.md` e `docs/FOTOGRAMETRIA.md` precisam da correção.
+>
+> **Continua valendo:** não se renderiza o filme (D067/D069). Os três quadros
+> são parados.
+
+> ## O render foi PARADO. Abra `out/cena-revisar.blend`
+>
+> **Por quê:** enquanto o filme renderizava, apareceram no `DECISOES.md` três
+> ordens dele da mesma noite, escritas por outra sessão **depois** de o render
+> começar — *"deixe sem os nomes, na hora da câmera passar"*, *"a fachada do
+> Portal Celeiro pode girar"* e, decisiva, **"não renderiza nada ainda"** junto
+> de *"sempre quero revisar no blender antes de pontos importantes"*
+> (D067, D068).
+>
+> Os 958 quadros já feitos tinham **letreiro dentro da cena 3D** — o que ele
+> mandou tirar — e o **portal no rumo antigo de 73°**. Continuar custava 11 h de
+> GPU para produzir um arquivo já recusado. **Parei.** Detalhe em **D069**.
+>
+> Nada foi apagado: os quadros estão em
+> `F:\render-agroshow\final-1508-SUPERADO-letreiros-em-3d\`, com um `LEIA-ME.txt`
+> explicando por que não servem.
+>
+> | o quê | onde |
+> |---|---|
+> | **a cena para revisar** | `out/cena-revisar.blend` |
+> | a mesma cena sem o conserto de câmera, para comparar | `out/cena-revisar-1940-antes-do-conserto-de-camera.blend` |
+> | o que foi decidido hoje | `DECISOES.md` **D061–D071** |
+> | handoff desta sessão | `RETOMAR-1508-RENDER.md` |
+> | **frente paralela: fotogrametria** | `RETOMAR-1608-FOTOGRAMETRIA.md` |
+>
+> **O que ele decide agora:** se a cena serve para render. Enquanto ele não
+> disser, **não se renderiza** — é ordem escrita.
+
+> ## ~~A fotogrametria foi tentada e não fechou (D071)~~ — **SUPERADO**
+>
+> **⚠ Este bloco inteiro está errado.** A fotogrametria **fechou**: 100 de 100
+> imagens, 42.090 pontos, erro de 0,80 px. Eu lia o submodelo `0`, que é o
+> descarte de duas imagens, em vez do `1`. Ver **D072** e o bloco do topo deste
+> arquivo. Fica aqui porque **nada se apaga**.
+>
+> Ele perguntou se dava para montar um 3D a partir das imagens do extrator.
+> **Dá, mas não o recinto inteiro:** medido o pitch dos 62 voos com telemetria,
+> há **zero voos em nadir** — não existe voo de mapeamento aqui. O que existe
+> são **32 órbitas**, e órbita reconstrói *um assunto*, não um sítio.
+>
+> Seis tentativas com duas versões do COLMAP não fecharam: o melhor foi um
+> modelo degenerado, 13 imagens com 2 pontos 3D. A hipótese que sobra é
+> **textura repetitiva** (telha ondulada), e o próximo passo é **trocar de
+> assunto antes de trocar de ferramenta** — 10 minutos de máquina.
+>
+> **Erro meu registrado junto:** triei os voos pela hora no nome do arquivo e
+> propus um alvo que é show noturno. Neste acervo, **triagem se faz no pixel**.
+> Handoff em `RETOMAR-1608-FOTOGRAMETRIA.md`, log em `docs/FOTOGRAMETRIA.md`.
+
+> ## O custo do filme está medido em regime, não em amostra
+>
+> Os 958 quadros pagaram por um número que antes era estimativa: **10,0 s/quadro
+> e 35 MB/quadro**, OptiX na RTX 4060, 2560×1440, com beauty EXR + data EXR
+> (Cryptomatte, Normal, Depth) + preview PNG.
+>
+> Para os 5.475 quadros do filme: **~15,2 h e ~188 GB.** Sem os passes seriam
+> ~10,8 h e 23 GB — os passes custam 39% do tempo e 165 GB (D065).
+>
+> Quando ele autorizar:
+> ```
+> "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background \
+>     --python scripts/render_shots.py -- --blend out/cena.blend \
+>     --saida "F:/render-agroshow/final"
+> ```
+> e `bash scripts/fechar_entrega.sh` vigia, relança se cair e encoda no fim.
+> **Não reaproveitar a pasta `final-1508-SUPERADO`** como retomada.
+
+> ## A câmera foi reenquadrada por medida, e os três portões passam
+>
+> **21 planos** reenquadrados, **duração de nenhum alterada** — o filme continua
+> em **5.475 quadros, 182 s**. Isso foi possível porque a distância entra por
+> **soma**, não por fator: num push-in o comprimento do caminho é
+> `|dist_ini − dist_fim|`, e somar o mesmo valor nas duas pontas afasta a câmera
+> sem mexer na velocidade (D070).
+>
+> | portão | o que pergunta | resultado |
+> |---|---|---|
+> | `scripts/conferir_camera.py` | a câmera nasce ou morre dentro de geometria? | **0 problemas** |
+> | `scripts/enquadramento.py` | o plano **mostra** o lugar que promete? | **0 reprovados em 22** |
+> | `scripts/planos.py --conferir` | a velocidade está na faixa de drone? | **todas dentro** |
+>
+> **Três planos passaram por melhor-esforço e estão carimbados:** P03, P05 e
+> P12. O pior é **P05, domínio 0,62** — a fachada do Pavilhão 2 ainda toma boa
+> parte do quadro. Nenhum dos 891 candidatos passou em tudo neles.
+>
+> **Uma tentativa foi descartada por medida:** com distância por *fator*, os 22
+> planos passavam, mas a duração teve de esticar e o filme ia a **273 s
+> (+49,6%)**. Quatro minutos e meio é outro produto. Ficou em
+> `data/planos.DESCARTADO-solver5-273s.json`.
+
+> ## A procedência do acervo está fechada — é tudo Dois Vizinhos (D061)
+>
+> O GPS do próprio drone põe **60 das 71 pastas em dúvida entre 24 m e 387 m** do
+> recinto, e **nenhuma fora**. O "autódromo oval" está em
+> `DJI_20251126155520_0054_D` (168 m) e os "silos de grão" em
+> `DJI_20251129182345_0168_D` (336 m) — os dois com GPS confirmado. **Nada foi
+> descartado.** Reprodutível: `python scripts/provar_recinto.py`.
 
 > **Regime de trabalho em vigor**, ordem dele de 15/08: *"Trabalhe de forma
 > autônoma até o fim. Não me pergunte nada: quando houver ambiguidade, escolha a
 > opção mais conservadora, registre a decisão e o motivo em DECISOES.md e siga.
 > Se algo travar de vez, pule para a próxima tarefa da fila e documente o
-> bloqueio."* → **`DECISOES.md` é leitura obrigatória.**
+> bloqueio."* → **`DECISOES.md` é leitura obrigatória, e é leitura de novo antes
+> de deixar máquina moendo a noite inteira: mais de uma sessão escreve aqui, e o
+> estado muda debaixo do trabalho em curso.**
 >
 > **Precedência:** ordem do Natan → `reference/DOUTRINA-RENDER-3D.md` → doutrina
-> do projeto. A doutrina é ordem norteadora dele, entregue em 15/08. Onde ela
-> contraria uma ordem direta, a ordem vence — e a divergência fica escrita.
+> do projeto. Entre duas ordens dele, vale a **mais recente**.
 
 ## Os números do render, remedidos em 15/08
 
 ```
 saida ........ beauty EXR (Half/DWAA) + data EXR (Float32/ZIP, crypto) + preview PNG 8
-custo ........ 10,0 s/quadro · 12,9 h o filme · 176 GB de 300 GB livres no F:
+custo ........ 10,0 s/quadro em regime · ~14,5 h o filme (5.280 q) · 35 MB/q -> ~181 GB de 282 GB livres no F:
+calibra ...... 11,6 s/q com os tres slots contra 7,1 s/q so PNG -- os passes custam 39%% e 231 GB (D065)
 amostragem ... 128 samples / limiar 0,1 + denoise -- medido contra 0,01/max: EMPATAM
 ```
 
@@ -71,7 +209,7 @@ Decidido por ele em 14/08/2026, e é isto que manda:
    >
    > **Nada foi gerado por IA** — *"depois crio os vídeos"* é primeira pessoa, e
    > a geração é passo dele. **O filme não foi renderizado**: são 52 quadros de
-   > cena, não os 4.635. Ver `DECISOES.md` D034 a D037.
+   > cena, não os 5.280. Ver `DECISOES.md` D034 a D037.
 
 **Regra permanente:** a descrição dos áudios (`docs/brief-audios.md`) é a régua
 do que vai dentro de cada ambiente — conteúdo, posição e detalhe. Dúvida sobre
@@ -172,12 +310,12 @@ estandes ............ 74 instanciados + 60 proprios
 arvores ............. 418 + 189 arbustos de talude (so onde ha declive)
 povoamento .......... 1681 figuras PROXY na colecao POVOAMENTO -- NAO sao finais
 mobiliario .......... 209 pecas CC0 (mesa e cadeira) na colecao MOBILIARIO
-letreiros ........... 16, texto do audio dele, tamanho pela regra de 8%
+letreiros ........... 17 objetos, texto do audio dele, tamanho pela regra de 8%; 4 reamarrados em 15/08 (D062)
 area de espera ...... 11 pecas em (520,-240) para ele posicionar
 textura ............. PBR CC0 em 4 materiais; a cor MEDIDA nao e sobrescrita
 planos .............. 22 de 22 (filme completo)
-render .............. 2760x1380 (2:1)
-duracao do filme .... 4635 quadros (154 s a 30 fps)
+render .............. 2560x1440 (16:9)
+duracao do filme .... 5280 quadros (176 s a 30 fps) -- alongado em 15/08, ver D064
 patamares ........... arena 0 m -> shows 3.5 m -> anel 7.0 m -> plato 10.0 m
 bacia ............... ferradura aberta 120 graus para SUL-SUDESTE (medida)
 ```
@@ -336,12 +474,23 @@ Decisão do Natan.
 
 Telão LED **P2,9 · 1379 × 690 px nativos · 4,00 × 2,00 m**.
 
-- Proporção **2:1**, master em **2760 × 1380**
+> **Mudou em 15/08/2026, por ordem dele (DECISOES.md D044).** A proporção era
+> 2:1 e estava escrita aqui como não negociável desde a primeira sessão. Ele
+> disse *"sobre o painel de led eu vou exportar em 16:9 não se preocupa"* e,
+> perguntado se era render nativo ou master 2:1 reencaixado, respondeu **render
+> nativo em 16:9**. Foi avisado antes de decidir de que 16:9 é **mais estreito**
+> que 2:1 e custa 11% de largura. O encaixe no painel passou a ser dele.
+
+- Proporção **16:9**, master em **2560 × 1440**
 - **Nunca masterizar em 1379 × 690** — largura ímpar não codifica em H.264 4:2:0
 - **`.mov` (ProRes 422 HQ) e `.mp4` (H.264)** — os dois, sempre
-- **2:1 limpo, jamais tarja embutida.** Tarja embutida não se desfaz, e se o
+- **Quadro limpo, jamais tarja embutida.** Tarja embutida não se desfaz, e se o
   processador estiver em modo preencher, estica a tarja junto
-- **Área de segurança de 90%** — 2484 × 1242 centralizados
+- **Área de segurança de 90%** — 2304 × 1296 centralizados
+- **Sensor vertical 20,25 mm** (36 mm na horizontal ÷ 16/9). Era 18,0 mm em 2:1,
+  e é este número que a régua de 8%/4% usa: trocar só a resolução, sem trocar o
+  sensor, entrega letreiro 12,5% pequeno demais **sem nenhum aviso**.
+  `letreiros.py` lê a proporção da cena para ninguém precisar lembrar
 - Tipografia: o painel tem 951.510 pixels para 4 m de tela. Título com no mínimo
   8% da altura do quadro; apoio nunca abaixo de 4%
 - Mandar junto uma **cartela de teste** de 10 s com marcas de canto
@@ -418,7 +567,7 @@ modelados e a configuração de Cycles gravada na cena.
 ### O número que decide o Plano A vs o Plano B
 
 Medido nesta máquina, com a cena ainda crua: **31 s por quadro** em 2760×1380,
-Cycles 128 samples, OptiX na RTX 4060 — o filme inteiro, 4.635 quadros, dá
+Cycles 128 samples, OptiX na RTX 4060 — o filme inteiro, hoje 5.280 quadros, dá
 **cerca de 39 h**. Com textura, vegetação e gente, sobe. Recronometrar depois
 do passo 2 antes de prometer prazo.
 

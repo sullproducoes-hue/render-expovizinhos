@@ -1,3 +1,20 @@
+> ## ⚠ ESTA NÃO É A SESSÃO MAIS NOVA
+>
+> 1. **`RETOMAR-1508-RENDER.md`** — a **décima primeira** sessão (15/08, noite).
+>    É a que colocou o filme no render: 22 planos reenquadrados por medida,
+>    4 letreiros reamarrados ao plano certo, a dúvida do recinto fechada por GPS,
+>    e **5.280 quadros rodando em `F:/render-agroshow/final/`** com a entrega se
+>    fechando sozinha. **Comece por ela.**
+> 2. **`RETOMAR-1508-LETREIROS.md`** — a letra na superfície e os três portões
+>    de letreiro.
+> 3. **`RETOMAR-1508-DECIMA.md`** — o levantamento do acervo (9.980 quadros) e a
+>    página `out/acervo/ACERVO.html`. A dúvida de procedência que ela abriu
+>    **foi resolvida** em D061 — é tudo Dois Vizinhos, nada foi descartado.
+> 4. **`RETOMAR-1508-OITAVA.md`** — o layout do recinto.
+>
+> O que está aqui embaixo continua valendo para as **armadilhas** e para o
+> histórico, mas o estado da cena mudou várias vezes desde então.
+
 # RETOMAR — handoff do render-agroshow
 
 **AGROSHOW 2026 · Parque de Exposições de Dois Vizinhos, PR**
@@ -1224,3 +1241,123 @@ chegou a zero. **O `G:` mencionado na versão anterior deste arquivo não existe
 **Máquina:** Xeon E5-2680 v4 (28 threads), RTX 4060 8 GB, 32 GB RAM.
 Render é OptiX na GPU; ffmpeg é CPU e não briga — mas **cronometrar com a
 máquina ocupada mede ruído**.
+
+### 47. Estabilizador de vídeo apaga o GPS do drone
+
+Os exports `_stabilized` carregam **só o stream de vídeo**. O `djmd` da DJI — que
+é onde moram latitude, longitude, altitude e gimbal, amostra a amostra — não é
+copiado. O que sobra no container é `comment = Original filename: …`.
+
+Onze voos ficaram sem coordenada por causa disso, e os MP4 originais não estão
+mais no disco. **Extrair telemetria do original antes de estabilizar** — depois
+não tem de onde tirar.
+
+Como conferir se um arquivo ainda tem: `ffprobe -show_streams` e procurar um
+stream `data / djmd`. Quem tem, tem quatro streams; quem não tem, tem um.
+
+### 48. `ray_cast` devolve o objeto no 5º campo, não no 6º
+
+A ordem é `(ok, local, normal, índice, OBJETO, matriz)`. Trocar os dois últimos
+entrega uma `Matrix` onde se espera um `Object`, e como Python não checa tipo, o
+erro só aparece quando alguém chama `.name` — no meio de uma varredura de vinte
+minutos, com o resultado parcial perdido.
+
+### 49. `drawtext` do ffmpeg e a letra da unidade no Windows
+
+Dentro de um filtro, `:` é separador de opção — e todo caminho absoluto do
+Windows começa com `C:`. Escapar é um pântano que muda de build para build
+(`C\:`, `C\\:`, com ou sem aspas), e a mensagem de erro (*"No option name
+near…"*) não diz que o problema é a unidade.
+
+**A saída que não tem pântano é não ter dois-pontos:** copiar a fonte para a
+pasta de saída e chamar por **caminho relativo**, com o ffmpeg rodando lá dentro.
+É o que `scripts/encode.sh` faz.
+
+Isso soma à armadilha antiga de que `drawtext` **sem** `fontfile` falha em
+silêncio no Windows: o filtro roda, o vídeo sai, e o texto simplesmente não
+existe.
+
+### 50. `metadata=print` do ffmpeg escreve em nível INFO
+
+Com `-v error`, a linha `lavfi.signalstats.YMAX=…` **some** — e um portão que lê
+essa saída passa com a variável **vazia** em vez de reprovar. Foi o que aconteceu
+na primeira versão do portão da cartela: ele imprimiu *"cartela conferida
+(YMAX=)"* e não tinha medido nada.
+
+Duas regras saem daí: usar `-v info -nostats`, e **abortar quando a medida não
+sai**. Portão que não consegue medir não pode passar em silêncio — é pior que
+não ter portão, porque dá a sensação de estar coberto.
+
+### 51. Render de 13 h não pode ser filho de uma sessão de shell efêmera
+
+**O que aconteceu em 15/08, às 19h19:** o render caiu no quadro **238 de 5.280**,
+36 minutos depois de começar. Não foi crash — o log termina com um `Saved:`
+normal, sem erro. O que morreu foi o **processo pai**: o shell que lançou o
+Blender foi encerrado, e o Blender foi junto.
+
+Pior: sobrou um `blender.exe` **vivo e mudo**, sem escrever nada. Isso enganou o
+vigia, que checava "existe blender.exe?" e por isso se recusou a relançar.
+Impasse de trinta minutos causado pela própria trava de segurança.
+
+**Três formas de lançar foram testadas, e só uma serve:**
+
+| forma | o que faz |
+|---|---|
+| shell efêmero (`run_in_background` do harness) | morre junto com o shell — foi o defeito |
+| `cmd //c start /B` do git-bash | **trava a chamada** e, quando o shell é encerrado, dispara ali |
+| `schtasks //Run` | funciona, mas disparou **duas vezes** com dois renders na mesma pasta |
+| **`nohup … &` de um processo que sobrevive** | **é o que serve** — o vigia lança e o filho vive enquanto ele viver |
+
+**Duas regras saem daí:**
+
+1. **Aliveness se mede pelo relógio do log, não pela lista de processos.** Um
+   processo pode estar vivo e não estar trabalhando. `fechar_entrega.sh` agora
+   compara `stat -c %Y` do log com a hora atual: mudo por mais de 7 minutos =
+   morto, mata e relança.
+2. **Dois renders na mesma pasta é pior que zero.** Os dois pulam quadro que já
+   existe, mas os dois começam o mesmo quadro seguinte e escrevem o mesmo
+   arquivo ao mesmo tempo. Quando isso foi detectado, os quadros do período de
+   sobreposição (240–243) foram **apagados e refeitos** — quatro quadros custam
+   quarenta segundos, e um EXR truncado no meio do filme custa a fila inteira.
+
+### 52. Cada sessão do Blender 5.2 aparece como DOIS `blender.exe`
+
+No `tasklist` e no `wmic`, um único `blender.exe --background` produz **dois**
+processos, com poucos segundos de diferença e pais distintos. Contar processos
+para saber quantos renders estão rodando dá o dobro do número real e leva a
+matar o render certo.
+
+**Quem conta sessão é o log:** `grep -c "Read blend" out/render-final.log`. Uma
+linha por sessão, sempre.
+
+### 53. Editar um `.sh` que está rodando
+
+O bash lê o script por **offset de bytes** enquanto executa. Editar o arquivo com
+o processo vivo faz ele continuar lendo de uma posição que agora contém outra
+coisa. Nesta sessão o `fechar_entrega.sh` foi corrigido três vezes com uma
+instância rodando: a instância antiga seguiu com a lógica velha (dava para ver no
+log — ela ainda contava `1 de 4` depois de a paciência ter virado 2).
+
+**Depois de mexer no script, matar e relançar a instância.** E olhar o log para
+confirmar que a nova lógica está no ar, em vez de supor.
+
+### 54. Num repositório onde mais de uma sessão escreve, o estado muda debaixo do trabalho em curso
+
+Em 15/08, entre 19h28 e 19h40, outra sessão aplicou três ordens novas dele:
+tirou os letreiros da cena 3D, girou o portal de 73° para 124° e registrou
+**"não renderiza nada ainda"**. Eu tinha um render de 13 horas rodando desde
+18h43, e passei as três horas seguintes escrevendo documentação **sem reler o
+`DECISOES.md`**. Quem me avisou foi a saída do `build_scene.py`, duas horas
+depois — não eu.
+
+Três hábitos saem daí:
+
+- **reler `DECISOES.md` antes de deixar máquina moendo a noite inteira**, e de
+  novo antes de declarar qualquer coisa pronta;
+- **conferir `stat -c %y` dos arquivos-fonte** (`build_scene.py`, `planos.json`,
+  `letreiros.json`) contra a hora em que o processo longo começou — se algum é
+  mais novo, o que está rodando já nasceu velho;
+- **numeração de decisão colide.** Duas sessões escreveram `D067` no mesmo
+  arquivo. O meu virou `D067b`. Antes de numerar, `grep -n "^### D0" DECISOES.md
+  | tail -1` — e mesmo assim pode colidir, porque a outra sessão está escrevendo
+  agora.

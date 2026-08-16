@@ -1,0 +1,691 @@
+{
+  "o_que_e": "proposta de casamento bloco-do-Natan x peca-existente; PRECISA DO SIM DELE antes de apagar qualquer peca",
+  "resumo": {
+    "SUBSTITUI": 11,
+    "SUBSTITUI?": 12,
+    "ABSORVE ZONA": 25,
+    "NAO E EDIFICACAO": 1,
+    "CONVIVE": 34,
+    "NOVO": 2
+  },
+  "casos": [
+    {
+      "bloco": "Area 1",
+      "classe": "CONVIVE",
+      "par": "PAVILHÃO 1",
+      "dist": 27.8,
+      "sim": 0.0,
+      "nota": "Área de Estacionamento. deixar com vagas de estacionamento distribuídas, tem fotos extraídas de referencia. sem cobertura"
+    },
+    {
+      "bloco": "Area 2",
+      "classe": "SUBSTITUI",
+      "par": "SAGUÃO ABERTO",
+      "dist": 2.6,
+      "sim": 0.5,
+      "nota": "Saguão Aberto, para praça de alimentação."
+    },
+    {
+      "bloco": "Tenda 3",
+      "classe": "CONVIVE",
+      "par": "Expositores Industria/Comércio e Serviços",
+      "dist": 28.5,
+      "sim": 0.0,
+      "nota": "Tendo de vendeores"
+    },
+    {
+      "bloco": "Tenda 4",
+      "classe": "CONVIVE",
+      "par": "Portal de Entrada",
+      "dist": 25.2,
+      "sim": 0.0,
+      "nota": "Vendedores ambulantes"
+    },
+    {
+      "bloco": "Tenda 5",
+      "classe": "CONVIVE",
+      "par": "Expositores Industria/Comércio e Serviços",
+      "dist": 23.7,
+      "sim": 0.0,
+      "nota": "tenda de vendedores"
+    },
+    {
+      "bloco": "Tenda 6",
+      "classe": "CONVIVE",
+      "par": "PAVILHÃO 1",
+      "dist": 20.1,
+      "sim": 0.0,
+      "nota": "Vendedores"
+    },
+    {
+      "bloco": "Tenda 7",
+      "classe": "CONVIVE",
+      "par": "PAVILHÃO 1",
+      "dist": 21.2,
+      "sim": 0.0,
+      "nota": "Tenda vendedores"
+    },
+    {
+      "bloco": "Area 8",
+      "classe": "SUBSTITUI",
+      "par": "RECINTO DE LEILÕES",
+      "dist": 1.3,
+      "sim": 1.0,
+      "nota": "Recinto de leilões de gado."
+    },
+    {
+      "bloco": "Circulo 9",
+      "classe": "SUBSTITUI",
+      "par": "RESTAURANTE SOCIEDADE RURAL",
+      "dist": 5.8,
+      "sim": 1.0,
+      "nota": "Restaurante sociedade rural"
+    },
+    {
+      "bloco": "Area 10",
+      "classe": "SUBSTITUI",
+      "par": "RESTAURANTE SOCIEDADE RURAL",
+      "dist": 7.5,
+      "sim": 1.0,
+      "nota": "junto com o restaurante sociedade rural"
+    },
+    {
+      "bloco": "Bloco 11",
+      "classe": "SUBSTITUI",
+      "par": "MANGUEIRAS",
+      "dist": 0.3,
+      "sim": 1.0,
+      "nota": "Mangueiras onde ficam os bois. No contexto rural, de pecuária e de rodeios, uma mangueira (muitas vezes chamada de curral ou mangueiro) é um grande espaço cercado, usado para prender, separar e cuidar do gado."
+    },
+    {
+      "bloco": "Bloco 12",
+      "classe": "SUBSTITUI?",
+      "par": "COBERTURA",
+      "dist": 1.4,
+      "sim": 0.0,
+      "nota": "anexo as mangueira"
+    },
+    {
+      "bloco": "Area 13",
+      "classe": "SUBSTITUI",
+      "par": "PALCO",
+      "dist": 2.3,
+      "sim": 1.0,
+      "nota": "Palco principal de show"
+    },
+    {
+      "bloco": "Area 14",
+      "classe": "NAO E EDIFICACAO",
+      "par": "ARENA DE RODEIO",
+      "dist": 2.0,
+      "sim": 0.5,
+      "nota": "Arena de roudei onde tem que ter um touro e um boiadeiro montado e ao redor da arena pessoas. sem cobertura, chaão de barro. e recado ao redor"
+    },
+    {
+      "bloco": "Circulo 15",
+      "classe": "SUBSTITUI?",
+      "par": "Bar",
+      "dist": 0.1,
+      "sim": 0.0,
+      "nota": "Bar, quiosque de bebida."
+    },
+    {
+      "bloco": "Circulo 16",
+      "classe": "SUBSTITUI?",
+      "par": "Bar",
+      "dist": 0.2,
+      "sim": 0.0,
+      "nota": "Bar, quiosque de bebida"
+    },
+    {
+      "bloco": "Circulo 17",
+      "classe": "SUBSTITUI?",
+      "par": "Bar",
+      "dist": 0.1,
+      "sim": 0.0,
+      "nota": "bar, quiosque de bebida."
+    },
+    {
+      "bloco": "Tenda 20",
+      "classe": "CONVIVE",
+      "par": "É CHURRASCO!",
+      "dist": 18.1,
+      "sim": 0.0,
+      "nota": "Tenda"
+    },
+    {
+      "bloco": "Tenda 21",
+      "classe": "CONVIVE",
+      "par": "É CHURRASCO!",
+      "dist": 14.7,
+      "sim": 0.0,
+      "nota": ""
+    },
+    {
+      "bloco": "Bloco 22",
+      "classe": "SUBSTITUI?",
+      "par": "PALCO AFTER",
+      "dist": 0.3,
+      "sim": 0.0,
+      "nota": ""
+    },
+    {
+      "bloco": "Circulo 23",
+      "classe": "CONVIVE",
+      "par": "PORTAL",
+      "dist": 25.1,
+      "sim": 0.0,
+      "nota": "vendedor de barraca"
+    },
+    {
+      "bloco": "Circulo 24",
+      "classe": "CONVIVE",
+      "par": "Praça de Alimentação Aberta",
+      "dist": 27.7,
+      "sim": 0.0,
+      "nota": "vendedor de barraca"
+    },
+    {
+      "bloco": "Tenda 25",
+      "classe": "CONVIVE",
+      "par": "Aberta",
+      "dist": 24.0,
+      "sim": 0.0,
+      "nota": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "bloco": "Bloco 26",
+      "classe": "CONVIVE",
+      "par": "Aberta",
+      "dist": 24.3,
+      "sim": 0.0,
+      "nota": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "bloco": "Tenda 27",
+      "classe": "CONVIVE",
+      "par": "Aberta",
+      "dist": 27.2,
+      "sim": 0.0,
+      "nota": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "bloco": "Tenda 28",
+      "classe": "CONVIVE",
+      "par": "PORTAL",
+      "dist": 30.9,
+      "sim": 0.0,
+      "nota": "vendedor na tenda, vendedores ambulantes."
+    },
+    {
+      "bloco": "Tenda 29",
+      "classe": "CONVIVE",
+      "par": "PORTAL",
+      "dist": 19.9,
+      "sim": 0.0,
+      "nota": ""
+    },
+    {
+      "bloco": "Bloco 30",
+      "classe": "SUBSTITUI?",
+      "par": "CCO",
+      "dist": 0.2,
+      "sim": 0.0,
+      "nota": "CCO, equipe de segurança"
+    },
+    {
+      "bloco": "Bloco 31",
+      "classe": "SUBSTITUI?",
+      "par": "CASA 1",
+      "dist": 0.2,
+      "sim": 0.0,
+      "nota": "casinha decorativa que tem nas imagens da extração"
+    },
+    {
+      "bloco": "Bloco 32",
+      "classe": "SUBSTITUI?",
+      "par": "CASA 2",
+      "dist": 0.3,
+      "sim": 0.0,
+      "nota": ""
+    },
+    {
+      "bloco": "Bloco 33",
+      "classe": "SUBSTITUI",
+      "par": "AUDITÓRIO",
+      "dist": 3.0,
+      "sim": 1.0,
+      "nota": "Auditório"
+    },
+    {
+      "bloco": "Tenda 34",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 30.4,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 35",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 28.2,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 36",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 15.4,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 37",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 19.0,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 38",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 12.2,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 39",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 3.8,
+      "sim": 0.5,
+      "nota": "tenda expositores externos"
+    },
+    {
+      "bloco": "Tenda 40",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 7.9,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "bloco": "Tenda 41",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 13.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "bloco": "Tenda 42",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 9.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 43",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 15.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 44",
+      "classe": "NOVO",
+      "par": null,
+      "dist": null,
+      "nota": "avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "bloco": "Tenda 45",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 31.0,
+      "sim": 0.5,
+      "nota": "tenda expositores externos"
+    },
+    {
+      "bloco": "Tenda 46",
+      "classe": "CONVIVE",
+      "par": "Expositores Externo",
+      "dist": 27.2,
+      "sim": 0.0,
+      "nota": ""
+    },
+    {
+      "bloco": "Tenda 47",
+      "classe": "CONVIVE",
+      "par": "PISTA DE JULGAMENTOS",
+      "dist": 25.5,
+      "sim": 0.0,
+      "nota": "avicultura, coloque dentro coisas semelhantes"
+    },
+    {
+      "bloco": "Tenda 48",
+      "classe": "CONVIVE",
+      "par": "Pista de Julgamentos",
+      "dist": 23.8,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 49",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 28.1,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 50",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 28.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 51",
+      "classe": "NOVO",
+      "par": null,
+      "dist": null,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 52",
+      "classe": "CONVIVE",
+      "par": "Pista de Julgamentos",
+      "dist": 31.1,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 53",
+      "classe": "CONVIVE",
+      "par": "Pista de Julgamentos",
+      "dist": 28.2,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 54",
+      "classe": "CONVIVE",
+      "par": "Pista de Julgamentos",
+      "dist": 28.7,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. Agricultura, coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 55",
+      "classe": "CONVIVE",
+      "par": "S-A",
+      "dist": 32.0,
+      "sim": 0.0,
+      "nota": "Estande de exposição."
+    },
+    {
+      "bloco": "Tenda 56",
+      "classe": "CONVIVE",
+      "par": "S-A",
+      "dist": 25.6,
+      "sim": 0.0,
+      "nota": "Estande de exposição."
+    },
+    {
+      "bloco": "Area 57",
+      "classe": "CONVIVE",
+      "par": "Praça de Alimentação",
+      "dist": 14.7,
+      "sim": 0.0,
+      "nota": "Área de boques mata levemente aberta, estilo parque recreação."
+    },
+    {
+      "bloco": "Tenda 58",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 29.6,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 59",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 18.3,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 60",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 14.0,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 61",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 17.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes  a avicultura."
+    },
+    {
+      "bloco": "Tenda 62",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 15.5,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 63",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 12.9,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 64",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 12.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 65",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 3.1,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 66",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 12.5,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 67",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 17.7,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Tenda 68",
+      "classe": "SUBSTITUI?",
+      "par": "BRF",
+      "dist": 0.5,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 69",
+      "classe": "SUBSTITUI?",
+      "par": "AASPAR",
+      "dist": 1.1,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes."
+    },
+    {
+      "bloco": "Tenda 70",
+      "classe": "SUBSTITUI",
+      "par": "APICULTURA",
+      "dist": 0.7,
+      "sim": 1.0,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes. apicultura."
+    },
+    {
+      "bloco": "Tenda 71",
+      "classe": "SUBSTITUI?",
+      "par": "MECÂNICOS",
+      "dist": 0.1,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes a uma mecanica de agricultores"
+    },
+    {
+      "bloco": "Tenda 72",
+      "classe": "ABSORVE ZONA",
+      "par": "Expositores Externo",
+      "dist": 31.2,
+      "sim": 0.5,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Bloco 75",
+      "classe": "CONVIVE",
+      "par": "Fazendinha",
+      "dist": 20.2,
+      "sim": 0.0,
+      "nota": "área representa onde terá vários tratores agrícolas e implementos. coloque um ao lado do outro."
+    },
+    {
+      "bloco": "Area 76",
+      "classe": "CONVIVE",
+      "par": "Fazendinha",
+      "dist": 19.0,
+      "sim": 0.0,
+      "nota": "Área de alimentação com carrinhos de foodtruck e tendas"
+    },
+    {
+      "bloco": "Area 77",
+      "classe": "CONVIVE",
+      "par": "Exposição de Máquinas,Equipamentos e Veículos e Implementos",
+      "dist": 30.2,
+      "sim": 0.75,
+      "nota": "Área mostrando a Exposição de máquinas, equipamentos e veículos e implementos."
+    },
+    {
+      "bloco": "Area 78",
+      "classe": "CONVIVE",
+      "par": "Bar",
+      "dist": 19.2,
+      "sim": 0.0,
+      "nota": "Área mostrando a Exposição de Veículos  e moto náuticas"
+    },
+    {
+      "bloco": "Area 79",
+      "classe": "CONVIVE",
+      "par": "PALCO AFTER",
+      "dist": 21.4,
+      "sim": 0.0,
+      "nota": "Área mostrando a Exposição de Veículos  e moto náuticas"
+    },
+    {
+      "bloco": "Area 80",
+      "classe": "CONVIVE",
+      "par": "Bar",
+      "dist": 12.9,
+      "sim": 0.0,
+      "nota": "Estrada de asfalto."
+    },
+    {
+      "bloco": "Area 82",
+      "classe": "CONVIVE",
+      "par": "RUA JORGE AMADO",
+      "dist": 8.4,
+      "sim": 0.0,
+      "nota": "Estrada de asfalto."
+    },
+    {
+      "bloco": "Area 83",
+      "classe": "ABSORVE ZONA",
+      "par": "ESTACIONAMENTO",
+      "dist": 7.3,
+      "sim": 1.0,
+      "nota": "Área de Estacionamento. deixar com vagas de estacionamento distribuídas, tem fotos extraídas de referencia. sem cobertura"
+    },
+    {
+      "bloco": "Tenda 84",
+      "classe": "CONVIVE",
+      "par": "RESTAURANTE SOCIEDADE RURAL",
+      "dist": 25.8,
+      "sim": 0.0,
+      "nota": "Tenda vendedores"
+    },
+    {
+      "bloco": "Tenda 85",
+      "classe": "CONVIVE",
+      "par": "ARENA DO CONHECIMENTO - UTF-PR",
+      "dist": 30.4,
+      "sim": 0.0,
+      "nota": "tenda expositores externos. coloque dentro coisas semelhantes, agricultores"
+    },
+    {
+      "bloco": "Bloco 86",
+      "classe": "SUBSTITUI",
+      "par": "ARENA DO CONHECIMENTO - UTF-PR",
+      "dist": 1.3,
+      "sim": 1.0,
+      "nota": "Tenda, arena do conhecimento UTF - PR"
+    },
+    {
+      "bloco": "Area 87",
+      "classe": "SUBSTITUI",
+      "par": "PISTA DE JULGAMENTOS",
+      "dist": 0.3,
+      "sim": 0.5,
+      "nota": "A pista de julgamento é um espaço em feiras e exposições agropecuárias onde animais (como bovinos, ovinos e equinos) são apresentados e avaliados por juízes especializados com base em seus padrões raciais, beleza, postura e potencial genético"
+    },
+    {
+      "bloco": "Bloco 88",
+      "classe": "SUBSTITUI?",
+      "par": "ORDENHADEIRA",
+      "dist": 0.4,
+      "sim": 0.0,
+      "nota": "Ordenha de vaca"
+    },
+    {
+      "bloco": "Area 90",
+      "classe": "CONVIVE",
+      "par": "Aberta",
+      "dist": 16.9,
+      "sim": 0.0,
+      "nota": "Área de boques mata levemente aberta, estilo parque recreação."
+    },
+    {
+      "bloco": "Bloco 92",
+      "classe": "SUBSTITUI",
+      "par": "BANHEIROS FEM.",
+      "dist": 2.6,
+      "sim": 0.5,
+      "nota": "área de banheiros."
+    }
+  ]
+}

@@ -61,8 +61,22 @@ import texturas
 # --------------------------------------------------------------------------
 # Constantes proprias do gerador (geometria e bacia vivem em terreno.py)
 
-LARGURA_RENDER = 2760    # 2:1, 2x o nativo do painel P2,9 (1379x690)
-ALTURA_RENDER = 1380
+# 16:9 por ordem dele em 15/08/2026 (DECISOES.md D044): "sobre o painel de led
+# eu vou exportar em 16:9 nao se preocupa" -- e, perguntado, confirmou render
+# NATIVO, nao master 2:1 reencaixado. Derruba o 2760x1380 que o ESTADO.md
+# carregava como "nao negociar" desde a primeira sessao.
+#
+# 2560x1440 e escolha minha dentro da ordem dele, e o motivo e custo: 3,69 Mpx
+# contra os 3,81 Mpx do master antigo -- a troca de proporcao sai de graca em
+# tempo de render. 3840x2160 custaria 2,2x por quadro sem que o painel P2,9
+# (1379 px nativos) tivesse onde gastar a resolucao.
+#
+# ATENCAO a quem for mexer: nao basta trocar estes dois numeros. A regra de
+# tipografia de 8%/4% usa o sensor VERTICAL, que sai da proporcao -- 18,0 mm em
+# 2:1, 20,25 mm em 16:9. `letreiros.py` le a proporcao da cena justamente para
+# ninguem ter de lembrar disso.
+LARGURA_RENDER = 2560
+ALTURA_RENDER = 1440
 
 # ESTIMADO fica separada de proposito: e a colecao do que NAO foi medido, e
 # poder esconder ela inteira no .blend e o que deixa ver, num clique, quanto da
@@ -78,7 +92,20 @@ RAIZ = Path(__file__).resolve().parent.parent
 # pavilhao vem medido em data/footprints.json e passa por `azimute_para_giro`.
 # Fica aqui porque `conferir_norte.py` imprime este valor como referencia.
 RUMO_PAVILHOES = 341.0   # = azimute 108,4 depois da conversao. Ver azimute_para_giro
-RUMO_PORTAL = 73.0       # de frente para quem chega pela Dorvalino Tosi
+# PORTAL: 73 -> 124 em 15/08/2026, autorizado por ele ("a fachada do Portal
+# Celeiro pode girar"). O 73 nunca funcionou como estava escrito. O comentário
+# dizia "de frente para quem chega", mas `estruturas.portal()` aplica o rumo ao
+# VÃO (o portal nasce com os 24 m no eixo X local), então a fachada acabava
+# olhando para 163°/343° -- 77° fora da câmera do P02 e do P22, que é o que o
+# portão de obliquidade acusou (D059).
+#
+# 124 não sai de opinião: sai da estrada de asfalto que ELE marcou. No trecho
+# que passa a 20 m do portal, ela corre em 34°/214° (data/correcao-posicao-1508
+# .json, entre os vértices (93,1 / 95,8) e (48,9 / 65,9)). Portal que se
+# atravessa fica perpendicular à estrada: vão em 124°, fachada olhando 34°/214°.
+# Com isso a câmera do P02 (azimute 60°) e a do P22 (240°) ficam a 26° da
+# fachada -- dentro dos 65° que o portão exige, sem mexer em câmera nenhuma.
+RUMO_PORTAL = 124.0
 RUMO_PALCO = 334.0       # de frente para a arena
 
 RUMO_CONCHA = 116.6
@@ -785,6 +812,45 @@ def azimute_para_giro(azimute):
     return (90.0 - azimute) % 360.0
 
 
+# Material de cada tipo de superficie que ele marcou. Todos ja existem na cena
+# -- nenhum material novo nasce aqui.
+MATERIAL_DE_SUPERFICIE = {
+    "estacionamento": "MAT_SAIBRO",
+    "asfalto": "MAT_ASFALTO",
+    "arena": "MAT_ARENA",
+    "bosque": "MAT_TERRENO",
+    "alimentacao": "MAT_SAIBRO",
+    "exposicao": "MAT_SAIBRO",
+}
+
+_AJUSTES_CACHE = None
+
+
+def ajustes_manuais():
+    """O que o Natan ajustou a mao no ajustador visual. MANDA ACIMA DE TUDO.
+
+    Vem de `data/ajustes-manuais.json`, escrito por `out/ajustar/ajustar.html`.
+    Nao e medida e nao se discute: se ele moveu, girou ou redimensionou a peca
+    olhando a planta, e porque a medida errou. Ausente, nao muda nada.
+    """
+    global _AJUSTES_CACHE
+    if _AJUSTES_CACHE is None:
+        caminho = RAIZ / "data" / "ajustes-manuais.json"
+        if caminho.exists():
+            # `utf-8-sig`, nao `utf-8`: este arquivo vem de DOWNLOAD do
+            # navegador ou de um "salvar como" do editor dele, e os dois poem
+            # BOM. Com `utf-8` o `json.loads` estoura no primeiro caractere e o
+            # build morre no meio, sem dizer que a causa foi um byte invisivel.
+            _AJUSTES_CACHE = json.loads(
+                caminho.read_text(encoding="utf-8-sig")).get("pecas", {})
+            if _AJUSTES_CACHE:
+                print(f"  ajuste manual dele ... {len(_AJUSTES_CACHE)} pecas "
+                      f"(manda acima da medicao)")
+        else:
+            _AJUSTES_CACHE = {}
+    return _AJUSTES_CACHE
+
+
 def forma_do_pavilhao(rotulo, fp, x_pt=None, y_pt=None):
     """largura, profundidade, giro e a procedencia de cada um desses numeros.
 
@@ -797,6 +863,14 @@ def forma_do_pavilhao(rotulo, fp, x_pt=None, y_pt=None):
     incha o contorno em ~1,5 px de cada lado, o que aparece como +6 a +9% de
     area nos cinco pavilhoes que conferem. Escalando pela cota, o vies sai.
     """
+    # Ajuste dele vem antes de qualquer medicao, e encerra a funcao.
+    aj = ajustes_manuais().get(rotulo)
+    if aj and "largura_m" in aj:
+        it_qualquer = procurar_footprint(fp, rotulo, x_pt, y_pt) or {}
+        return (aj["largura_m"], aj["profundidade_m"],
+                azimute_para_giro(aj["rumo_graus"]),
+                "AJUSTE MANUAL DO NATAN no ajustador visual", it_qualquer)
+
     it = procurar_footprint(fp, rotulo, x_pt, y_pt)
     if not it or it.get("confianca") not in ("alta", "media"):
         return None
@@ -1614,6 +1688,231 @@ CONTATOS_EXIGIDOS = [
 TOLERANCIA_CONTATO = 0.02      # 2 cm: abaixo disso e' ruido de float, nao vao
 
 
+def construir_blocos_novos(col_pai=None):
+    """Constroi os blocos que ele criou no ajustador visual.
+
+    Quatro formas, e cada uma vira geometria de verdade -- nao marcador:
+      retangulo / tenda -> caixa, e a tenda ganha duas aguas
+      circulo           -> cilindro de 32 lados
+      poligono          -> extrusao do contorno que ele desenhou ponto a ponto
+
+    A `nota_do_natan` de cada bloco fica gravada como propriedade do objeto e
+    sai impressa aqui. Ela nao e' decoracao: e' a instrucao dele sobre o que
+    aquilo e' ("area do estacionamento, chao de saibro"), e e' por ela que a
+    proxima sessao sabe o que modelar de verdade no lugar do bloco bruto.
+    """
+    import bmesh
+
+    caminho = RAIZ / "data" / "ajustes-manuais.json"
+    if not caminho.exists():
+        return []
+    doc = json.loads(caminho.read_text(encoding="utf-8-sig"))
+    blocos = doc.get("blocos_novos") or []
+    if not blocos:
+        return []
+
+    col = bpy.data.collections.get("BLOCOS_DO_NATAN")
+    if col is None:
+        col = bpy.data.collections.new("BLOCOS_DO_NATAN")
+        (col_pai or bpy.context.scene.collection).children.link(col)
+
+    print(f"\nblocos criados por ele no ajustador: {len(blocos)}")
+    feitos = []
+    for b in blocos:
+        nome = b.get("nome") or b.get("objeto_na_cena") or "Bloco"
+        forma = b.get("forma", "retangulo")
+        x, y = float(b["x_m"]), float(b["y_m"])
+        alt = float(b.get("altura_m") or 3.2)
+        giro = math.radians(-(float(b.get("rumo_graus", 90.0)) - 90.0))
+
+        # SUPERFICIE nao e' volume. Ordem dele em 15/08: *"pode tratar como
+        # superficie, area de rodeio tambem e superficie"* e *"se em alguma area
+        # tiver estrada vai ser de chao"*. O ajustador dava 3,2 m a todo bloco,
+        # e com isso o estacionamento de 15.042 m2 viraria um caixao de 3,2 m
+        # tapando a entrada do parque.
+        superficie = b.get("superficie")
+        if superficie:
+            alt = min(alt, 0.05)
+
+        malha = bpy.data.meshes.new(nome)
+        bm = bmesh.new()
+
+        if forma == "circulo":
+            r = float(b.get("raio_m") or 10.0)
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=32,
+                                  radius1=r, radius2=r, depth=alt)
+            bmesh.ops.translate(bm, verts=bm.verts, vec=(0, 0, alt / 2.0))
+        elif forma == "poligono" and b.get("pontos_m"):
+            pts = [(float(p[0]) - x, float(p[1]) - y) for p in b["pontos_m"]]
+            vs = [bm.verts.new((px, py, 0.0)) for px, py in pts]
+            try:
+                face = bm.faces.new(vs)
+            except ValueError:      # contorno que se cruza: nao inventa conserto
+                print(f"  {nome[:30]:<30} POLIGONO INVALIDO (se cruza) -- pulado")
+                bm.free()
+                continue
+            saida = bmesh.ops.extrude_face_region(bm, geom=[face])
+            tampa = [e for e in saida["geom"] if isinstance(e, bmesh.types.BMVert)]
+            bmesh.ops.translate(bm, verts=tampa, vec=(0, 0, alt))
+        elif forma == "tenda":
+            # Duas aguas DE VERDADE, com vertice de cumeeira.
+            #
+            # A primeira versao era um cubo com os vertices de cima deslocados
+            # por `1 - |y|/ly`. Cubo so' tem canto, e em todo canto |y| = ly:
+            # o fator dava zero e a tenda saia caixa. O teste pegou porque mediu
+            # volume -- 400 m3 e' exatamente 10x10x4 -- e nao porque alguem
+            # olhou o quadro.
+            lx = float(b.get("largura_m") or 10.0) / 2.0
+            ly = float(b.get("profundidade_m") or 10.0) / 2.0
+            z_parede = alt * 0.60
+            base = [bm.verts.new(p) for p in
+                    ((-lx, -ly, 0.0), (lx, -ly, 0.0), (lx, ly, 0.0), (-lx, ly, 0.0))]
+            topo = [bm.verts.new((v.co.x, v.co.y, z_parede)) for v in base]
+            crista = [bm.verts.new((-lx, 0.0, alt)), bm.verts.new((lx, 0.0, alt))]
+            bm.faces.new(base[::-1])                       # piso
+            for i in range(4):                             # paredes
+                bm.faces.new((base[i], base[(i + 1) % 4],
+                              topo[(i + 1) % 4], topo[i]))
+            bm.faces.new((topo[0], topo[1], crista[1], crista[0]))   # agua sul
+            bm.faces.new((topo[2], topo[3], crista[0], crista[1]))   # agua norte
+            bm.faces.new((topo[1], topo[2], crista[1]))              # empena leste
+            bm.faces.new((topo[3], topo[0], crista[0]))              # empena oeste
+        else:
+            lx = float(b.get("largura_m") or 10.0) / 2.0
+            ly = float(b.get("profundidade_m") or 10.0) / 2.0
+            bmesh.ops.create_cube(bm, size=1.0)
+            for v in bm.verts:
+                v.co.x *= lx * 2; v.co.y *= ly * 2; v.co.z *= alt
+            bmesh.ops.translate(bm, verts=bm.verts, vec=(0, 0, alt / 2.0))
+
+        bm.to_mesh(malha)
+        bm.free()
+
+        obj = bpy.data.objects.new(nome, malha)
+        obj.location = (x, y, 0.0)
+        obj.rotation_euler = (0.0, 0.0, giro)
+        obj["origem"] = "criado pelo Natan no ajustador visual"
+        obj["forma"] = forma
+        nota = b.get("nota_do_natan") or ""
+        if nota:
+            obj["nota_do_natan"] = nota
+        if superficie:
+            obj["superficie"] = superficie
+            mat = MATERIAL_DE_SUPERFICIE.get(superficie)
+            if mat and mat in bpy.data.materials:
+                obj.data.materials.append(bpy.data.materials[mat])
+        if b.get("cercado"):
+            obj["cercado"] = True      # ordem 9: "recado" era CERCADO
+        col.objects.link(obj)
+        feitos.append(obj)
+        tipo = f"{forma} chao" if superficie else forma
+        print(f"  {nome[:30]:<30} {tipo:<14} ({x:7.1f}, {y:7.1f}) alt {alt:.2f} m"
+              + (f'\n      nota dele: "{nota[:62]}"' if nota else ""))
+    return feitos
+
+
+def descartar_substituidos():
+    """Ordem dele em 15/08: *"pode substituir"*.
+
+    Onde o bloco dele cobre uma peca que a cena ja construia, a peca VELHA sai
+    -- para a colecao `DESCARTADO`, nunca apagada (`nada se apaga`, regra da
+    casa). O casamento vem de `data/casamento-blocos.json`, que e' proposta do
+    `casar_blocos.py` e nao adivinhacao daqui.
+
+    `CONVIVE` e `NAO E EDIFICACAO` nao entram: a primeira e' vizinhanca, e a
+    segunda e' a ARENA DE RODEIO, que nao e' predio -- e a bacia do terreno em
+    `terreno.PATAMARES`. Descartar aquilo abriria um buraco no relevo.
+    """
+    import unicodedata
+
+    caminho = RAIZ / "data" / "casamento-blocos.json"
+    if not caminho.exists():
+        return
+    casos = json.loads(caminho.read_text(encoding="utf-8-sig"))["casos"]
+    alvos = {c["par"] for c in casos
+             if c["classe"] in ("SUBSTITUI", "SUBSTITUI?", "ABSORVE ZONA")
+             and c["par"]}
+    if not alvos:
+        return
+
+    def chave(s):
+        s = unicodedata.normalize("NFKD", str(s))
+        return "".join(c for c in s if not unicodedata.combining(c)).upper().strip()
+
+    col = bpy.data.collections.get("DESCARTADO")
+    if col is None:
+        col = bpy.data.collections.new("DESCARTADO")
+        bpy.context.scene.collection.children.link(col)
+
+    procurados = {chave(a) for a in alvos}
+    movidos = 0
+    for o in list(bpy.data.objects):
+        if o.type != "MESH" or chave(o.name).split(".")[0] not in procurados:
+            continue
+        if any(c.name == "BLOCOS_DO_NATAN" for c in o.users_collection):
+            continue                      # nao descarta o bloco dele
+        for c in list(o.users_collection):
+            c.objects.unlink(o)
+        col.objects.link(o)
+        o.hide_render = True
+        o["descartado_porque"] = "substituido por bloco do Natan (15/08)"
+        movidos += 1
+
+    print(f"\nsubstituicao (ordem dele: 'pode substituir'):")
+    print(f"  {len(alvos)} rotulos casados -> {movidos} objetos para DESCARTADO")
+    if movidos == 0 and alvos:
+        print("  aviso: nenhum objeto casou pelo nome -- conferir antes de render")
+
+
+def aplicar_ajustes_de_posicao():
+    """Move para onde ele mandou, no fim de tudo.
+
+    A forma (largura, profundidade, rumo) ja entrou la' atras, em
+    `forma_do_pavilhao`. O que falta e' a POSICAO, que nao passa por aquela
+    funcao -- ela vem do rotulo na planta. Aqui o objeto e' empurrado para o
+    ponto dele, mantendo o Z, porque altura nao se ajusta olhando planta de
+    cima e ele nao mexeu nisso.
+
+    Casa o objeto pelo nome exato e, se nao achar, pelo nome sem acento -- a
+    cena tem `PAVILHÃO - GADO LEITE` e o ajustador escreve o mesmo rotulo, mas
+    um passeio por JSON e navegador ja' trocou acento neste projeto antes.
+    """
+    import unicodedata
+
+    ajustes = ajustes_manuais()
+    if not ajustes:
+        return
+
+    def chave(s):
+        s = unicodedata.normalize("NFKD", s)
+        return "".join(c for c in s if not unicodedata.combining(c)).upper().strip()
+
+    por_chave = {}
+    for o in bpy.data.objects:
+        por_chave.setdefault(chave(o.name), []).append(o)
+
+    print("\naplicando o ajuste manual dele:")
+    for rotulo, aj in ajustes.items():
+        if "x_m" not in aj:
+            continue
+        # `objeto_na_cena` vem do ajustador e manda: o rotulo da planta e'
+        # ambiguo (existe "PORTAL" como zona estimada, como letreiro e como
+        # estrutura), e sem ele o gerador movia o homonimo errado.
+        nome = aj.get("objeto_na_cena") or rotulo
+        alvos = bpy.data.objects.get(nome)
+        alvos = [alvos] if alvos else por_chave.get(chave(nome), [])
+        if not alvos:
+            print(f"  {rotulo[:34]:<34} NAO ACHEI NA CENA -- ajuste ignorado")
+            continue
+        for o in alvos:
+            antes = (o.location.x, o.location.y)
+            o.location.x, o.location.y = aj["x_m"], aj["y_m"]
+            d = math.hypot(aj["x_m"] - antes[0], aj["y_m"] - antes[1])
+            o["ajuste_manual"] = "posicao dada pelo Natan no ajustador visual"
+            print(f"  {o.name[:34]:<34} movido {d:6.1f} m  -> "
+                  f"({aj['x_m']:.1f}, {aj['y_m']:.1f})")
+
+
 def conferir_contato(tolerancia=TOLERANCIA_CONTATO):
     """Portao: peca que se apoia em outra tem de ENCOSTAR nela.
 
@@ -2122,12 +2421,29 @@ def main():
                          "Sem isso, constroi o recinto inteiro")
     ap.add_argument("--sem-camera", action="store_true",
                     help="pula a montagem das cameras -- so para conferir geometria")
+    ap.add_argument("--com-letreiros", action="store_true",
+                    help="constroi os letreiros dentro da cena 3D. PADRAO E' SEM: "
+                         "ordem dele em 15/08 a noite -- 'quero que deixe sem os "
+                         "nomes, na hora da camera passar'. Nome entra depois, "
+                         "em cima do filme, onde se troca sem re-renderizar")
+    ap.add_argument("--letreiros-so-avisam", action="store_true",
+                    help="NAO aborta quando um letreiro reprova no portao de "
+                         "quadro. So para montar a cena que MOSTRA o defeito a "
+                         "ele: os objetos saem carimbados com "
+                         "`letreiro_reprovado` e a cena nao e entrega")
     args = ap.parse_args(argv)
 
     dados = terreno.carregar_mapa(args.dados)
 
     limpar_cena()
     cols = criar_colecoes()
+    # A proporcao entra ANTES de construir, nao so' em configurar_render() la'
+    # embaixo: `letreiros.py` le a proporcao da cena para achar o sensor
+    # vertical, e ate 15/08 ele lia os 1920x1080 de fabrica porque a resolucao
+    # so' era aplicada 60 linhas depois. Deu certo por acaso -- 1920x1080
+    # tambem e' 16:9. Em 2:1 teria dimensionado 12,5% errado, calado.
+    bpy.context.scene.render.resolution_x = LARGURA_RENDER
+    bpy.context.scene.render.resolution_y = ALTURA_RENDER
     centro = terreno.centro_da_arena(dados)
     mats = criar_materiais()
 
@@ -2246,7 +2562,6 @@ def main():
                                             centro, solidos=ocupado, bbox=bbox)
     mobiliario.construir(dados, bpy.context.scene.collection, centro,
                          solidos=ocupado, bbox=bbox)
-    letreiros.construir(dados, bpy.context.scene.collection, centro, pacote)
     avulsas.construir(dados, bpy.context.scene.collection, centro,
                       fonte=letreiros._fonte(json.loads(
                           (RAIZ / "data" / "letreiros.json").read_text(
@@ -2259,6 +2574,25 @@ def main():
                                           else {**pacote, "planos": selecionados,
                                                 "total_quadros": max(p["_quadro_fim"] for p in selecionados)},
                                           cols["CAMERA"])
+
+    # DEPOIS das cameras, de proposito. O letreiro agora e' medido com a
+    # propria `world_to_camera_view` do Blender, a mesma funcao do portao de
+    # conferencia -- e para isso a camera precisa existir. Enquanto ele era
+    # construido antes, a unica coisa que dava para medir era DISTANCIA, e
+    # distancia nao ve o alvo viajar: nos sobrevoos (P09, P11, P16, P18) a mira
+    # anda 40 m durante o plano e o letreiro plantado ficava para tras, em
+    # quadro no comeco e fora no fim, com a conta de distancia passando verde.
+    if not args.com_letreiros:
+        print("  letreiros .......... FORA da cena, por ordem dele de 15/08 a "
+              "noite: 'deixe sem os nomes, na hora da camera passar'.")
+        print("                       O texto e o suporte de cada um continuam "
+              "em data/letreiros.json, e --com-letreiros traz de volta.")
+    elif not args.sem_camera:
+        letreiros.construir(dados, bpy.context.scene.collection, centro, pacote,
+                            abortar=not args.letreiros_so_avisam)
+    else:
+        print("  letreiros .......... pulados (--sem-camera): sao medidos "
+              "contra a camera do plano")
 
     n_marcos = 0
     if args.export_fbx:
@@ -2328,6 +2662,10 @@ def main():
     print(f"  patamares ........... arena 0 m -> shows {terreno.PATAMARES[2][2]} m "
           f"-> anel {terreno.PATAMARES[4][2]} m -> plato {terreno.PATAMARES[6][2]} m")
     print("=" * 58)
+
+    aplicar_ajustes_de_posicao()
+    construir_blocos_novos()
+    descartar_substituidos()
 
     # O portao roda ANTES de salvar: arquivo com peca flutuando nao chega ao
     # disco para depois alguem descobrir num render de 12 h.

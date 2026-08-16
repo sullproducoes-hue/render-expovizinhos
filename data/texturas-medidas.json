@@ -2,20 +2,36 @@
  "o_que_e": "Luminancia linear media de cada mapa Diffuse. Serve para normalizar a variacao de cor: dividido por esta media, o mapa tem media 1,0 e a cor MEDIDA no footage sobrevive como media da superficie.",
  "gerado_por": "scripts/texturas.py --medir",
  "itens": {
+  "MAT_MADEIRA": {
+   "slug": "recinto_madeira_portal",
+   "arquivo": "assets/textura/recinto_madeira_portal_Diffuse_2k.jpg",
+   "luminancia_media": 0.214006,
+   "luminancia_p05": 0.0865,
+   "luminancia_p95": 0.323143,
+   "pixels": 4194304
+  },
   "MAT_ARENA": {
-   "slug": "dirt_aerial_03",
-   "arquivo": "assets/textura/dirt_aerial_03_Diffuse_2k.jpg",
-   "luminancia_media": 0.138156,
-   "luminancia_p05": 0.102243,
-   "luminancia_p95": 0.193954,
+   "slug": "recinto_terra_pista",
+   "arquivo": "assets/textura/recinto_terra_pista_Diffuse_2k.jpg",
+   "luminancia_media": 0.213568,
+   "luminancia_p05": 0.059511,
+   "luminancia_p95": 0.502886,
    "pixels": 4194304
   },
   "MAT_SAIBRO": {
-   "slug": "gravel_road",
-   "arquivo": "assets/textura/gravel_road_Diffuse_2k.jpg",
-   "luminancia_media": 0.115579,
-   "luminancia_p05": 0.089687,
-   "luminancia_p95": 0.140988,
+   "slug": "recinto_brita_piso",
+   "arquivo": "assets/textura/recinto_brita_piso_Diffuse_2k.jpg",
+   "luminancia_media": 0.214017,
+   "luminancia_p05": 0.039546,
+   "luminancia_p95": 0.434154,
+   "pixels": 4194304
+  },
+  "MAT_CONCRETO": {
+   "slug": "recinto_concreto_pavilhao",
+   "arquivo": "assets/textura/recinto_concreto_pavilhao_Diffuse_2k.jpg",
+   "luminancia_media": 0.214008,
+   "luminancia_p05": 0.135633,
+   "luminancia_p95": 0.278894,
    "pixels": 4194304
   }
  }

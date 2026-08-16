@@ -1,61 +1,199 @@
 {
- "o_que_e": "Contrato da textura PBR por material. Diz QUAL asset CC0 entra em cada classe, em que escala real, e com que forca. Escrito antes do codigo, como o resto do projeto.",
+ "o_que_e": "Contrato da textura PBR por material. Diz DE ONDE sai o mapa de cada classe, em que escala real, e com que forca. Escrito antes do codigo, como o resto do projeto.",
 
- "a_regra_que_nao_se_quebra": "A COR-BASE E MEDIDA E A BIBLIOTECA NAO A SOBRESCREVE. O albedo de cada classe saiu do footage do proprio recinto (data/materiais-medidos.json, quadro de golden hour com todas as classes no mesmo quadro). Um Diffuse de biblioteca e a cor de OUTRO lugar, com OUTRA luz, e trocar um pelo outro seria jogar fora a unica medida de cor que este projeto tem. Entao a textura entra por tres portas, e albedo nao e uma delas: NORMAL (relevo), ROUGHNESS (brilho) e VARIACAO DE LUMINANCIA NORMALIZADA -- o Diffuse dividido pela propria media, o que deixa a media da mancha em 1,0 e faz a cor final ter exatamente a cor medida como media. Isso e conferivel, e conferir e o que scripts/conferir_texturas.py faz.",
+ "mudou_em_16_08_2026": "As classes deixaram de vir de biblioteca CC0 e passaram a vir do FOOTAGE DO PROPRIO RECINTO, deiluminado. O motivo nao e gosto, e procedencia: uma grama da Africa do Sul e um ferro enferrujado da Europa carregam a sombra, o sol e o balanco de branco de OUTRO lugar. Os assets CC0 continuam em assets/textura/ -- nada se apaga -- e estao listados em `biblioteca_substituida`. Gerado por scripts/texturas_recinto.py.",
 
- "por_que_aerial": "O criterio que decide nao e beleza, e o LADO REAL da textura. O terreno tem 808 x 454 m. Uma grama de 2 m repete 404 vezes na largura e do alto le como grade -- e grade e o que mais denuncia CG num plano aberto. As texturas da categoria 'aerial' do Poly Haven tem 15 a 25 m de lado: 54 repeticoes em vez de 404. E mesmo essas entram so como relevo no terreno, porque padrao repetido em NORMAL se esconde e padrao repetido em COR nao se esconde.",
+ "a_regra_que_nao_se_quebra": "A COR-BASE E MEDIDA E A TEXTURA NAO A SOBRESCREVE. O albedo de cada classe saiu do footage do proprio recinto (data/materiais-medidos.json, quadro de golden hour com todas as classes no mesmo quadro). Um Diffuse que traga cor propria e a cor de OUTRA superficie sob OUTRA luz, e trocar um pelo outro seria jogar fora a unica medida de cor que este projeto tem. Entao a textura entra por tres portas, e albedo nao e uma delas: NORMAL (relevo), ROUGHNESS (brilho) e VARIACAO DE LUMINANCIA NORMALIZADA -- o mapa dividido pela propria media, o que deixa a media da mancha em 1,0 e faz a cor final ter exatamente a cor medida como media. Isso e conferivel, e conferir e o que scripts/conferir_texturas.py faz.",
+
+ "por_que_o_diffuse_e_neutro": "Descoberto e corrigido em 16/08. O no que scripts/texturas.py:aplicar() monta faz `cor_final = cor_medida x (1 + f x (mapa/media - 1))`, e `media` e a media da LUMINANCIA -- um numero so, para os tres canais. Se o mapa Diffuse tiver cor propria, a razao mapa/media sai colorida e a multiplicacao pinta a cor DUAS vezes. Medido no MAT_ARENA com forca 0,30, rodando a conta do no sobre os dois arquivos reais: com o mapa colorido a media final da 0,2911/0,1835/0,1439 em vez dos 0,2659/0,1875/0,1548 medidos -- +9,5% no vermelho e -7,0% no azul. Com o mapa neutro da 0,2659/0,1875/0,1548, identico a quatro casas. Com o mapa NEUTRO a media do multiplicador e 1,000 em cada canal e a promessa acima passa a ser verdade aritmetica, nao retorica. Por isso cada classe tem DOIS arquivos de cor: `_Diffuse_2k.jpg`, neutro, que e o que o shader consome; e `_Albedo_2k.jpg`, colorido, cuja media linear por canal E a cor medida -- ele nao entra no shader, e a prova da deiluminacao e a fonte para quem quiser a cor sem passar pelo no.",
+
+ "a_deiluminacao": "Todo mapa aqui foi dividido pela propria versao desfocada (gaussiana com sigma = 1/8 do menor lado do recorte) antes de virar textura. Sombra assada na textura e o que mais denuncia 3D: a mesma parede fica escura no sol e clara na sombra, e luz de render nenhuma conserta isso porque a sombra ja esta pintada. O campo de luz retirado esta registrado classe a classe em `campo_de_luz_amplitude` -- na terra da pista ele era de 3,4x entre o canto claro e o escuro.",
+
+ "por_que_aerial": "REGRA DE 14/08, hoje PARCIALMENTE VENCIDA -- fica escrita porque o raciocinio continua valendo para COR. Dizia: o criterio que decide nao e beleza, e o LADO REAL da textura; o terreno tem 808 x 454 m, uma grama de 2 m repete 404 vezes na largura e do alto le como grade. O que mudou: as texturas do recinto sao recorte de video e o lado real delas e o que a camera viu -- 2 a 8 m, nao 15 a 25. A defesa continua sendo a mesma que o proprio paragrafo dava: padrao repetido em NORMAL se esconde e padrao repetido em COR nao se esconde. Por isso MAT_TERRENO segue sem variacao de cor e com forca de normal em 0,45. E o ponto aberto desta rodada, e esta na duvida 1 do relatorio de 16/08.",
 
  "resolucao": "2k",
  "por_que_2k": "RTX 4060 de 8 GB. 2k jpg descomprime para ~12,6 MB por mapa; 4 classes x 3 mapas = ~150 MB de VRAM. Em 4k seriam 600 MB, para detalhe que o painel P2,9 (1379 x 690 nativos) nao mostra. A camera mais baixa e a de dentro do pavilhao, a ~2 m -- e la quem aparece e lona e piso, nao o gramado de 800 m.",
 
- "mapa_normal": "nor_gl e nao nor_dx. O Blender le normal em convencao OpenGL; usar o DirectX inverte o eixo verde e o relevo sai com a luz vindo do lado errado -- erro que nao da erro, so fica estranho.",
+ "mapa_normal": "nor_gl e nao nor_dx. O Blender le normal em convencao OpenGL; usar o DirectX inverte o eixo verde e o relevo sai com a luz vindo do lado errado -- erro que nao da erro, so fica estranho. A conferencia da convencao esta escrita em texturas_recinto.py:normal_de_altura(): acima de uma saliencia a altura cresce descendo as linhas, logo o verde tem que subir ali.",
+
+ "gerado_por": "scripts/texturas_recinto.py",
+ "conferido_por": "scripts/conferir_texturas.py",
 
  "itens": {
-  "MAT_TERRENO": {
-   "slug": "aerial_grass_rock",
-   "nome": "Aerial Grass Rock",
-   "lado_m": 15.0,
+  "MAT_MADEIRA": {
+   "slug": "recinto_madeira_portal",
+   "nome": "Madeira do portal -- Parque de Exposicoes",
+   "origem": "FOTO_CLIENTE",
+   "procedencia": "registro -- recorte da unica foto que o cliente mandou do portal (12/08). Dois panos de tabua da ala direita, um de cada lado da luminaria; a emenda entre eles cai onde ja cairia uma junta de tabua.",
+   "quadro": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
+   "recorte_px": [[1094, 508, 1180, 580], [1256, 522, 1336, 580]],
+   "lado_m": 2.1,
+   "lado_m_como": "contagem de pecas numa parede FRONTAL, que e a unica escala deste conjunto que nao depende de perspectiva: ~15 tabuas em 166 px (11,1 px por tabua) x 0,14 m de tabua = 2,10 m.",
+   "escala_confianca": "alta",
+   "mapas": ["nor_gl", "Rough", "Diffuse"],
+   "usa_variacao_de_cor": true,
+   "forca_normal": 0.6,
+   "forca_variacao": 0.35,
+   "por_que": "O portal e a peca mais olhada do filme -- o plano final sai por ele -- e ate 15/08 saia como cor chapada. A tabua vertical com a junta funda e o que faz uma fachada de celeiro ler como madeira em vez de painel pintado, e isso e RELEVO com sombra propria, nao cor. Forca 0,6 e nao 1,0 porque o relevo aqui foi inferido da luminancia de uma foto de 8 bits: em 1,0 a veia da madeira viraria sulco.",
+   "cor_alvo_linear_rgb": [0.21, 0.11, 0.055],
+   "cor_procedencia": "DECLARADA, nao medida. `MAT_MADEIRA` em scripts/build_scene.py, marrom-tabaco. Nao ha madeira em data/materiais-medidos.json nem em data/materiais-quinta.json porque o portal nao aparece em video nenhum -- os 12 relatorios de triagem convergem nisso.",
+   "albedo_conferido": {"alvo": [0.21, 0.11, 0.055], "medido_no_arquivo": [0.20997, 0.10999, 0.05496], "erro_pct": [-0.01, 0.0, -0.07]},
+   "campo_de_luz_amplitude": 1.753,
+   "ampliacao": 13.88,
+   "ressalva": "O recorte nativo tem 166 px de lado e o mapa tem 2048: ampliacao de ~14x. A cadencia da tabua, a largura dela e a junta sao REAIS; a fibra fina da madeira e interpolacao, nao medida. Uma foto de celular da parede a 2 m resolve isso numa tomada -- e a duvida 2 do relatorio de 16/08."
+  },
+
+  "MAT_TELHA": {
+   "slug": "recinto_telha_metalica",
+   "nome": "Telha metalica ondulada -- galpao do recinto",
+   "origem": "PROVA_RECINTO",
+   "procedencia": "registro -- quadro nadir do proprio telhado, prova de material da triagem.",
+   "quadro": "telha-metalica__DJI_20251126155259_0053_D__00m41_000s.jpg",
+   "recorte_px": [880, 90, 1420, 500],
+   "substituiu": "corrugated_iron_02 (Poly Haven, CC0) -- continua em assets/textura/",
+   "lado_m": 2.432,
+   "lado_m_como": "MEDIDA, e e a unica escala medida do conjunto: 32 ondas no tile x 0,076 m de passo da chapa ondulada brasileira. O passo em pixel (8 px) saiu da autocorrelacao do perfil de colunas depois de o quadro ser girado ate a crista ficar vertical (autocorrelacao 0,95).",
+   "escala_confianca": "alta",
    "mapas": ["nor_gl", "Rough"],
    "usa_variacao_de_cor": false,
-   "forca_normal": 0.45,
-   "por_que": "O terreno JA TEM cor tratada: _manchar_terreno mistura as DUAS gramas medidas (sa 0,129 e pisada 0,278) por ruido de duas frequencias, e essa mistura e medida, nao biblioteca. A textura aqui entra so para dar relevo e quebra de brilho -- e o que falta para o gramado parar de ler como feltro. Forca 0,45 e nao 1,0 porque o normal foi capturado de uma altura de drone baixa e, aplicado inteiro num plano de 800 m, vira ruido de alta frequencia que so custa sample.",
-   "nao_usa_diffuse": "A cor viria de um gramado da Africa do Sul, com pedra dentro. O recinto e campo limpo e a cor dele esta medida."
+   "forca_normal": 1.0,
+   "por_que": "A onda da telha e o unico detalhe do recinto que aparece de longe, porque ela nao e cor: e RELEVO pegando sol rasante. Com o sol a 10 graus, cada onda joga a propria sombra e e isso que faz o telhado ler como telhado em vez de chapa. Forca 1,0, a unica do contrato. E agora a onda e a do galpao DELE, com o passo dele -- o asset de biblioteca era trapezoidal e o recinto e ondulada.",
+   "nao_usa_diffuse": "MAT_TELHA e o unico material cuja medicao ESTOUROU (albedo 1,00/1,00/0,95): telha metalica reflete o ceu, entao a camera nao ve a cor dela. Ver data/estouro-telhado.json -- 97% dos quadros claros. Fica o cinza galvanizado 0,62/0,63/0,64 com metallic 0,55, escolhido para o REFLEXO aparecer no render.",
+   "campo_de_luz_amplitude": 1.16,
+   "ampliacao": 8.0,
+   "giro_graus": 135.05
   },
+
   "MAT_ARENA": {
-   "slug": "dirt_aerial_03",
-   "nome": "Dirt Aerial 03",
-   "lado_m": 25.0,
+   "slug": "recinto_terra_pista",
+   "nome": "Terra batida da pista -- arena do bosque",
+   "origem": "PROVA_RECINTO",
+   "procedencia": "registro -- prova de material da triagem, terra-pista-arena.",
+   "quadro": "terra-pista-arena__1 (4)__00m14_750s.jpg",
+   "recorte_px": [900, 1300, 3000, 1950],
+   "substituiu": "dirt_aerial_03 (Poly Haven, CC0) -- continua em assets/textura/",
+   "lado_m": 8.0,
+   "lado_m_como": "ESTIMADA. O palco do bosque tem ~12 m de frente e ocupa ~936 px na linha dele; propagando pela perspectiva ate o centro do recorte da ~6 mm/px, e o quadrado retificado tem 770 px.",
+   "escala_confianca": "estimada, erro provavel de +-40%",
    "mapas": ["nor_gl", "Rough", "Diffuse"],
    "usa_variacao_de_cor": true,
    "forca_normal": 0.7,
    "forca_variacao": 0.3,
-   "por_que": "Chao batido da arena de rodeio e da alameda. Aqui a variacao de luminancia importa de verdade: terra batida nao e uniforme, tem trilha de arrasto e poca seca, e a arena e onde a camera desce. 25 m de lado cobre a arena inteira com poucas repeticoes."
+   "por_que": "Chao batido da arena de rodeio e da alameda. Aqui a variacao de luminancia importa de verdade: terra batida nao e uniforme, tem trilha de arrasto e poca seca -- e a arena e onde a camera desce. As arcadas de pneu que aparecem no mapa NAO sao ruido: sao a marca de trator que o quadro mostra, e estao na textura de proposito.",
+   "cor_alvo_linear_rgb": [0.2659, 0.1875, 0.1548],
+   "cor_procedencia": "MEDIDA -- data/materiais-medidos.json > terra.",
+   "albedo_conferido": {"alvo": [0.2659, 0.1875, 0.1548], "medido_no_arquivo": [0.26569, 0.1876, 0.15455], "erro_pct": [-0.08, 0.05, -0.16]},
+   "campo_de_luz_amplitude": 3.449,
+   "retificacao_vertical": 1.185,
+   "ampliacao": 2.992
   },
+
   "MAT_SAIBRO": {
-   "slug": "gravel_road",
-   "nome": "Gravel Road",
-   "lado_m": 2.0,
+   "slug": "recinto_brita_piso",
+   "nome": "Brita e saibro -- piso das mangueiras",
+   "origem": "PROVA_RECINTO",
+   "procedencia": "registro -- prova de material da triagem, brita-piso-asfalto.",
+   "quadro": "brita-piso-asfalto__1 (14)__00m03_000s.jpg",
+   "recorte_px": [150, 1560, 2000, 2150],
+   "substituiu": "gravel_road (Poly Haven, CC0) -- continua em assets/textura/",
+   "lado_m": 2.2,
+   "lado_m_como": "ESTIMADA pelo tambor de 200 L junto a cerca (0,88 m deitado, ~220 px), propagado pela perspectiva ate o centro do recorte. Cai em cima dos 2,0 m que o contrato ja usava para via de brita, o que e um controle a favor.",
+   "escala_confianca": "estimada, erro provavel de +-40%",
    "mapas": ["nor_gl", "Rough", "Diffuse"],
    "usa_variacao_de_cor": true,
    "forca_normal": 0.8,
    "forca_variacao": 0.35,
-   "por_que": "2 m de lado seria fatal no terreno e e correto na via: a via interna tem 6 m de largura, entao sao 3 repeticoes na transversal e o olho nao fecha padrao numa faixa estreita que corre. Forca alta porque brita e relevo por definicao -- e o que separa via de saibro de via de asfalto num sobrevoo."
+   "por_que": "2 m de lado seria fatal no terreno e e correto na via: a via interna tem 6 m de largura, entao sao ~3 repeticoes na transversal e o olho nao fecha padrao numa faixa estreita que corre. Forca alta porque brita e relevo por definicao -- e o que separa via de saibro de via de asfalto num sobrevoo. Este recorte veio de dia encoberto, entao o campo de luz a tirar era pequeno (1,4x) e o grão saiu limpo.",
+   "cor_alvo_linear_rgb": [0.1362, 0.0978, 0.0704],
+   "cor_procedencia": "MEDIDA -- data/materiais-medidos.json > brita.",
+   "albedo_conferido": {"alvo": [0.1362, 0.0978, 0.0704], "medido_no_arquivo": [0.1361, 0.09781, 0.07044], "erro_pct": [-0.08, 0.01, 0.06]},
+   "campo_de_luz_amplitude": 1.399,
+   "retificacao_vertical": 1.275,
+   "ampliacao": 3.06
   },
-  "MAT_TELHA": {
-   "slug": "corrugated_iron_02",
-   "nome": "Corrugated Iron 02",
-   "lado_m": 2.7,
+
+  "MAT_TERRENO": {
+   "slug": "recinto_grama_sa",
+   "nome": "Grama sa -- gramado do recinto",
+   "origem": "PROVA_RECINTO",
+   "procedencia": "registro -- prova de material da triagem, grama-sa.",
+   "quadro": "grama-sa__DJI_20251128151122_0141_D__00m03_500s.jpg",
+   "recorte_px": [200, 1500, 1450, 2500],
+   "substituiu": "aerial_grass_rock (Poly Haven, CC0) -- continua em assets/textura/",
+   "lado_m": 4.5,
+   "lado_m_como": "ESTIMADA pela camiseta das criancas no mesmo quadro (~0,36 m em ~94 px = 3,8 mm/px), corrigida para a linha do recorte.",
+   "escala_confianca": "estimada, erro provavel de +-40%",
    "mapas": ["nor_gl", "Rough"],
    "usa_variacao_de_cor": false,
-   "forca_normal": 1.0,
-   "por_que": "A onda da telha trapezoidal e o unico detalhe do recinto que aparece de longe, porque ela nao e cor: e RELEVO pegando sol rasante. Com o sol a 10 graus, cada onda joga a propria sombra e e isso que faz o telhado ler como telhado em vez de chapa. Forca 1,0, a unica do contrato.",
-   "nao_usa_diffuse": "MAT_TELHA e o unico material cuja medicao ESTOUROU (albedo 1,00/1,00/0,95): telha metalica reflete o ceu, entao a camera nao ve a cor dela. Ficou o cinza galvanizado com metallic 0,55, escolhido para o REFLEXO aparecer no render. Um Diffuse de ferro enferrujado por cima disso pintaria ferrugem que o footage nao mostra -- e docs/MATERIAIS-referencia.md ja registra que telha oxidada seria proposta, nao dado."
+   "forca_normal": 0.45,
+   "por_que": "O terreno JA TEM cor tratada: _manchar_terreno mistura as DUAS gramas medidas (sa 0,129 e pisada 0,278) por ruido de duas frequencias, e essa mistura e medida, nao biblioteca. A textura aqui entra so para dar relevo e quebra de brilho -- e o que falta para o gramado parar de ler como feltro. Forca 0,45 porque, aplicado inteiro num plano de 800 m, o normal vira ruido de alta frequencia que so custa sample.",
+   "nao_usa_diffuse": "A variacao de cor do gramado ja e feita por _manchar_terreno com as duas gramas MEDIDAS. Somar a mancha da textura por cima seria contar a mesma coisa duas vezes.",
+   "cor_alvo_linear_rgb": [0.1286, 0.1239, 0.0369],
+   "cor_procedencia": "MEDIDA -- data/materiais-medidos.json > grama (a grama sa, a que cobre a maior parte do recinto).",
+   "albedo_conferido": {"alvo": [0.1286, 0.1239, 0.0369], "medido_no_arquivo": [0.12863, 0.12391, 0.03676], "erro_pct": [0.02, 0.01, -0.37], "observacao": "o _Albedo_2k existe e bate, mas NAO entra no shader por decisao acima."},
+   "campo_de_luz_amplitude": 1.171,
+   "retificacao_vertical": 1.19,
+   "ampliacao": 1.936,
+   "ressalva": "A 3,8 mm/px a lamina de grama (~2 mm) nao e resolvida: o mapa le como carpete manchado, nao como grama fiapo a fiapo. O recorte de `recinto_grama_desgastada` le MELHOR como relva (as laminas aparecem no Rough) e trocar o slug e uma linha -- ver `disponivel_nao_ligado`."
+  },
+
+  "MAT_CONCRETO": {
+   "slug": "recinto_concreto_pavilhao",
+   "nome": "Piso de concreto -- pavilhao das mangueiras",
+   "origem": "PROVA_RECINTO",
+   "procedencia": "registro -- quadro do interior do pavilhao. NAO veio da pasta arena-lateral-patamares que a tarefa apontava: aquela pasta nao tem concreto nenhum. Ver `o_que_nao_existe_no_footage`.",
+   "quadro": "telha-metalica__IMG_9131-004__02m53_000s.jpg",
+   "recorte_px": [1000, 1450, 2800, 2150],
+   "lado_m": 2.0,
+   "lado_m_como": "ESTIMADA pelo contentor de 1000 L do quadro (1,37 m de frente, ~265 px), propagado pela perspectiva.",
+   "escala_confianca": "estimada, erro provavel de +-50% -- e a mais fraca do conjunto",
+   "mapas": ["nor_gl", "Rough", "Diffuse"],
+   "usa_variacao_de_cor": true,
+   "forca_normal": 0.5,
+   "forca_variacao": 0.25,
+   "por_que": "Concreto envelhecido de piso e quase todo mancha e quase nada relevo: o que o olho ve e a lavagem irregular do cimento e as marcas de vassoura, nao textura de agregado. Forca de normal baixa de proposito -- 0,5 -- e variacao de cor moderada, 0,25, porque a cor aqui e DECLARADA por ele e nao medida, e nao convem deixar a textura empurrar um valor que ninguem mediu.",
+   "cor_alvo_linear_rgb": [0.25, 0.25, 0.25],
+   "cor_procedencia": "DECLARADA POR ELE em 15/08 (concreto envelhecido, faixa de mercado 0,20-0,30, e 0,25 e o meio). Nas mangueiras nao ha ceu medivel nem superficie de refletancia conhecida -- ver data/materiais-quinta.json > 1 (14)__0011s.",
+   "albedo_conferido": {"alvo": [0.25, 0.25, 0.25], "medido_no_arquivo": [0.2498, 0.25038, 0.24938], "erro_pct": [-0.08, 0.15, -0.25]},
+   "campo_de_luz_amplitude": 1.197,
+   "retificacao_vertical": 1.0,
+   "ampliacao": 3.291,
+   "ressalva": "A retificacao de perspectiva mediu 0,80 e foi travada em 1,0: o piso tem marca de vassoura HORIZONTAL forte, o que quebra a hipotese de isotropia em que a medida se apoia. Sobra alguma compressao de perspectiva no mapa."
   }
+ },
+
+ "disponivel_nao_ligado": {
+  "recinto_grama_desgastada": {
+   "nome": "Grama desgastada -- gramado de circulacao",
+   "origem": "PROVA_RECINTO",
+   "quadro": "grama-desgastada__DJI_0953_stabilized_1__00m04_500s.jpg",
+   "recorte_px": [200, 1400, 3600, 2100],
+   "lado_m": 4.5,
+   "mapas_em_disco": ["nor_gl", "Rough", "Diffuse", "Albedo"],
+   "cor_alvo_linear_rgb": [0.2775, 0.2351, 0.1078],
+   "cor_procedencia": "MEDIDA -- data/materiais-medidos.json > grama_pisada. E a cor do DESGASTE, e ja esta registrado que usada chapada em 170.000 m2 ela deixou a cena com cara de deserto.",
+   "albedo_conferido": {"alvo": [0.2775, 0.2351, 0.1078], "medido_no_arquivo": [0.27631, 0.23538, 0.10699], "erro_pct": [-0.43, 0.12, -0.75]},
+   "por_que_nao_esta_ligado": "Nao existe material para esta classe hoje: o desgaste do gramado e feito por _manchar_terreno dentro de MAT_TERRENO, misturando as duas gramas medidas por ruido. Ligar isto pediria ou um MAT_TERRENO_PISADO novo (geometria, e nao e meu dominio) ou trocar o slug de MAT_TERRENO. Fica em disco, pronto, esperando decisao.",
+   "observacao": "Este recorte le MELHOR como relva do que o de grama sa -- as laminas aparecem no Rough. Se o criterio for leitura e nao rotulo de pasta, ele e o candidato a MAT_TERRENO."
+  }
+ },
+
+ "o_que_nao_existe_no_footage": {
+  "concreto_dos_patamares": "A pasta `provas-materiais/arena-lateral-patamares` NAO tem concreto. Foram olhados os 123 quadros dela em folha densa: o que ela mostra e o lounge da Sicredi (deck de madeira, piso de paver ceramico, colunas de madeira tingida), a mata em volta e o CHAO da lateral da arena -- que e terra batida com brita e talude de GRAMA, nao arquibancada de concreto. Os patamares da arena, no footage, sao banco de terra gramada. O unico concreto grande e chapado do acervo de provas e o piso do pavilhao das mangueiras, e foi de la que MAT_CONCRETO saiu."
+ },
+
+ "biblioteca_substituida": {
+  "por_que_continuam_em_disco": "Nada se apaga. Os quatro assets CC0 abaixo saem do caminho do render mas ficam em assets/textura/, e voltam trocando o `slug` do item.",
+  "aerial_grass_rock": "era MAT_TERRENO -- Aerial Grass Rock, 15 m, Poly Haven CC0",
+  "dirt_aerial_03": "era MAT_ARENA -- Dirt Aerial 03, 25 m, Poly Haven CC0",
+  "gravel_road": "era MAT_SAIBRO -- Gravel Road, 2 m, Poly Haven CC0",
+  "corrugated_iron_02": "era MAT_TELHA -- Corrugated Iron 02, 2,7 m, Poly Haven CC0"
  },
 
  "o_que_ficou_de_fora_e_por_que": {
   "MAT_LONA": "Nao entra textura. O que o olho ve numa tenda de PVC branca de longe nao e a trama do tecido -- e a BARRIGA do pano entre os esticadores e a costura dos gomos. Isso e geometria, nao mapa. Colar uma trama de algodao de 40 cm resolveria nada e custaria VRAM. Fica anotado como trabalho de modelagem.",
   "MAT_COPA": "Nao entra textura. As 418 arvores sao instancias de UMA malha e ja variam de cor por instancia (Object Info > Random). Textura de folha em copa vista de cima, a distancia de sobrevoo, nao aparece.",
-  "MAT_MADEIRA": "O portal e a peca mais olhada do filme (plano final sai por ele) e merece textura -- mas merece a textura da FOTO do cliente, nao uma tabua de biblioteca. Fica para quando o portal for retrabalhado, com reference/PORTAL-referencia.md na mao."
+  "MAT_TIJOLO": "Fora desta rodada. Existe prova em quadro (o galpao vermelho de `1 (17)`) e a cor esta medida, mas o pano de alvenaria nao entrou na fila de 16/08. E o proximo candidato natural.",
+  "MAT_ASFALTO_e_MAT_DECK": "Fora desta rodada. Nao ha prova de material dedicada a nenhum dos dois na triagem."
  }
 }
