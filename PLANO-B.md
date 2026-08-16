@@ -20,6 +20,23 @@
 **A imagem gerada é a placa do plano seguinte quando os dois olham o mesmo lugar** (P14→P15, P19→P20, P02→P22). Isso é o que segura a continuidade do filme.
 
 
+## O teto de 12 s — três planos não cabem num clipe só
+
+A IA de vídeo (Seedance V1.5 Pro) gera de 4 a 12 s por clipe. **3 planos passam disso, e os três são diferenciais** — justamente os que têm mais tela.
+
+
+Eles não viram um prompt: viram dois, e o segundo começa no **último quadro do primeiro**. Sem isso o corte aparece.
+
+
+| plano | dur. total | vira | cada clipe |
+|---|---|---|---|
+| **P06** Mercado do Produtor | 17.5 s | 2 clipes | 8.8 s cada |
+| **P08** Cafe Colonial | 13.5 s | 2 clipes | 6.8 s cada |
+| **P14** Fazendinha | 18.5 s | 2 clipes | 9.2 s cada |
+
+Total a gerar: **25 clipes** para 22 planos.
+
+
 ## Ordem de trabalho — não é a ordem do filme
 
 O filme roda P01→P22. O **trabalho** não: começa pelo que tem mais tela e pelo que pode travar.
@@ -329,8 +346,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 **Prompt de movimento (Seedance):**
 
 ```
-slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 17.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
+slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **Este plano não cabe num clipe só** (17.5 s contra o teto de 12 s). São 2 gerações com o mesmo prompt acima:
+>
+> - clipe 1 · 0.0–8.8 s · primeiro quadro = a imagem gerada do plano
+> - clipe 2 · 8.8–17.5 s · primeiro quadro = o ULTIMO quadro do clipe 1
+>
 
 **Salvar em:** `out/plano-b/P06/gerado/` e `out/plano-b/P06/video/`
 
@@ -407,8 +430,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 **Prompt de movimento (Seedance):**
 
 ```
-slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 13.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
+slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **Este plano não cabe num clipe só** (13.5 s contra o teto de 12 s). São 2 gerações com o mesmo prompt acima:
+>
+> - clipe 1 · 0.0–6.8 s · primeiro quadro = a imagem gerada do plano
+> - clipe 2 · 6.8–13.5 s · primeiro quadro = o ULTIMO quadro do clipe 1
+>
 
 **Salvar em:** `out/plano-b/P08/gerado/` e `out/plano-b/P08/video/`
 
@@ -661,8 +690,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 **Prompt de movimento (Seedance):**
 
 ```
-smooth aerial fly-over, camera advancing forward above the ground. Duration 18.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
+smooth aerial fly-over, camera advancing forward above the ground. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **Este plano não cabe num clipe só** (18.5 s contra o teto de 12 s). São 2 gerações com o mesmo prompt acima:
+>
+> - clipe 1 · 0.0–9.2 s · primeiro quadro = a imagem gerada do plano
+> - clipe 2 · 9.2–18.5 s · primeiro quadro = o ULTIMO quadro do clipe 1
+>
 
 **Salvar em:** `out/plano-b/P14/gerado/` e `out/plano-b/P14/video/`
 

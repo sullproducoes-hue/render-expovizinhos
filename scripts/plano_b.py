@@ -173,6 +173,39 @@ NEGATIVO_EN = (
     "grandstand bleachers around the rodeo arena"
 )
 
+# TETO DURO DA IA DE VIDEO. O Seedance V1.5 Pro aceita 4 a 12 s por clipe.
+# Plano mais longo que isso NAO e um prompt -- sao dois, e o segundo comeca no
+# ultimo quadro do primeiro. Descoberto conferindo o catalogo de modelos, nao
+# suposto: tres planos do filme passam do teto (P06 17,5 s, P14 18,5 s,
+# P08 13,5 s) e os tres sao diferenciais, que e onde doeria mais descobrir tarde.
+TETO_CLIPE_S = 12.0
+PISO_CLIPE_S = 4.0
+
+
+def cortar_em_clipes(duracao_s: float | None) -> list[dict]:
+    """Um plano vira N clipes que cabem no teto da IA de video.
+
+    Divide em partes iguais -- parte curta demais no fim fica com cara de
+    sobra, e o corte aparece. Encadeia pelo ultimo quadro: o clipe seguinte
+    nasce do frame final do anterior, que e o que segura a continuidade.
+    """
+    if not duracao_s:
+        return []
+    if duracao_s <= TETO_CLIPE_S:
+        return [{"n": 1, "de_s": 0.0, "ate_s": duracao_s,
+                 "duracao_s": round(duracao_s, 1), "primeiro_quadro": "a imagem gerada do plano"}]
+    n = int(-(-duracao_s // TETO_CLIPE_S))          # teto da divisao
+    passo = duracao_s / n
+    return [{
+        "n": i + 1,
+        "de_s": round(i * passo, 1),
+        "ate_s": round((i + 1) * passo, 1),
+        "duracao_s": round(passo, 1),
+        "primeiro_quadro": ("a imagem gerada do plano" if i == 0
+                            else f"o ULTIMO quadro do clipe {i}"),
+    } for i in range(n)]
+
+
 MOVIMENTO_EN = {
     "subida": "slow vertical crane-up, camera rising steadily while holding the subject centred",
     "push-in": "slow steady push-in, camera advancing straight toward the subject at constant speed",
@@ -332,7 +365,7 @@ def montar_prompt(plano: dict, letreiro: dict | None, povoamento: dict) -> dict:
 
     mov = MOVIMENTO_EN.get(plano.get("movimento"), plano.get("movimento", ""))
     animacao = (
-        f"{mov}. Duration {plano.get('duracao_s')} seconds. "
+        f"{mov}. Duration {min(plano.get('duracao_s') or 0, TETO_CLIPE_S)} seconds. "
         f"The camera moves slowly and deliberately at a constant speed — this is "
         f"a drone shot, not a fast fly-through. Everything in the frame stays "
         f"physically consistent: people walk, flags and banners move in a light "
@@ -396,12 +429,15 @@ def montar() -> dict:
             "bloqueio": local.get("bloqueio"),
             "cena_3d": local.get("cena_3d"),
             "pasta_de_trabalho": f"out/plano-b/{pid}",
+            "clipes": cortar_em_clipes(plano.get("duracao_s")),
             "placas": placas,
             "prompts": montar_prompt(plano, letr.get(pid), povoamento) if plano else None,
         })
 
     resumo = {
         "planos": len(registros),
+        "clipes_a_gerar": sum(len(r["clipes"]) for r in registros),
+        "planos_que_partem_em_dois": sum(1 for r in registros if len(r["clipes"]) > 1),
         "prontos": sum(1 for r in registros if r["estado"] == "PRONTO"),
         "com_ressalva": sum(1 for r in registros if r["estado"] == "PRONTO COM RESSALVA"),
         "sem_placa": sum(1 for r in registros if r["estado"] in ("SEM PLACA", "PLACA NAO RESOLVE")),
@@ -465,6 +501,21 @@ def escrever_md(d: dict) -> str:
 
     L.append("\n**A imagem gerada é a placa do plano seguinte quando os dois olham o mesmo lugar** "
              "(P14→P15, P19→P20, P02→P22). Isso é o que segura a continuidade do filme.\n")
+
+    L.append(f"\n## O teto de {TETO_CLIPE_S:.0f} s — três planos não cabem num clipe só\n")
+    L.append(f"A IA de vídeo (Seedance V1.5 Pro) gera de {PISO_CLIPE_S:.0f} a "
+             f"{TETO_CLIPE_S:.0f} s por clipe. **{r['planos_que_partem_em_dois']} planos passam "
+             f"disso, e os três são diferenciais** — justamente os que têm mais tela.\n")
+    L.append("\nEles não viram um prompt: viram dois, e o segundo começa no "
+             "**último quadro do primeiro**. Sem isso o corte aparece.\n")
+    L.append("\n| plano | dur. total | vira | cada clipe |")
+    L.append("|---|---|---|---|")
+    for p in d["planos"]:
+        if len(p["clipes"]) > 1:
+            L.append(f"| **{p['plano']}** {p['local'][:28]} | {p['duracao_s']} s | "
+                     f"{len(p['clipes'])} clipes | {p['clipes'][0]['duracao_s']} s cada |")
+    L.append(f"\nTotal a gerar: **{r['clipes_a_gerar']} clipes** para "
+             f"{r['planos']} planos.\n")
 
     L.append("\n## Ordem de trabalho — não é a ordem do filme\n")
     L.append("O filme roda P01→P22. O **trabalho** não: começa pelo que tem mais tela "
@@ -536,6 +587,14 @@ def escrever_md(d: dict) -> str:
             L.append("```")
             L.append(p["prompts"]["animacao"])
             L.append("```")
+            if len(p["clipes"]) > 1:
+                L.append(f"\n> **Este plano não cabe num clipe só** ({p['duracao_s']} s "
+                         f"contra o teto de {TETO_CLIPE_S:.0f} s). São "
+                         f"{len(p['clipes'])} gerações com o mesmo prompt acima:\n>")
+                for c in p["clipes"]:
+                    L.append(f"> - clipe {c['n']} · {c['de_s']}–{c['ate_s']} s · "
+                             f"primeiro quadro = {c['primeiro_quadro']}")
+                L.append(">")
         L.append(f"\n**Salvar em:** `{p['pasta_de_trabalho']}/gerado/` e "
                  f"`{p['pasta_de_trabalho']}/video/`\n")
 
@@ -590,6 +649,16 @@ def escrever_html(d: dict) -> str:
         pr = p["prompts"] or {}
         bloq = (f'<p class="bloq"><b>Bloqueio:</b> {e(p["bloqueio"])}</p>'
                 if p["bloqueio"] else "")
+        corte = ""
+        if len(p["clipes"]) > 1:
+            linhas = "".join(
+                f"<li>clipe {c['n']} · {c['de_s']}–{c['ate_s']} s · "
+                f"primeiro quadro = <b>{e(c['primeiro_quadro'])}</b></li>"
+                for c in p["clipes"])
+            corte = (f'<div class="corte"><b>Não cabe num clipe só</b> — '
+                     f'{p["duracao_s"]} s contra o teto de {TETO_CLIPE_S:.0f} s. '
+                     f'{len(p["clipes"])} gerações com este mesmo prompt:'
+                     f'<ul>{linhas}</ul></div>')
         letr = (f'<p class="letr"><b>Letreiro:</b> {e(p["titulo_na_tela"])} '
                 f'<i>— entra na edição, nunca no prompt</i></p>'
                 if p["titulo_na_tela"] else "")
@@ -612,7 +681,7 @@ def escrever_html(d: dict) -> str:
         <div class="pbox"><h3>negativo <button class="cop">copiar</button></h3>
           <pre>{e(pr.get('imagem_negativo',''))}</pre></div>
         <div class="pbox"><h3>movimento — Seedance <button class="cop">copiar</button></h3>
-          <pre>{e(pr.get('animacao',''))}</pre></div>
+          <pre>{e(pr.get('animacao',''))}</pre>{corte}</div>
       </div>
     </section>""")
 
@@ -667,6 +736,9 @@ def escrever_html(d: dict) -> str:
    letter-spacing:.06em; margin:0 0 5px; display:flex; align-items:center; gap:8px }}
  pre {{ background:#101008; border:1px solid var(--ln); border-radius:5px; padding:10px;
    margin:0; white-space:pre-wrap; font-size:12.5px; color:#cfc9b4 }}
+ .corte {{ background:#3a2a10; border-left:3px solid #b06000; padding:8px 10px;
+   margin-top:8px; font-size:12.5px; border-radius:0 4px 4px 0 }}
+ .corte ul {{ margin:6px 0 0; padding-left:18px; color:var(--mu) }}
  .oculto {{ display:none }}
 </style></head><body>
 <header class="topo">
@@ -732,7 +804,13 @@ def criar_pastas(d: dict) -> int:
             f"## Prompt de imagem\n```\n{pr.get('imagem','')}\n```\n\n"
             f"## Negativo\n```\n{pr.get('imagem_negativo','')}\n```\n\n"
             f"## Movimento (Seedance)\n```\n{pr.get('animacao','')}\n```\n\n"
-            f"## Onde salvar\n"
+            + ("" if len(p["clipes"]) <= 1 else
+               f"### Este plano vira {len(p['clipes'])} clipes\n"
+               f"{p['duracao_s']} s nao cabem no teto de {TETO_CLIPE_S:.0f} s.\n\n"
+               + "".join(f"- clipe {c['n']} · {c['de_s']}–{c['ate_s']} s · "
+                         f"primeiro quadro = {c['primeiro_quadro']}\n"
+                         for c in p["clipes"]) + "\n")
+            + f"## Onde salvar\n"
             f"- `placa/` — cópia do quadro real, se você quiser tudo junto\n"
             f"- `gerado/` — a imagem que voltar da IA\n"
             f"- `video/` — o clipe que voltar do Seedance\n",

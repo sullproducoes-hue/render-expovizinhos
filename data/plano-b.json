@@ -27,6 +27,8 @@
  ],
  "_resumo": {
   "planos": 22,
+  "clipes_a_gerar": 25,
+  "planos_que_partem_em_dois": 3,
   "prontos": 10,
   "com_ressalva": 11,
   "sem_placa": 1,
@@ -49,6 +51,15 @@
    "bloqueio": null,
    "cena_3d": "terreno e vias; sem carro, sem guarita",
    "pasta_de_trabalho": "out/plano-b/P01",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 7.0,
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251127184025_0104_D.MP4",
@@ -176,6 +187,15 @@
    "bloqueio": "Duas entradas ou uma? A foto de 12/08 e o portico azul do 0126_D tem o mesmo letreiro PARQUE DE EXPOSICOES. Qual dos dois abre e fecha o filme e pergunta para ele. Registrado em lideres.md e nao arbitrado aqui.",
    "cena_3d": "portal modelado como estrutura simples",
    "pasta_de_trabalho": "out/plano-b/P02",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 9.0,
+     "duracao_s": 9.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
@@ -320,6 +340,15 @@
    "bloqueio": null,
    "cena_3d": "caixa com footprint medido, parede tijolo + telhado telha",
    "pasta_de_trabalho": "out/plano-b/P03",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 6.0,
+     "duracao_s": 6.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "1 (16).mp4",
@@ -447,6 +476,15 @@
    "bloqueio": "Nenhum quadro do acervo confirma a Praca de Alimentacao Coberta por placa. O candidato entra como tipologia, nao como local.",
    "cena_3d": "footprint medido por watershed no bloco norte (145,5 x 33,6 m)",
    "pasta_de_trabalho": "out/plano-b/P04",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 7.0,
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_0935_stabilized_1.mp4",
@@ -506,6 +544,15 @@
    "bloqueio": null,
    "cena_3d": "caixa com footprint medido",
    "pasta_de_trabalho": "out/plano-b/P05",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 5.0,
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "1 (17).mp4",
@@ -599,6 +646,22 @@
    "bloqueio": "Um dos quatro diferenciais e nao existe um unico quadro do acervo com o Mercado do Produtor confirmado por placa. Posicao vem da planta; aparencia nao vem de lugar nenhum.",
    "cena_3d": "zona ESTIMADA -- caixa cinza por tipo, sem footprint desenhado na planta",
    "pasta_de_trabalho": "out/plano-b/P06",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 8.8,
+     "duracao_s": 8.8,
+     "primeiro_quadro": "a imagem gerada do plano"
+    },
+    {
+     "n": 2,
+     "de_s": 8.8,
+     "ate_s": 17.5,
+     "duracao_s": 8.8,
+     "primeiro_quadro": "o ULTIMO quadro do clipe 1"
+    }
+   ],
    "placas": [
     {
      "video": "1 (16).mp4",
@@ -638,7 +701,7 @@
    "prompts": {
     "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. producer's market — open-sided stalls with wooden crates of fresh produce, cheeses, preserves and cured meats, farmers behind the counters talking to buyers. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 15 m above the ground, roughly 45 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
     "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
-    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 17.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
     "letreiro_na_tela": "Mercado do Produtor",
     "letreiro_apoio": "Um diferencial do AGROSHOW",
     "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
@@ -658,6 +721,15 @@
    "bloqueio": "Sem confirmacao nominal no acervo.",
    "cena_3d": "zona ESTIMADA",
    "pasta_de_trabalho": "out/plano-b/P07",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 5.0,
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "1 (17).mp4",
@@ -717,6 +789,22 @@
    "bloqueio": "Um dos quatro diferenciais, sem quadro nominalmente confirmado. O lote 03 tambem achou um salao com mesas e escreveu, literal, que SUPOE ser Centro de Convivencia ou Cafe Colonial. Suposicao nao vira referencia de area: e material de venda de espaco fisico.",
    "cena_3d": "zona ESTIMADA + 209 pecas de mobiliario CC0",
    "pasta_de_trabalho": "out/plano-b/P08",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 6.8,
+     "duracao_s": 6.8,
+     "primeiro_quadro": "a imagem gerada do plano"
+    },
+    {
+     "n": 2,
+     "de_s": 6.8,
+     "ate_s": 13.5,
+     "duracao_s": 6.8,
+     "primeiro_quadro": "o ULTIMO quadro do clipe 1"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_0964_stabilized_1.mp4",
@@ -756,7 +844,7 @@
    "prompts": {
     "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. colonial café — long tables laid with breads, cakes, cured meats, cheese and coffee, warm hanging lights, families seated eating. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 5 m above the ground, roughly 60 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
     "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
-    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 13.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
     "letreiro_na_tela": "Café Colonial",
     "letreiro_apoio": "Um diferencial do AGROSHOW",
     "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
@@ -776,6 +864,15 @@
    "bloqueio": null,
    "cena_3d": "zona ESTIMADA",
    "pasta_de_trabalho": "out/plano-b/P09",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 9.0,
+     "duracao_s": 9.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251128150932_0138_D.MP4",
@@ -869,6 +966,15 @@
    "bloqueio": null,
    "cena_3d": "zona ESTIMADA -- e o predio redondo ainda e caixa",
    "pasta_de_trabalho": "out/plano-b/P10",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 8.0,
+     "duracao_s": 8.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251126155259_0053_D.MP4",
@@ -1030,6 +1136,15 @@
    "bloqueio": null,
    "cena_3d": "6 pavilhoes com forma medida do desenho, na ordem ditada pelo cliente",
    "pasta_de_trabalho": "out/plano-b/P11",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 11.0,
+     "duracao_s": 11.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251126185721_0082_D.MP4",
@@ -1157,6 +1272,15 @@
    "bloqueio": "O lote 05 achou outra pista gramada cercada por tapume branco COM CAVALOS e escreveu que supoe ser julgamento e nao arena. Duas candidatas, nenhuma com placa.",
    "cena_3d": "zona ESTIMADA",
    "pasta_de_trabalho": "out/plano-b/P12",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 5.0,
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251126185721_0082_D.MP4",
@@ -1216,6 +1340,15 @@
    "bloqueio": null,
    "cena_3d": "estandes instanciados da planta",
    "pasta_de_trabalho": "out/plano-b/P13",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 5.5,
+     "duracao_s": 5.5,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251128150932_0138_D.MP4",
@@ -1275,6 +1408,22 @@
    "bloqueio": "Um dos quatro diferenciais. Nenhum quadro confirma a Fazendinha por placa. A posicao ja e dele (mapa, 14/08); a APARENCIA continua sem fonte no acervo.",
    "cena_3d": "zona ESTIMADA em (-164,4 . -18,6) m, posicao decidida por ele em 14/08 pelo mapa",
    "pasta_de_trabalho": "out/plano-b/P14",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 9.2,
+     "duracao_s": 9.2,
+     "primeiro_quadro": "a imagem gerada do plano"
+    },
+    {
+     "n": 2,
+     "de_s": 9.2,
+     "ate_s": 18.5,
+     "duracao_s": 9.2,
+     "primeiro_quadro": "o ULTIMO quadro do clipe 1"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251127211745_0128_D.MP4",
@@ -1382,7 +1531,7 @@
    "prompts": {
     "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children's farm area — small rustic barn, pony rides, pens with sheep and goats, a border collie herding demonstration, families with small children watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 14 m above the ground, roughly 38 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
     "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
-    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 18.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
     "letreiro_na_tela": "Fazendinha",
     "letreiro_apoio": "Área para atividades infantis",
     "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
@@ -1402,6 +1551,15 @@
    "bloqueio": "O mesmo do P14.",
    "cena_3d": "mesma zona do P14",
    "pasta_de_trabalho": "out/plano-b/P15",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 7.0,
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_20251128151108_0140_D.MP4",
@@ -1461,6 +1619,15 @@
    "bloqueio": null,
    "cena_3d": "estandes da planta + 1 trator na AREA_DE_ESPERA",
    "pasta_de_trabalho": "out/plano-b/P16",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 6.0,
+     "duracao_s": 6.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_0937_stabilized.mp4",
@@ -1554,6 +1721,15 @@
    "bloqueio": "Nenhum quadro do acervo mostra o setor de veiculos e motos nauticas identificado. A separacao entre maquinas e veiculos so existe pela COR com que a planta pinta o estande -- ver scripts/classificar_estandes.py.",
    "cena_3d": "12 estandes azuis da planta, centroide em (-34,2 . 58,4) m",
    "pasta_de_trabalho": "out/plano-b/P17",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 5.0,
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [],
    "prompts": {
     "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area — pickup trucks and boats on trailers, dealer stands, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
@@ -1578,6 +1754,15 @@
    "bloqueio": null,
    "cena_3d": "bacia + concha permanente na zona PALCO",
    "pasta_de_trabalho": "out/plano-b/P18",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 5.5,
+     "duracao_s": 5.5,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "DJI_0937_stabilized_1.mp4",
@@ -1671,6 +1856,15 @@
    "bloqueio": "Onze dos doze lotes usam 'bacia' com ressalva: a placa que aparece diz ARENA DE EVENTOS, nao arena de rodeio. E o acervo NAO TEM arena de rodeio montada -- zero quadros de brete, porteira de partida ou prova. Como o rodeio fica configurado nao vem do footage.",
    "cena_3d": "arena + 2 camarotes, sem arquibancada (restricao 1)",
    "pasta_de_trabalho": "out/plano-b/P19",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 12.0,
+     "duracao_s": 12.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "1 (2).mp4",
@@ -1798,6 +1992,15 @@
    "bloqueio": "Ha uma arvore plantada na frente da concha, tapando a boca de cena -- out/concha/frente.png. Ou a arvore sai, ou a concha nao aparece em plano nenhum. E decisao dele.",
    "cena_3d": "concha permanente construida (porao azul 2,4 m, caixa cenica 8,9 m)",
    "pasta_de_trabalho": "out/plano-b/P20",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 7.0,
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "1 (4).mp4",
@@ -1925,6 +2128,15 @@
    "bloqueio": null,
    "cena_3d": "subida de 15 a 48 m sobre a arena; e a assinatura do filme",
    "pasta_de_trabalho": "out/plano-b/P21",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 7.0,
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "1 (3).mp4",
@@ -2018,6 +2230,15 @@
    "bloqueio": "O mesmo do P02, e pesa mais aqui: nao existe nenhuma vista lateral, traseira, de topo ou de perto do portal. Para modelar em 3D, uma frontal e pouco.",
    "cena_3d": "mesmo portal do P02",
    "pasta_de_trabalho": "out/plano-b/P22",
+   "clipes": [
+    {
+     "n": 1,
+     "de_s": 0.0,
+     "ate_s": 6.0,
+     "duracao_s": 6.0,
+     "primeiro_quadro": "a imagem gerada do plano"
+    }
+   ],
    "placas": [
     {
      "video": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
