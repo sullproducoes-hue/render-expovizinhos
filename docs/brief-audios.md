@@ -33,7 +33,7 @@ Ordem apresentada é a lógica do conteúdo, não a dos nomes de arquivo.
 [01:20] Sai do pavilhão 2, lá do outro lado, entra no pavilhão 3.
 [01:24] O pavilhão 3 vai ser entrada, já na entrada pode colocar o mercado do produtor e o café colonial.
 [01:30] E aí, a primeira parte do pavilhão, os expositores das agroindústrias ali, né?
-[01:37] Os guichezinhos dos expositores das agroindústrias e da metade pra frente faz uma divisão de meia parede, de OSB*,
+[01:37] Os guichezinhos dos expositores das agroindústrias e da metade pra frente faz uma divisão de meia parede, de TS*,
 [01:44] e pra trás daí, na parte dos fundos, faz o café colonial.
 [01:49] Num lado, a cozinha, pra atender o café colonial, no outro lado, a cozinha didática,
 [01:55] aonde vai ter lá a questão de acontecendo, então, a cozinha didática.
@@ -151,7 +151,7 @@ Ordem apresentada é a lógica do conteúdo, não a dos nomes de arquivo.
 
 | Trecho | Transcrição bruta | Correção aplicada | Confiança |
 |--------|------------------|-------------------|-----------|
-| Áudio 1 · 01:37 | "meia pareda, de TS" | "meia parede, de OSB" | Baixa — pode ser outro material. Confirmar |
+| Áudio 1 · 01:37 | "meia pareda, de TS" | "meia parede, de TS" | Alta — confirmado pelo Natan em 16/08/2026 |
 | Áudio 1 · 02:11 | "enfrenta a sua cidade rural" | "em frente à Sociedade Rural" | Alta — bate com o mapa |
 | Áudio 1 · 02:28 | "do réreo foribráforo" | "do núcleo Hereford e Braford" | Alta — bate com "cara branca, corpo vermelho" e com "NÚCLEO CARA BRANCA" no mapa |
 | Áudio 2 · 01:16 | "não dá pra colocar que bancada" | "não dá pra colocar arquibancada" | Alta |

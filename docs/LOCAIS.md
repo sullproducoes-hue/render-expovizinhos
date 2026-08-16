@@ -50,7 +50,7 @@ Ordem do percurso. `plano` é o plano da decupagem que cobre o lugar
 | 04 | Pavilhão 2 | −104,0 · 139,0 | P05 | Indústria, comércio e prestação de serviços |
 | 05 ♦ | **Mercado do Produtor** | −165,2 · 132,9 | P06 | Na entrada do Pavilhão 3 |
 | 06 | Agroindústrias | (Pavilhão 3) | P07 | Guichês dos expositores, primeira metade do pavilhão |
-| 07 ♦ | **Café Colonial** | −158,0 · 137,0 | P08 | Fundos do Pavilhão 3, depois de uma divisão de meia parede de OSB. De um lado a cozinha que atende o café |
+| 07 ♦ | **Café Colonial** | −158,0 · 137,0 | P08 | Fundos do Pavilhão 3, depois de uma divisão de meia parede de TS. De um lado a cozinha que atende o café |
 | 07b | Cozinha Didática | −153,8 · 135,2 | P08 | Do outro lado da meia parede, com aula acontecendo |
 | 08 | Praça de Alimentação Aberta | −202,3 · 77,0 | P09 | Embaixo do bosque. O percurso passa por dentro do bosque |
 | 09 | Recinto de Leilões | −311,9 · −7,3 | P10 | **Leilão acontecendo.** Sai em frente à Sociedade Rural |
