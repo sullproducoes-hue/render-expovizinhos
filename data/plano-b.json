@@ -1,0 +1,3114 @@
+{
+ "_o_que_isto_e": [
+  "A esteira do PLANO B: footage real em disco -> imagem gerada por IA -> animacao.",
+  "Uma linha por plano do filme, na ordem em que o filme roda.",
+  "Nada aqui e gerado: sao os arquivos que ja existem, cruzados com os",
+  "contratos ja escritos do projeto (planos, luz, povoamento, letreiros)."
+ ],
+ "_o_que_isto_nao_e": [
+  "Nao e julgamento de imagem: nenhuma placa foi conferida a olho aqui.",
+  "A escolha do quadro dentro do voo e por PROXIMIDADE DE TIMECODE contra a",
+  "ancora de data/quadros-ia.json, com desempate pela etiqueta do acervo.",
+  "Quadro escolhido assim pode estar errado — por isso a pagina mostra alternativas."
+ ],
+ "_fontes": {
+  "placas": "data/quadros-ia.json (as ancoras conferidas a olho em 15/08)",
+  "arquivos": "data/acervo-quadros.json (9.980 quadros medidos)",
+  "camera": "data/planos.json",
+  "luz": "data/luz.json — 2026-11-27 18:15",
+  "gente_e_bicho": "data/povoamento.json (censo tirado do audio do cliente)",
+  "letreiros": "data/letreiros.json"
+ },
+ "_restricoes_que_causam_rejeicao": [
+  "Arena de rodeio SEM ARQUIBANCADA — so pista, camarotes dos lados, palco de frente.",
+  "A palavra 'Kids' e proibida — use Fazendinha.",
+  "Portal em conceito celeiro, versao economica.",
+  "Quatro diferenciais com mais tela: Fazendinha, Rodeio, Cafe Colonial, Mercado do Produtor."
+ ],
+ "_resumo": {
+  "planos": 22,
+  "imagens_a_gerar": 66,
+  "clipes_a_gerar": 34,
+  "planos_com_tres_tomadas": 4,
+  "prontos": 10,
+  "com_ressalva": 11,
+  "sem_placa": 0,
+  "placas_resolvidas": 46,
+  "placas_totais": 46,
+  "duracao_total_s": 182.5
+ },
+ "planos": [
+  {
+   "plano": "P01",
+   "local": "Estacionamento",
+   "titulo_na_tela": null,
+   "diferencial": false,
+   "duracao_s": 7.0,
+   "lente_mm": 24,
+   "movimento": "subida",
+   "altura_m": 24.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "terreno e vias; sem carro, sem guarita",
+   "pasta_de_trabalho": "out/plano-b/P01",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 7.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251127184025_0104_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 40.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "asfalto com vaga pintada virando saibro vermelho, sol a ~5 graus. E a hora do filme.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127184025_0104_D\\quadros\\q020_00-00-40.jpg",
+     "thumb": "thumbs/dji-20251127184025-0104-d/q020_00-00-40.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127184025_0104_D\\quadros\\q019_00-00-38.jpg",
+       "tc": "00:00:38",
+       "nota": 100.0,
+       "thumb": "thumbs/dji-20251127184025-0104-d/q019_00-00-38.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127184025_0104_D\\quadros\\q021_00-00-42.jpg",
+       "tc": "00:00:42",
+       "nota": 90.5,
+       "thumb": "thumbs/dji-20251127184025-0104-d/q021_00-00-42.jpg"
+      }
+     ],
+     "id": "dji-20251127184025-0104-d__q020_00-00-40",
+     "tc_do_arquivo": "00:00:40",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 96.2,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    },
+    {
+     "video": "1 (15).mp4",
+     "raiz": "quinta",
+     "tc_s": 2.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "entrada do Recinto de Leiloes com estacionamento e cerca, com sol -- uma das tres folhas de sol do lote 01.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _15_\\quadros\\q007_00-00-02.jpg",
+     "thumb": "thumbs/1-15/q007_00-00-02.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _15_\\quadros\\q008_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 65.7,
+       "thumb": "thumbs/1-15/q008_00-00-02.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _15_\\quadros\\q009_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 45.5,
+       "thumb": "thumbs/1-15/q009_00-00-02.jpg"
+      }
+     ],
+     "id": "1-15__q007_00-00-02",
+     "tc_do_arquivo": "00:00:02",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 48.6,
+     "tier": "parecido",
+     "periodo": "dia"
+    },
+    {
+     "video": "IMG_9131-004.MOV",
+     "raiz": "brutos",
+     "tc_s": 9.0,
+     "papel": "apoio",
+     "confianca": "confirmado",
+     "porque": "parque VAZIO de manha: via asfaltica com terra vermelha arrastada por cima. Placa limpa, sem nada para a IA apagar.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\IMG_9131-004\\quadros\\q002_00-00-11.jpg",
+     "thumb": "thumbs/img-9131-004/q002_00-00-11.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9131-004\\quadros\\q001_00-00-01.jpg",
+       "tc": "00:00:01",
+       "nota": 54.5,
+       "thumb": "thumbs/img-9131-004/q001_00-00-01.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9131-004\\quadros\\q003_00-00-22.jpg",
+       "tc": "00:00:22",
+       "nota": 71.6,
+       "thumb": "thumbs/img-9131-004/q003_00-00-22.jpg"
+      }
+     ],
+     "id": "img-9131-004__q002_00-00-11",
+     "tc_do_arquivo": "00:00:11",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 50.7,
+     "tier": "bom",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. wide gravel parking field full of parked pickup trucks and cars, families walking toward the entrance gate, tree-lined access avenue. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 24 m above the ground, roughly 122 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow vertical crane-up, camera rising steadily while holding the subject centred. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 100.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. wide gravel parking field full of parked pickup trucks and cars, families walking toward the entrance gate, tree-lined access avenue. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 24 m above the ground, roughly 122 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 155.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. families arriving on foot between the parked pickups, carrying folding chairs and cool boxes, walking toward the entrance. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 60.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a mud-splashed pickup wheel and boot stepping down onto the gravel, the entrance banner soft in the background. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": null,
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P02",
+   "local": "Portal -- 'E daqui que sai o alimento que sustenta o mundo'",
+   "titulo_na_tela": "É daqui que sai o alimento que sustenta o mundo",
+   "diferencial": false,
+   "duracao_s": 9.0,
+   "lente_mm": 35,
+   "movimento": "push-in",
+   "altura_m": 6.5,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Duas entradas ou uma? A foto de 12/08 e o portico azul do 0126_D tem o mesmo letreiro PARQUE DE EXPOSICOES. Qual dos dois abre e fecha o filme e pergunta para ele. Registrado em lideres.md e nao arbitrado aqui.",
+   "cena_3d": "portal modelado como estrutura simples",
+   "pasta_de_trabalho": "out/plano-b/P02",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 4.5
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 4.5,
+     "ate_s": 9.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
+     "raiz": "foto_portal",
+     "tc_s": null,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "a UNICA imagem do portal celeiro que existe. Frontal, unica vista. Referencia obrigatoria do primeiro e do ultimo plano.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
+     "thumb": null,
+     "alternativas": [],
+     "fora_do_acervo": true,
+     "nota": null,
+     "tier": null,
+     "periodo": "foto do cliente, nao e footage"
+    },
+    {
+     "video": "DJI_20251127211702_0126_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 16.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "o portico ATUAL do parque -- metalico, azul, com esferas e telao. NOTURNO (o arquivo e de 21:17): serve de FORMA e de leitura de sinalizacao, nao de luz. Nao e o celeiro; entra porque a duvida das duas entradas esta aberta.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211702_0126_D\\quadros\\q023_00-00-16.jpg",
+     "thumb": "thumbs/dji-20251127211702-0126-d/q023_00-00-16.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211702_0126_D\\quadros\\q021_00-00-15.jpg",
+       "tc": "00:00:15",
+       "nota": 49.3,
+       "thumb": "thumbs/dji-20251127211702-0126-d/q021_00-00-15.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211702_0126_D\\quadros\\q022_00-00-15.jpg",
+       "tc": "00:00:15",
+       "nota": 45.2,
+       "thumb": "thumbs/dji-20251127211702-0126-d/q022_00-00-15.jpg"
+      }
+     ],
+     "id": "dji-20251127211702-0126-d__q023_00-00-16",
+     "tc_do_arquivo": "00:00:16",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 51.0,
+     "tier": "bom",
+     "periodo": "noite"
+    },
+    {
+     "video": "1 (15).mp4",
+     "raiz": "quinta",
+     "tc_s": 12.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "a alameda de entrada com arvores em fileira e postes: o corredor por onde o plano de abertura passa.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _15_\\quadros\\q048_00-00-12.jpg",
+     "thumb": "thumbs/1-15/q048_00-00-12.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _15_\\quadros\\q049_00-00-12.jpg",
+       "tc": "00:00:12",
+       "nota": 57.1,
+       "thumb": "thumbs/1-15/q049_00-00-12.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _15_\\quadros\\q050_00-00-12.jpg",
+       "tc": "00:00:12",
+       "nota": 57.8,
+       "thumb": "thumbs/1-15/q050_00-00-12.jpg"
+      }
+     ],
+     "id": "1-15__q048_00-00-12",
+     "tc_do_arquivo": "00:00:12",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 69.4,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "DJI_20251127211745_0128_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 0.5,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "duas casas de madeira ja construidas no recinto: tabuado vertical, telha ceramica, varanda. E a leitura ECONOMICA do celeiro, que e a que o cliente pediu. NOTURNO (21:17) -- vale a forma e o detalhe de madeira, nao a cor.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211745_0128_D\\quadros\\q001_00-00-00.jpg",
+     "thumb": "thumbs/dji-20251127211745-0128-d/q001_00-00-00.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211745_0128_D\\quadros\\q002_00-00-00.jpg",
+       "tc": "00:00:00",
+       "nota": 70.9,
+       "thumb": "thumbs/dji-20251127211745-0128-d/q002_00-00-00.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211745_0128_D\\quadros\\q003_00-00-00.jpg",
+       "tc": "00:00:00",
+       "nota": 94.3,
+       "thumb": "thumbs/dji-20251127211745-0128-d/q003_00-00-00.jpg"
+      }
+     ],
+     "id": "dji-20251127211745-0128-d__q001_00-00-00",
+     "tc_do_arquivo": "00:00:00",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 73.9,
+     "tier": "parecido",
+     "periodo": "noite"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large rustic timber entrance portal in barn style — vertical board cladding, ceramic tile roof, economical construction, a hanging wooden sign across the opening, visitors walking through. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 6 m above the ground, roughly 54 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 9.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 60.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large rustic timber entrance portal in barn style — vertical board cladding, ceramic tile roof, economical construction, a hanging wooden sign across the opening, visitors walking through. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 6 m above the ground, roughly 54 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 115.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a family walking through the timber portal opening, looking up at the hanging sign as they pass under it. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 20.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the weathered vertical board cladding and its wrought-iron lantern and hardware, low sun raking across the grain of the wood. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "É daqui que sai o alimento que sustenta o mundo",
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P03",
+   "local": "Pavilhao 1 -- Industria, Comercio e Prestacao de Servicos",
+   "titulo_na_tela": "Pavilhão 1",
+   "diferencial": false,
+   "duracao_s": 6.0,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 46.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "caixa com footprint medido, parede tijolo + telhado telha",
+   "pasta_de_trabalho": "out/plano-b/P03",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 6.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 6.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (16).mp4",
+     "raiz": "quinta",
+     "tc_s": 110.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "coluna azul, alvenaria de tijolo vermelho, estrutura de telhado vermelha, e uma pessoa em pe dando escala. E a paleta do parque em um quadro.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q076_00-01-49.jpg",
+     "thumb": "thumbs/1-16/q076_00-01-49.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q077_00-01-51.jpg",
+       "tc": "00:01:51",
+       "nota": 90.5,
+       "thumb": "thumbs/1-16/q077_00-01-51.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q075_00-01-48.jpg",
+       "tc": "00:01:48",
+       "nota": 63.2,
+       "thumb": "thumbs/1-16/q075_00-01-48.jpg"
+      }
+     ],
+     "id": "1-16__q076_00-01-49",
+     "tc_do_arquivo": "00:01:49",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 81.4,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "IMG_9131-004.MOV",
+     "raiz": "brutos",
+     "tc_s": 176.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "cobertura POR DENTRO: telha ondulada, tesoura vermelha, terca, pilar azul, piso de cimento gasto. Parque vazio.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\IMG_9131-004\\quadros\\q017_00-02-56.jpg",
+     "thumb": "thumbs/img-9131-004/q017_00-02-56.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9131-004\\quadros\\q016_00-02-45.jpg",
+       "tc": "00:02:45",
+       "nota": 45.0,
+       "thumb": "thumbs/img-9131-004/q016_00-02-45.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9131-004\\quadros\\q018_00-03-07.jpg",
+       "tc": "00:03:07",
+       "nota": 56.4,
+       "thumb": "thumbs/img-9131-004/q018_00-03-07.jpg"
+      }
+     ],
+     "id": "img-9131-004__q017_00-02-56",
+     "tc_do_arquivo": "00:02:56",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 60.2,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "1 (1).mp4",
+     "raiz": "quinta",
+     "tc_s": 8.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "interior de pavilhao VAZIO -- o vao livre pronto para a IA montar estande dentro.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _1_\\quadros\\q032_00-00-08.jpg",
+     "thumb": "thumbs/1-1/q032_00-00-08.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _1_\\quadros\\q033_00-00-08.jpg",
+       "tc": "00:00:08",
+       "nota": 70.9,
+       "thumb": "thumbs/1-1/q033_00-00-08.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _1_\\quadros\\q034_00-00-08.jpg",
+       "tc": "00:00:08",
+       "nota": 72.3,
+       "thumb": "thumbs/1-1/q034_00-00-08.jpg"
+      }
+     ],
+     "id": "1-1__q032_00-00-08",
+     "tc_do_arquivo": "00:00:08",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 70.0,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. long exhibition pavilion with brick walls and corrugated metal roof, commercial trade booths under the roof, banners, visitors browsing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 46 m above the ground, roughly 23 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 6.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 342.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. long exhibition pavilion with brick walls and corrugated metal roof, commercial trade booths under the roof, banners, visitors browsing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 46 m above the ground, roughly 23 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 37.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors at a trade booth inside the pavilion, an exhibitor leaning over the counter explaining a product. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 302.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. two hands closing a handshake over a booth counter, brochures and a branded banner soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Pavilhão 1",
+    "letreiro_apoio": "Indústria, Comércio e Serviços",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P04",
+   "local": "Praca de Alimentacao Coberta",
+   "titulo_na_tela": "Praça de Alimentação",
+   "diferencial": false,
+   "duracao_s": 7.0,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 11.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Nenhum quadro do acervo confirma a Praca de Alimentacao Coberta por placa. O candidato entra como tipologia, nao como local.",
+   "cena_3d": "footprint medido por watershed no bloco norte (145,5 x 33,6 m)",
+   "pasta_de_trabalho": "out/plano-b/P04",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 7.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_0935_stabilized_1.mp4",
+     "raiz": "brutos",
+     "tc_s": 5.0,
+     "papel": "apoio",
+     "confianca": "nao_confirmado",
+     "porque": "rua dos food stands ao nivel do chao. Nenhuma placa confirma que seja esta praca.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_1\\quadros\\q008_00-00-05.jpg",
+     "thumb": "thumbs/dji-0935-stabilized-1/q008_00-00-05.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_1\\quadros\\q007_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 81.0,
+       "thumb": "thumbs/dji-0935-stabilized-1/q007_00-00-04.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_1\\quadros\\q009_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 87.8,
+       "thumb": "thumbs/dji-0935-stabilized-1/q009_00-00-06.jpg"
+      }
+     ],
+     "id": "dji-0935-stabilized-1__q008_00-00-05",
+     "tc_do_arquivo": "00:00:05",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 62.7,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. covered food court with long rows of tables and chairs, food service counters along one side, families eating, overhead roof structure. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 120 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 11 m above the ground, roughly 52 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 343.3,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. covered food court with long rows of tables and chairs, food service counters along one side, families eating, overhead roof structure. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 120 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 11 m above the ground, roughly 52 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 38.3,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. families seated at the long tables of the covered food court, plates and drinks on the boards, queue at the service counters behind. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 120 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 303.3,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a plate of grilled meat, rice and salad being set down on the table, steam rising, hands reaching in. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Praça de Alimentação",
+    "letreiro_apoio": "Área coberta",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P05",
+   "local": "Pavilhao 2 -- Industria, Comercio e Prestacao de Servicos",
+   "titulo_na_tela": "Pavilhão 2",
+   "diferencial": false,
+   "duracao_s": 5.0,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 14.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "caixa com footprint medido",
+   "pasta_de_trabalho": "out/plano-b/P05",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (17).mp4",
+     "raiz": "quinta",
+     "tc_s": 4.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "galpao VERMELHO com portas AZUIS -- confirma vermelho+azul como identidade construida do parque.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _17_\\quadros\\q008_00-00-04.jpg",
+     "thumb": "thumbs/1-17/q008_00-00-04.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _17_\\quadros\\q009_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 83.3,
+       "thumb": "thumbs/1-17/q009_00-00-04.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _17_\\quadros\\q006_00-00-03.jpg",
+       "tc": "00:00:03",
+       "nota": 61.5,
+       "thumb": "thumbs/1-17/q006_00-00-03.jpg"
+      }
+     ],
+     "id": "1-17__q008_00-00-04",
+     "tc_do_arquivo": "00:00:04",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 82.5,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "1 (16).mp4",
+     "raiz": "quinta",
+     "tc_s": 30.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "ritmo dos vaos e beiral do mesmo tipo de pavilhao, por fora.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q021_00-00-29.jpg",
+     "thumb": "thumbs/1-16/q021_00-00-29.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q022_00-00-31.jpg",
+       "tc": "00:00:31",
+       "nota": 58.0,
+       "thumb": "thumbs/1-16/q022_00-00-31.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q020_00-00-28.jpg",
+       "tc": "00:00:28",
+       "nota": 56.6,
+       "thumb": "thumbs/1-16/q020_00-00-28.jpg"
+      }
+     ],
+     "id": "1-16__q021_00-00-29",
+     "tc_do_arquivo": "00:00:29",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 55.8,
+     "tier": "parecido",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. second exhibition pavilion, same construction as the first, trade stands and machinery displays, visitors walking the central aisle. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 14 m above the ground, roughly 22 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 75.3,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. second exhibition pavilion, same construction as the first, trade stands and machinery displays, visitors walking the central aisle. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 14 m above the ground, roughly 22 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 130.3,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors walking the central aisle between machinery stands, one group stopped in front of a display. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 35.3,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a manufacturer's badge and painted sheet metal on a display machine, reflections of the low sun on the paint. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Pavilhão 2",
+    "letreiro_apoio": "Indústria, Comércio e Serviços",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P06",
+   "local": "Mercado do Produtor",
+   "titulo_na_tela": "Mercado do Produtor",
+   "diferencial": true,
+   "duracao_s": 17.5,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 15.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Um dos quatro diferenciais e nao existe um unico quadro do acervo com o Mercado do Produtor confirmado por placa. Posicao vem da planta; aparencia nao vem de lugar nenhum.",
+   "cena_3d": "zona ESTIMADA -- caixa cinza por tipo, sem footprint desenhado na planta",
+   "pasta_de_trabalho": "out/plano-b/P06",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.8,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.8
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 5.8,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 5.8,
+     "ate_s": 11.6
+    },
+    {
+     "n": 3,
+     "escala": "detalhe",
+     "rotulo": "DETALHE",
+     "duracao_s": 5.8,
+     "primeiro_quadro": "a imagem detalhe do plano",
+     "de_s": 11.6,
+     "ate_s": 17.4
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (16).mp4",
+     "raiz": "quinta",
+     "tc_s": 60.0,
+     "papel": "placa-base",
+     "confianca": "nao_confirmado",
+     "porque": "o lote 01 registrou que este pavilhao vazio de pilar azul e alvenaria vermelha e a coisa mais parecida com o Mercado do Produtor montado que o acervo tem -- e esta VAZIO, sem banca nenhuma. Placa perfeita para a IA montar as bancas; nome nao confirmado.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q042_00-01-00.jpg",
+     "thumb": "thumbs/1-16/q042_00-01-00.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q043_00-01-01.jpg",
+       "tc": "00:01:01",
+       "nota": 67.5,
+       "thumb": "thumbs/1-16/q043_00-01-01.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _16_\\quadros\\q041_00-00-58.jpg",
+       "tc": "00:00:58",
+       "nota": 49.6,
+       "thumb": "thumbs/1-16/q041_00-00-58.jpg"
+      }
+     ],
+     "id": "1-16__q042_00-01-00",
+     "tc_do_arquivo": "00:01:00",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 65.6,
+     "tier": "bom",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. producer's market — open-sided stalls with wooden crates of fresh produce, cheeses, preserves and cured meats, farmers behind the counters talking to buyers. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 15 m above the ground, roughly 45 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 30.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. producer's market — open-sided stalls with wooden crates of fresh produce, cheeses, preserves and cured meats, farmers behind the counters talking to buyers. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 15 m above the ground, roughly 45 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 85.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. farmers behind the market stalls handing produce to buyers across the counter, crates stacked at their feet. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 350.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. hands lifting a wooden crate of tomatoes and greens, a wheel of cheese and jars of preserves on the counter beside it. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Mercado do Produtor",
+    "letreiro_apoio": "Um diferencial do AGROSHOW",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P07",
+   "local": "Agroindustrias",
+   "titulo_na_tela": "Pavilhão 3",
+   "diferencial": false,
+   "duracao_s": 5.0,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 46.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Sem confirmacao nominal no acervo.",
+   "cena_3d": "zona ESTIMADA",
+   "pasta_de_trabalho": "out/plano-b/P07",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (17).mp4",
+     "raiz": "quinta",
+     "tc_s": 30.0,
+     "papel": "apoio",
+     "confianca": "nao_confirmado",
+     "porque": "galpao e estrada de terra do mesmo setor. Tipologia, nao nome.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _17_\\quadros\\q061_00-00-30.jpg",
+     "thumb": "thumbs/1-17/q061_00-00-30.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _17_\\quadros\\q062_00-00-30.jpg",
+       "tc": "00:00:30",
+       "nota": 89.0,
+       "thumb": "thumbs/1-17/q062_00-00-30.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _17_\\quadros\\q059_00-00-29.jpg",
+       "tc": "00:00:29",
+       "nota": 72.3,
+       "thumb": "thumbs/1-17/q059_00-00-29.jpg"
+      }
+     ],
+     "id": "1-17__q061_00-00-30",
+     "tc_do_arquivo": "00:00:30",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 70.8,
+     "tier": "parecido",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agro-industry stands: small-scale food processing displays, stainless equipment, tasting counters, branded booths. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 46 m above the ground, roughly 20 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 40.3,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agro-industry stands: small-scale food processing displays, stainless equipment, tasting counters, branded booths. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 46 m above the ground, roughly 20 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 95.3,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors at an agro-industry tasting counter, a producer pouring a sample and talking them through it. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 0.3,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a small glass of cachaça and slices of salami and cheese on a wooden board, a hand reaching for one. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Pavilhão 3",
+    "letreiro_apoio": "Cozinha Didática",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P08",
+   "local": "Cafe Colonial",
+   "titulo_na_tela": "Café Colonial",
+   "diferencial": true,
+   "duracao_s": 13.5,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 5.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Um dos quatro diferenciais, sem quadro nominalmente confirmado. O lote 03 tambem achou um salao com mesas e escreveu, literal, que SUPOE ser Centro de Convivencia ou Cafe Colonial. Suposicao nao vira referencia de area: e material de venda de espaco fisico.",
+   "cena_3d": "zona ESTIMADA + 209 pecas de mobiliario CC0",
+   "pasta_de_trabalho": "out/plano-b/P08",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 4.5
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 4.5,
+     "ate_s": 9.0
+    },
+    {
+     "n": 3,
+     "escala": "detalhe",
+     "rotulo": "DETALHE",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem detalhe do plano",
+     "de_s": 9.0,
+     "ate_s": 13.5
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_0964_stabilized_1.mp4",
+     "raiz": "brutos",
+     "tc_s": 5.0,
+     "papel": "apoio",
+     "confianca": "nao_confirmado",
+     "porque": "fogo de chao com costelas e gradil metalico -- material de gastronomia do proprio recinto. O lote 04 registrou como Cafe Colonial POSSIVEL, sem placa.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0964_stabilized_1\\quadros\\q007_00-00-05.jpg",
+     "thumb": "thumbs/dji-0964-stabilized-1/q007_00-00-05.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0964_stabilized_1\\quadros\\q006_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 100.0,
+       "thumb": "thumbs/dji-0964-stabilized-1/q006_00-00-04.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0964_stabilized_1\\quadros\\q008_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 63.3,
+       "thumb": "thumbs/dji-0964-stabilized-1/q008_00-00-06.jpg"
+      }
+     ],
+     "id": "dji-0964-stabilized-1__q007_00-00-05",
+     "tc_do_arquivo": "00:00:05",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 75.6,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. colonial café — long tables laid with breads, cakes, cured meats, cheese and coffee, warm hanging lights, families seated eating. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 5 m above the ground, roughly 60 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 270.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. colonial café — long tables laid with breads, cakes, cured meats, cheese and coffee, warm hanging lights, families seated eating. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 5 m above the ground, roughly 60 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 325.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. families seated along the long colonial café tables, plates passing hand to hand, warm hanging lights above. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 230.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the table top loaded with breads, cakes, cured meats, cheese and a cup of coffee being poured, close and warm. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Café Colonial",
+    "letreiro_apoio": "Um diferencial do AGROSHOW",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P09",
+   "local": "Praca de Alimentacao Aberta",
+   "titulo_na_tela": "Alimentação no Bosque",
+   "diferencial": false,
+   "duracao_s": 9.0,
+   "lente_mm": 35,
+   "movimento": "sobrevoo",
+   "altura_m": 31.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "zona ESTIMADA",
+   "pasta_de_trabalho": "out/plano-b/P09",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 4.5
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 4.5,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 4.5,
+     "ate_s": 9.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251128150932_0138_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 6.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "fechamento de lona branca com dobra, vinco e translucidez -- a tenda como ela e montada aqui. Serve de gabarito para a IA nao inventar tenda de outro lugar.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128150932_0138_D\\quadros\\q008_00-00-06.jpg",
+     "thumb": "thumbs/dji-20251128150932-0138-d/q008_00-00-06.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128150932_0138_D\\quadros\\q006_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 46.6,
+       "thumb": "thumbs/dji-20251128150932-0138-d/q006_00-00-05.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128150932_0138_D\\quadros\\q007_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 52.2,
+       "thumb": "thumbs/dji-20251128150932-0138-d/q007_00-00-05.jpg"
+      }
+     ],
+     "id": "dji-20251128150932-0138-d__q008_00-00-06",
+     "tc_do_arquivo": "00:00:06",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 50.3,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "DJI_0935_stabilized_1.mp4",
+     "raiz": "brutos",
+     "tc_s": 3.0,
+     "papel": "apoio",
+     "confianca": "nao_confirmado",
+     "porque": "rua de food stands em operacao.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_1\\quadros\\q005_00-00-03.jpg",
+     "thumb": "thumbs/dji-0935-stabilized-1/q005_00-00-03.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_1\\quadros\\q006_00-00-03.jpg",
+       "tc": "00:00:03",
+       "nota": 93.5,
+       "thumb": "thumbs/dji-0935-stabilized-1/q006_00-00-03.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_1\\quadros\\q004_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 51.1,
+       "thumb": "thumbs/dji-0935-stabilized-1/q004_00-00-02.jpg"
+      }
+     ],
+     "id": "dji-0935-stabilized-1__q005_00-00-03",
+     "tc_do_arquivo": "00:00:03",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 45.0,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. open-air food court in a grove of trees, food trucks and stalls around the edge, picnic tables in dappled shade, people queuing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone about 31 m above the ground, roughly 139 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 9.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 42.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. open-air food court in a grove of trees, food trucks and stalls around the edge, picnic tables in dappled shade, people queuing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 31 m above the ground, roughly 139 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 97.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. people queuing at the food trucks under the trees, others eating at picnic tables in dappled shade. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 2.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a hand taking a paper-wrapped sandwich across the food-truck hatch, the tree canopy soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Alimentação no Bosque",
+    "letreiro_apoio": "Área externa",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P10",
+   "local": "Recinto de Leiloes",
+   "titulo_na_tela": "Recinto de Leilões",
+   "diferencial": false,
+   "duracao_s": 8.0,
+   "lente_mm": 35,
+   "movimento": "push-in",
+   "altura_m": 5.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "zona ESTIMADA -- e o predio redondo ainda e caixa",
+   "pasta_de_trabalho": "out/plano-b/P10",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 4.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 4.0
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 4.0,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 4.0,
+     "ate_s": 8.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251126155259_0053_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 46.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "top-down do predio de telhado radial com a fachada dizendo RECINTO DE LEILOES ERVELINO COLETTI -- lido em recorte ampliado. E a unica confirmacao nominal por placa deste local no acervo inteiro.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126155259_0053_D\\quadros\\q035_00-00-46.jpg",
+     "thumb": "thumbs/dji-20251126155259-0053-d/q035_00-00-46.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126155259_0053_D\\quadros\\q034_00-00-45.jpg",
+       "tc": "00:00:45",
+       "nota": 94.1,
+       "thumb": "thumbs/dji-20251126155259-0053-d/q034_00-00-45.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126155259_0053_D\\quadros\\q033_00-00-44.jpg",
+       "tc": "00:00:44",
+       "nota": 82.5,
+       "thumb": "thumbs/dji-20251126155259-0053-d/q033_00-00-44.jpg"
+      }
+     ],
+     "id": "dji-20251126155259-0053-d__q035_00-00-46",
+     "tc_do_arquivo": "00:00:46",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 96.7,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "1 (10).mp4",
+     "raiz": "quinta",
+     "tc_s": 20.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "orbita COMPLETA do predio redondo: numero de faces, ritmo de pilar, geometria do telhado. A melhor prova de forma que este projeto tem.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _10_\\quadros\\q052_00-00-20.jpg",
+     "thumb": "thumbs/1-10/q052_00-00-20.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _10_\\quadros\\q053_00-00-20.jpg",
+       "tc": "00:00:20",
+       "nota": 48.4,
+       "thumb": "thumbs/1-10/q053_00-00-20.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _10_\\quadros\\q054_00-00-20.jpg",
+       "tc": "00:00:20",
+       "nota": 47.3,
+       "thumb": "thumbs/1-10/q054_00-00-20.jpg"
+      }
+     ],
+     "id": "1-10__q052_00-00-20",
+     "tc_do_arquivo": "00:00:20",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 48.8,
+     "tier": "parecido",
+     "periodo": "dia"
+    },
+    {
+     "video": "1 (12).mp4",
+     "raiz": "quinta",
+     "tc_s": 20.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "salao de leiloes POR DENTRO: forro de madeira ripada em curva, luminaria embutida, cadeira preta, balcao. O audio [02:18] pede o leilao acontecendo.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _12_\\quadros\\q039_00-00-20.jpg",
+     "thumb": "thumbs/1-12/q039_00-00-20.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _12_\\quadros\\q040_00-00-20.jpg",
+       "tc": "00:00:20",
+       "nota": 90.3,
+       "thumb": "thumbs/1-12/q040_00-00-20.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _12_\\quadros\\q037_00-00-19.jpg",
+       "tc": "00:00:19",
+       "nota": 94.4,
+       "thumb": "thumbs/1-12/q037_00-00-19.jpg"
+      }
+     ],
+     "id": "1-12__q039_00-00-20",
+     "tc_do_arquivo": "00:00:20",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 92.5,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    },
+    {
+     "video": "1 (13).mp4",
+     "raiz": "quinta",
+     "tc_s": 4.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "o pulpito do leiloeiro e as grades azuis do ringue -- o audio nomeia o pulpito.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _13_\\quadros\\q043_00-00-04.jpg",
+     "thumb": "thumbs/1-13/q043_00-00-04.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _13_\\quadros\\q044_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 52.9,
+       "thumb": "thumbs/1-13/q044_00-00-04.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _13_\\quadros\\q045_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 72.1,
+       "thumb": "thumbs/1-13/q045_00-00-04.jpg"
+      }
+     ],
+     "id": "1-13__q043_00-00-04",
+     "tc_do_arquivo": "00:00:04",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 49.9,
+     "tier": "parecido",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. livestock auction ring — circular sale ring with a raised auctioneer's booth, tiered seating facing the ring, buyers seated with catalogues, a single animal in the ring. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 5 m above the ground, roughly 53 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 8.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 116.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. livestock auction ring — circular sale ring with a raised auctioneer's booth, tiered seating facing the ring, buyers seated with catalogues, a single animal in the ring. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 5 m above the ground, roughly 53 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 171.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. buyers seated with catalogues in the tiered seating facing the sale ring, one raising a hand to bid, a single animal in the ring. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 76.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a raised bidding hand and a catalogue on a knee, the auctioneer's booth soft in the background. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Recinto de Leilões",
+    "letreiro_apoio": "Exposição de Animais",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P11",
+   "local": "Exposicao de Animais",
+   "titulo_na_tela": "Pavilhões de Animais",
+   "diferencial": false,
+   "duracao_s": 11.0,
+   "lente_mm": 35,
+   "movimento": "sobrevoo",
+   "altura_m": 14.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "6 pavilhoes com forma medida do desenho, na ordem ditada pelo cliente",
+   "pasta_de_trabalho": "out/plano-b/P11",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.5,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.5
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 5.5,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 5.5,
+     "ate_s": 11.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251126185721_0082_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 16.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "os SEIS pavilhoes em fila sob sol rasante, com a pista de julgamento gramada ao lado. O quadro mais completo da camada BASE em todo o acervo, e na hora do filme.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185721_0082_D\\quadros\\q023_00-00-16.jpg",
+     "thumb": "thumbs/dji-20251126185721-0082-d/q023_00-00-16.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185721_0082_D\\quadros\\q024_00-00-16.jpg",
+       "tc": "00:00:16",
+       "nota": 82.8,
+       "thumb": "thumbs/dji-20251126185721-0082-d/q024_00-00-16.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185721_0082_D\\quadros\\q022_00-00-15.jpg",
+       "tc": "00:00:15",
+       "nota": 88.3,
+       "thumb": "thumbs/dji-20251126185721-0082-d/q022_00-00-15.jpg"
+      }
+     ],
+     "id": "dji-20251126185721-0082-d__q023_00-00-16",
+     "tc_do_arquivo": "00:00:16",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 86.5,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    },
+    {
+     "video": "DJI_20251126185022_0065_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 1.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "a placa diz EXPO VIZINHOS . GADO DE LEITE -- confirmacao nominal do pavilhao. No mesmo quadro, a telha vista de baixo e a brita ao nivel do chao.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185022_0065_D\\quadros\\q002_00-00-01.jpg",
+     "thumb": "thumbs/dji-20251126185022-0065-d/q002_00-00-01.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185022_0065_D\\quadros\\q001_00-00-00.jpg",
+       "tc": "00:00:00",
+       "nota": 86.7,
+       "thumb": "thumbs/dji-20251126185022-0065-d/q001_00-00-00.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185022_0065_D\\quadros\\q003_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 82.9,
+       "thumb": "thumbs/dji-20251126185022-0065-d/q003_00-00-02.jpg"
+      }
+     ],
+     "id": "dji-20251126185022-0065-d__q002_00-00-01",
+     "tc_do_arquivo": "00:00:01",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 88.6,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    },
+    {
+     "video": "1 (14).mp4",
+     "raiz": "quinta",
+     "tc_s": 6.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "MANGUEIRAS / currais: grade metalica em serie sobre brita, com cobertura. A planta so tinha o rotulo -- 14,1 x 2,4 m era o tamanho da PALAVRA.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _14_\\quadros\\q024_00-00-06.jpg",
+     "thumb": "thumbs/1-14/q024_00-00-06.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _14_\\quadros\\q025_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 81.2,
+       "thumb": "thumbs/1-14/q025_00-00-06.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _14_\\quadros\\q026_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 64.5,
+       "thumb": "thumbs/1-14/q026_00-00-06.jpg"
+      }
+     ],
+     "id": "1-14__q024_00-00-06",
+     "tc_do_arquivo": "00:00:06",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 62.3,
+     "tier": "parecido",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. row of open livestock barns, animals in individual pens with straw bedding, handlers grooming them, feed and water troughs. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 34 dairy cattle, 34 Hereford and Braford cattle, 34 Nelore beef cattle, roughly 48 sheep and goats, 22 horses. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 14 m above the ground, roughly 86 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 11.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 90.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. row of open livestock barns, animals in individual pens with straw bedding, handlers grooming them, feed and water troughs. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 34 dairy cattle, 34 Hereford and Braford cattle, 34 Nelore beef cattle, roughly 48 sheep and goats, 22 horses. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 14 m above the ground, roughly 86 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 145.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. handlers grooming and washing cattle in the open barn, animals tied at the rail with straw underfoot. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 34 dairy cattle, 34 Hereford and Braford cattle, 34 Nelore beef cattle, roughly 48 sheep and goats, 22 horses. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 50.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a handler's hand running a brush down the flank of a bull, hide and straw in sharp texture, the barn falling soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Pavilhões de Animais",
+    "letreiro_apoio": "Gado de leite, corte, ovinos, caprinos e equinos",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P12",
+   "local": "Pista de Julgamentos",
+   "titulo_na_tela": "Pista de Julgamentos",
+   "diferencial": false,
+   "duracao_s": 5.0,
+   "lente_mm": 35,
+   "movimento": "orbita",
+   "altura_m": 23.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "O lote 05 achou outra pista gramada cercada por tapume branco COM CAVALOS e escreveu que supoe ser julgamento e nao arena. Duas candidatas, nenhuma com placa.",
+   "cena_3d": "zona ESTIMADA",
+   "pasta_de_trabalho": "out/plano-b/P12",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251126185721_0082_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 20.0,
+     "papel": "placa-base",
+     "confianca": "provavel",
+     "porque": "pista de julgamento gramada e cercada, verde uniforme, com arvore isolada dentro e sombra longa atravessando. Duas gramas distintas no mesmo quadro.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185721_0082_D\\quadros\\q029_00-00-20.jpg",
+     "thumb": "thumbs/dji-20251126185721-0082-d/q029_00-00-20.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185721_0082_D\\quadros\\q027_00-00-19.jpg",
+       "tc": "00:00:19",
+       "nota": 69.7,
+       "thumb": "thumbs/dji-20251126185721-0082-d/q027_00-00-19.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251126185721_0082_D\\quadros\\q028_00-00-19.jpg",
+       "tc": "00:00:19",
+       "nota": 65.6,
+       "thumb": "thumbs/dji-20251126185721-0082-d/q028_00-00-19.jpg"
+      }
+     ],
+     "id": "dji-20251126185721-0082-d__q029_00-00-20",
+     "tc_do_arquivo": "00:00:20",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 61.5,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. grass judging arena, cattle led on halters by handlers in a line, judges in the centre, spectators along the rail. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 8 Hereford and Braford cattle, roughly 40 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone about 23 m above the ground, roughly 44 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow orbital arc around the subject, camera holding distance and height. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 170.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. grass judging arena, cattle led on halters by handlers in a line, judges in the centre, spectators along the rail. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 8 Hereford and Braford cattle, roughly 40 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 23 m above the ground, roughly 44 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 225.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. cattle led on halters in a line across the grass judging arena, judges walking between them, spectators along the rail. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 8 Hereford and Braford cattle, roughly 40 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 130.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a gloved hand on a halter rope beside the animal's head, the judge's clipboard soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Pista de Julgamentos",
+    "letreiro_apoio": "Julgamento de animais",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P13",
+   "local": "Expositores Externos",
+   "titulo_na_tela": "Expositores Externos",
+   "diferencial": false,
+   "duracao_s": 5.5,
+   "lente_mm": 35,
+   "movimento": "sobrevoo",
+   "altura_m": 13.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "estandes instanciados da planta",
+   "pasta_de_trabalho": "out/plano-b/P13",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.5,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.5
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251128150932_0138_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 16.0,
+     "papel": "placa-base",
+     "confianca": "provavel",
+     "porque": "brita e saibro com pedra solta, placa de concreto rente ao chao -- o chao onde o estande externo pousa.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128150932_0138_D\\quadros\\q019_00-00-16.jpg",
+     "thumb": "thumbs/dji-20251128150932-0138-d/q019_00-00-16.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128150932_0138_D\\quadros\\q018_00-00-15.jpg",
+       "tc": "00:00:15",
+       "nota": 49.4,
+       "thumb": "thumbs/dji-20251128150932-0138-d/q018_00-00-15.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128150932_0138_D\\quadros\\q020_00-00-17.jpg",
+       "tc": "00:00:17",
+       "nota": 72.1,
+       "thumb": "thumbs/dji-20251128150932-0138-d/q020_00-00-17.jpg"
+      }
+     ],
+     "id": "dji-20251128150932-0138-d__q019_00-00-16",
+     "tc_do_arquivo": "00:00:16",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 69.1,
+     "tier": "parecido",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. outdoor exhibitor area on grass, open stands and marquees, equipment displayed on the ground, visitors walking between them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 50 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 13 m above the ground, roughly 48 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 5.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 250,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. outdoor exhibitor area on grass, open stands and marquees, equipment displayed on the ground, visitors walking between them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 50 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 13 m above the ground, roughly 48 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 305,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors walking between the outdoor stands and marquees, exhibitors talking to them beside the equipment on the grass. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 50 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 210,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a stand banner and product laid out on a trestle table, a visitor's hand picking one up. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Expositores Externos",
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P14",
+   "local": "Fazendinha",
+   "titulo_na_tela": "Fazendinha",
+   "diferencial": true,
+   "duracao_s": 18.5,
+   "lente_mm": 24,
+   "movimento": "sobrevoo",
+   "altura_m": 14.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Um dos quatro diferenciais. Nenhum quadro confirma a Fazendinha por placa. A posicao ja e dele (mapa, 14/08); a APARENCIA continua sem fonte no acervo.",
+   "cena_3d": "zona ESTIMADA em (-164,4 . -18,6) m, posicao decidida por ele em 14/08 pelo mapa",
+   "pasta_de_trabalho": "out/plano-b/P14",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 6.2,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 6.2
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 6.2,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 6.2,
+     "ate_s": 12.4
+    },
+    {
+     "n": 3,
+     "escala": "detalhe",
+     "rotulo": "DETALHE",
+     "duracao_s": 6.2,
+     "primeiro_quadro": "a imagem detalhe do plano",
+     "de_s": 12.4,
+     "ate_s": 18.6
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251127211745_0128_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 0.5,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "casas de madeira construidas no recinto: tabuado vertical, telha ceramica, varanda, cerca de mourao. O lote 10 aponta este quadro como vocabulario da Fazendinha e do portal ao mesmo tempo. NOTURNO (21:17) -- forma sim, cor nao.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211745_0128_D\\quadros\\q001_00-00-00.jpg",
+     "thumb": "thumbs/dji-20251127211745-0128-d/q001_00-00-00.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211745_0128_D\\quadros\\q002_00-00-00.jpg",
+       "tc": "00:00:00",
+       "nota": 70.9,
+       "thumb": "thumbs/dji-20251127211745-0128-d/q002_00-00-00.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127211745_0128_D\\quadros\\q003_00-00-00.jpg",
+       "tc": "00:00:00",
+       "nota": 94.3,
+       "thumb": "thumbs/dji-20251127211745-0128-d/q003_00-00-00.jpg"
+      }
+     ],
+     "id": "dji-20251127211745-0128-d__q001_00-00-00",
+     "tc_do_arquivo": "00:00:00",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 73.9,
+     "tier": "parecido",
+     "periodo": "noite"
+    },
+    {
+     "video": "DJI_20251128151108_0140_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 4.0,
+     "papel": "apoio",
+     "confianca": "provavel",
+     "porque": "area infantil EM USO: painel pintado, cones, animadores, criancas. Referencia de como a area funciona na pratica -- sem usar a palavra proibida.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128151108_0140_D\\quadros\\q015_00-00-04.jpg",
+     "thumb": "thumbs/dji-20251128151108-0140-d/q015_00-00-04.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128151108_0140_D\\quadros\\q016_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 46.7,
+       "thumb": "thumbs/dji-20251128151108-0140-d/q016_00-00-04.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128151108_0140_D\\quadros\\q017_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 35.9,
+       "thumb": "thumbs/dji-20251128151108-0140-d/q017_00-00-04.jpg"
+      }
+     ],
+     "id": "dji-20251128151108-0140-d__q015_00-00-04",
+     "tc_do_arquivo": "00:00:04",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 48.6,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "DJI_0962_stabilized.mp4",
+     "raiz": "brutos",
+     "tc_s": 5.0,
+     "papel": "apoio",
+     "confianca": "nao_confirmado",
+     "porque": "conjunto de casinhas de madeira com cara de tema rural. O lote 04 escreveu, literal, que NAO tem certeza de que seja a Fazendinha.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0962_stabilized\\quadros\\q004_00-00-04.jpg",
+     "thumb": "thumbs/dji-0962-stabilized/q004_00-00-04.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0962_stabilized\\quadros\\q005_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 87.2,
+       "thumb": "thumbs/dji-0962-stabilized/q005_00-00-06.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0962_stabilized\\quadros\\q003_00-00-03.jpg",
+       "tc": "00:00:03",
+       "nota": 75.5,
+       "thumb": "thumbs/dji-0962-stabilized/q003_00-00-03.jpg"
+      }
+     ],
+     "id": "dji-0962-stabilized__q004_00-00-04",
+     "tc_do_arquivo": "00:00:04",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 77.8,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children's farm area — small rustic barn, pony rides, pens with sheep and goats, a border collie herding demonstration, families with small children watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 14 m above the ground, roughly 38 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 175.6,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children's farm area — small rustic barn, pony rides, pens with sheep and goats, a border collie herding demonstration, families with small children watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 14 m above the ground, roughly 38 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 230.6,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children at the low wooden fence of the children's farm feeding the sheep and goats, parents standing behind them watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 135.6,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a small child's hand holding out feed to a goat's muzzle over the fence rail, warm and close. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Fazendinha",
+    "letreiro_apoio": "Área para atividades infantis",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P15",
+   "local": "Fazendinha (continuacao, orbita)",
+   "titulo_na_tela": null,
+   "diferencial": true,
+   "duracao_s": 7.0,
+   "lente_mm": 50,
+   "movimento": "orbita",
+   "altura_m": 37.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "O mesmo do P14.",
+   "cena_3d": "mesma zona do P14",
+   "pasta_de_trabalho": "out/plano-b/P15",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 7.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_20251128151108_0140_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 7.5,
+     "papel": "apoio",
+     "confianca": "provavel",
+     "porque": "segundo angulo da mesma area infantil, para a IA nao repetir o mesmo enquadramento no par de planos.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128151108_0140_D\\quadros\\q025_00-00-07.jpg",
+     "thumb": "thumbs/dji-20251128151108-0140-d/q025_00-00-07.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128151108_0140_D\\quadros\\q026_00-00-07.jpg",
+       "tc": "00:00:07",
+       "nota": 75.3,
+       "thumb": "thumbs/dji-20251128151108-0140-d/q026_00-00-07.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251128151108_0140_D\\quadros\\q027_00-00-07.jpg",
+       "tc": "00:00:07",
+       "nota": 92.4,
+       "thumb": "thumbs/dji-20251128151108-0140-d/q027_00-00-07.jpg"
+      }
+     ],
+     "id": "dji-20251128151108-0140-d__q025_00-00-07",
+     "tc_do_arquivo": "00:00:07",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 73.4,
+     "tier": "bom",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same children's farm area seen closer: the pony ring and the animal pens, children feeding the animals over a low wooden fence. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens from a drone about 37 m above the ground, roughly 31 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow orbital arc around the subject, camera holding distance and height. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 84.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same children's farm area seen closer: the pony ring and the animal pens, children feeding the animals over a low wooden fence. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens from a drone 37 m above the ground, roughly 31 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 139.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children riding ponies led at a walk around the ring by a handler, a border collie working the sheep behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 44.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a child's boots in the stirrups and small hands gripping the saddle horn, the pony's mane in the low sun. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": null,
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P16",
+   "local": "Maquinas, Equipamentos e Implementos Agricolas",
+   "titulo_na_tela": "Máquinas e Implementos",
+   "diferencial": false,
+   "duracao_s": 6.0,
+   "lente_mm": 35,
+   "movimento": "sobrevoo",
+   "altura_m": 9.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "estandes da planta + 1 trator na AREA_DE_ESPERA",
+   "pasta_de_trabalho": "out/plano-b/P16",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 6.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 6.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_0937_stabilized.mp4",
+     "raiz": "brutos",
+     "tc_s": 6.0,
+     "papel": "placa-base",
+     "confianca": "provavel",
+     "porque": "alameda de tratores -- exatamente o setor, com a implantacao real dos equipamentos em fila sob arvore.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q013_00-00-06.jpg",
+     "thumb": "thumbs/dji-0937-stabilized/q013_00-00-06.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q014_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 61.9,
+       "thumb": "thumbs/dji-0937-stabilized/q014_00-00-06.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q011_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 57.7,
+       "thumb": "thumbs/dji-0937-stabilized/q011_00-00-05.jpg"
+      }
+     ],
+     "id": "dji-0937-stabilized__q013_00-00-06",
+     "tc_do_arquivo": "00:00:06",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 74.6,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    },
+    {
+     "video": "DJI_0935_stabilized_2.mp4",
+     "raiz": "brutos",
+     "tc_s": 2.5,
+     "papel": "apoio",
+     "confianca": "provavel",
+     "porque": "alameda de maquinas sob as arvores, outro angulo e outra hora.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q005_00-00-02.jpg",
+     "thumb": "thumbs/dji-0935-stabilized-2/q005_00-00-02.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q006_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 81.6,
+       "thumb": "thumbs/dji-0935-stabilized-2/q006_00-00-02.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q007_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 87.7,
+       "thumb": "thumbs/dji-0935-stabilized-2/q007_00-00-02.jpg"
+      }
+     ],
+     "id": "dji-0935-stabilized-2__q005_00-00-02",
+     "tc_do_arquivo": "00:00:02",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 45.0,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agricultural machinery exhibition — tractors, combine harvesters, seeders and implements lined up on gravel, buyers inspecting them, manufacturer flags. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 90 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 9 m above the ground, roughly 68 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 6.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 186.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agricultural machinery exhibition — tractors, combine harvesters, seeders and implements lined up on gravel, buyers inspecting them, manufacturer flags. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 90 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 9 m above the ground, roughly 68 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 241.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. buyers walking the line of tractors and harvesters, one climbing the steps into a cab while a salesman talks from the ground. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 90 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 146.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the treads of a huge tractor tyre with a person standing beside it for scale, manufacturer's paint and badge sharp. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Máquinas e Implementos",
+    "letreiro_apoio": "Equipamentos agrícolas e veículos",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P17",
+   "local": "Veiculos e Motos Nauticas",
+   "titulo_na_tela": null,
+   "diferencial": false,
+   "duracao_s": 5.0,
+   "lente_mm": 24,
+   "movimento": "travelling",
+   "altura_m": 21.0,
+   "estado": "PLACA EMPRESTADA",
+   "porque_o_estado": "sem placa propria; usa a do P16 por ordem dele",
+   "bloqueio": "Nenhum quadro do acervo mostra o setor de veiculos e motos nauticas identificado. A separacao entre maquinas e veiculos so existe pela COR com que a planta pinta o estande -- ver scripts/classificar_estandes.py.",
+   "cena_3d": "12 estandes azuis da planta, centroide em (-34,2 . 58,4) m",
+   "pasta_de_trabalho": "out/plano-b/P17",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_0937_stabilized.mp4",
+     "raiz": "brutos",
+     "tc_s": 6.0,
+     "papel": "placa-base",
+     "confianca": "emprestada",
+     "porque": "alameda de tratores -- exatamente o setor, com a implantacao real dos equipamentos em fila sob arvore.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q013_00-00-06.jpg",
+     "thumb": "thumbs/dji-0937-stabilized/q013_00-00-06.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q014_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 61.9,
+       "thumb": "thumbs/dji-0937-stabilized/q014_00-00-06.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized\\quadros\\q011_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 57.7,
+       "thumb": "thumbs/dji-0937-stabilized/q011_00-00-05.jpg"
+      }
+     ],
+     "id": "dji-0937-stabilized__q013_00-00-06",
+     "tc_do_arquivo": "00:00:06",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 74.6,
+     "tier": "bom",
+     "periodo": "fim de tarde",
+     "emprestada_de": "P16",
+     "porque_emprestada": "Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta."
+    },
+    {
+     "video": "DJI_0935_stabilized_2.mp4",
+     "raiz": "brutos",
+     "tc_s": 2.5,
+     "papel": "apoio",
+     "confianca": "emprestada",
+     "porque": "alameda de maquinas sob as arvores, outro angulo e outra hora.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q005_00-00-02.jpg",
+     "thumb": "thumbs/dji-0935-stabilized-2/q005_00-00-02.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q006_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 81.6,
+       "thumb": "thumbs/dji-0935-stabilized-2/q006_00-00-02.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0935_stabilized_2\\quadros\\q007_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 87.7,
+       "thumb": "thumbs/dji-0935-stabilized-2/q007_00-00-02.jpg"
+      }
+     ],
+     "id": "dji-0935-stabilized-2__q005_00-00-02",
+     "tc_do_arquivo": "00:00:02",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 45.0,
+     "tier": "bom",
+     "periodo": "fim de tarde",
+     "emprestada_de": "P16",
+     "porque_emprestada": "Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta."
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area. KEEP the layout of the reference image — the same tree-lined avenue, the same row of units parked at the same angle, the same ground and the same light — but REPLACE every tractor and farm implement with pickup trucks, SUVs and motorboats and jet-skis sitting on road trailers. No agricultural machinery anywhere in the frame. Dealer banners beside the units, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow lateral tracking move, camera sliding sideways at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 280.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area. KEEP the layout of the reference image — the same tree-lined avenue, the same row of units parked at the same angle, the same ground and the same light — but REPLACE every tractor and farm implement with pickup trucks, SUVs and motorboats and jet-skis sitting on road trailers. No agricultural machinery anywhere in the frame. Dealer banners beside the units, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 335.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. buyers walking the line of pickups and boats on trailers, a dealer opening a truck door for a couple. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 240.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a boat's outboard motor and polished hull on its trailer, low sun reflecting off the paint. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": null,
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P18",
+   "local": "Area de Shows",
+   "titulo_na_tela": "Área de Shows",
+   "diferencial": false,
+   "duracao_s": 5.5,
+   "lente_mm": 35,
+   "movimento": "sobrevoo",
+   "altura_m": 16.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "bacia + concha permanente na zona PALCO",
+   "pasta_de_trabalho": "out/plano-b/P18",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 5.5,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 5.5
+    }
+   ],
+   "placas": [
+    {
+     "video": "DJI_0937_stabilized_1.mp4",
+     "raiz": "brutos",
+     "tc_s": 6.0,
+     "papel": "placa-base",
+     "confianca": "provavel",
+     "porque": "area de shows com o palco montado, de dia.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized_1\\quadros\\q013_00-00-06.jpg",
+     "thumb": "thumbs/dji-0937-stabilized-1/q013_00-00-06.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized_1\\quadros\\q011_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 71.5,
+       "thumb": "thumbs/dji-0937-stabilized-1/q011_00-00-05.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0937_stabilized_1\\quadros\\q012_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 88.8,
+       "thumb": "thumbs/dji-0937-stabilized-1/q012_00-00-05.jpg"
+      }
+     ],
+     "id": "dji-0937-stabilized-1__q013_00-00-06",
+     "tc_do_arquivo": "00:00:06",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 75.2,
+     "tier": "parecido",
+     "periodo": "fim de tarde"
+    },
+    {
+     "video": "DJI_0961_stabilized.mp4",
+     "raiz": "brutos",
+     "tc_s": 11.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "a bacia inteira num quadro: anel de saibro, talude gramado descendo, esplanada rebaixada com deck e palco ao fundo. Conferido: NAO HA ARQUIBANCADA.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0961_stabilized\\quadros\\q015_00-00-11.jpg",
+     "thumb": "thumbs/dji-0961-stabilized/q015_00-00-11.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0961_stabilized\\quadros\\q014_00-00-10.jpg",
+       "tc": "00:00:10",
+       "nota": 92.4,
+       "thumb": "thumbs/dji-0961-stabilized/q014_00-00-10.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0961_stabilized\\quadros\\q016_00-00-12.jpg",
+       "tc": "00:00:12",
+       "nota": 77.2,
+       "thumb": "thumbs/dji-0961-stabilized/q016_00-00-12.jpg"
+      }
+     ],
+     "id": "dji-0961-stabilized__q015_00-00-11",
+     "tc_do_arquivo": "00:00:11",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 84.8,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large open show ground filling with a crowd at dusk, stage lighting towers, sound system, the crowd facing the stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 16 m above the ground, roughly 84 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "smooth aerial fly-over, camera advancing forward above the ground. Duration 5.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 52.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large open show ground filling with a crowd at dusk, stage lighting towers, sound system, the crowd facing the stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 16 m above the ground, roughly 84 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 107.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the crowd on the show ground at dusk, hands up, faces lit by the stage lighting from the front. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 12.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a few faces in the front of the crowd lit warm by the stage lights, hands raised, everything behind falling into bokeh. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Área de Shows",
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P19",
+   "local": "Arena de Rodeio",
+   "titulo_na_tela": "Arena de Rodeio",
+   "diferencial": true,
+   "duracao_s": 12.0,
+   "lente_mm": 35,
+   "movimento": "orbita",
+   "altura_m": 26.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Onze dos doze lotes usam 'bacia' com ressalva: a placa que aparece diz ARENA DE EVENTOS, nao arena de rodeio. E o acervo NAO TEM arena de rodeio montada -- zero quadros de brete, porteira de partida ou prova. Como o rodeio fica configurado nao vem do footage.",
+   "cena_3d": "arena + 2 camarotes, sem arquibancada (restricao 1)",
+   "pasta_de_trabalho": "out/plano-b/P19",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 4.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 4.0
+    },
+    {
+     "n": 2,
+     "escala": "medio",
+     "rotulo": "PLANO MÉDIO",
+     "duracao_s": 4.0,
+     "primeiro_quadro": "a imagem medio do plano",
+     "de_s": 4.0,
+     "ate_s": 8.0
+    },
+    {
+     "n": 3,
+     "escala": "detalhe",
+     "rotulo": "DETALHE",
+     "duracao_s": 4.0,
+     "primeiro_quadro": "a imagem detalhe do plano",
+     "de_s": 8.0,
+     "ate_s": 12.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (2).mp4",
+     "raiz": "quinta",
+     "tc_s": 11.0,
+     "papel": "placa-base",
+     "confianca": "provavel",
+     "porque": "nadir da arena: terra escura batida com rastro circular de arraste, halo de terra vermelha, luz encoberta difusa. A melhor fonte de POSICAO do acervo depois do satelite, e mais recente.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _2_\\quadros\\q014_00-00-11.jpg",
+     "thumb": "thumbs/1-2/q014_00-00-11.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _2_\\quadros\\q013_00-00-10.jpg",
+       "tc": "00:00:10",
+       "nota": 46.2,
+       "thumb": "thumbs/1-2/q013_00-00-10.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _2_\\quadros\\q015_00-00-12.jpg",
+       "tc": "00:00:12",
+       "nota": 47.1,
+       "thumb": "thumbs/1-2/q015_00-00-12.jpg"
+      }
+     ],
+     "id": "1-2__q014_00-00-11",
+     "tc_do_arquivo": "00:00:11",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 48.2,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "IMG_9133.MOV",
+     "raiz": "brutos",
+     "tc_s": 5.0,
+     "papel": "placa-base",
+     "confianca": "provavel",
+     "porque": "a pista batida VAZIA inteira, em arco, do nivel do chao, recinto sem gente. Unico registro da pista sem nada em cima -- a placa mais limpa que existe para a IA vestir.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\IMG_9133\\quadros\\q005_00-00-05.jpg",
+     "thumb": "thumbs/img-9133/q005_00-00-05.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9133\\quadros\\q004_00-00-04.jpg",
+       "tc": "00:00:04",
+       "nota": 54.0,
+       "thumb": "thumbs/img-9133/q004_00-00-04.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9133\\quadros\\q006_00-00-06.jpg",
+       "tc": "00:00:06",
+       "nota": 41.6,
+       "thumb": "thumbs/img-9133/q006_00-00-06.jpg"
+      }
+     ],
+     "id": "img-9133__q005_00-00-05",
+     "tc_do_arquivo": "00:00:05",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 48.3,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "DJI_0961_stabilized.mp4",
+     "raiz": "brutos",
+     "tc_s": 11.0,
+     "papel": "forma",
+     "confianca": "provavel",
+     "porque": "o perfil da bacia com palco e tendas 5x5 de regua.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_0961_stabilized\\quadros\\q015_00-00-11.jpg",
+     "thumb": "thumbs/dji-0961-stabilized/q015_00-00-11.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0961_stabilized\\quadros\\q014_00-00-10.jpg",
+       "tc": "00:00:10",
+       "nota": 92.4,
+       "thumb": "thumbs/dji-0961-stabilized/q014_00-00-10.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_0961_stabilized\\quadros\\q016_00-00-12.jpg",
+       "tc": "00:00:12",
+       "nota": 77.2,
+       "thumb": "thumbs/dji-0961-stabilized/q016_00-00-12.jpg"
+      }
+     ],
+     "id": "dji-0961-stabilized__q015_00-00-11",
+     "tc_do_arquivo": "00:00:11",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 84.8,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. rodeo arena — an oval dirt track with a bucking bull and a mounted rider, chutes at one end, a stage facing the arena and VIP boxes along the sides. THERE ARE NO GRANDSTAND BLEACHERS around this arena: only the track, the side boxes and the facing stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. one bucking bull, 6 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone about 26 m above the ground, roughly 85 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow orbital arc around the subject, camera holding distance and height. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 45.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. rodeo arena — an oval dirt track with a bucking bull and a mounted rider, chutes at one end, a stage facing the arena and VIP boxes along the sides. THERE ARE NO GRANDSTAND BLEACHERS around this arena: only the track, the side boxes and the facing stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. one bucking bull, 6 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 26 m above the ground, roughly 85 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 100.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the bucking bull and mounted rider mid-buck seen from the arena rail, dust up, the crowd's hats and shoulders in the near foreground. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. one bucking bull, 6 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 5.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the rider's gloved hand gripping the bull rope and his spurred boot against the bull's flank, dust hanging in the low sun. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Arena de Rodeio",
+    "letreiro_apoio": "Um diferencial do AGROSHOW",
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P20",
+   "local": "Palco Principal",
+   "titulo_na_tela": null,
+   "diferencial": false,
+   "duracao_s": 7.0,
+   "lente_mm": 24,
+   "movimento": "push-in",
+   "altura_m": 19.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "Ha uma arvore plantada na frente da concha, tapando a boca de cena -- out/concha/frente.png. Ou a arvore sai, ou a concha nao aparece em plano nenhum. E decisao dele.",
+   "cena_3d": "concha permanente construida (porao azul 2,4 m, caixa cenica 8,9 m)",
+   "pasta_de_trabalho": "out/plano-b/P20",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 7.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (4).mp4",
+     "raiz": "quinta",
+     "tc_s": 2.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "o palco existente de frente, em SOL RASANTE: estrutura branca sobre base azul, nao madeira. E a melhor luz do lote 01 e a que casa com o HDRI do filme. No mesmo quadro, grama proxima e uma pessoa em pe dando escala.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _4_\\quadros\\q012_00-00-02.jpg",
+     "thumb": "thumbs/1-4/q012_00-00-02.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _4_\\quadros\\q013_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 72.6,
+       "thumb": "thumbs/1-4/q013_00-00-02.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _4_\\quadros\\q014_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 63.8,
+       "thumb": "thumbs/1-4/q014_00-00-02.jpg"
+      }
+     ],
+     "id": "1-4__q012_00-00-02",
+     "tc_do_arquivo": "00:00:02",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 68.9,
+     "tier": "parecido",
+     "periodo": "dia"
+    },
+    {
+     "video": "IMG_9133.MOV",
+     "raiz": "brutos",
+     "tc_s": 4.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "o palco fixo da bacia vazio e de dia, quatro angulos dentro da janela. E a concha que entrou na cena em 15/08.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\IMG_9133\\quadros\\q004_00-00-04.jpg",
+     "thumb": "thumbs/img-9133/q004_00-00-04.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9133\\quadros\\q003_00-00-03.jpg",
+       "tc": "00:00:03",
+       "nota": 46.4,
+       "thumb": "thumbs/img-9133/q003_00-00-03.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\IMG_9133\\quadros\\q005_00-00-05.jpg",
+       "tc": "00:00:05",
+       "nota": 48.3,
+       "thumb": "thumbs/img-9133/q005_00-00-05.jpg"
+      }
+     ],
+     "id": "img-9133__q004_00-00-04",
+     "tc_do_arquivo": "00:00:04",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 54.0,
+     "tier": "bom",
+     "periodo": "dia"
+    },
+    {
+     "video": "DJI_20251127184447_0110_D.MP4",
+     "raiz": "brutos",
+     "tc_s": 2.0,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "palco de EVENTO montado e vazio, e na frente dele o esquema real dos camarotes: deck de madeira modular, gradil branco, terreo, SEM ARQUIBANCADA. Prova por imagem da restricao 1.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127184447_0110_D\\quadros\\q005_00-00-02.jpg",
+     "thumb": "thumbs/dji-20251127184447-0110-d/q005_00-00-02.jpg",
+     "alternativas": [
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127184447_0110_D\\quadros\\q006_00-00-02.jpg",
+       "tc": "00:00:02",
+       "nota": 66.2,
+       "thumb": "thumbs/dji-20251127184447-0110-d/q006_00-00-02.jpg"
+      },
+      {
+       "arquivo": "F:\\Extração quadros expo 2025\\DJI_20251127184447_0110_D\\quadros\\q003_00-00-01.jpg",
+       "tc": "00:00:01",
+       "nota": 58.6,
+       "thumb": "thumbs/dji-20251127184447-0110-d/q003_00-00-01.jpg"
+      }
+     ],
+     "id": "dji-20251127184447-0110-d__q005_00-00-02",
+     "tc_do_arquivo": "00:00:02",
+     "w": 1512,
+     "h": 2688,
+     "em_pe": true,
+     "nota": 64.2,
+     "tier": "bom",
+     "periodo": "fim de tarde"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. main stage at dusk, a performer singing, stage lighting on, the crowd below with hands raised. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 19 m above the ground, roughly 38 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 20.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. main stage at dusk, a performer singing, stage lighting on, the crowd below with hands raised. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 19 m above the ground, roughly 38 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 75.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the performer at the front of the stage with the crowd's raised hands in the foreground, stage lights on. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 340.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the singer at the microphone lit warm from the side, the stage lighting rig soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": null,
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P21",
+   "local": "'Aqui sera um grande balcao de negocios' -- subida final",
+   "titulo_na_tela": null,
+   "diferencial": false,
+   "duracao_s": 7.0,
+   "lente_mm": 24,
+   "movimento": "subida",
+   "altura_m": 48.0,
+   "estado": "PRONTO",
+   "porque_o_estado": "tem placa em disco e nenhum bloqueio",
+   "bloqueio": null,
+   "cena_3d": "subida de 15 a 48 m sobre a arena; e a assinatura do filme",
+   "pasta_de_trabalho": "out/plano-b/P21",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 7.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 7.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "1 (3).mp4",
+     "raiz": "quinta",
+     "tc_s": 30.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "nadir alto com o recinto INTEIRO dentro do quadro. E o unico quadro que mostra a coisa toda de uma vez.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _3_\\quadros\\q044_00-00-30.jpg",
+     "thumb": "thumbs/1-3/q044_00-00-30.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _3_\\quadros\\q045_00-00-30.jpg",
+       "tc": "00:00:30",
+       "nota": 55.1,
+       "thumb": "thumbs/1-3/q045_00-00-30.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _3_\\quadros\\q043_00-00-29.jpg",
+       "tc": "00:00:29",
+       "nota": 42.5,
+       "thumb": "thumbs/1-3/q043_00-00-29.jpg"
+      }
+     ],
+     "id": "1-3__q044_00-00-30",
+     "tc_do_arquivo": "00:00:30",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 41.4,
+     "tier": "parecido",
+     "periodo": "dia"
+    },
+    {
+     "video": "1 (11).mp4",
+     "raiz": "quinta",
+     "tc_s": 20.0,
+     "papel": "placa-base",
+     "confianca": "confirmado",
+     "porque": "sobe do predio redondo e abre para o recinto com as TENDAS BRANCAS montadas -- e o unico aereo do lote com evento em pe.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _11_\\quadros\\q083_00-00-20.jpg",
+     "thumb": "thumbs/1-11/q083_00-00-20.jpg",
+     "alternativas": [
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _11_\\quadros\\q084_00-00-20.jpg",
+       "tc": "00:00:20",
+       "nota": 73.7,
+       "thumb": "thumbs/1-11/q084_00-00-20.jpg"
+      },
+      {
+       "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\Brutos Expo\\agroshow extrator somente\\extracao\\1 _11_\\quadros\\q085_00-00-20.jpg",
+       "tc": "00:00:20",
+       "nota": 53.5,
+       "thumb": "thumbs/1-11/q085_00-00-20.jpg"
+      }
+     ],
+     "id": "1-11__q083_00-00-20",
+     "tc_do_arquivo": "00:00:20",
+     "w": 3840,
+     "h": 2160,
+     "em_pe": false,
+     "nota": 55.1,
+     "tier": "parecido",
+     "periodo": "dia"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. high wide aerial of the whole fairground at dusk, every area lit, tents, pavilions, the arena and the show field all readable at once. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 48 m above the ground, roughly 132 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow vertical crane-up, camera rising steadily while holding the subject centred. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 27.0,
+      "lente_mm": 24,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. high wide aerial of the whole fairground at dusk, every area lit, tents, pavilions, the arena and the show field all readable at once. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 48 m above the ground, roughly 132 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 82.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. groups of people talking business across the grounds — handshakes beside machinery, folders and phones out. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 347.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. two men shaking hands over a signed sheet on a truck bonnet, the fairground soft and busy behind them. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": null,
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  },
+  {
+   "plano": "P22",
+   "local": "Saida pelo portal",
+   "titulo_na_tela": "Aqui será um grande balcão de negócios",
+   "diferencial": false,
+   "duracao_s": 6.0,
+   "lente_mm": 35,
+   "movimento": "push-in",
+   "altura_m": 12.0,
+   "estado": "PRONTO COM RESSALVA",
+   "porque_o_estado": "tem placa em disco, mas ha bloqueio registrado",
+   "bloqueio": "O mesmo do P02, e pesa mais aqui: nao existe nenhuma vista lateral, traseira, de topo ou de perto do portal. Para modelar em 3D, uma frontal e pouco.",
+   "cena_3d": "mesmo portal do P02",
+   "pasta_de_trabalho": "out/plano-b/P22",
+   "clipes": [
+    {
+     "n": 1,
+     "escala": "geral",
+     "rotulo": "PLANO GERAL",
+     "duracao_s": 6.0,
+     "primeiro_quadro": "a imagem geral do plano",
+     "de_s": 0,
+     "ate_s": 6.0
+    }
+   ],
+   "placas": [
+    {
+     "video": "WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
+     "raiz": "foto_portal",
+     "tc_s": null,
+     "papel": "forma",
+     "confianca": "confirmado",
+     "porque": "restricao 6: o plano final sai pelo portal. A mesma e unica foto.",
+     "resolvido": true,
+     "motivo_nao_resolvido": null,
+     "arquivo": "E:\\Projetos todos\\Mapa - agroshow\\WhatsApp Image 2026-08-12 at 13.15.32.jpeg",
+     "thumb": null,
+     "alternativas": [],
+     "fora_do_acervo": true,
+     "nota": null,
+     "tier": null,
+     "periodo": "foto do cliente, nao e footage"
+    }
+   ],
+   "prompts": {
+    "imagem": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same rustic timber barn portal seen from inside the grounds, visitors walking out through it, night falling behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 12 m above the ground, roughly 26 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.",
+    "imagem_negativo": "cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena",
+    "animacao": "slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 6.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.",
+    "escalas": [
+     {
+      "escala": "geral",
+      "rotulo": "PLANO GERAL",
+      "faixa_m": "> 30 m",
+      "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+      "azimute_deg": 240.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same rustic timber barn portal seen from inside the grounds, visitors walking out through it, night falling behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 12 m above the ground, roughly 26 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "medio",
+      "rotulo": "PLANO MÉDIO",
+      "faixa_m": "8 a 30 m",
+      "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+      "azimute_deg": 295.0,
+      "lente_mm": 35,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors walking out through the timber portal at dusk, backs to camera, the last light behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440."
+     },
+     {
+      "escala": "detalhe",
+      "rotulo": "DETALHE",
+      "faixa_m": "≤ 8 m",
+      "papel": "vende: textura, mão, rosto, produto, o material de perto",
+      "azimute_deg": 200.0,
+      "lente_mm": 50,
+      "prompt": "Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the timber portal's hanging sign lit from below at dusk, the grain of the board and the lantern glow close. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440."
+     }
+    ],
+    "letreiro_na_tela": "Aqui será um grande balcão de negócios",
+    "letreiro_apoio": null,
+    "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, depois. IA geradora escreve texto torto."
+   }
+  }
+ ]
+}

@@ -28,7 +28,7 @@ Isso roda em qualquer Python — não precisa de `bpy` nem de GPU.
 
 ## A decupagem
 
-22 planos, 5.280 quadros, **176 s (2,9 min) a 30 fps.** Os 19 títulos do
+22 planos, 5.475 quadros, **182,5 s (3,0 min) a 30 fps.** Os 19 títulos do
 `docs/BRIEFING.md` mapeiam 1:1 nos planos com título; os que não têm título
 (P15, P22) são continuação do plano anterior, sem letreiro novo.
 
@@ -36,26 +36,26 @@ Isso roda em qualquer Python — não precisa de `bpy` nem de GPU.
 |---|---|---|---|---|---|---|
 | P01 | Estacionamento | subida | 24 mm | 7.0 s | 2.8 | planta |
 | P02 | É daqui que sai o alimento que sustenta o mundo | push-in | 35 mm | 9.0 s | 2.1 | planta |
-| P03 | Pavilhão 1 — Indústria, Comércio e Prestação de Serviços | orbita | 35 mm | 6.0 s | 1.7 | planta |
-| P04 | Praça de Alimentação Coberta | push-in | 35 mm | 7.0 s | 2.0 | planta |
-| P05 | Pavilhão 2 — Indústria, Comércio e Prestação de Serviços | orbita | 35 mm | 5.0 s | 1.7 | planta |
-| P06 **·** | Mercado do Produtor | push-in | 50 mm | 17.5 s | 2.0 | planta |
-| P07 | Agroindústrias | travelling | 35 mm | 5.0 s | 1.6 | planta |
-| P08 **·** | Café Colonial | push-in | 50 mm | 13.5 s | 2.0 | planta |
+| P03 | Pavilhão 1 — Indústria, Comércio e Prestação de Serviços | push-in | 24 mm | 6.0 s | 2.1 | planta |
+| P04 | Praça de Alimentação Coberta | push-in | 24 mm | 7.0 s | 1.9 | planta |
+| P05 | Pavilhão 2 — Indústria, Comércio e Prestação de Serviços | push-in | 24 mm | 5.0 s | 2.0 | planta |
+| P06 **·** | Mercado do Produtor | push-in | 24 mm | 17.5 s | 1.9 | planta |
+| P07 | Agroindústrias | push-in | 24 mm | 5.0 s | 2.1 | planta |
+| P08 **·** | Café Colonial | push-in | 24 mm | 13.5 s | 1.6 | planta |
 | P09 | Praça de Alimentação Aberta | sobrevoo | 35 mm | 9.0 s | 6.0 | planta |
-| P10 | Recinto de Leilões | push-in | 35 mm | 8.0 s | 2.0 | planta |
+| P10 | Recinto de Leilões | push-in | 35 mm | 8.0 s | 1.9 | planta |
 | P11 | Exposição de Animais | sobrevoo | 35 mm | 11.0 s | 6.3 | planta |
-| P12 | Pista de Julgamentos | orbita | 50 mm | 5.0 s | 1.7 | planta |
+| P12 | Pista de Julgamentos | orbita | 35 mm | 5.0 s | 1.7 | planta |
 | P13 | Expositores Externos | sobrevoo | 35 mm | 5.5 s | 6.4 | planta |
-| P14 **·** | Fazendinha | push-in | 35 mm | 12.0 s | 1.9 | planta |
+| P14 **·** | Fazendinha | sobrevoo | 24 mm | 18.5 s | 6.4 | planta |
 | P15 | — | orbita | 50 mm | 7.0 s | 1.8 | planta |
 | P16 | Máquinas, Equipamentos e Implementos Agrícolas | sobrevoo | 35 mm | 6.0 s | 5.9 | planta |
-| P17 | Veículos e Motos Náuticas | travelling | 50 mm | 5.0 s | 1.4 | planta |
-| P18 | Área de Shows | sobrevoo | 35 mm | 5.5 s | 5.3 | planta |
-| P19 **·** | Arena de Rodeio | orbita | 35 mm | 12.0 s | 1.8 | planta |
-| P20 | Palco Principal | push-in | 50 mm | 7.0 s | 1.8 | planta |
+| P17 | Veículos e Motos Náuticas | travelling | 24 mm | 5.0 s | 1.3 | planta |
+| P18 | Área de Shows | sobrevoo | 35 mm | 5.5 s | 5.1 | planta |
+| P19 **·** | Arena de Rodeio | orbita | 35 mm | 12.0 s | 2.1 | planta |
+| P20 | Palco Principal | push-in | 24 mm | 7.0 s | 1.9 | planta |
 | P21 | Aqui será um grande balcão de negócios | subida | 24 mm | 7.0 s | 5.1 | planta |
-| P22 | — | push-in | 35 mm | 6.0 s | 2.0 | planta |
+| P22 | — | push-in | 35 mm | 6.0 s | 2.1 | planta |
 
 > **Refeita em 15/08/2026, à noite.** Sete planos mudaram de duração porque
 > o reenquadramento afastou a câmera e a velocidade saiu da faixa — e a escolha
@@ -69,6 +69,17 @@ Isso roda em qualquer Python — não precisa de `bpy` nem de GPU.
 > MOSTRA o lugar que promete — 9 amostras ao longo do movimento, 45 raios pelo
 > frustum, e reprova quando **uma única superfície** toma mais de 40% do quadro.
 > O conferidor de velocidade e o de câmera não viam isso.
+
+> **Correção de 16/08/2026.** A tabela acima estava congelada num estado
+> anterior ao `data/planos.json`: ela imprimia **50 mm** em P06, P08 e P12, e
+> **órbita** em P03/P05, quando o JSON já dizia **24 mm** e **push-in**. Também
+> declarava 5.280 quadros / 176 s contra os **5.475 / 182,5 s** que a decupagem
+> soma hoje — divergência já notada em `RETOMAR-1508-RENDER.md`, e que quase
+> encodou filme curto. Tabela e total foram **regerados de `data/planos.json`**
+> por `scripts/planos.py --tabela`. **A fonte é o JSON; este documento é
+> impressão dele.** Os outros lugares que ainda dizem 5.280 (`README.md`,
+> `ESTADO.md`) não foram tocados aqui — são texto de contexto, não decisão de
+> plano.
 
 **·** marca os quatro diferenciais (P06 Mercado do Produtor, P08 Café
 Colonial, P14/P15 Fazendinha, P19 Arena de Rodeio) — todos com 9–16 s de tela

@@ -106,3 +106,109 @@ por área pavimentada.
 alternativa honesta é medir o asfalto num quadro do footage pelo mesmo método do
 `medir_materiais.py` — é meia hora de máquina, não é pesquisa. Fica esperando a
 decisão dele sobre se vale.
+
+---
+
+## P06 · Três das cinco placas novas do P19 não sei de que voo são
+
+**O contexto.** Em 16/08 ele subiu **cinco quadros** como placa do P19 (Arena de
+Rodeio), pelo painel de upload. São melhores do que as três do catálogo, e
+**resolvem parte do bloqueio escrito no P19**: aquele texto dizia que o acervo
+não tem a arena montada. Continua sem brete e sem porteira de partida — mas
+agora tem, **de foto e não de suposição**, a bacia de terra, o palco fixo de
+frente e a **ausência de arquibancada**, que é a restrição dura do cliente.
+
+O que elas mostram, olhando:
+
+| | |
+|---|---|
+| uma | a bacia **em dia de evento** — palco de truss com painel, balões, tendas brancas de pico, gradil em volta da pista. Sol a pino, céu azul duro: **luz errada para o filme**, mas é a única leitura de "como o evento se veste" |
+| quatro | o **palco fixo** — concha branca, base azul, cobertura de aço vermelha — com a bacia de terra riscada de rastro de pneu. **Fim de tarde, sol baixo, sombra longa**: é a luz que `data/luz.json` declara (27/11, 18:15) |
+
+**A dúvida.** O painel devolve o nome do arquivo, não o caminho. Cruzei os cinco
+nomes contra `data/acervo-quadros.json` e **só dois fecham em um voo só**:
+
+| nome | caminho | como sei |
+|---|---|---|
+| `q052_00-00-08.jpg` | `E:\…\extracao\1 _4_\quadros\q052_00-00-08.jpg` | candidato único |
+| `q079_00-00-12.jpg` | `E:\…\extracao\1 _4_\quadros\q079_00-00-12.jpg` | candidato único |
+| `q015_00-00-12.jpg` | `E:\…\extracao\1 _2_\quadros\q015_00-00-12.jpg` | 2 candidatos; o outro é noturno e estas não são |
+
+Os outros dois **não fecham**: `q007_00-00-01.jpg` tem **28** candidatos e
+`q014_00-00-02.jpg` tem **15**, espalhados por voos diferentes. O melhor palpite
+para os dois é a família `DJI_0953_stabilized` (fim de tarde, nota 88,5 no
+primeiro), mas **é palpite, e palpite não vira caminho no projeto**.
+
+Convém notar que `1 (4)` é justamente o voo onde `docs/MATERIAIS-referencia.md`
+mediu a pessoa de 1,70 m ao lado do palco fixo — as placas novas caem no mesmo
+material que já serve de gabarito de escala.
+
+**O que ela trava.** Nada da geração: os cinco assets já estão na Artlist e o
+prompt já foi montado em cima deles. Trava só **gravar a procedência** em
+`data/quadros-ia.json`, e procedência é o que este projeto não inventa.
+
+**PROVISÓRIO — não escrevi nenhum dos cinco em `quadros-ia.json`.** Motivo: dois
+dos caminhos seriam chute, e `quadros-ia.json` é a fonte das âncoras conferidas
+a olho. Uma linha errada ali contamina a esteira inteira, porque
+`scripts/plano_b.py` resolve tudo a partir dela.
+
+**O conserto é de trinta segundos, e é dele:** abrir os dois arquivos que ele
+subiu e dizer de que pasta saíram. Com isso os cinco entram como placa do P19,
+com `confianca: confirmado` e `papel: forma`, e o bloqueio do P19 pode ser
+reescrito para dizer o que passou a existir.
+
+---
+
+## P07 · O portal está construído, e a frase dele não é a frase do projeto
+
+**O que apareceu.** Em 16/08 ele mandou uma foto do **portal já executado** —
+madeira tratada, tabuado vertical, empena de celeiro, ferragem e lampiões, com
+marcas de ferro-de-marcar queimadas na fachada.
+
+**Isto derruba uma premissa do projeto.** `PENDENCIAS.md` P01 diz, e a decisão do
+Q1 foi tomada em cima disso: *"o portal ainda não foi construído no parque — a
+foto é o conceito que ele mandou, não um registro"*. **Era verdade em 15/08 e não
+é mais.** O Q1 inteiro foi enquadrado por casamento de perspectiva contra a foto
+de conceito, e foi registrado ali que aquela câmera é a única sem qualidade de
+bundle adjustment. Agora existe o prédio, e com ele a chance de fotografá-lo de
+quantos ângulos ele quiser — que é exatamente o que o P01 pedia e não tinha.
+
+**A dúvida, e ela é de rejeição.** A fachada executada diz:
+
+> **Daqui vem o alimento que sustenta o mundo.**
+
+`data/letreiros.json`, no P02 e ecoado no P22, diz:
+
+> **É daqui que sai o alimento que sustenta o mundo**
+
+marcado `LITERAL -- ESTADO.md manda nao reescrever`, com procedência
+`AUDIO 3 [00:36] e [00:40], repetida por ele duas vezes seguidas`.
+
+São **frases diferentes**. A do JSON é a que ele ditou; a da madeira é a que a
+arquiteta executou. O filme **abre e fecha nesse portal**, e o letreiro de tela
+do P02 vai aparecer no mesmo quadro que a placa real. Duas redações do mesmo mote
+lado a lado leem como erro de revisão.
+
+**O que ela trava.** O letreiro do P02 e do P22 — os dois planos que abrem e
+fecham. Não trava a imagem: o prompt não escreve texto, de propósito.
+
+**PROVISÓRIO — não mexi em `letreiros.json`.** Motivo: aquele campo tem
+procedência de áudio e uma ordem explícita de não reescrever. Trocar a frase por
+causa de uma foto seria eu decidir contra uma instrução escrita dele, e a regra
+da casa é que o que ele mandou gravar só muda com ele.
+
+**As três saídas, e é escolha dele:**
+1. **manda a madeira** — o letreiro de tela passa a repetir a fachada, e o quadro
+   fica coerente. Custa reescrever `letreiros.json` e anotar que o áudio foi
+   vencido pela obra;
+2. **manda o áudio** — a tela mantém a frase ditada e a fachada mostra a outra.
+   Só funciona se o P02 **não** enquadrar a placa legível;
+3. **a tela não repete a fachada** — o letreiro do P02 vira outra coisa, e a frase
+   fica por conta da madeira, que já a diz. É a mais limpa das três, e a única que
+   não põe duas redações no mesmo quadro.
+
+**E um pedido barato que ficou muito mais barato:** o `FILA-CENA.md` pedia *"uma
+foto de celular da parede do portal a 2 metros"* para resolver a madeira ampliada
+14×. O prédio existe e ele esteve lá. Junto com ela, as 4 a 6 tomadas que o
+`quadros-ia.json` já pedia — três quartos dos dois lados, lateral pura, detalhe do
+tabuado e da ferragem — resolvem o P01, o P02, o P22 e o Q1 de uma vez.

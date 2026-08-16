@@ -19,6 +19,30 @@ para títulos, restrições e o LOOK LOCK das imagens de apoio.
 6. `.claude/agents/render-agroshow.md` — agente diretor técnico da cena 3D
    (`docs/AGENTE-2.5D-suspenso.md` guarda o texto antigo, do caminho 2.5D)
 
+## Caminho B — quadros gerados por IA a partir do footage
+
+Esteira paralela à cena 3D: o quadro real do acervo entra numa IA geradora de
+imagem, a imagem aprovada entra numa IA de vídeo, e o clipe entra na edição.
+
+```bash
+python3 scripts/plano_b.py --criar-pastas
+```
+
+Escreve `PLANO-B.md` (o runbook, na ordem de trabalho), `data/plano-b.json` e
+**`out/plano-b/PLANO-B.html`** — a página que resolve o "não acho o quadro que
+eu quero": um cartão por plano, na ordem do filme, com a placa em disco pelo
+**caminho absoluto**, os prompts de imagem e de movimento prontos para copiar,
+e a pasta onde salvar o que voltar.
+
+`out/` não versiona, então a página e as pastas nascem localmente — e é o certo:
+os caminhos são de `F:` e `E:`, e as miniaturas vêm de `out/acervo/thumbs/`.
+**As 46 placas resolvem para arquivo em disco**; P17, que não tinha imagem
+nenhuma, usa a das máquinas do P16 como placa emprestada, por ordem dele.
+
+`docs/ONDE-GERAR.md` diz **onde** gerar: o estado de cada conta, o custo por
+geração, a saída grátis pelo Google AI Studio, a regra de prompt
+imagem-para-imagem e os cinco itens a conferir antes de animar.
+
 ## Gerar a cena 3D
 
 ```bash
