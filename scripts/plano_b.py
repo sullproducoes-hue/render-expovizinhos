@@ -183,27 +183,193 @@ PISO_CLIPE_S = 4.0
 
 
 def cortar_em_clipes(duracao_s: float | None) -> list[dict]:
-    """Um plano vira N clipes que cabem no teto da IA de video.
+    """A duracao do plano se divide entre as TOMADAS que ele comporta.
 
-    Divide em partes iguais -- parte curta demais no fim fica com cara de
-    sobra, e o corte aparece. Encadeia pelo ultimo quadro: o clipe seguinte
-    nasce do frame final do anterior, que e o que segura a continuidade.
+    Ordem dele de 16/08 -- geral, medio e detalhe por bloco -- muda a conta. Um
+    plano nao e mais UMA tomada longa: sao ate tres, e o corte entre elas e o que
+    da ritmo. Cada tomada e um clipe proprio, gerado da sua propria imagem.
+
+    Quantas cabem e aritmetica, nao gosto: o Seedance nao gera abaixo de 4 s,
+    entao um plano de 5 s comporta UMA tomada e um de 12 s comporta tres. Plano
+    curto continua sendo uma tomada so -- picar 5 s em tres da 1,7 s cada, que
+    nao e corte, e piscada.
+
+    Efeito colateral bom: dividido assim, **nenhuma tomada passa dos 12 s**. O
+    teto que obrigava P06, P08 e P14 a virar dois clipes encadeados deixou de
+    morder. A guarda continua no codigo porque duracao muda, e no dia que mudar
+    e melhor a conta reclamar do que o Seedance recusar.
     """
     if not duracao_s:
         return []
-    if duracao_s <= TETO_CLIPE_S:
-        return [{"n": 1, "de_s": 0.0, "ate_s": duracao_s,
-                 "duracao_s": round(duracao_s, 1), "primeiro_quadro": "a imagem gerada do plano"}]
-    n = int(-(-duracao_s // TETO_CLIPE_S))          # teto da divisao
+    n = max(1, min(len(ESCALAS), int(duracao_s // PISO_CLIPE_S)))
     passo = duracao_s / n
-    return [{
-        "n": i + 1,
-        "de_s": round(i * passo, 1),
-        "ate_s": round((i + 1) * passo, 1),
-        "duracao_s": round(passo, 1),
-        "primeiro_quadro": ("a imagem gerada do plano" if i == 0
-                            else f"o ULTIMO quadro do clipe {i}"),
-    } for i in range(n)]
+    clipes = []
+    for i in range(n):
+        esc = ESCALAS[i]
+        if passo > TETO_CLIPE_S:                     # guarda: nao deve acontecer hoje
+            sub = int(-(-passo // TETO_CLIPE_S))
+            for j in range(sub):
+                clipes.append({
+                    "n": len(clipes) + 1, "escala": esc["id"], "rotulo": esc["rotulo"],
+                    "duracao_s": round(passo / sub, 1),
+                    "primeiro_quadro": (f"a imagem {esc['id']} do plano" if j == 0
+                                        else f"o ULTIMO quadro do clipe {len(clipes)}"),
+                })
+        else:
+            clipes.append({
+                "n": i + 1, "escala": esc["id"], "rotulo": esc["rotulo"],
+                "duracao_s": round(passo, 1),
+                "primeiro_quadro": f"a imagem {esc['id']} do plano",
+            })
+    for c, ini in zip(clipes, [sum(x["duracao_s"] for x in clipes[:i])
+                              for i in range(len(clipes))]):
+        c["de_s"] = round(ini, 1)
+        c["ate_s"] = round(ini + c["duracao_s"], 1)
+    return clipes
+
+
+# AS TRES ESCALAS. Ordem dele, 16/08: "esse ficou plano geral, quero um mediano
+# e um detalhes de cada bloco, com angulos diferentes".
+#
+# Nao e invencao nova: e a LEI DO DETALHAMENTO que FILA-CENA.md ja escreveu para
+# a cena 3D -- <= 8 m HERO, 8-30 m MEDIO, > 30 m FUNDO -- aplicada agora ao
+# enquadramento da IA em vez da densidade de malha. A mesma regua nos dois planos.
+#
+# O AZIMUTE MUDA JUNTO, e isso nao e enfeite. Tres escalas do mesmo ponto de
+# vista cortam como zoom, e zoom em corte parece erro. Angulo diferente e o que
+# faz o corte ler como outra camera -- que e o que ele pediu.
+ESCALAS = [
+    {
+        "id": "geral",
+        "rotulo": "PLANO GERAL",
+        "faixa_m": "> 30 m",
+        "delta_azimute_deg": 0,
+        "papel": "estabelece o lugar: onde estou, qual o tamanho disto",
+        "camera_en": ("from a drone {alt:.0f} m above the ground, roughly {dist:.0f} m "
+                      "from the subject, looking down at a shallow angle — the whole "
+                      "area reads at once, the ground plane still reads, this is not "
+                      "a top-down map view"),
+        "lente_mm": None,          # usa a lente declarada do plano
+    },
+    {
+        "id": "medio",
+        "rotulo": "PLANO MÉDIO",
+        "faixa_m": "8 a 30 m",
+        "delta_azimute_deg": 55,
+        "papel": "mostra a atividade: o que as pessoas estão fazendo aqui",
+        "camera_en": ("from a low drone about 12 m above the ground, roughly 25 m from "
+                      "the subject, gentle downward tilt — people read full-figure, "
+                      "faces and gestures are legible, the activity is the subject and "
+                      "the wider site is only context at the edges of frame"),
+        "lente_mm": 35,
+    },
+    {
+        "id": "detalhe",
+        "rotulo": "DETALHE",
+        "faixa_m": "≤ 8 m",
+        "delta_azimute_deg": -40,
+        "papel": "vende: textura, mão, rosto, produto, o material de perto",
+        "camera_en": ("at eye level, camera about 1,6 m above the ground and 3 to 6 m "
+                      "from the subject, shallow depth of field with the background "
+                      "falling soft — a person's point of view standing right there, "
+                      "NOT an aerial and NOT a drone shot"),
+        "lente_mm": 50,
+    },
+]
+
+# O QUE O MEDIO E O DETALHE OLHAM, bloco a bloco. Sai do audio do cliente
+# (docs/brief-audios.md) e do povoamento: o detalhe tem que ser a coisa que
+# aquele bloco VENDE, nao um recorte qualquer do plano geral.
+RECORTE_EN = {
+    "P01": ("families arriving on foot between the parked pickups, carrying "
+            "folding chairs and cool boxes, walking toward the entrance",
+            "a mud-splashed pickup wheel and boot stepping down onto the gravel, "
+            "the entrance banner soft in the background"),
+    "P02": ("a family walking through the timber portal opening, looking up at "
+            "the hanging sign as they pass under it",
+            "the weathered vertical board cladding and its wrought-iron lantern "
+            "and hardware, low sun raking across the grain of the wood"),
+    "P03": ("visitors at a trade booth inside the pavilion, an exhibitor leaning "
+            "over the counter explaining a product",
+            "two hands closing a handshake over a booth counter, brochures and a "
+            "branded banner soft behind"),
+    "P04": ("families seated at the long tables of the covered food court, plates "
+            "and drinks on the boards, queue at the service counters behind",
+            "a plate of grilled meat, rice and salad being set down on the table, "
+            "steam rising, hands reaching in"),
+    "P05": ("visitors walking the central aisle between machinery stands, one "
+            "group stopped in front of a display",
+            "a manufacturer's badge and painted sheet metal on a display machine, "
+            "reflections of the low sun on the paint"),
+    "P06": ("farmers behind the market stalls handing produce to buyers across "
+            "the counter, crates stacked at their feet",
+            "hands lifting a wooden crate of tomatoes and greens, a wheel of "
+            "cheese and jars of preserves on the counter beside it"),
+    "P07": ("visitors at an agro-industry tasting counter, a producer pouring a "
+            "sample and talking them through it",
+            "a small glass of cachaça and slices of salami and cheese on a wooden "
+            "board, a hand reaching for one"),
+    "P08": ("families seated along the long colonial café tables, plates passing "
+            "hand to hand, warm hanging lights above",
+            "the table top loaded with breads, cakes, cured meats, cheese and a "
+            "cup of coffee being poured, close and warm"),
+    "P09": ("people queuing at the food trucks under the trees, others eating at "
+            "picnic tables in dappled shade",
+            "a hand taking a paper-wrapped sandwich across the food-truck hatch, "
+            "the tree canopy soft behind"),
+    "P10": ("buyers seated with catalogues in the tiered seating facing the sale "
+            "ring, one raising a hand to bid, a single animal in the ring",
+            "a raised bidding hand and a catalogue on a knee, the auctioneer's "
+            "booth soft in the background"),
+    "P11": ("handlers grooming and washing cattle in the open barn, animals tied "
+            "at the rail with straw underfoot",
+            "a handler's hand running a brush down the flank of a bull, hide and "
+            "straw in sharp texture, the barn falling soft behind"),
+    "P12": ("cattle led on halters in a line across the grass judging arena, "
+            "judges walking between them, spectators along the rail",
+            "a gloved hand on a halter rope beside the animal's head, the judge's "
+            "clipboard soft behind"),
+    "P13": ("visitors walking between the outdoor stands and marquees, exhibitors "
+            "talking to them beside the equipment on the grass",
+            "a stand banner and product laid out on a trestle table, a visitor's "
+            "hand picking one up"),
+    "P14": ("children at the low wooden fence of the children's farm feeding the "
+            "sheep and goats, parents standing behind them watching",
+            "a small child's hand holding out feed to a goat's muzzle over the "
+            "fence rail, warm and close"),
+    "P15": ("children riding ponies led at a walk around the ring by a handler, "
+            "a border collie working the sheep behind them",
+            "a child's boots in the stirrups and small hands gripping the saddle "
+            "horn, the pony's mane in the low sun"),
+    "P16": ("buyers walking the line of tractors and harvesters, one climbing the "
+            "steps into a cab while a salesman talks from the ground",
+            "the treads of a huge tractor tyre with a person standing beside it "
+            "for scale, manufacturer's paint and badge sharp"),
+    "P17": ("buyers walking the line of pickups and boats on trailers, a dealer "
+            "opening a truck door for a couple",
+            "a boat's outboard motor and polished hull on its trailer, low sun "
+            "reflecting off the paint"),
+    "P18": ("the crowd on the show ground at dusk, hands up, faces lit by the "
+            "stage lighting from the front",
+            "a few faces in the front of the crowd lit warm by the stage lights, "
+            "hands raised, everything behind falling into bokeh"),
+    "P19": ("the bucking bull and mounted rider mid-buck seen from the arena rail, "
+            "dust up, the crowd's hats and shoulders in the near foreground",
+            "the rider's gloved hand gripping the bull rope and his spurred boot "
+            "against the bull's flank, dust hanging in the low sun"),
+    "P20": ("the performer at the front of the stage with the crowd's raised hands "
+            "in the foreground, stage lights on",
+            "the singer at the microphone lit warm from the side, the stage "
+            "lighting rig soft behind"),
+    "P21": ("groups of people talking business across the grounds — handshakes "
+            "beside machinery, folders and phones out",
+            "two men shaking hands over a signed sheet on a truck bonnet, the "
+            "fairground soft and busy behind them"),
+    "P22": ("visitors walking out through the timber portal at dusk, backs to "
+            "camera, the last light behind them",
+            "the timber portal's hanging sign lit from below at dusk, the grain of "
+            "the board and the lantern glow close"),
+}
 
 
 MOVIMENTO_EN = {
@@ -358,6 +524,56 @@ def povoar_en(plano_id: str, povoamento: dict) -> str:
     return ", ".join(pedacos)
 
 
+def montar_escalas(plano: dict, povoamento: dict, cam: dict) -> list[dict]:
+    """Um plano vira TRES imagens: geral, medio e detalhe, de angulos diferentes.
+
+    O geral herda a camera declarada do plano. O medio e o detalhe descem para as
+    faixas da LEI DO DETALHAMENTO e giram o azimute, porque tres escalas do mesmo
+    ponto de vista cortam como zoom.
+
+    O DETALHE nao leva o povoamento nem as tendas: a 3-6 m nao cabe multidao no
+    quadro, e mandar "roughly 55 visitors" num plano de mao e o jeito mais rapido
+    de a IA encher o fundo de gente derretida.
+    """
+    pid = plano["id"]
+    az = (cam.get("azimute_deg") or 0)
+    alt = cam.get("alt_fim_m") or cam.get("alt_ini_m") or 20
+    dist = cam.get("dist_fim_m") or cam.get("dist_ini_m") or 60
+    medio_en, detalhe_en = RECORTE_EN.get(pid, ("", ""))
+    gente = povoar_en(pid, povoamento)
+
+    saida = []
+    for esc in ESCALAS:
+        lente = esc["lente_mm"] or plano.get("lente_mm")
+        camera = esc["camera_en"].format(alt=alt, dist=dist)
+
+        if esc["id"] == "geral":
+            assunto, com_gente, com_tendas = CONTEUDO_EN.get(pid, ""), True, True
+        elif esc["id"] == "medio":
+            assunto, com_gente, com_tendas = medio_en, True, True
+        else:
+            assunto, com_gente, com_tendas = detalhe_en, False, False
+
+        partes = [BASE_EN, assunto]
+        if com_tendas:
+            partes.append(TENDAS_EN)
+        if com_gente and gente:
+            partes.append(gente)
+        partes += [LUZ_EN, f"{lente} mm lens {camera}",
+                   "16:9 horizontal frame, 2560x1440"]
+
+        saida.append({
+            "escala": esc["id"],
+            "rotulo": esc["rotulo"],
+            "faixa_m": esc["faixa_m"],
+            "papel": esc["papel"],
+            "azimute_deg": round((az + esc["delta_azimute_deg"]) % 360, 1),
+            "lente_mm": lente,
+            "prompt": ". ".join(p for p in partes if p) + ".",
+        })
+    return saida
+
+
 def montar_prompt(plano: dict, letreiro: dict | None, povoamento: dict) -> dict:
     pid = plano["id"]
     lente = plano.get("lente_mm")
@@ -403,6 +619,7 @@ def montar_prompt(plano: dict, letreiro: dict | None, povoamento: dict) -> dict:
         "imagem": imagem,
         "imagem_negativo": NEGATIVO_EN,
         "animacao": animacao,
+        "escalas": montar_escalas(plano, povoamento, cam),
         "letreiro_na_tela": (letreiro or {}).get("texto"),
         "letreiro_apoio": (letreiro or {}).get("apoio"),
         "_letreiro_nota": "O letreiro NAO entra no prompt — entra na edicao, "
@@ -484,8 +701,9 @@ def montar() -> dict:
 
     resumo = {
         "planos": len(registros),
+        "imagens_a_gerar": sum(len((r["prompts"] or {}).get("escalas", [])) for r in registros),
         "clipes_a_gerar": sum(len(r["clipes"]) for r in registros),
-        "planos_que_partem_em_dois": sum(1 for r in registros if len(r["clipes"]) > 1),
+        "planos_com_tres_tomadas": sum(1 for r in registros if len(r["clipes"]) == 3),
         "prontos": sum(1 for r in registros if r["estado"] == "PRONTO"),
         "com_ressalva": sum(1 for r in registros if r["estado"] == "PRONTO COM RESSALVA"),
         "sem_placa": sum(1 for r in registros if r["estado"] in ("SEM PLACA", "PLACA NAO RESOLVE")),
@@ -550,20 +768,55 @@ def escrever_md(d: dict) -> str:
     L.append("\n**A imagem gerada é a placa do plano seguinte quando os dois olham o mesmo lugar** "
              "(P14→P15, P19→P20, P02→P22). Isso é o que segura a continuidade do filme.\n")
 
-    L.append(f"\n## O teto de {TETO_CLIPE_S:.0f} s — três planos não cabem num clipe só\n")
-    L.append(f"A IA de vídeo (Seedance V1.5 Pro) gera de {PISO_CLIPE_S:.0f} a "
-             f"{TETO_CLIPE_S:.0f} s por clipe. **{r['planos_que_partem_em_dois']} planos passam "
-             f"disso, e os três são diferenciais** — justamente os que têm mais tela.\n")
-    L.append("\nEles não viram um prompt: viram dois, e o segundo começa no "
-             "**último quadro do primeiro**. Sem isso o corte aparece.\n")
-    L.append("\n| plano | dur. total | vira | cada clipe |")
-    L.append("|---|---|---|---|")
+    L.append("\n## As três escalas — ordem dele, 16/08\n")
+    L.append("> *\"esse ficou plano geral, quero um mediano e um detalhes de cada "
+             "bloco, com ângulos diferentes\"*\n")
+    L.append("\nCada bloco rende **três imagens**, não uma. Não é escala nova "
+             "inventada aqui: é a **LEI DO DETALHAMENTO** que o `FILA-CENA.md` já "
+             "escreveu para a cena 3D, aplicada ao enquadramento da IA.\n")
+    L.append("\n| escala | faixa | lente | ângulo | o que faz |")
+    L.append("|---|---|---|---|---|")
+    for esc in ESCALAS:
+        gira = ("o azimute do plano" if not esc["delta_azimute_deg"]
+                else f"{esc['delta_azimute_deg']:+d}° do plano")
+        L.append(f"| **{esc['rotulo']}** | {esc['faixa_m']} | "
+                 f"{esc['lente_mm'] or 'a do plano'} mm | {gira} | {esc['papel']} |")
+    L.append("\n**O ângulo gira junto, e isso não é enfeite.** Três escalas do "
+             "mesmo ponto de vista cortam como zoom, e zoom em corte parece erro. "
+             "Ângulo diferente é o que faz o corte ler como outra câmera.\n")
+    L.append("\n**O detalhe não leva multidão nem tenda no prompt.** A 3–6 m não "
+             "cabe multidão no quadro, e mandar *\"roughly 55 visitors\"* num plano "
+             "de mão é o jeito mais rápido de encher o fundo de gente derretida.\n")
+
+    L.append("\n### Ângulo se pede na IMAGEM, nunca no vídeo\n")
+    L.append("O Seedance move a câmera **dentro de um plano contínuo** — órbita, "
+             "push-in, sobrevoo. Ele não corta. Pedir \"vários ângulos\" no prompt "
+             "de vídeo devolve câmera à deriva ou morfagem.\n")
+    L.append("\n**Corte é edição, não é movimento de câmera.** Cada ângulo é uma "
+             "imagem própria → um clipe próprio → e o corte acontece na timeline.\n")
+
+    L.append("\n## Quantas tomadas cada plano comporta\n")
+    L.append(f"O Seedance não gera abaixo de **{PISO_CLIPE_S:.0f} s**. Então a "
+             f"duração do plano decide quantas tomadas cabem: plano de 5 s comporta "
+             f"uma, de 12 s comporta três. Picar 5 s em três dá 1,7 s cada — não é "
+             f"corte, é piscada.\n")
+    L.append("\n**Gere sempre as três imagens** de qualquer jeito: as que não "
+             "viram clipe servem de escolha e de reserva se a primeira não fechar.\n")
+    L.append("\n| tomadas | planos | dur. de cada |")
+    L.append("|---|---|---|")
+    from collections import defaultdict
+    porn = defaultdict(list)
     for p in d["planos"]:
-        if len(p["clipes"]) > 1:
-            L.append(f"| **{p['plano']}** {p['local'][:28]} | {p['duracao_s']} s | "
-                     f"{len(p['clipes'])} clipes | {p['clipes'][0]['duracao_s']} s cada |")
-    L.append(f"\nTotal a gerar: **{r['clipes_a_gerar']} clipes** para "
-             f"{r['planos']} planos.\n")
+        porn[len(p["clipes"])].append(p)
+    for n in sorted(porn, reverse=True):
+        ids = " ".join(x["plano"] for x in porn[n])
+        faixa = sorted({x["clipes"][0]["duracao_s"] for x in porn[n]})
+        L.append(f"| **{n}** | {ids} | {faixa[0]} a {faixa[-1]} s |")
+    L.append(f"\n**{r['imagens_a_gerar']} imagens** e **{r['clipes_a_gerar']} clipes** "
+             f"para {r['planos']} planos.\n")
+    L.append(f"\nDividido assim, **nenhuma tomada passa dos {TETO_CLIPE_S:.0f} s** — "
+             f"o teto que obrigava P06, P08 e P14 a virar dois clipes encadeados "
+             f"deixou de morder. A guarda continua no código porque duração muda.\n")
 
     L.append("\n## Ordem de trabalho — não é a ordem do filme\n")
     L.append("O filme roda P01→P22. O **trabalho** não: começa pelo que tem mais tela "
@@ -628,11 +881,14 @@ def escrever_md(d: dict) -> str:
                          f"  *{pl['porque']}*")
 
         if p["prompts"]:
-            L.append("\n\n**Prompt de imagem:**\n")
-            L.append("```")
-            L.append(p["prompts"]["imagem"])
-            L.append("```")
-            L.append("\n**Negativo:**\n")
+            for esc in p["prompts"]["escalas"]:
+                L.append(f"\n\n**{esc['rotulo']}** · {esc['faixa_m']} · "
+                         f"{esc['lente_mm']} mm · azimute {esc['azimute_deg']}° — "
+                         f"*{esc['papel']}*\n")
+                L.append("```")
+                L.append(esc["prompt"])
+                L.append("```")
+            L.append("\n**Negativo (vale nas três):**\n")
             L.append("```")
             L.append(p["prompts"]["imagem_negativo"])
             L.append("```")
@@ -640,14 +896,17 @@ def escrever_md(d: dict) -> str:
             L.append("```")
             L.append(p["prompts"]["animacao"])
             L.append("```")
-            if len(p["clipes"]) > 1:
-                L.append(f"\n> **Este plano não cabe num clipe só** ({p['duracao_s']} s "
-                         f"contra o teto de {TETO_CLIPE_S:.0f} s). São "
-                         f"{len(p['clipes'])} gerações com o mesmo prompt acima:\n>")
-                for c in p["clipes"]:
-                    L.append(f"> - clipe {c['n']} · {c['de_s']}–{c['ate_s']} s · "
-                             f"primeiro quadro = {c['primeiro_quadro']}")
-                L.append(">")
+            L.append(f"\n> **{p['duracao_s']} s comportam {len(p['clipes'])} tomada"
+                     f"{'s' if len(p['clipes']) > 1 else ''}:**\n>")
+            for c in p["clipes"]:
+                L.append(f"> - clipe {c['n']} · **{c['rotulo']}** · "
+                         f"{c['de_s']}–{c['ate_s']} s ({c['duracao_s']} s) · "
+                         f"primeiro quadro = {c['primeiro_quadro']}")
+            if len(p["clipes"]) < len(ESCALAS):
+                L.append(f">\n> As outras {len(ESCALAS) - len(p['clipes'])} imagens "
+                         f"não viram clipe aqui — gere assim mesmo, servem de "
+                         f"escolha e de reserva.")
+            L.append(">")
         L.append(f"\n**Salvar em:** `{p['pasta_de_trabalho']}/gerado/` e "
                  f"`{p['pasta_de_trabalho']}/video/`\n")
 
@@ -705,18 +964,29 @@ def escrever_html(d: dict) -> str:
             placas = ['<p class="alerta">Nenhuma placa. Este plano não tem imagem de referência.</p>']
 
         pr = p["prompts"] or {}
+        escalas_html = "".join(
+            f'<div class="pbox esc-{esc["escala"]}">'
+            f'<h3><span class="escrot">{e(esc["rotulo"])}</span> '
+            f'{esc["faixa_m"]} · {esc["lente_mm"]} mm · azimute {esc["azimute_deg"]}° '
+            f'<button class="cop">copiar</button></h3>'
+            f'<p class="escpapel">{e(esc["papel"])}</p>'
+            f'<pre>{e(esc["prompt"])}</pre></div>'
+            for esc in pr.get("escalas", []))
         bloq = (f'<p class="bloq"><b>Bloqueio:</b> {e(p["bloqueio"])}</p>'
                 if p["bloqueio"] else "")
-        corte = ""
-        if len(p["clipes"]) > 1:
-            linhas = "".join(
-                f"<li>clipe {c['n']} · {c['de_s']}–{c['ate_s']} s · "
-                f"primeiro quadro = <b>{e(c['primeiro_quadro'])}</b></li>"
-                for c in p["clipes"])
-            corte = (f'<div class="corte"><b>Não cabe num clipe só</b> — '
-                     f'{p["duracao_s"]} s contra o teto de {TETO_CLIPE_S:.0f} s. '
-                     f'{len(p["clipes"])} gerações com este mesmo prompt:'
-                     f'<ul>{linhas}</ul></div>')
+        linhas = "".join(
+            f"<li>clipe {c['n']} · <b>{e(c['rotulo'])}</b> · "
+            f"{c['de_s']}–{c['ate_s']} s ({c['duracao_s']} s) · "
+            f"da imagem <b>{e(c['escala'])}</b></li>"
+            for c in p["clipes"])
+        sobra = len(ESCALAS) - len(p["clipes"])
+        corte = (f'<div class="corte"><b>{p["duracao_s"]} s comportam '
+                 f'{len(p["clipes"])} tomada{"s" if len(p["clipes"]) > 1 else ""}</b>'
+                 f'<ul>{linhas}</ul>'
+                 + (f'<i>As outras {sobra} imagens não viram clipe aqui — gere '
+                    f'assim mesmo, servem de escolha e de reserva.</i>'
+                    if sobra > 0 else '')
+                 + '</div>') if p["clipes"] else ""
         letr = (f'<p class="letr"><b>Letreiro:</b> {e(p["titulo_na_tela"])} '
                 f'<i>— entra na edição, nunca no prompt</i></p>'
                 if p["titulo_na_tela"] else "")
@@ -734,9 +1004,8 @@ def escrever_html(d: dict) -> str:
       {letr}{bloq}
       <div class="placas">{''.join(placas)}</div>
       <div class="prompts">
-        <div class="pbox"><h3>prompt de imagem <button class="cop">copiar</button></h3>
-          <pre>{e(pr.get('imagem',''))}</pre></div>
-        <div class="pbox"><h3>negativo <button class="cop">copiar</button></h3>
+        {escalas_html}
+        <div class="pbox"><h3>negativo — vale nas três <button class="cop">copiar</button></h3>
           <pre>{e(pr.get('imagem_negativo',''))}</pre></div>
         <div class="pbox"><h3>movimento — Seedance <button class="cop">copiar</button></h3>
           <pre>{e(pr.get('animacao',''))}</pre>{corte}</div>
@@ -794,6 +1063,11 @@ def escrever_html(d: dict) -> str:
    letter-spacing:.06em; margin:0 0 5px; display:flex; align-items:center; gap:8px }}
  pre {{ background:#101008; border:1px solid var(--ln); border-radius:5px; padding:10px;
    margin:0; white-space:pre-wrap; font-size:12.5px; color:#cfc9b4 }}
+ .escrot {{ background:#3a4a2a; color:#d8e8c0; padding:2px 8px; border-radius:3px;
+   letter-spacing:.04em }}
+ .esc-medio .escrot {{ background:#2a4055; color:#c8dcf0 }}
+ .esc-detalhe .escrot {{ background:#553a2a; color:#f0d8c0 }}
+ .escpapel {{ font-size:12px; color:var(--mu); margin:0 0 5px; font-style:italic }}
  .empr {{ background:#2a2038; border-left:3px solid #7a5aa0; padding:6px 9px;
    margin:6px 0; font-size:12px; color:#cfc0e0; border-radius:0 4px 4px 0 }}
  .corte {{ background:#3a2a10; border-left:3px solid #b06000; padding:8px 10px;
@@ -861,15 +1135,22 @@ def criar_pastas(d: dict) -> int:
             f"# {p['plano']} — {p['local']}\n\n"
             f"{p['estado']} · {p['duracao_s']} s · {p['lente_mm']} mm · {p['movimento']}\n\n"
             f"## Placas\n{placas}\n\n"
-            f"## Prompt de imagem\n```\n{pr.get('imagem','')}\n```\n\n"
-            f"## Negativo\n```\n{pr.get('imagem_negativo','')}\n```\n\n"
+            + "".join(
+                f"## {esc['rotulo']} · {esc['faixa_m']} · {esc['lente_mm']} mm · "
+                f"azimute {esc['azimute_deg']}°\n{esc['papel']}\n\n"
+                f"```\n{esc['prompt']}\n```\n\n"
+                for esc in pr.get("escalas", []))
+            + f"## Negativo (vale nas tres)\n```\n{pr.get('imagem_negativo','')}\n```\n\n"
             f"## Movimento (Seedance)\n```\n{pr.get('animacao','')}\n```\n\n"
-            + ("" if len(p["clipes"]) <= 1 else
-               f"### Este plano vira {len(p['clipes'])} clipes\n"
-               f"{p['duracao_s']} s nao cabem no teto de {TETO_CLIPE_S:.0f} s.\n\n"
-               + "".join(f"- clipe {c['n']} · {c['de_s']}–{c['ate_s']} s · "
+            + (f"### {p['duracao_s']} s comportam {len(p['clipes'])} tomada(s)\n\n"
+               + "".join(f"- clipe {c['n']} · {c['rotulo']} · "
+                         f"{c['de_s']}–{c['ate_s']} s ({c['duracao_s']} s) · "
                          f"primeiro quadro = {c['primeiro_quadro']}\n"
-                         for c in p["clipes"]) + "\n")
+                         for c in p["clipes"])
+               + ("" if len(p["clipes"]) >= len(ESCALAS) else
+                  f"\nAs outras {len(ESCALAS) - len(p['clipes'])} imagens nao viram "
+                  f"clipe aqui. Gere assim mesmo: servem de escolha e de reserva.\n")
+               + "\n" if p["clipes"] else "")
             + f"## Onde salvar\n"
             f"- `placa/` — cópia do quadro real, se você quiser tudo junto\n"
             f"- `gerado/` — a imagem que voltar da IA\n"

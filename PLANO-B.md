@@ -20,21 +20,52 @@
 **A imagem gerada é a placa do plano seguinte quando os dois olham o mesmo lugar** (P14→P15, P19→P20, P02→P22). Isso é o que segura a continuidade do filme.
 
 
-## O teto de 12 s — três planos não cabem num clipe só
+## As três escalas — ordem dele, 16/08
 
-A IA de vídeo (Seedance V1.5 Pro) gera de 4 a 12 s por clipe. **3 planos passam disso, e os três são diferenciais** — justamente os que têm mais tela.
-
-
-Eles não viram um prompt: viram dois, e o segundo começa no **último quadro do primeiro**. Sem isso o corte aparece.
+> *"esse ficou plano geral, quero um mediano e um detalhes de cada bloco, com ângulos diferentes"*
 
 
-| plano | dur. total | vira | cada clipe |
-|---|---|---|---|
-| **P06** Mercado do Produtor | 17.5 s | 2 clipes | 8.8 s cada |
-| **P08** Cafe Colonial | 13.5 s | 2 clipes | 6.8 s cada |
-| **P14** Fazendinha | 18.5 s | 2 clipes | 9.2 s cada |
+Cada bloco rende **três imagens**, não uma. Não é escala nova inventada aqui: é a **LEI DO DETALHAMENTO** que o `FILA-CENA.md` já escreveu para a cena 3D, aplicada ao enquadramento da IA.
 
-Total a gerar: **25 clipes** para 22 planos.
+
+| escala | faixa | lente | ângulo | o que faz |
+|---|---|---|---|---|
+| **PLANO GERAL** | > 30 m | a do plano mm | o azimute do plano | estabelece o lugar: onde estou, qual o tamanho disto |
+| **PLANO MÉDIO** | 8 a 30 m | 35 mm | +55° do plano | mostra a atividade: o que as pessoas estão fazendo aqui |
+| **DETALHE** | ≤ 8 m | 50 mm | -40° do plano | vende: textura, mão, rosto, produto, o material de perto |
+
+**O ângulo gira junto, e isso não é enfeite.** Três escalas do mesmo ponto de vista cortam como zoom, e zoom em corte parece erro. Ângulo diferente é o que faz o corte ler como outra câmera.
+
+
+**O detalhe não leva multidão nem tenda no prompt.** A 3–6 m não cabe multidão no quadro, e mandar *"roughly 55 visitors"* num plano de mão é o jeito mais rápido de encher o fundo de gente derretida.
+
+
+### Ângulo se pede na IMAGEM, nunca no vídeo
+
+O Seedance move a câmera **dentro de um plano contínuo** — órbita, push-in, sobrevoo. Ele não corta. Pedir "vários ângulos" no prompt de vídeo devolve câmera à deriva ou morfagem.
+
+
+**Corte é edição, não é movimento de câmera.** Cada ângulo é uma imagem própria → um clipe próprio → e o corte acontece na timeline.
+
+
+## Quantas tomadas cada plano comporta
+
+O Seedance não gera abaixo de **4 s**. Então a duração do plano decide quantas tomadas cabem: plano de 5 s comporta uma, de 12 s comporta três. Picar 5 s em três dá 1,7 s cada — não é corte, é piscada.
+
+
+**Gere sempre as três imagens** de qualquer jeito: as que não viram clipe servem de escolha e de reserva se a primeira não fechar.
+
+
+| tomadas | planos | dur. de cada |
+|---|---|---|
+| **3** | P06 P08 P14 P19 | 4.0 a 6.2 s |
+| **2** | P02 P09 P10 P11 | 4.0 a 5.5 s |
+| **1** | P01 P03 P04 P05 P07 P12 P13 P15 P16 P17 P18 P20 P21 P22 | 5.0 a 7.0 s |
+
+**66 imagens** e **34 clipes** para 22 planos.
+
+
+Dividido assim, **nenhuma tomada passa dos 12 s** — o teto que obrigava P06, P08 e P14 a virar dois clipes encadeados deixou de morder. A guarda continua no código porque duração muda.
 
 
 ## Ordem de trabalho — não é a ordem do filme
@@ -118,13 +149,27 @@ O filme roda P01→P22. O **trabalho** não: começa pelo que tem mais tela e pe
   *parque VAZIO de manha: via asfaltica com terra vermelha arrastada por cima. Placa limpa, sem nada para a IA apagar.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 100.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. wide gravel parking field full of parked pickup trucks and cars, families walking toward the entrance gate, tree-lined access avenue. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 24 m above the ground, roughly 122 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. wide gravel parking field full of parked pickup trucks and cars, families walking toward the entrance gate, tree-lined access avenue. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 24 m above the ground, roughly 122 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 155.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. families arriving on foot between the parked pickups, carrying folding chairs and cool boxes, walking toward the entrance. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 60.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a mud-splashed pickup wheel and boot stepping down onto the gravel, the entrance banner soft in the background. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -135,6 +180,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow vertical crane-up, camera rising steadily while holding the subject centred. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **7.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–7.0 s (7.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P01/gerado/` e `out/plano-b/P01/video/`
 
@@ -169,13 +221,27 @@ slow vertical crane-up, camera rising steadily while holding the subject centred
   *duas casas de madeira ja construidas no recinto: tabuado vertical, telha ceramica, varanda. E a leitura ECONOMICA do celeiro, que e a que o cliente pediu. NOTURNO (21:17) -- vale a forma e o detalhe de madeira, nao a cor.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 60.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large rustic timber entrance portal in barn style — vertical board cladding, ceramic tile roof, economical construction, a hanging wooden sign across the opening, visitors walking through. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 6 m above the ground, roughly 54 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large rustic timber entrance portal in barn style — vertical board cladding, ceramic tile roof, economical construction, a hanging wooden sign across the opening, visitors walking through. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 6 m above the ground, roughly 54 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 115.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a family walking through the timber portal opening, looking up at the hanging sign as they pass under it. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 20.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the weathered vertical board cladding and its wrought-iron lantern and hardware, low sun raking across the grain of the wood. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -186,6 +252,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 9.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **9.0 s comportam 2 tomadas:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–4.5 s (4.5 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 4.5–9.0 s (4.5 s) · primeiro quadro = a imagem medio do plano
+>
+> As outras 1 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P02/gerado/` e `out/plano-b/P02/video/`
 
@@ -213,13 +287,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *interior de pavilhao VAZIO -- o vao livre pronto para a IA montar estande dentro.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 342.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. long exhibition pavilion with brick walls and corrugated metal roof, commercial trade booths under the roof, banners, visitors browsing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 46 m above the ground, roughly 23 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. long exhibition pavilion with brick walls and corrugated metal roof, commercial trade booths under the roof, banners, visitors browsing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 46 m above the ground, roughly 23 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 37.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors at a trade booth inside the pavilion, an exhibitor leaning over the counter explaining a product. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 302.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. two hands closing a handshake over a booth counter, brochures and a branded banner soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -230,6 +318,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 6.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **6.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–6.0 s (6.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P03/gerado/` e `out/plano-b/P03/video/`
 
@@ -252,13 +347,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *rua dos food stands ao nivel do chao. Nenhuma placa confirma que seja esta praca.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 343.3° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. covered food court with long rows of tables and chairs, food service counters along one side, families eating, overhead roof structure. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 120 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 11 m above the ground, roughly 52 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. covered food court with long rows of tables and chairs, food service counters along one side, families eating, overhead roof structure. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 120 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 11 m above the ground, roughly 52 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 38.3° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. families seated at the long tables of the covered food court, plates and drinks on the boards, queue at the service counters behind. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 120 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 303.3° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a plate of grilled meat, rice and salad being set down on the table, steam rising, hands reaching in. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -269,6 +378,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **7.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–7.0 s (7.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P04/gerado/` e `out/plano-b/P04/video/`
 
@@ -292,13 +408,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *ritmo dos vaos e beiral do mesmo tipo de pavilhao, por fora.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 75.3° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. second exhibition pavilion, same construction as the first, trade stands and machinery displays, visitors walking the central aisle. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 14 m above the ground, roughly 22 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. second exhibition pavilion, same construction as the first, trade stands and machinery displays, visitors walking the central aisle. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 14 m above the ground, roughly 22 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 130.3° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors walking the central aisle between machinery stands, one group stopped in front of a display. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 80 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 35.3° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a manufacturer's badge and painted sheet metal on a display machine, reflections of the low sun on the paint. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -309,6 +439,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **5.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.0 s (5.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P05/gerado/` e `out/plano-b/P05/video/`
 
@@ -331,13 +468,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *o lote 01 registrou que este pavilhao vazio de pilar azul e alvenaria vermelha e a coisa mais parecida com o Mercado do Produtor montado que o acervo tem -- e esta VAZIO, sem banca nenhuma. Placa perfeita para a IA montar as bancas; nome nao confirmado.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 30.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. producer's market — open-sided stalls with wooden crates of fresh produce, cheeses, preserves and cured meats, farmers behind the counters talking to buyers. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 15 m above the ground, roughly 45 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. producer's market — open-sided stalls with wooden crates of fresh produce, cheeses, preserves and cured meats, farmers behind the counters talking to buyers. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 15 m above the ground, roughly 45 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 85.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. farmers behind the market stalls handing produce to buyers across the counter, crates stacked at their feet. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 350.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. hands lifting a wooden crate of tomatoes and greens, a wheel of cheese and jars of preserves on the counter beside it. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -349,10 +500,11 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
 
-> **Este plano não cabe num clipe só** (17.5 s contra o teto de 12 s). São 2 gerações com o mesmo prompt acima:
+> **17.5 s comportam 3 tomadas:**
 >
-> - clipe 1 · 0.0–8.8 s · primeiro quadro = a imagem gerada do plano
-> - clipe 2 · 8.8–17.5 s · primeiro quadro = o ULTIMO quadro do clipe 1
+> - clipe 1 · **PLANO GERAL** · 0–5.8 s (5.8 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 5.8–11.6 s (5.8 s) · primeiro quadro = a imagem medio do plano
+> - clipe 3 · **DETALHE** · 11.6–17.4 s (5.8 s) · primeiro quadro = a imagem detalhe do plano
 >
 
 **Salvar em:** `out/plano-b/P06/gerado/` e `out/plano-b/P06/video/`
@@ -376,13 +528,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *galpao e estrada de terra do mesmo setor. Tipologia, nao nome.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 40.3° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agro-industry stands: small-scale food processing displays, stainless equipment, tasting counters, branded booths. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 46 m above the ground, roughly 20 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agro-industry stands: small-scale food processing displays, stainless equipment, tasting counters, branded booths. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 46 m above the ground, roughly 20 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 95.3° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors at an agro-industry tasting counter, a producer pouring a sample and talking them through it. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 0.3° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a small glass of cachaça and slices of salami and cheese on a wooden board, a hand reaching for one. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -393,6 +559,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **5.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.0 s (5.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P07/gerado/` e `out/plano-b/P07/video/`
 
@@ -415,13 +588,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *fogo de chao com costelas e gradil metalico -- material de gastronomia do proprio recinto. O lote 04 registrou como Cafe Colonial POSSIVEL, sem placa.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 270.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. colonial café — long tables laid with breads, cakes, cured meats, cheese and coffee, warm hanging lights, families seated eating. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 5 m above the ground, roughly 60 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. colonial café — long tables laid with breads, cakes, cured meats, cheese and coffee, warm hanging lights, families seated eating. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 5 m above the ground, roughly 60 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 325.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. families seated along the long colonial café tables, plates passing hand to hand, warm hanging lights above. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 230.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the table top loaded with breads, cakes, cured meats, cheese and a cup of coffee being poured, close and warm. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -433,10 +620,11 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
 
-> **Este plano não cabe num clipe só** (13.5 s contra o teto de 12 s). São 2 gerações com o mesmo prompt acima:
+> **13.5 s comportam 3 tomadas:**
 >
-> - clipe 1 · 0.0–6.8 s · primeiro quadro = a imagem gerada do plano
-> - clipe 2 · 6.8–13.5 s · primeiro quadro = o ULTIMO quadro do clipe 1
+> - clipe 1 · **PLANO GERAL** · 0–4.5 s (4.5 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 4.5–9.0 s (4.5 s) · primeiro quadro = a imagem medio do plano
+> - clipe 3 · **DETALHE** · 9.0–13.5 s (4.5 s) · primeiro quadro = a imagem detalhe do plano
 >
 
 **Salvar em:** `out/plano-b/P08/gerado/` e `out/plano-b/P08/video/`
@@ -461,13 +649,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *rua de food stands em operacao.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 42.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. open-air food court in a grove of trees, food trucks and stalls around the edge, picnic tables in dappled shade, people queuing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone about 31 m above the ground, roughly 139 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. open-air food court in a grove of trees, food trucks and stalls around the edge, picnic tables in dappled shade, people queuing. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 31 m above the ground, roughly 139 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 97.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. people queuing at the food trucks under the trees, others eating at picnic tables in dappled shade. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 2.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a hand taking a paper-wrapped sandwich across the food-truck hatch, the tree canopy soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -478,6 +680,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 smooth aerial fly-over, camera advancing forward above the ground. Duration 9.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **9.0 s comportam 2 tomadas:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–4.5 s (4.5 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 4.5–9.0 s (4.5 s) · primeiro quadro = a imagem medio do plano
+>
+> As outras 1 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P09/gerado/` e `out/plano-b/P09/video/`
 
@@ -509,13 +719,27 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 9.0 
   *o pulpito do leiloeiro e as grades azuis do ringue -- o audio nomeia o pulpito.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 116.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. livestock auction ring — circular sale ring with a raised auctioneer's booth, tiered seating facing the ring, buyers seated with catalogues, a single animal in the ring. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 5 m above the ground, roughly 53 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. livestock auction ring — circular sale ring with a raised auctioneer's booth, tiered seating facing the ring, buyers seated with catalogues, a single animal in the ring. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 5 m above the ground, roughly 53 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 171.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. buyers seated with catalogues in the tiered seating facing the sale ring, one raising a hand to bid, a single animal in the ring. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 70 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 76.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a raised bidding hand and a catalogue on a knee, the auctioneer's booth soft in the background. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -526,6 +750,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 8.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **8.0 s comportam 2 tomadas:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–4.0 s (4.0 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 4.0–8.0 s (4.0 s) · primeiro quadro = a imagem medio do plano
+>
+> As outras 1 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P10/gerado/` e `out/plano-b/P10/video/`
 
@@ -553,13 +785,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *MANGUEIRAS / currais: grade metalica em serie sobre brita, com cobertura. A planta so tinha o rotulo -- 14,1 x 2,4 m era o tamanho da PALAVRA.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 90.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. row of open livestock barns, animals in individual pens with straw bedding, handlers grooming them, feed and water troughs. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 34 dairy cattle, 34 Hereford and Braford cattle, 34 Nelore beef cattle, roughly 48 sheep and goats, 22 horses. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 14 m above the ground, roughly 86 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. row of open livestock barns, animals in individual pens with straw bedding, handlers grooming them, feed and water troughs. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 34 dairy cattle, 34 Hereford and Braford cattle, 34 Nelore beef cattle, roughly 48 sheep and goats, 22 horses. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 14 m above the ground, roughly 86 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 145.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. handlers grooming and washing cattle in the open barn, animals tied at the rail with straw underfoot. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 34 dairy cattle, 34 Hereford and Braford cattle, 34 Nelore beef cattle, roughly 48 sheep and goats, 22 horses. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 50.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a handler's hand running a brush down the flank of a bull, hide and straw in sharp texture, the barn falling soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -570,6 +816,14 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 smooth aerial fly-over, camera advancing forward above the ground. Duration 11.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **11.0 s comportam 2 tomadas:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.5 s (5.5 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 5.5–11.0 s (5.5 s) · primeiro quadro = a imagem medio do plano
+>
+> As outras 1 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P11/gerado/` e `out/plano-b/P11/video/`
 
@@ -592,13 +846,27 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 11.0
   *pista de julgamento gramada e cercada, verde uniforme, com arvore isolada dentro e sombra longa atravessando. Duas gramas distintas no mesmo quadro.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 170.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. grass judging arena, cattle led on halters by handlers in a line, judges in the centre, spectators along the rail. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 8 Hereford and Braford cattle, roughly 40 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone about 23 m above the ground, roughly 44 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. grass judging arena, cattle led on halters by handlers in a line, judges in the centre, spectators along the rail. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 8 Hereford and Braford cattle, roughly 40 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 23 m above the ground, roughly 44 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 225.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. cattle led on halters in a line across the grass judging arena, judges walking between them, spectators along the rail. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. 8 Hereford and Braford cattle, roughly 40 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 130.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a gloved hand on a halter rope beside the animal's head, the judge's clipboard soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -609,6 +877,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow orbital arc around the subject, camera holding distance and height. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **5.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.0 s (5.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P12/gerado/` e `out/plano-b/P12/video/`
 
@@ -628,13 +903,27 @@ slow orbital arc around the subject, camera holding distance and height. Duratio
   *brita e saibro com pedra solta, placa de concreto rente ao chao -- o chao onde o estande externo pousa.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 250° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. outdoor exhibitor area on grass, open stands and marquees, equipment displayed on the ground, visitors walking between them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 50 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 13 m above the ground, roughly 48 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. outdoor exhibitor area on grass, open stands and marquees, equipment displayed on the ground, visitors walking between them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 50 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 13 m above the ground, roughly 48 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 305° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors walking between the outdoor stands and marquees, exhibitors talking to them beside the equipment on the grass. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 50 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 210° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a stand banner and product laid out on a trestle table, a visitor's hand picking one up. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -645,6 +934,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 smooth aerial fly-over, camera advancing forward above the ground. Duration 5.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **5.5 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.5 s (5.5 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P13/gerado/` e `out/plano-b/P13/video/`
 
@@ -675,13 +971,27 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 5.5 
   *conjunto de casinhas de madeira com cara de tema rural. O lote 04 escreveu, literal, que NAO tem certeza de que seja a Fazendinha.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 175.6° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children's farm area — small rustic barn, pony rides, pens with sheep and goats, a border collie herding demonstration, families with small children watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a low drone, camera about 14 m above the ground, roughly 38 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children's farm area — small rustic barn, pony rides, pens with sheep and goats, a border collie herding demonstration, families with small children watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 14 m above the ground, roughly 38 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 230.6° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children at the low wooden fence of the children's farm feeding the sheep and goats, parents standing behind them watching. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 135.6° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a small child's hand holding out feed to a goat's muzzle over the fence rail, warm and close. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -693,10 +1003,11 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 smooth aerial fly-over, camera advancing forward above the ground. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
 
-> **Este plano não cabe num clipe só** (18.5 s contra o teto de 12 s). São 2 gerações com o mesmo prompt acima:
+> **18.5 s comportam 3 tomadas:**
 >
-> - clipe 1 · 0.0–9.2 s · primeiro quadro = a imagem gerada do plano
-> - clipe 2 · 9.2–18.5 s · primeiro quadro = o ULTIMO quadro do clipe 1
+> - clipe 1 · **PLANO GERAL** · 0–6.2 s (6.2 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 6.2–12.4 s (6.2 s) · primeiro quadro = a imagem medio do plano
+> - clipe 3 · **DETALHE** · 12.4–18.6 s (6.2 s) · primeiro quadro = a imagem detalhe do plano
 >
 
 **Salvar em:** `out/plano-b/P14/gerado/` e `out/plano-b/P14/video/`
@@ -718,13 +1029,27 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 12.0
   *segundo angulo da mesma area infantil, para a IA nao repetir o mesmo enquadramento no par de planos.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 50 mm · azimute 84.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same children's farm area seen closer: the pony ring and the animal pens, children feeding the animals over a low wooden fence. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens from a drone about 37 m above the ground, roughly 31 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same children's farm area seen closer: the pony ring and the animal pens, children feeding the animals over a low wooden fence. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens from a drone 37 m above the ground, roughly 31 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 139.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. children riding ponies led at a walk around the ring by a handler, a border collie working the sheep behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 55 visitors, 4 horses, 9 sheep and goats, 2 border collie dogs. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 44.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a child's boots in the stirrups and small hands gripping the saddle horn, the pony's mane in the low sun. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -735,6 +1060,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow orbital arc around the subject, camera holding distance and height. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **7.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–7.0 s (7.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P15/gerado/` e `out/plano-b/P15/video/`
 
@@ -758,13 +1090,27 @@ slow orbital arc around the subject, camera holding distance and height. Duratio
   *alameda de maquinas sob as arvores, outro angulo e outra hora.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 186.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agricultural machinery exhibition — tractors, combine harvesters, seeders and implements lined up on gravel, buyers inspecting them, manufacturer flags. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 90 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 9 m above the ground, roughly 68 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. agricultural machinery exhibition — tractors, combine harvesters, seeders and implements lined up on gravel, buyers inspecting them, manufacturer flags. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 90 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 9 m above the ground, roughly 68 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 241.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. buyers walking the line of tractors and harvesters, one climbing the steps into a cab while a salesman talks from the ground. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. roughly 90 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 146.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the treads of a huge tractor tyre with a person standing beside it for scale, manufacturer's paint and badge sharp. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -775,6 +1121,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 smooth aerial fly-over, camera advancing forward above the ground. Duration 6.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **6.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–6.0 s (6.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P16/gerado/` e `out/plano-b/P16/video/`
 
@@ -803,13 +1156,27 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 6.0 
   **Emprestada do P16.** Ordem dele em 16/08. O acervo nao tem um unico quadro da area de veiculos e nauticos. A alameda de maquinas do P16 da a IMPLANTACAO certa -- fila de equipamentos sob as arvores, mesma hora, mesma altura -- e o prompt troca o que esta exposto: sai trator, entra picape e barco sobre carreta.
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 280.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area. KEEP the layout of the reference image — the same tree-lined avenue, the same row of units parked at the same angle, the same ground and the same light — but REPLACE every tractor and farm implement with pickup trucks, SUVs and motorboats and jet-skis sitting on road trailers. No agricultural machinery anywhere in the frame. Dealer banners beside the units, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. vehicle and nautical display area. KEEP the layout of the reference image — the same tree-lined avenue, the same row of units parked at the same angle, the same ground and the same light — but REPLACE every tractor and farm implement with pickup trucks, SUVs and motorboats and jet-skis sitting on road trailers. No agricultural machinery anywhere in the frame. Dealer banners beside the units, buyers walking the line. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 21 m above the ground, roughly 37 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 335.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. buyers walking the line of pickups and boats on trailers, a dealer opening a truck door for a couple. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 240.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a boat's outboard motor and polished hull on its trailer, low sun reflecting off the paint. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -820,6 +1187,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow lateral tracking move, camera sliding sideways at constant speed. Duration 5.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **5.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.0 s (5.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P17/gerado/` e `out/plano-b/P17/video/`
 
@@ -843,13 +1217,27 @@ slow lateral tracking move, camera sliding sideways at constant speed. Duration 
   *a bacia inteira num quadro: anel de saibro, talude gramado descendo, esplanada rebaixada com deck e palco ao fundo. Conferido: NAO HA ARQUIBANCADA.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 52.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large open show ground filling with a crowd at dusk, stage lighting towers, sound system, the crowd facing the stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 16 m above the ground, roughly 84 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. large open show ground filling with a crowd at dusk, stage lighting towers, sound system, the crowd facing the stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 16 m above the ground, roughly 84 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 107.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the crowd on the show ground at dusk, hands up, faces lit by the stage lighting from the front. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 12.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. a few faces in the front of the crowd lit warm by the stage lights, hands raised, everything behind falling into bokeh. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -860,6 +1248,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 smooth aerial fly-over, camera advancing forward above the ground. Duration 5.5 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **5.5 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–5.5 s (5.5 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P18/gerado/` e `out/plano-b/P18/video/`
 
@@ -890,13 +1285,27 @@ smooth aerial fly-over, camera advancing forward above the ground. Duration 5.5 
   *o perfil da bacia com palco e tendas 5x5 de regua.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 45.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. rodeo arena — an oval dirt track with a bucking bull and a mounted rider, chutes at one end, a stage facing the arena and VIP boxes along the sides. THERE ARE NO GRANDSTAND BLEACHERS around this arena: only the track, the side boxes and the facing stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. one bucking bull, 6 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone about 26 m above the ground, roughly 85 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. rodeo arena — an oval dirt track with a bucking bull and a mounted rider, chutes at one end, a stage facing the arena and VIP boxes along the sides. THERE ARE NO GRANDSTAND BLEACHERS around this arena: only the track, the side boxes and the facing stage. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. one bucking bull, 6 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 26 m above the ground, roughly 85 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 100.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the bucking bull and mounted rider mid-buck seen from the arena rail, dust up, the crowd's hats and shoulders in the near foreground. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. one bucking bull, 6 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 5.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the rider's gloved hand gripping the bull rope and his spurred boot against the bull's flank, dust hanging in the low sun. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -907,6 +1316,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow orbital arc around the subject, camera holding distance and height. Duration 12.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **12.0 s comportam 3 tomadas:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–4.0 s (4.0 s) · primeiro quadro = a imagem geral do plano
+> - clipe 2 · **PLANO MÉDIO** · 4.0–8.0 s (4.0 s) · primeiro quadro = a imagem medio do plano
+> - clipe 3 · **DETALHE** · 8.0–12.0 s (4.0 s) · primeiro quadro = a imagem detalhe do plano
+>
 
 **Salvar em:** `out/plano-b/P19/gerado/` e `out/plano-b/P19/video/`
 
@@ -935,13 +1351,27 @@ slow orbital arc around the subject, camera holding distance and height. Duratio
   *palco de EVENTO montado e vazio, e na frente dele o esquema real dos camarotes: deck de madeira modular, gradil branco, terreo, SEM ARQUIBANCADA. Prova por imagem da restricao 1.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 20.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. main stage at dusk, a performer singing, stage lighting on, the crowd below with hands raised. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 19 m above the ground, roughly 38 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. main stage at dusk, a performer singing, stage lighting on, the crowd below with hands raised. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 19 m above the ground, roughly 38 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 75.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the performer at the front of the stage with the crowd's raised hands in the foreground, stage lights on. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. a dense crowd of several hundred visitors, 4 visitors. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 340.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the singer at the microphone lit warm from the side, the stage lighting rig soft behind. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -952,6 +1382,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **7.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–7.0 s (7.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P20/gerado/` e `out/plano-b/P20/video/`
 
@@ -973,13 +1410,27 @@ slow steady push-in, camera advancing straight toward the subject at constant sp
   *sobe do predio redondo e abre para o recinto com as TENDAS BRANCAS montadas -- e o unico aereo do lote com evento em pe.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 24 mm · azimute 27.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. high wide aerial of the whole fairground at dusk, every area lit, tents, pavilions, the arena and the show field all readable at once. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone about 48 m above the ground, roughly 132 m from the subject, looking down at a shallow angle — the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. high wide aerial of the whole fairground at dusk, every area lit, tents, pavilions, the arena and the show field all readable at once. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 24 mm lens from a drone 48 m above the ground, roughly 132 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 82.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. groups of people talking business across the grounds — handshakes beside machinery, folders and phones out. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 347.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. two men shaking hands over a signed sheet on a truck bonnet, the fairground soft and busy behind them. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -990,6 +1441,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow vertical crane-up, camera rising steadily while holding the subject centred. Duration 7.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **7.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–7.0 s (7.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P21/gerado/` e `out/plano-b/P21/video/`
 
@@ -1012,13 +1470,27 @@ slow vertical crane-up, camera rising steadily while holding the subject centred
   *restricao 6: o plano final sai pelo portal. A mesma e unica foto.*
 
 
-**Prompt de imagem:**
+**PLANO GERAL** · > 30 m · 35 mm · azimute 240.0° — *estabelece o lugar: onde estou, qual o tamanho disto*
 
 ```
-Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same rustic timber barn portal seen from inside the grounds, visitors walking out through it, night falling behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone, camera about 12 m above the ground, roughly 26 m from the subject, slight downward tilt. 16:9 horizontal frame, 2560x1440.
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the same rustic timber barn portal seen from inside the grounds, visitors walking out through it, night falling behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a drone 12 m above the ground, roughly 26 m from the subject, looking down at a shallow angle — the whole area reads at once, the ground plane still reads, this is not a top-down map view. 16:9 horizontal frame, 2560x1440.
 ```
 
-**Negativo:**
+
+**PLANO MÉDIO** · 8 a 30 m · 35 mm · azimute 295.0° — *mostra a atividade: o que as pessoas estão fazendo aqui*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. visitors walking out through the timber portal at dusk, backs to camera, the last light behind them. white peaked event marquees and tents pitched across the grounds, guy ropes and steel poles visible. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 35 mm lens from a low drone about 12 m above the ground, roughly 25 m from the subject, gentle downward tilt — people read full-figure, faces and gestures are legible, the activity is the subject and the wider site is only context at the edges of frame. 16:9 horizontal frame, 2560x1440.
+```
+
+
+**DETALHE** · ≤ 8 m · 50 mm · azimute 200.0° — *vende: textura, mão, rosto, produto, o material de perto*
+
+```
+Ultra-photorealistic photograph, not a 3D render and not an illustration. Southern Brazil agricultural fairground in Dois Vizinhos, Parana. Shot on a full-frame camera, natural colour, real atmospheric haze, believable depth of field, no CGI look, no plastic surfaces, no oversaturation, no HDR halo. the timber portal's hanging sign lit from below at dusk, the grain of the board and the lantern glow close. late-afternoon golden hour, 18:15 on 27 November, sun low at ~10 degrees above the horizon, long warm raking shadows, clear sky with soft high cloud. 50 mm lens at eye level, camera about 1,6 m above the ground and 3 to 6 m from the subject, shallow depth of field with the background falling soft — a person's point of view standing right there, NOT an aerial and NOT a drone shot. 16:9 horizontal frame, 2560x1440.
+```
+
+**Negativo (vale nas três):**
 
 ```
 cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces, extra limbs, warped text, unreadable signage, watermark, logo overlay, oversaturated colours, fisheye distortion, grandstand bleachers around the rodeo arena
@@ -1029,6 +1501,13 @@ cartoon, illustration, 3D render, videogame, CGI, plastic skin, distorted faces,
 ```
 slow steady push-in, camera advancing straight toward the subject at constant speed. Duration 6.0 seconds. The camera moves slowly and deliberately at a constant speed — this is a drone shot, not a fast fly-through. Everything in the frame stays physically consistent: people walk, flags and banners move in a light breeze, animals shift naturally, the light does not change. No morphing, no warping architecture, no drifting text, no zoom.
 ```
+
+> **6.0 s comportam 1 tomada:**
+>
+> - clipe 1 · **PLANO GERAL** · 0–6.0 s (6.0 s) · primeiro quadro = a imagem geral do plano
+>
+> As outras 2 imagens não viram clipe aqui — gere assim mesmo, servem de escolha e de reserva.
+>
 
 **Salvar em:** `out/plano-b/P22/gerado/` e `out/plano-b/P22/video/`
 
