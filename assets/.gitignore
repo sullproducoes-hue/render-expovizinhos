@@ -1,6 +1,13 @@
-# Binario de asset CC0 nao versiona: o MANIFESTO.md e o
-# _procedencia.json bastam para rebaixar tudo com md5 conferido.
-*
-!.gitignore
-!MANIFESTO.md
-!_procedencia.json
+# ATE 16/08/2026 este arquivo barrava todo binario, e o MANIFESTO.md mais o
+# _procedencia.json bastavam para rebaixar tudo com md5 conferido.
+#
+# Mudou por ordem dele: os binarios passam a versionar, via Git LFS -- os
+# padroes estao em .gitattributes na raiz. O manifesto continua valendo como
+# registro de licenca, e e ele que sustenta que tudo aqui e CC0 ou CC-BY com
+# atribuicao gravada.
+#
+# ATENCAO, e esta linha e a razao de o arquivo continuar existindo:
+# `assets/textura/recinto_*` sao DERIVADOS de material do cliente -- o footage
+# do recinto e a foto do portal. O `origin` deste repositorio e PUBLICO. Isso
+# foi decidido por ele em 16/08/2026, sabendo disso, depois de a exposicao ser
+# apontada.

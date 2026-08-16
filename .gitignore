@@ -1,8 +1,19 @@
 __pycache__/
 *.pyc
-out/
 *.blend1
 .venv/
+
+# `out/` nao versionava NADA. Em 16/08/2026, por ordem dele, as CENAS-HEROI e a
+# pasta de entrega passaram a versionar via Git LFS (ver .gitattributes).
+#
+# O resto de out/ continua fora, e nao por capricho: sao 3,5 GB de
+# intermediario REGERAVEL -- 1,9 GB de bancos do COLMAP (features e matches),
+# 9.980 miniaturas do acervo, ensaios de encode. O LFS gratis do GitHub da 1 GB.
+out/*
+!out/heroi/
+!out/cena-heroi-q1.blend
+!out/cena-heroi-q2.blend
+!out/cena-heroi-q3.blend
 
 # Ferramenta rebaixavel, nao fonte: 1,5 GB de binario do COLMAP em duas
 # versoes, mais os zips de origem. Quem precisar rebaixa -- os caminhos e as

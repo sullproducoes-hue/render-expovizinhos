@@ -55,3 +55,54 @@ definido no lançamento e não se lê nem se muda por dentro.
 COLMAP, ffmpeg e escrita em `render-expovizinhos/**` e `F:`. O teto de 600.000 ms
 do Bash foi contornado pondo **todo render em background**, que não tem esse
 limite.
+
+---
+
+## P03 · `_cilindro` aceita `eixo="X"` e ignora, em silêncio
+
+**A dúvida.** Nenhuma — é defeito conhecido, e o conserto é de uma linha.
+
+**O que ela trava.** Nada agora. O Q3 foi montado com `_tubo_entre`, que recebe
+os dois pontos explícitos.
+
+**Por que não consertei.** `heroi_portal.py:_cilindro` é **compartilhado** com o
+`heroi_portal` e o `heroi_arena` — os dois quadros que o Natan acabou de aprovar
+(D089). Mexer num helper compartilhado depois da aprovação muda os dois pelas
+costas, e a regra da casa é que aprovação dele não se altera sem ele saber.
+
+**O conserto, quando ele autorizar:** `else: raise ValueError(f"eixo {eixo}")`.
+Parâmetro que o helper não entende tem que **abortar**, nunca cair no default.
+Detalhe em **D090**.
+
+---
+
+## P04 · O rumo do Pavilhão 1 não foi aplicado, e isso é escolha declarada
+
+**A dúvida.** O footprint de `PAVILHÃO 1` traz `rumo_graus: 90,0` **com
+`rumo_confiavel: false`** e `preenchimento 0,706`.
+
+**O que ela trava.** Só o Q3, e só na luz: o rumo decide de que lado o sol entra
+pela boca. Não muda geometria nenhuma.
+
+**PROVISÓRIO — cena montada em eixos locais** (comprimento em Y, boca em −Y,
+lado aberto em −X). Motivo: aplicar um rumo em que a própria planta declara não
+confiar trocaria a luz do quadro por um número que não se sustenta. Quando o
+Natan mandar o print da orientação do Pavilhão 1, ou quando a nuvem `montagem`
+cobrir esse prédio, o rumo entra e o quadro se refaz — é um argumento de linha
+de comando, não uma remodelagem.
+
+---
+
+## P05 · Asfalto não tem cor medida no acervo
+
+**A dúvida.** O piso do Pavilhão 1 na foto é **asfalto escuro**. Em
+`data/materiais-medidos.json` não existe asfalto — o mais próximo é `MAT_SAIBRO`
+(brita da área de máquinas), que é marrom.
+
+**O que ela trava.** A cor do chão do Q3, e do chão de qualquer plano que passe
+por área pavimentada.
+
+**PROVISÓRIO — usei `MAT_SAIBRO` medido**, e o chão puxa para o marrom. A
+alternativa honesta é medir o asfalto num quadro do footage pelo mesmo método do
+`medir_materiais.py` — é meia hora de máquina, não é pesquisa. Fica esperando a
+decisão dele sobre se vale.

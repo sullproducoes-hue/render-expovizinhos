@@ -2392,3 +2392,268 @@ mediu a letra entregue em **0,72 m** contra os **0,84 m** da foto, e a segunda
 linha em 0,31 contra 0,42. A familia entrega ~0,55 de caixa alta por em.
 Corrigido para `caps / 0.55`. A LARGURA ja estava exata (6,28 m contra 6,30
 medidos na foto, −0,3%), porque essa eu tinha travado por alvo.
+
+### D089 · Ele aprovou o Q1 e o Q2 olhando as folhas, e mandou abrir o Q3
+**16/08/2026, ~12h.** Ordem literal dele, em duas mensagens:
+
+> *"Sobre q1 q2 e q3 quero que rode mais uma vez; e faca o restante"*
+> *"enquanto refaz continua eu aprovei o que foi feitos prints que me foram enviados"*
+
+**O que isso decide, e por que fica escrito:**
+
+1. **A aprovacao do Q1 e do Q2 e' dele e ja aconteceu.** O verificador reprova
+   sozinho e NUNCA aprova sozinho -- o melhor veredito que ele pode dar e' "sem
+   divergencia grosseira". Quem aprova e' o Natan, e ele aprovou olhando as
+   folhas `real | 3D`. As duas conferencias que estavam rodando (3a do Q1, 1a
+   reconferencia do Q2) **continuam valendo como MEDIDA**, nao como portao: o
+   que elas acharem vira conserto ou pendencia, nao desaprova o que ele aprovou.
+
+2. **O gatilho do Q3 esta cumprido, e por um caminho melhor que o previsto.**
+   O adendo do `NOITE-3-QUADROS.md` exigia "zero reprovacao em aberto do
+   verificador" nos dois primeiros. A regra existia para impedir tres quadros
+   medianos. **Aprovacao do dono e' autoridade superior a do portao que
+   substitui o julgamento dele.** O Q3 abre.
+
+3. **Q1 e Q2 foram rodados de novo, por ordem dele**, em `-r2`, sem tocar nos
+   arquivos que os verificadores estavam lendo -- e sem `--blend`, entao nenhum
+   `.blend` foi reescrito. Os quatro sairam com EXIT 0, e EXIT 0 aqui e' prova de
+   GPU: `heroi_portal.py` e `heroi_arena.py` abortam com `sys.exit(3)` se nenhum
+   OPTIX ficar ativo (D009).
+
+   | arquivo | bytes |
+   |---|---|
+   | `F:/heroi/Q1/final-2560-r2.png` | 5.696.415 |
+   | `F:/heroi/Q1/match-1600-r2.png` | 3.008.595 |
+   | `F:/heroi/Q2/final-2560-r2.png` | 5.033.719 |
+   | `F:/heroi/Q2/match-1600-r2.png` | 2.168.293 |
+
+   Diferenca de algumas centenas de bytes contra os originais -- e' o ruido da
+   amostragem adaptativa, nao mudanca de cena. **Nada foi apagado**: os quatro
+   originais de 03:37-03:45 continuam onde estavam.
+
+### D090 · `_cilindro(eixo="X")` nao existe, e cai no default EM SILENCIO
+**Como apareceu:** primeiro teste do Q3 (`F:/heroi/Q3/t01.png`). Seis tubos
+vermelhos VERTICAIS de 24,6 m atravessando piso e telhado, onde eu tinha pedido
+eletroduto transversal.
+
+**A causa:** `heroi_portal.py:_cilindro(bm, cx, cy, cz, raio, altura, lados, eixo)`
+so trata `eixo == "Y"`. Nao ha `elif "X"`, nao ha `else: raise`. Um `eixo="X"`
+**passa direto** e devolve um cilindro no Z, com o `altura` virando comprimento
+vertical. Nenhum erro na tela, nenhum aviso no log.
+
+**E' a mesma familia de tres armadilhas que este projeto ja pagou:**
+
+| onde | o que caiu em silencio | custo |
+|---|---|---|
+| motor de render | `BLENDER_EEVEE_NEXT` nao existe no 5.2; o `try/except` engolia o `TypeError` | cena saiu em **Cycles CPU** sem ninguem saber |
+| dispositivo | `prefs.devices` vem vazia ate `get_devices()`; o laco nao ligava nada | render na CPU, 36 s/quadro em vez de 10 (D009) |
+| **aqui** | `eixo="X"` ignorado | 6 tubos verticais atravessando a cena |
+
+**A regra que sobra:** parametro que o helper nao entende tem que **abortar**,
+nunca cair no default. Enquanto `_cilindro` nao ganhar esse portao, quem precisa
+de barra fora do eixo Z usa `_tubo_entre(a, b)`, que recebe os dois pontos
+explicitos -- e cujo docstring, escrito no Q2, ja avisava: *"NAO se cria cilindro
+e se gira por Euler para apontar numa direcao"*. O aviso estava certo e eu usei a
+funcao errada mesmo assim.
+
+**Conserto aplicado:** `heroi_pavilhao.py:instalacoes` monta o eletroduto
+transversal com `_tubo_entre`. O `_cilindro` **nao foi tocado** -- mexer nele
+mexe no Q1 e no Q2, que o Natan acabou de aprovar. Fica em `PENDENCIAS.md`.
+
+### D091 · O Q3 nasceu, e a hora do LOOK LOCK deixou de ser preferencia
+**O que foi construido:** `scripts/heroi_pavilhao.py`, a boca do Pavilhao 1.
+Footprint da planta (51,85 x 25,59 m, D016), forma do footage
+(`P03.../real/2_img-9131-004_176.00s.jpg`, o unico quadro do acervo com pilar,
+sapata, trelica, terca, tijolo vazado e espessura da agua **todos de uma vez** e
+em plano baixo). Uma funcao, `_cota_agua(x)`, decide caibro, terca, agua, oitao
+e o topo do pilar -- a licao das tres vezes em que duas pecas divergiram.
+
+**Quatro testes, e o que cada um consertou:**
+
+| teste | o que estava errado | conserto |
+|---|---|---|
+| t01 | 6 tubos verticais atravessando a cena | D090 |
+| t01 | face de baixo da agua com albedo 0,185 -- o interior inteiro fechava em preto | 0,44. E' a **maior superficie de rebote da cena**, e telha galvanizada por baixo e metal claro |
+| t01 | laje 8 cm acima da grama: a face lateral pegava sol rasante e virava um meio-fio branco que nao existe na foto | grama quase rente |
+| t02 | 9 porticos (passo 6,5 m): o teto lia como plano vazio | 13 porticos, passo 4,32 m, e barra mais grossa |
+| t03 | camera 6 m **fora** do pavilhao, com grama no rodape | camera 4,5 m **dentro**, como a foto real. O enquadramento so casou depois disso |
+
+**E aqui a hora deixou de ser gosto.** O Q2 abriu a pergunta do LOOK LOCK
+medindo a saturacao da grama (D084). O Q3 e' **interior coberto**: com o sol a
+10,1 graus do contrato, quase nada entra pela boca e o fundo do pavilhao vira
+tunel preto. Nao e' preferencia estetica, e' se o quadro mostra o lugar ou nao.
+As tres horas foram rodadas com o mesmo enquadramento --
+`out/heroi/Q3-hora.jpg`, construido por `scripts/folha_horas.py` (novo).
+
+**A escolha continua sendo dele.** Nenhuma das tres foi promovida.
+
+### D092 · O que salvou o Q3 nao foi a hora: foi acender a luz do pavilhao
+**A hipotese que eu tinha, e ela estava errada.** O Q2 abriu a pergunta do LOOK
+LOCK (D084) e a resposta la foi "subir a hora ajuda e nao fecha". Eu assumi que
+no Q3 valeria o mesmo com sinal igual. **Vale com sinal INVERTIDO.** Medido nas
+tres horas, mesmo enquadramento, luminaria apagada:
+
+| hora | elevacao | V medio do fundo | % de pixel quase preto |
+|---|---|---|---|
+| 18:15 (contrato) | 10,1 | 0,040 | **78,5%** |
+| 17:30 | 19,8 | 0,030 | 88,3% |
+| 17:00 | 26,4 | 0,033 | **93,2%** |
+| **foto real** | ~encoberto | **0,400** | **1,2%** |
+
+**Subir o sol PIORA o interior coberto.** Com o sol baixo a luz ainda entra
+rasante por baixo da agua; subindo o sol, a propria cobertura passa a sombrear
+o que antes entrava. O Q2 e' chao aberto e o Q3 e' interior -- **a mesma
+mudanca de hora anda para lados opostos nos dois**, e por isso o LOOK LOCK nao
+pode ser decidido olhando um quadro so.
+
+**E nenhuma hora chegaria perto, porque nao e' a hora: e' o CLIMA.** A foto de
+referencia e' dia ENCOBERTO -- o domo inteiro do ceu entrando pela boca. O
+contrato e' golden hour de ceu LIMPO. Sao dois climas, e um nao vira o outro
+mexendo no relogio.
+
+**O que fechou:** o que acontece de verdade num pavilhao as 18:15 -- a luz esta
+acesa. `_mat` deixa `Emission Strength` em **3,0 fixo**, que serve para a lampada
+APARECER e nao para ILUMINAR: num tubo de 1,24 m dentro de um vao de 25 m e'
+quase nada.
+
+| luminaria | V medio do quadro | % quase preto |
+|---|---|---|
+| 3 (o default do `_mat`) | 0,080 | 69,4% |
+| 22 | 0,126 | 39,6% |
+| **60 -- o final** | **0,194** | **17,9%** |
+
+**Sem tocar na hora do contrato.** O `_mat` NAO foi alterado: ele e'
+compartilhado com o Q1 e o Q2, que o Natan acabou de aprovar, e mexer nele
+mudaria os dois pelas costas. A forca entra por `heroi_pavilhao.py:acender()`,
+com `--luminarias`, e o valor 60 e' **PROPOSTA** -- quanto de luz artificial
+entra num quadro e' decisao dele. Folha em `out/heroi/Q3-luz.jpg`.
+
+**A regra que sobra:** antes de repetir num quadro a conclusao de outro,
+perguntar se o quadro e' do mesmo TIPO. Chao aberto e interior coberto respondem
+ao sol em direcoes opostas.
+
+### D093 · A terceira conferencia do Q1 achou o que duas nao acharam, e uma delas estava no centro do quadro
+**REPROVADO.** Tres divergencias NOVAS, nenhuma apontada nas duas rodadas
+anteriores, e a pior e' de uma linha:
+
+**1. Os tres portoes de ferro estavam BRANCOS.** `portao_de_ferro` fazia
+`_atribuir(obj, mats["branco"])` -- `MAT_ESQUADRIA`, albedo 0,80. O material
+certo, `MAT_FERRO_PRETO` (0,018), **ja existia na mesma cena, sem uso**. Medido
+dentro do vao central:
+
+| | mediana da luminancia | faixa |
+|---|---|---|
+| foto | 0,0495 | **430:1** |
+| render | 0,3411 | **35:1** |
+
+O vao inteiro num tom so. **O elemento grafico mais forte do centro do quadro
+tinha sumido**, e passou por duas conferencias. Corrigido para `mats["ferro"]`.
+
+**2. As duas alas estavam baixas**, medido por razao na mesma vertical (D083):
+esquerda 1,36 no render contra **1,62** na foto (17% baixa); direita 1,54
+contra **1,59-1,74**. `ALA_E_TOPO` foi de `_mz(570)` para `_mz(531)`, e
+`ALA_D_TOPO` de `_mz(495)` para `_mz(452)` -- a leitura no encontro com o corpo,
+que e' a mais conservadora das duas que a foto oferece.
+
+**A prova que se enxerga sem medir:** na foto o topo da ala esquerda cruza a
+linha *"PARQUE DE EXPOSICOES"*; no render ele cruzava *"DE DOIS VIZINHOS - PR"*.
+**Uma linha de texto inteira mais baixo**, e eu olhei essa folha sete vezes.
+
+**3. `MAT_FOLHAGEM` era o verde INVENTADO que o D084 mandou tirar.** Matiz
+107,4 graus contra 71,9 da medida em `materiais-medidos.json`. **O conserto do
+D084 foi feito no `heroi_arena.py` e nunca foi portado para o
+`heroi_portal.py`** -- exatamente a falha "consertei num arquivo e deixei o
+outro" que o D083 item 3 ja tinha registrado uma vez, com o mesmo asset.
+Trocado por `MAT_COPA` com a cor medida.
+
+**Defeito novo dentro de um conserto antigo:** o V da trelica do frontao
+fechava em vertice a 0,19 m ATRAS do rufo, e projetado a ponta saia **4 px
+acima da linha do telhado**. Na foto o topo da empena e' achatado e as duas
+pernas **param separadas ~1,3 m**. Agora param, e 0,32 m abaixo do rufo -- nao
+ha vertice para furar. De quebra o V foi de 40,0% para 46,7% da largura da
+empena, que e' o que a foto le. **O angulo nao foi perseguido**: saiu em 26,4
+graus contra 24,9 medidos, como consequencia (D086).
+
+**Ficam em aberto, e declarados:** o colarinho dos mouroes (56 triangulos, raio
+constante, sem pe alargado), a folhagem dos vasos (54 triangulos cada, le como
+estrela de 8 laminas), a agua direita ainda 1,8 graus rasa, e o topo da ala
+direita, que na foto SOBE 0,76 m do encontro ate o canto e aqui e' plano --
+esse ultimo e' **mudanca de forma, nao de parametro**, e o D086 ensinou a nao
+tratar forma como parametro.
+
+**Correcao de documento:** o `ENTREGA.md` declarava as aguas em "21,3 / 31,0
+contra 22,3 / 30,9". A silhueta entregue le **21,9 / 29,3**. O documento
+afirmava mais do que o arquivo entregava.
+
+### D094 · A reconferencia do Q2 achou um numero FALSO impresso numa peca
+**A pior coisa do lote, e nao e' geometria.** `out/heroi/Q2-hora.jpg` --- folha
+que existe para o Natan decidir --- imprimia no subtitulo:
+
+> *"a matiz ja bate nas tres (H≈88° contra 87°)"*
+
+Medido nas proprias imagens dessa folha: **18:15 da 114-158 graus · 17:30 da
+58-105 · 17:00 da 48-83**. Nenhuma das tres bate 88, e a que iria ao cliente
+(18:15) e' a mais longe. Varredura de 182 patches no render entregue: mediana
+**130,6**, faixa 45,8 a 199,5. **Nenhum patch em 88.**
+
+De onde veio o erro: o D084 registra "matiz agora em 88,9 contra 87,5 -- fecha",
+e esse numero foi medido **na cor do material**, nao no pixel do render. Entre
+o albedo e o pixel entram o ceu azul, o AgX Punchy e a saturacao de 0,05 --- e
+**com saturacao 0,05 a matiz e' ruido**. Afirmar matiz sobre cinza e' afirmar
+sobre nada.
+
+**A regra que sobra, e ela e' mais dura que a do D083:** numero que vai
+impresso numa peca se mede **no arquivo que a peca mostra**, nunca na entrada
+que o gerou. E numero de matiz so vale acompanhado da saturacao.
+
+**Consertos aplicados no mesmo turno** (os tres achados por medida, os tres
+baratos):
+
+1. **a trelica sobrava 0,40 m para fora da agua**, nos dois lados -- banzos
+   inferiores em ±7,752 contra cobertura ate ±7,35. No render de 2560 a
+   cobertura terminava em px 1880 e a trelica em px 1905: um pente de 12 barras
+   saindo da silhueta do telhado, onde a foto tem beiral limpo. Agora os banzos
+   sao travados dentro da agua;
+2. **a misula de 1,35 m estava na parede do FUNDO**, 17,67 m dentro do palco,
+   onde ninguem ve. Na linha da boca -- onde o balanco NASCE -- a trelica
+   estava com 0,63 m, e afinava 33% sobre o balanco em vez dos 69% da foto.
+   A interpolacao passou a comecar na boca;
+3. **duas arvores de 12 m a 1,37 m uma da outra**, dentro do quadro,
+   projetando em px 1892 e 1881. Filtro de folga minima pela soma dos raios de
+   copa.
+
+**O que NAO foi consertado, e por que:** a altura da caixa cenica ainda esta 7
+a 11% alta (era +60%), e o proprio `heroi_arena.py` guarda duas medidas que
+**nao fecham na mesma geometria** -- o comentario da linha 52 diz que a razao
+altura/largura tem que dar 0,67 e que 0,44 foi reprovado por "larga e baixa
+demais", e com `BOCA=5,50` ela esta em **0,404**. Quem baixou foi a altura; a
+**largura nunca foi remedida**. Isso e' remedir, nao ajustar, e vai para
+`PENDENCIAS.md` -- perseguir o numero sem remedir a largura e' exatamente o que
+o D086 proibe.
+
+E a **cor da grama, da parede e do chao da arena** continua sendo a proposta em
+aberto do LOOK LOCK (D084). O gramado ainda le como agua parada. Isso e'
+decisao dele, nao conserto meu.
+
+### D095 · Q1 aprovado na versao r3
+**16/08/2026, ~13h30. Ordem dele:** *"Q1 esta aprovado"*, dita depois de olhar a
+folha `out/heroi/Q1.jpg` reconstruida sobre o `match-1600-r3.png` e o
+antes/depois `out/heroi/Q1-antes-depois-r3.jpg`.
+
+**O que foi aprovado, para nao restar duvida de qual arquivo:**
+
+| | |
+|---|---|
+| render | `F:/heroi/Q1/final-2560-r3.png` e `match-1600-r3.png` |
+| cena | `out/cena-heroi-q1.blend` (regravada as 13h com os cinco consertos) |
+| folha | `out/heroi/Q1.jpg` |
+| construtor | `scripts/heroi_portal.py`, com os consertos do D093 |
+
+**O Q1 esta FECHADO.** Nao se mexe mais nele sem ordem dele -- e isso vale
+inclusive para o `_cilindro` da pendencia P03, que e' compartilhado.
+
+**O que fica em aberto DENTRO de um quadro aprovado, e continua declarado:**
+colarinho dos mouroes, folhagem dos vasos, a agua direita 1,8 graus rasa, e o
+topo da ala direita, que na foto sobe 0,76 m do encontro ate o canto e aqui e'
+plano. Aprovacao dele nao apaga medida do verificador -- ela decide que o quadro
+vai a mesa assim. As duas coisas convivem, e as duas ficam escritas.

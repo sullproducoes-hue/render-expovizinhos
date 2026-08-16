@@ -77,3 +77,26 @@ desde 14/08; o que faltava era alguém medir o efeito.
 - a nuvem de pontos: 42.090 pontos, erro de reprojeção de 0,80 px;
 - o custo de render: 7,5 s a 960×540 na 4060;
 - o vão entre pilar e telhado dos pavilhões: 16 a 26 cm.
+
+---
+
+## Q3 · a boca do Pavilhão 1 — o que aqui é proposta
+
+Construtor: `scripts/heroi_pavilhao.py`. Referência real:
+`out/quadros-ia/P03_pavilhao-1-industria-comercio-e-prestacao-de/real/2_img-9131-004_176.00s.jpg`.
+
+| item | o que fiz | por que é proposta, e não medida |
+|---|---|---|
+| **cor da face de baixo da água** | albedo 0,44 cinza neutro | `MAT_TELHA` em `materiais-medidos.json` está em **(1,0 / 1,0 / 0,95)** — foi amostrada na água **virada para o sol** e saiu grampeada no branco. Serve para a telha vista de cima; **não serve** para a face de baixo, que é o que este quadro mostra. E aqui ela é a maior superfície de rebote da cena: no teste `t01`, com 0,185, o interior inteiro fechava em preto |
+| **azul do pilar** | (0,021 / 0,038 / 0,072) | não há medida de azul no acervo. Mesma situação do azul da concha (D024) |
+| **ferrugem da treliça** | (0,128 / 0,052 / 0,036) | idem |
+| **tijolo aparente** | (0,155 / 0,062 / 0,045) | idem. E **não há textura de tijolo** em `assets/textura/` — a parede entra lisa |
+| **piso** | `MAT_SAIBRO` medido (brita) | na foto o piso do Pavilhão 1 é **asfalto escuro**, e asfalto **não tem medida** no acervo. A brita é a medida mais próxima que existe, e ela puxa o chão para o marrom. **Ou se aceita, ou se mede o asfalto num quadro do footage** |
+| **pé-direito 4,60 m + treliça 1,05 m** | soma 5,65 m | `estruturas.py:68` declarava 5,0 m até o beiral com ~20% de incerteza. A partição em pé-direito livre + altura de treliça é **proporção lida na foto**, não trena |
+| **13 pórticos, passo de 4,32 m** | ritmo lido na foto | o passo não está cotado em lugar nenhum. Com 9 (6,5 m) o teto lia como plano vazio |
+| **eixos locais, rumo não aplicado** | comprimento em Y, boca em −Y, lado aberto em −X | o footprint de `PAVILHÃO 1` traz `rumo_graus: 90,0` **com `rumo_confiavel: false`**. Aplicar um rumo em que a própria planta não confia só mudaria de que lado o sol entra pela boca — trocaria a luz do quadro por um número que não se sustenta |
+
+**A hora do LOOK LOCK pesa mais aqui do que nos outros dois.** O Q3 é um
+interior coberto: com o sol a 10,1° do contrato, quase nada entra pela boca e o
+fundo do pavilhão vira túnel escuro. As três horas foram rodadas para o mesmo
+quadro — `F:/heroi/Q3/hora-1815.png`, `hora-1730.png`, `hora-1700.png`.

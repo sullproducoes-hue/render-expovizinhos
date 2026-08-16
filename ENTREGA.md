@@ -14,9 +14,13 @@ sessão de propósito.
 | **configuração gravada** | `data/render-config.json` | ✅ **verde** | adaptativa 10/50, denoise OptiX, ordem de sacrifício da VRAM, armadilha 34 |
 | **preset × cheio** | `out/heroi/Q1-preset-x-cheio.jpg` | ✅ **verde** | sem diferença visível · 13 s contra 18 s · **preset mantido** (D076) |
 | **fotogrametria lida** | `model_analyzer` nos 6 modelos | ✅ **verde** | 100/100 e 150/150 imagens · erro 0,60 a 0,89 px · todos ≤ 1,5 (D072) |
-| **Q1 · forma** | `out/heroi/Q1.jpg` | 🔴 **REPROVADO 2×, consertado 2×** | 1ª rodada: 8 divergências, 7 corrigidas · 2ª rodada: o enquadramento **não tinha sido corrigido** (câmera mirava x=0) e o frontão é **assimétrico** — remedido, e as duas inclinações agora saem sozinhas batendo a foto (21,3°/31,0° contra 22,3°/30,9°) |
-| **Q2 · forma** | `out/heroi/Q2.jpg` | 🔴 **REPROVADO, consertado** | 7 divergências · caixa cênica **60% alta demais** (razão 4,06 medida contra 6,51) e **1,0 a 2,1 m de céu aberto** entre parede e cobertura · **6 corrigidas**, a 7ª virou proposta (D084) |
-| **Q3** | — | ⬜ **não aberto, e corretamente** | o gatilho do adendo é "zero reprovação em aberto nos dois". O Q1 foi reprovado, então as horas do Q3 foram para ele — que é o que a regra manda |
+| **Q1 · forma** | `out/heroi/Q1.jpg` | 🔴 **REPROVADO 2×, consertado 2×** | 1ª rodada: 8 divergências, 7 corrigidas · 2ª rodada: o enquadramento **não tinha sido corrigido** (câmera mirava x=0) e o frontão é **assimétrico** · **3ª rodada: REPROVADO de novo** — portões de ferro **brancos** no centro do quadro, alas 12–17% baixas, `MAT_FOLHAGEM` era o verde inventado que o D084 mandou tirar. Os cinco consertos estão no `-r3` (D093). **Correção deste documento:** ele declarava as águas em 21,3°/31,0°; a silhueta entregue lê **21,9°/29,3°** — o texto afirmava mais do que o arquivo entregava |
+| **Q2 · forma** | `out/heroi/Q2.jpg` | 🔴 **REPROVADO na reconferência** | Da 1ª rodada, **2 e 3 fecharam** (a caixa veda, os cartões sumiram) e o **5 fechou melhor que o relatado** (saturação 0,91, não 0,68). Mas: a caixa ainda está **7–11% alta**, a mísula de 1,35 m estava **na parede do fundo** e a treliça **sobrava 0,40 m para fora da água**. Três consertos no `-r3`; a altura da caixa virou pendência, porque é **remedir, não ajustar** (D094) |
+| **número impresso em peça** | `out/heroi/Q2-hora.jpg` | 🔴 **era FALSO, corrigido** | a folha imprimia *"a matiz já bate nas três (H≈88°)"* e **nenhuma das três imagens dela tem um único patch em 88°**. O número tinha sido medido no albedo do material, não no pixel do arquivo. A folha foi refeita **sem nenhuma afirmação de cor** (D094) |
+| **Q1 · aprovação** | o Natan, olhando a folha | ✅ **APROVADO E FECHADO** na versão `-r3`, 16/08 ~13h30 | D095. Aprovou a primeira vez às 12h (D089), o verificador reprovou às 13h (D093), os cinco consertos entraram e ele aprovou o `-r3`. **Não se mexe mais nele sem ordem dele** |
+| **Q2 · aprovação** | idem | ✅ **APROVADO POR ELE**, 16/08 ~12h | D089 |
+| **Q1 e Q2 · rodados de novo** | ordem dele de 16/08 ~12h | ✅ **verde** | 4 arquivos `-r2`, todos EXIT 0 — e EXIT 0 aqui **é prova de GPU**: os dois construtores abortam com `sys.exit(3)` sem OptiX ativo. Nada foi apagado |
+| **Q3 · forma** | `out/heroi/Q3.jpg` | 🟡 **construído, conferência RODANDO** | `scripts/heroi_pavilhao.py`, novo. 4 testes. Aberto pela aprovação dele (D089), não pelo gatilho do adendo. **Falta o verificador** |
 | **textura** | `./.venv/Scripts/python.exe scripts/conferir_texturas.py` | ✅ **verde, conferido por mim** | exit 0 · albedo dos 6 materiais com erro de 0,01% a 0,37% contra a cor medida · Diffuse neutro, normal OpenGL |
 | **asset com licença** | `assets/_procedencia.json` | ✅ **verde, conferido por mim** | 46 entradas · **0 sem licença, 0 sem URL, 0 arquivo faltando** · 44 CC0, 1 domínio público (SRTM), 1 CC-BY 4.0 com atribuição · nenhum muro de login atravessado, nenhuma conta criada |
 | `provas_luz.py` | — | **N/A** | fora do escopo desta sessão, por contrato |
@@ -33,7 +37,9 @@ sessão de propósito.
 | `out/heroi/Q2.jpg` | **folha `real \| 3D` da arena** |
 | `out/heroi/Q2-antes-depois.jpg` | **o antes/depois da arena** — é a imagem que mais vende |
 | `out/heroi/Q1-preset-x-cheio.jpg` | a prova de que o preset basta |
-| `out/cena-heroi-q1.blend` · `out/cena-heroi-q2.blend` | para abrir e conferir, que é como você confere |
+| `out/heroi/Q3.jpg` | **folha `real \| 3D` da boca do Pavilhão 1** |
+| `out/heroi/Q3-hora.jpg` | as três horas do LOOK LOCK **no interior coberto**, que é onde a hora mais pesa |
+| `out/cena-heroi-q1.blend` · `q2` · `q3` | para abrir e conferir, que é como você confere |
 | `F:\heroi\Q1\final-2560.png` · `F:\heroi\Q2\final-2560.png` | entrega 2560×1440 |
 | `out/heroi/_materiais-amostra.jpg` | os materiais, cru → deiluminado → mapa final |
 | `out/heroi/_nuvens-o-que-cobrem.jpg` | o que cada nuvem de pontos reconstruiu de verdade |

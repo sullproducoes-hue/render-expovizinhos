@@ -11,21 +11,24 @@ Atualizado em 16/08/2026, madrugada.
 > este arquivo enquanto a noite durar. Fila de longo prazo em `FILA-CENA.md`.
 >
 > ```
-> FASE: C
-> Q1 portal ....... REPROVADO 2x, consertado 2x. O frontao e ASSIMETRICO
->                   (D086) e a camera mirava x=0 (D087). Falta 3a conferencia
-> Q2 arena ........ REPROVADO, 6 de 7 consertadas, a 7a virou PROPOSTA
->                   (a hora do LOOK LOCK -- D084)
-> Q3 pavilhao ..... NAO ABERTO — so abre com Q1 e Q2 sem reprovacao aberta
+> FASE: D  -- atualizado 16/08 as 13h
+> Q1 portal ....... APROVADO PELO NATAN (D089). Rodado de novo em -r2.
+> Q2 arena ........ APROVADO PELO NATAN (D089). Rodado de novo em -r2.
+> Q3 pavilhao ..... CONSTRUIDO e renderizado. scripts/heroi_pavilhao.py,
+>                   novo. Abriu pela aprovacao dele, nao pelo gatilho do
+>                   adendo. FALTA A CONFERENCIA -- e ninguem se auto-aprova.
 > BLOQUEIOS: nenhum
+> ESPERANDO ELE: a hora do LOOK LOCK (vale para o filme inteiro, e no Q3
+>                pesa o dobro porque e interior coberto)
 > ```
 >
 > | o quê | onde |
 > |---|---|
-> | **as folhas `real \| 3D`** | `out/heroi/Q1.jpg`, `out/heroi/Q2.jpg` |
+> | **as folhas `real \| 3D`** | `out/heroi/Q1.jpg`, `Q2.jpg`, `Q3.jpg` |
+> | **as horas do LOOK LOCK** | `out/heroi/Q2-hora.jpg`, `out/heroi/Q3-hora.jpg` |
 > | **a pagina para o cliente** | `out/heroi/APRESENTACAO.html` |
 > | **o antes/depois da arena** | `out/heroi/Q2-antes-depois.jpg` |
-> | cenas para abrir e conferir | `out/cena-heroi-q1.blend`, `out/cena-heroi-q2.blend` |
+> | cenas para abrir e conferir | `out/cena-heroi-q1.blend`, `-q2`, `-q3` |
 > | renders finais | `F:/heroi/Q1/final-2560.png` e `F:/heroi/Q2/final-2560.png` |
 > | configuração de render, gravada | `data/render-config.json` |
 > | decisões da noite | `DECISOES.md` **D072–D088** |

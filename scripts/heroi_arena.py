@@ -253,7 +253,16 @@ def trelica_espacial(col, mats):
         misula -- alta onde nasce, fina onde termina -- e altura constante le
         como caixote pendurado.
         """
-        t = (y_fundo - y) / (y_fundo - y_frente)
+        # A misula tem que afinar SOBRE O BALANCO, e o balanco nasce na
+        # LINHA DA BOCA (y = -PROFUNDIDADE/2), nao na parede do fundo.
+        # Interpolando do fundo, os 1,35 m caiam 17,67 m dentro do palco, onde
+        # ninguem ve, e na boca a trelica ja estava em 0,63 m: sobre os 5,20 m
+        # de balanco ela afinava so 33%, e nao os 69% que a foto mostra.
+        # Achado na 1a reconferencia.
+        y_boca = -PROFUNDIDADE / 2.0
+        if y >= y_boca:
+            return 1.35
+        t = (y_boca - y) / (y_boca - y_frente)
         return 1.35 + t * (0.42 - 1.35)
 
     # Banzo INFERIOR duplo + banzo SUPERIOR: seccao TRIANGULAR, que e' o que
@@ -261,10 +270,18 @@ def trelica_espacial(col, mats):
     # que estava aqui, nao sao uma trelica espacial -- e o docstring prometia
     # tres banzos e o codigo montava dois.
     meia = (xs[1] - xs[0]) * 0.28
+    # A agua vai ate CAIXA_LARGURA/2 + 0,55 = 7,35. Os banzos inferiores
+    # externos ficavam em +-7,752 e SOBRAVAM 0,40 m para fora do telhado nos
+    # dois lados -- no render de 2560 a cobertura terminava em px 1880 e a
+    # trelica em px 1905, lendo como um pente de 12 barras saindo da silhueta.
+    # Na foto o beiral e' limpo. Achado na 1a reconferencia.
+    X_MAX = CAIXA_LARGURA / 2.0 + 0.55 - 0.10
     for x in xs:
         sup = [(x, y, _cota_cobertura(y) - 0.03) for y in ys]
-        inf_a = [(x - meia, y, _cota_cobertura(y) - _altura(y)) for y in ys]
-        inf_b = [(x + meia, y, _cota_cobertura(y) - _altura(y)) for y in ys]
+        xa = max(-X_MAX, min(X_MAX, x - meia))
+        xb = max(-X_MAX, min(X_MAX, x + meia))
+        inf_a = [(xa, y, _cota_cobertura(y) - _altura(y)) for y in ys]
+        inf_b = [(xb, y, _cota_cobertura(y) - _altura(y)) for y in ys]
         for k in range(n_no - 1):
             _tubo_entre(bm, sup[k], sup[k + 1])
             _tubo_entre(bm, inf_a[k], inf_a[k + 1])
@@ -396,6 +413,20 @@ def cortina_de_arvores(col):
     # nenhuma dentro da pegada do palco: |x|>20 ou y>PROFUNDIDADE
     postos = [(x, y, s) for x, y, s in postos
               if abs(x) > LARGURA / 2.0 + 6.0 or y > PROFUNDIDADE]
+    # E nenhuma em cima da outra: a 1a reconferencia achou a Arvore 12 e a 13 a
+    # **1,37 m** uma da outra, as duas com 12 m de altura e copa de 6 m de raio,
+    # DENTRO do quadro -- projetavam em px 1892 e 1881. Duas copias da mesma
+    # malha no mesmo lugar leem como erro de instanciacao, que e' o que sao.
+    # A folga minima e' a soma dos dois raios de copa (raio ~ 2,6 x escala).
+    guardadas = []
+    for x, y, s in postos:
+        if all(math.hypot(x - gx, y - gy) > 2.6 * (s + gs)
+               for gx, gy, gs in guardadas):
+            guardadas.append((x, y, s))
+    if len(guardadas) < len(postos):
+        print(f"arvores  {len(postos) - len(guardadas)} descartadas por "
+              f"sobreposicao de copa")
+    postos = guardadas
     for i, (x, y, s) in enumerate(postos):
         e = bpy.data.objects.new(f"Arvore arena {i + 1}", None)
         e.instance_type = "COLLECTION"

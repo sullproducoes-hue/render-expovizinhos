@@ -78,7 +78,14 @@ PROFUNDIDADE       = 3.2                            # m -- nao medivel em foto f
 
 # Ala esquerda (x 150..370 px, topo 570 px, beiral de telha 635 px)
 ALA_E_X0, ALA_E_X1 = _mx(150.0), _mx(370.0)         # -10.77 .. -6.14
-ALA_E_TOPO         = _mz(570.0)                     # 4.94 m -- a leitura de
+ALA_E_TOPO         = _mz(531.0)                     # 5.76 m. ERA _mz(570) = 4,94.
+#   O verificador mediu por RAZAO NA MESMA VERTICAL (D083), que nao depende de
+#   escala nem de altura de camera: topo/beiral da ala esquerda da' 1,62 na foto
+#   e dava 1,36 no render -- 17% baixa. A prova que se enxerga na folha: na foto
+#   o topo da ala esquerda cruza a linha "PARQUE DE EXPOSICOES"; no render ele
+#   cruzava a linha de baixo, "DE DOIS VIZINHOS - PR". Uma linha de texto
+#   inteira mais baixo.
+#   A leitura antiga de 570 e a de 552 ficam abaixo, como registro:
 #   552 px do t04 subiu a ala acima da linha do letreiro, o que a foto desmente:
 #   la o topo da ala esquerda fica ABAIXO da base do letreiro. Quem tinha errado
 #   era a cota das luminarias, nao a do telhado. Corrigidas abaixo.
@@ -86,7 +93,15 @@ ALA_E_BEIRAL       = _mz(635.0)                     # 3.57 m
 
 # Ala direita (x 955..1390 px, topo 460 px, beiral 600 px)
 ALA_D_X0, ALA_D_X1 = _mx(1037.0), _mx(1390.0)       # +7.87 .. +15.28
-ALA_D_TOPO         = _mz(495.0)                     # 6.51 m -- ha um DEGRAU
+ALA_D_TOPO         = _mz(452.0)                     # 7.42 m. ERA _mz(495) = 6,51.
+#   Mesma medida por razao: 1,59 a 1,74 na foto contra 1,54 no render. 452 px e'
+#   a leitura NO ENCONTRO com o corpo central (x 1049), e e' a mais
+#   conservadora das duas: no canto (x 1355) a foto le 423 px.
+#   AINDA EM ABERTO, e declarado: na foto o topo da ala direita SOBE 36 px
+#   (~0,76 m) do encontro ate o canto. Aqui ele e' PLANO. Consertar isso e'
+#   mudanca de forma, nao de parametro -- e o D086 ensinou que quando o ajuste
+#   erra dos dois lados com a mesma magnitude, o problema e' a forma.
+#   A leitura antiga de 495 fica abaixo, como registro:
 #   visivel entre o ombro do corpo central (7,25) e a ala direita. Ler os dois
 #   na mesma cota apagava o degrau e a fachada virava um bloco so.
 ALA_D_BEIRAL       = _mz(600.0)                     # 4.31 m
@@ -234,7 +249,15 @@ def criar_materiais():
         "ferro":    _mat("MAT_FERRO_PRETO", (0.018, 0.018, 0.020), 0.45, 0.6),
         "letra":    _mat("MAT_LETREIRO", (0.86, 0.86, 0.84), 0.42),
         "azul":     _mat("MAT_MASTRO", (0.035, 0.20, 0.55), 0.35, 0.3),
-        "folha":    _mat("MAT_FOLHAGEM", (0.055, 0.13, 0.035), 0.70),
+        # MAT_COPA, com a cor MEDIDA -- e nao um verde meu. O verde que
+        # estava aqui (0,055 / 0,13 / 0,035) e a mesma familia do
+        # `MAT_GRAMA = 0,055/0,145/0,030` que o D084 mandou tirar do Q2: o
+        # conserto foi feito no `heroi_arena.py` e NUNCA foi portado para ca.
+        # Matiz medida no render: 107,4 graus (verde-ciano) contra 71,9 da
+        # medida em materiais-medidos.json. E' o mesmo desvio para o ciano, e
+        # a mesma falha de "consertei num arquivo e deixei o outro" que o
+        # D083 item 3 ja tinha registrado uma vez.
+        "folha":    _mat("MAT_COPA", (0.1324, 0.1538, 0.0455), 0.70),
         "muro":     _mat("MAT_MURO", (0.72, 0.72, 0.70), 0.75),
         "aro":      _mat("MAT_ARO_BARRIL", (0.10, 0.085, 0.065), 0.55, 0.5),
     }
@@ -498,7 +521,13 @@ def portao_de_ferro(col, mats, xs, bao):
             az = alt - 0.10 + 0.42 * math.sin(math.pi * t)
             _cilindro(bm, ax, y, az, 0.02, 0.10, lados=6)
     obj = _fechar(obj, bm)
-    _atribuir(obj, mats["branco"])
+    # FERRO PRETO, e nao branco. O verificador mediu na 3a conferencia: dentro
+    # do vao central a foto tem mediana de luminancia 0,0495 com faixa de
+    # 430:1 (renda preta contra lona clara), e o render tinha mediana 0,3411
+    # com faixa de 35:1 -- o vao inteiro num tom so. O elemento grafico mais
+    # forte do CENTRO do quadro tinha sumido. `MAT_FERRO_PRETO` (0,018) ja
+    # existia na cena, sem uso.
+    _atribuir(obj, mats["ferro"])
     return obj
 
 
@@ -687,22 +716,37 @@ def trelica_do_frontao(col, mats):
     _cubo(bm, (CORPO_X0 + CORPO_X1) / 2.0, y, z0 + 0.22,
           (CORPO_X1 - CORPO_X0) * 0.58, 0.22, 0.30)
 
-    # as duas barras do V invertido
+    # as duas barras do V invertido.
+    #
+    # DUAS CORRECOES da 3a conferencia, e as duas medidas na foto:
+    #
+    # a) o V NAO fecha em vertice. Na terceira conferencia o apice estava em
+    #    z=9,23 contra o rufo em z=9,24, mas 0,19 m ATRAS dele -- e projetado
+    #    a ponta saia 4 px ACIMA da linha do telhado. E' a familia "peca
+    #    furando o telhado" do D080. Na foto o topo da empena e' ACHATADO e as
+    #    duas pernas PARAM SEPARADAS ~1,3 m na cota da cumeeira. Agora elas
+    #    param separadas, e 0,32 m abaixo do rufo: nao ha vertice para furar.
+    # b) o V ocupava 40,0% da largura da empena; a foto le px 480..789 de
+    #    375..1037 = 46,7%. Cada perna passa de 0,200 para 0,2335.
+    #
+    # O angulo NAO foi ajustado -- ele sai como CONSEQUENCIA das duas medidas
+    # acima, em 26,4 graus contra os 24,9 medidos na foto. Numero que se
+    # persegue direto e' numero que esconde a forma errada (D086).
+    cx = (CORPO_X0 + CORPO_X1) / 2.0
+    Z_TOPO = CORPO_CUMEEIRA - 0.32       # para de subir ANTES do rufo
+    MEIA_FOLGA = 0.65                    # ~1,3 m entre as duas pontas
     for lado in (-1, 1):
-        # ~40% da largura da empena, nao 86%: o verificador mediu o cavalete
-        # da foto ocupando ~40% com pernas a 27-30 graus, contra 72% a 17
-        # graus que eu tinha. Cavalete largo e raso le como tesoura de galpao,
-        # nao como o pendural da foto.
-        dx = lado * ((CORPO_X1 - CORPO_X0) * 0.20)
-        comp = math.hypot(dx, subida - 0.30)
+        dx = lado * ((CORPO_X1 - CORPO_X0) * 0.2335)
+        x_pe, z_pe = cx + dx, z0 + 0.30
+        x_topo, z_topo = cx + lado * MEIA_FOLGA, Z_TOPO
+        comp = math.hypot(x_topo - x_pe, z_topo - z_pe)
         vs = _cubo(bm, 0, 0, 0, comp, 0.22, 0.30)
         bmesh.ops.rotate(bm, verts=vs, cent=Vector((0, 0, 0)),
-                         matrix=Matrix.Rotation(lado * math.atan2(subida - 0.30,
-                                                                 abs(dx)), 4, "Y"))
-        cx = (CORPO_X0 + CORPO_X1) / 2.0
+                         matrix=Matrix.Rotation(
+                             math.atan2(z_topo - z_pe, x_topo - x_pe), 4, "Y"))
         bmesh.ops.translate(bm, verts=vs,
-                            vec=Vector((cx + dx / 2.0, y,
-                                        z0 + 0.30 + (subida - 0.30) / 2.0)))
+                            vec=Vector(((x_pe + x_topo) / 2.0, y,
+                                        (z_pe + z_topo) / 2.0)))
     obj = _fechar(obj, bm)
     _atribuir(obj, mats["madeira"])
     return obj
